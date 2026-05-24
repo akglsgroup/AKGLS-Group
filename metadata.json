@@ -1,0 +1,6 @@
+{
+  "name": "AKGLS Group Site",
+  "description": "Enterprise digital marketing and AI SEO agency portal featuring highly optimized mega navigation, strategic diagnostics, and ROI estimators.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
