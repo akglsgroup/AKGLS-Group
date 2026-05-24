@@ -20,6 +20,7 @@ import AiSeoServicesPage from './components/AiSeoServicesPage';
 import GoogleAdsServicesPage from './components/GoogleAdsServicesPage';
 import WebDesignServicesPage from './components/WebDesignServicesPage';
 import WordPressServicesPage from './components/WordPressServicesPage';
+import DentalClinicMarketingPage from './components/DentalClinicMarketingPage';
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
@@ -298,7 +299,7 @@ const getIconComponent = (icon: string) => {
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'web-design' | 'wordpress'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing'>('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [modalEmail, setModalEmail] = useState('');
@@ -351,11 +352,16 @@ export default function App() {
     return () => window.removeEventListener('keydown', handleShortcut);
   }, []);
 
-  // Hash route router trigger for dedicated subpages
+  // Hash and Path route router trigger for dedicated subpages
   useEffect(() => {
     const handleHashRouter = () => {
       const hash = window.location.hash;
-      if (hash === '#geo-services') {
+      const pathname = window.location.pathname;
+
+      if (pathname === '/dental-clinic-marketing' || pathname === '/services/dental-clinic-marketing' || hash === '#dental-clinic-marketing' || hash === '#dental-marketing' || hash === '#dental-services' || hash === '#dental-clinic-marketing-services') {
+        setCurrentPage('dental-clinic-marketing');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (hash === '#geo-services') {
         setCurrentPage('geo');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (hash === '#seo-services') {
@@ -385,7 +391,11 @@ export default function App() {
     };
     handleHashRouter();
     window.addEventListener('hashchange', handleHashRouter);
-    return () => window.removeEventListener('hashchange', handleHashRouter);
+    window.addEventListener('popstate', handleHashRouter);
+    return () => {
+      window.removeEventListener('hashchange', handleHashRouter);
+      window.removeEventListener('popstate', handleHashRouter);
+    };
   }, []);
 
   // Generative Engine mock scanner log runner
@@ -527,6 +537,11 @@ export default function App() {
       title: "WordPress Development Services & Custom Engineering | AKGLS Group",
       description: "Maximize WordPress speed, security, and schema scalability. We craft lightweight, database optimized, responsive architectures for modern search optimization.",
       canonical: "https://akgls.group/#wordpress-development-services"
+    },
+    'dental-clinic-marketing': {
+      title: "Dental Clinic Marketing & Local Patient Acquisition Services | AKGLS Group",
+      description: "Dominate dental local map packs, generate high-value implants and cosmetic patient appointments, and optimize local directories structures with HIPAA-aligned dental funnels.",
+      canonical: "https://akgls.group/dental-clinic-marketing"
     }
   };
 
@@ -649,6 +664,18 @@ export default function App() {
           }}
           openProposalForm={() => {
             const formEl = document.querySelector('#free-wordpress-consultation-form') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'dental-clinic-marketing' ? (
+        <DentalClinicMarketingPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#free-dental-audit-portal') || document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
         />

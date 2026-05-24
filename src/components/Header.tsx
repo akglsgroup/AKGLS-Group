@@ -178,6 +178,15 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                               <a 
                                 key={iIdx} 
                                 href={item.href}
+                                onClick={(e) => {
+                                  if (item.href.startsWith('/')) {
+                                    e.preventDefault();
+                                    window.history.pushState(null, '', item.href);
+                                    window.dispatchEvent(new PopStateEvent('popstate'));
+                                    setActiveMenu(null);
+                                    setIsMobileMenuOpen(false);
+                                  }
+                                }}
                                 className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors"
                               >
                                 <span className="text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo transition-colors flex items-center gap-1">
@@ -252,6 +261,15 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                               <a 
                                 key={iIdx} 
                                 href={item.href}
+                                onClick={(e) => {
+                                  if (item.href.startsWith('/')) {
+                                    e.preventDefault();
+                                    window.history.pushState(null, '', item.href);
+                                    window.dispatchEvent(new PopStateEvent('popstate'));
+                                    setActiveMenu(null);
+                                    setIsMobileMenuOpen(false);
+                                  }
+                                }}
                                 className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo"
                               >
                                 <span className="flex items-center gap-1">
@@ -680,7 +698,14 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                             <a 
                               key={sIdx} 
                               href={sub.href} 
-                              onClick={() => setIsMobileMenuOpen(false)}
+                              onClick={(e) => {
+                                setIsMobileMenuOpen(false);
+                                if (sub.href.startsWith('/')) {
+                                  e.preventDefault();
+                                  window.history.pushState(null, '', sub.href);
+                                  window.dispatchEvent(new PopStateEvent('popstate'));
+                                }
+                              }}
                               className="block py-1 text-slate-300 hover:text-brand-indigo"
                             >
                               {sub.name}
@@ -710,7 +735,14 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                             <a 
                               key={sIdx} 
                               href={sub.href} 
-                              onClick={() => setIsMobileMenuOpen(false)}
+                              onClick={(e) => {
+                                setIsMobileMenuOpen(false);
+                                if (sub.href.startsWith('/')) {
+                                  e.preventDefault();
+                                  window.history.pushState(null, '', sub.href);
+                                  window.dispatchEvent(new PopStateEvent('popstate'));
+                                }
+                              }}
                               className="block py-1 text-slate-300 hover:text-brand-indigo"
                             >
                               {sub.name}
