@@ -23,6 +23,280 @@ import WordPressServicesPage from './components/WordPressServicesPage';
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
+interface Capability {
+  id: string;
+  tag: string;
+  title: string;
+  description: string;
+  subservices: string[];
+  icon: string;
+  iconBgClass: string;
+  iconTextClass: string;
+  borderHoverClass: string;
+  badge?: string;
+}
+
+const ALL_CAPABILITIES: Capability[] = [
+  {
+    id: "seo",
+    tag: "25 SERVICES",
+    title: "Search Engine Optimization (SEO)",
+    description: "Improve your website rankings, organic traffic, and online visibility through strategic SEO solutions.",
+    subservices: [
+      "Technical SEO",
+      "On-Page & Off-Page SEO",
+      "Local & Maps SEO",
+      "Enterprise & Ecommerce SEO",
+      "Voice Search & Mobile SEO",
+      "International & Programmatic SEO",
+      "YouTube, Image & Video SEO",
+      "Keywords & Competitor Analytics",
+      "Link Building & Core Web Vitals"
+    ],
+    icon: "Award",
+    iconBgClass: "bg-brand-orange/15",
+    iconTextClass: "text-brand-orange",
+    borderHoverClass: "hover:border-brand-orange/35"
+  },
+  {
+    id: "ai",
+    tag: "13 SERVICES",
+    title: "AI & Next-Gen Optimization Services",
+    description: "Optimize your brand for AI-powered search engines and conversational platforms.",
+    subservices: [
+      "Generative Engine Optimization (GEO)",
+      "Answer Engine Optimization (AEO)",
+      "AI Search Optimization (ChatGPT, Gemini)",
+      "AI Content Strategy & Visibility Audits",
+      "AI Citation & Knowledge Base Optimizations",
+      "AI Content Automation & Chatbot Dev",
+      "AI Lead Gen Systems & Marketing Consulting"
+    ],
+    icon: "Bot",
+    iconBgClass: "bg-brand-purple/15",
+    iconTextClass: "text-brand-purple",
+    borderHoverClass: "hover:border-brand-purple/35",
+    badge: "Trending"
+  },
+  {
+    id: "ppc",
+    tag: "16 PLATFORMS & CAMPAIGNS",
+    title: "Paid Advertising Services (PPC)",
+    description: "Drive instant leads and conversions with highly targeted paid campaigns across premium channels.",
+    subservices: [
+      "Google & Meta Ads",
+      "LinkedIn, YouTube & Instagram Ads",
+      "Twitter/X, Pinterest & Amazon Ads",
+      "Search, Display & Shopping Ads",
+      "Video & App Promotion Ads",
+      "Remarketing & Performance Max"
+    ],
+    icon: "LineChart",
+    iconBgClass: "bg-brand-teal/15",
+    iconTextClass: "text-brand-teal",
+    borderHoverClass: "hover:border-brand-teal/35"
+  },
+  {
+    id: "smm",
+    tag: "15 SERVICES",
+    title: "Social Media Marketing (SMM)",
+    description: "Grow your audience, engagement, and brand authority across social platforms.",
+    subservices: [
+      "Social Media Strategy & Management",
+      "Content Creation (Reels & Shorts)",
+      "Influencer Marketing & Community Management",
+      "Paid Social Advertising & Social Branding",
+      "Viral Campaigns & LinkedIn Personal Branding",
+      "Instagram, Facebook, Reddit & Twitter Growth"
+    ],
+    icon: "Users",
+    iconBgClass: "bg-indigo-500/15",
+    iconTextClass: "text-indigo-400",
+    borderHoverClass: "hover:border-indigo-500/35"
+  },
+  {
+    id: "content",
+    tag: "16 CONTENT TYPES",
+    title: "Content Marketing Services",
+    description: "Create high-quality, engaging, and SEO-optimized content for all platforms.",
+    subservices: [
+      "Blog Writing & Website Content",
+      "SEO Content Writing (AI-Optimized)",
+      "Landing Page & Ad Copywriting",
+      "PR, Guest Posting & Technical Writing",
+      "Whitepapers, eBooks, Newsletters & Case Studies"
+    ],
+    icon: "FileCheck",
+    iconBgClass: "bg-fuchsia-500/15",
+    iconTextClass: "text-fuchsia-400",
+    borderHoverClass: "hover:border-fuchsia-500/35"
+  },
+  {
+    id: "dev",
+    tag: "12 SERVICES",
+    title: "Website Design & Development",
+    description: "Build fast, responsive, and conversion-focused websites with advanced custom frameworks.",
+    subservices: [
+      "WordPress, Shopify & WooCommerce Development",
+      "Ecommerce & Custom Web Applications",
+      "Landing Page Design & UI/UX Design",
+      "Speed Optimizations & Responsive Mobile Designs",
+      "Website Redesigns, Maintenance & CRO"
+    ],
+    icon: "Database",
+    iconBgClass: "bg-violet-500/15",
+    iconTextClass: "text-violet-400",
+    borderHoverClass: "hover:border-violet-500/35"
+  },
+  {
+    id: "ecom",
+    tag: "11 SERVICES",
+    title: "Ecommerce Marketing Services",
+    description: "Scale online stores with data-driven ecommerce marketing strategies.",
+    subservices: [
+      "Ecommerce SEO (Shopify & WooCommerce)",
+      "Shopping Ads & Product Feed Optimizations",
+      "Amazon & Flipkart Marketplaces SEO",
+      "Cart Abandonment & Checkout Funnel CRO",
+      "Product Page Conversions & Brand Positioning"
+    ],
+    icon: "Briefcase",
+    iconBgClass: "bg-rose-500/15",
+    iconTextClass: "text-rose-400",
+    borderHoverClass: "hover:border-rose-500/35"
+  },
+  {
+    id: "brand",
+    tag: "9 SERVICES",
+    title: "Branding & Creative Services",
+    description: "Create a strong and memorable digital brand identity.",
+    subservices: [
+      "Brand Strategy & logo Design",
+      "Graphic Design & Corporate Branding",
+      "Packaging, Creative Ads & Motion Graphics",
+      "Video Editing & Brand Reputation Management"
+    ],
+    icon: "Star",
+    iconBgClass: "bg-amber-500/15",
+    iconTextClass: "text-amber-400",
+    borderHoverClass: "hover:border-amber-500/35"
+  },
+  {
+    id: "leadgen",
+    tag: "12 SERVICES",
+    title: "Lead Generation & Performance Marketing",
+    description: "Generate qualified leads and improve conversion rates across B2B & B2C funnels.",
+    subservices: [
+      "B2B & B2C Lead Generation Campaigns",
+      "Sales Funnel & Marketing Automation",
+      "CRM Integrations (HubSpot, Salesforce)",
+      "WhatsApp, Email & SMS Marketing Sequences",
+      "Webinar, Affiliate Marketing & Tracking Setups"
+    ],
+    icon: "Users",
+    iconBgClass: "bg-emerald-500/15",
+    iconTextClass: "text-emerald-400",
+    borderHoverClass: "hover:border-emerald-500/35"
+  },
+  {
+    id: "analytics",
+    tag: "9 SERVICES",
+    title: "Analytics & Data Intelligence",
+    description: "Track, analyze, and optimize your marketing performance with clean dashboard reports.",
+    subservices: [
+      "GA4, Google Tag Manager & Looker Studio Setup",
+      "Heatmaps, Behavior & Goal Tracking",
+      "Conversion Analytics & Automated ROI Reporting",
+      "Specialized Marketing Data Audits"
+    ],
+    icon: "Database",
+    iconBgClass: "bg-cyan-500/15",
+    iconTextClass: "text-cyan-400",
+    borderHoverClass: "hover:border-cyan-500/35"
+  },
+  {
+    id: "local",
+    tag: "7 SERVICES",
+    title: "Local Business Marketing",
+    description: "Help regional enterprises dominate their geographical market listings.",
+    subservices: [
+      "Google Business Profile Setup & Optimization",
+      "Local SEO & Regional Maps Ranking",
+      "Review, citation & Hyperlocal Ad Management",
+      "Multi-Location Enterprise Local Search SEO"
+    ],
+    icon: "MapPin",
+    iconBgClass: "bg-rose-500/15",
+    iconTextClass: "text-rose-400",
+    borderHoverClass: "hover:border-rose-500/35"
+  },
+  {
+    id: "industry",
+    tag: "11 NICHES DEPLOYED",
+    title: "Specialized Industry Services",
+    description: "Bespoke digital campaigns optimized for technical and corporate industry sectors.",
+    subservices: [
+      "Healthcare, Dental Clinic & Real Estate Marketing",
+      "Legal Firm, Education & Restaurant Marketing",
+      "Manufacturing, IoT, SaaS & Startup Solutions",
+      "Ecommerce Brand Growth & Scale Strategies"
+    ],
+    icon: "Briefcase",
+    iconBgClass: "bg-orange-500/15",
+    iconTextClass: "text-orange-400",
+    borderHoverClass: "hover:border-orange-500/35"
+  },
+  {
+    id: "growth",
+    tag: "11 TACTICS",
+    title: "Advanced Growth Solutions",
+    description: "High-performance strategies built to scale commercial metrics at pace.",
+    subservices: [
+      "Growth Hacking & Omnichannel Marketing",
+      "Funnel Optimization & Account-Based Marketing (ABM)",
+      "Predictive Analytics & Data-Driven Retargeting",
+      "Customer Retention, CRO & AI Campaigns"
+    ],
+    icon: "Sparkles",
+    iconBgClass: "bg-teal-500/15",
+    iconTextClass: "text-teal-400",
+    borderHoverClass: "hover:border-teal-500/35"
+  },
+  {
+    id: "support",
+    tag: "9 OPTIONS",
+    title: "Support & Consulting",
+    description: "Professional consulting and agency team training for long-term compounding growth.",
+    subservices: [
+      "Digital Marketing, SEO & AI Consulting",
+      "Corporate Workshops & Team Trainings",
+      "Freelancer Guidance & Strategic Planning",
+      "Comprehensive Operational Audits"
+    ],
+    icon: "HelpCircle",
+    iconBgClass: "bg-indigo-500/15",
+    iconTextClass: "text-indigo-400",
+    borderHoverClass: "hover:border-indigo-500/35"
+  }
+];
+
+const getIconComponent = (icon: string) => {
+  switch (icon) {
+    case 'Award': return <Award className="w-5 h-5" />;
+    case 'Bot': return <Bot className="w-5 h-5" />;
+    case 'LineChart': return <LineChart className="w-5 h-5" />;
+    case 'Users': return <Users className="w-5 h-5" />;
+    case 'FileCheck': return <FileCheck className="w-5 h-5" />;
+    case 'Database': return <Database className="w-5 h-5" />;
+    case 'Briefcase': return <Briefcase className="w-5 h-5" />;
+    case 'Star': return <Star className="w-5 h-5" />;
+    case 'MapPin': return <MapPin className="w-5 h-5" />;
+    case 'Sparkles': return <Sparkles className="w-5 h-5" />;
+    case 'HelpCircle': return <HelpCircle className="w-5 h-5" />;
+    default: return <Award className="w-5 h-5" />;
+  }
+};
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'web-design' | 'wordpress'>('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -257,6 +531,14 @@ export default function App() {
   };
 
   const currentMeta = PAGE_METADATA[currentPage] || PAGE_METADATA.home;
+
+  const filteredCapabilities = ALL_CAPABILITIES.filter(cap => {
+    const query = servicesSearchQuery.toLowerCase().trim();
+    if (!query) return true;
+    if (cap.title.toLowerCase().includes(query)) return true;
+    if (cap.description.toLowerCase().includes(query)) return true;
+    return cap.subservices.some(sub => sub.toLowerCase().includes(query));
+  });
 
   return (
     <div className="bg-[#05070a] text-slate-300 font-sans selection:bg-brand-indigo selection:text-white min-h-screen flex flex-col justify-between overflow-x-hidden leading-relaxed pb-16 lg:pb-0">
@@ -561,118 +843,99 @@ export default function App() {
               CAPABILITIES DIRECTORY
             </span>
             <h2 className="text-3xl md:text-5xl font-extrabold font-display leading-tight text-white animate-fade-in">
-              Explore Our Core Capabilities Directory
+              Explore Our Full Core Capabilities Map
             </h2>
             <p className="text-slate-400 text-xs sm:text-sm font-light">
-              We provide an unprecedented level of tactical execution across 14 master disciplines. Use the interactive finder below to query specific technical actions instantly.
+              We provide an unprecedented level of execution across 14 master disciplines. Use the interactive finder below to search all sub-services instantly.
             </p>
 
             {/* Keyword finder filter */}
             <div className="max-w-xl mx-auto pt-3 relative">
               <input 
                 type="text" 
-                placeholder="Query from 140+ capabilities (e.g. Technical SEO, GEO, AEO, PPC, Shopify CRO, ORM)..."
+                placeholder="Search from 140+ services (e.g. AEO, Shopify, Local maps, B2B lead generation)..."
                 value={servicesSearchQuery}
                 onChange={(e) => setServicesSearchQuery(e.target.value)}
                 className="w-full bg-[#0c121e] border border-slate-800 rounded-2xl py-4.5 pl-5 pr-12 text-xs text-slate-200 shadow-inner focus:outline-none focus:border-brand-indigo focus:ring-2 focus:ring-brand-indigo/20 placeholder-slate-500 font-medium"
               />
               <span className="absolute right-4 inset-y-0 flex items-center text-xs text-slate-500 font-bold">
-                {servicesSearchQuery ? "Query Active" : "140+ Steps"}
+                {servicesSearchQuery ? "Active" : `${ALL_CAPABILITIES.length} disciplines`}
               </span>
             </div>
           </div>
 
           {/* Capabilities grid blocks layout */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            
-            {/* Card block 1: SEO Services */}
-            <div className="bg-[#0c121e] border border-slate-850 hover:border-brand-indigo/35 transition-all rounded-3xl p-6 text-left hover:shadow-2xl hover:shadow-brand-indigo/5 flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-brand-orange/15 text-brand-orange flex items-center justify-center font-bold">
-                    SEO
+          {filteredCapabilities.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {filteredCapabilities.map((cap) => (
+                <div 
+                  key={cap.id} 
+                  className={`bg-[#0c121e] border border-slate-850 hover:border-brand-indigo/35 transition-all rounded-3xl p-6 text-left hover:shadow-2xl hover:shadow-brand-indigo/5 flex flex-col justify-between`}
+                >
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${cap.iconBgClass} ${cap.iconTextClass}`}>
+                        {getIconComponent(cap.icon)}
+                      </div>
+                      <span className="text-[10px] text-slate-500 font-mono font-bold uppercase tracking-wider">
+                        {cap.tag}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-1.5">
+                      {cap.title}
+                      {cap.badge && (
+                        <span className="bg-brand-purple/10 text-brand-purple text-[8.5px] uppercase py-0.5 px-2 rounded font-mono font-bold shrink-0">
+                          {cap.badge}
+                        </span>
+                      )}
+                    </h3>
+                    
+                    <p className="text-slate-400 text-xs font-light leading-relaxed">
+                      {cap.description}
+                    </p>
+                    
+                    <div className="border-t border-slate-800/85 pt-3 space-y-1.5 max-h-40 overflow-y-auto pr-1">
+                      {cap.subservices.map((sub, sIdx) => {
+                        const isMatch = servicesSearchQuery && sub.toLowerCase().includes(servicesSearchQuery.toLowerCase());
+                        return (
+                          <div 
+                            key={sIdx} 
+                            className={`flex items-start gap-1.5 text-xs font-bold leading-tight ${isMatch ? 'text-brand-teal' : 'text-slate-350'}`}
+                          >
+                            <CheckCircle2 className="w-3.5 h-3.5 text-brand-teal shrink-0 mt-0.5" />
+                            <span>{sub}</span>
+                          </div>
+                        );
+                      })}
+                    </div>
                   </div>
-                  <span className="text-[10px] text-slate-500 font-mono font-bold uppercase tracking-wider">
-                    25 CORE ACTIONS
-                  </span>
-                </div>
-                <h3 className="text-lg font-extrabold text-white font-display">
-                  Search Engine Optimization (SEO)
-                </h3>
-                <p className="text-slate-400 text-xs font-light leading-relaxed">
-                  Generate structural site directories, optimize internal linking architecture, and establish topical authority matching active user intents.
-                </p>
-                <div className="border-t border-slate-800/80 pt-3 space-y-1.5 max-h-36 overflow-y-auto pr-1">
-                  <div className="flex items-center gap-1.5 text-xs text-slate-300 font-bold"><CheckCircle2 className="w-3.5 h-3.5 text-brand-teal shrink-0" /> Technical site crawler analysis</div>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-300 font-bold"><CheckCircle2 className="w-3.5 h-3.5 text-brand-teal shrink-0" /> Enterprise & Ecommerce SEO</div>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-300 font-bold"><CheckCircle2 className="w-3.5 h-3.5 text-brand-teal shrink-0" /> International & Localized pack SEO</div>
-                </div>
-              </div>
-              <div className="pt-5 border-t border-slate-800/80 mt-5 flex justify-between items-center text-[10px] font-bold text-slate-500 font-mono uppercase">
-                <span>Enterprise protocol</span>
-                <a href="#audit-form" className="text-brand-indigo hover:text-indigo-300 text-xs flex items-center font-bold font-display uppercase tracking-wider">Request Audit Slot →</a>
-              </div>
-            </div>
-
-            {/* Card block 2: AI Optimization Services */}
-            <div className="bg-[#0c121e] border border-slate-850 hover:border-brand-purple/35 transition-all rounded-3xl p-6 text-left hover:shadow-2xl hover:shadow-brand-purple/5 flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-brand-purple/15 text-brand-purple flex items-center justify-center font-bold">
-                    AI
+                  
+                  <div className="pt-5 border-t border-slate-800/80 mt-5 flex justify-between items-center text-[10px] font-mono uppercase font-bold text-slate-500">
+                    <span>AKGLS PROTOCOL</span>
+                    <a 
+                      href="#audit-form" 
+                      className="text-brand-indigo hover:text-indigo-300 text-xs flex items-center font-bold font-display uppercase tracking-wider transition-colors"
+                    >
+                      Request Audit Setup →
+                    </a>
                   </div>
-                  <span className="text-[10px] text-slate-500 font-mono font-bold uppercase tracking-wider">
-                    13 SERVICES
-                  </span>
                 </div>
-                <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-1.5">
-                  AI Optimization (GEO & AEO) <span className="bg-brand-purple/10 text-brand-purple text-[8.5px] uppercase py-0.5 px-2 rounded font-mono font-bold">Trending</span>
-                </h3>
-                <p className="text-slate-400 text-xs font-light leading-relaxed">
-                  Restructure pricing relationships and semantic code templates so conversational LLMs index and recommend your brand to active queries.
-                </p>
-                <div className="border-t border-slate-800/80 pt-3 space-y-1.5 max-h-36 overflow-y-auto pr-1">
-                  <div className="flex items-center gap-1.5 text-xs text-slate-300 font-bold"><CheckCircle2 className="w-3.5 h-3.5 text-brand-teal shrink-0" /> Generative Engine Optimization (GEO)</div>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-300 font-bold"><CheckCircle2 className="w-3.5 h-3.5 text-brand-teal shrink-0" /> Answer Engine Optimization (AEO)</div>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-300 font-bold"><CheckCircle2 className="w-3.5 h-3.5 text-brand-teal shrink-0" /> RAG system relational markups</div>
-                </div>
-              </div>
-              <div className="pt-5 border-t border-slate-800/80 mt-5 flex justify-between items-center text-[10px] font-bold text-slate-500 font-mono uppercase">
-                <span>LLM entity rules</span>
-                <a href="#audit-form" className="text-brand-indigo hover:text-indigo-300 text-xs flex items-center font-bold font-display uppercase tracking-wider">Request Audit Slot →</a>
-              </div>
+              ))}
             </div>
-
-            {/* Card block 3: Paid Ads (PPC) */}
-            <div className="bg-[#0c121e] border border-slate-850 hover:border-brand-teal/35 transition-all rounded-3xl p-6 text-left hover:shadow-2xl hover:shadow-brand-teal/5 flex flex-col justify-between">
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-brand-teal/15 text-brand-teal flex items-center justify-center font-bold">
-                    PPC
-                  </div>
-                  <span className="text-[10px] text-slate-500 font-mono font-bold uppercase tracking-wider">
-                    16 CAMPAIGN TYPES
-                  </span>
-                </div>
-                <h3 className="text-lg font-extrabold text-white font-display">
-                  Paid Advertising (PPC)
-                </h3>
-                <p className="text-slate-400 text-xs font-light leading-relaxed">
-                  Lower overall customer acquisition costs through strategic search ads, negative keyword blacklists, and bid settings.
-                </p>
-                <div className="border-t border-slate-800/80 pt-3 space-y-1.5 max-h-36 overflow-y-auto pr-1">
-                  <div className="flex items-center gap-1.5 text-xs text-slate-300 font-bold"><CheckCircle2 className="w-3.5 h-3.5 text-brand-teal shrink-0" /> Google Search & Performance Max</div>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-300 font-bold"><CheckCircle2 className="w-3.5 h-3.5 text-brand-teal shrink-0" /> Meta shopping ads structures</div>
-                  <div className="flex items-center gap-1.5 text-xs text-slate-300 font-bold"><CheckCircle2 className="w-3.5 h-3.5 text-brand-teal shrink-0" /> B2B LinkedIn PPC lead models</div>
-                </div>
-              </div>
-              <div className="pt-5 border-t border-slate-800/80 mt-5 flex justify-between items-center text-[10px] font-bold text-slate-500 font-mono uppercase">
-                <span>SLA conversions</span>
-                <a href="#audit-form" className="text-brand-indigo hover:text-indigo-300 text-xs flex items-center font-bold font-display uppercase tracking-wider">Request Audit Slot →</a>
-              </div>
+          ) : (
+            <div className="text-center py-12 p-8 bg-[#0c121e] border border-slate-850 rounded-3xl max-w-lg mx-auto space-y-3">
+              <p className="text-slate-400 text-sm font-light">
+                No matching service categories found for "<span className="text-brand-indigo font-bold">{servicesSearchQuery}</span>".
+              </p>
+              <button 
+                onClick={() => setServicesSearchQuery('')}
+                className="text-brand-teal hover:text-teal-300 text-xs font-bold font-display uppercase tracking-wider"
+              >
+                Clear query & view all
+              </button>
             </div>
-
-          </div>
+          )}
         </div>
       </section>
 
@@ -1556,7 +1819,7 @@ export default function App() {
             </h5>
             <div className="space-y-2 text-xs font-light">
               <p className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-slate-500" /> Business Support: <strong className="text-white font-semibold">info@akgls.com</strong>
+                <Mail className="w-4 h-4 text-slate-500" /> Business Support: <strong className="text-white font-semibold">info@akglsgroup.com</strong>
               </p>
               <p className="flex items-center gap-2">
                 <Phone className="w-4 h-4 text-slate-500" /> Call Council Support: <strong className="text-white font-semibold"><a href="tel:+918318114492" className="hover:text-brand-indigo transition-colors">+91 831 811 4492</a></strong>

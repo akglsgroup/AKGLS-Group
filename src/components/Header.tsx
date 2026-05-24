@@ -79,9 +79,9 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
           {/* Left section contacts */}
           <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] sm:text-xs">
-            <a href="mailto:info@akgls.com" className="flex items-center gap-1.5 hover:text-brand-indigo transition-colors">
+            <a href="mailto:info@akglsgroup.com" className="flex items-center gap-1.5 hover:text-brand-indigo transition-colors">
               <Mail className="w-3.5 h-3.5 text-brand-teal" />
-              <span>info@akgls.com</span>
+              <span>info@akglsgroup.com</span>
             </a>
             <span className="text-slate-700 hidden sm:inline">|</span>
             <a href="tel:+918318114492" className="flex items-center gap-1.5 hover:text-brand-indigo transition-colors">
