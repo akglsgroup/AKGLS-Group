@@ -1,4 +1,5 @@
 import { useState, useEffect, FormEvent } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { 
   Sparkles, Bot, Clock, HelpCircle, ArrowRight, CheckCircle2, 
   MapPin, Phone, Mail, Award, CheckCircle, Database, LineChart, 
@@ -207,9 +208,70 @@ export default function App() {
     ? defaultCaseStudies 
     : defaultCaseStudies.filter(c => c.category === portfolioFilter);
 
+  const PAGE_METADATA = {
+    home: {
+      title: "AKGLS Group | AI SEO, GEO & Performance Marketing Agency",
+      description: "Deploy SEO-friendly structure markups with real-time Generative Engine Optimization (GEO) to citation-proof your business across ChatGPT, Perplexity, Gemini, and Google Search.",
+      canonical: "https://akgls.group/"
+    },
+    geo: {
+      title: "GEO (Generative Engine Optimization) Services | AKGLS Group",
+      description: "Optimize your brand for Next-Gen LLM retrieval, conversational AI filters, Perplexity Citations, and ChatGPT Search results with our proven expertise.",
+      canonical: "https://akgls.group/#geo-services"
+    },
+    seo: {
+      title: "Organic Search Optimization & SEO Services | AKGLS Group",
+      description: "Drive massive organic keyword visibility and high-intent customer traffic with premium full-funnel, semantic content structures and modern search practices.",
+      canonical: "https://akgls.group/#seo-services"
+    },
+    'technical-seo': {
+      title: "Technical SEO Optimization, Schema & Infrastructure | AKGLS Group",
+      description: "Maximize crawl budget, speed, structural JSON-LD schemas, and indexing hierarchies so both human users and AI web crawlers browse flawlessly.",
+      canonical: "https://akgls.group/#technical-seo-services"
+    },
+    aeo: {
+      title: "AEO (Answer Engine Optimization) & RAG Systems | AKGLS Group",
+      description: "Align entity properties and structure conversational answers to trigger direct summary panel responses inside Google's AI Overviews and top retrievers.",
+      canonical: "https://akgls.group/#aeo-services"
+    },
+    'ai-seo': {
+      title: "AI-Powered SEO & LLM Context Optimization | AKGLS Group",
+      description: "Modernize your visibility pipelines with natural language semantic processing, dynamic entity graphs, and indexing nodes optimized for Claude, Gemini, and GPT-4.",
+      canonical: "https://akgls.group/#ai-seo-services"
+    },
+    'google-ads': {
+      title: "PPC Management & High-ROI Google Ads Services | AKGLS Group",
+      description: "Secure dominant top-of-page positions and scale qualified conversions across search, shopping grids, display networks, and Performance Max channels.",
+      canonical: "https://akgls.group/#google-ads-services"
+    },
+    'web-design': {
+      title: "Professional Web Web Design & High-Converting UX/UI | AKGLS Group",
+      description: "Build gorgeous, loading-fast custom websites crafted with optimal UX/UI standards. We supply clear structural nodes to search indexers and convert visitors.",
+      canonical: "https://akgls.group/#web-design-services"
+    },
+    wordpress: {
+      title: "WordPress Development Services & Custom Engineering | AKGLS Group",
+      description: "Maximize WordPress speed, security, and schema scalability. We craft lightweight, database optimized, responsive architectures for modern search optimization.",
+      canonical: "https://akgls.group/#wordpress-development-services"
+    }
+  };
+
+  const currentMeta = PAGE_METADATA[currentPage] || PAGE_METADATA.home;
+
   return (
     <div className="bg-[#05070a] text-slate-300 font-sans selection:bg-brand-indigo selection:text-white min-h-screen flex flex-col justify-between overflow-x-hidden leading-relaxed pb-16 lg:pb-0">
       
+      <Helmet>
+        <title>{currentMeta.title}</title>
+        <meta name="description" content={currentMeta.description} />
+        <link rel="canonical" href={currentMeta.canonical} />
+        <meta property="og:title" content={currentMeta.title} />
+        <meta property="og:description" content={currentMeta.description} />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={currentMeta.title} />
+        <meta name="twitter:description" content={currentMeta.description} />
+      </Helmet>
       {/* GLOBAL SERVICES HEADER COMPONENTS */}
       <Header 
         onSearchOpen={() => setIsSearchOpen(true)}
