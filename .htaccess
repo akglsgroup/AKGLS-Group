@@ -1,0 +1,16 @@
+# ----------------------------------------------------------------------
+# AKGLS Group | Project Root Generic Apache Rewrite (.htaccess)
+# ----------------------------------------------------------------------
+# If you are hosting the static files or running behind an Apache server
+# on Hostinger, this rule delegates all client-side virtual routes to
+# the entry point (index.html) so they do not return a 404 on refresh.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteRule . /index.html [L]
+</IfModule>

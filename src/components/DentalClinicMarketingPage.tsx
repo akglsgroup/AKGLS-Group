@@ -529,30 +529,7 @@ export default function DentalClinicMarketingPage({ onBackToHome, openProposalFo
         </div>
       </div>
 
-      {/* MULTI-LOCATION PERSISTENT BANNER STICKY CTA */}
-      <div className="bg-[#090e18] border-b border-slate-900 py-2.5 px-4 sticky top-0 z-40 backdrop-blur-md bg-opacity-95">
-        <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-          <div className="flex items-center gap-2 text-xs">
-            <span className="text-brand-teal font-mono font-bold uppercase tracking-widest bg-brand-teal/10 px-2 py-0.5 rounded text-[9px] border border-brand-teal/20">SPECIALIZED</span>
-            <span className="text-slate-300 font-medium">Elevating Dental Authority & Patient Volume</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <a 
-              href="#free-dental-marketing-audit" 
-              className="bg-brand-orange text-white hover:bg-opacity-95 font-black text-[10px] uppercase tracking-wider py-1.5 px-4 rounded-lg transition-all shadow-md"
-              id="sticky-audit-btn"
-            >
-              Get Free Audit
-            </a>
-            <button 
-              onClick={onBackToHome}
-              className="text-[10.5px] uppercase font-mono text-slate-400 hover:text-white transition-colors cursor-pointer"
-            >
-              ← Back to Main Page
-            </button>
-          </div>
-        </div>
-      </div>
+
 
       {/* 🚀 HERO SECTION */}
       <header className="relative pt-24 pb-28 text-left border-b border-slate-900/60" id="hero-section">

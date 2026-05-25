@@ -1,0 +1,17 @@
+# ----------------------------------------------------------------------
+# AKGLS Group | Client-side Routing & 404 Fallback Config for Apache
+# ----------------------------------------------------------------------
+# This file handles URL rewrites. On page refresh, Apache tries to find
+# physical files or directories (e.g., /dental-clinic-marketing).
+# This rule rewrites those virtual paths to index.html so React Router
+# can handle the rendering correctly.
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^index\.html$ - [L]
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-l
+  RewriteRule . /index.html [L]
+</IfModule>
