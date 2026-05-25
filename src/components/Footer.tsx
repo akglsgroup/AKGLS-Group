@@ -105,13 +105,14 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
   // Section 5: Industry Solutions
   const industryLinks = [
     { name: "Dental Clinic Marketing", href: "/dental-clinic-marketing" },
-    { name: "Healthcare Marketing", href: "#capabilities-explorer" },
-    { name: "IoT Marketing", href: "#capabilities-explorer" },
-    { name: "SaaS Marketing", href: "#capabilities-explorer" },
-    { name: "Manufacturing Marketing", href: "#capabilities-explorer" },
-    { name: "Real Estate Marketing", href: "#capabilities-explorer" },
-    { name: "Education Marketing", href: "#capabilities-explorer" },
-    { name: "Ecommerce Marketing", href: "#capabilities-explorer" },
+    { name: "Healthcare Marketing", href: "/healthcare-marketing-services" },
+    { name: "IoT Marketing", href: "/iot-company-marketing-services" },
+    { name: "Law Firm Marketing", href: "/law-firm-marketing-services" },
+    { name: "Manufacturing Marketing", href: "/manufacturing-marketing-services" },
+    { name: "Real Estate Marketing", href: "/real-estate-marketing-services" },
+    { name: "Education Marketing", href: "/education-marketing-services" },
+    { name: "Restaurant Marketing", href: "/restaurant-marketing-services" },
+    { name: "Finance Marketing", href: "/finance-marketing-services" },
   ];
 
   // Section 6: Resources & Tools Info

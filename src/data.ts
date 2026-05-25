@@ -98,15 +98,15 @@ export const solutionsMenu: MegaColumn[] = [
   {
     title: "Industry Solutions",
     items: [
-      { name: "Healthcare Marketing", href: "#capabilities-explorer" },
+      { name: "Healthcare Marketing", href: "/healthcare-marketing-services" },
       { name: "Dental Clinic Marketing", href: "/dental-clinic-marketing" },
-      { name: "Manufacturing Marketing", href: "#capabilities-explorer" },
-      { name: "IoT Company Marketing", href: "#capabilities-explorer" },
-      { name: "Real Estate Marketing", href: "#capabilities-explorer" },
-      { name: "Education Marketing", href: "#capabilities-explorer" },
-      { name: "Law Firm Marketing", href: "#capabilities-explorer" },
-      { name: "Restaurant Marketing", href: "#capabilities-explorer" },
-      { name: "Finance Marketing", href: "#capabilities-explorer" }
+      { name: "Manufacturing Marketing", href: "/manufacturing-marketing-services" },
+      { name: "IoT Company Marketing", href: "/iot-company-marketing-services" },
+      { name: "Real Estate Marketing", href: "/real-estate-marketing-services" },
+      { name: "Education Marketing", href: "/education-marketing-services" },
+      { name: "Law Firm Marketing", href: "/law-firm-marketing-services" },
+      { name: "Restaurant Marketing", href: "/restaurant-marketing-services" },
+      { name: "Finance Marketing", href: "/finance-marketing-services" }
     ]
   },
   {

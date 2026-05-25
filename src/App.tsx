@@ -22,6 +22,14 @@ import GoogleAdsServicesPage from './components/GoogleAdsServicesPage';
 import WebDesignServicesPage from './components/WebDesignServicesPage';
 import WordPressServicesPage from './components/WordPressServicesPage';
 import DentalClinicMarketingPage from './components/DentalClinicMarketingPage';
+import ManufacturingMarketingPage from './components/ManufacturingMarketingPage';
+import IotCompanyMarketingPage from './components/IotCompanyMarketingPage';
+import RealEstateMarketingPage from './components/RealEstateMarketingPage';
+import HealthcareMarketingPage from './components/HealthcareMarketingPage';
+import EducationMarketingPage from './components/EducationMarketingPage';
+import LawFirmMarketingPage from './components/LawFirmMarketingPage';
+import RestaurantMarketingPage from './components/RestaurantMarketingPage';
+import FinanceMarketingPage from './components/FinanceMarketingPage';
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
@@ -300,7 +308,7 @@ const getIconComponent = (icon: string) => {
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance'>('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [modalEmail, setModalEmail] = useState('');
@@ -361,6 +369,30 @@ export default function App() {
 
       if (pathname === '/dental-clinic-marketing' || pathname === '/services/dental-clinic-marketing' || hash === '#dental-clinic-marketing' || hash === '#dental-marketing' || hash === '#dental-services' || hash === '#dental-clinic-marketing-services') {
         setCurrentPage('dental-clinic-marketing');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/manufacturing-marketing-services' || pathname === '/industrial-marketing-agency' || pathname === '/b2b-manufacturing-marketing' || hash === '#manufacturing-marketing-services' || hash === '#industrial-marketing' || hash === '#manufacturing-marketing') {
+        setCurrentPage('manufacturing');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/iot-company-marketing-services' || pathname === '/iot-company-marketing-services/' || pathname === '/iot-marketing-agency' || pathname === '/iot-digital-marketing-services' || pathname === '/iot-seo-services' || pathname === '/technology-company-marketing' || hash === '#iot-company-marketing-services' || hash === '#iot-marketing-agency' || hash === '#iot-marketing' || hash === '#iot-services') {
+        setCurrentPage('iot');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/real-estate-marketing-services' || pathname === '/real-estate-marketing-services/' || pathname === '/real-estate-digital-marketing' || pathname === '/real-estate-digital-marketing/' || pathname === '/real-estate-seo-services' || pathname === '/real-estate-seo-services/' || pathname === '/property-marketing-agency' || pathname === '/property-marketing-agency/' || hash === '#real-estate-marketing-services' || hash === '#real-estate-seo' || hash === '#real-estate-marketing') {
+        setCurrentPage('real-estate');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/healthcare-marketing-services' || pathname === '/healthcare-marketing-services/' || pathname === '/healthcare-digital-marketing' || pathname === '/healthcare-digital-marketing/' || pathname === '/medical-marketing-agency' || pathname === '/medical-marketing-agency/' || pathname === '/hospital-marketing-services' || pathname === '/hospital-marketing-services/' || hash === '#healthcare-marketing-services' || hash === '#healthcare-seo' || hash === '#healthcare-marketing') {
+        setCurrentPage('healthcare');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/education-marketing-services' || pathname === '/education-marketing-services/' || pathname === '/education-digital-marketing' || pathname === '/education-digital-marketing/' || pathname === '/school-marketing-agency' || pathname === '/school-marketing-agency/' || pathname === '/college-marketing-services' || pathname === '/college-marketing-services/' || pathname === '/edtech-marketing-agency' || pathname === '/edtech-marketing-agency/' || hash === '#education-marketing-services' || hash === '#education-seo' || hash === '#education-marketing') {
+        setCurrentPage('education');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/law-firm-marketing-services' || pathname === '/law-firm-marketing-services/' || pathname === '/legal-marketing-agency' || pathname === '/legal-marketing-agency/' || pathname === '/lawyer-digital-marketing' || pathname === '/lawyer-digital-marketing/' || pathname === '/attorney-seo-services' || pathname === '/attorney-seo-services/' || hash === '#law-firm-marketing-services' || hash === '#legal-seo' || hash === '#lawyer-marketing') {
+        setCurrentPage('law-firm');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/restaurant-marketing-services' || pathname === '/restaurant-marketing-services/' || pathname === '/restaurant-digital-marketing' || pathname === '/restaurant-digital-marketing/' || pathname === '/restaurant-seo-services' || pathname === '/restaurant-seo-services/' || pathname === '/food-business-marketing-agency' || pathname === '/food-business-marketing-agency/' || hash === '#restaurant-marketing-services' || hash === '#restaurant-seo' || hash === '#restaurant-marketing') {
+        setCurrentPage('restaurant');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/finance-marketing-services' || pathname === '/finance-marketing-services/' || pathname === '/financial-services-marketing' || pathname === '/financial-services-marketing/' || pathname === '/finance-digital-marketing' || pathname === '/finance-digital-marketing/' || pathname === '/fintech-marketing-agency' || pathname === '/fintech-marketing-agency/' || hash === '#finance-marketing-services' || hash === '#financial-seo' || hash === '#finance-marketing') {
+        setCurrentPage('finance');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (hash === '#geo-services') {
         setCurrentPage('geo');
@@ -543,6 +575,46 @@ export default function App() {
       title: "Dental Clinic Marketing & Local Patient Acquisition Services | AKGLS Group",
       description: "Dominate dental local map packs, generate high-value implants and cosmetic patient appointments, and optimize local directories structures with HIPAA-aligned dental funnels.",
       canonical: "https://akgls.group/dental-clinic-marketing"
+    },
+    'manufacturing': {
+      title: "Manufacturing Marketing Services | Industrial Digital Marketing Agency | AKGLS Group",
+      description: "Grow your manufacturing business with industrial digital marketing services from AKGLS Group. SEO, lead generation, B2B marketing, Google Ads, AI SEO & website solutions for manufacturers.",
+      canonical: "https://akglsgroup.com/manufacturing-marketing-services"
+    },
+    'iot': {
+      title: "IoT Company Marketing Services | IoT SEO Agency | AKGLS Group",
+      description: "Grow your IoT business with expert IoT marketing services from AKGLS Group. IoT SEO, B2B lead generation, Google Ads, AI SEO & digital marketing solutions for IoT companies.",
+      canonical: "https://akglsgroup.com/iot-company-marketing-services/"
+    },
+    'real-estate': {
+      title: "Real Estate Marketing Services | Real Estate SEO Agency | AKGLS Group",
+      description: "Generate property leads and grow your real estate business with expert real estate marketing services from AKGLS Group. SEO, Google Ads, social media & AI-powered property marketing solutions.",
+      canonical: "https://akglsgroup.com/real-estate-marketing-services/"
+    },
+    'healthcare': {
+      title: "Healthcare Marketing Services | Medical SEO Agency | AKGLS Group",
+      description: "Grow your healthcare business with expert healthcare marketing services from AKGLS Group. Medical SEO, Google Ads, local SEO, AI SEO & patient lead generation solutions.",
+      canonical: "https://akglsgroup.com/healthcare-marketing-services/"
+    },
+    'education': {
+      title: "Education Marketing Services | School & College Marketing Agency | AKGLS Group",
+      description: "Grow admissions and student inquiries with expert education marketing services from AKGLS Group. SEO, Google Ads, social media & AI-powered marketing for schools, colleges & edtech companies.",
+      canonical: "https://akglsgroup.com/education-marketing-services/"
+    },
+    'law-firm': {
+      title: "Law Firm Marketing Services | Lawyer SEO Agency | AKGLS Group",
+      description: "Grow your law firm with expert legal marketing services from AKGLS Group. Lawyer SEO, Google Ads, local SEO, AI SEO & lead generation solutions for attorneys and law firms.",
+      canonical: "https://akglsgroup.com/law-firm-marketing-services/"
+    },
+    'restaurant': {
+      title: "Restaurant Marketing Services | Restaurant SEO Agency | AKGLS Group",
+      description: "Grow your restaurant with expert restaurant marketing services from AKGLS Group. Restaurant SEO, Google Ads, social media, local SEO & AI-powered food business marketing solutions.",
+      canonical: "https://akglsgroup.com/restaurant-marketing-services/"
+    },
+    'finance': {
+      title: "Finance Marketing Services | Financial SEO Agency | AKGLS Group",
+      description: "Grow your financial business with expert finance marketing services from AKGLS Group. SEO, Google Ads, fintech marketing, AI SEO & lead generation solutions for finance companies.",
+      canonical: "https://akglsgroup.com/finance-marketing-services/"
     }
   };
 
@@ -677,6 +749,102 @@ export default function App() {
           }}
           openProposalForm={() => {
             const formEl = document.querySelector('#free-dental-audit-portal') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'manufacturing' ? (
+        <ManufacturingMarketingPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#manufacturing-audit-section') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'iot' ? (
+        <IotCompanyMarketingPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#iot-audit-form-section') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'real-estate' ? (
+        <RealEstateMarketingPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#re-audit-form-section') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'healthcare' ? (
+        <HealthcareMarketingPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#healthcare-audit-section') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'education' ? (
+        <EducationMarketingPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#education-audit-section') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'law-firm' ? (
+        <LawFirmMarketingPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#legal-audit-section') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'restaurant' ? (
+        <RestaurantMarketingPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#restaurant-audit-section') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'finance' ? (
+        <FinanceMarketingPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#finance-audit-section') || document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
         />
