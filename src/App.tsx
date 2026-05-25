@@ -31,6 +31,16 @@ import EducationMarketingPage from './components/EducationMarketingPage';
 import LawFirmMarketingPage from './components/LawFirmMarketingPage';
 import RestaurantMarketingPage from './components/RestaurantMarketingPage';
 import FinanceMarketingPage from './components/FinanceMarketingPage';
+import OffPageSeoPage from './components/OffPageSeoPage';
+import LocalSeoPage from './components/LocalSeoPage';
+import EcommerceSeoPage from './components/EcommerceSeoPage';
+import EnterpriseSeoPage from './components/EnterpriseSeoPage';
+import InternationalSeoPage from './components/InternationalSeoPage';
+import MobileSeoPage from './components/MobileSeoPage';
+import ProgrammaticSeoPage from './components/ProgrammaticSeoPage';
+import LinkBuildingPage from './components/LinkBuildingPage';
+import SeoAuditPage from './components/SeoAuditPage';
+import SeoConsultingPage from './components/SeoConsultingPage';
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
@@ -309,7 +319,7 @@ const getIconComponent = (icon: string) => {
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services'>('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [modalEmail, setModalEmail] = useState('');
@@ -406,6 +416,36 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (pathname === '/on-page-seo' || pathname === '/on-page-seo/' || pathname === '/on-page-seo-services' || pathname === '/on-page-seo-services/' || hash === '#on-page-seo' || hash === '#on-page-seo-services') {
         setCurrentPage('on-page-seo');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/off-page-seo-services' || pathname === '/off-page-seo-services/' || hash === '#off-page-seo' || hash === '#off-page-seo-services') {
+        setCurrentPage('off-page-seo');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/local-seo-services' || pathname === '/local-seo-services/' || hash === '#local-seo' || hash === '#local-seo-services') {
+        setCurrentPage('local-seo');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/ecommerce-seo-services' || pathname === '/ecommerce-seo-services/' || hash === '#ecommerce-seo' || hash === '#ecommerce-seo-services') {
+        setCurrentPage('ecommerce-seo');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/enterprise-seo-services' || pathname === '/enterprise-seo-services/' || hash === '#enterprise-seo' || hash === '#enterprise-seo-services') {
+        setCurrentPage('enterprise-seo');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/international-seo-services' || pathname === '/international-seo-services/' || hash === '#international-seo' || hash === '#international-seo-services') {
+        setCurrentPage('international-seo');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/mobile-seo-services' || pathname === '/mobile-seo-services/' || hash === '#mobile-seo' || hash === '#mobile-seo-services') {
+        setCurrentPage('mobile-seo');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/programmatic-seo-services' || pathname === '/programmatic-seo-services/' || hash === '#programmatic-seo' || hash === '#programmatic-seo-services') {
+        setCurrentPage('programmatic-seo');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/link-building-services' || pathname === '/link-building-services/' || hash === '#link-building' || hash === '#link-building-services') {
+        setCurrentPage('link-building');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/seo-audit-services' || pathname === '/seo-audit-services/' || hash === '#seo-audit' || hash === '#seo-audit-services') {
+        setCurrentPage('seo-audit-services');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/seo-consulting-services' || pathname === '/seo-consulting-services/' || hash === '#seo-consulting' || hash === '#seo-consulting-services') {
+        setCurrentPage('seo-consulting-services');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (pathname === '/aeo-services' || pathname === '/aeo-services/' || hash === '#aeo-services' || hash === '#aeo' || hash === '#ai-answer-optimization') {
         setCurrentPage('aeo');
@@ -554,6 +594,56 @@ export default function App() {
       title: "On-Page SEO & Content Semantic Optimization | AKGLS Group",
       description: "Align your headings structure, alt entities, and LSI keyword relevancy to make pages immediately understandable to crawl bots and AI search engine agents.",
       canonical: "https://akglsgroup.com/on-page-seo-services/"
+    },
+    'off-page-seo': {
+      title: "Off-Page SEO Services Company | Link Building Agency | AKGLS Group",
+      description: "Secure high-authority backlinks, boost domain authority rating indicators, and expand search coverage with safe, white-hat editorial outreach campaigns.",
+      canonical: "https://akglsgroup.com/off-page-seo-services/"
+    },
+    'local-seo': {
+      title: "Local SEO Services Company | Google Map pack Optimization | AKGLS Group",
+      description: "Dominate neighborhood searches and claim top-of-page ranks inside Google Map packs with optimized GBP profiles and hyper-local citation structures.",
+      canonical: "https://akglsgroup.com/local-seo-services/"
+    },
+    'ecommerce-seo': {
+      title: "Ecommerce SEO Services Company | Core Category Authority | AKGLS Group",
+      description: "Drive non-branded traffic and direct product checkouts with platform-specific technical blueprints, category optimization schemes, and rich schemas.",
+      canonical: "https://akglsgroup.com/ecommerce-seo-services/"
+    },
+    'enterprise-seo': {
+      title: "Enterprise SEO Services Company | Corporate Search scale | AKGLS Group",
+      description: "Scale organic revenues securely across millions of pages. We design structural sitemaps, optimize technical crawling, and resolve index blockades.",
+      canonical: "https://akglsgroup.com/enterprise-seo-services/"
+    },
+    'international-seo': {
+      title: "International SEO Services Company | Global Hreflang setup | AKGLS Group",
+      description: "Expand your organic footprint across multilingual territories. Configure precise Hreflang code rules and regional content structures.",
+      canonical: "https://akglsgroup.com/international-seo-services/"
+    },
+    'mobile-seo': {
+      title: "Mobile SEO Services & Core Web Vitals Speed | AKGLS Group",
+      description: "Ensure lightning fast loading speeds, optimize responsiveness viewports, and secure smartphone crawlers priority indexing guidelines of Google.",
+      canonical: "https://akglsgroup.com/mobile-seo-services/"
+    },
+    'programmatic-seo': {
+      title: "Programmatic SEO Services & Automated Organic Scale | AKGLS Group",
+      description: "Build dynamic database-driven templates, program high-volume localized keyword maps, and capture organic markets easily.",
+      canonical: "https://akglsgroup.com/programmatic-seo-services/"
+    },
+    'link-building': {
+      title: "Link Building Services Company | White Hat Backlink Agency | AKGLS Group",
+      description: "Secure permanent link assets, boost domain authority baseline statistics, audit toxic backlink profiles, and claim top ranking organic results.",
+      canonical: "https://akglsgroup.com/link-building-services/"
+    },
+    'seo-audit-services': {
+      title: "Technical SEO Audit & Sitemap Compliance | AKGLS Group",
+      description: "Diagnose crawl budget issues, verify HTTPS certificates configurations, map out content gaps, and prioritize developer execution models.",
+      canonical: "https://akglsgroup.com/seo-audit-services/"
+    },
+    'seo-consulting-services': {
+      title: "SEO Consulting Services & Fractional Search Leadership | AKGLS Group",
+      description: "Consult with seasoned search architects. Get custom growth roadmap timelines, build internal SOP manuals, and troubleshoot penalties.",
+      canonical: "https://akglsgroup.com/seo-consulting-services/"
     },
     aeo: {
       title: "AEO (Answer Engine Optimization) & RAG Systems | AKGLS Group",
@@ -706,6 +796,126 @@ export default function App() {
           }}
           openProposalForm={() => {
             const formEl = document.querySelector('#onpage-audit-section') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'off-page-seo' ? (
+        <OffPageSeoPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#off-page-cta') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'local-seo' ? (
+        <LocalSeoPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#local-cta') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'ecommerce-seo' ? (
+        <EcommerceSeoPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#ecommerce-cta') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'enterprise-seo' ? (
+        <EnterpriseSeoPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#enterprise-cta') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'international-seo' ? (
+        <InternationalSeoPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#international-cta') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'mobile-seo' ? (
+        <MobileSeoPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#mobile-cta') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'programmatic-seo' ? (
+        <ProgrammaticSeoPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#programmatic-cta') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'link-building' ? (
+        <LinkBuildingPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#link-building-cta') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'seo-audit-services' ? (
+        <SeoAuditPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#seo-audit-cta') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'seo-consulting-services' ? (
+        <SeoConsultingPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#seo-consulting-cta') || document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
         />

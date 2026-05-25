@@ -66,16 +66,16 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
 
   // Section 2: SEO Services Info
   const seoServicesLinks = [
-    { name: "SEO Services", href: "#seo-services" },
-    { name: "Technical SEO", href: "#technical-seo" },
-    { name: "Local SEO", href: "#seo-services" },
-    { name: "Ecommerce SEO", href: "#seo-services" },
-    { name: "Enterprise SEO", href: "#seo-services" },
-    { name: "AI SEO Services", href: "#ai-seo-services" },
-    { name: "GEO Services", href: "#geo-services" },
-    { name: "AEO Services", href: "#aeo-services" },
-    { name: "Link Building", href: "#seo-services" },
-    { name: "SEO Audit Services", href: "#audit-form" },
+    { name: "SEO Services", href: "/seo-services" },
+    { name: "Technical SEO", href: "/technical-seo" },
+    { name: "Local SEO", href: "/local-seo-services" },
+    { name: "Ecommerce SEO", href: "/ecommerce-seo-services" },
+    { name: "Enterprise SEO", href: "/enterprise-seo-services" },
+    { name: "AI SEO Services", href: "/ai-seo-services" },
+    { name: "GEO Services", href: "/geo-services" },
+    { name: "AEO Services", href: "/aeo-services" },
+    { name: "Link Building", href: "/link-building-services" },
+    { name: "SEO Audit Services", href: "/seo-audit-services" },
   ];
 
   // Section 3: Digital Marketing Info
