@@ -4,19 +4,19 @@ export const servicesMenu: MegaColumn[] = [
   {
     title: "SEO Services",
     items: [
-      { name: "SEO Services", href: "#seo-services" },
-      { name: "Technical SEO", href: "#technical-seo" },
-      { name: "On-Page SEO", href: "#seo-services" },
-      { name: "Off-Page SEO", href: "#seo-services" },
-      { name: "Local SEO", href: "#seo-services" },
-      { name: "Ecommerce SEO", href: "#seo-services" },
-      { name: "Enterprise SEO", href: "#seo-services" },
-      { name: "International SEO", href: "#seo-services" },
-      { name: "Mobile SEO", href: "#seo-services" },
-      { name: "Programmatic SEO", href: "#seo-services" },
-      { name: "Link Building", href: "#seo-services" },
-      { name: "SEO Audit Services", href: "#technical-seo" },
-      { name: "SEO Consulting", href: "#seo-services" }
+      { name: "SEO Services", href: "/seo-services" },
+      { name: "Technical SEO", href: "/technical-seo" },
+      { name: "On-Page SEO", href: "/on-page-seo" },
+      { name: "Off-Page SEO", href: "/seo-services" },
+      { name: "Local SEO", href: "/seo-services" },
+      { name: "Ecommerce SEO", href: "/seo-services" },
+      { name: "Enterprise SEO", href: "/seo-services" },
+      { name: "International SEO", href: "/seo-services" },
+      { name: "Mobile SEO", href: "/seo-services" },
+      { name: "Programmatic SEO", href: "/seo-services" },
+      { name: "Link Building", href: "/seo-services" },
+      { name: "SEO Audit Services", href: "/technical-seo" },
+      { name: "SEO Consulting", href: "/seo-services" }
     ],
     featuredCta: {
       text: "Get Free SEO Audit",
@@ -27,17 +27,17 @@ export const servicesMenu: MegaColumn[] = [
   {
     title: "AI Optimization Services",
     items: [
-      { name: "GEO Services", href: "#geo-services", isTrending: true },
-      { name: "AEO Services", href: "#aeo-services", isTrending: true },
-      { name: "AI SEO Services", href: "#ai-seo-services" },
-      { name: "AI Search Optimization", href: "#ai-seo-services" },
-      { name: "ChatGPT Optimization", href: "#ai-seo-services" },
-      { name: "Gemini Optimization", href: "#ai-seo-services" },
-      { name: "Claude Optimization", href: "#ai-seo-services" },
-      { name: "AI Visibility Optimization", href: "#ai-seo-services" },
-      { name: "AI Content Optimization", href: "#ai-seo-services" },
-      { name: "Voice Search Optimization", href: "#ai-seo-services" },
-      { name: "SGE Optimization", href: "#ai-seo-services" }
+      { name: "GEO Services", href: "/geo-services", isTrending: true },
+      { name: "AEO Services", href: "/aeo-services", isTrending: true },
+      { name: "AI SEO Services", href: "/ai-seo-services" },
+      { name: "AI Search Optimization", href: "/ai-seo-services" },
+      { name: "ChatGPT Optimization", href: "/ai-seo-services" },
+      { name: "Gemini Optimization", href: "/ai-seo-services" },
+      { name: "Claude Optimization", href: "/ai-seo-services" },
+      { name: "AI Visibility Optimization", href: "/ai-seo-services" },
+      { name: "AI Content Optimization", href: "/ai-seo-services" },
+      { name: "Voice Search Optimization", href: "/ai-seo-services" },
+      { name: "SGE Optimization", href: "/ai-seo-services" }
     ],
     featuredCta: {
       text: "Rank in AI Search",

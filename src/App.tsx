@@ -16,6 +16,7 @@ import Chatbox from './components/Chatbox';
 import GeoServicesPage from './components/GeoServicesPage';
 import SeoServicesPage from './components/SeoServicesPage';
 import TechnicalSeoPage from './components/TechnicalSeoPage';
+import OnPageSeoPage from './components/OnPageSeoPage';
 import AeoServicesPage from './components/AeoServicesPage';
 import AiSeoServicesPage from './components/AiSeoServicesPage';
 import GoogleAdsServicesPage from './components/GoogleAdsServicesPage';
@@ -308,7 +309,7 @@ const getIconComponent = (icon: string) => {
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance'>('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [modalEmail, setModalEmail] = useState('');
@@ -394,19 +395,22 @@ export default function App() {
       } else if (pathname === '/finance-marketing-services' || pathname === '/finance-marketing-services/' || pathname === '/financial-services-marketing' || pathname === '/financial-services-marketing/' || pathname === '/finance-digital-marketing' || pathname === '/finance-digital-marketing/' || pathname === '/fintech-marketing-agency' || pathname === '/fintech-marketing-agency/' || hash === '#finance-marketing-services' || hash === '#financial-seo' || hash === '#finance-marketing') {
         setCurrentPage('finance');
         window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (hash === '#geo-services') {
+      } else if (pathname === '/geo-services' || pathname === '/geo-services/' || hash === '#geo-services') {
         setCurrentPage('geo');
         window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (hash === '#seo-services') {
+      } else if (pathname === '/seo-services' || pathname === '/seo-services/' || hash === '#seo-services') {
         setCurrentPage('seo');
         window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (hash === '#technical-seo' || hash === '#technical-seo-services') {
+      } else if (pathname === '/technical-seo' || pathname === '/technical-seo/' || pathname === '/technical-seo-services' || pathname === '/technical-seo-services/' || hash === '#technical-seo' || hash === '#technical-seo-services') {
         setCurrentPage('technical-seo');
         window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (hash === '#aeo-services' || hash === '#aeo' || hash === '#ai-answer-optimization') {
+      } else if (pathname === '/on-page-seo' || pathname === '/on-page-seo/' || pathname === '/on-page-seo-services' || pathname === '/on-page-seo-services/' || hash === '#on-page-seo' || hash === '#on-page-seo-services') {
+        setCurrentPage('on-page-seo');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/aeo-services' || pathname === '/aeo-services/' || hash === '#aeo-services' || hash === '#aeo' || hash === '#ai-answer-optimization') {
         setCurrentPage('aeo');
         window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (hash === '#ai-seo-services' || hash === '#ai-seo' || hash === '#ai-powered-seo-services' || hash === '#ai-search-optimization-services') {
+      } else if (pathname === '/ai-seo-services' || pathname === '/ai-seo-services/' || hash === '#ai-seo-services' || hash === '#ai-seo' || hash === '#ai-powered-seo-services' || hash === '#ai-search-optimization-services') {
         setCurrentPage('ai-seo');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (hash === '#google-ads-services' || hash === '#google-ads' || hash === '#google-ads-agency' || hash === '#ppc-management-services' || hash === '#google-ads-management-company') {
@@ -529,47 +533,52 @@ export default function App() {
     home: {
       title: "AKGLS Group | AI SEO, GEO & Performance Marketing Agency",
       description: "Deploy SEO-friendly structure markups with real-time Generative Engine Optimization (GEO) to citation-proof your business across ChatGPT, Perplexity, Gemini, and Google Search.",
-      canonical: "https://akgls.group/"
+      canonical: "https://akglsgroup.com/"
     },
     geo: {
       title: "GEO (Generative Engine Optimization) Services | AKGLS Group",
       description: "Optimize your brand for Next-Gen LLM retrieval, conversational AI filters, Perplexity Citations, and ChatGPT Search results with our proven expertise.",
-      canonical: "https://akgls.group/#geo-services"
+      canonical: "https://akglsgroup.com/geo-services/"
     },
     seo: {
       title: "Organic Search Optimization & SEO Services | AKGLS Group",
       description: "Drive massive organic keyword visibility and high-intent customer traffic with premium full-funnel, semantic content structures and modern search practices.",
-      canonical: "https://akgls.group/#seo-services"
+      canonical: "https://akglsgroup.com/seo-services/"
     },
     'technical-seo': {
       title: "Technical SEO Optimization, Schema & Infrastructure | AKGLS Group",
       description: "Maximize crawl budget, speed, structural JSON-LD schemas, and indexing hierarchies so both human users and AI web crawlers browse flawlessly.",
-      canonical: "https://akgls.group/#technical-seo-services"
+      canonical: "https://akglsgroup.com/technical-seo-services/"
+    },
+    'on-page-seo': {
+      title: "On-Page SEO & Content Semantic Optimization | AKGLS Group",
+      description: "Align your headings structure, alt entities, and LSI keyword relevancy to make pages immediately understandable to crawl bots and AI search engine agents.",
+      canonical: "https://akglsgroup.com/on-page-seo-services/"
     },
     aeo: {
       title: "AEO (Answer Engine Optimization) & RAG Systems | AKGLS Group",
       description: "Align entity properties and structure conversational answers to trigger direct summary panel responses inside Google's AI Overviews and top retrievers.",
-      canonical: "https://akgls.group/#aeo-services"
+      canonical: "https://akglsgroup.com/aeo-services/"
     },
     'ai-seo': {
       title: "AI-Powered SEO & LLM Context Optimization | AKGLS Group",
       description: "Modernize your visibility pipelines with natural language semantic processing, dynamic entity graphs, and indexing nodes optimized for Claude, Gemini, and GPT-4.",
-      canonical: "https://akgls.group/#ai-seo-services"
+      canonical: "https://akglsgroup.com/ai-seo-services/"
     },
     'google-ads': {
       title: "PPC Management & High-ROI Google Ads Services | AKGLS Group",
       description: "Secure dominant top-of-page positions and scale qualified conversions across search, shopping grids, display networks, and Performance Max channels.",
-      canonical: "https://akgls.group/#google-ads-services"
+      canonical: "https://akglsgroup.com/google-ads-services/"
     },
     'web-design': {
       title: "Professional Web Web Design & High-Converting UX/UI | AKGLS Group",
       description: "Build gorgeous, loading-fast custom websites crafted with optimal UX/UI standards. We supply clear structural nodes to search indexers and convert visitors.",
-      canonical: "https://akgls.group/#web-design-services"
+      canonical: "https://akglsgroup.com/web-design-services/"
     },
     wordpress: {
       title: "WordPress Development Services & Custom Engineering | AKGLS Group",
       description: "Maximize WordPress speed, security, and schema scalability. We craft lightweight, database optimized, responsive architectures for modern search optimization.",
-      canonical: "https://akgls.group/#wordpress-development-services"
+      canonical: "https://akglsgroup.com/wordpress-development-services/"
     },
     'dental-clinic-marketing': {
       title: "Dental Clinic Marketing & Local Patient Acquisition Services | AKGLS Group",
@@ -659,6 +668,7 @@ export default function App() {
       {currentPage === 'geo' ? (
         <GeoServicesPage 
           onBackToHome={() => {
+            window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
           }}
@@ -670,6 +680,7 @@ export default function App() {
       ) : currentPage === 'seo' ? (
         <SeoServicesPage 
           onBackToHome={() => {
+            window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
           }}
@@ -677,6 +688,7 @@ export default function App() {
       ) : currentPage === 'technical-seo' ? (
         <TechnicalSeoPage 
           onBackToHome={() => {
+            window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
           }}
@@ -685,9 +697,22 @@ export default function App() {
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
         />
+      ) : currentPage === 'on-page-seo' ? (
+        <OnPageSeoPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#onpage-audit-section') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
       ) : currentPage === 'aeo' ? (
         <AeoServicesPage 
           onBackToHome={() => {
+            window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
           }}
@@ -699,6 +724,7 @@ export default function App() {
       ) : currentPage === 'ai-seo' ? (
         <AiSeoServicesPage
           onBackToHome={() => {
+            window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
           }}
@@ -710,6 +736,7 @@ export default function App() {
       ) : currentPage === 'google-ads' ? (
         <GoogleAdsServicesPage
           onBackToHome={() => {
+            window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
           }}
@@ -721,6 +748,7 @@ export default function App() {
       ) : currentPage === 'web-design' ? (
         <WebDesignServicesPage
           onBackToHome={() => {
+            window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
           }}
@@ -732,6 +760,7 @@ export default function App() {
       ) : currentPage === 'wordpress' ? (
         <WordPressServicesPage
           onBackToHome={() => {
+            window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
           }}

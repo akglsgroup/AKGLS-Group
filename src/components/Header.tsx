@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Search, ChevronDown, X, Menu, Phone, Mail, MapPin, 
@@ -66,9 +66,52 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
 
   const handleMobileNavClick = (anchor: string) => {
     setIsMobileMenuOpen(false);
-    const element = document.querySelector(anchor);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    const isSubPage = window.location.pathname !== '/';
+    if (isSubPage) {
+      window.history.pushState(null, '', `/${anchor}`);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    } else {
+      const element = document.querySelector(anchor);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    const isSubPage = window.location.pathname !== '/';
+    
+    if (href.startsWith('/')) {
+      e.preventDefault();
+      window.history.pushState(null, '', href);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      setActiveMenu(null);
+      setIsMobileMenuOpen(false);
+    } else if (href.startsWith('#')) {
+      if (isSubPage) {
+        e.preventDefault();
+        window.history.pushState(null, '', `/${href}`);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+        setActiveMenu(null);
+        setIsMobileMenuOpen(false);
+      } else {
+        setIsMobileMenuOpen(false);
+        setActiveMenu(null);
+        const element = document.querySelector(href);
+        if (element) {
+          e.preventDefault();
+          window.location.hash = href;
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else if (href === '/') {
+      if (isSubPage) {
+        e.preventDefault();
+        window.history.pushState(null, '', '/');
+        window.dispatchEvent(new PopStateEvent('popstate'));
+        setActiveMenu(null);
+        setIsMobileMenuOpen(false);
+      }
     }
   };
 
@@ -125,7 +168,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
           <div className="flex items-center justify-between">
             
             {/* Logo Mark */}
-            <a href="#" className="flex items-center gap-3 select-none group">
+            <a 
+              href="/" 
+              onClick={(e) => handleLinkClick(e, '/')}
+              className="flex items-center gap-3 select-none group"
+            >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-indigo to-brand-purple flex items-center justify-center shadow-lg shadow-brand-indigo/35 group-hover:scale-105 transition-transform duration-300">
                 <span className="text-white font-black text-xl font-display">AK</span>
               </div>
@@ -178,15 +225,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                               <a 
                                 key={iIdx} 
                                 href={item.href}
-                                onClick={(e) => {
-                                  if (item.href.startsWith('/')) {
-                                    e.preventDefault();
-                                    window.history.pushState(null, '', item.href);
-                                    window.dispatchEvent(new PopStateEvent('popstate'));
-                                    setActiveMenu(null);
-                                    setIsMobileMenuOpen(false);
-                                  }
-                                }}
+                                onClick={(e) => handleLinkClick(e, item.href)}
                                 className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors"
                               >
                                 <span className="text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo transition-colors flex items-center gap-1">
@@ -261,15 +300,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                               <a 
                                 key={iIdx} 
                                 href={item.href}
-                                onClick={(e) => {
-                                  if (item.href.startsWith('/')) {
-                                    e.preventDefault();
-                                    window.history.pushState(null, '', item.href);
-                                    window.dispatchEvent(new PopStateEvent('popstate'));
-                                    setActiveMenu(null);
-                                    setIsMobileMenuOpen(false);
-                                  }
-                                }}
+                                onClick={(e) => handleLinkClick(e, item.href)}
                                 className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo"
                               >
                                 <span className="flex items-center gap-1">
@@ -322,6 +353,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                             <a 
                               key={idx} 
                               href={item.href}
+                              onClick={(e) => handleLinkClick(e, item.href)}
                               className="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all text-left"
                             >
                               {item.name}
@@ -461,6 +493,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                               <a 
                                 key={iIdx} 
                                 href={item.href}
+                                onClick={(e) => handleLinkClick(e, item.href)}
                                 className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo"
                               >
                                 <span className="truncate">{item.name}</span>
@@ -505,6 +538,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                         <a 
                           key={idx} 
                           href={item.href}
+                          onClick={(e) => handleLinkClick(e, item.href)}
                           className="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo transition-all"
                         >
                           {item.name.includes('Team') && <Users className="w-3.5 h-3.5 text-slate-400" />}
@@ -552,6 +586,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                         <a 
                           key={idx} 
                           href={item.href}
+                          onClick={(e) => handleLinkClick(e, item.href)}
                           className="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all"
                         >
                           <span>{item.name}</span>
@@ -690,14 +725,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                             <a 
                               key={sIdx} 
                               href={sub.href} 
-                              onClick={(e) => {
-                                setIsMobileMenuOpen(false);
-                                if (sub.href.startsWith('/')) {
-                                  e.preventDefault();
-                                  window.history.pushState(null, '', sub.href);
-                                  window.dispatchEvent(new PopStateEvent('popstate'));
-                                }
-                              }}
+                              onClick={(e) => handleLinkClick(e, sub.href)}
                               className="block py-1 text-slate-300 hover:text-brand-indigo"
                             >
                               {sub.name}
@@ -727,14 +755,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                             <a 
                               key={sIdx} 
                               href={sub.href} 
-                              onClick={(e) => {
-                                setIsMobileMenuOpen(false);
-                                if (sub.href.startsWith('/')) {
-                                  e.preventDefault();
-                                  window.history.pushState(null, '', sub.href);
-                                  window.dispatchEvent(new PopStateEvent('popstate'));
-                                }
-                              }}
+                              onClick={(e) => handleLinkClick(e, sub.href)}
                               className="block py-1 text-slate-300 hover:text-brand-indigo"
                             >
                               {sub.name}
@@ -761,7 +782,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                         <a 
                           key={idx} 
                           href={item.href} 
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          onClick={(e) => handleLinkClick(e, item.href)}
                           className="block py-1.5 text-slate-300 hover:text-brand-indigo"
                         >
                           {item.name}
@@ -789,7 +810,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                             <a 
                               key={sIdx} 
                               href={sub.href} 
-                              onClick={() => setIsMobileMenuOpen(false)}
+                              onClick={(e) => handleLinkClick(e, sub.href)}
                               className="block py-0.5 text-slate-300 hover:text-brand-indigo"
                             >
                               {sub.name}
@@ -816,7 +837,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                         <a 
                           key={idx} 
                           href={item.href} 
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          onClick={(e) => handleLinkClick(e, item.href)}
                           className="block py-1 text-slate-300 hover:text-brand-indigo"
                         >
                           {item.name}
@@ -841,7 +862,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                         <a 
                           key={idx} 
                           href={item.href} 
-                          onClick={() => setIsMobileMenuOpen(false)}
+                          onClick={(e) => handleLinkClick(e, item.href)}
                           className="block py-1 text-slate-300 hover:text-brand-indigo"
                         >
                           {item.name}
