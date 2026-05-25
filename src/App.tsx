@@ -7,6 +7,7 @@ import {
   FileCheck, Star, Users, Briefcase
 } from 'lucide-react';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import SmartSearch from './components/SmartSearch';
 import ServiceQuiz from './components/ServiceQuiz';
 import RoiCalculator from './components/RoiCalculator';
@@ -1814,83 +1815,17 @@ export default function App() {
 
         </div>
       </section>
+        </>
+      )}
 
-      {/* CORE SYSTEM FOOTER */}
-      <footer className="bg-brand-navy text-slate-400 pt-16 pb-8 border-t border-slate-800 text-left">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 mb-16">
-          
-          {/* Brand Col */}
-          <div className="lg:col-span-5 space-y-4">
-            <a href="#" className="flex items-center gap-3 select-none group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-indigo to-brand-purple flex items-center justify-center shadow-lg">
-                <span className="text-white font-black text-xl font-display">AK</span>
-              </div>
-              <span className="font-extrabold tracking-wider text-white text-base font-display uppercase">
-                AKGLS <span className="text-brand-teal">GROUP</span>
-              </span>
-            </a>
-            
-            <p className="text-xs text-slate-400 leading-relaxed max-w-sm font-light">
-              A premium client organic growth and AI SEO enterprise agency delivering target search visibility, custom Shopify Plus developments, and generative LLM schema optimization solutions.
-            </p>
-
-            <p className="text-xs text-slate-500 font-mono flex items-center gap-2">
-              <MapPin className="w-4 h-4 text-slate-500" /> San Francisco Office: 201 Mission St • NYC Office: 1540 Broadway
-            </p>
-          </div>
-
-          {/* Contact Details */}
-          <div className="lg:col-span-4 space-y-3">
-            <h5 className="text-xs font-extrabold uppercase tracking-widest text-white font-display">
-              Get in Touch
-            </h5>
-            <div className="space-y-2 text-xs font-light">
-              <p className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-slate-500" /> Business Support: <strong className="text-white font-semibold">info@akglsgroup.com</strong>
-              </p>
-              <p className="flex items-center gap-2">
-                <Phone className="w-4 h-4 text-slate-500" /> Call Council Support: <strong className="text-white font-semibold"><a href="tel:+918318114492" className="hover:text-brand-indigo transition-colors">+91 831 811 4492</a></strong>
-              </p>
-              <p className="flex items-center gap-2">
-                <ShieldCheck className="w-4 h-4 text-slate-500" /> 24/7 Operations Monitoring
-              </p>
-            </div>
-          </div>
-
-          {/* Navigation link elements */}
-          <div className="lg:col-span-3 space-y-3">
-            <h5 className="text-xs font-extrabold uppercase tracking-widest text-white font-display">
-              Company Gates
-            </h5>
-            <ul className="space-y-1.5 text-xs font-semibold">
-              <li><a href="#portfolio-gallery" className="hover:text-brand-teal transition-colors">Case Studies Portfolio</a></li>
-              <li><a href="#capabilities-explorer" className="hover:text-brand-teal transition-colors">Core Capabilities finder</a></li>
-              <li><a href="#careers-gateway" className="hover:text-brand-teal transition-colors">Apply Open Roles Gates</a></li>
-              <li><a href="#audit-form" className="hover:text-brand-teal transition-colors">Request Diagnostic Audit</a></li>
-              <li className="pt-2 border-t border-slate-800 text-[9px] text-slate-500 uppercase tracking-widest leading-none font-bold">Domain Optimization</li>
-              <li><a href="#seo-services" className="hover:text-brand-teal text-[11px] transition-colors">Local & Ecommerce SEO</a></li>
-              <li><a href="#technical-seo" className="hover:text-brand-teal text-[11px] transition-colors">Technical SEO & Audits</a></li>
-              <li><a href="#geo-services" className="hover:text-brand-teal text-[11px] transition-colors">GEO Services</a></li>
-              <li><a href="#aeo-services" className="hover:text-brand-teal text-[11px] transition-colors">AEO Services</a></li>
-              <li><a href="#ai-seo-services" className="hover:text-brand-teal text-[11px] transition-colors">AI SEO Services</a></li>
-              <li><a href="#google-ads-services" className="hover:text-brand-teal text-[11px] transition-colors">Google Ads & PPC Services</a></li>
-              <li><a href="#web-design-services" className="hover:text-brand-teal text-[11px] transition-colors">Web Design & UI/UX Services</a></li>
-            </ul>
-          </div>
-
-        </div>
-
-        {/* Legal block */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-slate-800 text-center md:text-left flex flex-col md:flex-row justify-between items-center text-[11px] text-slate-500 gap-4">
-          <span>© 2026 AKGLS Group. All rights reserved. Configured securely under modern content distribution networks.</span>
-          <div className="space-x-4">
-            <a href="#" className="hover:text-slate-350 transition-colors">Privacy Principles</a>
-            <a href="#" className="hover:text-slate-350 transition-colors">SLA Standard Terms</a>
-          </div>
-        </div>
-      </footer>
-    </>
-  )}
+      {/* COMMON FOOTER FOR WHOLE WEBSITE */}
+      <Footer 
+        openProposal={() => {
+          const formEl = document.querySelector('#audit-form');
+          formEl?.scrollIntoView({ behavior: 'smooth' });
+        }}
+        openDownloadModal={() => setDownloadModalOpen(true)}
+      />
 
       {/* KEYBOARD SHORTCUT FLOATING PANEL HINT */}
       <div className="fixed bottom-6 left-6 z-40 hidden md:block">
