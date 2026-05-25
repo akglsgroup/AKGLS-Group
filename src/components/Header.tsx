@@ -530,7 +530,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                       : 'text-slate-300 hover:text-white'
                   }`}
                 >
-                  Hire Experts
+                  Hire
                   <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${activeMenu === 'hire' ? 'rotate-180' : ''}`} />
                 </button>
 
@@ -577,18 +577,10 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               </button>
 
               <a 
-                href="#audit-form" 
-                onClick={openProposal}
-                className="text-xs font-black uppercase tracking-wider py-3.5 px-5 rounded-xl border border-dotted border-slate-800 hover:border-brand-indigo hover:text-brand-indigo transition-all text-slate-300 hover:bg-white/5"
-              >
-                Request Proposal
-              </a>
-
-              <a 
-                href="#audit-form" 
+                href="tel:+918318114492" 
                 className="bg-gradient-to-r from-brand-indigo to-brand-purple hover:opacity-95 text-white text-xs font-extrabold uppercase tracking-wide py-3.5 px-6 rounded-xl transition-all shadow-md shadow-brand-indigo/20 flex items-center gap-1.5"
               >
-                Get Free Strategy Call <ArrowRight className="w-3.5 h-3.5" />
+                Call Now <Phone className="w-3.5 h-3.5" />
               </a>
             </div>
 
@@ -840,7 +832,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                     onClick={() => handleMobileAccordionClick('hire')}
                     className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
                   >
-                    <span className="flex items-center gap-2"><Star className="w-4 h-4 text-brand-orange" /> Hire Experts</span>
+                    <span className="flex items-center gap-2"><Star className="w-4 h-4 text-brand-orange" /> Hire</span>
                     <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform ${activeMobileAccordion === 'hire' ? 'rotate-180' : ''}`} />
                   </button>
                   {activeMobileAccordion === 'hire' && (
