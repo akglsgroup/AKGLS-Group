@@ -72,6 +72,10 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
     { name: "Ecommerce SEO", href: "/ecommerce-seo-services" },
     { name: "Enterprise SEO", href: "/enterprise-seo-services" },
     { name: "AI SEO Services", href: "/ai-seo-services" },
+    { name: "AI Search Optimization", href: "/ai-search-optimization-services" },
+    { name: "ChatGPT Optimization", href: "/chatgpt-optimization-services" },
+    { name: "Gemini Optimization", href: "/gemini-optimization-services" },
+    { name: "Claude Optimization", href: "/claude-optimization-services" },
     { name: "GEO Services", href: "/geo-services" },
     { name: "AEO Services", href: "/aeo-services" },
     { name: "Link Building", href: "/link-building-services" },
@@ -80,7 +84,10 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
 
   // Section 3: Digital Marketing Info
   const marketingServicesLinks = [
-    { name: "Google Ads Services", href: "#google-ads-services" },
+    { name: "Enterprise Marketing Solutions", href: "/enterprise-marketing-solutions" },
+    { name: "Google Ads Services", href: "/google-ads-services" },
+    { name: "Meta Ads Services", href: "/meta-ads-services" },
+    { name: "LinkedIn Ads Services", href: "/linkedin-ads-services" },
     { name: "Social Media Marketing", href: "#capabilities-explorer" },
     { name: "Content Marketing", href: "#capabilities-explorer" },
     { name: "ORM Services", href: "#capabilities-explorer" },
@@ -95,7 +102,8 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
     { name: "Web Design Services", href: "#web-design-services" },
     { name: "WordPress Development", href: "#wordpress-development-services" },
     { name: "WooCommerce Development", href: "#web-design-services" },
-    { name: "Shopify Development", href: "#web-design-services" },
+    { name: "Shopify Development", href: "/shopify-development-services" },
+    { name: "Startup Growth Solutions", href: "/startup-growth-solutions" },
     { name: "Landing Page Design", href: "#web-design-services" },
     { name: "Website Maintenance", href: "#web-design-services" },
     { name: "UI/UX Design", href: "#web-design-services" },
@@ -137,11 +145,14 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
 
   // AI-Optimized topical tags
   const aiSearchTags = [
-    { name: "AI SEO Services", href: "#ai-seo-services" },
-    { name: "GEO Services", href: "#geo-services" },
-    { name: "AEO Services", href: "#aeo-services" },
-    { name: "ChatGPT Optimization", href: "#ai-seo-services" },
-    { name: "Voice Search SEO", href: "#technical-seo" },
+    { name: "AI SEO Services", href: "/ai-seo-services" },
+    { name: "AI Search Optimization", href: "/ai-search-optimization-services" },
+    { name: "GEO Services", href: "/geo-services" },
+    { name: "AEO Services", href: "/aeo-services" },
+    { name: "ChatGPT Optimization", href: "/chatgpt-optimization-services" },
+    { name: "Gemini Optimization", href: "/gemini-optimization-services" },
+    { name: "Claude Optimization", href: "/claude-optimization-services" },
+    { name: "Voice Search SEO", href: "/ai-search-optimization-services" },
   ];
 
   // Trust elements and Badges

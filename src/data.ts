@@ -30,14 +30,14 @@ export const servicesMenu: MegaColumn[] = [
       { name: "GEO Services", href: "/geo-services", isTrending: true },
       { name: "AEO Services", href: "/aeo-services", isTrending: true },
       { name: "AI SEO Services", href: "/ai-seo-services" },
-      { name: "AI Search Optimization", href: "/ai-seo-services" },
-      { name: "ChatGPT Optimization", href: "/ai-seo-services" },
-      { name: "Gemini Optimization", href: "/ai-seo-services" },
-      { name: "Claude Optimization", href: "/ai-seo-services" },
-      { name: "AI Visibility Optimization", href: "/ai-seo-services" },
-      { name: "AI Content Optimization", href: "/ai-seo-services" },
-      { name: "Voice Search Optimization", href: "/ai-seo-services" },
-      { name: "SGE Optimization", href: "/ai-seo-services" }
+      { name: "AI Search Optimization", href: "/ai-search-optimization-services", isTrending: true },
+      { name: "ChatGPT Optimization", href: "/chatgpt-optimization-services", isTrending: true },
+      { name: "Gemini Optimization", href: "/gemini-optimization-services", isTrending: true },
+      { name: "Claude Optimization", href: "/claude-optimization-services", isTrending: true },
+      { name: "AI Visibility Optimization", href: "/ai-search-optimization-services" },
+      { name: "AI Content Optimization", href: "/ai-search-optimization-services" },
+      { name: "Voice Search Optimization", href: "/voice-search-optimization-services", isTrending: true },
+      { name: "SGE Optimization", href: "/ai-search-optimization-services" }
     ],
     featuredCta: {
       text: "Rank in AI Search",
@@ -48,20 +48,20 @@ export const servicesMenu: MegaColumn[] = [
   {
     title: "Paid Marketing",
     items: [
-      { name: "Google Ads", href: "#google-ads-services" },
-      { name: "Meta Ads", href: "#google-ads-services" },
-      { name: "YouTube Ads", href: "#google-ads-services" },
-      { name: "LinkedIn Ads", href: "#google-ads-services" },
-      { name: "Shopping Ads", href: "#google-ads-services" },
-      { name: "Performance Max Campaigns", href: "#google-ads-services" },
-      { name: "Retargeting Ads", href: "#google-ads-services" },
-      { name: "App Promotion Ads", href: "#google-ads-services" },
-      { name: "Lead Generation Campaigns", href: "#google-ads-services" },
-      { name: "Conversion Optimization", href: "#google-ads-services" }
+      { name: "Google Ads", href: "/google-ads-services" },
+      { name: "Meta Ads", href: "/meta-ads-services" },
+      { name: "YouTube Ads", href: "/google-ads-services" },
+      { name: "LinkedIn Ads", href: "/linkedin-ads-services" },
+      { name: "Shopping Ads", href: "/google-ads-services" },
+      { name: "Performance Max Campaigns", href: "/google-ads-services" },
+      { name: "Retargeting Ads", href: "/google-ads-services" },
+      { name: "App Promotion Ads", href: "/google-ads-services" },
+      { name: "Lead Generation Campaigns", href: "/google-ads-services" },
+      { name: "Conversion Optimization", href: "/google-ads-services" }
     ],
     featuredCta: {
       text: "Get Free Ads Audit",
-      href: "#google-ads-services",
+      href: "/google-ads-services",
       badge: "High ROAS"
     }
   },
@@ -70,7 +70,9 @@ export const servicesMenu: MegaColumn[] = [
     items: [
       { name: "Web Design", href: "#web-design-services" },
       { name: "WordPress Development", href: "#wordpress-development-services" },
-      { name: "Shopify Development", href: "#web-design-services" },
+      { name: "Shopify Development", href: "/shopify-development-services" },
+      { name: "Startup Growth Solutions", href: "/startup-growth-solutions" },
+      { name: "Enterprise Marketing Solutions", href: "/enterprise-marketing-solutions" },
       { name: "Landing Page Design", href: "#web-design-services" },
       { name: "UI/UX Design", href: "#web-design-services" },
       { name: "CRO Services", href: "#web-design-services" },
@@ -86,8 +88,8 @@ export const solutionsMenu: MegaColumn[] = [
   {
     title: "Business Growth Solutions",
     items: [
-      { name: "Startup Growth Solution", href: "#capabilities-explorer" },
-      { name: "Enterprise Marketing Solution", href: "#capabilities-explorer" },
+      { name: "Startup Growth Solution", href: "/startup-growth-solutions" },
+      { name: "Enterprise Marketing Solutions", href: "/enterprise-marketing-solutions" },
       { name: "Local Business Growth", href: "#capabilities-explorer" },
       { name: "Ecommerce Growth Solution", href: "#capabilities-explorer" },
       { name: "B2B Lead Generation", href: "#capabilities-explorer" },
@@ -289,13 +291,18 @@ export const searchDatabase: SearchResult[] = [
   // Services
   { title: "Technical SEO", category: "Services", href: "#technical-seo-services", description: "Audit crawl depth, sitemaps, indexing structures, and core web vitals." },
   { title: "GEO Services (Generative Engine Optimization)", category: "AI SEO", href: "#geo-services", description: "Optimize for search engines relying on generative LLM synthesis." },
+  { title: "AI Search Optimization Services", category: "AI SEO", href: "/ai-search-optimization-services", description: "Optimize digital properties for high footprint discovery on ChatGPT, Claude, Gemini, and Google AI Overviews." },
+  { title: "Gemini Optimization Services", category: "AI SEO", href: "/gemini-optimization-services", description: "Increase visibility in Google Gemini conversations and search layouts through specialized schemas." },
+  { title: "Claude Optimization Services", category: "AI SEO", href: "/claude-optimization-services", description: "Optimize digital properties for high footprint discovery on Anthropic Claude models and comparative prompts." },
+  { title: "Voice Search Optimization Services", category: "AI SEO", href: "/voice-search-optimization-services", description: "Optimize digital properties for high footprint discovery on Siri, Alexa, Google Assistant, and conversational voice queries." },
   { title: "AEO Services (Answer Engine Optimization)", category: "AI SEO", href: "#aeo-services", description: "Rank in response systems answering prompts directly." },
   { title: "AI SEO Services (All-Platforms Optimization)", category: "AI SEO", href: "#ai-seo-services", description: "Format business specs for ChatGPT, Gemini, Perplexity guides." },
-  { title: "Google Ads & PPC Campaigns Agency", category: "PPC", href: "#google-ads-services", description: "Expert Google Ads management, Search, Display, Shopping, and Performance Max bidding." },
-  { title: "PPC Management Services", category: "PPC", href: "#google-ads-services", description: "Custom PPC management, bid optimization, CRO landing page design, and negative keyword audits." },
-  { title: "Shopify Development", category: "Creative & Development", href: "#web-design-services", description: "High-speed theme layout development, cart CRO integrations." },
+  { title: "Google Ads & PPC Campaigns Agency", category: "PPC", href: "/google-ads-services", description: "Expert Google Ads management, Search, Display, Shopping, and Performance Max bidding." },
+  { title: "PPC Management Services", category: "PPC", href: "/google-ads-services", description: "Custom PPC management, bid optimization, CRO landing page design, and negative keyword audits." },
+  { title: "Shopify Development", category: "Creative & Development", href: "/shopify-development-services", description: "High-speed theme layout development, cart CRO integrations." },
+  { title: "Startup Growth Solutions", category: "Creative & Development", href: "/startup-growth-solutions", description: "Scale your startup faster with growth marketing, technical AI SEO, and predictable customer lead acquisitions." },
   { title: "WordPress Development", category: "Creative & Development", href: "#web-design-services", description: "Bespoke corporate setups, gutenvine blocks, enterprise architecture." },
-  { title: "Local Maps Optimization & Google Ads", category: "Services", href: "#google-ads-services", description: "Dominate Google Pack geographical listings, local service ads, and regional maps." },
+  { title: "Local Maps Optimization & Google Ads", category: "Services", href: "/google-ads-services", description: "Dominate Google Pack geographical listings, local service ads, and regional maps." },
   // Tools
   { title: "SEO ROI Calculator", category: "Free Tools", href: "#roi-calculator", description: "Simulate organic growth conversion value lift instantly." },
   { title: "AI Content Analyzer", category: "Free Tools", href: "#content-analyzer", description: "Predict search rank index weights for semantic text queries." },

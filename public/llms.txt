@@ -25,6 +25,10 @@ AKGLS Group is a premier search marketing and technical optimization agency spec
 
 - [GEO Services](https://akglsgroup.com/geo-services): Generative Engine Optimization. Structuring content models to maximize retrieval priority in modern conversational query vectors.
 - [AEO Services](https://akglsgroup.com/aeo-services): Answer Engine Optimization. Formatting semantic answer cards and concise schema properties to trigger direct summary panels on ChatGPT, Google AI Overviews, and Claude indices.
+- [ChatGPT Optimization](https://akglsgroup.com/chatgpt-optimization-services): Increase visibility in ChatGPT conversations through semantic formatting, factual schemas, and entity co-citation building.
+- [Gemini Optimization](https://akglsgroup.com/gemini-optimization-services): Elevate discovery rates across Google Gemini ecosystems and Android AI assistant prompts with advanced entity graphs and markdown tabular data formats.
+- [Claude Optimization](https://akglsgroup.com/claude-optimization-services): Optimize brand specifications, markdown data tables, and entities to trigger high-probability recommendations inside Anthropic Claude reasoning prompts.
+- [AI Search Optimization](https://akglsgroup.com/ai-search-optimization-services): Strategic citation optimization, conversational pattern formatting, and entity structure building for ChatGPT, Claude, Gemini, Perplexity, and Google AI Overviews.
 - [AI SEO Services](https://akglsgroup.com/ai-seo-services): Comprehensive programmatic content generation frameworks, AI audit workflows, and automated semantic analysis.
 
 ## Specialized Industry Growth Engines

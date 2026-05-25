@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient for Subtle Tech Look (Optional, keeping background transparent/white) -->
+    <!-- Brand Gradients -->
+    <linearGradient id="navyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#121829" />
+      <stop offset="100%" stop-color="#212a45" />
+    </linearGradient>
+    <linearGradient id="tealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1de2bc" />
+      <stop offset="100%" stop-color="#008c85" />
+    </linearGradient>
+    <linearGradient id="magentaGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e21c81" />
+      <stop offset="100%" stop-color="#9d0056" />
+    </linearGradient>
+  </defs>
+
+  <!-- 1. Solid White Background within Rounded Corner Container -->
+  <!-- Outer Wrapper Box with Gap on Left and Right for Design Consistency -->
+  <path d="M 50,280 L 50,400 C 50,435 77,462 112,462 L 400,462 C 435,462 462,435 462,400 L 462,112 C 462,77 435,50 400,50 L 112,50 C 77,50 50,77 50,112 L 50,200" 
+        fill="#ffffff" 
+        stroke="#8e9cb2" 
+        stroke-width="14" 
+        stroke-linecap="round" 
+        stroke-linejoin="round" />
+
+  <!-- 2. Three Left Chevrons passing through the outer line gap -->
+  <path d="M 30,215 L 50,240 L 30,265" fill="none" stroke="#00b49f" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 60,215 L 80,240 L 60,265" fill="none" stroke="#00b49f" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M 90,215 L 110,240 L 90,265" fill="none" stroke="#00b49f" stroke-width="14" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- 3. Stylized Symmetrical 'A' -->
+  <!-- Left Leg (Navy Blue / Deep Slate) -->
+  <polygon points="140,380 245,130 295,130 190,380" fill="url(#navyGrad)" />
+  
+  <!-- Right Leg (Teal Ribbon Overlay on Top-Right leg) -->
+  <polygon points="295,130 395,380 345,380 245,130" fill="url(#tealGrad)" />
+
+  <!-- 4. Dynamic Magenta Crossbar Chevron pointing right -->
+  <path d="M 280,245 L 350,280 L 280,315 L 305,280 Z" fill="url(#magentaGrad)" />
+
+  <!-- 5. Classic Mouse Pointer Cursor near lower triangle of 'A' -->
+  <path d="M 270,330 L 270,385 L 287,368 L 312,393 L 323,382 L 298,357 L 310,345 Z" fill="#121829" />
+</svg>

@@ -20,8 +20,13 @@ import OnPageSeoPage from './components/OnPageSeoPage';
 import AeoServicesPage from './components/AeoServicesPage';
 import AiSeoServicesPage from './components/AiSeoServicesPage';
 import GoogleAdsServicesPage from './components/GoogleAdsServicesPage';
+import MetaAdsServicesPage from './components/MetaAdsServicesPage';
+import LinkedInAdsServicesPage from './components/LinkedInAdsServicesPage';
 import WebDesignServicesPage from './components/WebDesignServicesPage';
 import WordPressServicesPage from './components/WordPressServicesPage';
+import ShopifyDevelopmentServicesPage from './components/ShopifyDevelopmentServicesPage';
+import StartupGrowthSolutionsPage from './components/StartupGrowthSolutionsPage';
+import EnterpriseMarketingSolutionsPage from './components/EnterpriseMarketingSolutionsPage';
 import DentalClinicMarketingPage from './components/DentalClinicMarketingPage';
 import ManufacturingMarketingPage from './components/ManufacturingMarketingPage';
 import IotCompanyMarketingPage from './components/IotCompanyMarketingPage';
@@ -41,6 +46,11 @@ import ProgrammaticSeoPage from './components/ProgrammaticSeoPage';
 import LinkBuildingPage from './components/LinkBuildingPage';
 import SeoAuditPage from './components/SeoAuditPage';
 import SeoConsultingPage from './components/SeoConsultingPage';
+import AiSearchOptimizationPage from './components/AiSearchOptimizationPage';
+import ChatgptOptimizationPage from './components/ChatgptOptimizationPage';
+import GeminiOptimizationPage from './components/GeminiOptimizationPage';
+import ClaudeOptimizationPage from './components/ClaudeOptimizationPage';
+import VoiceSearchOptimizationPage from './components/VoiceSearchOptimizationPage';
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
@@ -319,7 +329,7 @@ const getIconComponent = (icon: string) => {
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing'>('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [modalEmail, setModalEmail] = useState('');
@@ -450,17 +460,47 @@ export default function App() {
       } else if (pathname === '/aeo-services' || pathname === '/aeo-services/' || hash === '#aeo-services' || hash === '#aeo' || hash === '#ai-answer-optimization') {
         setCurrentPage('aeo');
         window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (pathname === '/ai-seo-services' || pathname === '/ai-seo-services/' || hash === '#ai-seo-services' || hash === '#ai-seo' || hash === '#ai-powered-seo-services' || hash === '#ai-search-optimization-services') {
+      } else if (pathname === '/chatgpt-optimization-services' || pathname === '/chatgpt-optimization-services/' || hash === '#chatgpt-optimization' || hash === '#chatgpt-seo') {
+        setCurrentPage('chatgpt-optimization');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/gemini-optimization-services' || pathname === '/gemini-optimization-services/' || hash === '#gemini-optimization' || hash === '#gemini-seo') {
+        setCurrentPage('gemini-optimization');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/claude-optimization-services' || pathname === '/claude-optimization-services/' || hash === '#claude-optimization' || hash === '#claude-seo') {
+        setCurrentPage('claude-optimization');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/voice-search-optimization-services' || pathname === '/voice-search-optimization-services/' || hash === '#voice-search-optimization' || hash === '#voice-seo') {
+        setCurrentPage('voice-search-optimization');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/ai-search-optimization-services' || pathname === '/ai-search-optimization-services/' || hash === '#ai-search-optimization-services' || hash === '#ai-search-optimization') {
+        setCurrentPage('ai-search-optimization');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/ai-seo-services' || pathname === '/ai-seo-services/' || hash === '#ai-seo-services' || hash === '#ai-seo' || hash === '#ai-powered-seo-services') {
         setCurrentPage('ai-seo');
         window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (hash === '#google-ads-services' || hash === '#google-ads' || hash === '#google-ads-agency' || hash === '#ppc-management-services' || hash === '#google-ads-management-company') {
+      } else if (pathname === '/google-ads-services' || pathname === '/google-ads-services/' || pathname === '/ppc-services' || pathname === '/ppc-services/' || pathname === '/google-ppc-agency' || pathname === '/google-ppc-agency/' || pathname === '/paid-search-marketing' || pathname === '/paid-search-marketing/' || hash === '#google-ads-services' || hash === '#google-ads' || hash === '#google-ads-agency' || hash === '#ppc-management-services' || hash === '#google-ads-management-company') {
         setCurrentPage('google-ads');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/meta-ads-services' || pathname === '/meta-ads-services/' || pathname === '/facebook-instagram-ads-services' || pathname === '/facebook-instagram-ads-services/' || pathname === '/facebook-ads-agency' || pathname === '/facebook-ads-agency/' || pathname === '/instagram-ads-management' || pathname === '/instagram-ads-management/' || hash === '#meta-ads-services' || hash === '#meta-ads' || hash === '#facebook-instagram-ads-services') {
+        setCurrentPage('meta-ads');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/linkedin-ads-services' || pathname === '/linkedin-ads-services/' || pathname === '/linkedin-advertising-services' || pathname === '/linkedin-advertising-services/' || pathname === '/b2b-linkedin-marketing' || pathname === '/b2b-linkedin-marketing/' || pathname === '/linkedin-lead-generation-services' || pathname === '/linkedin-lead-generation-services/' || hash === '#linkedin-ads-services' || hash === '#linkedin-ads' || hash === '#b2b-linkedin-marketing' || hash === '#linkedin-lead-generation-services' || hash === '#linkedin-advertising-services') {
+        setCurrentPage('linkedin-ads');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (hash === '#web-design-services' || hash === '#web-design' || hash === '#website-design-company' || hash === '#professional-web-design-services' || hash === '#ui-ux-web-design-agency') {
         setCurrentPage('web-design');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (hash === '#wordpress-development-services' || hash === '#wordpress-development-company' || hash === '#wordpress-website-development' || hash === '#wordpress-agency' || hash === '#wordpress' || hash === '#wordpress-development') {
         setCurrentPage('wordpress');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/shopify-development-services' || pathname === '/shopify-development-services/' || pathname === '/shopify-store-development' || pathname === '/shopify-store-development/' || pathname === '/shopify-web-development' || pathname === '/shopify-web-development/' || pathname === '/shopify-ecommerce-development' || pathname === '/shopify-ecommerce-development/' || hash === '#shopify-development-services' || hash === '#shopify-development' || hash === '#shopify-ecommerce-development' || hash === '#shopify-store-development') {
+        setCurrentPage('shopify-development');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/startup-growth-solutions' || pathname === '/startup-growth-solutions/' || pathname === '/startup-marketing-services' || pathname === '/startup-marketing-services/' || pathname === '/startup-growth-agency' || pathname === '/startup-growth-agency/' || pathname === '/startup-growth-consulting' || pathname === '/startup-growth-consulting/' || hash === '#startup-growth-solutions' || hash === '#startup-growth' || hash === '#startup-marketing' || hash === '#startup-consulting') {
+        setCurrentPage('startup-growth');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/enterprise-marketing-solutions' || pathname === '/enterprise-marketing-solutions/' || pathname === '/enterprise-digital-marketing-services' || pathname === '/enterprise-digital-marketing-services/' || pathname === '/enterprise-growth-marketing' || pathname === '/enterprise-growth-marketing/' || pathname === '/corporate-marketing-solutions' || pathname === '/corporate-marketing-solutions/' || hash === '#enterprise-marketing-solutions' || hash === '#enterprise-marketing' || hash === '#enterprise-growth' || hash === '#corporate-marketing') {
+        setCurrentPage('enterprise-marketing');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         setCurrentPage('home');
@@ -650,15 +690,50 @@ export default function App() {
       description: "Align entity properties and structure conversational answers to trigger direct summary panel responses inside Google's AI Overviews and top retrievers.",
       canonical: "https://akglsgroup.com/aeo-services/"
     },
+    'chatgpt-optimization': {
+      title: "ChatGPT Optimization Services | ChatGPT SEO Agency | AKGLS Group",
+      description: "Increase your brand visibility in ChatGPT and AI-generated answers with advanced ChatGPT Optimization services from AKGLS Group. Future-ready AI search strategies.",
+      canonical: "https://akglsgroup.com/chatgpt-optimization-services/"
+    },
+    'gemini-optimization': {
+      title: "Gemini Optimization Services | Google Gemini SEO Agency | AKGLS Group",
+      description: "Optimize your business for Google Gemini and AI-powered search experiences with advanced Gemini Optimization services from AKGLS Group.",
+      canonical: "https://akglsgroup.com/gemini-optimization-services/"
+    },
+    'claude-optimization': {
+      title: "Claude Optimization Services | Claude AI SEO Agency | AKGLS Group",
+      description: "Optimize your business for Claude AI and conversational AI discovery with advanced Claude Optimization services from AKGLS Group. Improve AI visibility and future-ready search presence.",
+      canonical: "https://akglsgroup.com/claude-optimization-services/"
+    },
+    'voice-search-optimization': {
+      title: "Voice Search Optimization Services | Voice SEO Agency | AKGLS Group",
+      description: "Optimize your business for voice assistants, conversational search, and AI-powered voice queries with advanced Voice Search Optimization services from AKGLS Group.",
+      canonical: "https://akglsgroup.com/voice-search-optimization-services/"
+    },
+    'ai-search-optimization': {
+      title: "AI Search Optimization Services | AI SEO Agency | AKGLS Group",
+      description: "Optimize your business for ChatGPT, Google AI Overviews, Gemini & AI-powered search engines with advanced AI Search Optimization services from AKGLS Group.",
+      canonical: "https://akglsgroup.com/ai-search-optimization-services/"
+    },
     'ai-seo': {
       title: "AI-Powered SEO & LLM Context Optimization | AKGLS Group",
       description: "Modernize your visibility pipelines with natural language semantic processing, dynamic entity graphs, and indexing nodes optimized for Claude, Gemini, and GPT-4.",
       canonical: "https://akglsgroup.com/ai-seo-services/"
     },
     'google-ads': {
-      title: "PPC Management & High-ROI Google Ads Services | AKGLS Group",
-      description: "Secure dominant top-of-page positions and scale qualified conversions across search, shopping grids, display networks, and Performance Max channels.",
+      title: "Google Ads Services | PPC Management Agency | AKGLS Group",
+      description: "Generate high-quality leads and maximize ROI with expert Google Ads services from AKGLS Group. Search Ads, Display Ads, Shopping Ads, YouTube Ads & PPC management solutions.",
       canonical: "https://akglsgroup.com/google-ads-services/"
+    },
+    'meta-ads': {
+      title: "Meta Ads Services | Facebook & Instagram Ads Agency | AKGLS Group",
+      description: "Generate high-quality leads, sales, and brand awareness with expert Meta Ads services from AKGLS Group. Facebook Ads, Instagram Ads, remarketing & AI-powered social advertising solutions.",
+      canonical: "https://akglsgroup.com/meta-ads-services/"
+    },
+    'linkedin-ads': {
+      title: "LinkedIn Ads Services | B2B LinkedIn Advertising Agency | AKGLS Group",
+      description: "Generate high-quality B2B leads with expert LinkedIn Ads services from AKGLS Group. LinkedIn lead generation, sponsored ads, ABM campaigns & AI-powered B2B advertising solutions.",
+      canonical: "https://akglsgroup.com/linkedin-ads-services/"
     },
     'web-design': {
       title: "Professional Web Web Design & High-Converting UX/UI | AKGLS Group",
@@ -669,6 +744,21 @@ export default function App() {
       title: "WordPress Development Services & Custom Engineering | AKGLS Group",
       description: "Maximize WordPress speed, security, and schema scalability. We craft lightweight, database optimized, responsive architectures for modern search optimization.",
       canonical: "https://akglsgroup.com/wordpress-development-services/"
+    },
+    'shopify-development': {
+      title: "Shopify Development Services | Shopify Store Development Company | AKGLS Group",
+      description: "Build high-converting Shopify stores with expert Shopify development services from AKGLS Group. Custom Shopify design, theme development, Shopify SEO & ecommerce growth solutions.",
+      canonical: "https://akglsgroup.com/shopify-development-services/"
+    },
+    'startup-growth': {
+      title: "Startup Growth Solutions | Startup Marketing & Scaling Agency | AKGLS Group",
+      description: "Scale your startup faster with startup growth solutions from AKGLS Group. Growth marketing, AI SEO, lead generation, product growth, branding & startup scaling strategies.",
+      canonical: "https://akglsgroup.com/startup-growth-solutions/"
+    },
+    'enterprise-marketing': {
+      title: "Enterprise Marketing Solutions | Enterprise Digital Marketing Agency | AKGLS Group",
+      description: "Scale enterprise growth with AI-powered enterprise marketing solutions from AKGLS Group. Enterprise SEO, PPC, AI marketing, lead generation & digital transformation strategies.",
+      canonical: "https://akglsgroup.com/enterprise-marketing-solutions/"
     },
     'dental-clinic-marketing': {
       title: "Dental Clinic Marketing & Local Patient Acquisition Services | AKGLS Group",
@@ -931,6 +1021,66 @@ export default function App() {
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
         />
+      ) : currentPage === 'chatgpt-optimization' ? (
+        <ChatgptOptimizationPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'gemini-optimization' ? (
+        <GeminiOptimizationPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'claude-optimization' ? (
+        <ClaudeOptimizationPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'voice-search-optimization' ? (
+        <VoiceSearchOptimizationPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'ai-search-optimization' ? (
+        <AiSearchOptimizationPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
       ) : currentPage === 'ai-seo' ? (
         <AiSeoServicesPage
           onBackToHome={() => {
@@ -955,6 +1105,30 @@ export default function App() {
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
         />
+      ) : currentPage === 'meta-ads' ? (
+        <MetaAdsServicesPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#meta-audit-form') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'linkedin-ads' ? (
+        <LinkedInAdsServicesPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#linkedin-audit-form') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
       ) : currentPage === 'web-design' ? (
         <WebDesignServicesPage
           onBackToHome={() => {
@@ -976,6 +1150,42 @@ export default function App() {
           }}
           openProposalForm={() => {
             const formEl = document.querySelector('#free-wordpress-consultation-form') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'shopify-development' ? (
+        <ShopifyDevelopmentServicesPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#shopify-consultation-form') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'startup-growth' ? (
+        <StartupGrowthSolutionsPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#startup-growth-audit') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'enterprise-marketing' ? (
+        <EnterpriseMarketingSolutionsPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#enterprise-growth-audit') || document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
         />

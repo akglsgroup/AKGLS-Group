@@ -83,7 +83,7 @@ export default function SmartSearch({ isOpen, onClose }: SmartSearchProps) {
   const trendingSearches = [
     { title: "AI SEO Services Dashboard", href: "#ai-seo-services" },
     { title: "SEO ROI Calculator", href: "#roi-calculator" },
-    { title: "Google Performance Max Ads Guide", href: "#google-ads-services" },
+    { title: "Google Performance Max Ads Guide", href: "/google-ads-services" },
     { title: "AI Content Analyzer Free Tools", href: "#content-analyzer" }
   ];
 
