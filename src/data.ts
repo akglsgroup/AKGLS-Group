@@ -289,26 +289,75 @@ export const defaultCaseStudies: CaseStudy[] = [
 ];
 
 export const searchDatabase: SearchResult[] = [
-  // Services
-  { title: "Technical SEO", category: "Services", href: "#technical-seo-services", description: "Audit crawl depth, sitemaps, indexing structures, and core web vitals." },
-  { title: "GEO Services (Generative Engine Optimization)", category: "AI SEO", href: "#geo-services", description: "Optimize for search engines relying on generative LLM synthesis." },
-  { title: "AI Search Optimization Services", category: "AI SEO", href: "/ai-search-optimization-services", description: "Optimize digital properties for high footprint discovery on ChatGPT, Claude, Gemini, and Google AI Overviews." },
-  { title: "Gemini Optimization Services", category: "AI SEO", href: "/gemini-optimization-services", description: "Increase visibility in Google Gemini conversations and search layouts through specialized schemas." },
-  { title: "Claude Optimization Services", category: "AI SEO", href: "/claude-optimization-services", description: "Optimize digital properties for high footprint discovery on Anthropic Claude models and comparative prompts." },
-  { title: "Voice Search Optimization Services", category: "AI SEO", href: "/voice-search-optimization-services", description: "Optimize digital properties for high footprint discovery on Siri, Alexa, Google Assistant, and conversational voice queries." },
-  { title: "AEO Services (Answer Engine Optimization)", category: "AI SEO", href: "#aeo-services", description: "Rank in response systems answering prompts directly." },
-  { title: "AI SEO Services (All-Platforms Optimization)", category: "AI SEO", href: "#ai-seo-services", description: "Format business specs for ChatGPT, Gemini, Perplexity guides." },
-  { title: "Google Ads & PPC Campaigns Agency", category: "PPC", href: "/google-ads-services", description: "Expert Google Ads management, Search, Display, Shopping, and Performance Max bidding." },
-  { title: "PPC Management Services", category: "PPC", href: "/google-ads-services", description: "Custom PPC management, bid optimization, CRO landing page design, and negative keyword audits." },
-  { title: "Shopify Development", category: "Creative & Development", href: "/shopify-development-services", description: "High-speed theme layout development, cart CRO integrations." },
-  { title: "Startup Growth Solutions", category: "Creative & Development", href: "/startup-growth-solutions", description: "Scale your startup faster with growth marketing, technical AI SEO, and predictable customer lead acquisitions." },
-  { title: "Local Business Growth Services", category: "Services", href: "/local-business-growth-services", description: "Hyperlocal SEO, Google Business Profile maps ranking, regional citation sync, local lead generation, and walk-in sales funnels." },
-  { title: "WordPress Development", category: "Creative & Development", href: "#web-design-services", description: "Bespoke corporate setups, gutenvine blocks, enterprise architecture." },
-  { title: "Local Maps Optimization & Google Ads", category: "Services", href: "/google-ads-services", description: "Dominate Google Pack geographical listings, local service ads, and regional maps." },
-  // Tools
-  { title: "SEO ROI Calculator", category: "Free Tools", href: "#roi-calculator", description: "Simulate organic growth conversion value lift instantly." },
-  { title: "AI Content Analyzer", category: "Free Tools", href: "#content-analyzer", description: "Predict search rank index weights for semantic text queries." },
-  // Info
-  { title: "Meet Our Team", category: "Company", href: "#team-leadership", description: "Strategists, engineers, and digital marketing leaders at AKGLS." },
-  { title: "Careers Gateway", category: "Company", href: "#careers-gateway", description: "We are expanding! Apply as a remote AI schema architect or strategist." }
+  // Core SEO Services
+  { title: "SEO Services", category: "SEO Services", href: "/seo-services", description: "Comprehensive search engine optimization services to scale rankings and premium traffic." },
+  { title: "Technical SEO Services", category: "SEO Services", href: "/technical-seo", description: "Deep server logs analysis, XML sitemaps, semantic crawl path audits, and Core Web Vitals lift." },
+  { title: "On-Page SEO Services", category: "SEO Services", href: "/on-page-seo", description: "Optimize metadata headers, structural markup tags, content schemas, and click-through rates." },
+  { title: "Off-Page SEO Services & Outreach", category: "SEO Services", href: "/off-page-seo-services", description: "Build high domain authority backlink profile footprint through clean digital PR outreach." },
+  { title: "Local SEO Services", category: "SEO Services", href: "/local-seo-services", description: "Dominate Google Local Map packs, optimize Google Business Profile, and secure local citation catalogs." },
+  { title: "Ecommerce SEO Services", category: "SEO Services", href: "/ecommerce-seo-services", description: "Scale product and category page rankings for Shopify, WooCommerce, or Magento stores." },
+  { title: "Enterprise SEO Services", category: "SEO Services", href: "/enterprise-seo-services", description: "Scale search footprints for high-node scale sites with robust corporate architecture." },
+  { title: "International SEO Services", category: "SEO Services", href: "/international-seo-services", description: "Deploy hreflang configurations and geo-routing directories for global scaling." },
+  { title: "Mobile SEO Services", category: "SEO Services", href: "/mobile-seo-services", description: "Optimize responsivness and speed parameters for mobile rank index priority." },
+  { title: "Programmatic SEO Services", category: "SEO Services", href: "/programmatic-seo-services", description: "Mass scale high-traffic keywords with database-driven landing pages templates." },
+  { title: "Link Building Outreach", category: "SEO Services", href: "/link-building-services", description: "Secure premium white-hat backlinks and high authority editorial placements." },
+  { title: "SEO Audit Services", category: "SEO Services", href: "/seo-audit-services", description: "Get a comprehensive technical and strategic index diagnostic health check." },
+  { title: "SEO Consulting & Roadmaps", category: "SEO Services", href: "/seo-consulting-services", description: "Strategic partner blueprints, penalty troubleshooting, and architectural search audits." },
+
+  // AI Optimization (GEO / AEO) Services
+  { title: "GEO (Generative Engine Optimization)", category: "AI SEO", href: "/geo-services", description: "Deploy technical markup graphs and index nodes for ChatGPT Search, Gemini, and Claude." },
+  { title: "AEO (Answer Engine Optimization)", category: "AI SEO", href: "/aeo-services", description: "Assert brand dominance in modern platforms answering user prompts directly." },
+  { title: "AI Search Optimization", category: "AI SEO", href: "/ai-search-optimization-services", description: "Prepare your brand's digital footprints for LLM recommendations and citations." },
+  { title: "ChatGPT Optimization", category: "AI SEO", href: "/chatgpt-optimization-services", description: "Structure schemas to expand brand visibility in OpenAI ChatGPT Search queries." },
+  { title: "Gemini Optimization", category: "AI SEO", href: "/gemini-optimization-services", description: "Optimize semantic networks for Google Gemini integration and citations." },
+  { title: "Claude Optimization", category: "AI SEO", href: "/claude-optimization-services", description: "Structure clean documentation resources easily parsed by Anthropic Claude engines." },
+  { title: "Voice Search Optimization", category: "AI SEO", href: "/voice-search-optimization-services", description: "Rank in conversational queries from Google Assistant, Apple Siri, and Amazon Alexa." },
+  { title: "AI SEO Services (All-Platforms)", category: "AI SEO", href: "/ai-seo-services", description: "Complete package SEO modernized with direct machine learning indexing structures." },
+
+  // Paid Marketing
+  { title: "Google Ads Campaigns (PPC)", category: "Paid Ads", href: "/google-ads-services", description: "Expert campaign management, Search, Display, Shopping, and high-ROI Performance Max sets." },
+  { title: "Meta Ads (Facebook & Instagram)", category: "Paid Ads", href: "/meta-ads-services", description: "Generate sales and lead pipelines through precise audience social ads demographics." },
+  { title: "LinkedIn Ads (B2B Marketing)", category: "Paid Ads", href: "/linkedin-ads-services", description: "Target key commercial decision makers, corporate niches, and industry segments." },
+
+  // Business Growth Solutions
+  { title: "Startup Growth Solutions", category: "Solutions", href: "/startup-growth-solutions", description: "Iterate rapid digital scaling paths with clean growth audits and customer acquisitions." },
+  { title: "Enterprise Marketing Solutions", category: "Solutions", href: "/enterprise-marketing-solutions", description: "Full scale operations, omni-channel campaigns integration, and customized data reports." },
+  { title: "Local Business Growth Services", category: "Solutions", href: "/local-business-growth-services", description: "Accelerate regional sales, local walk-in footfalls, and phone call queries." },
+  { title: "Ecommerce Growth Solutions", category: "Solutions", href: "/ecommerce-growth-solutions", description: "Optimize digital shopping stores for predictable scaling and conversion margin lift." },
+  { title: "B2B Lead Generation", category: "Solutions", href: "/b2b-lead-generation-services", description: "Establish scalable lead pipelines, CRM integrations, and predictable sales meetings." },
+  { title: "SaaS Marketing Growth", category: "Solutions", href: "/saas-marketing-solutions", description: "Drive CAC optimization, platform trial signups, and predictable ARR expansion." },
+
+  // Industry Verticals
+  { title: "Healthcare Digital Marketing", category: "Industries", href: "/healthcare-marketing-services", description: "HIPAA-compliant patient booking pipelines and local medical search trust signals." },
+  { title: "Dental Clinic Marketing", category: "Industries", href: "/dental-clinic-marketing", description: "Secure predictable local patient appointments and clinic search maps optimization." },
+  { title: "Manufacturing Marketing Solutions", category: "Industries", href: "/manufacturing-marketing-services", description: "B2B industrial marketing, distributor pipelines, and structural trade authority links." },
+  { title: "IoT Company Marketing", category: "Industries", href: "/iot-company-marketing-services", description: "Scale technical technology buyers through programmatic content and specialized tech SEO." },
+  { title: "Real Estate Digital Marketing", category: "Industries", href: "/real-estate-marketing-services", description: "Optimize broker maps, property listings schemas, and localized ads leads." },
+  { title: "Education Marketing Services", category: "Industries", href: "/education-marketing-services", description: "Drive enrollments for schools, colleges, and interactive EdTech web startups." },
+  { title: "Law firm Digital Marketing", category: "Industries", href: "/law-firm-marketing-services", description: "Establish high value legal cases and localized attorney ranking presence." },
+  { title: "Restaurant Marketing Solutions", category: "Industries", href: "/restaurant-marketing-services", description: "Drive table reservations, group bookings, and regional culinary search dominance." },
+  { title: "Finance & Fintech Marketing", category: "Industries", href: "/finance-marketing-services", description: "Secure high net worth investors and compliance-vetted lead pipelines." },
+
+  // Case Studies
+  { title: "All SEO Case Studies Portfolio", category: "Case Studies", href: "/seo-case-studies", description: "Real historic client results demonstrating organic search scaling." },
+  { title: "Ecommerce SEO Case Study", category: "Case Studies", href: "/case-study/ecommerce-seo-results", description: "How we generated 310% traffic growth for an active Shopify clothing brand." },
+  { title: "Local SEO Case Study", category: "Case Studies", href: "/case-study/local-seo-results", description: "Google Map packs optimization yielding 45% lift in phone enquiries." },
+  { title: "PPC Success Case Study", category: "Case Studies", href: "/case-study/ppc-success-stories", description: "Cutting spend waste while boosting conversion ROI across Google Search & PMax." },
+  { title: "AI SEO Case Study (GEO Results)", category: "Case Studies", href: "/case-study/ai-optimization-results", description: "Expanding brand mentions across ChatGPT search rankings with structured RAG graphs." },
+
+  // Dedicated Experts for Hire
+  { title: "Hire SEO Expert", category: "Hire Experts", href: "/hire-seo-expert", description: "Hire highly vetting dedicated organic SEO specialists for your team." },
+  { title: "Hire PPC Advertising Expert", category: "Hire Experts", href: "/hire-ppc-expert", description: "Work with certified Google Ads PPC optimization specialists." },
+  { title: "Hire AI SEO Specialist (GEO Expert)", category: "Hire Experts", href: "/hire-ai-seo-expert", description: "Partner with an expert focused on generative engine search optimization." },
+  { title: "Hire Content Writer", category: "Hire Experts", href: "/hire-content-writer", description: "Secure experienced copywriters and semantic content planners." },
+  { title: "Hire Link Building Specialist", category: "Hire Experts", href: "/hire-link-building-expert", description: "Hire outreach managers specialized in high DA link acquisitions." },
+  { title: "Hire Growth Marketing Manager", category: "Hire Experts", href: "/hire-marketing-manager", description: "Partner with senior growth consultants to scale omni-channel campaigns." },
+  { title: "Hire WordPress Developer", category: "Hire Experts", href: "/hire-wordpress-developer", description: "Hire dedicated specialists for fast theme builds and Core Web Vitals optimization." },
+
+  // Dev & Tools
+  { title: "Shopify Store Development", category: "Development", href: "/shopify-development-services", description: "High-spec custom web development for Shopify storefronts." },
+  { title: "SEO ROI Calculator Tool", category: "Free Tools", href: "#roi-calculator", description: "Interact with our organic growth multiplier model to simulate dollar values." },
+  { title: "AI Content Analyzer System", category: "Free Tools", href: "#content-analyzer", description: "Leverage basic semantic scoring algorithms to evaluate keyword densities." },
+  { title: "Meet Our Team & Leadership", category: "Company", href: "#team-leadership", description: "Learn about the technical founders and consultants leading AKGLS Group." },
+  { title: "Careers Gateway & Remote Jobs", category: "Company", href: "#careers-gateway", description: "We are expanding! Apply as a remote AI schema engineer or SEO strategist." }
 ];

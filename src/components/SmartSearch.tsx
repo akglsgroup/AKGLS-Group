@@ -67,16 +67,28 @@ export default function SmartSearch({ isOpen, onClose }: SmartSearchProps) {
 
   const handleResultClick = (item: any) => {
     onClose();
-    if (item.href && item.href.startsWith('#')) {
-      window.location.hash = item.href;
-    }
-    try {
-      const element = document.querySelector(item.href);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
+    if (!item.href) return;
+
+    const isSubPage = window.location.pathname !== '/';
+
+    if (item.href.startsWith('/')) {
+      window.history.pushState(null, '', item.href);
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    } else if (item.href.startsWith('#')) {
+      if (isSubPage) {
+        window.history.pushState(null, '', `/${item.href}`);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+      } else {
+        window.location.hash = item.href;
+        try {
+          const element = document.querySelector(item.href);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth' });
+          }
+        } catch (e) {
+          // Ignored
+        }
       }
-    } catch (e) {
-      // Ignored for non-selector hash routes
     }
   };
 

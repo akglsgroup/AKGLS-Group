@@ -1,26 +1,39 @@
 import { useState, FormEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { MessageSquare, X, Send, Sparkles, Bot, Clock } from 'lucide-react';
+import { MessageSquare, X, Send } from 'lucide-react';
 
 interface ChatMessage {
   text: string;
   sender: 'user' | 'agent';
+  whatsappCta?: boolean;
 }
 
 export default function Chatbox() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
-      text: "Hello! We specialize in driving organic search results and optimizing high-conversion paid campaign slots. How can our agency help your business scale today?",
+      text: "Hello! We are the AKGLS Group certified digital master strategists. We specialize in driving organic SEO scales and high-conversion paid advertising channels. How can we help you scale your operations today?",
       sender: 'agent'
     }
   ]);
   const [userInput, setUserInput] = useState('');
 
-  const optionReplies: Record<string, string> = {
-    "How do I boost search traffic?": "To boost organic search traffic, our team conducts a thorough technical audit to remove indexing friction, constructs semantic keyword clusters, and maps a strategic earned backlink path.",
-    "Can you lower my Google Ads waste?": "Absolutely! We eliminate high-spend non-converting terms, construct negative keyword blacklists, segment ad variants, and set up Meta & Google Conversion APIs to lower acquisition costs by 25-45%.",
-    "Tell me about AI SEO.": "AI SEO involves structuring your website's database schemas and relational data graphs so active bots like ChatGPT, Gemini, and Perplexity can easily discover, index, and recommend your brand."
+  const optionReplies: Record<string, ChatMessage> = {
+    "How do I boost search traffic?": {
+      text: "To boost organic keywords and traffic, we conduct thorough technical audits, remove redirect & rendering index blockers, align structured metadata, and secure high DA earned editorial backlinks. For a bespoke report and pricing for your domain, let's talk directly via WhatsApp or phone call!",
+      sender: 'agent',
+      whatsappCta: true
+    },
+    "Can you lower my Google Ads waste?": {
+      text: "Absolutely! We eliminate high-spend non-converting search terms, construct comprehensive negative keyword sets, segment ad variations, and configure Meta & Google Conversion APIs to lower customer acquisition margins by 25-45%. Let's review your exact ad setups on WhatsApp or phone immediately!",
+      sender: 'agent',
+      whatsappCta: true
+    },
+    "Tell me about AI SEO.": {
+      text: "AI SEO and GEO (Generative Engine Optimization) involves formatting structured database schemas, JSON-LD graphs, and semantic citations so search engines like ChatGPT Search, Google Gemini, Anthropic Claude, and Perplexity recommend your brand options. Chat with us on WhatsApp or call to align your AI-search ready roadmap!",
+      sender: 'agent',
+      whatsappCta: true
+    }
   };
 
   const handleOptionClick = (text: string) => {
@@ -29,9 +42,74 @@ export default function Chatbox() {
 
     // Append custom response
     setTimeout(() => {
-      const reply = optionReplies[text] || "Thank you for reaching out! A senior client growth partner has been notified to reply directly to you.";
-      setMessages(prev => [...prev, { text: reply, sender: 'agent' }]);
+      const reply = optionReplies[text] || {
+        text: "Thank you for reaching out! A senior client growth advisor is ready to evaluate your site parameters. Ring us directly or connect on WhatsApp for an instant custom roadmap!",
+        sender: 'agent',
+        whatsappCta: true
+      };
+      setMessages(prev => [...prev, reply]);
     }, 600);
+  };
+
+  const getBotResponse = (query: string): ChatMessage => {
+    const q = query.toLowerCase();
+
+    // 1. WhatsApp / Contact / Call requests
+    if (
+      q.includes('whatsapp') || q.includes('contact') || q.includes('phone') || 
+      q.includes('call') || q.includes('number') || q.includes('speak') || 
+      q.includes('person') || q.includes('human') || q.includes('talk') ||
+      q.includes('address') || q.includes('chat') || q.includes('expert')
+    ) {
+      return {
+        text: "You can connect directly with our certified master strategists. Ring us immediately or message us on WhatsApp at +91 831 811 4492 for a free campaign audit or consultation!",
+        sender: 'agent',
+        whatsappCta: true
+      };
+    }
+
+    // 2. SEO / keywords / traffic queries
+    if (q.includes('seo') || q.includes('traffic') || q.includes('rank') || q.includes('organic') || q.includes('audit')) {
+      return {
+        text: "We conduct deep Technical and On-Page audits, clean crawler indexing friction, configure schema graphs, and coordinate white-hat editorial outreach backlinks to scale your traffic. Connect with our SEO consultants directly on WhatsApp to learn more and request a diagnostic report!",
+        sender: 'agent',
+        whatsappCta: true
+      };
+    }
+
+    // 3. Paid Ads / PPC / budgets queries
+    if (q.includes('ads') || q.includes('ppc') || q.includes('google ads') || q.includes('facebook') || q.includes('meta') || q.includes('budget') || q.includes('spend')) {
+      return {
+        text: "We manage Google Ads (Search, Display, Performance Max, local listing campaigns) and Facebook/Instagram social ads. We cut acquisition waste by 25-45% using high-intent positive/negative segments and Conversion API tracking. Message us on WhatsApp to discuss your ad parameters!",
+        sender: 'agent',
+        whatsappCta: true
+      };
+    }
+
+    // 4. Web design / development / Shopify / WordPress
+    if (q.includes('web') || q.includes('design') || q.includes('wordpress') || q.includes('shopify') || q.includes('developer') || q.includes('speed')) {
+      return {
+        text: "Our experts design loading-fast custom WordPress corporate setups, robust Shopify theme templates, and CRO landers aligned perfectly with Google's Core Web Vitals to convert traffic into buyers. Talk to a developer on WhatsApp or place a direct call to outline your layouts and get bespoke quotes!",
+        sender: 'agent',
+        whatsappCta: true
+      };
+    }
+
+    // 5. Price / Pricing / Cost / Hire queries
+    if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('fee') || q.includes('hire') || q.includes('salary') || q.includes('packages')) {
+      return {
+        text: "AKGLS Group provides highly tailored corporate pricing packages and onboarding. You can hire dedicated organic SEO experts, certified PPC analysts, copywriters, or developers on flat monthly models starting immediately. Connect via WhatsApp or call to review rates!",
+        sender: 'agent',
+        whatsappCta: true
+      };
+    }
+
+    // 6. Generic queries - persuade to WhatsApp/phone
+    return {
+      text: "That is an excellent digital growth target! While our automated helper covers general frameworks, a senior client strategist needs to manually inspect your site parameters to provide the most accurate roadmap. We can draft this for you instantly over WhatsApp (+91 831 811 4492) or Call. Connect with us on WhatsApp below for a priority consultation!",
+      sender: 'agent',
+      whatsappCta: true
+    };
   };
 
   const handleSendMessage = (e: FormEvent) => {
@@ -43,10 +121,8 @@ export default function Chatbox() {
     setUserInput('');
 
     setTimeout(() => {
-      setMessages(prev => [...prev, {
-        text: "That is an excellent point. Our optimization engines are structured exactly to address this. Please submit your parameters via our homepage diagnostic form so we can draft a customized organic strategy report for your brand.",
-        sender: 'agent'
-      }]);
+      const botResponse = getBotResponse(query);
+      setMessages(prev => [...prev, botResponse]);
     }, 700);
   };
 
@@ -103,17 +179,43 @@ export default function Chatbox() {
             </div>
 
             {/* Main messages scrolling logs */}
-            <div className="h-64 p-4 overflow-y-auto space-y-3 bg-slate-50/50 scrollbar-none flex flex-col">
+            <div className="h-72 p-4 overflow-y-auto space-y-4 bg-slate-50/50 scrollbar-none flex flex-col">
               {messages.map((msg, idx) => (
                 <div 
                   key={idx} 
-                  className={`p-3 rounded-2xl max-w-[80%] text-[11.5px] leading-relaxed ${
-                    msg.sender === 'user' 
-                      ? 'bg-brand-indigo text-white rounded-tr-none ml-auto text-left shadow' 
-                      : 'bg-white text-slate-700 rounded-tl-none mr-auto shadow-sm border border-slate-100 text-left'
-                  }`}
+                  className={`flex flex-col space-y-1.5 ${msg.sender === 'user' ? 'items-end' : 'items-start'}`}
                 >
-                  {msg.text}
+                  <div 
+                    className={`p-3 rounded-2xl max-w-[85%] text-[11.5px] leading-relaxed shadow-sm ${
+                      msg.sender === 'user' 
+                        ? 'bg-brand-indigo text-white rounded-tr-none text-left shadow-md' 
+                        : 'bg-white text-slate-700 rounded-tl-none border border-slate-100 text-left'
+                    }`}
+                  >
+                    {msg.text}
+
+                    {msg.sender === 'agent' && msg.whatsappCta && (
+                      <div className="mt-2.5 pt-2 border-t border-slate-100 flex flex-col gap-2">
+                        <a 
+                          href="https://wa.me/918318114492?text=Hi%20AKGLS%20Group%2C%20I%20have%20some%20queries%20about%20your%20digital%20marketing%20services..."
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center justify-center gap-1.5 px-3 py-2 bg-emerald-500 hover:bg-emerald-600 active:scale-95 text-white text-[10px] font-bold rounded-lg shadow transition-all cursor-pointer text-center"
+                        >
+                          <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.453L0 24zm6.59-4.846c1.6.95 3.1 1.455 4.8 1.456 5.485 0 9.946-4.464 9.95-9.953.002-2.656-.103-5.15-2.92-6.97-1.866-1.868-4.347-2.897-6.98-2.898-5.494 0-9.957 4.463-9.962 10.15-.001 1.93.502 3.8 1.46 5.5l-.22.8-1.52 5.56 5.71-1.49-.69-.4zm10.1-5.698c-.278-.139-1.643-.812-1.897-.905-.254-.093-.44-.139-.626.139-.186.279-.722.905-.884 1.09-.163.186-.326.21-.604.07-.279-.14-1.176-.434-2.24-1.385-.828-.739-1.387-1.652-1.55-1.93-.163-.28-.017-.43.122-.569.125-.125.279-.325.418-.487.14-.163.186-.279.279-.465.093-.186.046-.35-.023-.488-.07-.139-.626-1.508-.857-2.066-.225-.54-.452-.466-.62-.474-.16-.007-.343-.008-.528-.008-.186 0-.488.07-.743.349-.256.279-.976.953-.976 2.324s1.001 2.695 1.14 2.881c.14.186 1.968 3.005 4.767 4.21.666.286 1.187.457 1.593.585.67.213 1.28.183 1.764.11.54-.082 1.643-.672 1.874-1.32.23-.65.23-1.206.162-1.32-.07-.11-.255-.18-.53-.32z" />
+                          </svg>
+                          <span>Chat on WhatsApp</span>
+                        </a>
+                        <a 
+                          href="tel:+918318114492"
+                          className="inline-flex items-center justify-center gap-1 bg-slate-100 hover:bg-slate-200 text-slate-700 text-[10px] font-bold py-1.5 rounded-lg text-center transition-all cursor-pointer"
+                        >
+                          ☎ Call +91 831 811 4492
+                        </a>
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -122,19 +224,19 @@ export default function Chatbox() {
             <div className="p-2 border-t border-slate-100 flex flex-wrap gap-1 bg-white">
               <button 
                 onClick={() => handleOptionClick("How do I boost search traffic?")}
-                className="bg-slate-100 hover:bg-brand-indigo hover:text-white text-[10px] font-bold text-slate-600 py-1.5 px-2.5 rounded-full transition-all"
+                className="bg-slate-100 hover:bg-brand-indigo hover:text-white text-[10px] font-bold text-slate-600 py-1.5 px-2.5 rounded-full transition-all cursor-pointer"
               >
-                Boost Search Trafic?
+                Boost Search Traffic?
               </button>
               <button 
                 onClick={() => handleOptionClick("Can you lower my Google Ads waste?")}
-                className="bg-slate-100 hover:bg-brand-indigo hover:text-white text-[10px] font-bold text-slate-600 py-1.5 px-2.5 rounded-full transition-all"
+                className="bg-slate-100 hover:bg-brand-indigo hover:text-white text-[10px] font-bold text-slate-600 py-1.5 px-2.5 rounded-full transition-all cursor-pointer"
               >
                 Lower PPC Costs?
               </button>
               <button 
                 onClick={() => handleOptionClick("Tell me about AI SEO.")}
-                className="bg-slate-100 hover:bg-brand-indigo hover:text-white text-[10px] font-bold text-slate-600 py-1.5 px-2.5 rounded-full transition-all"
+                className="bg-slate-100 hover:bg-brand-indigo hover:text-white text-[10px] font-bold text-slate-600 py-1.5 px-2.5 rounded-full transition-all cursor-pointer"
               >
                 AI SEO & GEO Info?
               </button>
@@ -147,11 +249,11 @@ export default function Chatbox() {
                 placeholder="Type your strategic digital query..." 
                 value={userInput}
                 onChange={(e) => setUserInput(e.target.value)}
-                className="w-full text-xs py-2.5 px-4 bg-slate-50 border border-slate-200 focus:border-brand-indigo rounded-xl focus:outline-none placeholder-slate-400 font-medium"
+                className="w-full text-xs py-2.5 px-4 bg-slate-50 border border-slate-200 focus:border-brand-indigo rounded-xl focus:outline-none placeholder-slate-400 font-medium text-slate-800"
               />
               <button 
                 type="submit" 
-                className="bg-brand-indigo hover:bg-opacity-95 text-white py-2 px-3 rounded-xl text-xs flex items-center justify-center shrink-0"
+                className="bg-brand-indigo hover:bg-opacity-95 text-white py-2 px-3 rounded-xl text-xs flex items-center justify-center shrink-0 cursor-pointer"
               >
                 <Send className="w-3.5 h-3.5" />
               </button>
