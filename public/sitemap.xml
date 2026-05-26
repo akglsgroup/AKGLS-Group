@@ -3,181 +3,341 @@
   <!-- Primary Pages -->
   <url>
     <loc>https://akglsgroup.com/</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- Core SEO & Search Solutions -->
   <url>
-    <loc>https://akglsgroup.com/seo-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/seo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/technical-seo</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/technical-seo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/on-page-seo</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/on-page-seo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/off-page-seo-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/off-page-seo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/local-seo-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/local-seo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/ecommerce-seo-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/ecommerce-seo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/enterprise-seo-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/enterprise-seo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/international-seo-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/international-seo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/mobile-seo-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/mobile-seo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/programmatic-seo-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/programmatic-seo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/link-building-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/link-building-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/seo-audit-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/seo-audit-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/seo-consulting-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/seo-consulting-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <!-- AI & GEO & AEO Search Integration -->
   <url>
-    <loc>https://akglsgroup.com/ai-seo-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/ai-seo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/ai-search-optimization-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/ai-search-optimization-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/chatgpt-optimization-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/chatgpt-optimization-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/gemini-optimization-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/gemini-optimization-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/geo-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/geo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/aeo-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/aeo-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/claude-optimization-services/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/voice-search-optimization-services/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <!-- Paid Marketing Channels -->
+  <url>
+    <loc>https://akglsgroup.com/google-ads-services/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/meta-ads-services/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/linkedin-ads-services/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Creative & Development -->
+  <url>
+    <loc>https://akglsgroup.com/web-design-services/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/wordpress-development-services/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/shopify-development-services/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Solutions & Growth Frameworks -->
+  <url>
+    <loc>https://akglsgroup.com/startup-growth-solutions/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/enterprise-marketing-solutions/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/ecommerce-growth-solutions/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/b2b-lead-generation-services/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/saas-marketing-solutions/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Case Studies Portfolio -->
+  <url>
+    <loc>https://akglsgroup.com/seo-case-studies/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/case-study/ecommerce-seo-results/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/case-study/local-seo-results/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/case-study/ppc-success-stories/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/case-study/ai-optimization-results/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
 
   <!-- Industry Focused Solutions -->
   <url>
     <loc>https://akglsgroup.com/dental-clinic-marketing</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://akglsgroup.com/manufacturing-marketing-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/iot-company-marketing-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/iot-company-marketing-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/real-estate-marketing-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/real-estate-marketing-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/healthcare-marketing-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/healthcare-marketing-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/education-marketing-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/education-marketing-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/law-firm-marketing-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/law-firm-marketing-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/restaurant-marketing-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/restaurant-marketing-services/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://akglsgroup.com/finance-marketing-services</loc>
-    <lastmod>2026-05-25</lastmod>
+    <loc>https://akglsgroup.com/finance-marketing-services/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- Dedicated Experts for Hire -->
+  <url>
+    <loc>https://akglsgroup.com/hire-marketing-manager/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/hire-wordpress-developer/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/hire-seo-expert/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/hire-ppc-expert/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/hire-ai-seo-expert/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/hire-content-writer/</loc>
+    <lastmod>2026-05-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://akglsgroup.com/hire-link-building-expert/</loc>
+    <lastmod>2026-05-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

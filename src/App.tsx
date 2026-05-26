@@ -13,7 +13,6 @@ import ServiceQuiz from './components/ServiceQuiz';
 import RoiCalculator from './components/RoiCalculator';
 import ContentAnalyzer from './components/ContentAnalyzer';
 import Chatbox from './components/Chatbox';
-import WhatsAppWidget from './components/WhatsAppWidget';
 import GeoServicesPage from './components/GeoServicesPage';
 import SeoServicesPage from './components/SeoServicesPage';
 import TechnicalSeoPage from './components/TechnicalSeoPage';
@@ -985,6 +984,31 @@ export default function App() {
       title: "Hire WordPress Developer | Dedicated WordPress Development Services | AKGLS Group",
       description: "Hire expert WordPress developers from AKGLS Group for custom WordPress development, WooCommerce, Elementor, speed optimization, SEO-friendly websites & AI-ready WordPress solutions.",
       canonical: "https://akglsgroup.com/hire-wordpress-developer/"
+    },
+    'hire-seo-expert': {
+      title: "Hire SEO Expert | Dedicated Search Engine Optimization Experts | AKGLS Group",
+      description: "Hire vetted dedicated SEO experts and search engineers from AKGLS Group. Scale your organic traffic, improve rankings, and drive organic revenue.",
+      canonical: "https://akglsgroup.com/hire-seo-expert/"
+    },
+    'hire-ppc-expert': {
+      title: "Hire PPC Expert | Google Ads Specialist for Hire | AKGLS Group",
+      description: "Hire expert PPC specialists and Google Ads consultants from AKGLS Group. Optimize your campaign structures, improve ROAS, and stop ad budget waste.",
+      canonical: "https://akglsgroup.com/hire-ppc-expert/"
+    },
+    'hire-ai-seo-expert': {
+      title: "Hire AI SEO Expert | Generative Engine Optimization Analysts | AKGLS Group",
+      description: "Hire dedicated AI SEO and GEO experts from AKGLS Group. Optimize your website structure and schemas to rank in Perplexity, ChatGPT Search, and Gemini.",
+      canonical: "https://akglsgroup.com/hire-ai-seo-expert/"
+    },
+    'hire-content-writer': {
+      title: "Hire SEO Content Copywriter | Dedicated Blog & Copywriting Experts | AKGLS Group",
+      description: "Hire experienced copywriters and SEO semantic content planners from AKGLS Group to craft landing pages, detailed blogs, and user guides.",
+      canonical: "https://akglsgroup.com/hire-content-writer/"
+    },
+    'hire-link-building-expert': {
+      title: "Hire Link Building Specialist | Dedicated Outreach Specialists | AKGLS Group",
+      description: "Hire expert link builders and outreach strategists from AKGLS Group to secure highly authoritative white-hat backlinks and boost domain ratings.",
+      canonical: "https://akglsgroup.com/hire-link-building-expert/"
     }
   };
 
@@ -1737,7 +1761,7 @@ export default function App() {
               <span>Enterprise organic ranking & geo systems</span>
             </div>
 
-            <h1 className="text-4.5xl sm:text-5xl md:text-5.5xl lg:text-6xl font-extrabold font-display leading-[1.08] tracking-tight">
+            <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold font-display leading-[1.12] sm:leading-[1.08] tracking-tight">
               Traditional Search is Evolving. <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-indigo-400 to-purple-400">
                 We Engineer AI SEO & Performance Marketing.
@@ -1745,7 +1769,7 @@ export default function App() {
             </h1>
 
             <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed max-w-xl">
-              Over 50% of high-intent search user journeys now bypass basic ranking lists to converse with generative AI tools. AKGLS Group deploys technical organic schema markup structures with real-time **Generative Engine Optimization (GEO)** to citation-proof your business across Perplexity, ChatGPT Search, Gemini, and Google.
+              Over 50% of high-intent search user journeys now bypass basic ranking lists to converse with generative AI tools. AKGLS Group deploys technical organic schema markup structures with real-time Generative Engine Optimization (GEO) to citation-proof your business across Perplexity, ChatGPT Search, Gemini, and Google.
             </p>
 
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
@@ -2926,9 +2950,6 @@ export default function App() {
 
       {/* CORE INTEGRATION CHAT HELPER CHATBOX */}
       <Chatbox />
-
-      {/* GLOBAL DYNAMIC PRE-FILLED WHATSAPP FLOATING BUTTON */}
-      <WhatsAppWidget currentPage={currentPage} />
 
     </div>
   );
