@@ -183,16 +183,6 @@ export default function OnPageSeoPage({ onBackToHome, openProposalForm }: OnPage
 
   return (
     <div className="pt-8">
-      {/* Back to home breadcrumb */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-        <button 
-          onClick={onBackToHome}
-          className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-teal uppercase tracking-widest hover:text-white transition-colors"
-        >
-          &larr; Back to Corporate Home
-        </button>
-      </div>
-
       {/* Hero Header Section */}
       <section className="relative overflow-hidden py-16 lg:py-24 border-b border-slate-850">
         <div className="absolute inset-0 bg-gradient-to-b from-brand-indigo/10 via-transparent to-transparent pointer-events-none" />

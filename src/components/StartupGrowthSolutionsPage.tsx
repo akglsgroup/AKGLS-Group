@@ -275,7 +275,7 @@ export default function StartupGrowthSolutionsPage({ onBackToHome, openProposalF
       </div>
 
       {/* TOP HEADER STATUS BAR */}
-      <div className="bg-slate-900 border-b border-indigo-950 text-xs py-2.5 px-4 flex justify-between items-center z-50 sticky top-0 font-mono">
+      <div className="bg-slate-900 border-b border-indigo-950 text-xs py-2.5 px-4 flex justify-between items-center z-20 relative font-mono">
         <div className="flex items-center space-x-2 text-slate-400">
           <span className="w-2.5 h-2.5 rounded-full bg-brand-teal animate-ping"></span>
           <span>Growth Advisory Services Available</span>

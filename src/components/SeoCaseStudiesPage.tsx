@@ -415,7 +415,7 @@ export default function SeoCaseStudiesPage({ onBackToHome, openProposalForm }: S
       </div>
 
       {/* STICKY TOP STATUS COMPONENT */}
-      <div id="sticky-header" className="bg-slate-950 border-b border-indigo-950/80 text-xs py-2 px-4 flex justify-between items-center z-50 sticky top-0 font-mono">
+      <div id="sticky-header" className="bg-slate-950 border-b border-indigo-950/80 text-xs py-2 px-4 flex justify-between items-center z-20 relative font-mono">
         <div className="flex items-center space-x-2 text-slate-400">
           <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span>
           <span>Verified Organic Growth Audits: Active</span>

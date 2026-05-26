@@ -292,7 +292,7 @@ export default function MetaAdsServicesPage({ onBackToHome, openProposalForm }: 
       </div>
 
       {/* STICKY TOP NAVIGATION BAR */}
-      <div className="bg-slate-900 border-b border-slate-800 text-xs py-2.5 px-4 flex justify-between items-center z-50 sticky top-0">
+      <div className="bg-slate-900 border-b border-slate-800 text-xs py-2.5 px-4 flex justify-between items-center z-20 relative">
         <div className="flex items-center space-x-2 text-slate-400 font-mono">
           <span className="w-2.5 h-2.5 rounded-full bg-brand-teal animate-ping"></span>
           <span>Advantage+ Meta Ad Algorithms Synchronized</span>

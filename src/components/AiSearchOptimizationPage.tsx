@@ -293,7 +293,7 @@ export default function AiSearchOptimizationPage({ onBackToHome, openProposalFor
     <div id="ai-search-optimization-page" className="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-brand-teal selection:text-slate-950">
       
       {/* Dynamic Sticky Header Navigation Placeholder Alert / Navigation Assist */}
-      <div className="bg-slate-900 border-b border-slate-800 text-xs py-2 px-4 flex justify-between items-center z-50 sticky top-0">
+      <div className="bg-slate-900 border-b border-slate-800 text-xs py-2 px-4 flex justify-between items-center z-20 relative">
         <div className="flex items-center space-x-2 text-slate-400">
           <span className="w-2 h-2 rounded-full bg-brand-teal animate-pulse"></span>
           <span>Next-Gen Search Integration Ready</span>

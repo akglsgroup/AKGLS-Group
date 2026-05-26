@@ -478,7 +478,7 @@ export default function HireLinkBuildingExpertPage({ onBackToHome, openProposalF
       <div className="absolute top-[50%] left-[-15%] w-[650px] h-[650px] bg-indigo-950/20 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Navigation Header */}
-      <nav id="link-building-nav" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between border-b border-slate-900/60 sticky top-0 bg-[#02040d]/85 backdrop-blur z-50">
+      <nav id="link-building-nav" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between border-b border-slate-900/60 relative bg-[#02040d]/85 backdrop-blur z-20">
         <button 
           onClick={onBackToHome}
           className="group flex items-center gap-2 text-slate-400 hover:text-white transition font-mono text-xs bg-transparent border-none cursor-pointer"

@@ -466,7 +466,7 @@ export default function HireMarketingManagerPage({ onBackToHome, openProposalFor
       <div className="absolute top-[60%] left-[-10%] w-[600px] h-[600px] bg-cyan-950/15 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Navigation Header */}
-      <nav id="marketing-manager-nav" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between border-b border-slate-900/60 sticky top-0 bg-[#02040d]/90 backdrop-blur z-50">
+      <nav id="marketing-manager-nav" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between border-b border-slate-900/60 relative bg-[#02040d]/90 backdrop-blur z-20">
         <button 
           onClick={onBackToHome}
           className="group flex items-center gap-2 text-slate-400 hover:text-white transition font-mono text-xs bg-transparent border-none cursor-pointer"

@@ -151,7 +151,7 @@ export default function AiOptimizationCaseStudyPage({ onBackToHome, openProposal
       <div className="absolute top-[50%] left-[-15%] w-[600px] h-[600px] bg-purple-900/10 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Main Navigation Row Header */}
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between border-b border-slate-900 sticky top-0 bg-[#040612]/85 backdrop-blur z-50">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between border-b border-slate-900 relative bg-[#040612]/85 backdrop-blur z-20">
         <button 
           onClick={onBackToHome}
           className="group flex items-center gap-2 text-slate-400 hover:text-white transition font-mono text-xs bg-transparent border-none cursor-pointer"

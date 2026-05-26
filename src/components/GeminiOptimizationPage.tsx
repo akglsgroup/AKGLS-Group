@@ -290,7 +290,7 @@ export default function GeminiOptimizationPage({ onBackToHome, openProposalForm 
     <div id="gemini-optimization-page" className="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-brand-teal selection:text-slate-950">
       
       {/* Sticky Top Header Navigation Info Alert */}
-      <div className="bg-slate-900 border-b border-slate-800 text-xs py-2 px-4 flex justify-between items-center z-50 sticky top-0">
+      <div className="bg-slate-900 border-b border-slate-800 text-xs py-2 px-4 flex justify-between items-center z-20 relative">
         <div className="flex items-center space-x-2 text-slate-400">
           <span className="w-2.5 h-2.5 rounded-full bg-brand-teal animate-pulse"></span>
           <span>Google Gemini Search SEO Specialist Active</span>

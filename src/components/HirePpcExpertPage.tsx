@@ -196,7 +196,7 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
       <div className="absolute top-[55%] right-[-15%] w-[650px] h-[650px] bg-cyan-950/20 rounded-full blur-[150px] pointer-events-none" />
 
       {/* Main Corporate Header Navigator */}
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between border-b border-slate-900 sticky top-0 bg-[#040612]/90 backdrop-blur z-50">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5 flex items-center justify-between border-b border-slate-900 relative bg-[#040612]/90 backdrop-blur z-20">
         <button 
           onClick={onBackToHome}
           className="group flex items-center gap-2 text-slate-400 hover:text-white transition font-mono text-xs bg-transparent border-none cursor-pointer"
