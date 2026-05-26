@@ -16,11 +16,12 @@ export const servicesMenu: MegaColumn[] = [
       { name: "Programmatic SEO", href: "/programmatic-seo-services" },
       { name: "Link Building", href: "/link-building-services" },
       { name: "SEO Audit Services", href: "/seo-audit-services" },
-      { name: "SEO Consulting", href: "/seo-consulting-services" }
+      { name: "SEO Consulting", href: "/seo-consulting-services" },
+      { name: "Hire SEO Expert", href: "/hire-seo-expert" }
     ],
     featuredCta: {
       text: "Get Free SEO Audit",
-      href: "#audit-form",
+      href: "/seo-audit-services",
       badge: "Free Tool"
     }
   },
@@ -199,13 +200,13 @@ export const companyMenu = [
 ];
 
 export const hireExpertsMenu = [
-  { name: "Hire SEO Expert", href: "#audit-form" },
-  { name: "Hire PPC Expert", href: "#audit-form" },
-  { name: "Hire AI SEO Expert", href: "#audit-form" },
-  { name: "Hire Content Writer", href: "#audit-form" },
-  { name: "Hire WordPress Developer", href: "#audit-form" },
-  { name: "Hire Link Building Expert", href: "#audit-form" },
-  { name: "Hire Marketing Manager", href: "#audit-form" }
+  { name: "Hire SEO Expert", href: "/hire-seo-expert" },
+  { name: "Hire PPC Expert", href: "/hire-ppc-expert" },
+  { name: "Hire AI SEO Expert", href: "/hire-ai-seo-expert" },
+  { name: "Hire Content Writer", href: "/hire-content-writer" },
+  { name: "Hire WordPress Developer", href: "/hire-wordpress-developer" },
+  { name: "Hire Link Building Expert", href: "/hire-link-building-expert" },
+  { name: "Hire Marketing Manager", href: "/hire-marketing-manager" }
 ];
 
 export const defaultCaseStudies: CaseStudy[] = [

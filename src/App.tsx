@@ -36,6 +36,13 @@ import EcommerceSeoCaseStudyPage from './components/EcommerceSeoCaseStudyPage';
 import LocalSeoCaseStudyPage from './components/LocalSeoCaseStudyPage';
 import PpcSuccessStoriesPage from './components/PpcSuccessStoriesPage';
 import AiOptimizationCaseStudyPage from './components/AiOptimizationCaseStudyPage';
+import HireSeoExpertPage from './components/HireSeoExpertPage';
+import HirePpcExpertPage from './components/HirePpcExpertPage';
+import HireAiSeoExpertPage from './components/HireAiSeoExpertPage';
+import HireContentWriterPage from './components/HireContentWriterPage';
+import HireLinkBuildingExpertPage from './components/HireLinkBuildingExpertPage';
+import HireMarketingManagerPage from './components/HireMarketingManagerPage';
+import HireWordPressDeveloperPage from './components/HireWordPressDeveloperPage';
 import DentalClinicMarketingPage from './components/DentalClinicMarketingPage';
 import ManufacturingMarketingPage from './components/ManufacturingMarketingPage';
 import IotCompanyMarketingPage from './components/IotCompanyMarketingPage';
@@ -338,7 +345,7 @@ const getIconComponent = (icon: string) => {
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study' | 'hire-seo-expert' | 'hire-ppc-expert' | 'hire-ai-seo-expert' | 'hire-content-writer' | 'hire-link-building-expert' | 'hire-marketing-manager' | 'hire-wordpress-developer'>('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [modalEmail, setModalEmail] = useState('');
@@ -549,6 +556,69 @@ export default function App() {
         hash === '#ai-optimization-case-study' || hash === '#ai-seo-case-study' || hash === '#geo-optimization-results'
       ) {
         setCurrentPage('ai-optimization-case-study');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/hire-seo-expert' || pathname === '/hire-seo-expert/' ||
+        pathname === '/hire-seo-specialist' || pathname === '/hire-seo-specialist/' ||
+        pathname === '/dedicated-seo-expert' || pathname === '/dedicated-seo-expert/' ||
+        pathname === '/seo-consultant-for-hire' || pathname === '/seo-consultant-for-hire/' ||
+        hash === '#hire-seo-expert' || hash === '#hire-seo-specialist' || hash === '#dedicated-seo-expert'
+      ) {
+        setCurrentPage('hire-seo-expert');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/hire-ai-seo-expert' || pathname === '/hire-ai-seo-expert/' ||
+        pathname === '/hire-ai-seo-specialist' || pathname === '/hire-ai-seo-specialist/' ||
+        pathname === '/dedicated-ai-seo-consultant' || pathname === '/dedicated-ai-seo-consultant/' ||
+        pathname === '/ai-seo-expert-for-hire' || pathname === '/ai-seo-expert-for-hire/' ||
+        hash === '#hire-ai-seo-expert' || hash === '#hire-ai-seo-specialist' || hash === '#dedicated-ai-seo-consultant'
+      ) {
+        setCurrentPage('hire-ai-seo-expert');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/hire-content-writer' || pathname === '/hire-content-writer/' ||
+        pathname === '/hire-seo-content-writer' || pathname === '/hire-seo-content-writer/' ||
+        pathname === '/dedicated-content-writer' || pathname === '/dedicated-content-writer/' ||
+        pathname === '/content-writing-services' || pathname === '/content-writing-services/' ||
+        hash === '#hire-content-writer' || hash === '#hire-seo-content-writer' || hash === '#dedicated-content-writer' || hash === '#content-writing-services'
+      ) {
+        setCurrentPage('hire-content-writer');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/hire-ppc-expert' || pathname === '/hire-ppc-expert/' ||
+        pathname === '/hire-google-ads-expert' || pathname === '/hire-google-ads-expert/' ||
+        pathname === '/dedicated-ppc-specialist' || pathname === '/dedicated-ppc-specialist/' ||
+        pathname === '/ppc-consultant-for-hire' || pathname === '/ppc-consultant-for-hire/' ||
+        hash === '#hire-ppc-expert' || hash === '#hire-google-ads-expert' || hash === '#dedicated-ppc-specialist'
+      ) {
+        setCurrentPage('hire-ppc-expert');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/hire-link-building-expert' || pathname === '/hire-link-building-expert/' ||
+        pathname === '/hire-link-building-specialist' || pathname === '/hire-link-building-specialist/' ||
+        pathname === '/dedicated-link-building-services' || pathname === '/dedicated-link-building-services/' ||
+        pathname === '/seo-link-building-expert' || pathname === '/seo-link-building-expert/' ||
+        hash === '#hire-link-building-expert' || hash === '#hire-link-building-specialist' || hash === '#dedicated-link-building-services'
+      ) {
+        setCurrentPage('hire-link-building-expert');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/hire-marketing-manager' || pathname === '/hire-marketing-manager/' ||
+        pathname === '/dedicated-marketing-manager' || pathname === '/dedicated-marketing-manager/' ||
+        pathname === '/marketing-manager-for-hire' || pathname === '/marketing-manager-for-hire/' ||
+        pathname === '/hire-digital-marketing-manager' || pathname === '/hire-digital-marketing-manager/' ||
+        hash === '#hire-marketing-manager' || hash === '#dedicated-marketing-manager' || hash === '#marketing-manager-for-hire'
+      ) {
+        setCurrentPage('hire-marketing-manager');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/hire-wordpress-developer' || pathname === '/hire-wordpress-developer/' ||
+        pathname === '/wordpress-developer-for-hire' || pathname === '/wordpress-developer-for-hire/' ||
+        pathname === '/dedicated-wordpress-developer' || pathname === '/dedicated-wordpress-developer/' ||
+        pathname === '/hire-woocommerce-developer' || pathname === '/hire-woocommerce-developer/' ||
+        hash === '#hire-wordpress-developer' || hash === '#dedicated-wordpress-developer' || hash === '#wordpress-developer-for-hire'
+      ) {
+        setCurrentPage('hire-wordpress-developer');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (
         pathname === '/case-study/local-seo-results' || pathname === '/case-study/local-seo-results/' ||
@@ -904,6 +974,16 @@ export default function App() {
       title: "Finance Marketing Services | Financial SEO Agency | AKGLS Group",
       description: "Grow your financial business with expert finance marketing services from AKGLS Group. SEO, Google Ads, fintech marketing, AI SEO & lead generation solutions for finance companies.",
       canonical: "https://akglsgroup.com/finance-marketing-services/"
+    },
+    'hire-marketing-manager': {
+      title: "Hire Marketing Manager | Dedicated Digital Marketing Manager | AKGLS Group",
+      description: "Hire experienced marketing managers from AKGLS Group for SEO, PPC, social media, AI marketing, lead generation, branding & complete digital growth management services.",
+      canonical: "https://akglsgroup.com/hire-marketing-manager/"
+    },
+    'hire-wordpress-developer': {
+      title: "Hire WordPress Developer | Dedicated WordPress Development Services | AKGLS Group",
+      description: "Hire expert WordPress developers from AKGLS Group for custom WordPress development, WooCommerce, Elementor, speed optimization, SEO-friendly websites & AI-ready WordPress solutions.",
+      canonical: "https://akglsgroup.com/hire-wordpress-developer/"
     }
   };
 
@@ -1395,6 +1475,118 @@ export default function App() {
           }}
           openProposalForm={() => {
             const formEl = document.querySelector('#audit-form');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'hire-seo-expert' ? (
+        <HireSeoExpertPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'hire-ppc-expert' ? (
+        <HirePpcExpertPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'hire-ai-seo-expert' ? (
+        <HireAiSeoExpertPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'hire-content-writer' ? (
+        <HireContentWriterPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'hire-link-building-expert' ? (
+        <HireLinkBuildingExpertPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.getElementById('free-backlink-audit-stage');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'hire-marketing-manager' ? (
+        <HireMarketingManagerPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.getElementById('free-marketing-audit-stage');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'hire-wordpress-developer' ? (
+        <HireWordPressDeveloperPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.getElementById('free-wp-audit-form');
             if (formEl) {
               formEl.scrollIntoView({ behavior: 'smooth' });
             } else {
