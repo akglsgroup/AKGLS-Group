@@ -132,7 +132,7 @@ export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: 
   };
 
   return (
-    <div className="min-h-screen bg-[#02040d] text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-300 font-sans antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-[#02040d] text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-300 font-sans antialiased overflow-x-hidden relative">
       
       {/* Background decoration elements */}
       <div className="absolute top-0 left-0 right-0 h-[800px] bg-gradient-to-b from-[#061b17]/30 via-[#030d21]/15 to-transparent pointer-events-none" />

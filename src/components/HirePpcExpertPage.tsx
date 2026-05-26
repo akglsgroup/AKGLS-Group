@@ -188,7 +188,7 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
   ];
 
   return (
-    <div className="min-h-screen bg-[#040612] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-300 font-sans antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-[#040612] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-300 font-sans antialiased overflow-x-hidden relative">
       
       {/* Background decoration elements */}
       <div className="absolute top-0 left-0 right-0 h-[700px] bg-gradient-to-b from-[#0b1433]/30 via-[#0a1b3d]/15 to-transparent pointer-events-none" />

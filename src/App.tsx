@@ -43,6 +43,8 @@ import HireContentWriterPage from './components/HireContentWriterPage';
 import HireLinkBuildingExpertPage from './components/HireLinkBuildingExpertPage';
 import HireMarketingManagerPage from './components/HireMarketingManagerPage';
 import HireWordPressDeveloperPage from './components/HireWordPressDeveloperPage';
+import IndiaPricingPage from './components/IndiaPricingPage';
+import ClientProposalBuilderPage from './components/ClientProposalBuilderPage';
 import DentalClinicMarketingPage from './components/DentalClinicMarketingPage';
 import ManufacturingMarketingPage from './components/ManufacturingMarketingPage';
 import IotCompanyMarketingPage from './components/IotCompanyMarketingPage';
@@ -345,7 +347,7 @@ const getIconComponent = (icon: string) => {
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study' | 'hire-seo-expert' | 'hire-ppc-expert' | 'hire-ai-seo-expert' | 'hire-content-writer' | 'hire-link-building-expert' | 'hire-marketing-manager' | 'hire-wordpress-developer'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study' | 'hire-seo-expert' | 'hire-ppc-expert' | 'hire-ai-seo-expert' | 'hire-content-writer' | 'hire-link-building-expert' | 'hire-marketing-manager' | 'hire-wordpress-developer' | 'india-pricing' | 'proposal-generator'>('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [modalEmail, setModalEmail] = useState('');
@@ -628,6 +630,12 @@ export default function App() {
         hash === '#local-seo-case-study' || hash === '#google-maps-seo-case-study'
       ) {
         setCurrentPage('local-seo-case-study');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/india-pricing' || pathname === '/india-pricing/' || hash === '#india-pricing' || hash === '#indian-pricing' || hash === '#india-pricing-plans') {
+        setCurrentPage('india-pricing');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/proposal-generator' || pathname === '/proposal-generator/' || pathname === '/proposal-builder' || pathname === '/proposal-builder/' || hash === '#proposal-generator' || hash === '#proposal-builder') {
+        setCurrentPage('proposal-generator');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (pathname === '/local-business-growth-services' || pathname === '/local-business-growth-services/' || pathname === '/local-business-marketing' || pathname === '/local-business-marketing/' || pathname === '/local-growth-marketing-services' || pathname === '/local-growth-marketing-services/' || pathname === '/small-business-growth-solutions' || pathname === '/small-business-growth-solutions/' || pathname === '/local-business-marketing-services' || pathname === '/local-business-marketing-services/' || pathname === '/small-business-growth-agency' || pathname === '/small-business-growth-agency/' || pathname === '/local-business-digital-marketing' || pathname === '/local-business-digital-marketing/' || hash === '#local-business-growth-services' || hash === '#local-business-growth' || hash === '#local-marketing' || hash === '#local-business-marketing') {
         setCurrentPage('local-business-growth');
@@ -1618,6 +1626,30 @@ export default function App() {
             } else {
               window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
             }
+          }}
+        />
+      ) : currentPage === 'india-pricing' ? (
+        <IndiaPricingPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.getElementById('india-proposal-portal');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'proposal-generator' ? (
+        <ClientProposalBuilderPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
           }}
         />
       ) : currentPage === 'local-business-growth' ? (

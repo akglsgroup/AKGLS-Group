@@ -470,7 +470,7 @@ export default function HireLinkBuildingExpertPage({ onBackToHome, openProposalF
   ];
 
   return (
-    <div className="min-h-screen bg-[#02040d] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-300 font-sans antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-[#02040d] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-300 font-sans antialiased overflow-x-hidden relative">
       
       {/* Visual Ambient Overlays */}
       <div className="absolute top-0 left-0 right-0 h-[800px] bg-gradient-to-b from-[#091b26]/30 via-[#020614]/15 to-transparent pointer-events-none" />

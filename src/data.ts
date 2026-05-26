@@ -189,6 +189,8 @@ export const resourcesMenu: MegaColumn[] = [
 ];
 
 export const companyMenu = [
+  { name: "Indian Client Pricing", href: "/india-pricing" },
+  { name: "Proposal PDF Builder", href: "/proposal-builder" },
   { name: "About Us", href: "#team-leadership" },
   { name: "Meet Our Team", href: "#team-leadership" },
   { name: "Careers", href: "#careers-gateway" },
@@ -359,5 +361,6 @@ export const searchDatabase: SearchResult[] = [
   { title: "SEO ROI Calculator Tool", category: "Free Tools", href: "#roi-calculator", description: "Interact with our organic growth multiplier model to simulate dollar values." },
   { title: "AI Content Analyzer System", category: "Free Tools", href: "#content-analyzer", description: "Leverage basic semantic scoring algorithms to evaluate keyword densities." },
   { title: "Meet Our Team & Leadership", category: "Company", href: "#team-leadership", description: "Learn about the technical founders and consultants leading AKGLS Group." },
-  { title: "Careers Gateway & Remote Jobs", category: "Company", href: "#careers-gateway", description: "We are expanding! Apply as a remote AI schema engineer or SEO strategist." }
+  { title: "Careers Gateway & Remote Jobs", category: "Company", href: "#careers-gateway", description: "We are expanding! Apply as a remote AI schema engineer or SEO strategist." },
+  { title: "Indian Client Pricing Models", category: "Company", href: "/india-pricing", description: "Suggesed task SEO, search and PPC plans package pricing structured for Indian startups and SMEs." }
 ];

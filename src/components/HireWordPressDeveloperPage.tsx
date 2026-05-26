@@ -306,7 +306,7 @@ export default function HireWordPressDeveloperPage({ onBackToHome, openProposalF
   };
 
   return (
-    <div className="min-h-screen bg-[#02040d] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-300 font-sans antialiased overflow-x-hidden">
+    <div className="min-h-screen bg-[#02040d] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-300 font-sans antialiased overflow-x-hidden relative">
       
       {/* Visual Ambience Blocks */}
       <div className="absolute top-0 left-0 right-0 h-[850px] bg-gradient-to-b from-[#0f1c2b]/35 via-[#02040d]/10 to-transparent pointer-events-none" />
