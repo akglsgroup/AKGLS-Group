@@ -929,27 +929,35 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
       </AnimatePresence>
 
       {/* MOBILE STICKY BOTTOM CORE HIGH-CONVERSION CTA NAVIGATION BAR */}
-      <div className="fixed bottom-0 inset-x-0 bg-[#0a0f1d]/95 border-t border-slate-800 z-40 lg:hidden py-2 px-4 shadow-2xl backdrop-blur-md">
-        <div className="grid grid-cols-4 gap-2 text-center max-w-md mx-auto">
+      <div 
+        className="fixed bottom-0 inset-x-0 bg-[#0a0f1d]/98 border-t border-slate-800/80 z-40 lg:hidden shadow-[0_-10px_35px_rgba(0,0,0,0.7)] backdrop-blur-md"
+        style={{
+          paddingTop: '10px',
+          paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)',
+          paddingLeft: '16px',
+          paddingRight: '16px'
+        }}
+      >
+        <div className="grid grid-cols-4 gap-1 sm:gap-2 text-center max-w-md mx-auto">
           {/* Item 1: WhatsApp */}
           <a 
             href={`https://wa.me/918318114492?text=${encodeURIComponent(getWhatsAppMessage(currentPage))}`} 
             target="_blank" 
             rel="noopener noreferrer"
             referrerPolicy="no-referrer"
-            className="flex flex-col items-center justify-center text-slate-400 hover:text-brand-emerald"
+            className="flex flex-col items-center justify-center text-slate-400 hover:text-emerald-400 transition-colors"
           >
-            <MessageSquare className="w-5 h-5 text-emerald-500" />
-            <span className="text-[10px] font-bold mt-1">WhatsApp</span>
+            <MessageSquare className="w-5 h-5 text-emerald-500 hover:scale-105 transition-transform" />
+            <span className="text-[9px] sm:text-[10px] font-bold mt-1.5 whitespace-nowrap">WhatsApp</span>
           </a>
 
           {/* Item 2: Call now */}
           <a 
             href="tel:+918318114492" 
-            className="flex flex-col items-center justify-center text-slate-400 hover:text-brand-indigo"
+            className="flex flex-col items-center justify-center text-slate-400 hover:text-brand-indigo transition-colors"
           >
-            <PhoneCall className="w-5 h-5 text-brand-indigo" />
-            <span className="text-[10px] font-bold mt-1">Call Now</span>
+            <PhoneCall className="w-5 h-5 text-brand-teal hover:scale-105 transition-transform" />
+            <span className="text-[9px] sm:text-[10px] font-bold mt-1.5 whitespace-nowrap">Call Now</span>
           </a>
 
           {/* Item 3: Free Audit */}
@@ -958,19 +966,19 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               const element = document.querySelector('#audit-form');
               if (element) element.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="flex flex-col items-center justify-center text-slate-400 hover:text-brand-orange"
+            className="flex flex-col items-center justify-center text-slate-400 hover:text-brand-orange transition-colors cursor-pointer"
           >
-            <FileText className="w-5 h-5 text-brand-orange" />
-            <span className="text-[10px] font-bold mt-1">Free Audit</span>
+            <FileText className="w-5 h-5 text-brand-orange hover:scale-105 transition-transform" />
+            <span className="text-[9px] sm:text-[10px] font-bold mt-1.5 whitespace-nowrap">Free Audit</span>
           </button>
 
           {/* Item 4: Book Consultation */}
           <button 
             onClick={openQuiz}
-            className="flex flex-col items-center justify-center bg-gradient-to-r from-brand-indigo to-brand-purple text-white rounded-xl py-1 px-2 shadow-md hover:opacity-95"
+            className="flex flex-col items-center justify-center bg-gradient-to-r from-brand-indigo to-brand-purple text-white rounded-xl py-1 px-2.5 shadow-md hover:brightness-110 active:scale-95 transition-all cursor-pointer"
           >
-            <Zap className="w-4 h-4 text-white" />
-            <span className="text-[9px] font-black uppercase mt-0.5 tracking-tight">Book Free</span>
+            <Zap className="w-4 h-4 text-brand-teal animate-pulse" />
+            <span className="text-[9px] font-black uppercase mt-1 tracking-tight whitespace-nowrap">Book Free</span>
           </button>
         </div>
       </div>

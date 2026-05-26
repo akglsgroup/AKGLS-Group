@@ -222,47 +222,6 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
         </div>
       </nav>
 
-      {/* STICKY CTA PANEL */}
-      <AnimatePresence>
-        {showStickyCta && (
-          <motion.div 
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 80, opacity: 0 }}
-            transition={{ duration: 0.25 }}
-            className="fixed bottom-0 left-0 right-0 bg-[#080d24]/95 border-t border-cyan-500/30 backdrop-blur-md py-4 z-50 shadow-2xl"
-          >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <span className="w-2.5 h-2.5 bg-indigo-505 bg-indigo-500 rounded-full animate-pulse shrink-0" />
-                <p className="text-xs sm:text-sm text-slate-300">
-                  Ready to launch precision campaigns? Hire a highly vetted <strong className="text-white">dedicated PPC Specialist</strong> from AKGLS.
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-                <a 
-                  href="https://wa.me/918318114492"
-                  target="_blank"
-                  referrerPolicy="no-referrer"
-                  className="bg-emerald-950/30 text-emerald-400 border border-emerald-900 px-4 py-2 rounded-lg text-xs font-mono hover:bg-emerald-950/60 transition"
-                >
-                  WhatsApp Expert
-                </a>
-                <button 
-                  onClick={() => {
-                    const form = document.getElementById('free-ppc-audit');
-                    if (form) form.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="bg-gradient-to-r from-cyan-500 to-indigo-500 text-white font-bold px-5 py-2 rounded-lg text-xs hover:opacity-95 transition"
-                >
-                  Hire PPC Specialist
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* HERO SECTION */}
       <header className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">

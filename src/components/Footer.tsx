@@ -213,7 +213,7 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
       </div>
 
       {/* FOOTER CONTAINER BACKGROUND - DARK NAVY (#081120) */}
-      <footer className="bg-[#081120] text-slate-350 pt-28 pb-12 border-t border-slate-900/60 font-sans text-left">
+      <footer className="bg-[#081120] text-slate-350 pt-28 pb-32 lg:pb-12 border-t border-slate-900/60 font-sans text-left">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           {/* DESKTOP 6-COLUMN MEGA FOOTER & COMPANY CRADLE BLOCK */}

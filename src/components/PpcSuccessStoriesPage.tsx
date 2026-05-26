@@ -1487,17 +1487,6 @@ export default function PpcSuccessStoriesPage({ onBackToHome, openProposalForm }
         </div>
       </section>
 
-      {/* Floating Sticky Conversion Bar at bottom of screen on Mobile/Tablet */}
-      <div className="fixed bottom-0 inset-x-0 bg-slate-950/85 backdrop-blur-md border-t border-purple-950/40 p-4 z-40 sm:hidden flex justify-between items-center">
-        <span className="text-xs font-bold text-emerald-400 font-mono">🚀 PPC ROI Lift Projection LIVE</span>
-        <button 
-          onClick={openProposalForm}
-          className="px-4 py-2 bg-brand-orange text-white text-[11px] font-extrabold rounded-lg hover:bg-orange-600 transition shadow cursor-pointer font-sans"
-        >
-          Audit My Ads
-        </button>
-      </div>
-
     </div>
   );
 }

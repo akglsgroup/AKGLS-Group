@@ -504,47 +504,6 @@ export default function HireLinkBuildingExpertPage({ onBackToHome, openProposalF
         </div>
       </nav>
 
-      {/* Sticky CTA strip */}
-      <AnimatePresence>
-        {showStickyCta && (
-          <motion.div 
-            initial={{ y: 80, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 80, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed bottom-0 left-0 right-0 bg-[#04081c]/95 border-t border-cyan-500/30 backdrop-blur-md py-4 z-50 shadow-2xl"
-          >
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="flex items-center gap-3">
-                <span className="w-2.5 h-2.5 bg-cyan-400 rounded-full animate-ping shrink-0" />
-                <p className="text-xs sm:text-sm text-slate-300">
-                  Ready to amplify your rankings? Hire a <strong className="text-cyan-400 font-bold">dedicated link building outreach specialist</strong> from AKGLS.
-                </p>
-              </div>
-              <div className="flex items-center gap-3">
-                <a 
-                  href="https://wa.me/918318114492"
-                  target="_blank"
-                  referrerPolicy="no-referrer"
-                  className="bg-cyan-950/30 text-cyan-400 border border-cyan-900 px-4 py-2 rounded-lg text-xs font-mono hover:bg-cyan-950/65 transition"
-                >
-                  Direct Chat
-                </a>
-                <button 
-                  onClick={() => {
-                    const el = document.getElementById('free-backlink-audit-stage');
-                    if (el) el.scrollIntoView({ behavior: 'smooth' });
-                  }}
-                  className="bg-gradient-to-r from-cyan-400 to-indigo-500 text-slate-950 font-bold px-5 py-2 rounded-lg text-xs hover:opacity-95 transition"
-                >
-                  Request Backlink Audit List
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
       {/* HERO SECTION */}
       <header id="link-building-hero" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24 relative">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
