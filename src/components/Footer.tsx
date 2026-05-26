@@ -652,30 +652,6 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
         </div>
       </footer>
 
-      {/* MOBILE PERSISTENT FLOATING STICKY ACTION PANEL */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#081120]/95 backdrop-blur-md border-t border-indigo-950/25 py-2.5 px-4 z-40 lg:hidden flex justify-between items-center shadow-lg">
-        <div className="text-left">
-          <span className="text-[8px] font-mono text-brand-teal font-extrabold uppercase tracking-widest block">ACQUISITION SUPPORT Desk</span>
-          <span className="text-[10.5px] text-white block truncate leading-none mt-0.5 font-bold">{CONTACT_NUMBER}</span>
-        </div>
-        <div className="flex gap-2">
-          {/* Direct Mobile Quick Call */}
-          <a 
-            href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}
-            className="bg-brand-orange text-white hover:bg-opacity-95 text-[10.5px] uppercase font-mono tracking-wider font-extrabold py-1.5 px-3 rounded-lg"
-          >
-            Call Office
-          </a>
-          <a 
-            href="#audit-form"
-            onClick={(e) => handleLinkClick('#audit-form', e)}
-            className="bg-brand-indigo text-white hover:bg-opacity-95 text-[10.5px] uppercase font-mono tracking-wider font-extrabold py-1.5 px-3 rounded-lg"
-          >
-            Audit Website
-          </a>
-        </div>
-      </div>
-
     </div>
   );
 }

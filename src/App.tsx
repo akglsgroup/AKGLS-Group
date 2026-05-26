@@ -13,6 +13,7 @@ import ServiceQuiz from './components/ServiceQuiz';
 import RoiCalculator from './components/RoiCalculator';
 import ContentAnalyzer from './components/ContentAnalyzer';
 import Chatbox from './components/Chatbox';
+import WhatsAppWidget from './components/WhatsAppWidget';
 import GeoServicesPage from './components/GeoServicesPage';
 import SeoServicesPage from './components/SeoServicesPage';
 import TechnicalSeoPage from './components/TechnicalSeoPage';
@@ -1023,6 +1024,7 @@ export default function App() {
           formEl?.scrollIntoView({ behavior: 'smooth' });
         }}
         openDownloadModal={() => setDownloadModalOpen(true)}
+        currentPage={currentPage}
       />
 
       {currentPage === 'geo' ? (
@@ -2861,15 +2863,7 @@ export default function App() {
         openDownloadModal={() => setDownloadModalOpen(true)}
       />
 
-      {/* KEYBOARD SHORTCUT FLOATING PANEL HINT */}
-      <div className="fixed bottom-6 left-6 z-40 hidden md:block">
-        <div className="p-2.5 px-3.5 bg-slate-900/90 text-white border border-slate-800 rounded-xl shadow-2xl flex items-center gap-2 text-xs font-mono select-none">
-          <span className="w-2 h-2 rounded-full bg-brand-teal animate-pulse" />
-          <span>Press</span>
-          <kbd className="bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded text-[10px] font-bold border border-slate-700 font-mono shadow-inner">/</kbd>
-          <span>to search capabilities instantly</span>
-        </div>
-      </div>
+
 
       {/* PDF STRATEGY GUIDE DOWNLOAD MODAL */}
       {downloadModalOpen && (
@@ -2932,6 +2926,9 @@ export default function App() {
 
       {/* CORE INTEGRATION CHAT HELPER CHATBOX */}
       <Chatbox />
+
+      {/* GLOBAL DYNAMIC PRE-FILLED WHATSAPP FLOATING BUTTON */}
+      <WhatsAppWidget currentPage={currentPage} />
 
     </div>
   );

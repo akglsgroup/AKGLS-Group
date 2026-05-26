@@ -8,15 +8,17 @@ import {
   Facebook, Twitter, Linkedin, Instagram
 } from 'lucide-react';
 import { servicesMenu, solutionsMenu, caseStudiesMenu, resourcesMenu, companyMenu, hireExpertsMenu } from '../data';
+import { getWhatsAppMessage } from './WhatsAppWidget';
 
 interface HeaderProps {
   onSearchOpen: () => void;
   openQuiz: () => void;
   openProposal: () => void;
   openDownloadModal: () => void;
+  currentPage?: string;
 }
 
-export default function Header({ onSearchOpen, openQuiz, openProposal, openDownloadModal }: HeaderProps) {
+export default function Header({ onSearchOpen, openQuiz, openProposal, openDownloadModal, currentPage = 'home' }: HeaderProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileSearchQuery, setMobileSearchQuery] = useState('');
@@ -931,8 +933,9 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
         <div className="grid grid-cols-4 gap-2 text-center max-w-md mx-auto">
           {/* Item 1: WhatsApp */}
           <a 
-            href="https://wa.me/918318114492" 
+            href={`https://wa.me/918318114492?text=${encodeURIComponent(getWhatsAppMessage(currentPage))}`} 
             target="_blank" 
+            rel="noopener noreferrer"
             referrerPolicy="no-referrer"
             className="flex flex-col items-center justify-center text-slate-400 hover:text-brand-emerald"
           >

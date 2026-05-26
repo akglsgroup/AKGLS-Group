@@ -51,3 +51,32 @@
   animation-play-state: paused;
 }
 
+/* -------------------------------------------------------------------------- */
+/* GLOBAL FLOATING WIDGET PATHS AND OVERLAPPING CTA MITIGATIONS               */
+/* -------------------------------------------------------------------------- */
+
+/* Hide duplicate, page-specific floating speed dials & CTAs to keep the screen clear */
+div.fixed.bottom-4.right-4:not(#floating-chat-bubble):not(#global-whatsapp-float-widget),
+div.fixed.bottom-6.right-6:not(#floating-chat-bubble):not(#global-whatsapp-float-widget),
+div.fixed.bottom-4:not(#floating-chat-bubble):not(#global-whatsapp-float-widget),
+div.fixed.bottom-6:not(#floating-chat-bubble):not(#global-whatsapp-float-widget) {
+  display: none !important;
+}
+
+/* Stand behind the z-50 floaters on desktop so they overlay perfectly rather than colliding */
+div.fixed.bottom-0[class*="bg-[#090d24]"],
+div.fixed.bottom-0[class*="bg-[#080d24]"],
+div.fixed.bottom-0[class*="bg-[#04081c]"] {
+  z-index: 30 !important;
+}
+
+/* Hide full-width sticky CTA bars on screens smaller than 1024px to prevent overlapping the mobile navigation menu */
+@media (max-w: 1023px) {
+  div.fixed.bottom-0[class*="bg-[#090d24]"],
+  div.fixed.bottom-0[class*="bg-[#080d24]"],
+  div.fixed.bottom-0[class*="bg-[#04081c]"] {
+    display: none !important;
+  }
+}
+
+
