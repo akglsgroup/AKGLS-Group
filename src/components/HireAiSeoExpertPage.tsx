@@ -177,7 +177,7 @@ export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: 
               <span>Future-Ready SGE & LLM Integration Optimization</span>
             </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
               Hire AI SEO Experts to Improve <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-teal-300 to-cyan-400">AI Search Visibility, Rankings & Organic Growth</span>
             </h1>
 

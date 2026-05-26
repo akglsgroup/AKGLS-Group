@@ -233,7 +233,7 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
               <span>Certified Dedicated PPC Expert Allocation</span>
             </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-md lg:text-6xl font-black tracking-tight text-white leading-tight">
+            <h1 className="text-3xl sm:text-5xl lg:text-md lg:text-6xl font-black tracking-tight text-white leading-tight">
               Hire PPC Experts to Generate More <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-300 to-purple-400">Leads, Sales & Real ROAS</span>
             </h1>
 

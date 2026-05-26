@@ -515,7 +515,7 @@ export default function HireLinkBuildingExpertPage({ onBackToHome, openProposalF
               <span>Unbreakable White Hat PageRank Authority Flow</span>
             </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
               Hire Link Building Experts to Improve <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-teal-300 to-indigo-400">SEO Authority, Rankings & Organic Growth</span>
             </h1>
 

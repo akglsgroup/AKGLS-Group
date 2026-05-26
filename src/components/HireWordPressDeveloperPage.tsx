@@ -350,7 +350,7 @@ export default function HireWordPressDeveloperPage({ onBackToHome, openProposalF
               <span>SEO Friendly & Optimized Builders</span>
             </span>
 
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-white leading-tight">
               Hire WordPress Developers to Build <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-indigo-300 to-purple-400">Fast, SEO-Friendly & Conversion-Focused</span> Websites
             </h1>
 
