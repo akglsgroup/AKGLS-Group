@@ -90,10 +90,10 @@ export const solutionsMenu: MegaColumn[] = [
     items: [
       { name: "Startup Growth Solution", href: "/startup-growth-solutions" },
       { name: "Enterprise Marketing Solutions", href: "/enterprise-marketing-solutions" },
-      { name: "Local Business Growth", href: "#capabilities-explorer" },
-      { name: "Ecommerce Growth Solution", href: "#capabilities-explorer" },
-      { name: "B2B Lead Generation", href: "#capabilities-explorer" },
-      { name: "SaaS Marketing Solution", href: "#capabilities-explorer" },
+      { name: "Local Business Growth Services", href: "/local-business-growth-services" },
+      { name: "Ecommerce Growth Solution", href: "/ecommerce-growth-solutions" },
+      { name: "B2B Lead Generation Services", href: "/b2b-lead-generation-services" },
+      { name: "SaaS Marketing Solutions", href: "/saas-marketing-solutions" },
       { name: "Revenue Growth Strategy", href: "#capabilities-explorer" }
     ]
   },
@@ -127,12 +127,12 @@ export const solutionsMenu: MegaColumn[] = [
 
 export const caseStudiesMenu = {
   leftItems: [
-    { name: "SEO Case Studies", href: "#portfolio-gallery" },
-    { name: "Ecommerce SEO Results", href: "#portfolio-gallery" },
-    { name: "Local SEO Results", href: "#portfolio-gallery" },
-    { name: "Lead Generation Results", href: "#portfolio-gallery" },
-    { name: "PPC Success Stories", href: "#portfolio-gallery" },
-    { name: "AI Optimization Results", href: "#portfolio-gallery" }
+    { name: "SEO Case Studies", href: "/seo-case-studies" },
+    { name: "Ecommerce SEO Results", href: "/case-study/ecommerce-seo-results" },
+    { name: "Local SEO Results", href: "/case-study/local-seo-results" },
+    { name: "Lead Generation Results", href: "/seo-case-studies" },
+    { name: "PPC Success Stories", href: "/case-study/ppc-success-stories" },
+    { name: "AI Optimization Results", href: "/case-study/ai-optimization-results" }
   ]
 };
 
@@ -301,6 +301,7 @@ export const searchDatabase: SearchResult[] = [
   { title: "PPC Management Services", category: "PPC", href: "/google-ads-services", description: "Custom PPC management, bid optimization, CRO landing page design, and negative keyword audits." },
   { title: "Shopify Development", category: "Creative & Development", href: "/shopify-development-services", description: "High-speed theme layout development, cart CRO integrations." },
   { title: "Startup Growth Solutions", category: "Creative & Development", href: "/startup-growth-solutions", description: "Scale your startup faster with growth marketing, technical AI SEO, and predictable customer lead acquisitions." },
+  { title: "Local Business Growth Services", category: "Services", href: "/local-business-growth-services", description: "Hyperlocal SEO, Google Business Profile maps ranking, regional citation sync, local lead generation, and walk-in sales funnels." },
   { title: "WordPress Development", category: "Creative & Development", href: "#web-design-services", description: "Bespoke corporate setups, gutenvine blocks, enterprise architecture." },
   { title: "Local Maps Optimization & Google Ads", category: "Services", href: "/google-ads-services", description: "Dominate Google Pack geographical listings, local service ads, and regional maps." },
   // Tools

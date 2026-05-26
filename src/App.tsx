@@ -27,6 +27,15 @@ import WordPressServicesPage from './components/WordPressServicesPage';
 import ShopifyDevelopmentServicesPage from './components/ShopifyDevelopmentServicesPage';
 import StartupGrowthSolutionsPage from './components/StartupGrowthSolutionsPage';
 import EnterpriseMarketingSolutionsPage from './components/EnterpriseMarketingSolutionsPage';
+import LocalBusinessGrowthServicesPage from './components/LocalBusinessGrowthServicesPage';
+import EcommerceGrowthSolutionsPage from './components/EcommerceGrowthSolutionsPage';
+import B2BLeadGenerationServicesPage from './components/B2BLeadGenerationServicesPage';
+import SaaSMarketingSolutionsPage from './components/SaaSMarketingSolutionsPage';
+import SeoCaseStudiesPage from './components/SeoCaseStudiesPage';
+import EcommerceSeoCaseStudyPage from './components/EcommerceSeoCaseStudyPage';
+import LocalSeoCaseStudyPage from './components/LocalSeoCaseStudyPage';
+import PpcSuccessStoriesPage from './components/PpcSuccessStoriesPage';
+import AiOptimizationCaseStudyPage from './components/AiOptimizationCaseStudyPage';
 import DentalClinicMarketingPage from './components/DentalClinicMarketingPage';
 import ManufacturingMarketingPage from './components/ManufacturingMarketingPage';
 import IotCompanyMarketingPage from './components/IotCompanyMarketingPage';
@@ -329,7 +338,7 @@ const getIconComponent = (icon: string) => {
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study'>('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [modalEmail, setModalEmail] = useState('');
@@ -501,6 +510,57 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (pathname === '/enterprise-marketing-solutions' || pathname === '/enterprise-marketing-solutions/' || pathname === '/enterprise-digital-marketing-services' || pathname === '/enterprise-digital-marketing-services/' || pathname === '/enterprise-growth-marketing' || pathname === '/enterprise-growth-marketing/' || pathname === '/corporate-marketing-solutions' || pathname === '/corporate-marketing-solutions/' || hash === '#enterprise-marketing-solutions' || hash === '#enterprise-marketing' || hash === '#enterprise-growth' || hash === '#corporate-marketing') {
         setCurrentPage('enterprise-marketing');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/ecommerce-growth-solutions' || pathname === '/ecommerce-growth-solutions/' || pathname === '/ecommerce-marketing-services' || pathname === '/ecommerce-marketing-services/' || pathname === '/ecommerce-growth-agency' || pathname === '/ecommerce-growth-agency/' || pathname === '/ecommerce-scaling-services' || pathname === '/ecommerce-scaling-services/' || hash === '#ecommerce-growth-solutions' || hash === '#ecommerce-growth' || hash === '#ecommerce-marketing') {
+        setCurrentPage('ecommerce-growth');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/b2b-lead-generation-services' || pathname === '/b2b-lead-generation-services/' || pathname === '/b2b-lead-generation-agency' || pathname === '/b2b-lead-generation-agency/' || pathname === '/business-lead-generation-services' || pathname === '/business-lead-generation-services/' || pathname === '/b2b-sales-lead-generation' || pathname === '/b2b-sales-lead-generation/' || hash === '#b2b-lead-generation-services' || hash === '#b2b-lead-generation' || hash === '#b2b-leads') {
+        setCurrentPage('b2b-lead-gen');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/saas-marketing-solutions' || pathname === '/saas-marketing-solutions/' || pathname === '/saas-marketing-agency' || pathname === '/saas-marketing-agency/' || pathname === '/saas-growth-marketing' || pathname === '/saas-growth-marketing/' || pathname === '/software-marketing-services' || pathname === '/software-marketing-services/' || hash === '#saas-marketing-solutions' || hash === '#saas-marketing' || hash === '#saas-growth') {
+        setCurrentPage('saas-marketing');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/seo-case-studies' || pathname === '/seo-case-studies/' || pathname === '/results' || pathname === '/results/' || pathname === '/seo-success-stories' || pathname === '/seo-success-stories/' || pathname === '/digital-marketing-case-studies' || pathname === '/digital-marketing-case-studies/' || hash === '#seo-case-studies' || hash === '#seo-results' || hash === '#seo-portfolio') {
+        setCurrentPage('seo-case-studies');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/case-study/ecommerce-seo-results' || pathname === '/case-study/ecommerce-seo-results/' ||
+        pathname === '/ecommerce-seo-case-study' || pathname === '/ecommerce-seo-case-study/' ||
+        pathname === '/seo-success-story-ecommerce' || pathname === '/seo-success-story-ecommerce/' ||
+        pathname === '/ecommerce-organic-growth-case-study' || pathname === '/ecommerce-organic-growth-case-study/' ||
+        hash === '#ecommerce-seo-case-study' || hash === '#shopify-seo-case-study'
+      ) {
+        setCurrentPage('ecommerce-seo-case-study');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/case-study/ppc-success-stories' || pathname === '/case-study/ppc-success-stories/' ||
+        pathname === '/google-ads-case-study' || pathname === '/google-ads-case-study/' ||
+        pathname === '/ppc-case-studies' || pathname === '/ppc-case-studies/' ||
+        pathname === '/paid-marketing-success-stories' || pathname === '/paid-marketing-success-stories/' ||
+        hash === '#ppc-success-stories' || hash === '#ppc-case-study'
+      ) {
+        setCurrentPage('ppc-case-study');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/case-study/ai-optimization-results' || pathname === '/case-study/ai-optimization-results/' ||
+        pathname === '/ai-seo-case-study' || pathname === '/ai-seo-case-study/' ||
+        pathname === '/geo-optimization-success-story' || pathname === '/geo-optimization-success-story/' ||
+        pathname === '/chatgpt-optimization-results' || pathname === '/chatgpt-optimization-results/' ||
+        hash === '#ai-optimization-case-study' || hash === '#ai-seo-case-study' || hash === '#geo-optimization-results'
+      ) {
+        setCurrentPage('ai-optimization-case-study');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/case-study/local-seo-results' || pathname === '/case-study/local-seo-results/' ||
+        pathname === '/local-seo-case-study' || pathname === '/local-seo-case-study/' ||
+        pathname === '/google-maps-seo-success-story' || pathname === '/google-maps-seo-success-story/' ||
+        pathname === '/local-business-growth-case-study' || pathname === '/local-business-growth-case-study/' ||
+        hash === '#local-seo-case-study' || hash === '#google-maps-seo-case-study'
+      ) {
+        setCurrentPage('local-seo-case-study');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (pathname === '/local-business-growth-services' || pathname === '/local-business-growth-services/' || pathname === '/local-business-marketing' || pathname === '/local-business-marketing/' || pathname === '/local-growth-marketing-services' || pathname === '/local-growth-marketing-services/' || pathname === '/small-business-growth-solutions' || pathname === '/small-business-growth-solutions/' || pathname === '/local-business-marketing-services' || pathname === '/local-business-marketing-services/' || pathname === '/small-business-growth-agency' || pathname === '/small-business-growth-agency/' || pathname === '/local-business-digital-marketing' || pathname === '/local-business-digital-marketing/' || hash === '#local-business-growth-services' || hash === '#local-business-growth' || hash === '#local-marketing' || hash === '#local-business-marketing') {
+        setCurrentPage('local-business-growth');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         setCurrentPage('home');
@@ -759,6 +819,46 @@ export default function App() {
       title: "Enterprise Marketing Solutions | Enterprise Digital Marketing Agency | AKGLS Group",
       description: "Scale enterprise growth with AI-powered enterprise marketing solutions from AKGLS Group. Enterprise SEO, PPC, AI marketing, lead generation & digital transformation strategies.",
       canonical: "https://akglsgroup.com/enterprise-marketing-solutions/"
+    },
+    'ecommerce-growth': {
+      title: "Ecommerce Growth Solutions | Ecommerce Marketing Agency | AKGLS Group",
+      description: "Scale your ecommerce business with AI-powered ecommerce growth solutions from AKGLS Group. Ecommerce SEO, Google Ads, Shopify growth, CRO & performance marketing services.",
+      canonical: "https://akglsgroup.com/ecommerce-growth-solutions/"
+    },
+    'b2b-lead-gen': {
+      title: "B2B Lead Generation Services | B2B Lead Generation Agency | AKGLS Group",
+      description: "Generate high-quality B2B leads with AI-powered lead generation services from AKGLS Group. LinkedIn outreach, SEO, PPC, ABM & sales funnel optimization solutions.",
+      canonical: "https://akglsgroup.com/b2b-lead-generation-services/"
+    },
+    'saas-marketing': {
+      title: "SaaS Marketing Solutions | SaaS Growth Marketing Agency | AKGLS Group",
+      description: "Scale your SaaS business with AI-powered SaaS marketing solutions from AKGLS Group. SaaS SEO, PPC, product-led growth, lead generation & customer acquisition strategies.",
+      canonical: "https://akglsgroup.com/saas-marketing-solutions/"
+    },
+    'seo-case-studies': {
+      title: "SEO Case Studies | Real traffic and keywords ranking growth metrics | AKGLS Group",
+      description: "Verified SEO Case Studies and results achieved by AKGLS Group. Explore compounding traffic growth, enterprise lead generation, SaaS free trial lifts, and map pack takeovers.",
+      canonical: "https://akglsgroup.com/seo-case-studies/"
+    },
+    'ecommerce-seo-case-study': {
+      title: "Ecommerce SEO Case Study | 450% Organic Traffic Growth | AKGLS Group",
+      description: "Discover how AKGLS Group increased ecommerce organic traffic, keyword rankings, and revenue using technical SEO, AI SEO, CRO, and content optimization strategies.",
+      canonical: "https://akglsgroup.com/case-study/ecommerce-seo-results/"
+    },
+    'local-seo-case-study': {
+      title: "Local SEO Case Study | Google Maps Rankings & Lead Growth | AKGLS Group",
+      description: "Discover how AKGLS Group increased Google Maps visibility, local business rankings, phone calls, and leads using Local SEO and Google Business Profile optimization strategies.",
+      canonical: "https://akglsgroup.com/case-study/local-seo-results/"
+    },
+    'ppc-case-study': {
+      title: "PPC Case Study | Google Ads & Paid Marketing Results | AKGLS Group",
+      description: "Explore how AKGLS Group generated high-quality leads, improved ROAS, and scaled revenue using Google Ads, Meta Ads, LinkedIn Ads, AI-powered PPC, and conversion optimization strategies.",
+      canonical: "https://akglsgroup.com/case-study/ppc-success-stories/"
+    },
+    'ai-optimization-case-study': {
+      title: "AI Optimization Case Study | AI SEO & GEO Results | AKGLS Group",
+      description: "Discover how AKGLS Group improved AI search visibility, ChatGPT mentions, GEO rankings, organic traffic, and lead generation using AI SEO, AEO, and conversational optimization strategies.",
+      canonical: "https://akglsgroup.com/case-study/ai-optimization-results/"
     },
     'dental-clinic-marketing': {
       title: "Dental Clinic Marketing & Local Patient Acquisition Services | AKGLS Group",
@@ -1186,6 +1286,131 @@ export default function App() {
           }}
           openProposalForm={() => {
             const formEl = document.querySelector('#enterprise-growth-audit') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'ecommerce-growth' ? (
+        <EcommerceGrowthSolutionsPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#free-ecommerce-audit-form') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'b2b-lead-gen' ? (
+        <B2BLeadGenerationServicesPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#free-b2b-audit-form') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'saas-marketing' ? (
+        <SaaSMarketingSolutionsPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#free-saas-audit-form') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'seo-case-studies' ? (
+        <SeoCaseStudiesPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#case-audit-form') || document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'ecommerce-seo-case-study' ? (
+        <EcommerceSeoCaseStudyPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              // Scroll to some other location if not available on the single screen
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'local-seo-case-study' ? (
+        <LocalSeoCaseStudyPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'ppc-case-study' ? (
+        <PpcSuccessStoriesPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'ai-optimization-case-study' ? (
+        <AiOptimizationCaseStudyPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            if (formEl) {
+              formEl.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            }
+          }}
+        />
+      ) : currentPage === 'local-business-growth' ? (
+        <LocalBusinessGrowthServicesPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#free-local-audit') || document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
         />

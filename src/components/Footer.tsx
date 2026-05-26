@@ -85,13 +85,16 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
   // Section 3: Digital Marketing Info
   const marketingServicesLinks = [
     { name: "Enterprise Marketing Solutions", href: "/enterprise-marketing-solutions" },
+    { name: "Ecommerce Growth Solutions", href: "/ecommerce-growth-solutions" },
+    { name: "Local Business Growth Services", href: "/local-business-growth-services" },
     { name: "Google Ads Services", href: "/google-ads-services" },
     { name: "Meta Ads Services", href: "/meta-ads-services" },
     { name: "LinkedIn Ads Services", href: "/linkedin-ads-services" },
     { name: "Social Media Marketing", href: "#capabilities-explorer" },
     { name: "Content Marketing", href: "#capabilities-explorer" },
     { name: "ORM Services", href: "#capabilities-explorer" },
-    { name: "Lead Generation", href: "#audit-form" },
+    { name: "B2B Lead Generation Services", href: "/b2b-lead-generation-services" },
+    { name: "SaaS Marketing Solutions", href: "/saas-marketing-solutions" },
     { name: "Email Marketing", href: "#capabilities-explorer" },
     { name: "Conversion Optimization", href: "#audit-form" },
     { name: "Analytics Services", href: "#capabilities-explorer" },
