@@ -4,7 +4,8 @@ import {
   Search, ChevronDown, X, Menu, Phone, Mail, MapPin, 
   TrendingUp, Bot, Sparkles, Code, FileText, CheckCircle2, 
   Calculator, Download, Award, Info, Users, Briefcase, 
-  Layers, MessageSquare, Send, ArrowRight, Star, Zap, PhoneCall
+  Layers, MessageSquare, Send, ArrowRight, Star, Zap, PhoneCall,
+  Facebook, Twitter, Linkedin, Instagram
 } from 'lucide-react';
 import { servicesMenu, solutionsMenu, caseStudiesMenu, resourcesMenu, companyMenu, hireExpertsMenu } from '../data';
 
@@ -120,39 +121,66 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
       {/* ENTERPRISE NOTICE TICKER / TOP BAR */}
       <div id="top-bar" className="bg-brand-navy border-b border-slate-800 text-slate-300 py-2.5 px-4 text-xs font-medium z-50 relative">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
-          {/* Left section contacts */}
+          {/* Left section contacts: Phone & WhatsApp */}
           <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] sm:text-xs">
-            <a href="mailto:info@akglsgroup.com" className="flex items-center gap-1.5 hover:text-brand-indigo transition-colors">
-              <Mail className="w-3.5 h-3.5 text-brand-teal" />
-              <span>info@akglsgroup.com</span>
-            </a>
-            <span className="text-slate-700 hidden sm:inline">|</span>
-            <a href="tel:+918318114492" className="flex items-center gap-1.5 hover:text-brand-indigo transition-colors">
-              <Phone className="w-3.5 h-3.5 text-brand-indigo" />
+            <a href="tel:+918318114492" className="flex items-center gap-1.5 hover:text-brand-indigo transition-colors text-slate-300 font-semibold">
+              <Phone className="w-3.5 h-3.5 text-brand-indigo animate-pulse" />
               <span>+91 831 811 4492</span>
             </a>
-            <span className="text-slate-700 hidden sm:inline">|</span>
-            <span className="flex items-center gap-1.5">
-              <MapPin className="w-3.5 h-3.5 text-brand-orange" />
-              <span>San Francisco • New York • Remote Office</span>
-            </span>
-          </div>
-
-          {/* Right section social & mini action buttons */}
-          <div className="flex items-center gap-4 text-[11px] sm:text-xs font-semibold">
+            <span className="text-slate-800 hidden sm:inline">|</span>
             <a 
               href="https://wa.me/918318114492" 
               target="_blank" 
+              rel="noopener noreferrer"
               referrerPolicy="no-referrer"
-              className="flex items-center gap-1 px-2.5 py-1 bg-emerald-600/35 hover:bg-emerald-600 text-emerald-300 hover:text-white rounded-md transition-all text-[11px]"
+              className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors text-slate-200 font-semibold"
             >
-              <MessageSquare className="w-3 h-3" /> WhatsApp Chat
+              <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+              <span>WhatsApp Chat</span>
             </a>
-            <a href="#audit-quiz" onClick={openQuiz} className="text-brand-orange hover:underline flex items-center gap-1">
-              <Sparkles className="w-3.5 h-3.5" /> Free Action Guide
+          </div>
+
+          {/* Right section social media icons */}
+          <div className="flex items-center gap-5">
+            <a 
+              href="https://www.facebook.com/akglsgroup/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
+              className="text-slate-400 hover:text-[#1877F2] transition-colors p-1"
+              aria-label="Facebook"
+            >
+              <Facebook className="w-4 h-4" />
             </a>
-            <a href="#audit-form" onClick={openProposal} className="hover:text-white text-indigo-300 transition-colors">
-              Client Portal
+            <a 
+              href="https://x.com/akglsgroup" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
+              className="text-slate-400 hover:text-white transition-colors p-1"
+              aria-label="X (formerly Twitter)"
+            >
+              <Twitter className="w-4 h-4" />
+            </a>
+            <a 
+              href="https://www.linkedin.com/company/akglsgroup" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
+              className="text-slate-400 hover:text-[#0A66C2] transition-colors p-1"
+              aria-label="LinkedIn"
+            >
+              <Linkedin className="w-4 h-4" />
+            </a>
+            <a 
+              href="https://www.instagram.com/akglsgroup/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              referrerPolicy="no-referrer"
+              className="text-slate-400 hover:text-[#E1306C] transition-colors p-1"
+              aria-label="Instagram"
+            >
+              <Instagram className="w-4 h-4" />
             </a>
           </div>
         </div>
