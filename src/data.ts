@@ -154,13 +154,13 @@ export const resourcesMenu: MegaColumn[] = [
   {
     title: "Free Tools",
     items: [
-      { name: "SEO Audit Tool", href: "#roi-calculator" },
-      { name: "AI Content Analyzer", href: "#content-analyzer" },
-      { name: "Meta Tag Generator", href: "#capabilities-explorer" },
-      { name: "Schema Generator", href: "#capabilities-explorer" },
-      { name: "Sitemap Generator", href: "#capabilities-explorer" },
-      { name: "Keyword Density Checker", href: "#capabilities-explorer" },
-      { name: "SEO ROI Calculator", href: "#roi-calculator" }
+      { name: "SEO Audit Tool", href: "/tools/seo-audit-tool" },
+      { name: "AI Content Analyzer", href: "/tools" },
+      { name: "Meta Tag Generator", href: "/tools" },
+      { name: "Schema Generator", href: "/tools" },
+      { name: "Sitemap Generator", href: "/tools" },
+      { name: "Keyword Density Checker", href: "/tools" },
+      { name: "SEO ROI Calculator", href: "/tools" }
     ]
   },
   {
@@ -189,6 +189,7 @@ export const resourcesMenu: MegaColumn[] = [
 ];
 
 export const companyMenu = [
+  { name: "Free SEO/AI SEO Tools", href: "/tools" },
   { name: "Indian Client Pricing", href: "/india-pricing" },
   { name: "Proposal PDF Builder", href: "/proposal-builder" },
   { name: "About Us", href: "#team-leadership" },

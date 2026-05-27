@@ -69,6 +69,8 @@ import ChatgptOptimizationPage from './components/ChatgptOptimizationPage';
 import GeminiOptimizationPage from './components/GeminiOptimizationPage';
 import ClaudeOptimizationPage from './components/ClaudeOptimizationPage';
 import VoiceSearchOptimizationPage from './components/VoiceSearchOptimizationPage';
+import FreeToolsPage from './components/FreeToolsPage';
+import SeoAuditToolPage from './components/SeoAuditToolPage';
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
@@ -347,7 +349,7 @@ const getIconComponent = (icon: string) => {
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study' | 'hire-seo-expert' | 'hire-ppc-expert' | 'hire-ai-seo-expert' | 'hire-content-writer' | 'hire-link-building-expert' | 'hire-marketing-manager' | 'hire-wordpress-developer' | 'india-pricing' | 'proposal-generator'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study' | 'hire-seo-expert' | 'hire-ppc-expert' | 'hire-ai-seo-expert' | 'hire-content-writer' | 'hire-link-building-expert' | 'hire-marketing-manager' | 'hire-wordpress-developer' | 'india-pricing' | 'proposal-generator' | 'tools' | 'seo-audit-tool'>('home');
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [modalEmail, setModalEmail] = useState('');
@@ -639,6 +641,22 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (pathname === '/local-business-growth-services' || pathname === '/local-business-growth-services/' || pathname === '/local-business-marketing' || pathname === '/local-business-marketing/' || pathname === '/local-growth-marketing-services' || pathname === '/local-growth-marketing-services/' || pathname === '/small-business-growth-solutions' || pathname === '/small-business-growth-solutions/' || pathname === '/local-business-marketing-services' || pathname === '/local-business-marketing-services/' || pathname === '/small-business-growth-agency' || pathname === '/small-business-growth-agency/' || pathname === '/local-business-digital-marketing' || pathname === '/local-business-digital-marketing/' || hash === '#local-business-growth-services' || hash === '#local-business-growth' || hash === '#local-marketing' || hash === '#local-business-marketing') {
         setCurrentPage('local-business-growth');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/tools/seo-audit-tool' || pathname === '/tools/seo-audit-tool/' ||
+        hash === '#tools/seo-audit-tool' || hash === '#seo-audit-tool'
+      ) {
+        setCurrentPage('seo-audit-tool');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/tools' || pathname === '/tools/' ||
+        pathname === '/free-tools' || pathname === '/free-tools/' ||
+        pathname === '/marketing-tools' || pathname === '/marketing-tools/' ||
+        pathname === '/seo-tools' || pathname === '/seo-tools/' ||
+        pathname === '/ai-seo-tools' || pathname === '/ai-seo-tools/' ||
+        hash === '#tools' || hash === '#free-tools'
+      ) {
+        setCurrentPage('tools');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         setCurrentPage('home');
@@ -1017,6 +1035,16 @@ export default function App() {
       title: "Hire Link Building Specialist | Dedicated Outreach Specialists | AKGLS Group",
       description: "Hire expert link builders and outreach strategists from AKGLS Group to secure highly authoritative white-hat backlinks and boost domain ratings.",
       canonical: "https://akglsgroup.com/hire-link-building-expert/"
+    },
+    'tools': {
+      title: "Free SEO, AI SEO & Digital Marketing Tools for Growth | AKGLS Group",
+      description: "Explore 15+ free marketing tools, audit crawlers, and financial simulators. Optimize local metadata tags, schema structures, keyword stuffing risk levels, and calculate growth potentials instantly.",
+      canonical: "https://akglsgroup.com/tools/"
+    },
+    'seo-audit-tool': {
+      title: "Free Technical SEO Audit & Website Crawler Tool | AKGLS Group",
+      description: "Deconstruct your website header structures. Check canonical declarations, site-index maps, SSL compliance levels, and generate premium PDF logs.",
+      canonical: "https://akglsgroup.com/tools/seo-audit-tool/"
     }
   };
 
@@ -1650,6 +1678,39 @@ export default function App() {
             window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
+          }}
+        />
+      ) : currentPage === 'tools' ? (
+        <FreeToolsPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          onNavigateToSeoAudit={() => {
+            window.history.pushState(null, '', '/tools/seo-audit-tool');
+            window.location.hash = '#tools/seo-audit-tool';
+            setCurrentPage('seo-audit-tool');
+          }}
+        />
+      ) : currentPage === 'seo-audit-tool' ? (
+        <SeoAuditToolPage
+          onBackToTools={() => {
+            window.history.pushState(null, '', '/tools');
+            window.location.hash = '#tools';
+            setCurrentPage('tools');
+          }}
+          onNavigateToTool={(toolId) => {
+            // If selecting seo-audit-tool directly
+            if (toolId === "seo-audit" || toolId === "seo-audit-tool") {
+              window.history.pushState(null, '', '/tools/seo-audit-tool');
+              window.location.hash = '#tools/seo-audit-tool';
+              setCurrentPage('seo-audit-tool');
+            } else {
+              window.history.pushState(null, '', '/tools');
+              window.location.hash = `#tools?tool=${toolId}`;
+              setCurrentPage('tools');
+            }
           }}
         />
       ) : currentPage === 'local-business-growth' ? (
