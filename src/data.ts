@@ -141,14 +141,13 @@ export const resourcesMenu: MegaColumn[] = [
   {
     title: "Blog Categories",
     items: [
-      { name: "SEO Blogs", href: "#capabilities-explorer" },
-      { name: "AI SEO Blogs", href: "#ai-deepdive" },
-      { name: "GEO Blogs", href: "#ai-deepdive" },
-      { name: "AEO Blogs", href: "#ai-deepdive" },
-      { name: "Google Updates", href: "#capabilities-explorer" },
-      { name: "PPC Blogs", href: "#capabilities-explorer" },
-      { name: "Social Media Blogs", href: "#capabilities-explorer" },
-      { name: "Ecommerce Blogs", href: "#capabilities-explorer" }
+      { name: "All Insights Blog", href: "/blog" },
+      { name: "SEO Blogs", href: "/blog?category=SEO Blogs" },
+      { name: "AI SEO Blogs", href: "/blog?category=AI SEO Blogs" },
+      { name: "GEO Blogs", href: "/blog?category=GEO Blogs" },
+      { name: "AEO Blogs", href: "/blog?category=AEO Blogs" },
+      { name: "Google Updates", href: "/blog?category=Google Updates" },
+      { name: "SaaS Marketing Blogs", href: "/blog?category=SaaS Marketing" }
     ]
   },
   {
@@ -189,6 +188,7 @@ export const resourcesMenu: MegaColumn[] = [
 ];
 
 export const companyMenu = [
+  { name: "SEO / AI Search Blog", href: "/blog" },
   { name: "Free SEO/AI SEO Tools", href: "/tools" },
   { name: "Indian Client Pricing", href: "/india-pricing" },
   { name: "Proposal PDF Builder", href: "/proposal-builder" },

@@ -71,6 +71,7 @@ import ClaudeOptimizationPage from './components/ClaudeOptimizationPage';
 import VoiceSearchOptimizationPage from './components/VoiceSearchOptimizationPage';
 import FreeToolsPage from './components/FreeToolsPage';
 import SeoAuditToolPage from './components/SeoAuditToolPage';
+import SeoBlogListPage from './components/SeoBlogListPage';
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
@@ -349,7 +350,8 @@ const getIconComponent = (icon: string) => {
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study' | 'hire-seo-expert' | 'hire-ppc-expert' | 'hire-ai-seo-expert' | 'hire-content-writer' | 'hire-link-building-expert' | 'hire-marketing-manager' | 'hire-wordpress-developer' | 'india-pricing' | 'proposal-generator' | 'tools' | 'seo-audit-tool'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study' | 'hire-seo-expert' | 'hire-ppc-expert' | 'hire-ai-seo-expert' | 'hire-content-writer' | 'hire-link-building-expert' | 'hire-marketing-manager' | 'hire-wordpress-developer' | 'india-pricing' | 'proposal-generator' | 'tools' | 'seo-audit-tool' | 'blog'>('home');
+  const [blogInitialCategory, setBlogInitialCategory] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [modalEmail, setModalEmail] = useState('');
@@ -657,6 +659,20 @@ export default function App() {
         hash === '#tools' || hash === '#free-tools'
       ) {
         setCurrentPage('tools');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/blog' || pathname === '/blog/' ||
+        pathname.startsWith('/blog/') ||
+        hash === '#blog' || hash.startsWith('#blog')
+      ) {
+        const params = new URLSearchParams(window.location.search);
+        const catParam = params.get('category');
+        if (catParam) {
+          setBlogInitialCategory(catParam);
+        } else {
+          setBlogInitialCategory(null);
+        }
+        setCurrentPage('blog');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         setCurrentPage('home');
@@ -1045,6 +1061,11 @@ export default function App() {
       title: "Free Technical SEO Audit & Website Crawler Tool | AKGLS Group",
       description: "Deconstruct your website header structures. Check canonical declarations, site-index maps, SSL compliance levels, and generate premium PDF logs.",
       canonical: "https://akglsgroup.com/tools/seo-audit-tool/"
+    },
+    'blog': {
+      title: "Latest SEO, GEO, AEO & AI Search Engine Trends Blog | AKGLS Group",
+      description: "Read advanced SEO blueprints, Generative Engine Optimization guides, Core Web Vitals overhauls, and white-hat outreach strategies from AKGLS Group.",
+      canonical: "https://akglsgroup.com/blog/"
     }
   };
 
@@ -1703,6 +1724,31 @@ export default function App() {
           onNavigateToTool={(toolId) => {
             // If selecting seo-audit-tool directly
             if (toolId === "seo-audit" || toolId === "seo-audit-tool") {
+              window.history.pushState(null, '', '/tools/seo-audit-tool');
+              window.location.hash = '#tools/seo-audit-tool';
+              setCurrentPage('seo-audit-tool');
+            } else {
+              window.history.pushState(null, '', '/tools');
+              window.location.hash = `#tools?tool=${toolId}`;
+              setCurrentPage('tools');
+            }
+          }}
+        />
+      ) : currentPage === 'blog' ? (
+        <SeoBlogListPage
+          initialCategory={blogInitialCategory}
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          onNavigateToService={(serviceId) => {
+            window.history.pushState(null, '', `/${serviceId}`);
+            window.location.hash = `#${serviceId}`;
+            setCurrentPage(serviceId as any);
+          }}
+          onNavigateToTool={(toolId) => {
+            if (toolId === "seo-audit-tool") {
               window.history.pushState(null, '', '/tools/seo-audit-tool');
               window.location.hash = '#tools/seo-audit-tool';
               setCurrentPage('seo-audit-tool');
