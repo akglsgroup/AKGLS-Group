@@ -128,13 +128,13 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
 
   // Section 6: Resources & Tools Info
   const resourcesLinks = [
-    { name: "Blog & Insights", href: "#capabilities-explorer" },
-    { name: "Case Studies", href: "#portfolio-gallery" },
-    { name: "Free SEO Tools", href: "#capabilities-explorer" },
+    { name: "Blog & Insights", href: "/blog" },
+    { name: "Case Studies", href: "/seo-case-studies" },
+    { name: "Free SEO Tools", href: "/tools" },
     { name: "Free Performance Audit", href: "#audit-form" },
-    { name: "SEO Setup Checklist", href: "#capabilities-explorer" },
-    { name: "AI SEO Guide (2026)", href: "#capabilities-explorer" },
-    { name: "Expert Webinars", href: "#capabilities-explorer" },
+    { name: "SEO Setup Checklist", href: "/learning-hub/seo-checklist-pdf" },
+    { name: "AI SEO Guide (2026)", href: "/learning-hub/ai-seo-guide" },
+    { name: "Expert Webinars", href: "/learning-hub?category=Webinars" },
     { name: "Frequently FAQs", href: "#faq" },
   ];
 

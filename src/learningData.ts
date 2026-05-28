@@ -280,5 +280,110 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     downloadUrl: "https://akglsgroup.com/downloads/sge-ai-prepublish-checklist.pdf",
     fileSize: "1.8 MB",
     content: "## The SGE Indexed Crawler & AI Citation Pre-Publish Checklist\nNever publish a page hoping for AI citations without running a formal technical check. This checklist ensures your pages are perfectly optimized for both traditional search robots and LLM-driven generative crawlers.\n\n---\n\n## 📋 The 25-Point Algorithmic Checklist\n\n### Phase 1: Semantic Parsability\n- [ ] **Direct Answer Modules:** Ensure the page contains a direct, bolded response of 20-30 words near the top of the body copy to simplify RAG chunking.\n- [ ] **Structural Headers (H2/H3):** Map headings strictly to nested logical parameters to help conversational engines quickly determine topic relevance.\n- [ ] **Entity Term Co-Occurrences:** Verify that your content includes relevant secondary entities and industry nouns associated with your primary subject.\n\n### Phase 2: Schema & Metadata Security\n- [ ] **Clean JSON-LD Schema:** Embed precise markup defining the Organization, Product, FAQ, or Topic of the page.\n- [ ] **Canonical URL Congruence:** Ensure canonical tags point precisely to the correct HTTPS URL to prevent indexing fragmentation.\n- [ ] **Indexation Flags Verification:** Confirm your robot tags are configured as `index, follow` and that the page is accessible to LLM crawler agents defined in your `robots.txt` file."
+  },
+  {
+    id: "checklist-seo-pdf",
+    slug: "seo-checklist-pdf",
+    title: "Ultimate Organic SEO Audit & Launch Checklist",
+    type: "Checklist",
+    category: "Checklists",
+    shortDesc: "Complete industry-standard 50-point technical checklist tracking server headers mapping, Trailing Slash consistency, and JSON-LD Entity markup.",
+    durationOrPages: "50 Checkpoints (8 Pages)",
+    difficulty: "Universal",
+    rating: 4.9,
+    studentsCount: 1850,
+    tags: ["Technical Checklist", "SEO Audit", "Launch Protocol"],
+    author: {
+      name: "Amrish Singh",
+      role: "SEO Architect & Founder",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+    },
+    downloadUrl: "https://akglsgroup.com/downloads/ultimate-seo-launch-checklist.pdf",
+    fileSize: "2.4 MB",
+    content: "## Ultimate Organic SEO Audit & Launch Checklist\n\nThis is our comprehensive 50-point SEO checklist designed for high-end SaaS, e-commerce, and enterprise portals prior to search submission or site migrations.\n\n### 🌐 Phase 1: Search Console & Crawling Diagnostics\n*   **DMARC/SPF Records Validation:** Verify your domain's custom SPF/DMARC signatures are updated so crawlers recognize structural outbound notifications.\n*   **Redirect Standardization:** Enforce absolute lower-case URL parameters. Ensure the trailing slash behaviors are entirely uniform (`/seo` vs `/seo/`) to prevent duplicate directory crawlings.\n*   **Sitemap Index Integrity:** Host split XML indexes if matching over 10,000 distinct resource references. Declare specific sitemap limits inside your custom `robots.txt` payload.\n\n### 🛠️ Phase 2: Structural On-Page Semantics\n*   **Keyword Proximity Optimization:** Keep target industry nouns within the first 100 written characters of your core visual text content.\n*   **Structured Metadata Declaration:** Ensure every unique index page declares custom JSON-LD schemas mapping exact Organization definitions and article models.\n*   **Header Distribution:** Maintain nested H1-H6 levels precisely. Never allow CSS text-sizing requirements to dictate header assignments."
+  },
+  {
+    id: "template-website-audit",
+    slug: "website-audit-template",
+    title: "Enterprise Website Performance & SEO Audit Template",
+    type: "Template",
+    category: "Templates",
+    shortDesc: "Ready-to-use structural audit sheet tracking performance, crawl logs, link juice flow, core-web-vitals, and direct competitor matrices.",
+    durationOrPages: "Excel Sheet & Notion Hub",
+    difficulty: "Advanced",
+    rating: 5.0,
+    studentsCount: 2400,
+    tags: ["Excel Template", "SEO Audit", "Performance Index"],
+    author: {
+      name: "Amrish Singh",
+      role: "SEO Architect & Founder",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+    },
+    downloadUrl: "https://akglsgroup.com/downloads/enterprise-seo-audit-matrix-v4.xlsx",
+    fileSize: "5.1 MB",
+    content: "## Enterprise Website Performance & SEO Audit Template\n\nGet our battle-tested Excel & Notion framework for auditing corporate digital architecture. Simplify complex reporting and tracking across all technical departments.\n\n### 📊 Included Auditing Sheets & Calculators\n1.  **Crawl Log Analyzer:** Map bots crawling frequency, HTTP response ratios (200, 301, 404, 503), and bandwidth usage patterns.\n2.  **Core Web Vitals Tracker:** Benchmark Interaction to Next Paint (INP), Largest Contentful Paint (LCP), and Cumulative Layout Shift (CLS) against industry standards.\n3.  **Link Juice Routing Model:** Track internally pointing links to optimize authority flow and resolve orphan directory issues.\n4.  **Competitor Visibility Index:** Score competitor site metadata, domain authority indexes, and SGE citation percentage changes dynamically.\n\n### ⚙️ How To Deploy The Performance Matrix\n*   Use the download link to unlock your `.xlsx` spreadsheet and Notion integration instructions.\n*   Open sheet 1 (\"Setup Variables\") to customize indexing configurations and client boundaries.\n*   Integrate API trackers directly with Google Search Console or third-party crawlers to import your data automatically."
+  },
+  {
+    id: "guide-ai-seo",
+    slug: "ai-seo-guide",
+    title: "Artificial Intelligence SEO Strategy & Generative Playbook",
+    type: "Tutorial",
+    category: "Digital Marketing Tutorials",
+    shortDesc: "The complete roadmap to optimizing websites for generative search. Align with retrieval algorithms, search-generative-experience, and AI citations.",
+    durationOrPages: "12 Chapter Handbook (PDF)",
+    difficulty: "Advanced",
+    rating: 4.9,
+    studentsCount: 3600,
+    tags: ["AI SEO", "Generative Search", "GEO Strategy", "RAG Pipelines"],
+    author: {
+      name: "Amrish Singh",
+      role: "SEO Architect & Founder",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+    },
+    downloadUrl: "https://akglsgroup.com/downloads/ai-seo-generative-playbook-2026.pdf",
+    fileSize: "6.8 MB",
+    content: "## Artificial Intelligence SEO Strategy & Generative Playbook\n\nTraditional search algorithms page matching is being replaced by real-time text synthesizers. This playbook details structural workflows to secure top citations across modern AI search tools.\n\n### Chapter 1: The AI Search Retrieval Shift\nTraditional index queries are giving way to conversational retrieval networks. These platforms do not simply list web links; they synthesize answers using dynamic retrieval patterns.\n\n*   **Understanding Embeddings:** Pages are vectorized into high-dimensional geometric coordinates. Content matching is based on semantic relevance, not exact keywords.\n*   **The RAG Bottleneck:** To cite your content, LLM routers must ingest, split, and score your paragraphs as precise context passages.\n\n### Chapter 2: The Core Optimization Tenets\nTo maximize citation rates, your technical team must implement several essential workflows:\n\n1.  **The Summary Abstract Pattern:** Always place a clear, bolded summary of 20 to 30 words at the top of your resource pages. This provides a clean chunk for retrieval systems.\n2.  **Entity-Graph Grounding:** Align your company's name and primary service descriptions with high-trust industry nouns on authoritative third-party domains.\n3.  **Clean Microdata Architectures:** Standardize webpage schemas to help search engines easily parse pricing, authorship, and product specifications."
+  },
+  {
+    id: "template-keyword-research",
+    slug: "keyword-research-template",
+    title: "Dynamic Semantic Keyword Clustering & Mapping Template",
+    type: "Template",
+    category: "Templates",
+    shortDesc: "Excel / Notion builder with automated keyword grouping calculators, search-intent classifier matrices, and crawl prioritize scores.",
+    durationOrPages: "Structured XLS Spreadsheet",
+    difficulty: "Intermediate",
+    rating: 4.8,
+    studentsCount: 1950,
+    tags: ["Keyword Clustering", "Search Intent", "SEO Spreadsheet"],
+    author: {
+      name: "Amrish Singh",
+      role: "SEO Architect & Founder",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+    },
+    downloadUrl: "https://akglsgroup.com/downloads/semantic-keyword-clustering-v2.xlsx",
+    fileSize: "3.5 MB",
+    content: "## Dynamic Keyword Clustering & Mapping Template\n\nBypass inefficient flat list keyword strategies and organize your search campaign around semantic topic clusters designed to build visual domain authority.\n\n### 📐 Structuring Content Clusters for Topic Authority\nModern search engines do not rank individual pages for isolated search phrases. Instead, they reward websites that demonstrate comprehensive coverage of entire topics.\n\n*   **The Pillar-Clustering Model:** Establish a single comprehensive guide (the \"Pillar\") and surround it with supporting secondary articles (\"Clusters\") linking directly back to the pillar.\n*   **Categorizing Intent:** Group keywords into Specific (Infographic/Educational), Investigational (Comparison lists), or Transactional (Checkout pages) tabs.\n\n### 🔧 Included Spreadsheet Tools\n1.  **Semantic Clustering Engine:** Categorize thousands of search terms into coherent topic groups automatically using simple similarity values.\n2.  **Crawl Priority Modeler:** Calculate content roadmap schedules using keyword difficulty, volume, and relevance.\n3.  **Internal Anchor Layout Builder:** Streamline internal link planning across your content clusters."
+  },
+  {
+    id: "template-content-calendar",
+    slug: "content-calendar-template",
+    title: "The Algorithmic Content & Editorial Calendar Template",
+    type: "Template",
+    category: "Templates",
+    shortDesc: "Notion / Google Sheets setup designed for software development and performance teams to coordinate workflows and technical audits.",
+    durationOrPages: "Notion Workspace Hub",
+    difficulty: "Universal",
+    rating: 4.9,
+    studentsCount: 1580,
+    tags: ["Notion Calendar", "Editorial Workflow", "Content Scaling"],
+    author: {
+      name: "Amrish Singh",
+      role: "SEO Architect & Founder",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+    },
+    downloadUrl: "https://akglsgroup.com/downloads/algorithmic-editorial-content-calendar.zip",
+    fileSize: "2.9 MB",
+    content: "## The Algorithmic Content & Editorial Calendar Template\n\nEstablish an efficient editorial pipeline that keeps your creative and technical teams perfectly aligned throughout your search campaign.\n\n### ⏱️ Essential Steps for Your Publishing Workflow\n*   **Syllabus Audits:** Ensure every upcoming brief meets search intent guidelines and passes secondary entity density checks before drafting begins.\n*   **Code Review / Technical QA:** Verify page speed performance, schema markup, and responsive visual formatting inside sandboxed staging environments.\n*   **Indexation Verification Tracker:** Document indexation timing in GSC and monitor organic SGE reference placements on a recurring basis.\n\n### 📦 Notion Hub Key Capabilities\n1.  **Multiple Visual Layouts:** Track production timelines using Kanban lists, Gantt charts, or standard calendar layouts.\n2.  **Pre-built Content Brief Blueprints:** Standardize brief writing with pre-built templates for landing pages, technical articles, and comparisons.\n3.  **Team Assignment Systems:** Coordinate writers, technical editors, and developers across all steps of the publishing pipeline."
   }
 ];

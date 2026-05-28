@@ -178,11 +178,11 @@ export const resourcesMenu: MegaColumn[] = [
   {
     title: "Downloads",
     items: [
-      { name: "SEO Checklist PDF", href: "#audit-form" },
-      { name: "Website Audit Template", href: "#audit-form" },
-      { name: "AI SEO Guide", href: "#audit-form" },
-      { name: "Keyword Research Template", href: "#audit-form" },
-      { name: "Content Calendar Template", href: "#audit-form" }
+      { name: "SEO Checklist PDF", href: "/learning-hub/seo-checklist-pdf" },
+      { name: "Website Audit Template", href: "/learning-hub/website-audit-template" },
+      { name: "AI SEO Guide", href: "/learning-hub/ai-seo-guide" },
+      { name: "Keyword Research Template", href: "/learning-hub/keyword-research-template" },
+      { name: "Content Calendar Template", href: "/learning-hub/content-calendar-template" }
     ]
   }
 ];
