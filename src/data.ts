@@ -165,14 +165,14 @@ export const resourcesMenu: MegaColumn[] = [
   {
     title: "Learning Hub",
     items: [
-      { name: "SEO Course", href: "#capabilities-explorer" },
-      { name: "GEO Course", href: "#ai-deepdive" },
-      { name: "AEO Course", href: "#ai-deepdive" },
-      { name: "AI Marketing Course", href: "#ai-deepdive" },
-      { name: "Digital Marketing Tutorials", href: "#capabilities-explorer" },
-      { name: "Webinars", href: "#capabilities-explorer" },
-      { name: "Templates", href: "#capabilities-explorer" },
-      { name: "Checklists", href: "#capabilities-explorer" }
+      { name: "SEO Course", href: "/learning-hub?category=SEO Course" },
+      { name: "GEO Course", href: "/learning-hub?category=GEO Course" },
+      { name: "AEO Course", href: "/learning-hub?category=AEO Course" },
+      { name: "AI Marketing Course", href: "/learning-hub?category=AI Marketing Course" },
+      { name: "Digital Marketing Tutorials", href: "/learning-hub?category=Digital Marketing Tutorials" },
+      { name: "Webinars", href: "/learning-hub?category=Webinars" },
+      { name: "Templates", href: "/learning-hub?category=Templates" },
+      { name: "Checklists", href: "/learning-hub?category=Checklists" }
     ]
   },
   {
