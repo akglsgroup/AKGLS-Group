@@ -1825,7 +1825,7 @@ export default function FinanceMarketingPage({ onBackToHome, openProposalForm }:
                       <div className="bg-[#05111a] border border-emerald-555/20 p-4 rounded-xl text-left space-y-2">
                         <span className="text-[8.5px] uppercase font-black text-emerald-400 block tracking-widest">Growth Expert Dispatch:</span>
                         <p className="text-[10px] text-slate-205 leading-relaxed font-light">
-                          Our specialist (Amrish Singh, Managing Partner) will email you the full index report. To speed up setup, book an immediate strategy sync with him over WhatsApp:
+                           Our specialist (Shashi Prabha Singh, Managing Partner) will email you the full index report. To speed up setup, book an immediate strategy sync with her over WhatsApp:
                         </p>
                         <div className="flex gap-2.5 pt-1">
                           <a 

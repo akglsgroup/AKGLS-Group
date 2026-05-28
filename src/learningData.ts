@@ -47,7 +47,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 1420,
     tags: ["SEO", "Technical SEO", "Google Indexation", "Core Web Vitals"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "SEO Architect & Founder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -102,7 +102,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 980,
     tags: ["GEO", "LLM Search", "Retrieval-Augmented Generation", "AI Citations"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "AI Integration Lead",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -143,7 +143,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 750,
     tags: ["AEO", "Voice Search", "Answer Box", "JSON-LD Structuring"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "SEO Architect & Founder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -178,7 +178,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 1110,
     tags: ["AI Marketing", "Automation", "Workflow Engineering", "Smart Campaigning"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "AI Integration Lead",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -213,7 +213,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 620,
     tags: ["Google Tag Manager", "Server-Side Tracking", "Analytics", "Privacy Compliance"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "SEO Architect & Founder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -232,12 +232,12 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 2010,
     tags: ["Live SGE Audit", "GEO Analysis", "SaaS Growth", "Expert Roundtable"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "AI Integration Lead",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
     videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4",
-    content: "## Live SGE & GEO Website Audit Breakdown\nIn this highly rated practical webinar panel, Amrish and the elite growth engineering team audit live websites to diagnose SGE citation blockages. We highlight exactly where AI crawlers failed to parse pricing and explain why structured schemas were ignored.\n\n### 📺 Watch the Webinar & Access Resources\nUse the interactive player below to view the masterclass stream. Key takeaways and tools demonstrated are provided in the adjacent tabs."
+    content: "## Live SGE & GEO Website Audit Breakdown\nIn this highly rated practical webinar panel, Shashi Prabha and the elite growth engineering team audit live websites to diagnose SGE citation blockages. We highlight exactly where AI crawlers failed to parse pricing and explain why structured schemas were ignored.\n\n### 📺 Watch the Webinar & Access Resources\nUse the interactive player below to view the masterclass stream. Key takeaways and tools demonstrated are provided in the adjacent tabs."
   },
   {
     id: "template-notion-onpage",
@@ -252,7 +252,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 3100,
     tags: ["Notion Hub", "Productivity", "SEO Brief Builder", "NLP Optimization"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "SEO Architect & Founder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -273,7 +273,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 2200,
     tags: ["AI Index Tracker", "Schema Verification", "QA Checklists", "Frictionless Crawling"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "SEO Architect & Founder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -294,7 +294,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 1850,
     tags: ["Technical Checklist", "SEO Audit", "Launch Protocol"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "SEO Architect & Founder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -315,7 +315,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 2400,
     tags: ["Excel Template", "SEO Audit", "Performance Index"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "SEO Architect & Founder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -336,7 +336,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 3600,
     tags: ["AI SEO", "Generative Search", "GEO Strategy", "RAG Pipelines"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "SEO Architect & Founder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -357,7 +357,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 1950,
     tags: ["Keyword Clustering", "Search Intent", "SEO Spreadsheet"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "SEO Architect & Founder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -378,7 +378,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 1580,
     tags: ["Notion Calendar", "Editorial Workflow", "Content Scaling"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "SEO Architect & Founder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -399,7 +399,7 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     studentsCount: 2100,
     tags: ["Indexation Diagnostics", "Technical Audit", "Crawl Budget", "Googlebot Rules"],
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "SEO Architect & Founder",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },

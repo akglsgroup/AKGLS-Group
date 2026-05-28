@@ -130,7 +130,7 @@ export default function InternshipProgramPage({
 
   const benefits = [
     { title: "Live Client Projects", desc: "No boring theories. Work on actual corporate brand campaigns and witness real rankings lift." },
-    { title: "Expert Mentorship", desc: "Gain clinical insights directly from Amrish Singh and our senior technical engineering leads." },
+    { title: "Expert Mentorship", desc: "Gain clinical insights directly from Shashi Prabha Singh and our senior technical engineering leads." },
     { title: "AI-Powered Skills", desc: "Acquire high-demand GEO, LLM citation optimization, and prompt-engineering capabilities." },
     { title: "Flexible Work Modes", desc: "Select between remote online projects, active workspace offices, or custom hybrid modules." },
     { title: "Accredited Certificate", desc: "Secure a certified credential of completion along with a comprehensive performance review." },
@@ -252,7 +252,7 @@ export default function InternshipProgramPage({
     {
       name: "Aditya Kumar",
       role: "Digital Marketing Graduate (Now Freelance Consultant)",
-      text: "The hybrid model worked perfectly with my final semester schedule. I loved the tool kits access. Running real Semrush crawls, inspecting conversion budgets, and getting direct mentorship feedback from Amrish made this the best career choice I have ever made.",
+      text: "The hybrid model worked perfectly with my final semester schedule. I loved the tool kits access. Running real Semrush crawls, inspecting conversion budgets, and getting direct mentorship feedback from Shashi Prabha made this the best career choice I have ever made.",
       stat: "Built 12+ Active Site Case Studies"
     }
   ];
@@ -510,7 +510,7 @@ export default function InternshipProgramPage({
                   <Users className="w-7 h-7 text-brand-indigo" />
                   <div className="text-xs">
                     <p className="font-bold text-white leading-tight">Weekly Mentor Roundtable</p>
-                    <p className="text-slate-500 tracking-wide mt-0.5 text-[10px]">Direct code audit with founder Amrish Singh</p>
+                    <p className="text-slate-500 tracking-wide mt-0.5 text-[10px]">Direct code audit with founder Shashi Prabha Singh</p>
                   </div>
                 </div>
               </div>
@@ -1000,7 +1000,7 @@ export default function InternshipProgramPage({
                 <div className="border-t border-slate-900 pt-3 flex justify-between items-center">
                   <div className="text-[10px] text-slate-500">
                     <span className="block">Instructor Signature</span>
-                    <span className="block font-bold text-white mt-0.5">Amrish Singh, CEO</span>
+                    <span className="block font-bold text-white mt-0.5">Shashi Prabha Singh, CEO</span>
                   </div>
                   <span className="text-[10px] bg-brand-emerald/10 text-brand-emerald px-2 py-0.5 rounded border border-brand-emerald/20">VERIFIED</span>
                 </div>
@@ -1306,7 +1306,7 @@ export default function InternshipProgramPage({
               Connect directly with our counselor line to secure prompt responses concerning program tracks.
             </p>
             <a 
-              href="mailto:amrish.singh01@gmail.com?subject=AKGLS Internship Inquiry"
+              href="mailto:akglsgroup@gmail.com?subject=AKGLS Internship Inquiry"
               className="w-full bg-slate-900 hover:bg-slate-850 text-slate-300 py-3.5 rounded-xl font-bold text-xs uppercase tracking-wider transition border border-slate-800 flex items-center justify-center gap-1.5"
             >
               <Mail className="w-4 h-4 text-brand-indigo" />
@@ -1635,7 +1635,7 @@ export default function InternshipProgramPage({
             </a>
             
             <a 
-              href="mailto:amrish.singh01@gmail.com?subject=AKGLS Career Guidance Request"
+              href="mailto:akglsgroup@gmail.com?subject=AKGLS Career Guidance Request"
               className="bg-slate-950 hover:bg-slate-900 text-slate-350 border border-slate-850 hover:border-slate-750 px-6 py-4 rounded-xl font-bold text-xs uppercase tracking-wider transition"
             >
               Talk to Career Counselor

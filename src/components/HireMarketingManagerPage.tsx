@@ -1340,7 +1340,7 @@ export default function HireMarketingManagerPage({ onBackToHome, openProposalFor
                         required
                         value={auditName} 
                         onChange={(e) => setAuditName(e.target.value)}
-                        placeholder="Amrish Singh"
+                        placeholder="Shashi Prabha Singh"
                         className="w-full bg-[#02040b] border border-slate-850 rounded p-2 text-xs text-white placeholder-slate-700" 
                       />
                     </div>
@@ -1393,7 +1393,7 @@ export default function HireMarketingManagerPage({ onBackToHome, openProposalFor
                       required
                       value={auditEmail} 
                       onChange={(e) => setAuditEmail(e.target.value)}
-                      placeholder="amrish.singh@corporate.com"
+                      placeholder="shashisingh@corporate.com"
                       className="w-full bg-[#02040b] border border-slate-850 rounded p-2 text-xs text-white placeholder-slate-700" 
                     />
                   </div>

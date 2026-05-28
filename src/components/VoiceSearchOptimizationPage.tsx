@@ -1203,7 +1203,7 @@ export default function VoiceSearchOptimizationPage({ onBackToHome, openProposal
                         required
                         value={auditForm.name}
                         onChange={(e) => setAuditForm({...auditForm, name: e.target.value})}
-                        placeholder="Amrish Singh"
+                        placeholder="Shashi Prabha Singh"
                         className="w-full bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs focus:ring-1 focus:ring-brand-teal focus:outline-none"
                       />
                     </div>
@@ -1240,7 +1240,7 @@ export default function VoiceSearchOptimizationPage({ onBackToHome, openProposal
                         required
                         value={auditForm.email}
                         onChange={(e) => setAuditForm({...auditForm, email: e.target.value})}
-                        placeholder="amrish@mysite.com"
+                        placeholder="shashisingh@mysite.com"
                         className="w-full bg-slate-900 border border-slate-800 rounded-xl p-3 text-xs focus:ring-1 focus:ring-brand-teal focus:outline-none"
                       />
                     </div>

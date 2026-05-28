@@ -694,7 +694,7 @@ export default function SeoAuditToolPage({ onBackToTools, onNavigateToTool }: Se
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <button
               onClick={() => {
-                const mailOption = "mailto:amrish.singh01@gmail.com?subject=SEO Tech Audit Assistance Proposal";
+                const mailOption = "mailto:info@akglsgroup.com?subject=SEO Tech Audit Assistance Proposal";
                 window.location.href = mailOption;
               }}
               className="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs uppercase tracking-wider px-6 py-3.5 rounded-xl transition shadow-lg shadow-emerald-950/30 font-bold"

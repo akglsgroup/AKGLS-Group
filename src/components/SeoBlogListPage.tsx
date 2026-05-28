@@ -871,7 +871,7 @@ export default function SeoBlogListPage({
                   Need Help Implementing These Upgrades?
                 </h3>
                 <p className="text-xs text-slate-400 leading-relaxed font-light">
-                  Contact Amrish and our senior full-stack technology analysts to execute professional metadata schemas, Core Web Vitals speed overhauls, or client-side indexing.
+                  Contact Shashi Prabha and our senior full-stack technology analysts to execute professional metadata schemas, Core Web Vitals speed overhauls, or client-side indexing.
                 </p>
 
                 <div className="space-y-2 text-left bg-slate-900/60 p-4 border border-slate-900 rounded-xl text-[11px] text-slate-400 font-semibold">
@@ -888,7 +888,7 @@ export default function SeoBlogListPage({
                 <div className="flex flex-col gap-2">
                   <button 
                     onClick={() => {
-                      window.location.href = "mailto:amrish.singh01@gmail.com?subject=SEO Optimization assistance request";
+                      window.location.href = "mailto:info@akglsgroup.com?subject=SEO Optimization assistance request";
                     }}
                     className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider py-3.5 rounded-xl shadow-lg shadow-emerald-950/20 hover:shadow-emerald-950/45 hover:-translate-y-0.5 active:translate-y-0 transition flex items-center justify-center gap-1.5"
                   >

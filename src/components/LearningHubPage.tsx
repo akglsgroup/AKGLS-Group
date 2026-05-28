@@ -861,7 +861,7 @@ export default function LearningHubPage({
                     </h4>
                     
                     <p className="text-xs text-slate-400 leading-relaxed font-light">
-                      Amrish and the high-speed technology group host direct implementation webinars every Thursday. Receive real code files, indexing scripts, and diagnostic scores.
+                      Shashi Prabha and the high-speed technology group host direct implementation webinars every Thursday. Receive real code files, indexing scripts, and diagnostic scores.
                     </p>
 
                     <div className="space-y-2 text-xs text-slate-400">
@@ -877,7 +877,7 @@ export default function LearningHubPage({
 
                     <button 
                       onClick={() => {
-                        window.location.href = "mailto:amrish.singh01@gmail.com?subject=SGE GEO webinar query";
+                        window.location.href = "mailto:info@akglsgroup.com?subject=SGE GEO webinar query";
                       }}
                       className="w-full bg-emerald-600 hover:bg-emerald-500 text-white py-3.5 rounded-xl font-black text-xs uppercase tracking-wider transition shadow-lg shadow-emerald-950/30"
                     >

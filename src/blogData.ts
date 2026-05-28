@@ -26,7 +26,7 @@ export const BLOG_POSTS: BlogPost[] = [
     readTime: "8 min read",
     date: "May 24, 2026",
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "Founder & High-Speed SEO Lead",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
@@ -114,7 +114,7 @@ Calculate what percentage of outcomes directly reference your domain URL versus 
     readTime: "6 min read",
     date: "May 18, 2026",
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "Founder & High-Speed SEO Lead",
       avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=256&auto=format&fit=crop"
     },
@@ -165,7 +165,7 @@ The most effective way to rank for AEO slots is the **Inverted Pyramid Answer Mo
     readTime: "10 min read",
     date: "April 30, 2026",
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "Founder & High-Speed SEO Lead",
       avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=256&auto=format&fit=crop"
     },
@@ -237,7 +237,7 @@ Fast loading cycles do more than delight users; they expand your **cralling budg
     readTime: "7 min read",
     date: "April 15, 2026",
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "Founder & High-Speed SEO Lead",
       avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=256&auto=format&fit=crop"
     },
@@ -282,7 +282,7 @@ Here is an advanced nested metadata script illustrating how to combine standard 
         "@type": "ContactPoint",
         "telephone": "+91-9876543210",
         "contactType": "sales",
-        "email": "amrish.singh01@gmail.com"
+        "email": "info@akglsgroup.com"
       }
     },
     {
@@ -325,7 +325,7 @@ Apply these validation steps:
     readTime: "9 min read",
     date: "March 22, 2026",
     author: {
-      name: "Amrish Singh",
+      name: "Shashi Prabha Singh",
       role: "Founder & High-Speed SEO Lead",
       avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=256&auto=format&fit=crop"
     },

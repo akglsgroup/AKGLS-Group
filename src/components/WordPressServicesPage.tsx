@@ -1321,7 +1321,7 @@ export default function WordPressServicesPage({ onBackToHome, openProposalForm }
                           required
                           value={consultForm.name} 
                           onChange={(e) => setConsultForm({...consultForm, name: e.target.value})}
-                          placeholder="Amrish Singh"
+                          placeholder="Shashi Prabha Singh"
                           className="w-full bg-[#0d121f] border border-slate-850 rounded-xl p-3.5 text-white placeholder-slate-600 focus:outline-none focus:border-brand-orange text-xs"
                         />
                       </div>
@@ -1359,7 +1359,7 @@ export default function WordPressServicesPage({ onBackToHome, openProposalForm }
                           required
                           value={consultForm.email} 
                           onChange={(e) => setConsultForm({...consultForm, email: e.target.value})}
-                          placeholder="amrish.singh01@gmail.com"
+                          placeholder="shashisingh447@gmail.com"
                           className="w-full bg-[#0d121f] border border-slate-850 rounded-xl p-3.5 text-white placeholder-slate-600 focus:outline-none focus:border-brand-orange text-xs"
                         />
                       </div>

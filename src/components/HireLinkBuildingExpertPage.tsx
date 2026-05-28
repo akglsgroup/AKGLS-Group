@@ -1402,7 +1402,7 @@ export default function HireLinkBuildingExpertPage({ onBackToHome, openProposalF
                 <input 
                   type="text" 
                   required
-                  placeholder="Amrish Singh"
+                  placeholder="Shashi Prabha Singh"
                   value={auditName}
                   onChange={(e) => setAuditName(e.target.value)}
                   className="w-full bg-[#02040b] border border-slate-850 focus:border-cyan-500 rounded p-2.5 text-xs text-white placeholder-slate-600 outline-none"
@@ -1459,7 +1459,7 @@ export default function HireLinkBuildingExpertPage({ onBackToHome, openProposalF
                 <input 
                   type="email" 
                   required
-                  placeholder="amrish.singh01@gmail.com"
+                  placeholder="shashisingh447@gmail.com"
                   value={auditEmail}
                   onChange={(e) => setAuditEmail(e.target.value)}
                   className="w-full bg-[#02040b] border border-slate-850 focus:border-cyan-500 rounded p-2.5 text-xs text-white placeholder-slate-600 outline-none"

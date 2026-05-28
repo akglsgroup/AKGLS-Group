@@ -1073,7 +1073,7 @@ export default function MetaAdsServicesPage({ onBackToHome, openProposalForm }: 
                   <input
                     type="text"
                     required
-                    placeholder="Amrish Singh"
+                    placeholder="Shashi Prabha Singh"
                     value={auditForm.name}
                     onChange={(e) => setAuditForm({ ...auditForm, name: e.target.value })}
                     className="w-full bg-slate-950 border border-slate-850 p-3 rounded-lg text-white font-mono"
@@ -1125,7 +1125,7 @@ export default function MetaAdsServicesPage({ onBackToHome, openProposalForm }: 
                   <input
                     type="email"
                     required
-                    placeholder="amrish.singh01@gmail.com"
+                    placeholder="shashisingh447@gmail.com"
                     value={auditForm.email}
                     onChange={(e) => setAuditForm({ ...auditForm, email: e.target.value })}
                     className="w-full bg-slate-950 border border-slate-850 p-3 rounded-lg text-white font-mono"

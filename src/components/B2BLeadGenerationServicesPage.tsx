@@ -971,7 +971,7 @@ export default function B2BLeadGenerationServicesPage({ onBackToHome, openPropos
               <div className="bg-slate-950 border border-indigo-950 p-3 rounded-lg text-left">
                 <span className="text-sky-400 font-extrabold block">Target stakeholder (VP Logistics):</span>
                 <p className="text-slate-400 italic mt-1 leading-snug">
-                  "Hi Amrish, noticed your team scaled trans-regional routes recently. We built an AI route optimization model that reduced transit fuel costs by 22% for logistics firms. Worth a brief 5-min review?"
+                  "Hi Shashi Prabha, noticed your team scaled trans-regional routes recently. We built an AI route optimization model that reduced transit fuel costs by 22% for logistics firms. Worth a brief 5-min review?"
                 </p>
               </div>
 
@@ -1544,7 +1544,7 @@ export default function B2BLeadGenerationServicesPage({ onBackToHome, openPropos
                           value={auditForm.email}
                           onChange={(e) => setAuditForm({ ...auditForm, email: e.target.value })}
                           className="w-full bg-slate-950 border border-indigo-950 p-2.5 rounded-lg text-white focus:border-brand-teal focus:outline-none"
-                          placeholder="e.g. amrish@apextech.com"
+                          placeholder="e.g. shashisingh@apextech.com"
                         />
                       </div>
 
