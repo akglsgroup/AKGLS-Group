@@ -378,6 +378,176 @@ const PATH_ALIASES: Record<string, string> = {
   "/ai-seo-internship/": "/internship-program",
 };
 
+// Beautifully maps each major category to a rich, semantic HTML structure so crawlers can easily parse headings, content, lists, and FAQs without JS.
+function getSemanticBody(searchKey: string, meta: { title: string; description: string }): string {
+  let bodyContent = `
+    <header style="padding: 20px; border-bottom: 1px solid #eaeaea; font-family: sans-serif;">
+      <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+        <span style="font-size: 24px; font-weight: bold; color: #1e293b;">AKGLS Group</span>
+        <nav style="display: flex; gap: 15px; flex-wrap: wrap;">
+          <a href="/" style="text-decoration: none; color: #475569; font-weight: 500;">Home</a>
+          <a href="/seo-services" style="text-decoration: none; color: #475569; font-weight: 500;">SEO Services</a>
+          <a href="/geo-services" style="text-decoration: none; color: #475569; font-weight: 500;">GEO Services</a>
+          <a href="/tools" style="text-decoration: none; color: #475569; font-weight: 500;">Free Tools</a>
+          <a href="/blog" style="text-decoration: none; color: #475569; font-weight: 500;">Blog</a>
+          <a href="/learning-hub" style="text-decoration: none; color: #475569; font-weight: 500;">Learning Hub</a>
+          <a href="/internship-program" style="text-decoration: none; color: #475569; font-weight: 500;">Internship</a>
+        </nav>
+      </div>
+    </header>
+    <main style="max-width: 800px; margin: 40px auto; padding: 0 20px; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; line-height: 1.6; color: #334155;">
+      <article>
+        <h1 style="font-size: 36px; font-weight: 800; color: #0f172a; margin-bottom: 10px; line-height: 1.2;">${meta.title}</h1>
+        <p style="font-size: 18px; color: #475569; margin-bottom: 35px; font-weight: 400;">${meta.description}</p>
+  `;
+
+  if (searchKey === "/" || searchKey === "") {
+    bodyContent += `
+      <h2>Generative Engine Optimization (GEO) & Next-Gen Organic Search Visibility</h2>
+      <p>AKGLS Group is a premier, full-suite Search Engine Optimization (SEO) and Generative Engine Optimization (GEO) agency. We specialize in configuring modern corporate and startup digital properties so they rank dominantly on traditional search engines (Google, Microsoft Bing) and AI search engines (ChatGPT, Perplexity, Gemini, Claude, and Google AI Overviews).</p>
+      
+      <h2>Core Specialized Performance Solutions</h2>
+      <ul>
+        <li><strong>Generative Engine Optimization (GEO & AEO):</strong> Structuring semantic context schemas, alt tags alignments, and entities citation networks to prompt direct attribution inside Perplexity answers and ChatGPT search queries.</li>
+        <li><strong>Technical SEO Infrastructure Optimization:</strong> Scaling sitemaps compliance, repairing indexing anomalies, and managing mobile viewport speeds.</li>
+        <li><strong>Enterprise Organic Scaling:</strong> Architecting custom programmatic SEO setups to index millions of high-converting transaction target routes safely.</li>
+        <li><strong>Paid PPC Execution:</strong> Engineering high-ROI Google Ads, LinkedIn sponsored campaigns, and Facebook/Instagram remarket loops.</li>
+      </ul>
+
+      <h2>Conversational AI Search & GEO FAQ</h2>
+      <h3>What is Generative Engine Optimization (GEO)?</h3>
+      <p>Generative Engine Optimization (GEO) is the technical science of structuring and optimizing website raw content, headings, JSON-LD schemas, and mentions across high-quality networks so AI search assistants (like ChatGPT, Gemini, and Perplexity) can crawl, authorize, extract, and reference your business as the definitive source.</p>
+      
+      <h3>Why are my pages not indexing on Google?</h3>
+      <p>Google indexing failures typically trace back to technical barriers. These include robots.txt blockades, noindex tags in response headers, JavaScript rendering budget depletion (where Googlebot suspends rendering heavy React elements), severe sitemap errors, duplicate canonical declarations, low density thin content, or server response loops (soft 404s/500 errors). Diagnosing these step-by-step with raw HTML fallbacks is critical.</p>
+
+      <h3>How does AKGLS Group citation-proof brands across ChatGPT and Perplexity?</h3>
+      <p>We deploy high-density schema structures, clear bullet lists of entity properties, self-referential canonical linkages, and white-hat outreach to authoritative resource centers. This feeds conversational engines the semantic facts they require to compile citation cards.</p>
+    `;
+  } else if (searchKey.includes("geo") || searchKey.includes("aeo") || searchKey.includes("chatgpt") || searchKey.includes("gemini") || searchKey.includes("claude") || searchKey.includes("ai-search")) {
+    bodyContent += `
+      <h2>The Shift From Ten Blue Links to AI Search Synthesis</h2>
+      <p>Modern consumers no longer only search through links; they request answers directly from conversational LLMs. If your business is not cited in ChatGPT Search, Gemini, Perplexity, and Google's AI Overviews (AIO), you are missing out on next-generation referral pipelines.</p>
+      
+      <h2>Proven Optimization Methodologies</h2>
+      <ul>
+        <li><strong>Fact Density Maximization:</strong> Presenting numerical evidence, expert peer citations, and clean factual statements inside readable bullet points.</li>
+        <li><strong>JSON-LD Entity Graphs:</strong> Building robust Schema graphs specifying exact organizational parents, service regions, and verified sameAs social channels.</li>
+        <li><strong>Conversational Intent Mapping:</strong> Aligning headings of content grids to match conversational triggers used by humans.</li>
+        <li><strong>Server-Side Semantic Fallbacks:</strong> Delivering fully rendered static snippets to AI indexing bots to secure high-speed crawl budget inclusions.</li>
+      </ul>
+
+      <h2>AI Search SEO (GEO) FAQ</h2>
+      <h3>How do Perplexity and ChatGPT index website content?</h3>
+      <p>AI search bots like GPTBot and PerplexityBot utilize custom crawlers that scan raw HTML headers and structural elements of public pages. Rather than executing heavy client-side Javascript loops which are highly CPU-restricted, they prefer analyzing pre-rendered semantic blocks, lists, schemas, and headings in milliseconds.</p>
+      
+      <h3>How can I optimize my website for Google AI Overviews (AIO)?</h3>
+      <p>To rank in Google AI Overviews, you must focus on semantic clarity: clear header matching, bullet lists detailing specific steps, schema-supported tables, and high-quality FAQ blocks that answer conversational queries directly and objectively.</p>
+
+      <h3>Does classic SEO play a role in GEO rankings?</h3>
+      <p>Yes. LLM search agents crawl websites that already have established digital authority. Clean canonical alignments, mobile lightning speed, security certificates, and external trusted mentions remain critical signals of authority.</p>
+    `;
+  } else if (searchKey.includes("technical-seo") || searchKey.includes("seo-audit") || searchKey.includes("on-page") || searchKey.includes("off-page") || searchKey.includes("local-seo") || searchKey.includes("link-building") || searchKey === "/seo-services") {
+    bodyContent += `
+      <h2>Technical Search Engine Optimization & Crawability Infrastructure</h2>
+      <p>A website that cannot be crawled will never rank. Technical SEO forms the crawlable blueprint of your digital marketing program. We optimize everything from robots.txt, dynamic XML sitemaps, JSON-LD configurations to Core Web Vitals performance parameters to secure Googlebot's priority indexing.</p>
+      
+      <h2>Technical Optimization Deliverables</h2>
+      <ul>
+        <li><strong>Comprehensive Indexing Auditing:</strong> Isolating soft-404 redirects, indexing exclusions, meta noindex flags, and canonical duplication issues.</li>
+        <li><strong>Semantic Markup Architectures:</strong> Structuring perfect H1-H6 headers, image nested alt descriptors, and contextual LSI text tags.</li>
+        <li><strong>Authority Outreach Campaigns:</strong> Executing high-quality, white-hat editorial link earning loops to elevate your baseline trust scores.</li>
+        <li><strong>Core Web Vitals Optimization:</strong> Speeding up interaction timings and eliminating layout shifting behaviors.</li>
+      </ul>
+
+      <h2>Technical Optimization and Indexing FAQ</h2>
+      <h3>Why are my React client-side pages struggling to rank?</h3>
+      <p>Client-side rendered (CSR) React websites deliver almost empty HTML structures (&lt;div id=&quot;root&quot;&gt;&lt;/div&gt;) to crawlers. While Googlebot eventually executes Javascript to read content, it splits this into a double-wave indexing process. This leads to massive crawl budget wastes, delayed indexing by days or weeks, and complete index failures on raw AI bots that don't execute JS.</p>
+      
+      <h3>How does server-side metadata and HTML caching fix indexation delays?</h3>
+      <p>Providing custom headers, dynamic meta tags, sitemap alignment, and semantic HTML body fallbacks guarantees that immediate raw HTTP fetches return complete, readable documents. Crawl bots index these in real-time instantly without passing through JS-rendering queues.</p>
+
+      <h3>How often should sitemaps be optimized?</h3>
+      <p>Sitemaps should dynamically compile in real-time. Whenever new service, blog, or program pages are added to your directory, the XML sitemap must reflect them instantly and be submitted to Google Search Console to prompt immediate crawling.</p>
+    `;
+  } else if (searchKey.includes("internship-program")) {
+    bodyContent += `
+      <h2>The AKGLS Group Digital Marketing & SEO Remote Internship Program</h2>
+      <p>Are you looking to kickstart your professional career? AKGLS Group offers an intensive remote internship program designed to train the next wave of SEO Strategists, AI SEO Engineers, Content Copywriters, and digital marketers with real, hands-on enterprise projects.</p>
+      
+      <h2>Core Training Streams and Modules</h2>
+      <ul>
+        <li><strong>AI SEO & Generative Engine Optimization (GEO):</strong> Learn how to structure next-gen schema graphs and write factual entity profiles optimized for ChatGPT, Perplexity, and Claude indexing agents.</li>
+        <li><strong>Traditional Technical SEO & Crawling:</strong> Master robots.txt definitions, redirect loops remediation, and sitemap auditing.</li>
+        <li><strong>WordPress and Custom Development:</strong> Code lightning-fast responsive themes and optimized sitemaps pipelines.</li>
+        <li><strong>High-Performance Paid Ads:</strong> Set up conversions loops and budget allocations across Google Ads and Meta platforms.</li>
+      </ul>
+
+      <h2>Internship Program FAQ</h2>
+      <h3>Is the AKGLS Group internship remote?</h3>
+      <p>Yes. The program is 100% remote. Interns from all regional zones coordinate inside our active remote workspace hubs under direct senior mentoring.</p>
+      
+      <h3>Will I receive hands-on training on AI SEO and GEO methodologies?</h3>
+      <p>Absolutely. You will learn the exact programmatic content strategies, JSON-LD entity structures, and server-side fallback pre-rendering methodologies that power this very applet.</p>
+
+      <h3>Are performance certifications provided?</h3>
+      <p>Yes. Upon successful completion of all training projects, you are awarded an official Professional Internship Certification from AKGLS Group detailing your core competencies.</p>
+    `;
+  } else if (searchKey.includes("learning-hub") || searchKey.includes("tools") || searchKey.includes("blog")) {
+    bodyContent += `
+      <h2>Free Marketing Tools, Dynamic Calculators & Growth Learning Academy</h2>
+      <p>Discover our extensive collection of free technical marketing calculators, local metadata structure checking systems, visual organic sitemap generators, and premium SEO checklists designed directly by our engineering squads.</p>
+      
+      <h2>Interactive Learning Guides and Downloads Available</h2>
+      <ul>
+        <li><strong>Google Search Indexation Diagnostic Checklist:</strong> A definitive 25-point developer audit troubleshooting system to debug indexing dropouts and rendering bottlenecks on Googlebot.</li>
+        <li><strong>AI SEO & GEO Optimization Handbook:</strong> A deep operational blueprint to claim organic citation badges on LLM search results page engines.</li>
+        <li><strong>Interactive ROI Simulators:</strong> Live tools to model expected client earnings, PPC acquisitions costs, and organic compounding indices.</li>
+      </ul>
+
+      <h2>Tools and Resources FAQ</h2>
+      <h3>How can I use your free SEO Audit Crawler tool?</h3>
+      <p>Simply navigate to our /tools/seo-audit-tool page, enter your business homepage URL, and our system will run live audits parsing your structural schema tags, canonical declarations, and SSL certificate compliance scores.</p>
+      
+      <h3>Where can I download the Google Indexation Troubleshooting Checklist?</h3>
+      <p>The checklist is accessible inside our /learning-hub directory as a premium 6-page developer checklist covering robots.txt testers, JavaScript rendering budgets, and trailing slashes consistency logs.</p>
+    `;
+  } else {
+    bodyContent += `
+      <h2>Strategic Growth Marketing & Custom Engineering Solutions</h2>
+      <p>We combine advanced technical SEO, AI-powered Generative Engine Optimization (GEO), and digital PPC execution strategies. This drives massive customer lead generation and ensures your properties rank seamlessly on Google Search as well as AI retrieval assistants.</p>
+
+      <h2>Key Outcomes of Our Services</h2>
+      <ul>
+        <li><strong>Proven Conversion Focus:</strong> Every traffic wave we direct is aligned with high-revenue buyer intent paths.</li>
+        <li><strong>Modern Schema Layouts:</strong> Comprehensive, error-free JSON-LD mapping that clearly articulates sameAs, parent categories, and target coordinates.</li>
+        <li><strong>Compounding Results:</strong> Unlike ads which stop when investment halts, organic alignment compounds month-over-month.</li>
+      </ul>
+
+      <h2>Solutions and Marketing Strategy FAQ</h2>
+      <h3>How long does it take for new SEO and GEO optimizations to show results?</h3>
+      <p>While traditional SEO indexing might take several weeks for classic search engines, our server-side progressive hydration fallbacks feed LLM search bots instantly. Real-time indexations and AI citations can often trigger within 24 to 72 hours.</p>
+
+      <h3>Can AKGLS Group help audit my existing content for AI search compatibility?</h3>
+      <p>Absolutely. We run detailed entity extraction audits to find gaps in your headings, and align keywords with standard chat prompts to secure citation visibility.</p>
+    `;
+  }
+
+  bodyContent += `
+      </article>
+    </main>
+    <footer style="padding: 40px 20px; background-color: #0f172a; color: #94a3b8; text-align: center; font-size: 14px; margin-top: 80px; font-family: sans-serif;">
+      <div style="max-width: 1200px; margin: 0 auto;">
+        <p>&copy; 2026 AKGLS Group. All rights reserved.</p>
+        <p>Premium SEO, GEO & Performance Growth Solutions.</p>
+      </div>
+    </footer>
+  `;
+
+  // Remove duplicate multi-spacing and feed a clean static payload
+  return bodyContent.replace(/\s+/g, ' ').trim();
+}
+
 // Generates dynamic SEO header tag blocks including titles, descriptions, canonicals, og elements, and JSON-LD dynamic schema mappings!
 function getInjectedHtml(originalHtml: string, rawPath: string): string {
   let cleanPath = rawPath.trim();
@@ -437,6 +607,12 @@ function getInjectedHtml(originalHtml: string, rawPath: string): string {
   } else {
     result = result.replace("</head>", `${seoTags}\n</head>`);
   }
+
+  // Inject semantic progressive-hydration content inside the root mounting container
+  const semanticBody = getSemanticBody(searchKey, meta);
+  if (result.includes('<div id="root"></div>')) {
+    result = result.replace('<div id="root"></div>', `<div id="root">${semanticBody}</div>`);
+  }
   
   return result;
 }
@@ -448,6 +624,63 @@ async function startServer() {
   // Health check API point
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
+  });
+
+  // Dynamic robots.txt that directs standard and modern AI scrapers/agents optimized for GEO/AEO/AIO
+  app.get("/robots.txt", (req, res) => {
+    res.setHeader("Content-Type", "text/plain");
+    const robotsText = `User-agent: *
+Allow: /
+Disallow: /api/
+
+# Enable crawling for leading Generative Search Agents and AI Bots
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Omgili
+Allow: /
+
+Sitemap: https://akglsgroup.com/sitemap.xml
+`;
+    res.send(robotsText);
+  });
+
+  // Dynamic XML Sitemap listing all target indexable landing pages
+  app.get("/sitemap.xml", (req, res) => {
+    res.setHeader("Content-Type", "application/xml");
+    
+    const urlElements = Object.keys(PAGE_METADATA).map((urlPath) => {
+      const pageMeta = PAGE_METADATA[urlPath];
+      const priority = urlPath === "/" ? "1.0" : "0.8";
+      return `  <url>
+    <loc>${pageMeta.canonical}</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>${priority}</priority>
+  </url>`;
+    });
+
+    const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${urlElements.join("\n")}
+</urlset>`;
+    
+    res.send(sitemapXml);
   });
 
   // Vite middleware for local development
