@@ -385,5 +385,26 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     downloadUrl: "https://akglsgroup.com/downloads/algorithmic-editorial-content-calendar.zip",
     fileSize: "2.9 MB",
     content: "## The Algorithmic Content & Editorial Calendar Template\n\nEstablish an efficient editorial pipeline that keeps your creative and technical teams perfectly aligned throughout your search campaign.\n\n### ⏱️ Essential Steps for Your Publishing Workflow\n*   **Syllabus Audits:** Ensure every upcoming brief meets search intent guidelines and passes secondary entity density checks before drafting begins.\n*   **Code Review / Technical QA:** Verify page speed performance, schema markup, and responsive visual formatting inside sandboxed staging environments.\n*   **Indexation Verification Tracker:** Document indexation timing in GSC and monitor organic SGE reference placements on a recurring basis.\n\n### 📦 Notion Hub Key Capabilities\n1.  **Multiple Visual Layouts:** Track production timelines using Kanban lists, Gantt charts, or standard calendar layouts.\n2.  **Pre-built Content Brief Blueprints:** Standardize brief writing with pre-built templates for landing pages, technical articles, and comparisons.\n3.  **Team Assignment Systems:** Coordinate writers, technical editors, and developers across all steps of the publishing pipeline."
+  },
+  {
+    id: "checklist-google-indexation",
+    slug: "google-indexation-checklist",
+    title: "Google Search Indexation Diagnostic & Troubleshooting Checklist",
+    type: "Checklist",
+    category: "Checklists",
+    shortDesc: "A definitive 25-point developer-centric audit checklist to debug indexation drops, crawl budget depletion, and rendering bypass failures on Googlebot.",
+    durationOrPages: "25 Checkpoints (6 Pages)",
+    difficulty: "Advanced",
+    rating: 4.9,
+    studentsCount: 2100,
+    tags: ["Indexation Diagnostics", "Technical Audit", "Crawl Budget", "Googlebot Rules"],
+    author: {
+      name: "Amrish Singh",
+      role: "SEO Architect & Founder",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+    },
+    downloadUrl: "https://akglsgroup.com/downloads/google-indexation-troubleshooting-checklist.pdf",
+    fileSize: "2.1 MB",
+    content: "## Google Search Indexation Diagnostic & Troubleshooting Checklist\n\nWhen Googlebot fails to index your pages, it is rarely due to a single issue. This developer-centric checklist helps pinpoint the exact technical roadblocks preventing crawl inclusion.\n\n---\n\n### 🛡️ Phase 1: Core Crawl Barriers\n- [ ] **Noindex Header Validation:** Search response headers for `X-Robots-Tag: noindex` or inline `<meta name=\"robots\" content=\"noindex\">` rules that block indexing attempts.\n- [ ] **Robots.txt Directive Check:** Use Google Search Console's Robots.txt Tester and verify that no root paths (such as `/api/` or nested directories) are accidentally blocking user-agents or wildcards.\n- [ ] **HTTP Response Integrity:** Ensure target pages return a clean `200 OK` status. Any soft 404s, persistent 500 server timing crashes, or 3xx redirection loops will immediately de-prioritize indexation queues.\n\n### 📑 Phase 2: Canonical and Duplicate Consolidation\n- [ ] **Self-Referential Canonicals:** Double-check that targets define explicit self-referential canonical tags (`<link rel=\"canonical\" href=\"https://yoursite.com/target-page/\">`) to avoid index fragmentation.\n- [ ] **URL Trailing Slashes & Case Consistency:** Align all internal, sitemap, and external link endpoints. Serving `/blog/post` alongside `/blog/post/` causes crawling confusion and blocks indexation.\n- [ ] **Low-Value Content Blocks (Thin Content):** Google de-prioritizes pages with thin content, copied templates, or boilerplate arrays. Enrich targeted pages with descriptive headings and original user value.\n\n### ⚙️ Phase 3: JavaScript Hydration & Rendering Bottlenecks\n- [ ] **Server-Side Rendering (SSR) Verification:** Verify that initial raw HTML source contains all priority semantic content before client-side hydration. Googlebot may pause executing heavy client-side JavaScript when resources are constrained.\n- [ ] **Resource Timeout Budgeting:** Check whether API calls or dynamic components take longer than 4-5 seconds to render in sandboxed tests. Googlebot will bypass elements that fail to load quickly."
   }
 ];
