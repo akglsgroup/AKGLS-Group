@@ -195,7 +195,7 @@ export const companyMenu = [
   { name: "About Us", href: "#team-leadership" },
   { name: "Meet Our Team", href: "#team-leadership" },
   { name: "Careers", href: "#careers-gateway" },
-  { name: "Internship Program", href: "#careers-gateway" },
+  { name: "Internship Program", href: "/internship-program" },
   { name: "Testimonials", href: "#testimonials" },
   { name: "Awards & Recognition", href: "#testimonials" },
   { name: "Media & Press", href: "#testimonials" },

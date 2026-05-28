@@ -132,6 +132,7 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
     { name: "Case Studies", href: "/seo-case-studies" },
     { name: "Free SEO Tools", href: "/tools" },
     { name: "Free Performance Audit", href: "#audit-form" },
+    { name: "Career Internship Program", href: "/internship-program" },
     { name: "SEO Setup Checklist", href: "/learning-hub/seo-checklist-pdf" },
     { name: "AI SEO Guide (2026)", href: "/learning-hub/ai-seo-guide" },
     { name: "Expert Webinars", href: "/learning-hub?category=Webinars" },

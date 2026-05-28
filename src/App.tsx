@@ -73,6 +73,7 @@ import FreeToolsPage from './components/FreeToolsPage';
 import SeoAuditToolPage from './components/SeoAuditToolPage';
 import SeoBlogListPage from './components/SeoBlogListPage';
 import LearningHubPage from './components/LearningHubPage';
+import InternshipProgramPage from './components/InternshipProgramPage';
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
@@ -351,7 +352,7 @@ const getIconComponent = (icon: string) => {
 };
 
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study' | 'hire-seo-expert' | 'hire-ppc-expert' | 'hire-ai-seo-expert' | 'hire-content-writer' | 'hire-link-building-expert' | 'hire-marketing-manager' | 'hire-wordpress-developer' | 'india-pricing' | 'proposal-generator' | 'tools' | 'seo-audit-tool' | 'blog' | 'learning-hub'>('home');
+  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study' | 'hire-seo-expert' | 'hire-ppc-expert' | 'hire-ai-seo-expert' | 'hire-content-writer' | 'hire-link-building-expert' | 'hire-marketing-manager' | 'hire-wordpress-developer' | 'india-pricing' | 'proposal-generator' | 'tools' | 'seo-audit-tool' | 'blog' | 'learning-hub' | 'internship-program'>('home');
   const [blogInitialCategory, setBlogInitialCategory] = useState<string | null>(null);
   const [learningInitialCategory, setLearningInitialCategory] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -689,6 +690,16 @@ export default function App() {
           setLearningInitialCategory(null);
         }
         setCurrentPage('learning-hub');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/internship-program' || pathname === '/internship-program/' ||
+        pathname === '/digital-marketing-internship' || pathname === '/digital-marketing-internship/' ||
+        pathname === '/seo-internship-program' || pathname === '/seo-internship-program/' ||
+        pathname === '/career-internship-program' || pathname === '/career-internship-program/' ||
+        pathname === '/ai-seo-internship' || pathname === '/ai-seo-internship/' ||
+        hash === '#internship-program' || hash === '#careers/internship'
+      ) {
+        setCurrentPage('internship-program');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         setCurrentPage('home');
@@ -1087,6 +1098,11 @@ export default function App() {
       title: "Algorithmic Growth Academy & Learning Hub | AKGLS Group",
       description: "Accelerate your systems alignment. Learn SEO, GEO, AEO, and AI marketing courses, access custom blueprints, interactive Excel templates and checklist tools built directly by engineers.",
       canonical: "https://akglsgroup.com/learning-hub/"
+    },
+    'internship-program': {
+      title: "Internship Program | Digital Marketing, SEO & AI SEO Internship | AKGLS Group",
+      description: "Join AKGLS Group Internship Program for hands-on training in SEO, AI SEO, social media marketing, Google Ads, WordPress, content writing & digital marketing with real projects and certification.",
+      canonical: "https://akglsgroup.com/internship-program/"
     }
   };
 
@@ -1803,6 +1819,19 @@ export default function App() {
               window.location.hash = `#tools?tool=${toolId}`;
               setCurrentPage('tools');
             }
+          }}
+        />
+      ) : currentPage === 'internship-program' ? (
+        <InternshipProgramPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          onNavigateToService={(serviceId) => {
+            window.history.pushState(null, '', `/${serviceId}`);
+            window.location.hash = `#${serviceId}`;
+            setCurrentPage(serviceId as any);
           }}
         />
       ) : currentPage === 'local-business-growth' ? (
@@ -2708,7 +2737,13 @@ export default function App() {
               
               <div className="pt-2">
                 <a 
-                  href="#audit-form"
+                  href="/internship-program"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    window.history.pushState(null, '', '/internship-program');
+                    window.location.hash = '#internship-program';
+                    setCurrentPage('internship-program');
+                  }}
                   className="text-xs font-bold font-display text-brand-indigo hover:underline flex items-center gap-1.5"
                 >
                   Explore remote internship channels <ChevronRight className="w-3.5 h-3.5" />
