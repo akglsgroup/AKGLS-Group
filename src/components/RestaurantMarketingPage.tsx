@@ -1329,19 +1329,19 @@ export default function RestaurantMarketingPage({ onBackToHome, openProposalForm
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs text-slate-300">
                 <div className="flex items-center gap-2">
-                  <CheckCircle class="w-4 h-4 text-amber-500" />
+                  <CheckCircle className="w-4 h-4 text-amber-500" />
                   <span>Sleek, lightweight mobile menus</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle class="w-4 h-4 text-amber-500" />
+                  <CheckCircle className="w-4 h-4 text-amber-500" />
                   <span>Interactive reservation triggers</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle class="w-4 h-4 text-amber-500" />
+                  <CheckCircle className="w-4 h-4 text-amber-500" />
                   <span>Frictionless WhatsApp ordering setup</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <CheckCircle class="w-4 h-4 text-amber-500" />
+                  <CheckCircle className="w-4 h-4 text-amber-500" />
                   <span>Optimized local schema structures</span>
                 </div>
               </div>

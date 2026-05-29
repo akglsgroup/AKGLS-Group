@@ -1,11 +1,13 @@
 import express from "express";
-import path from "path";
-import { fileURLToPath } from "url";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import next from "next";
 
 async function startServer() {
+  const dev = process.env.NODE_ENV !== "production";
+  const nextApp = next({ dev });
+  const handle = nextApp.getRequestHandler();
+
+  await nextApp.prepare();
+
   const app = express();
   const PORT = parseInt(process.env.PORT || "3000", 10);
 
@@ -14,25 +16,17 @@ async function startServer() {
     res.json({ status: "ok" });
   });
 
-  // Vite middleware for local development
-  if (process.env.NODE_ENV === "development") {
-    const { createServer: createViteServer } = await import("vite");
-    const vite = await createViteServer({
-      server: { middlewareMode: true },
-      appType: "spa",
-    });
-    app.use(vite.middlewares);
-  } else {
-    const distPath = path.join(process.cwd(), "dist");
-    app.use(express.static(distPath));
-    app.get("*", (req, res) => {
-      res.sendFile(path.join(distPath, "index.html"));
-    });
-  }
+  // Next.js request handler
+  app.all("*", (req, res) => {
+    return handle(req, res);
+  });
 
   app.listen(PORT, "0.0.0.0", () => {
     console.log(`Server running on port ${PORT}`);
   });
 }
 
-startServer();
+startServer().catch((err) => {
+  console.error("Error starting server", err);
+  process.exit(1);
+});

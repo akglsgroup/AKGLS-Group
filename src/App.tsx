@@ -351,10 +351,10 @@ const getIconComponent = (icon: string) => {
   }
 };
 
-export default function App() {
-  const [currentPage, setCurrentPage] = useState<'home' | 'geo' | 'seo' | 'technical-seo' | 'on-page-seo' | 'aeo' | 'ai-seo' | 'google-ads' | 'meta-ads' | 'linkedin-ads' | 'web-design' | 'wordpress' | 'dental-clinic-marketing' | 'manufacturing' | 'iot' | 'real-estate' | 'healthcare' | 'education' | 'law-firm' | 'restaurant' | 'finance' | 'off-page-seo' | 'local-seo' | 'ecommerce-seo' | 'enterprise-seo' | 'international-seo' | 'mobile-seo' | 'programmatic-seo' | 'link-building' | 'seo-audit-services' | 'seo-consulting-services' | 'shopify-development' | 'startup-growth' | 'enterprise-marketing' | 'local-business-growth' | 'ecommerce-growth' | 'b2b-lead-gen' | 'saas-marketing' | 'seo-case-studies' | 'ecommerce-seo-case-study' | 'local-seo-case-study' | 'ppc-case-study' | 'ai-optimization-case-study' | 'hire-seo-expert' | 'hire-ppc-expert' | 'hire-ai-seo-expert' | 'hire-content-writer' | 'hire-link-building-expert' | 'hire-marketing-manager' | 'hire-wordpress-developer' | 'india-pricing' | 'proposal-generator' | 'tools' | 'seo-audit-tool' | 'blog' | 'learning-hub' | 'internship-program'>('home');
-  const [blogInitialCategory, setBlogInitialCategory] = useState<string | null>(null);
-  const [learningInitialCategory, setLearningInitialCategory] = useState<string | null>(null);
+export default function App({ initialPage = 'home', initialCategory = null }: { initialPage?: any; initialCategory?: any } = {}) {
+  const [currentPage, setCurrentPage] = useState<string>(initialPage);
+  const [blogInitialCategory, setBlogInitialCategory] = useState<string | null>(initialCategory);
+  const [learningInitialCategory, setLearningInitialCategory] = useState<string | null>(initialCategory);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [downloadModalOpen, setDownloadModalOpen] = useState(false);
   const [modalEmail, setModalEmail] = useState('');

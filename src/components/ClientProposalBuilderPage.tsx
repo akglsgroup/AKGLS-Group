@@ -1643,10 +1643,10 @@ export default function ClientProposalBuilderPage({ onBackToHome }: { onBackToHo
                         <span className="block text-[9px] font-bold text-slate-400 uppercase">Core Services Bundled</span>
                         <ul className="text-[10px] text-slate-600 font-bold space-y-1.5 pl-1">
                           <li className="flex items-center gap-1.5"><span className="text-emerald-500">✓</span> Search Engine SEO Optimization</li>
-                          <li className="flex items-center gap-1.5"><span class="text-emerald-500">✓</span> Cognitive Generative AI Mappings</li>
-                          <li className="flex items-center gap-1.5"><span class="text-emerald-500">✓</span> Branded SMO Creative Posts</li>
-                          <li className="flex items-center gap-1.5"><span class="text-emerald-500">✓</span> Performance Conversories CRO</li>
-                          <li className="flex items-center gap-1.5"><span class="text-emerald-500">✓</span> Full Backlink Velocity Building</li>
+                          <li className="flex items-center gap-1.5"><span className="text-emerald-500">✓</span> Cognitive Generative AI Mappings</li>
+                          <li className="flex items-center gap-1.5"><span className="text-emerald-500">✓</span> Branded SMO Creative Posts</li>
+                          <li className="flex items-center gap-1.5"><span className="text-emerald-500">✓</span> Performance Conversories CRO</li>
+                          <li className="flex items-center gap-1.5"><span className="text-emerald-500">✓</span> Full Backlink Velocity Building</li>
                         </ul>
                       </div>
                       <div className="space-y-3">
