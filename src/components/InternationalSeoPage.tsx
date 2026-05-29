@@ -223,7 +223,7 @@ export default function InternationalSeoPage({ onBackToHome, openProposalForm }:
                   </button>
                 </form>
 
-                <AnimatePresence mode="wait">
+                <AnimatePresence mode="wait font-mono">
                   {tagGenerated && (
                     <motion.div 
                       initial={{ opacity: 0, scale: 0.95 }}
