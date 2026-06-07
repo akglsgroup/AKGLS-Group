@@ -14,6 +14,15 @@ async function startServer() {
     res.json({ status: "ok" });
   });
 
+  // Support both /geo-services and /geo-services/ with absolute pre-rendered crawlers speed
+  app.get(["/geo-services", "/geo-services/"], (req, res) => {
+    const isProd = process.env.NODE_ENV === "production";
+    const filePath = isProd
+      ? path.join(process.cwd(), "dist", "geo-services.html")
+      : path.join(process.cwd(), "public", "geo-services.html");
+    res.sendFile(filePath);
+  });
+
   // Vite middleware for local development
   if (process.env.NODE_ENV === "development") {
     const { createServer: createViteServer } = await import("vite");
