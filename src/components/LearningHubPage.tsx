@@ -191,68 +191,316 @@ export default function LearningHubPage({
 
   const activeLessonContent = selectedItem?.modules?.[activeModuleIdx]?.lessons?.[activeLessonIdx];
 
+  // Helper to parse inline markdown styles cleanly
+  const parseInlineElements = (text: string): React.ReactNode[] => {
+    const parts: React.ReactNode[] = [];
+    let currentWord = "";
+    let i = 0;
+    
+    while (i < text.length) {
+      if (text.startsWith('**', i)) {
+        if (currentWord) {
+          parts.push(currentWord);
+          currentWord = "";
+        }
+        i += 2;
+        const endIdx = text.indexOf('**', i);
+        if (endIdx !== -1) {
+          const boldText = text.substring(i, endIdx);
+          parts.push(<strong key={`bold-${i}`} className="font-extrabold text-white">{boldText}</strong>);
+          i = endIdx + 2;
+        } else {
+          currentWord += '**';
+        }
+      } else if (text.startsWith('`', i)) {
+        if (currentWord) {
+          parts.push(currentWord);
+          currentWord = "";
+        }
+        i += 1;
+        const endIdx = text.indexOf('`', i);
+        if (endIdx !== -1) {
+          const codeText = text.substring(i, endIdx);
+          parts.push(<code key={`code-${i}`} className="font-mono text-xs text-emerald-450 bg-slate-950/90 border border-slate-900 px-1.5 py-0.5 rounded-md mx-0.5">{codeText}</code>);
+          i = endIdx + 1;
+        } else {
+          currentWord += '`';
+        }
+      } else if (text.startsWith('*', i) && text[i+1] !== ' ' && text[i+1] !== '*') {
+        if (currentWord) {
+          parts.push(currentWord);
+          currentWord = "";
+        }
+        i += 1;
+        const endIdx = text.indexOf('*', i);
+        if (endIdx !== -1) {
+          const italicText = text.substring(i, endIdx);
+          parts.push(<em key={`italic-${i}`} className="italic text-slate-200">{italicText}</em>);
+          i = endIdx + 1;
+        } else {
+          currentWord += '*';
+        }
+      } else {
+        currentWord += text[i];
+        i += 1;
+      }
+    }
+    
+    if (currentWord) {
+      parts.push(currentWord);
+    }
+    
+    return parts;
+  };
+
   // Simulated content markdown parser
   const renderItemMarkdown = (markdown: string) => {
     const lines = markdown.split('\n');
-    let headingIdx = 0;
-
-    return lines.map((line, idx) => {
-      if (line.startsWith('## ')) {
-        return (
-          <h2 id={`hub-header-${idx}`} key={idx} className="text-xl md:text-2xl font-black text-white mt-8 mb-4 border-b border-slate-900 pb-2.5 flex items-center gap-2 font-display">
-            <span className="text-emerald-400 font-mono text-sm">[0{headingIdx++}]</span>
-            <span>{line.replace('## ', '')}</span>
+    const elements: React.ReactNode[] = [];
+    
+    let inCodeBlock = false;
+    let codeLanguage = '';
+    let codeBlockLines: string[] = [];
+    
+    let inTable = false;
+    let tableRows: string[][] = [];
+    
+    let headingIdx = 1;
+    
+    const renderBufferedTable = (indexKey: number) => {
+      if (tableRows.length > 0) {
+        const rows = [...tableRows];
+        tableRows = [];
+        inTable = false;
+        
+        const headers = rows[0];
+        const dataRows = rows.slice(1);
+        
+        elements.push(
+          <div key={`table-block-${indexKey}`} className="my-6 overflow-x-auto border border-slate-900 rounded-xl shadow-lg bg-slate-950/40">
+            <table className="min-w-full divide-y divide-slate-900 text-left">
+              <thead className="bg-[#0b1220] font-mono text-[11px] font-bold tracking-wider text-emerald-400">
+                <tr>
+                  {headers.map((cell, cIdx) => (
+                    <th key={cIdx} className="px-4 py-3 text-xs font-bold uppercase tracking-wider text-slate-300 border-r border-slate-900 last:border-r-0">
+                      {parseInlineElements(cell)}
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-900/60 text-slate-350">
+                {dataRows.map((row, rIdx) => (
+                  <tr key={rIdx} className="hover:bg-slate-900/20 transition-colors odd:bg-slate-950/20">
+                    {row.map((cell, cIdx) => (
+                      <td key={cIdx} className="px-4 py-3 text-xs sm:text-[13px] font-medium font-sans border-r border-slate-900/40 last:border-r-0">
+                        {parseInlineElements(cell)}
+                      </td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        );
+      }
+    };
+    
+    for (let idx = 0; idx < lines.length; idx++) {
+      const line = lines[idx];
+      const trimmed = line.trim();
+      
+      // 1. Handle Code Blocks
+      if (trimmed.startsWith('```')) {
+        if (inTable) {
+          renderBufferedTable(idx);
+        }
+        
+        if (!inCodeBlock) {
+          inCodeBlock = true;
+          codeLanguage = trimmed.replace('```', '').trim() || 'text';
+          codeBlockLines = [];
+        } else {
+          inCodeBlock = false;
+          const codeContent = codeBlockLines.join('\n');
+          const currentLang = codeLanguage;
+          elements.push(
+            <div key={`code-block-${idx}`} className="my-5 bg-[#030712] border border-slate-900 rounded-2xl overflow-hidden font-mono text-xs shadow-xl">
+              <div className="bg-slate-950 px-4 py-2 flex justify-between items-center border-b border-slate-900 text-slate-400 text-[10px] font-sans font-bold">
+                <span className="uppercase tracking-wider text-emerald-400 font-mono">{currentLang}</span>
+                <button
+                  type="button"
+                  onClick={() => {
+                    navigator.clipboard.writeText(codeContent);
+                  }}
+                  className="hover:text-emerald-400 transition-colors bg-slate-900 px-2.5 py-1 rounded border border-slate-850 hover:border-slate-800 text-[9px] font-bold"
+                >
+                  Copy Code
+                </button>
+              </div>
+              <pre className="p-4 overflow-x-auto text-[11px] leading-relaxed text-emerald-100/90 whitespace-pre">
+                <code>{codeContent}</code>
+              </pre>
+            </div>
+          );
+        }
+        continue;
+      }
+      
+      if (inCodeBlock) {
+        codeBlockLines.push(line);
+        continue;
+      }
+      
+      // 1.5 Handle Tables (lines starting and ending/containing pipes)
+      if (trimmed.startsWith('|')) {
+        inTable = true;
+        const cells = line.split('|').map(c => c.trim()).slice(1, -1);
+        const isSeparator = cells.every(c => /^:?-+:?$/.test(c));
+        if (!isSeparator && cells.length > 0) {
+          tableRows.push(cells);
+        }
+        continue;
+      } else if (inTable) {
+        renderBufferedTable(idx);
+      }
+      
+      // 2. Headings
+      if (trimmed.startsWith('# ')) {
+        const text = trimmed.substring(2).trim();
+        elements.push(
+          <h1 id={`hub-header-main-${idx}`} key={idx} className="text-xl sm:text-2xl md:text-3xl font-extrabold text-white mt-12 mb-6 pb-3 border-b border-slate-850 flex items-center gap-3 font-display">
+            <span>{parseInlineElements(text)}</span>
+          </h1>
+        );
+        continue;
+      }
+      
+      if (trimmed.startsWith('## ')) {
+        const text = trimmed.substring(3).trim();
+        elements.push(
+          <h2 id={`hub-header-${idx}`} key={idx} className="text-lg sm:text-xl md:text-2xl font-black text-white mt-10 mb-4 pb-2 border-b border-slate-900/50 flex items-center gap-3 font-display">
+            <span className="text-emerald-400 font-mono text-sm font-bold">[0{headingIdx++}]</span>
+            <span>{parseInlineElements(text)}</span>
           </h2>
         );
+        continue;
       }
-
-      if (line.startsWith('### ')) {
-        return (
-          <h3 key={idx} className="text-base md:text-lg font-bold text-teal-400 mt-6 mb-3 font-display">
-            {line.replace('### ', '')}
+      
+      if (trimmed.startsWith('### ')) {
+        const text = trimmed.substring(4).trim();
+        elements.push(
+          <h3 id={`hub-header-sub-${idx}`} key={idx} className="text-base sm:text-lg font-bold text-teal-400 mt-8 mb-3 font-display">
+            {parseInlineElements(text)}
           </h3>
         );
+        continue;
+      }
+      
+      if (trimmed.startsWith('#### ')) {
+        const text = trimmed.substring(5).trim();
+        const cleanText = text.replace(/\*\*$/, '').replace(/^\*\*/, '');
+        elements.push(
+          <h4 key={idx} className="text-xs sm:text-sm font-black text-emerald-400 mt-6 mb-2 font-mono uppercase tracking-wider">
+            {parseInlineElements(cleanText)}
+          </h4>
+        );
+        continue;
       }
 
-      if (line.startsWith('* ') || line.startsWith('- ')) {
-        const rawText = line.replace(/^[\*\-]\s+/, '');
-        return (
-          <div key={idx} className="flex gap-2.5 items-start pl-2 my-2 text-slate-300">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 mt-2 shrink-0" />
-            <p className="text-xs sm:text-[13px] leading-relaxed font-light">{rawText}</p>
+      if (trimmed.startsWith('##### ')) {
+        const text = trimmed.substring(6).trim();
+        elements.push(
+          <h5 key={idx} className="text-xs sm:text-sm font-bold text-[#818cf8] mt-4 mb-2 font-display">
+            {parseInlineElements(text)}
+          </h5>
+        );
+        continue;
+      }
+
+      // 3. Task Checklist / Todo items: e.g. `- [ ] ` or `- [x] `
+      if (trimmed.startsWith('- [ ] ') || trimmed.startsWith('- [x] ') || trimmed.startsWith('* [ ] ') || trimmed.startsWith('* [x] ')) {
+        const isChecked = trimmed.includes('[x]');
+        const text = trimmed.substring(6).trim();
+        elements.push(
+          <div key={idx} className="flex gap-3 items-center my-2 pl-2 text-slate-350">
+            <input 
+              type="checkbox" 
+              checked={isChecked} 
+              readOnly 
+              className="accent-emerald-500 rounded border-slate-800 bg-slate-950 focus:ring-0 w-3.5 h-3.5 pointer-events-none" 
+            />
+            <span className={`text-xs sm:text-[13px] font-medium leading-normal ${isChecked ? 'line-through text-slate-500' : 'text-slate-350'}`}>
+              {parseInlineElements(text)}
+            </span>
           </div>
         );
+        continue;
       }
 
-      if (/^\d+\.\s+/.test(line.trim())) {
-        const rawText = line.trim().replace(/^\d+\.\s+/, '');
-        const num = line.trim().match(/^\d+/)?.[0] || '1';
-        return (
-          <div key={idx} className="bg-slate-950/40 p-4 border border-slate-900 rounded-xl flex items-start gap-3 my-3">
-            <span className="h-5 w-5 rounded bg-slate-900 border border-slate-800 text-teal-400 font-mono text-[10px] flex items-center justify-center font-bold shrink-0">
+      // 4. Bullet lists: e.g. `* ` or `- ` (using raw matches to support leading spacing)
+      if (trimmed.startsWith('* ') || trimmed.startsWith('- ')) {
+        const text = trimmed.substring(2).trim();
+        const indentCount = line.length - line.trimStart().length;
+        const isNested = indentCount >= 2;
+        
+        elements.push(
+          <div key={idx} className={`flex gap-2.5 items-start ${isNested ? 'pl-8 text-slate-400' : 'pl-4 text-slate-300'} my-1.5`}>
+            {isNested ? (
+              <span className="h-1.5 w-1.5 rounded-full border border-emerald-450 bg-transparent mt-1.5 shrink-0" />
+            ) : (
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-450 mt-1.5 shrink-0" />
+            )}
+            <p className="text-xs sm:text-[13px] leading-relaxed font-light mt-0">{parseInlineElements(text)}</p>
+          </div>
+        );
+        continue;
+      }
+
+      // 5. Numbered lists: e.g. `1. `, `1.  `
+      if (/^\d+\.\s+/.test(trimmed)) {
+        const match = trimmed.match(/^(\d+)\.\s+/);
+        const num = match ? match[1] : '1';
+        const text = trimmed.replace(/^\d+\.\s+/, '').trim();
+        elements.push(
+          <div key={idx} className="bg-slate-950/20 p-3.5 border border-slate-900/40 rounded-xl flex items-start gap-4 my-3">
+            <span className="h-5 w-5 rounded bg-slate-900 border border-slate-850 text-teal-400 font-mono text-[10px] flex items-center justify-center font-bold shrink-0">
               {num}
             </span>
-            <p className="text-slate-300 text-xs leading-relaxed font-light mt-0.5">{rawText}</p>
+            <p className="text-slate-300 text-xs sm:text-[12.5px] leading-relaxed font-light mt-0.5">{parseInlineElements(text)}</p>
           </div>
         );
+        continue;
       }
 
-      if (line.trim().startsWith('```')) {
-        return null; // hide clean structure descriptors
+      // 6. Horizontal Ruler / line breaks
+      if (trimmed === '---') {
+        elements.push(<hr key={idx} className="my-8 border-slate-900/80" />);
+        continue;
       }
 
-      if (line.trim() === '') return <div key={idx} className="h-2" />;
+      // 7. Empty lines
+      if (trimmed === '') {
+        elements.push(<div key={idx} className="h-2" />);
+        continue;
+      }
 
-      return (
+      // 8. Render standard paragraph
+      elements.push(
         <p key={idx} className="text-slate-300 text-xs sm:text-[13.5px] leading-relaxed font-light mb-3">
-          {line}
+          {parseInlineElements(trimmed)}
         </p>
       );
-    });
+    }
+    
+    if (inTable) {
+      renderBufferedTable(lines.length);
+    }
+    
+    return elements;
   };
 
-  // Mock quiz answers
-  const currentQuizQuestions = [
+  // Dynamic quiz questions sourced from the active module or falling back to default assessments
+  const currentQuizQuestions = selectedItem?.modules?.[activeModuleIdx]?.quiz || [
     {
       q: "Which JSON-LD schema is recommended for smart Voice Assistant speaker identification under AEO mandates?",
       options: ["WebSite Schema", "Speakable Schema", "Action Schema", "SearchAction Schema"],
@@ -607,6 +855,8 @@ export default function LearningHubPage({
                                 onClick={() => {
                                   setActiveModuleIdx(mIdx);
                                   setActiveLessonIdx(lIdx);
+                                  setQuizSubmitted(false);
+                                  setSelectedAnswers({});
                                   window.scrollTo({ top: 0, behavior: 'smooth' });
                                 }}
                                 className={`w-full text-left p-2.5 rounded-xl border text-xs flex justify-between items-center transition ${

@@ -27,6 +27,11 @@ export interface LearningHubItem {
       duration: string;
       content: string;
     }[];
+    quiz?: {
+      q: string;
+      options: string[];
+      answerIdx: number;
+    }[];
   }[];
   downloadUrl?: string;
   fileSize?: string;
@@ -95,36 +100,432 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     title: "Generative Engine Optimization (GEO) Certified Practitioner Course",
     type: "Course",
     category: "GEO Course",
-    shortDesc: "Understand the intricate mechanics of LLM search retrievals, SGE index crawling, and RAG chunk matching. Learn to craft high-citation contents for ChatGPT Search, Gemini, and Claude.",
-    durationOrPages: "8 Lessons (3.5 hours)",
+    shortDesc: "Understand how AI search engines find, process, and cite web pages. Master structured schemas, content layout, and entity relations across ChatGPT Search, Gemini, and Perplexity.",
+    durationOrPages: "11 Lessons (3.0 hours)",
     difficulty: "Advanced",
     rating: 5.0,
     studentsCount: 980,
-    tags: ["GEO", "LLM Search", "Retrieval-Augmented Generation", "AI Citations"],
+    tags: ["GEO", "AI Search", "RAG Optimization", "AI Citations"],
     author: {
       name: "Shashi Prabha Singh",
       role: "AI Integration Lead",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
     },
-    content: "## Generative Engine Optimization (GEO) Certified Practitioner Course\nTraditional ranking equations are being supplemented by real-time LLM-driven synthesis engines. To remain visible, your brand must dominate the **Retrieval-Augmented Generation (RAG)** pipeline.\n\nIn this certified technical program, we delve deep into mathematical semantic matching, query expansion, co-citation authority mapping, and natural language citation structures.",
+    content: "## Generative Engine Optimization (GEO) Certified Practitioner Course\nAI-powered search assistants are transforming how users find information. Instead of clicking search links, users are reading direct, synthesized answers. To ensure your brand is discoverable, cited, and recommended in these summaries, you must optimize for Retrieval-Augmented Generation (RAG) and search scraper agents.\n\nIn this certified professional program, you will learn the mechanics of vector indexing, semantic search matching, structured metadata schemas, and actionable layout methods to secure high-value AI recommendations.",
     modules: [
       {
         id: "geo-mod-1",
-        title: "Module 1: The GEO Engine Pipeline",
-        description: "How conversational search models search, retrieve, fragment, and rank real-time internet sites.",
-        duration: "1.5 hours",
+        title: "Module 1: Foundations of Generative Search",
+        description: "Understand how AI search engines differ from traditional search directories and why citations are key.",
+        duration: "1.0 hour",
         lessons: [
           {
             id: "geo-les-1-1",
-            title: "1.1 Anatomy of a RAG Retrieval Instance",
-            duration: "45 min",
-            content: "### 1.1 Anatomy of a RAG Retrieval Instance\n\nWhen a user enters a query in ChatGPT Search or Google Gemini, the platform executes an automated multi-step RAG pipeline to synthesize the output:\n\n1.  **Query Decomposition & Transformation:** The conversation-style question is converted into specific technical query phrases.\n2.  **Parallel Multi-Retrieval Indices:** The aggregator queries its own internal index as well as real-time API indexes.\n3.  **Passage Segmentation & Filtering:** Top source pages are retrieved and split into standard text blocks (chunks, typically 100-300 elements long).\n4.  **Semantic Reranking:** Passage scores are reassessed based on context matching, source authority, and freshness.\n5.  **Coherent LLM Generation:** The LLM receives the most authoritative passage text chunks inside its prompt prefix to output a fully formatted written response with reference citations.\n\n#### Optimizing domain assets for this workflow:\nTo maximize citation potential, your pages must be easily **segmentable**. Avoid lengthy paragraphs that mix disparate concepts. Create structurally self-contained text boxes using clean headers that summarize the specific point."
+            title: "1.1 Introduction to GEO",
+            duration: "15 min",
+            content: `### 1.1 Introduction to GEO
+
+Generative Engine Optimization (GEO) is the practice of optimizing your website content and brand attributes so they are easily found, summarized, and cited by AI-powered search engines.
+
+AI-powered search assistants include:
+*   ChatGPT Search
+*   Google AI Overviews (SGE)
+*   Perplexity AI
+*   Gemini
+*   Mac Copilot
+
+Traditional SEO helps you rank on search directories. GEO ensures your brand is recommended inside conversational AI answers, providing footnote citations that link back to your web pages.`
           },
           {
             id: "geo-les-1-2",
-            title: "1.2 Boosting Entity Co-Citation Strength",
-            duration: "45 min",
-            content: "### 1.2 Boosting Entity Co-Citation Strength\n\nAI models evaluate trust by reviewing the relationships between entities in their pre-trained knowledge graphs and indexed text clusters.\n\n#### Crucial Execution Guidelines:\n*   **Authority Positioning:** Secure mentions of your brand name in close proximity to industry leader entities on external, authoritative sites.\n*   **Clean Name-Concept Alignments:** Consistently repeat precise sentence patterns: `\"AKGLS Group is a premier Indian SEO and GEO optimization agency\"`. This helps indexing models bind your brand to the core keyword concepts in their semantic associations."
+            title: "1.2 How AI Search Engines Discover Content (RAG)",
+            duration: "25 min",
+            content: `### 1.2 How AI Search Engines Discover Content (RAG)
+
+Search assistants rely on a framework called Retrieval-Augmented Generation (RAG) to compile answers. Think of it like an open-book exam for the AI:
+
+1.  **The Prompt:** The user asks a detailed question (e.g., "What are the recommended GEO services in India?").
+2.  **The Retrieval:** Safe crawler agents (like GPTBot or PerplexityBot) query a search index and fetch top-ranking web pages in real-time.
+3.  **The Segmentation:** The crawlers crop the content into readable slices of text, frequently 100 to 200 words in length.
+4.  **The Synthesis:** The LLM scans these slices, selects the most accurate information, and generates a conversation-style response with clickable citation footnotes.
+
+Instead of matching precise keywords, RAG systems evaluate the semantic meaning of your content. By organizing your pages clearly, your files become highly matching matches for these crawler scrapers.`
+          },
+          {
+            id: "geo-les-1-3",
+            title: "1.3 The Value of AI Citations",
+            duration: "20 min",
+            content: `### 1.3 The Value of AI Citations
+
+An AI citation is a footnote or interactive card inside a generative response that connects the user to your source domain. It represents an validation of professional authority and accuracy.
+
+#### Why Citations Generate Quality Traffic:
+*   **Inherent Editorial Trust:** Conversational systems only credit domains that provide direct, clear, and consistent explanations.
+*   **Highly Motivated Users:** Click-throughs come from users who have already read a personalized recommendation about your service, leading to exceptionally high conversion rates.
+*   **Reputational Weight:** Being cited by major models builds long-term authority in your market, establishing your brand as a primary source of truth.`
+          }
+        ],
+        quiz: [
+          {
+            q: "What is the primary objective of Generative Engine Optimization (GEO)?",
+            options: [
+              "To pay AI creators to advertise your brand in chat interfaces",
+              "To align your website content so AI systems discover, summarize, and cite your brand inside recommendations",
+              "To replace all human writers with AI agents on your homepage",
+              "To encrypt sitemap directories to block external crawlers"
+            ],
+            answerIdx: 1
+          },
+          {
+            q: "How does the Retrieval-Augmented Generation (RAG) pipeline operate in search?",
+            options: [
+              "It parses unrelated social media posts to build random keyword lists",
+              "It fetches real-time web pages, divides them into semantic text segments, and summarizes them using an LLM",
+              "It forces users to pay a monthly fee to browse search links",
+              "It randomly selects a page to display as a featured banner"
+            ],
+            answerIdx: 1
+          },
+          {
+            q: "Which bot serves as a primary web crawler for OpenAI's search system?",
+            options: [
+              "Bingbot",
+              "Googlebot",
+              "GPTBot or OAI-SearchBot",
+              "YandexBot"
+            ],
+            answerIdx: 2
+          },
+          {
+            q: "Why do AI citations generate high-quality conversion leads?",
+            options: [
+              "Because AI search systems block other pages from loading",
+              "Because they automatically process transactions for the user",
+              "Because users are clicking after reading a personalized and targeted recommendation matching their specific intent",
+              "Because footnote citations load faster than standard web URLs"
+            ],
+            answerIdx: 2
+          },
+          {
+            q: "What makes digital copy highly cite-worthy for AI scrapers?",
+            options: [
+              "Repeating high-density keywords fifty times in hidden text blocks",
+              "Using long, complex paragraphs with fluffy marketing jargon",
+              "Providing clean, direct, and well-structured factual claims supported by verified data",
+              "Removing all external sitemaps and corporate details"
+            ],
+            answerIdx: 2
+          }
+        ]
+      },
+      {
+        id: "geo-mod-2",
+        title: "Module 2: Structural Optimization and Copywriting",
+        description: "Learn how to format page copy, headers, and data arrays to make them highly chunkable for AI models.",
+        duration: "1.0 hour",
+        lessons: [
+          {
+            id: "geo-les-2-1",
+            title: "2.1 Structuring Content for RAG Pipelines",
+            duration: "20 min",
+            content: `### 2.1 Structuring Content for RAG Pipelines
+
+When crawlers process web pages for RAG, lengthy and poorly organized walls of text are often ignored or misunderstood. You must structure content so it split-folds cleanly into logical chunks.
+
+#### Structural Rules for High-Performance Pages:
+*   **Nested Headings:** Always organize your layout using clear, consecutive headings (H2, H3, H4) that show parental relations, helping bots map the topic hierarchy.
+*   **Readable Paragraph Slices:** Keep individual paragraphs brief, ideally under 120 words. This makes the segments easy to parse and score.
+*   **Plain Source Content:** Avoid placing vital specs, reviews, or facts inside heavy JavaScript toggle states, graphical animations, or non-selectable images. If a scraper cannot instantly view the text in raw source code, the system may omit your data.`
+          },
+          {
+            id: "geo-les-2-2",
+            title: "2.2 The 'Direct Answer' Writing Strategy",
+            duration: "20 min",
+            content: `### 2.2 The 'Direct Answer' Writing Strategy
+
+AI search models are designed to find direct and factual solutions. To capture featured snippets and direct summaries, your content should be optimized for conversational question-and-answer patterns.
+
+#### The Summary Abstract Pattern:
+Include a clear, bolded 20-30 word summary directly below your main heading or H2 questions. This provides the AI scraper with a pre-compiled summary ready to be grabbed as a citation.
+
+#### Phrasing for Answer Engines:
+Avoid passive fillers or corporate fluff. Instead, use natural, objective, and clear question headers (e.g., "How does GEO optimize a SaaS website?") followed immediately by an honest, factual description.`
+          },
+          {
+            id: "geo-les-2-3",
+            title: "2.3 Formatting Data in Static HTML Tables & Lists",
+            duration: "20 min",
+            content: `### 2.3 Formatting Data in Static HTML Tables & Lists
+
+Scraper bots are exceptionally efficient at parsing organized layout elements. When a user asks an AI to "compare pricing tiers for CRM platforms," the engine performs an audit of available data grids.
+
+#### The Power of HTML Tables and Bullet Points:
+*   **Static HTML Tables:** Keep specifications, pricing, and competitive charts inside clean, static HTML tables rather than interactive sliders. This reduces parsing ambiguity.
+*   **Structured Lists:** Use bulleted or numbered layouts to state product benefits, installation steps, and service areas. Bots easily read lists as clean arrays of sequential data.`
+          }
+        ],
+        quiz: [
+          {
+            q: "Why do long blocks of undivided text with vague headers study poorly under RAG?",
+            options: [
+              "Because scrapers are programmatically configured to prioritize short words only",
+              "Because RAG chunkers slice text into segments, and lack of header guidance makes it hard to score specific topic matches",
+              "Because long paragraphs reduce sitemap index validation scores",
+              "Because AI crawlers cannot read paragraphs that exceed fifty words"
+            ],
+            answerIdx: 1
+          },
+          {
+            q: "What is the primary benefit of the 'Summary Abstract' pattern on a webpage?",
+            options: [
+              "It blocks other crawlers from seeing your source code metrics",
+              "It provides AI agents with a factual, dense, and pre-compiled summary ready for direct ingestion into answers",
+              "It replaces your canonical metadata tags automatically",
+              "It forces users to enter their emails to read the remaining paragraphs"
+            ],
+            answerIdx: 1
+          },
+          {
+            q: "How should question-and-answer pairs be formatted to maximize conversational visibility?",
+            options: [
+              "Hide questions in graphic images to preserve custom styling",
+              "Bury the answer deep within an interactive hover state accordion",
+              "State the question clearly inside a heading (H2/H3) and write the direct answer immediately below it",
+              "Omit the question entirely and list only unrelated keywords"
+            ],
+            answerIdx: 2
+          },
+          {
+            q: "Why do AI search crawlers prefer static HTML tables over dynamic javascript widgets?",
+            options: [
+              "Because static tables occupy more physical screen space",
+              "Because javascript widgets often hide data in client-side states that crawlers cannot easily parse or execute",
+              "Because table grids automatically encrypt pricing layers for security",
+              "Because static tables force the user's browser to execute slower queries"
+            ],
+            answerIdx: 1
+          },
+          {
+            q: "Which formatting strategy is ideal for helping AI engines compile a product specification comparison?",
+            options: [
+              "Creating single-word list elements separated by random commas",
+              "Using clear, static HTML comparison charts containing explicit figures and attributes",
+              "Placing all key details inside a compressed ZIP download",
+              "Replacing technical figures with general marketing adjectives"
+            ],
+            answerIdx: 1
+          }
+        ]
+      },
+      {
+        id: "geo-mod-3",
+        title: "Module 3: Schema Markup & Crawler Management",
+        description: "Leverage technical machine-readable metadata and configure crawler rules to guide AI search bots.",
+        duration: "1.0 hour",
+        lessons: [
+          {
+            id: "geo-les-3-1",
+            title: "3.1 Implementing JSON-LD Schema Markup",
+            duration: "20 min",
+            content: `### 3.1 Implementing JSON-LD Schema Markup
+
+Standard SEO keywords tell engines about text, but structured Schema markup tells engines what that text actually represents. Schema acts as a clean metadata layer that explicitly defines real-world entities.
+
+#### Crucial Schemas for AI Search:
+*   **Organization Schema:** Defines your brand, founders, parent companies, alternative names, and official contact networks, establishing trust.
+*   **Product & Offer Schema:** Feeds crawlers exact pricing points, currency, stock availability, and rating details.
+*   **Speakable Schema:** Explicitly communicates which CSS sectors or text blocks are optimal for voice engines (like Siri or Google Assistant) to read aloud.`
+          },
+          {
+            id: "geo-les-3-2",
+            title: "3.2 Local GEO Tactics: Winning Regional Recommendations",
+            duration: "20 min",
+            content: `### 3.2 Local GEO Tactics: Winning Regional Recommendations
+
+When a user asks: "What is the recommended clinic in Lucknow for clear aligners?", conversational assistants scan localized co-citation graphs instead of generic organic links.
+
+#### Direct Local Blueprints:
+1.  **Coordinate Accuracy:** Populate 'LocalBusiness' schema with precise latitude, longitude, and zip-code coordinates to secure exact physical map matches.
+2.  **Reviews with Semantic Intent:** Train your customers to mention specific services and locations inside online reviews. Reviews mentioning "The Lucknow dental team at AKGLS Clinic configured my clear aligners perfectly" build strong regional entity relevance.
+3.  **Local NAP Consistency:** Verify your business Name, Address, and Phone details are entirely uniform across primary maps and citation directories.`
+          },
+          {
+            id: "geo-les-3-3",
+            title: "3.3 Managing Crawl Access: AI Bots and robots.txt",
+            duration: "20 min",
+            content: `### 3.3 Managing Crawl Access: AI Bots and robots.txt
+
+To be cited, your domains must be accessible to next-generation indexing agents. Your robots.txt configuration controls which crawler crawlers are permitted to visit your web pages.
+
+#### Essential Crawler Management:
+*   **Identify Critical Bots:** Understand the key web crawlers used by search platforms: GPTBot and OAI-SearchBot (OpenAI), Claude-Web (Anthropic), and PerplexityBot (Perplexity).
+*   **Avoid Over-blocking:** Verify your robots.txt does not inadvertently block access to core pricing, reviews, and resource directories.
+*   **Firewall Inspections:** Ensure server-side firewall rules or security blocks do not flag AI crawlers as suspicious scrapers, preventing real-time RAG ingestion.`
+          }
+        ],
+        quiz: [
+          {
+            q: "What is the main function of JSON-LD schema markup under GEO?",
+            options: [
+              "To act as a machine-readable metadata layer that clearly defines real-world entities, parameters, and relationships",
+              "To translate website copies into multiple languages automatically",
+              "To override standard CSS structures for faster mobile viewport rendering",
+              "To automatically register the company name on local boards"
+            ],
+            answerIdx: 0
+          },
+          {
+            q: "Which schema model declares corporate identity elements like founders, social profiles, and associated brands?",
+            options: [
+              "SearchAction Schema",
+              "Organization Schema",
+              "Review Schema",
+              "WebSite Schema"
+            ],
+            answerIdx: 1
+          },
+          {
+            q: "How can localized companies maximize recommendations inside regional chatbot queries?",
+            options: [
+              "By generating thousands of reviews under randomized synthetic names",
+              "By combining exact LocalBusiness coordinate schemas with uniform NAP details and semantic keywords inside customer reviews",
+              "By removing their physical location and maps integration metrics",
+              "By blocking all regional search crawlers via command lines"
+            ],
+            answerIdx: 1
+          },
+          {
+            q: "What is a common technical error in robots.txt that prevents conversational engines from citing a domain?",
+            options: [
+              "Setting up a custom favicon image link",
+              "Unintentionally blocking primary search bots like GPTBot or PerplexityBot from accessing core directory pages",
+              "Allowing multiple canonical URLs to point to identical targets",
+              "Excluding secure admin panels from generic search indexes"
+            ],
+            answerIdx: 1
+          },
+          {
+            q: "What is the purpose of implementing 'Speakable' schema metadata?",
+            options: [
+              "It translates text blocks into music audio streams automatically",
+              "It tracks the physical mouse coordinates of a webpage user",
+              "It identifies specific CSS selectors containing text chunks ideal for voice assistants to read aloud",
+              "It allows developers to write code using speech commands"
+            ],
+            answerIdx: 2
+          }
+        ]
+      },
+      {
+        id: "geo-mod-4",
+        title: "Module 4: Practical Integration & Quality Checklist",
+        description: "Study a real-world alignment case, apply the prepublish checkout checklist, and complete the course.",
+        duration: "1.0 hour",
+        lessons: [
+          {
+            id: "geo-les-4-1",
+            title: "4.1 Case Study: AKGLS Group Brand Alignment",
+            duration: "30 min",
+            content: `### 4.1 Case Study: AKGLS Group Brand Alignment
+
+This practical case study studies the organizational workflow applied to realign a technology services platform for generative search visibility.
+
+#### The Challenge:
+A business consulting firm enjoyed solid technical SEO rankings and organic keyword traffic. However, when users issued comparison prompts on ChatGPT or Perplexity (e.g., "Recommend a custom enterprise development company in India"), the brand was never recommended or cited.
+
+#### The Roadblocks Diagnosed:
+*   **Locked Comparatives:** Product attributes, package details, and comparisons were housed in dynamic hover-accordion panels that bots ignored.
+*   **Entity Decoupling:** The founder profile pages and social links were not explicitly associated with the corporation's digital footprint.
+*   **Bot Exclusions:** Test firewall filters and restrictive robot settings blocked GPTBot and PerplexityBot.
+
+#### Actionable Improvements Applied:
+1.  **Tabular Re-architecture:** Converted dynamic panels into clean, static HTML grids showing pricing, technical specifications, and clear parameters.
+2.  **Schema Alignment:** Deployed Organization JSON-LD markup to explicitly define the founders, parent organization, and verified service lines.
+3.  **Crawler Permissions:** Restructured standard robots.txt to grant clean, authorized access to major AI search agents.
+
+#### The Results:**
+The brand's conversational citation rate grew significantly within months. High-quality referral clicks surged, led by users asking tailored questions and receiving direct recommendations.`
+          },
+          {
+            id: "geo-les-4-2",
+            title: "4.2 The Pre-Publish GEO Launch Checklist",
+            duration: "30 min",
+            content: `### 4.2 The Pre-Publish GEO Launch Checklist
+
+Never publish a technical resources article, service spec sheets, or a corporate guide hoping for AI citations without executing our formal pre-publish technical check:
+
+#### 📋 Pre-Publish Checklist:
+
+##### 1. Clear Summary Abstract
+*   [ ] Does the top of the body copy embed an explicit, bolded 20-30 word summary that answers the core query instantly, simplifying client RAG chunking?
+
+##### 2. Noun and Entity Clarity
+*   [ ] Do industry-specific nouns and relevant technical keywords appear near brand name mentions?
+*   [ ] Are vague marketing filler phrases replaced with numerical facts, ratios, and verified statistics?
+
+##### 3. Formatting Strength
+*   [ ] Are comparative details or package pricing tiers presented in clear, static HTML grids and bulleted rows?
+*   [ ] Are semantic headings (H2, H3, H4) structured in consecutive order rather than random font sizes?
+
+##### 4. Metadata and Schema Verification
+*   [ ] Is error-free JSON-LD schema markup configured on the target page?
+*   [ ] Do canonical links point to absolute HTTPS addresses to avoid index duplication?
+
+##### 5. Scraper Access Validation
+*   [ ] Are crawlers like GPTBot, Claude-Web, and PerplexityBot allowed in your robots.txt settings?
+*   [ ] Have you verified your server-side firewalls are not blocking AI crawler networks?`
+          }
+        ],
+        quiz: [
+          {
+            q: "In the case study, what was a primary roadblock that initially prevented the brand from appearing in conversational recommendations?",
+            options: [
+              "The pricing was too expensive for bots to read",
+              "Review features and comparison tables were locked inside complex interactive panels that crawlers ignored",
+              "The domain was registered using incorrect names",
+              "The brand's logo used unsuitable color combinations"
+            ],
+            answerIdx: 1
+          },
+          {
+            q: "How does placing service features in static HTML tables instead of dynamic javascript elements enhance discoverability?",
+            options: [
+              "It automatically registers the product in global databases",
+              "It ensures real-time search crawlers can parse product details and pricing unambiguously during RAG retrieval steps",
+              "It encrypts private enterprise coordinates for security",
+              "It allows the client to download the database directly through zip archives"
+            ],
+            answerIdx: 1
+          },
+          {
+            q: "What should you check inside your robots.txt before launching a new resource page?",
+            options: [
+              "Confirm that AI crawlers like GPTBot and PerplexityBot are not blocked from indexing the folder path",
+              "Confirm that only administrative users can access the sitemaps",
+              "Set the homepage description character count to exactly ten words",
+              "Deactivate standard canonical links entirely"
+            ],
+            answerIdx: 0
+          },
+          {
+            q: "Why should vague filler adjectives be replaced with numerical facts to optimize for GEO?",
+            options: [
+              "To decrease the standard file size of your HTML files",
+              "Because AI systems score factual claims and stats as highly reliable, making them far more likely to be selected for citation",
+              "To improve the screen-sharing visibility on local displays",
+              "To translate parameters into mathematical coordinate loops automatically"
+            ],
+            answerIdx: 1
+          },
+          {
+            q: "What is the primary benefit of completing a pre-publish GEO audit?",
+            options: [
+              "It guarantees paid google ranking advertisements",
+              "It organizes page elements pre-emptively so search assistants can easily parse, index, and cite your page",
+              "It restricts human access to force email subscription signups",
+              "It instantly changes the visual styling of your desktop folders"
+            ],
+            answerIdx: 1
           }
         ]
       }
@@ -406,5 +807,634 @@ export const LEARNING_ITEMS: LearningHubItem[] = [
     downloadUrl: "https://akglsgroup.com/downloads/google-indexation-troubleshooting-checklist.pdf",
     fileSize: "2.1 MB",
     content: "## Google Search Indexation Diagnostic & Troubleshooting Checklist\n\nWhen Googlebot fails to index your pages, it is rarely due to a single issue. This developer-centric checklist helps pinpoint the exact technical roadblocks preventing crawl inclusion.\n\n---\n\n### 🛡️ Phase 1: Core Crawl Barriers\n- [ ] **Noindex Header Validation:** Search response headers for `X-Robots-Tag: noindex` or inline `<meta name=\"robots\" content=\"noindex\">` rules that block indexing attempts.\n- [ ] **Robots.txt Directive Check:** Use Google Search Console's Robots.txt Tester and verify that no root paths (such as `/api/` or nested directories) are accidentally blocking user-agents or wildcards.\n- [ ] **HTTP Response Integrity:** Ensure target pages return a clean `200 OK` status. Any soft 404s, persistent 500 server timing crashes, or 3xx redirection loops will immediately de-prioritize indexation queues.\n\n### 📑 Phase 2: Canonical and Duplicate Consolidation\n- [ ] **Self-Referential Canonicals:** Double-check that targets define explicit self-referential canonical tags (`<link rel=\"canonical\" href=\"https://yoursite.com/target-page/\">`) to avoid index fragmentation.\n- [ ] **URL Trailing Slashes & Case Consistency:** Align all internal, sitemap, and external link endpoints. Serving `/blog/post` alongside `/blog/post/` causes crawling confusion and blocks indexation.\n- [ ] **Low-Value Content Blocks (Thin Content):** Google de-prioritizes pages with thin content, copied templates, or boilerplate arrays. Enrich targeted pages with descriptive headings and original user value.\n\n### ⚙️ Phase 3: JavaScript Hydration & Rendering Bottlenecks\n- [ ] **Server-Side Rendering (SSR) Verification:** Verify that initial raw HTML source contains all priority semantic content before client-side hydration. Googlebot may pause executing heavy client-side JavaScript when resources are constrained.\n- [ ] **Resource Timeout Budgeting:** Check whether API calls or dynamic components take longer than 4-5 seconds to render in sandboxed tests. Googlebot will bypass elements that fail to load quickly."
+  },
+  {
+    id: "checklist-ultimate-audit-2026",
+    slug: "ultimate-website-audit-checklist-2026",
+    title: "Ultimate Website Audit Checklist 2026",
+    type: "Checklist",
+    category: "Checklists",
+    shortDesc: "For a professional SEO, GEO, AEO, UX, and Conversion audit in 2026. A comprehensive agency-level framework covering SEO + GEO + AEO + UX + CRO + AI Search.",
+    durationOrPages: "25 Sections (12 Pages)",
+    difficulty: "Advanced",
+    rating: 5.0,
+    studentsCount: 3820,
+    tags: ["Technical SEO", "GEO Audit", "AEO Strategy", "UX / CRO", "AI Search Optimization"],
+    author: {
+      name: "Shashi Prabha Singh",
+      role: "SEO Architect & Founder",
+      avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=256&auto=format&fit=crop"
+    },
+    downloadUrl: "https://akglsgroup.com/downloads/ultimate-website-audit-checklist-2026.pdf",
+    fileSize: "3.8 MB",
+    content: `# Ultimate Website Audit Checklist 2026
+
+## SEO + GEO + AEO + UX + CRO + AI Search Optimization
+
+---
+
+# 1. Business & Goal Audit
+
+### Business Objectives
+* Define primary business goal
+  * Lead Generation
+  * Ecommerce Sales
+  * Brand Awareness
+  * Subscription
+  * SaaS Demo Booking
+
+### KPI Audit
+* Organic Traffic
+* AI Search Visibility
+* Leads
+* Conversion Rate
+* Revenue
+* Assisted Conversions
+* Returning Visitors
+
+### Competitor Benchmarking
+* Top 10 SEO Competitors
+* Top 10 GEO Competitors
+* Top AI Search Competitors
+* Market Gap Analysis
+
+---
+
+# 2. Technical SEO Audit
+
+## Crawlability
+
+### Robots.txt
+* Robots file exists
+* No accidental Disallow
+* AI crawler permissions
+* Sitemap included
+
+### XML Sitemap
+* Sitemap accessible
+* Only 200 pages included
+* No redirects
+* No canonicals included
+* Images sitemap
+* Video sitemap
+
+### Crawl Depth
+* Important pages <= 3 clicks
+* No orphan pages
+* Crawl budget optimization
+
+---
+
+## Indexability
+
+### Meta Robots
+* No accidental noindex
+* Correct follow directives
+
+### Canonical Audit
+* Self-canonical
+* No canonical chains
+* No mixed protocols
+
+### URL Audit
+* Clean URLs
+* SEO-friendly structure
+* Lowercase URLs
+* No duplicate parameters
+
+---
+
+# 3. Core Web Vitals Audit
+
+## Largest Contentful Paint (LCP)
+Target:
+* Mobile < 2.5 sec
+* Desktop < 2 sec
+
+Check:
+* Hero image optimized
+* WebP/AVIF format
+* CDN usage
+* Critical CSS
+
+---
+
+## Interaction to Next Paint (INP)
+Target:
+* Under 100 ms
+
+Check:
+* JS execution
+* Third-party scripts
+* Chat widgets
+* Tracking scripts
+
+---
+
+## Cumulative Layout Shift (CLS)
+Target:
+* Below 0.1
+
+Check:
+* Image dimensions
+* Font loading
+* Dynamic ads
+* Popups
+
+---
+
+# 4. Mobile SEO Audit
+
+## Mobile Usability
+
+### Check
+* Responsive design
+* Mobile menu
+* Font size
+* Tap targets
+* Form usability
+
+### Mobile Performance
+* Mobile CWV
+* Mobile indexing
+* Mobile content parity
+
+---
+
+# 5. Site Speed Audit
+
+## Hosting
+
+### Review
+* Server response
+* TTFB
+* CDN
+* HTTP/3
+* Caching
+
+### Optimization
+* Lazy loading
+* JS minification
+* CSS minification
+* Brotli compression
+* Image compression
+
+---
+
+# 6. Security Audit
+
+### HTTPS
+* SSL valid
+* No mixed content
+
+### Security Headers
+* HSTS
+* CSP
+* X-Frame-Options
+* XSS Protection
+
+### Vulnerability Check
+* WordPress updates
+* Plugin updates
+* Theme updates
+
+---
+
+# 7. Information Architecture Audit
+
+### Structure
+Example:
+Home
+├── Services
+├── Solutions
+├── Industries
+├── Resources
+├── About
+└── Contact
+
+### Review
+* Logical hierarchy
+* User journey
+* Category structure
+* Breadcrumbs
+
+---
+
+# 8. On-Page SEO Audit
+
+## Title Tags
+
+### Check
+* Unique titles
+* 50-60 chars
+* Keyword inclusion
+* Brand inclusion
+
+---
+
+## Meta Descriptions
+
+### Check
+* Unique
+* CTA included
+* 150-160 chars
+
+---
+
+## Header Structure
+
+### Review
+* Single H1
+* Proper H2-H6 hierarchy
+* Keyword placement
+
+---
+
+## Content Optimization
+
+### Verify
+* Search intent match
+* Semantic keywords
+* NLP entities
+* FAQ inclusion
+
+---
+
+# 9. Content Audit
+
+## Content Quality
+
+### Check
+* E-E-A-T
+* Freshness
+* Accuracy
+* Citations
+* Expert review
+
+---
+
+## Thin Content
+
+### Identify
+* Pages under 300 words
+* Duplicate content
+* Low-value pages
+
+Action:
+* Merge
+* Improve
+* Remove
+
+---
+
+## Content Decay
+
+### Review
+* Traffic decline
+* Ranking loss
+* Outdated statistics
+* Broken references
+
+---
+
+# 10. GEO (Generative Engine Optimization) Audit
+
+## ChatGPT Visibility
+
+### Check
+* Brand mentions
+* Service mentions
+* Expert citations
+* Entity recognition
+
+---
+
+## AI Search Readiness
+
+### Verify
+* Structured answers
+* FAQ blocks
+* Statistics
+* Original research
+* Expert opinions
+
+---
+
+## LLM Visibility
+Audit presence in:
+* OpenAI ChatGPT
+* Google AI Overviews
+* Microsoft Copilot
+* Perplexity AI Perplexity
+* Anthropic Claude
+
+---
+
+# 11. AEO (Answer Engine Optimization)
+
+### Check
+* Direct answers
+* Featured snippets
+* PAA optimization
+* FAQ optimization
+* How-to schema
+* Comparison content
+
+### Question Mapping
+Who?
+What?
+Why?
+When?
+Where?
+How?
+
+---
+
+# 12. Entity SEO Audit
+
+### Entity Mapping
+Business
+Founder
+Services
+Products
+Locations
+Industries
+
+### Verify
+* Consistent naming
+* Organization schema
+* Knowledge graph signals
+* Wikidata presence
+
+---
+
+# 13. Schema Audit
+
+### Organization Schema
+* Logo
+* Social Profiles
+* Contact
+
+### Service Schema
+
+### FAQ Schema
+
+### Article Schema
+
+### Product Schema
+
+### Breadcrumb Schema
+
+### Review Schema
+
+### LocalBusiness Schema
+
+---
+
+# 14. Internal Linking Audit
+
+## Review
+
+### Orphan Pages
+* Find pages with zero links
+
+### Link Distribution
+* Homepage -> Services
+* Services -> Blogs
+* Blogs -> Services
+
+### Anchor Text
+Avoid:
+* Click Here
+* Learn More
+
+Use:
+* IoT Development Services
+* GEO Optimization Services
+
+---
+
+# 15. Backlink Audit
+
+## Analyze
+
+### Toxic Links
+* Spam domains
+* Casino links
+* Adult links
+
+### Authority Links
+* DR 50+
+* Relevant industries
+
+### Lost Backlinks
+* Reclaim opportunities
+
+---
+
+# 16. UX Audit
+
+## Homepage Test
+Within 3 seconds user should know:
+* What you do
+* Who you help
+* Why choose you
+
+---
+
+## Navigation
+
+### Check
+* Menu clarity
+* Search functionality
+* Breadcrumbs
+
+---
+
+## Readability
+
+### Verify
+* Font size
+* Contrast ratio
+* White space
+
+---
+
+# 17. Conversion Rate Optimization Audit
+
+## CTA Audit
+
+### Placement
+* Above fold
+* Mid content
+* Footer
+
+### Copy
+* Book Free Consultation
+* Request Proposal
+* Get Started
+
+---
+
+## Forms
+
+### Check
+* Required fields only
+* Validation
+* Mobile-friendly
+
+---
+
+# 18. Accessibility Audit
+
+## WCAG 2.2
+
+### Verify
+* Alt text
+* Keyboard navigation
+* Contrast ratio
+* Screen readers
+
+---
+
+# 19. Analytics Audit
+
+## Google Analytics 4
+
+### Check
+* Events
+* Conversions
+* Attribution
+* UTM tracking
+
+---
+
+## Google Search Console
+
+### Review
+* Coverage
+* CWV
+* CTR
+* Queries
+* Pages
+
+---
+
+# 20. Local SEO Audit
+
+### Google Business Profile
+Verify:
+* Categories
+* Services
+* Reviews
+* Photos
+* Posts
+
+### NAP Consistency
+Name
+Address
+Phone
+
+Across all citations.
+
+---
+
+# 21. E-commerce Audit (If Applicable)
+
+### Product Pages
+* Unique descriptions
+* Product schema
+* Reviews
+* Images
+
+### Checkout
+* Guest checkout
+* Payment options
+* Mobile optimization
+
+---
+
+# 22. Migration Audit
+
+## Pre-Migration
+* URL inventory
+* Rankings backup
+* Traffic backup
+
+## During Migration
+* 301 mapping
+* Canonicals
+* Redirect testing
+
+## Post Migration
+* Crawl site
+* Submit sitemap
+* Monitor rankings
+
+---
+
+# 23. AI SEO Audit (NEW 2026)
+
+### AI Content Readiness
+* Human reviewed
+* Fact checked
+* Expert verified
+* Original insights
+
+### Citation Worthiness
+Ask:
+Would ChatGPT cite this?
+Would AI Overview use this?
+Would Perplexity quote this?
+
+### Authority Signals
+* Author pages
+* Case studies
+* Original research
+* Statistics
+* Expert interviews
+
+---
+
+# 24. Lead Generation Audit
+
+### Contact Points
+* Contact forms
+* WhatsApp
+* Chatbot
+* Calendly
+* Call tracking
+
+### Trust Signals
+* Testimonials
+* Reviews
+* Certifications
+* Awards
+* Case Studies
+
+---
+
+# 25. Priority Scorecard
+
+| Area | Score |
+| --- | --- |
+| Technical SEO | /10 |
+| Core Web Vitals | /10 |
+| Content | /10 |
+| GEO | /10 |
+| AEO | /10 |
+| UX | /10 |
+| CRO | /10 |
+| Internal Linking | /10 |
+| Backlinks | /10 |
+| AI SEO | /10 |
+
+### Final Grade
+* 90-100 = Excellent
+* 80-89 = Good
+* 70-79 = Average
+* Below 70 = Needs Improvement
+
+This checklist is suitable for agencies like AKGLS Group and can be used as a full SEO + GEO + AEO + AI Search Audit template for client projects in 2026.`
   }
 ];

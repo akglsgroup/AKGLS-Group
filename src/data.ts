@@ -182,7 +182,8 @@ export const resourcesMenu: MegaColumn[] = [
       { name: "Website Audit Template", href: "/learning-hub/website-audit-template" },
       { name: "AI SEO Guide", href: "/learning-hub/ai-seo-guide" },
       { name: "Keyword Research Template", href: "/learning-hub/keyword-research-template" },
-      { name: "Content Calendar Template", href: "/learning-hub/content-calendar-template" }
+      { name: "Content Calendar Template", href: "/learning-hub/content-calendar-template" },
+      { name: "Ultimate Website Audit Checklist 2026", href: "/learning-hub/ultimate-website-audit-checklist-2026" }
     ]
   }
 ];
