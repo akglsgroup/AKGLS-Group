@@ -71,6 +71,7 @@ import ClaudeOptimizationPage from './components/ClaudeOptimizationPage';
 import VoiceSearchOptimizationPage from './components/VoiceSearchOptimizationPage';
 import LlmOptimizationServicesPage from './components/LlmOptimizationServicesPage';
 import AiCitationBuildingPage from './components/AiCitationBuildingPage';
+import AiSeoChecklistsPage from './components/AiSeoChecklistsPage';
 import FreeToolsPage from './components/FreeToolsPage';
 import SeoAuditToolPage from './components/SeoAuditToolPage';
 import SeoBlogListPage from './components/SeoBlogListPage';
@@ -860,6 +861,14 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     changefreq: "weekly",
     title: "Local Business Digital Marketing & Growth Solutions | AKGLS Group",
     description: "Claim top rankings inside Google local maps packs. Optimize GMB profiles, build local business citations, generate authentic client reviews, and direct organic client booking flows."
+  },
+  {
+    id: "ai-seo-checklists",
+    path: "/free-checklists/",
+    priority: 0.85,
+    changefreq: "weekly",
+    title: "Free AI SEO, GEO & AEO Checklists (2026 Edition) | AKGLS Group",
+    description: "Download free structured PDF checklists for ChatGPT Optimization, Generative Engine Optimization (GEO), and Answer Engine (AEO) schemas. Test your readiness score."
   }
 ];
 
@@ -1170,6 +1179,13 @@ export default function App() {
         hash === '#tools/seo-audit-tool' || hash === '#seo-audit-tool'
       ) {
         setCurrentPage('seo-audit-tool');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/free-checklists' || pathname === '/free-checklists/' ||
+        pathname === '/ai-seo-checklists' || pathname === '/ai-seo-checklists/' ||
+        hash === '#free-checklists' || hash === '#ai-seo-checklists'
+      ) {
+        setCurrentPage('ai-seo-checklists');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (
         pathname === '/tools' || pathname === '/tools/' ||
@@ -2288,6 +2304,18 @@ export default function App() {
             window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
+          }}
+        />
+      ) : currentPage === 'ai-seo-checklists' ? (
+        <AiSeoChecklistsPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
         />
       ) : currentPage === 'tools' ? (

@@ -155,6 +155,7 @@ export const resourcesMenu: MegaColumn[] = [
   {
     title: "Free Tools",
     items: [
+      { name: "AI SEO Checklists (New)", href: "/free-checklists/" },
       { name: "SEO Audit Tool", href: "/tools/seo-audit-tool" },
       { name: "AI Content Analyzer", href: "/tools" },
       { name: "Meta Tag Generator", href: "/tools" },
@@ -180,6 +181,7 @@ export const resourcesMenu: MegaColumn[] = [
   {
     title: "Downloads",
     items: [
+      { name: "AI SEO, GEO & AEO Checklists PDF", href: "/free-checklists/" },
       { name: "SEO Checklist PDF", href: "/learning-hub/seo-checklist-pdf" },
       { name: "Website Audit Template", href: "/learning-hub/website-audit-template" },
       { name: "AI SEO Guide", href: "/learning-hub/ai-seo-guide" },
