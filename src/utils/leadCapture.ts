@@ -31,7 +31,8 @@ async function getGeoLocation(): Promise<{ country: string; city: string; region
 
 /**
  * Capture a new lead from any form submission on the website.
- * This aggregates page details, current time, and geo-location, then sends it to the API.
+ * This aggregates page details, current time, and geo-location, then sends it to the API
+ * with a automatic client-side backup store is used for local offline/static mode.
  */
 export async function captureLead(formData: {
   name: string;
@@ -71,38 +72,53 @@ export async function captureLead(formData: {
       region: geo.region,
       ip: geo.ip,
       rawDetails: formData.rawDetails || {},
-      status: 'New',
+      status: 'New' as const,
       assignedTo: 'Unassigned',
     };
 
-    // 4. Save to server backend
-    const response = await fetch('/api/leads', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      return data.lead;
-    } else {
-      console.error('Server lead capture returned non-ok status:', response.status);
+    // 4. Save to local storage database (Guarantees no lead is lost, even on static sites)
+    const localLeadsStr = localStorage.getItem('akgls_system_leads') || '[]';
+    let localLeads: LeadRecord[] = [];
+    try {
+      localLeads = JSON.parse(localLeadsStr);
+      if (!Array.isArray(localLeads)) {
+        localLeads = [];
+      }
+    } catch {
+      localLeads = [];
     }
 
-    // 5. Fallback persistence in case server is unreachable (local backup)
-    const localLeadsStr = localStorage.getItem('backup_captured_leads') || '[]';
-    const localLeads = JSON.parse(localLeadsStr);
-    const backupLead: LeadRecord = {
-      id: 'local_lead_' + Math.random().toString(36).substring(2, 11),
+    const clientLead: LeadRecord = {
+      id: 'lead_' + Math.random().toString(36).substring(2, 11),
       ...payload,
-      status: 'New',
-      assignedTo: 'Unassigned',
     };
-    localLeads.unshift(backupLead);
-    localStorage.setItem('backup_captured_leads', JSON.stringify(localLeads));
-    return backupLead;
+    localLeads.unshift(clientLead);
+    localStorage.setItem('akgls_system_leads', JSON.stringify(localLeads));
+
+    // 5. Try saving to server backend
+    try {
+      const response = await fetch('/api/leads', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+          if (data && data.success && data.lead) {
+            return data.lead;
+          }
+        }
+      }
+    } catch (serverErr) {
+      console.warn('Backend capture unavailable (running in secure client-only fallback):', serverErr);
+    }
+
+    return clientLead;
   } catch (error) {
     console.error('Failed to capture lead:', error);
     return null;
