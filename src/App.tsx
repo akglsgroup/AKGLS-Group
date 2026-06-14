@@ -72,6 +72,8 @@ import VoiceSearchOptimizationPage from './components/VoiceSearchOptimizationPag
 import LlmOptimizationServicesPage from './components/LlmOptimizationServicesPage';
 import AiCitationBuildingPage from './components/AiCitationBuildingPage';
 import AiSeoChecklistsPage from './components/AiSeoChecklistsPage';
+import LeadManagementPortalPage from './components/LeadManagementPortalPage';
+import { initAutoLeadCapture } from './utils/leadCapture';
 import FreeToolsPage from './components/FreeToolsPage';
 import SeoAuditToolPage from './components/SeoAuditToolPage';
 import SeoBlogListPage from './components/SeoBlogListPage';
@@ -916,8 +918,10 @@ export default function App() {
   // Capabilities exploration live filter keywords
   const [servicesSearchQuery, setServicesSearchQuery] = useState('');
 
-  // Keyboard listener for command search modal
+  // Keyboard listener for command search modal & auto lead capture initialization
   useEffect(() => {
+    initAutoLeadCapture();
+
     const handleShortcut = (e: KeyboardEvent) => {
       if (e.key === '/') {
         e.preventDefault();
@@ -1186,6 +1190,13 @@ export default function App() {
         hash === '#free-checklists' || hash === '#ai-seo-checklists'
       ) {
         setCurrentPage('ai-seo-checklists');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/lead-portal' || pathname === '/lead-portal/' ||
+        pathname === '/admin/leads' || pathname === '/admin/leads/' ||
+        hash === '#lead-portal' || hash === '#leads'
+      ) {
+        setCurrentPage('lead-portal');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (
         pathname === '/tools' || pathname === '/tools/' ||
@@ -2316,6 +2327,14 @@ export default function App() {
           openProposalForm={() => {
             const formEl = document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'lead-portal' ? (
+        <LeadManagementPortalPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
           }}
         />
       ) : currentPage === 'tools' ? (

@@ -48,3 +48,26 @@ export interface SearchResult {
   href: string;
   description: string;
 }
+
+export interface LeadRecord {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  companyName?: string;
+  websiteUrl?: string;
+  budget?: string;
+  primaryGoal?: string;
+  pageAddress: string;
+  pageTitle: string;
+  time: string;
+  ip?: string;
+  country?: string;
+  city?: string;
+  region?: string;
+  status: 'New' | 'Contacted' | 'In Progress' | 'Converted' | 'Spam' | 'Archived';
+  assignedTo?: string;
+  notes?: string;
+  rawDetails?: Record<string, any>;
+}
+

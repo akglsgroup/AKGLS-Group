@@ -138,6 +138,7 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
     { name: "SEO Setup Checklist", href: "/learning-hub/seo-checklist-pdf" },
     { name: "AI SEO Guide (2026)", href: "/learning-hub/ai-seo-guide" },
     { name: "Expert Webinars", href: "/learning-hub?category=Webinars" },
+    { name: "Leads Portal (Secure)", href: "#lead-portal" },
     { name: "Frequently FAQs", href: "#faq" },
   ];
 
