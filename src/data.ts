@@ -29,6 +29,8 @@ export const servicesMenu: MegaColumn[] = [
     title: "AI Optimization Services",
     items: [
       { name: "GEO Services", href: "/geo-services", isTrending: true },
+      { name: "LLM Optimization Services", href: "/llm-optimization-services", isTrending: true },
+      { name: "AI Citation Building", href: "/ai-citation-building-services", isTrending: true },
       { name: "AEO Services", href: "/aeo-services", isTrending: true },
       { name: "AI SEO Services", href: "/ai-seo-services" },
       { name: "AI Search Optimization", href: "/ai-search-optimization-services", isTrending: true },
@@ -310,6 +312,8 @@ export const searchDatabase: SearchResult[] = [
 
   // AI Optimization (GEO / AEO) Services
   { title: "GEO (Generative Engine Optimization)", category: "AI SEO", href: "/geo-services", description: "Deploy technical markup graphs and index nodes for ChatGPT Search, Gemini, and Claude." },
+  { title: "LLM Optimization Services", category: "AI SEO", href: "/llm-optimization-services", description: "Optimize your brand presence, citations, metadata signals, and entity schemas across ChatGPT, Gemini, Claude, Perplexity, and Copilot." },
+  { title: "AI Citation Building Services", category: "AI SEO", href: "/ai-citation-building-services", description: "Increase your brand references, organic citations, schema configurations, and authority mentions across Perplexity, ChatGPT, and Gemini." },
   { title: "AEO (Answer Engine Optimization)", category: "AI SEO", href: "/aeo-services", description: "Assert brand dominance in modern platforms answering user prompts directly." },
   { title: "AI Search Optimization", category: "AI SEO", href: "/ai-search-optimization-services", description: "Prepare your brand's digital footprints for LLM recommendations and citations." },
   { title: "ChatGPT Optimization", category: "AI SEO", href: "/chatgpt-optimization-services", description: "Structure schemas to expand brand visibility in OpenAI ChatGPT Search queries." },
