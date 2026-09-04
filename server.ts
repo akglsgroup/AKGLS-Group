@@ -177,6 +177,15 @@ async function startServer() {
     res.sendFile(filePath);
   });
 
+  // Support both /hire-ai-seo-expert and /hire-ai-seo-expert/ with crawler-friendly pre-rendered HTML
+  app.get(["/hire-ai-seo-expert", "/hire-ai-seo-expert/"], (req, res) => {
+    const isProd = process.env.NODE_ENV === "production";
+    const filePath = isProd
+      ? path.join(process.cwd(), "dist", "hire-ai-seo-expert.html")
+      : path.join(process.cwd(), "public", "hire-ai-seo-expert.html");
+    res.sendFile(filePath);
+  });
+
   // Vite middleware for local development
   if (process.env.NODE_ENV === "development") {
     const { createServer: createViteServer } = await import("vite");

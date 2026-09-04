@@ -10,6 +10,11 @@
   RewriteEngine On
   RewriteBase /
   RewriteRule ^index\.html$ - [L]
+
+  # Dedicated Crawler-Friendly Pre-rendered Pages
+  RewriteRule ^geo-services/?$ geo-services.html [L]
+  RewriteRule ^hire-ai-seo-expert/?$ hire-ai-seo-expert.html [L]
+
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond %{REQUEST_FILENAME} !-l

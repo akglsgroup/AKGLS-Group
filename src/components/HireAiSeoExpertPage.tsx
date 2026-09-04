@@ -8,6 +8,7 @@ import {
   Target, Info, ArrowRightLeft, Database, Award, 
   MessageSquare, Smartphone, TrendingUp, Coins, ShoppingCart, Lock
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface HireAiSeoExpertPageProps {
   onBackToHome: () => void;
@@ -29,6 +30,25 @@ export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: 
     }
     metaDesc.setAttribute('content', 'Hire AI SEO experts from AKGLS Group for GEO, AEO, ChatGPT optimization, AI search visibility, conversational SEO, semantic SEO & future-ready organic growth strategies.');
 
+    // Inject JSON-LD Schema for React SPA route
+    const schemaScript = document.createElement('script');
+    schemaScript.type = 'application/ld+json';
+    schemaScript.id = 'react-hire-ai-seo-schema';
+    schemaScript.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Hire Dedicated AI SEO Expert & GEO Specialist",
+      "url": "https://www.akglsgroup.com/hire-ai-seo-expert",
+      "description": "Hire vetted AI SEO engineers from AKGLS Group for Generative Engine Optimization, AEO, and AI Overviews dominance.",
+      "provider": {
+        "@type": "Organization",
+        "name": "AKGLS Group",
+        "url": "https://www.akglsgroup.com/"
+      },
+      "areaServed": "Global"
+    });
+    document.head.appendChild(schemaScript);
+
     return () => {
       document.title = originalTitle;
       if (metaDesc) {
@@ -38,6 +58,8 @@ export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: 
           metaDesc.remove();
         }
       }
+      const existingSchema = document.getElementById('react-hire-ai-seo-schema');
+      if (existingSchema) existingSchema.remove();
     };
   }, []);
 
@@ -90,6 +112,24 @@ export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: 
   const startLiveAudit = (e: FormEvent) => {
     e.preventDefault();
     if (!auditUrl) return;
+
+    // Automatically capture as lead in lead management portal
+    captureLead({
+      name: auditName || 'Website AI Audit Prospect',
+      email: auditEmail || 'audit-request@akglsgroup.com',
+      phone: auditPhone,
+      websiteUrl: auditUrl,
+      primaryGoal: auditGoal,
+      notes: `[Industry: ${auditIndustry}] [Primary Goal: ${auditGoal}] Submitted on Hire AI SEO Expert Page`,
+      rawDetails: {
+        auditUrl,
+        auditName,
+        auditEmail,
+        auditPhone,
+        auditIndustry,
+        auditGoal
+      }
+    }).catch(err => console.warn('Audit lead capture fallback:', err));
 
     setAuditRunning(true);
     setAuditResult(null);
