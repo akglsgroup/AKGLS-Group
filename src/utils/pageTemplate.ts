@@ -1,5 +1,6 @@
 import { AppRoute } from '../routesData';
 import { renderSharedHeaderHtml, renderHeaderScript } from './headerTemplate';
+import { renderSharedFooterHtml, renderFooterScript } from './footerTemplate';
 
 export function renderPageHtml(route: AppRoute): string {
   const fullUrl = `https://www.akglsgroup.com${route.path.startsWith('/') ? route.path : '/' + route.path}`.replace(/\/+$/, '');
@@ -421,262 +422,12 @@ ${renderSharedHeaderHtml(route.path)}
       </section>
     </main>
 
-    <!-- CORPORATE MEGA FOOTER (Standard Unified Component Across All Pages) -->
-    <footer class="bg-brand-dark border-t border-brand-border text-slate-400 text-sm mt-auto relative z-10">
-      <!-- Section 10: Floating Global Acquisition CTA Strip -->
-      <div class="bg-gradient-to-r from-brand-indigo via-slate-900 to-brand-indigo border-b border-brand-border/80 py-10 px-4 sm:px-6 lg:px-8">
-        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-          <div>
-            <span class="inline-flex items-center px-2.5 py-1 rounded text-xs font-bold bg-brand-teal/20 text-brand-teal border border-brand-teal/30 mb-2">
-              READY TO SCALE?
-            </span>
-            <h3 class="text-2xl sm:text-3xl font-black font-display text-white tracking-tight">
-              Ready to Grow Your Business Online?
-            </h3>
-            <p class="text-slate-300 text-sm mt-1 max-w-xl">
-              Get in touch with AKGLS Group today to discuss your digital marketing, SEO, AI SEO, and web development needs.
-            </p>
-          </div>
-          <div class="flex flex-wrap items-center gap-3">
-            <a href="#audit-form" class="px-5 py-3 rounded-xl bg-brand-teal text-brand-dark font-display font-bold text-xs uppercase tracking-wider hover:bg-white transition-all shadow-lg shadow-brand-teal/20">
-              Get Free SEO Audit
-            </a>
-            <a href="tel:+918318114492" class="px-5 py-3 rounded-xl border border-brand-border bg-brand-card hover:border-brand-teal/50 text-slate-200 font-bold text-xs uppercase tracking-wider transition-all">
-              Schedule Consultation
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <!-- Main Mega-Grid -->
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <!-- Desktop 6-Column Layout -->
-        <div class="hidden lg:grid grid-cols-6 gap-8">
-          <!-- Col 1: Brand & Trust Badges -->
-          <div class="col-span-1 space-y-4">
-            <div class="flex items-center gap-2">
-              <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-teal to-brand-cyan flex items-center justify-center font-display font-black text-brand-dark text-base">
-                A
-              </div>
-              <span class="font-display font-black text-base tracking-tight text-white">AKGLS GROUP</span>
-            </div>
-            <p class="text-xs text-slate-400 leading-relaxed">
-              AKGLS Group is a premier full-service digital growth, AI SEO, and performance marketing agency.
-            </p>
-            <div class="pt-2 space-y-2">
-              <div class="flex items-center gap-2 text-[11px] text-slate-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-teal"></span>
-                <span>10+ Years Experience</span>
-              </div>
-              <div class="flex items-center gap-2 text-[11px] text-slate-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-teal"></span>
-                <span>AI SEO Experts</span>
-              </div>
-              <div class="flex items-center gap-2 text-[11px] text-slate-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-teal"></span>
-                <span>100+ Projects Delivered</span>
-              </div>
-              <div class="flex items-center gap-2 text-[11px] text-slate-300">
-                <span class="w-1.5 h-1.5 rounded-full bg-brand-teal"></span>
-                <span>ROI-Focused Agency</span>
-              </div>
-            </div>
-            <div class="pt-2 flex items-center gap-2 text-slate-400">
-              <a href="https://www.linkedin.com/company/akgls-group" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-brand-card hover:text-brand-teal hover:bg-brand-border transition-colors">
-                <span class="text-xs font-mono font-bold">IN</span>
-              </a>
-              <a href="https://twitter.com/akglsgroup" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-brand-card hover:text-brand-teal hover:bg-brand-border transition-colors">
-                <span class="text-xs font-mono font-bold">X</span>
-              </a>
-              <a href="https://www.facebook.com/akglsgroup" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-brand-card hover:text-brand-teal hover:bg-brand-border transition-colors">
-                <span class="text-xs font-mono font-bold">FB</span>
-              </a>
-              <a href="https://wa.me/918318114492" target="_blank" rel="noopener noreferrer" class="p-2 rounded-lg bg-brand-card hover:text-emerald-400 hover:bg-brand-border transition-colors">
-                <span class="text-xs font-mono font-bold">WA</span>
-              </a>
-            </div>
-          </div>
-
-          <!-- Col 2: SEO Services -->
-          <div class="space-y-3">
-            <h4 class="text-xs font-mono uppercase font-bold text-white tracking-wider border-b border-brand-border/60 pb-2">
-              SEO Services
-            </h4>
-            <ul class="space-y-1.5 text-xs">
-              <li><a href="/seo-services" class="hover:text-brand-teal transition-colors">Search Optimization</a></li>
-              <li><a href="/technical-seo-services" class="hover:text-brand-teal transition-colors">Technical SEO</a></li>
-              <li><a href="/on-page-seo-services" class="hover:text-brand-teal transition-colors">On-Page SEO</a></li>
-              <li><a href="/off-page-seo-services" class="hover:text-brand-teal transition-colors">Off-Page SEO</a></li>
-              <li><a href="/local-seo-services" class="hover:text-brand-teal transition-colors">Local SEO & Maps</a></li>
-              <li><a href="/ecommerce-seo-services" class="hover:text-brand-teal transition-colors">Ecommerce SEO</a></li>
-              <li><a href="/enterprise-seo-services" class="hover:text-brand-teal transition-colors">Enterprise SEO</a></li>
-              <li><a href="/international-seo-services" class="hover:text-brand-teal transition-colors">International SEO</a></li>
-              <li><a href="/mobile-seo-services" class="hover:text-brand-teal transition-colors">Mobile SEO</a></li>
-              <li><a href="/programmatic-seo-services" class="hover:text-brand-teal transition-colors">Programmatic SEO</a></li>
-              <li><a href="/link-building-services" class="hover:text-brand-teal transition-colors">Link Building</a></li>
-              <li><a href="/seo-audit-services" class="hover:text-brand-teal transition-colors">SEO Audit Services</a></li>
-              <li><a href="/seo-consulting-services" class="hover:text-brand-teal transition-colors">SEO Consulting</a></li>
-            </ul>
-          </div>
-
-          <!-- Col 3: Marketing & Paid Ads -->
-          <div class="space-y-3">
-            <h4 class="text-xs font-mono uppercase font-bold text-white tracking-wider border-b border-brand-border/60 pb-2">
-              Marketing & Paid Ads
-            </h4>
-            <ul class="space-y-1.5 text-xs">
-              <li><a href="/google-ads-services" class="hover:text-brand-teal transition-colors">Google Ads & PPC</a></li>
-              <li><a href="/meta-ads-services" class="hover:text-brand-teal transition-colors">Meta Ads</a></li>
-              <li><a href="/linkedin-ads-services" class="hover:text-brand-teal transition-colors">LinkedIn Ads</a></li>
-              <li><a href="/b2b-lead-generation-services" class="hover:text-brand-teal transition-colors">B2B Lead Generation</a></li>
-              <li><a href="/ecommerce-growth-solutions" class="hover:text-brand-teal transition-colors">Ecommerce Growth</a></li>
-              <li><a href="/startup-growth-solutions" class="hover:text-brand-teal transition-colors">Startup Growth</a></li>
-              <li><a href="/enterprise-marketing-solutions" class="hover:text-brand-teal transition-colors">Enterprise Marketing</a></li>
-              <li><a href="/local-business-growth-services" class="hover:text-brand-teal transition-colors">Local Business Growth</a></li>
-              <li><a href="/saas-marketing-solutions" class="hover:text-brand-teal transition-colors">SaaS Marketing</a></li>
-            </ul>
-          </div>
-
-          <!-- Col 4: AI & Web Tech -->
-          <div class="space-y-3">
-            <h4 class="text-xs font-mono uppercase font-bold text-white tracking-wider border-b border-brand-border/60 pb-2">
-              AI & Web Tech
-            </h4>
-            <ul class="space-y-1.5 text-xs">
-              <li><a href="/geo-services" class="hover:text-brand-teal transition-colors text-brand-teal font-semibold">GEO Services (New)</a></li>
-              <li><a href="/aeo-services" class="hover:text-brand-teal transition-colors">AEO Services</a></li>
-              <li><a href="/ai-seo-services" class="hover:text-brand-teal transition-colors">AI SEO Services</a></li>
-              <li><a href="/chatgpt-optimization-services" class="hover:text-brand-teal transition-colors">ChatGPT Optimization</a></li>
-              <li><a href="/gemini-optimization-services" class="hover:text-brand-teal transition-colors">Gemini Optimization</a></li>
-              <li><a href="/web-design-services" class="hover:text-brand-teal transition-colors">Web Design</a></li>
-              <li><a href="/wordpress-development-services" class="hover:text-brand-teal transition-colors">WordPress Development</a></li>
-              <li><a href="/shopify-development-services" class="hover:text-brand-teal transition-colors">Shopify Development</a></li>
-            </ul>
-          </div>
-
-          <!-- Col 5: Industry Verticals -->
-          <div class="space-y-3">
-            <h4 class="text-xs font-mono uppercase font-bold text-white tracking-wider border-b border-brand-border/60 pb-2">
-              Industry Verticals
-            </h4>
-            <ul class="space-y-1.5 text-xs">
-              <li><a href="/dental-clinic-marketing" class="hover:text-brand-teal transition-colors">Dental Clinics</a></li>
-              <li><a href="/manufacturing-marketing-services" class="hover:text-brand-teal transition-colors">Manufacturing B2B</a></li>
-              <li><a href="/iot-company-marketing-services" class="hover:text-brand-teal transition-colors">IoT Tech Companies</a></li>
-              <li><a href="/real-estate-marketing-services" class="hover:text-brand-teal transition-colors">Real Estate Agency</a></li>
-              <li><a href="/healthcare-marketing-services" class="hover:text-brand-teal transition-colors">Healthcare & Medical</a></li>
-              <li><a href="/education-marketing-services" class="hover:text-brand-teal transition-colors">Education & EdTech</a></li>
-              <li><a href="/law-firm-marketing-services" class="hover:text-brand-teal transition-colors">Law Firms</a></li>
-              <li><a href="/restaurant-marketing-services" class="hover:text-brand-teal transition-colors">Restaurants & Food</a></li>
-              <li><a href="/finance-marketing-services" class="hover:text-brand-teal transition-colors">Finance & FinTech</a></li>
-            </ul>
-          </div>
-
-          <!-- Col 6: Staffing & Tools -->
-          <div class="space-y-3">
-            <h4 class="text-xs font-mono uppercase font-bold text-white tracking-wider border-b border-brand-border/60 pb-2">
-              Staffing & Resources
-            </h4>
-            <ul class="space-y-1.5 text-xs">
-              <li><a href="/hire-ai-seo-expert" class="hover:text-brand-teal transition-colors">Hire AI SEO Expert</a></li>
-              <li><a href="/hire-seo-expert" class="hover:text-brand-teal transition-colors">Hire SEO Expert</a></li>
-              <li><a href="/hire-ppc-expert" class="hover:text-brand-teal transition-colors">Hire PPC Expert</a></li>
-              <li><a href="/hire-content-writer" class="hover:text-brand-teal transition-colors">Hire Content Writer</a></li>
-              <li><a href="/hire-link-building-expert" class="hover:text-brand-teal transition-colors">Hire Link Builder</a></li>
-              <li><a href="/tools" class="hover:text-brand-teal transition-colors">Free Marketing Tools</a></li>
-              <li><a href="/tools/seo-audit-tool" class="hover:text-brand-teal transition-colors">Website Crawler Tool</a></li>
-              <li><a href="/blog" class="hover:text-brand-teal transition-colors">Engineering Blog</a></li>
-              <li><a href="/learning-hub" class="hover:text-brand-teal transition-colors">Learning Hub</a></li>
-              <li><a href="/internship-program" class="hover:text-brand-teal transition-colors">Internship Program</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- Mobile Collapsible Accordion Drawer -->
-        <div class="lg:hidden space-y-3">
-          <div class="border border-brand-border rounded-xl overflow-hidden bg-brand-card/40">
-            <button class="footer-acc-btn w-full px-4 py-3 text-left font-display font-bold text-sm text-white flex justify-between items-center">
-              <span>SEO Services</span>
-              <svg class="w-4 h-4 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-            </button>
-            <div class="footer-acc-content hidden px-4 pb-4 pt-1 text-xs space-y-2 border-t border-brand-border/40">
-              <a href="/seo-services" class="block py-1 text-slate-300">SEO Services</a>
-              <a href="/technical-seo-services" class="block py-1 text-slate-300">Technical SEO</a>
-              <a href="/on-page-seo-services" class="block py-1 text-slate-300">On-Page SEO</a>
-              <a href="/local-seo-services" class="block py-1 text-slate-300">Local SEO</a>
-              <a href="/ecommerce-seo-services" class="block py-1 text-slate-300">Ecommerce SEO</a>
-              <a href="/link-building-services" class="block py-1 text-slate-300">Link Building</a>
-            </div>
-          </div>
-
-          <div class="border border-brand-border rounded-xl overflow-hidden bg-brand-card/40">
-            <button class="footer-acc-btn w-full px-4 py-3 text-left font-display font-bold text-sm text-white flex justify-between items-center">
-              <span>Marketing & Paid Ads</span>
-              <svg class="w-4 h-4 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-            </button>
-            <div class="footer-acc-content hidden px-4 pb-4 pt-1 text-xs space-y-2 border-t border-brand-border/40">
-              <a href="/google-ads-services" class="block py-1 text-slate-300">Google Ads</a>
-              <a href="/meta-ads-services" class="block py-1 text-slate-300">Meta Ads</a>
-              <a href="/linkedin-ads-services" class="block py-1 text-slate-300">LinkedIn Ads</a>
-              <a href="/b2b-lead-generation-services" class="block py-1 text-slate-300">B2B Lead Generation</a>
-            </div>
-          </div>
-
-          <div class="border border-brand-border rounded-xl overflow-hidden bg-brand-card/40">
-            <button class="footer-acc-btn w-full px-4 py-3 text-left font-display font-bold text-sm text-white flex justify-between items-center">
-              <span>AI & Web Tech</span>
-              <svg class="w-4 h-4 text-slate-400 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
-            </button>
-            <div class="footer-acc-content hidden px-4 pb-4 pt-1 text-xs space-y-2 border-t border-brand-border/40">
-              <a href="/geo-services" class="block py-1 text-brand-teal font-semibold">GEO Services</a>
-              <a href="/aeo-services" class="block py-1 text-slate-300">AEO Services</a>
-              <a href="/ai-seo-services" class="block py-1 text-slate-300">AI SEO Services</a>
-              <a href="/web-design-services" class="block py-1 text-slate-300">Web Design</a>
-              <a href="/wordpress-development-services" class="block py-1 text-slate-300">WordPress Dev</a>
-            </div>
-          </div>
-        </div>
-
-        <!-- Newsletter & Contact Line -->
-        <div class="mt-12 pt-8 border-t border-brand-border/60 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h5 class="text-sm font-bold text-white mb-1 font-display">Stay Ahead in Search & AI</h5>
-            <p class="text-xs text-slate-400">Subscribe for weekly breakdown reports on algorithm shifts, ChatGPT changes, and SEO blueprints.</p>
-            <form id="footerNewsletterForm" class="mt-3 flex gap-2 max-w-md">
-              <input type="email" id="newsletterEmailInput" required placeholder="Enter your business email" class="px-3.5 py-2.5 rounded-lg bg-brand-card border border-brand-border text-white text-xs flex-grow focus:outline-none focus:border-brand-teal" />
-              <button type="submit" class="px-4 py-2.5 rounded-lg bg-brand-teal text-brand-dark text-xs font-bold uppercase tracking-wider hover:bg-white transition-colors">
-                Subscribe
-              </button>
-            </form>
-            <div id="newsletterSuccessMsg" class="hidden text-xs text-brand-teal mt-2">✓ Subscribed successfully!</div>
-          </div>
-
-          <div class="space-y-2 text-xs text-slate-400 md:text-right">
-            <div><strong>Direct Inquiries:</strong> <a href="mailto:info@akglsgroup.com" class="text-slate-200 hover:text-brand-teal">info@akglsgroup.com</a></div>
-            <div><strong>Direct Calling:</strong> <a href="tel:+918318114492" class="text-slate-200 hover:text-brand-teal font-mono">+91 831 811 4492</a></div>
-            <div><strong>Offices:</strong> San Francisco, CA • New York, NY • New Delhi, IN</div>
-            <div><strong>Operating Hours:</strong> Monday – Friday, 9:00 AM – 6:00 PM EST</div>
-          </div>
-        </div>
-
-        <!-- Ecosystem & Copyright -->
-        <div class="mt-8 pt-8 border-t border-brand-border/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
-          <div>
-            © 2026 AKGLS Group. All rights reserved. Precision Search Engineering & Generative Engine Optimization.
-          </div>
-          <div class="flex items-center gap-4">
-            <a href="/privacy-policy" class="hover:text-slate-400 transition-colors">Privacy Policy</a>
-            <span>•</span>
-            <a href="/terms-of-service" class="hover:text-slate-400 transition-colors">Terms of Service</a>
-            <span>•</span>
-            <a href="/sitemap.xml" class="hover:text-slate-400 transition-colors">XML Sitemap</a>
-          </div>
-        </div>
-      </div>
-    </footer>
+    <!-- CORPORATE MEGA FOOTER (Standard Dynamic Unified Component Across All Pages) -->
+    ${renderSharedFooterHtml(route.path)}
 
     <!-- Interactive Client Scripts -->
     ${renderHeaderScript()}
+    ${renderFooterScript()}
     <script>
       // 1. FAQ Accordion Handlers
       document.querySelectorAll('.faq-toggle').forEach(btn => {
@@ -695,7 +446,7 @@ ${renderSharedHeaderHtml(route.path)}
         });
       });
 
-      // 3. Lead Capture Form AJAX Handler
+      // 2. Lead Capture Form AJAX Handler
       const leadForm = document.getElementById('pageLeadForm');
       const leadSuccess = document.getElementById('leadSuccessMsg');
       if (leadForm) {
@@ -731,38 +482,6 @@ ${renderSharedHeaderHtml(route.path)}
             leadForm.classList.add('hidden');
             if (leadSuccess) leadSuccess.classList.remove('hidden');
           }
-        });
-      }
-
-      // 4. Mobile Footer Accordion Handlers
-      document.querySelectorAll('.footer-acc-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-          const content = btn.nextElementSibling;
-          const icon = btn.querySelector('svg');
-          const isClosed = content.classList.contains('hidden');
-
-          if (isClosed) {
-            content.classList.remove('hidden');
-            if (icon) icon.classList.add('rotate-180', 'text-brand-teal');
-          } else {
-            content.classList.add('hidden');
-            if (icon) icon.classList.remove('rotate-180', 'text-brand-teal');
-          }
-        });
-      });
-
-      // 5. Footer Newsletter Handler
-      const footerNewsletter = document.getElementById('footerNewsletterForm');
-      const newsletterSuccess = document.getElementById('newsletterSuccessMsg');
-      if (footerNewsletter && newsletterSuccess) {
-        footerNewsletter.addEventListener('submit', (e) => {
-          e.preventDefault();
-          newsletterSuccess.classList.remove('hidden');
-          const input = document.getElementById('newsletterEmailInput');
-          if (input) input.value = '';
-          setTimeout(() => {
-            newsletterSuccess.classList.add('hidden');
-          }, 4000);
         });
       }
     </script>
