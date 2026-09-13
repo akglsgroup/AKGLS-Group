@@ -1,4 +1,5 @@
 import { AppRoute } from '../routesData';
+import { renderSharedHeaderHtml, renderHeaderScript } from './headerTemplate';
 
 export function renderPageHtml(route: AppRoute): string {
   const fullUrl = `https://www.akglsgroup.com${route.path.startsWith('/') ? route.path : '/' + route.path}`.replace(/\/+$/, '');
@@ -137,13 +138,16 @@ export function renderPageHtml(route: AppRoute): string {
             colors: {
               brand: {
                 dark: '#050b15',
-                indigo: '#0b1528',
+                navy: '#0c121e',
+                slate: '#05070a',
+                indigo: '#3b82f6',
+                purple: '#8b5cf6',
+                teal: '#06b6d4',
+                emerald: '#10b981',
+                orange: '#f97316',
                 card: '#0f1c35',
                 border: '#1e2e4a',
-                teal: '#0df2c9',
                 cyan: '#00d0ff',
-                orange: '#f59e0b',
-                purple: '#8b5cf6',
                 pink: '#ec4899',
               }
             }
@@ -224,89 +228,7 @@ export function renderPageHtml(route: AppRoute): string {
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- Top Announcement Bar -->
-    <div class="bg-gradient-to-r from-brand-indigo via-slate-900 to-brand-indigo border-b border-brand-border/60 py-2 px-4 text-xs font-medium text-slate-300">
-      <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
-        <div class="flex items-center gap-2">
-          <span class="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold bg-brand-teal/20 text-brand-teal border border-brand-teal/30">
-            PROVEN RESULTS
-          </span>
-          <span>Rank in ChatGPT Search, Perplexity, Gemini & Google AI Overviews</span>
-        </div>
-        <div class="flex items-center gap-4 text-slate-400">
-          <a href="tel:+918318114492" class="hover:text-brand-teal transition-colors flex items-center gap-1.5 font-mono">
-            <svg class="w-3.5 h-3.5 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
-            </svg>
-            +91 831 811 4492
-          </a>
-          <span class="text-slate-600">|</span>
-          <a href="https://wa.me/918318114492" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-400 transition-colors flex items-center gap-1 text-emerald-400">
-            <span>WhatsApp Us</span>
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Navigation Header -->
-    <header class="sticky top-0 z-40 bg-brand-dark/95 backdrop-blur border-b border-brand-border/80">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-3 group">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-brand-teal to-brand-cyan flex items-center justify-center font-display font-black text-brand-dark text-xl shadow-lg shadow-brand-teal/20 group-hover:scale-105 transition-transform">
-            A
-          </div>
-          <div>
-            <span class="font-display font-black text-xl tracking-tight text-white group-hover:text-brand-teal transition-colors">
-              AKGLS GROUP
-            </span>
-            <span class="block text-[10px] font-mono tracking-wider text-brand-teal/90 uppercase font-semibold">
-              AI SEO & PERFORMANCE
-            </span>
-          </div>
-        </a>
-
-        <!-- Desktop Nav -->
-        <nav class="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-300">
-          <a href="/geo-services" class="hover:text-brand-teal transition-colors flex items-center gap-1">
-            <span>GEO Services</span>
-            <span class="px-1.5 py-0.2 bg-brand-teal/20 text-brand-teal text-[10px] rounded font-mono font-bold">NEW</span>
-          </a>
-          <a href="/seo-services" class="hover:text-brand-teal transition-colors">SEO Services</a>
-          <a href="/aeo-services" class="hover:text-brand-teal transition-colors">AEO Services</a>
-          <a href="/google-ads-services" class="hover:text-brand-teal transition-colors">Paid Ads</a>
-          <a href="/hire-ai-seo-expert" class="hover:text-brand-teal transition-colors">Hire Experts</a>
-          <a href="/tools" class="hover:text-brand-teal transition-colors">Free Tools</a>
-          <a href="/blog" class="hover:text-brand-teal transition-colors">Blog</a>
-        </nav>
-
-        <div class="flex items-center gap-3">
-          <a href="#audit-form" class="hidden sm:inline-flex items-center justify-center px-4 py-2.5 rounded-lg text-xs font-bold uppercase tracking-wider bg-brand-teal text-brand-dark hover:bg-white hover:shadow-lg hover:shadow-brand-teal/30 transition-all font-display">
-            Get Free Proposal
-          </a>
-          <button id="mobileMenuBtn" aria-label="Toggle navigation menu" class="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-brand-card focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- Mobile Dropdown -->
-      <div id="mobileMenuDropdown" class="hidden lg:hidden border-t border-brand-border bg-brand-indigo px-4 pt-3 pb-6 space-y-3 text-sm">
-        <a href="/geo-services" class="block py-2 text-brand-teal font-semibold">GEO Services (Generative Search)</a>
-        <a href="/seo-services" class="block py-2 text-slate-200 hover:text-brand-teal">SEO Services</a>
-        <a href="/aeo-services" class="block py-2 text-slate-200 hover:text-brand-teal">AEO Services</a>
-        <a href="/google-ads-services" class="block py-2 text-slate-200 hover:text-brand-teal">Google Ads & PPC</a>
-        <a href="/hire-ai-seo-expert" class="block py-2 text-slate-200 hover:text-brand-teal">Hire AI SEO Expert</a>
-        <a href="/tools" class="block py-2 text-slate-200 hover:text-brand-teal">Free Tools</a>
-        <a href="/blog" class="block py-2 text-slate-200 hover:text-brand-teal">Blog & Learning Hub</a>
-        <div class="pt-2">
-          <a href="#audit-form" class="block w-full text-center py-3 rounded-lg bg-brand-teal text-brand-dark font-bold">
-            Get Free Audit Proposal
-          </a>
-        </div>
-      </div>
-    </header>
+${renderSharedHeaderHtml(route.path)}
 
     <!-- Main Container -->
     <main class="flex-grow">
@@ -754,17 +676,9 @@ export function renderPageHtml(route: AppRoute): string {
     </footer>
 
     <!-- Interactive Client Scripts -->
+    ${renderHeaderScript()}
     <script>
-      // 1. Mobile Menu Toggle
-      const mobileBtn = document.getElementById('mobileMenuBtn');
-      const mobileMenu = document.getElementById('mobileMenuDropdown');
-      if (mobileBtn && mobileMenu) {
-        mobileBtn.addEventListener('click', () => {
-          mobileMenu.classList.toggle('hidden');
-        });
-      }
-
-      // 2. FAQ Accordion Handlers
+      // 1. FAQ Accordion Handlers
       document.querySelectorAll('.faq-toggle').forEach(btn => {
         btn.addEventListener('click', () => {
           const content = btn.nextElementSibling;

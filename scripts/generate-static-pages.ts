@@ -12,10 +12,7 @@ const distDir = path.join(rootDir, 'dist');
 
 // List of handcrafted static pages that should be preserved unless explicitly forced
 const PRESERVED_FILES = new Set([
-  'geo-services.html',
-  'aeo-services.html',
-  'seo-services.html',
-  'hire-ai-seo-expert.html'
+  'geo-services.html'
 ]);
 
 export function generateSitemapXml(): string {
@@ -112,9 +109,15 @@ export function generateAllStaticPages(force = false): { created: number; skippe
 }
 
 // If run directly from CLI
-if (process.argv[1] === fileURLToPath(import.meta.url)) {
+const isDirectRun = process.argv[1] && (
+  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url) ||
+  process.argv[1].includes('generate-static-pages')
+);
+
+if (isDirectRun) {
   console.log('🚀 Starting Automatic Static Page Generation for AKGLS Group...');
   const force = process.argv.includes('--force');
   const result = generateAllStaticPages(force);
   console.log(`✓ Completed static page generation: ${result.created} generated, ${result.skipped} preserved (Total routes: ${result.total})`);
+  process.exit(0);
 }
