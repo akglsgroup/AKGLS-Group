@@ -2,6 +2,8 @@ import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import { getRouteBySlug, getOrCreateRouteBySlug } from "./src/routesData";
+import { renderPageHtml } from "./src/utils/pageTemplate";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -168,49 +170,88 @@ async function startServer() {
     }
   });
 
-  // Support both /geo-services and /geo-services/ with absolute pre-rendered crawlers speed
-  app.get(["/geo-services", "/geo-services/"], (req, res) => {
-    const isProd = process.env.NODE_ENV === "production";
-    const filePath = isProd
-      ? path.join(process.cwd(), "dist", "geo-services.html")
-      : path.join(process.cwd(), "public", "geo-services.html");
-    res.sendFile(filePath);
-  });
-
-  // Support both /hire-ai-seo-expert and /hire-ai-seo-expert/ with crawler-friendly pre-rendered HTML
-  app.get(["/hire-ai-seo-expert", "/hire-ai-seo-expert/"], (req, res) => {
-    const isProd = process.env.NODE_ENV === "production";
-    const filePath = isProd
-      ? path.join(process.cwd(), "dist", "hire-ai-seo-expert.html")
-      : path.join(process.cwd(), "public", "hire-ai-seo-expert.html");
-    res.sendFile(filePath);
-  });
-
-  // Support both /aeo-services and /aeo-services/ with pre-rendered crawler-friendly HTML
-  app.get(["/aeo-services", "/aeo-services/"], (req, res) => {
-    const isProd = process.env.NODE_ENV === "production";
-    const filePath = isProd
-      ? path.join(process.cwd(), "dist", "aeo-services.html")
-      : path.join(process.cwd(), "public", "aeo-services.html");
-    res.sendFile(filePath);
-  });
-
-  // Support both /seo-services and /seo-services/ with pre-rendered crawler-friendly HTML
-  app.get(["/seo-services", "/seo-services/"], (req, res) => {
-    const isProd = process.env.NODE_ENV === "production";
-    const filePath = isProd
-      ? path.join(process.cwd(), "dist", "seo-services.html")
-      : path.join(process.cwd(), "public", "seo-services.html");
-    res.sendFile(filePath);
-  });
-
-  // Explicit robots.txt and sitemap delivery
+  // Explicit robots.txt, sitemap.xml, and llms.txt delivery
   app.get("/robots.txt", (req, res) => {
     const isProd = process.env.NODE_ENV === "production";
     const filePath = isProd
       ? path.join(process.cwd(), "dist", "robots.txt")
       : path.join(process.cwd(), "public", "robots.txt");
     res.type("text/plain").sendFile(filePath);
+  });
+
+  app.get("/sitemap.xml", (req, res) => {
+    const isProd = process.env.NODE_ENV === "production";
+    const filePath = isProd
+      ? path.join(process.cwd(), "dist", "sitemap.xml")
+      : path.join(process.cwd(), "public", "sitemap.xml");
+    res.type("application/xml").sendFile(filePath);
+  });
+
+  app.get("/llms.txt", (req, res) => {
+    const isProd = process.env.NODE_ENV === "production";
+    const filePath = isProd
+      ? path.join(process.cwd(), "dist", "llms.txt")
+      : path.join(process.cwd(), "public", "llms.txt");
+    res.type("text/plain").sendFile(filePath);
+  });
+
+  // Universal Dynamic Pre-Rendered HTML Handler for ALL Current & Future Pages
+  // 1. Checks if a pre-rendered static HTML file exists in dist/ or public/
+  // 2. If not on disk, checks if the route exists in the route registry (or is requested)
+  //    and automatically dynamically converts it to static HTML on-the-fly and caches it
+  app.use((req, res, next) => {
+    if (req.method !== "GET") return next();
+    if (
+      req.path.startsWith("/api/") ||
+      req.path.startsWith("/@") ||
+      req.path.startsWith("/src/") ||
+      req.path.startsWith("/node_modules/") ||
+      req.path.includes(".")
+    ) {
+      return next();
+    }
+
+    const cleanSlug = req.path.replace(/^\/+|\/+$/g, "");
+    if (!cleanSlug) {
+      return next(); // Root "/" served by index.html SPA
+    }
+
+    const isProd = process.env.NODE_ENV === "production";
+    const publicTarget = path.join(process.cwd(), "public", `${cleanSlug}.html`);
+    const distTarget = path.join(process.cwd(), "dist", `${cleanSlug}.html`);
+
+    // 1. If static file already exists in dist or public, serve it immediately
+    if (isProd && fs.existsSync(distTarget)) {
+      return res.sendFile(distTarget);
+    }
+    if (fs.existsSync(publicTarget)) {
+      return res.sendFile(publicTarget);
+    }
+
+    // 2. Resolve route (either from registered SITEMAP_ROUTES or dynamic on-demand generation)
+    const route = getOrCreateRouteBySlug(cleanSlug);
+    if (route) {
+      try {
+        const html = renderPageHtml(route);
+        // Automatically save to public/ (and dist/ if in prod) so it's permanently cached
+        const targetDir = path.dirname(publicTarget);
+        if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
+        fs.writeFileSync(publicTarget, html, "utf-8");
+
+        if (isProd) {
+          const dDir = path.dirname(distTarget);
+          if (!fs.existsSync(dDir)) fs.mkdirSync(dDir, { recursive: true });
+          fs.writeFileSync(distTarget, html, "utf-8");
+        }
+
+        return res.type("text/html").send(html);
+      } catch (err) {
+        console.error(`Error dynamically generating page for /${cleanSlug}:`, err);
+      }
+    }
+
+    // Pass to next middleware (SPA fallback / Vite)
+    next();
   });
 
   // Vite middleware for local development

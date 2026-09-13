@@ -11,11 +11,15 @@
   RewriteBase /
   RewriteRule ^index\.html$ - [L]
 
-  # Dedicated Crawler-Friendly Pre-rendered Pages
+  # Dedicated Crawler-Friendly Pre-rendered Pages (Explicit overrides)
   RewriteRule ^geo-services/?$ geo-services.html [L]
   RewriteRule ^hire-ai-seo-expert/?$ hire-ai-seo-expert.html [L]
   RewriteRule ^aeo-services/?$ aeo-services.html [L]
   RewriteRule ^seo-services/?$ seo-services.html [L]
+
+  # Automatically serve any pre-rendered .html file if it exists for the requested path
+  RewriteCond %{DOCUMENT_ROOT}/$1.html -f
+  RewriteRule ^([^.]+)/?$ $1.html [L]
 
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
