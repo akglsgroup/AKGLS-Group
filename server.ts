@@ -186,6 +186,33 @@ async function startServer() {
     res.sendFile(filePath);
   });
 
+  // Support both /aeo-services and /aeo-services/ with pre-rendered crawler-friendly HTML
+  app.get(["/aeo-services", "/aeo-services/"], (req, res) => {
+    const isProd = process.env.NODE_ENV === "production";
+    const filePath = isProd
+      ? path.join(process.cwd(), "dist", "aeo-services.html")
+      : path.join(process.cwd(), "public", "aeo-services.html");
+    res.sendFile(filePath);
+  });
+
+  // Support both /seo-services and /seo-services/ with pre-rendered crawler-friendly HTML
+  app.get(["/seo-services", "/seo-services/"], (req, res) => {
+    const isProd = process.env.NODE_ENV === "production";
+    const filePath = isProd
+      ? path.join(process.cwd(), "dist", "seo-services.html")
+      : path.join(process.cwd(), "public", "seo-services.html");
+    res.sendFile(filePath);
+  });
+
+  // Explicit robots.txt and sitemap delivery
+  app.get("/robots.txt", (req, res) => {
+    const isProd = process.env.NODE_ENV === "production";
+    const filePath = isProd
+      ? path.join(process.cwd(), "dist", "robots.txt")
+      : path.join(process.cwd(), "public", "robots.txt");
+    res.type("text/plain").sendFile(filePath);
+  });
+
   // Vite middleware for local development
   if (process.env.NODE_ENV === "development") {
     const { createServer: createViteServer } = await import("vite");
