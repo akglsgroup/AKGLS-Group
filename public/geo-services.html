@@ -46,7 +46,7 @@
     <!-- Font Integrations -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;550;600;700;800&family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
     <!-- CSS Loading: Tailwind Play CDN for styling and layout -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -55,16 +55,20 @@
         theme: {
           extend: {
             fontFamily: {
-              sans: ["Inter", "sans-serif"],
+              sans: ["Plus Jakarta Sans", "ui-sans-serif", "system-ui", "sans-serif"],
               display: ["Space Grotesk", "sans-serif"],
               mono: ["JetBrains Mono", "monospace"],
             },
             colors: {
               brand: {
-                indigo: "#4f46e5",
-                purple: "#a855f7",
+                navy: "#0c121e",
+                slate: "#05070a",
+                indigo: "#3b82f6",
+                purple: "#8b5cf6",
                 teal: "#06b6d4",
+                emerald: "#10b981",
                 orange: "#f97316",
+                "light-bg": "#05070a",
               },
               slate: {
                 850: "#151f32",
@@ -187,38 +191,805 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <!-- NAVIGATION HEADER -->
-    <header class="sticky top-0 z-[100] backdrop-blur-md bg-[#05070a]/85 border-b border-slate-900/60 transition-all duration-300">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
-        <!-- Brand/Identity -->
-        <a href="/" class="flex items-center gap-2 group transition-transform duration-150 active:scale-95">
-          <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-indigo via-indigo-500 to-brand-teal flex items-center justify-center shadow-lg shadow-indigo-500/10 border border-indigo-400/25">
-            <svg class="h-5 w-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-            </svg>
-          </div>
-          <p class="font-display font-black text-lg tracking-tight text-white flex items-center">
-            AKGLS<span class="text-brand-orange ml-0.5">GROUP</span>
-          </p>
-        </a>
-
-        <!-- Contact Links -->
-        <div class="flex items-center gap-4">
-          <a href="tel:+918318114492" class="hidden sm:inline-flex items-center gap-1.5 text-xs font-mono font-bold text-slate-400 hover:text-white transition-colors bg-slate-900 border border-slate-800 px-3 py-1.5 rounded-lg">
-            <svg class="h-3.5 w-3.5 text-brand-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+    <!-- ENTERPRISE NOTICE TICKER / TOP BAR -->
+    <div id="top-bar" class="bg-brand-navy border-b border-slate-800 text-slate-300 py-2.5 px-4 text-xs font-medium z-50 relative">
+      <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
+        <!-- Left section contacts: Phone & WhatsApp -->
+        <div class="flex flex-wrap items-center justify-center gap-4 text-[11px] sm:text-xs">
+          <a href="tel:+918318114492" class="flex items-center gap-1.5 hover:text-brand-indigo transition-colors text-slate-300 font-semibold">
+            <svg class="w-3.5 h-3.5 text-brand-indigo animate-pulse" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.72l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.72.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
             </svg>
-            +91 831 811 4492
+            <span>+91 831 811 4492</span>
           </a>
-          <a href="https://wa.me/918318114492" target="_blank" referrerpolicy="no-referrer" class="bg-emerald-600/90 hover:bg-emerald-500 text-white font-extrabold text-2xs uppercase tracking-wider px-4 py-2 rounded-lg transition-all flex items-center gap-1">
-            <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24">
+          <span class="text-slate-800 hidden sm:inline">|</span>
+          <a 
+            href="https://wa.me/918318114492?text=Hello%20AKGLS%20Group,%20I%20am%20interested%20in%20deploying%20GEO%20Services%20on%20my%20domain." 
+            target="_blank" 
+            rel="noopener noreferrer"
+            referrerpolicy="no-referrer"
+            class="flex items-center gap-1.5 hover:text-emerald-400 transition-colors text-slate-200 font-semibold"
+          >
+            <svg class="w-3.5 h-3.5 text-emerald-400 fill-emerald-400/20" viewBox="0 0 24 24">
               <path d="M17.472 14.382c-.3.076-.84.254-1.127.305-.178.033-.374-.017-.508-.135-.38-.339-.745-.71-1.077-1.114-.305-.37-.624-.766-.883-1.176a.6.6 0 01-.013-.6c.101-.17.313-.364.444-.543.14-.19.26-.388.35-.61a.483.483 0 00-.03-.432c-.08-.19-.66-1.59-.9-2.17-.11-.27-.26-.35-.5-.35h-.45a1.2 1.2 0 00-.86.38c-.37.4-1.25 1.22-1.25 2.98s1.28 3.46 1.46 3.69c.18.24 2.52 3.85 6.11 5.4 2.31.99 3.19.88 3.97.77a3.174 3.174 0 002.1-1.48c.25-.49.25-.91.17-1.4-.08-.49-.3-.72-1.1-1.12zm-5.45 7.42A9.716 9.716 0 013 12c0-5.38 4.38-9.8 9.77-9.8a9.7 9.7 0 017 2.92A9.63 9.63 0 0119.7 12c0 1.94-.57 3.82-1.63 5.43l1.1 4.05-4.14-1.09a9.78 9.78 0 01-3.05.41zm0-19.6C6.54 2.2 1.4 7.33 1.4 13.6c0 2.01.52 3.96 1.52 5.68l-1.62 5.92 6.07-1.59A11.33 11.33 0 0012 25c6.26 0 11.4-5.13 11.4-11.4S18.26 2.2 12 2.2z"/>
             </svg>
-            WhatsApp
+            <span>WhatsApp Chat</span>
+          </a>
+        </div>
+
+        <!-- Right section social media icons -->
+        <div class="flex items-center gap-5">
+          <a 
+            href="https://www.facebook.com/akglsgroup/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            referrerpolicy="no-referrer"
+            class="text-slate-400 hover:text-[#1877F2] transition-colors p-1"
+            aria-label="Facebook"
+          >
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+          <a 
+            href="https://x.com/akglsgroup" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            referrerpolicy="no-referrer"
+            class="text-slate-400 hover:text-white transition-colors p-1"
+            aria-label="X (formerly Twitter)"
+          >
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a 
+            href="https://www.linkedin.com/company/akglsgroup" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            referrerpolicy="no-referrer"
+            class="text-slate-400 hover:text-[#0A66C2] transition-colors p-1"
+            aria-label="LinkedIn"
+          >
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+          </a>
+          <a 
+            href="https://www.instagram.com/akglsgroup/" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            referrerpolicy="no-referrer"
+            class="text-slate-400 hover:text-[#E1306C] transition-colors p-1"
+            aria-label="Instagram"
+          >
+            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
           </a>
         </div>
       </div>
-    </header>
+    </div>
+
+    <!-- CORE STICKY CORPORATE NAVBAR -->
+    <nav id="header-nav" class="sticky top-0 w-full z-40 transition-all duration-300 border-b bg-[#0a0f1d]/90 backdrop-blur-md py-5 border-slate-800/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between">
+          
+          <!-- Logo Mark -->
+          <a 
+            href="/" 
+            class="flex items-center gap-3 select-none group"
+          >
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-indigo to-brand-purple flex items-center justify-center shadow-lg shadow-brand-indigo/35 group-hover:scale-105 transition-transform duration-300">
+              <span class="text-white font-black text-xl font-display">AK</span>
+            </div>
+            <div class="flex flex-col text-left">
+              <span class="font-black tracking-tight text-xl font-display leading-none transition-colors text-white">
+                AKGLS <span class="text-brand-indigo">GROUP</span>
+              </span>
+              <span class="text-[9px] text-brand-teal tracking-widest font-extrabold uppercase mt-1 leading-none">
+                Digital & AI Enterprise
+              </span>
+            </div>
+          </a>
+
+          <!-- Desktop Central Navigation with full Hover Dropdowns -->
+          <div class="hidden lg:flex items-center space-x-1.5 xl:space-x-4">
+            
+            <!-- Menu 1: Services (4 Columns dropdown) -->
+            <div class="relative group/menu" data-menu="services">
+              <button 
+                class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all text-slate-300 hover:text-white group-hover/menu:text-brand-indigo group-hover/menu:bg-brand-indigo/10"
+              >
+                Services
+                <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/menu:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div class="hidden group-hover/menu:grid absolute left-1/2 -translate-x-[15%] top-full mt-2 w-[850px] bg-[#0c121e] border border-slate-800 rounded-2xl shadow-2xl p-6 z-50 text-left grid-cols-4 gap-6 text-slate-200">
+                <!-- Col 1: SEO Services -->
+                <div class="space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2">
+                    SEO Services
+                  </h4>
+                  <div class="space-y-1.5">
+                    <a href="/seo-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>SEO Services</span>
+                    </a>
+                    <a href="/technical-seo" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Technical SEO</span>
+                    </a>
+                    <a href="/on-page-seo" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>On-Page SEO</span>
+                    </a>
+                    <a href="/off-page-seo-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Off-Page SEO</span>
+                    </a>
+                    <a href="/local-seo-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Local SEO</span>
+                    </a>
+                    <a href="/ecommerce-seo-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Ecommerce SEO</span>
+                    </a>
+                    <a href="/enterprise-seo-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Enterprise SEO</span>
+                    </a>
+                    <a href="/international-seo-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>International SEO</span>
+                    </a>
+                    <a href="/link-building-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Link Building</span>
+                    </a>
+                    <a href="/seo-audit-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>SEO Audit Services</span>
+                    </a>
+                    <a href="/hire-seo-expert" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Hire SEO Expert</span>
+                    </a>
+                  </div>
+                  <div class="pt-2">
+                    <a href="/seo-audit-services" class="flex items-center justify-between text-xs font-bold text-white bg-gradient-to-r from-brand-indigo to-brand-purple py-2 px-3 rounded-lg shadow hover:opacity-95 transition-opacity">
+                      <span>Get Free SEO Audit</span>
+                      <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Col 2: AI Optimization Services -->
+                <div class="space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2">
+                    AI Optimization Services
+                  </h4>
+                  <div class="space-y-1.5">
+                    <a href="/geo-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md bg-brand-indigo/15 text-brand-indigo transition-colors text-[13px] font-bold">
+                      <span class="flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5 text-brand-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                        GEO Services
+                      </span>
+                      <span class="text-[9px] bg-brand-orange/10 text-brand-orange font-bold uppercase py-0.5 px-1.5 rounded tracking-wide font-mono scale-90">Trending</span>
+                    </a>
+                    <a href="/llm-optimization-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span class="flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5 text-brand-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                        LLM Optimization Services
+                      </span>
+                      <span class="text-[9px] bg-brand-orange/10 text-brand-orange font-bold uppercase py-0.5 px-1.5 rounded tracking-wide font-mono scale-90">Trending</span>
+                    </a>
+                    <a href="/ai-citation-building-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span class="flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5 text-brand-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                        AI Citation Building
+                      </span>
+                      <span class="text-[9px] bg-brand-orange/10 text-brand-orange font-bold uppercase py-0.5 px-1.5 rounded tracking-wide font-mono scale-90">Trending</span>
+                    </a>
+                    <a href="/aeo-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span class="flex items-center gap-1">
+                        <svg class="w-3.5 h-3.5 text-brand-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                        AEO Services
+                      </span>
+                      <span class="text-[9px] bg-brand-orange/10 text-brand-orange font-bold uppercase py-0.5 px-1.5 rounded tracking-wide font-mono scale-90">Trending</span>
+                    </a>
+                    <a href="/ai-seo-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>AI SEO Services</span>
+                    </a>
+                    <a href="/ai-search-optimization-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>AI Search Optimization</span>
+                    </a>
+                    <a href="/chatgpt-optimization-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>ChatGPT Optimization</span>
+                    </a>
+                    <a href="/gemini-optimization-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Gemini Optimization</span>
+                    </a>
+                    <a href="/claude-optimization-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Claude Optimization</span>
+                    </a>
+                    <a href="/voice-search-optimization-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Voice Search Optimization</span>
+                    </a>
+                  </div>
+                  <div class="pt-2">
+                    <a href="#audit-form" class="flex items-center justify-between text-xs font-bold text-white bg-gradient-to-r from-brand-indigo to-brand-purple py-2 px-3 rounded-lg shadow hover:opacity-95 transition-opacity">
+                      <span>Rank in AI Search</span>
+                      <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Col 3: Paid Marketing -->
+                <div class="space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2">
+                    Paid Marketing
+                  </h4>
+                  <div class="space-y-1.5">
+                    <a href="/google-ads-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Google Ads</span>
+                    </a>
+                    <a href="/meta-ads-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Meta Ads</span>
+                    </a>
+                    <a href="/google-ads-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>YouTube Ads</span>
+                    </a>
+                    <a href="/linkedin-ads-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>LinkedIn Ads</span>
+                    </a>
+                    <a href="/google-ads-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Shopping Ads</span>
+                    </a>
+                    <a href="/google-ads-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Performance Max</span>
+                    </a>
+                    <a href="/google-ads-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Conversion Optimization</span>
+                    </a>
+                  </div>
+                  <div class="pt-2">
+                    <a href="/google-ads-services" class="flex items-center justify-between text-xs font-bold text-white bg-gradient-to-r from-brand-indigo to-brand-purple py-2 px-3 rounded-lg shadow hover:opacity-95 transition-opacity">
+                      <span>Get Free Ads Audit</span>
+                      <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Col 4: Creative & Development -->
+                <div class="space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2">
+                    Creative & Development
+                  </h4>
+                  <div class="space-y-1.5">
+                    <a href="/#web-design-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Web Design</span>
+                    </a>
+                    <a href="/#wordpress-development-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>WordPress Development</span>
+                    </a>
+                    <a href="/shopify-development-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Shopify Development</span>
+                    </a>
+                    <a href="/startup-growth-solutions" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Startup Growth Solutions</span>
+                    </a>
+                    <a href="/enterprise-marketing-solutions" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Enterprise Marketing</span>
+                    </a>
+                    <a href="/#web-design-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>Landing Page Design</span>
+                    </a>
+                    <a href="/#web-design-services" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
+                      <span>UI/UX Design</span>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Menu 2: Solutions (3 Columns dropdown) -->
+            <div class="relative group/menu" data-menu="solutions">
+              <button 
+                class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all text-slate-300 hover:text-white group-hover/menu:text-brand-indigo group-hover/menu:bg-brand-indigo/10"
+              >
+                Solutions
+                <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/menu:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div class="hidden group-hover/menu:grid absolute left-1/2 -translate-x-[25%] top-full mt-2 w-[750px] bg-[#0c121e] border border-slate-800 rounded-2xl shadow-2xl p-6 z-50 text-left grid-cols-3 gap-6 text-slate-200">
+                <!-- Col 1: Business Growth Solutions -->
+                <div class="space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2">
+                    Business Growth Solutions
+                  </h4>
+                  <div class="space-y-1.5">
+                    <a href="/startup-growth-solutions" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Startup Growth Solution</a>
+                    <a href="/enterprise-marketing-solutions" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Enterprise Marketing Solutions</a>
+                    <a href="/local-business-growth-services" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Local Business Growth Services</a>
+                    <a href="/ecommerce-growth-solutions" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Ecommerce Growth Solution</a>
+                    <a href="/b2b-lead-generation-services" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">B2B Lead Generation Services</a>
+                    <a href="/saas-marketing-solutions" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">SaaS Marketing Solutions</a>
+                  </div>
+                </div>
+
+                <!-- Col 2: Industry Solutions -->
+                <div class="space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2">
+                    Industry Solutions
+                  </h4>
+                  <div class="space-y-1.5">
+                    <a href="/healthcare-marketing-services" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Healthcare Marketing</a>
+                    <a href="/dental-clinic-marketing" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo text-brand-teal font-extrabold">Dental Clinic Marketing</a>
+                    <a href="/manufacturing-marketing-services" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Manufacturing Marketing</a>
+                    <a href="/iot-company-marketing-services" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">IoT Company Marketing</a>
+                    <a href="/real-estate-marketing-services" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Real Estate Marketing</a>
+                    <a href="/education-marketing-services" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Education Marketing</a>
+                    <a href="/law-firm-marketing-services" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Law Firm Marketing</a>
+                  </div>
+                </div>
+
+                <!-- Col 3: AI Solutions -->
+                <div class="space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2 flex items-center justify-between">
+                    <span>AI Solutions</span>
+                    <span class="flex items-center gap-0.5 text-[9px] bg-brand-purple/10 text-brand-purple rounded-full px-2 py-0.5 font-bold">
+                      ★ AI Powered
+                    </span>
+                  </h4>
+                  <div class="space-y-1.5">
+                    <a href="/#ai-deepdive" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AI Marketing Automation</a>
+                    <a href="/#ai-deepdive" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AI Lead Generation</a>
+                    <a href="/#ai-deepdive" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AI Chatbot Integration</a>
+                    <a href="/#ai-deepdive" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AI SEO Automation</a>
+                    <a href="/#ai-deepdive" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AI Analytics Dashboard</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu 3: Case Studies (2 Columns) -->
+            <div class="relative group/menu" data-menu="cases">
+              <button 
+                class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all text-slate-300 hover:text-white group-hover/menu:text-brand-indigo group-hover/menu:bg-brand-indigo/10"
+              >
+                Case Studies
+                <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/menu:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div class="hidden group-hover/menu:grid absolute left-1/2 -translate-x-[30%] top-full mt-2 w-[650px] bg-[#0c121e] border border-slate-800 rounded-2xl shadow-2xl p-5 z-50 text-left grid-cols-12 gap-5 text-slate-200">
+                <!-- Left list column -->
+                <div class="col-span-5 space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2">
+                    Performance Cases
+                  </h4>
+                  <div class="space-y-1">
+                    <a href="/seo-case-studies" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all">SEO Case Studies</a>
+                    <a href="/case-study/ecommerce-seo-results" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all">Ecommerce SEO Results</a>
+                    <a href="/case-study/local-seo-results" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all">Local SEO Results</a>
+                    <a href="/seo-case-studies" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all">Lead Generation Results</a>
+                    <a href="/case-study/ppc-success-stories" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all">PPC Success Stories</a>
+                    <a href="/case-study/ai-optimization-results" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all">AI Optimization Results</a>
+                  </div>
+                  <div class="pt-2">
+                    <a href="/seo-case-studies" class="w-full bg-[#0a0f1d] hover:bg-slate-900 border border-slate-800 text-[11px] font-bold py-2.5 px-3 rounded-lg text-slate-300 transition-colors flex items-center justify-center gap-2">
+                      <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+                      Download Report Card
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Right side Featured Card -->
+                <div class="col-span-7 bg-slate-900 text-white p-4 rounded-xl border border-slate-800 flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-2">
+                      <span class="text-[10px] font-bold uppercase tracking-wider bg-brand-indigo px-2.5 py-0.5 rounded-full">Organic SEO</span>
+                      <span class="text-[9px] text-slate-400 font-mono">FEATURED RESULT</span>
+                    </div>
+                    <h4 class="text-sm font-extrabold text-white font-display mb-1.5 leading-snug">
+                      Fintech Leader Inc.
+                    </h4>
+                    <!-- Growth SVG graph -->
+                    <div class="h-20 w-full bg-slate-950/60 rounded-lg p-2 border border-slate-800/80 relative overflow-hidden flex flex-col justify-end">
+                      <div class="absolute inset-x-0 bottom-2 px-4 flex justify-between text-[8.5px] text-slate-500 font-mono">
+                        <span>Month 1</span>
+                        <span>Month 6</span>
+                      </div>
+                      <svg class="w-full h-12" viewBox="0 0 100 50" preserveAspectRatio="none">
+                        <defs>
+                          <linearGradient id="headerChartGrad" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0%" stopColor="#4F46E5" stopOpacity="0.4" />
+                            <stop offset="100%" stopColor="#4F46E5" stopOpacity="0" />
+                          </linearGradient>
+                        </defs>
+                        <path d="M 5,45 Q 23,38 41,30 T 77,15 L 95,8 L 95,45 Z" fill="url(#headerChartGrad)" />
+                        <path d="M 5,45 Q 23,38 41,30 T 77,15 L 95,8" fill="none" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" />
+                        <circle cx="95" cy="8" r="2" fill="#0D9488" />
+                      </svg>
+                    </div>
+
+                    <div class="mt-3 grid grid-cols-2 gap-2 bg-white/5 p-2 rounded-lg border border-white/5 text-center">
+                      <div>
+                        <div class="text-[8px] text-slate-400 uppercase font-bold tracking-wider">Metrics</div>
+                        <div class="text-xs font-black text-brand-emerald font-mono">+310% traffic</div>
+                      </div>
+                      <div>
+                        <div class="text-[8px] text-slate-400 uppercase font-bold tracking-wider">Comparison</div>
+                        <div class="text-[10px] font-semibold text-slate-300 truncate font-mono">4.5K → 18.5K/mo</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="mt-3.5 flex items-center justify-end">
+                    <a href="/seo-case-studies" class="bg-brand-orange hover:bg-opacity-95 text-[10px] font-black uppercase text-white py-2 px-3 rounded-lg transition-all">
+                      Duplicate This Strategy
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu 4: Resources (4 Columns dropdown) -->
+            <div class="relative group/menu" data-menu="resources">
+              <button 
+                class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all text-slate-300 hover:text-white group-hover/menu:text-brand-indigo group-hover/menu:bg-brand-indigo/10"
+              >
+                Resources
+                <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/menu:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div class="hidden group-hover/menu:grid absolute left-1/2 -translate-x-[40%] top-full mt-2 w-[800px] bg-[#0c121e] border border-slate-800 rounded-2xl shadow-2xl p-6 z-50 text-left grid-cols-4 gap-6 text-slate-200">
+                <!-- Col 1: Blog Categories -->
+                <div class="space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2">
+                    Blog Categories
+                  </h4>
+                  <div class="space-y-1.5">
+                    <a href="/blog" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">All Insights Blog</a>
+                    <a href="/blog?category=SEO%20Blogs" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">SEO Blogs</a>
+                    <a href="/blog?category=AI%20SEO%20Blogs" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AI SEO Blogs</a>
+                    <a href="/blog?category=GEO%20Blogs" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">GEO Blogs</a>
+                    <a href="/blog?category=AEO%20Blogs" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AEO Blogs</a>
+                    <a href="/blog?category=Google%20Updates" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Google Updates</a>
+                  </div>
+                </div>
+
+                <!-- Col 2: Free Tools -->
+                <div class="space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-brand-indigo" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                    <span>Free Tools</span>
+                  </h4>
+                  <div class="space-y-1.5">
+                    <a href="/free-checklists/" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AI SEO Checklists (New)</a>
+                    <a href="/tools/seo-audit-tool" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">SEO Audit Tool</a>
+                    <a href="/tools" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AI Content Analyzer</a>
+                    <a href="/tools" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Schema Generator</a>
+                    <a href="/tools" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">SEO ROI Calculator</a>
+                  </div>
+                </div>
+
+                <!-- Col 3: Learning Hub -->
+                <div class="space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2 flex items-center gap-1.5">
+                    <svg class="w-3.5 h-3.5 text-brand-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                    <span>Learning Hub</span>
+                  </h4>
+                  <div class="space-y-1.5">
+                    <a href="/learning-hub?category=SEO%20Course" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">SEO Course</a>
+                    <a href="/learning-hub?category=GEO%20Course" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">GEO Course</a>
+                    <a href="/learning-hub?category=AEO%20Course" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AEO Course</a>
+                    <a href="/learning-hub?category=AI%20Marketing%20Course" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AI Marketing Course</a>
+                    <a href="/learning-hub?category=Webinars" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Webinars</a>
+                  </div>
+                </div>
+
+                <!-- Col 4: Downloads -->
+                <div class="space-y-4">
+                  <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2">
+                    Downloads
+                  </h4>
+                  <div class="space-y-1.5">
+                    <a href="/free-checklists/" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AI SEO, GEO & AEO PDF</a>
+                    <a href="/learning-hub/seo-checklist-pdf" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">SEO Checklist PDF</a>
+                    <a href="/learning-hub/ai-seo-guide" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">AI SEO Guide 2026</a>
+                    <a href="/learning-hub/website-audit-template" class="block py-1 px-1.5 rounded-md hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Website Audit Template</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Menu 5: Company (Dropdown) -->
+            <div class="relative group/menu" data-menu="company">
+              <button 
+                class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all text-slate-300 hover:text-white group-hover/menu:text-brand-indigo group-hover/menu:bg-brand-indigo/10"
+              >
+                Company
+                <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/menu:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div class="hidden group-hover/menu:block absolute left-0 top-full mt-2 w-48 bg-[#0c121e] border border-slate-800 rounded-xl shadow-xl p-3 z-50 text-left space-y-1 text-slate-200">
+                <a href="/blog" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">SEO / AI Blog</a>
+                <a href="/tools" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Free Tools</a>
+                <a href="/india-pricing" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Indian Client Pricing</a>
+                <a href="/proposal-builder" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Proposal PDF Builder</a>
+                <a href="/#team-leadership" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">About Us</a>
+                <a href="/#team-leadership" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Meet Our Team</a>
+                <a href="/internship-program" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Internship Program</a>
+                <a href="/#audit-form" class="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">Contact Us</a>
+              </div>
+            </div>
+
+            <!-- Menu 6: Hire Experts (Dropdown) -->
+            <div class="relative group/menu" data-menu="hire">
+              <button 
+                class="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all text-slate-300 hover:text-white group-hover/menu:text-brand-indigo group-hover/menu:bg-brand-indigo/10"
+              >
+                Hire
+                <svg class="w-3.5 h-3.5 transition-transform duration-200 group-hover/menu:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              <div class="hidden group-hover/menu:block absolute right-0 top-full mt-2 w-56 bg-[#0c121e] border border-slate-800 rounded-xl shadow-xl p-3.5 z-50 text-left space-y-1.5 text-slate-200">
+                <div class="px-2 pb-1.5 border-b border-slate-850 mb-1">
+                  <span class="text-[10px] text-brand-orange font-black uppercase tracking-wider block">Instant Placement</span>
+                </div>
+                <a href="/hire-seo-expert" class="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo">
+                  <span>Hire SEO Expert</span>
+                  <svg class="w-3.5 h-3.5 text-brand-emerald" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </a>
+                <a href="/hire-ppc-expert" class="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo">
+                  <span>Hire PPC Expert</span>
+                  <svg class="w-3.5 h-3.5 text-brand-emerald" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </a>
+                <a href="/hire-ai-seo-expert" class="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo">
+                  <span>Hire AI SEO Expert</span>
+                  <svg class="w-3.5 h-3.5 text-brand-emerald" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </a>
+                <a href="/hire-content-writer" class="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo">
+                  <span>Hire Content Writer</span>
+                  <svg class="w-3.5 h-3.5 text-brand-emerald" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </a>
+                <a href="/hire-wordpress-developer" class="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo">
+                  <span>Hire WordPress Developer</span>
+                  <svg class="w-3.5 h-3.5 text-brand-emerald" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </a>
+                <a href="/hire-link-building-expert" class="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo">
+                  <span>Hire Link Building Expert</span>
+                  <svg class="w-3.5 h-3.5 text-brand-emerald" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Right Side Header Action Anchors -->
+          <div class="hidden lg:flex items-center space-x-4">
+            <a 
+              href="/#capabilities-explorer" 
+              class="p-2.5 rounded-xl transition-all text-slate-300 hover:text-white hover:bg-white/10"
+              title="Search capabilities..."
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </a>
+
+            <a 
+              href="tel:+918318114492" 
+              class="bg-gradient-to-r from-brand-indigo to-brand-purple hover:opacity-95 text-white text-xs font-extrabold uppercase tracking-wide py-3.5 px-6 rounded-xl transition-all shadow-md shadow-brand-indigo/20 flex items-center gap-1.5"
+            >
+              Call Now 
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.72l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.72.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            </a>
+          </div>
+
+          <!-- Mobile Navigation Toggles -->
+          <div class="flex lg:hidden items-center space-x-3">
+            <a 
+              href="/#capabilities-explorer"
+              class="p-2 text-slate-400 hover:text-brand-indigo"
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </a>
+            <button 
+              id="mobileMenuToggleBtn"
+              class="p-2 text-slate-400 hover:text-brand-indigo cursor-pointer"
+              aria-label="Open Mobile Menu"
+            >
+              <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+          </div>
+
+        </div>
+      </div>
+    </nav>
+
+    <!-- MOBILE NAVIGATION SLIDE-OVER DRAWER -->
+    <div id="mobileDrawerBackdrop" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-sm lg:hidden hidden text-left transition-opacity duration-300">
+      <div id="mobileDrawerPanel" class="absolute right-0 top-0 bottom-0 w-full max-w-[340px] bg-[#0c121e] border-l border-slate-800 flex flex-col justify-between shadow-2xl overflow-y-auto text-slate-200 transition-transform duration-300 translate-x-full">
+        <!-- Header inside drawer -->
+        <div class="p-5 border-b border-slate-800/80 flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <div class="w-8 h-8 rounded-lg bg-brand-indigo flex items-center justify-center font-bold text-white text-sm font-display">AK</div>
+            <span class="font-extrabold text-white text-base font-display">AKGLS MENU</span>
+          </div>
+          <button 
+            id="mobileMenuCloseBtn"
+            class="p-2 hover:bg-slate-900 rounded-lg text-slate-400 hover:text-white transition-colors cursor-pointer"
+            aria-label="Close Menu"
+          >
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+          </button>
+        </div>
+
+        <!-- Accordion Based Nav Middle Section -->
+        <div class="flex-1 px-5 py-4 space-y-1 text-slate-300 overflow-y-auto scrollbar-none">
+          
+          <!-- Services Accordion -->
+          <div class="border-b border-slate-800 pb-1.5">
+            <button 
+              class="mobile-accordion-btn w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+              data-target="mob-acc-services"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-brand-indigo" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+                Services
+              </span>
+              <svg class="w-4 h-4 text-slate-500 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="mob-acc-services" class="hidden pl-4 py-1.5 space-y-2 border-l border-slate-850 text-[13px]">
+              <div>
+                <p class="text-[10px] uppercase font-black text-slate-400">SEO Services</p>
+                <a href="/seo-services" class="block py-1 text-slate-300 hover:text-brand-indigo">SEO Services</a>
+                <a href="/technical-seo" class="block py-1 text-slate-300 hover:text-brand-indigo">Technical SEO</a>
+                <a href="/on-page-seo" class="block py-1 text-slate-300 hover:text-brand-indigo">On-Page SEO</a>
+                <a href="/local-seo-services" class="block py-1 text-slate-300 hover:text-brand-indigo">Local SEO</a>
+                <a href="/ecommerce-seo-services" class="block py-1 text-slate-300 hover:text-brand-indigo">Ecommerce SEO</a>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-black text-slate-400">AI Optimization</p>
+                <a href="/geo-services" class="block py-1 text-brand-indigo font-bold hover:text-white">GEO Services (Current)</a>
+                <a href="/llm-optimization-services" class="block py-1 text-slate-300 hover:text-brand-indigo">LLM Optimization</a>
+                <a href="/ai-citation-building-services" class="block py-1 text-slate-300 hover:text-brand-indigo">AI Citation Building</a>
+                <a href="/aeo-services" class="block py-1 text-slate-300 hover:text-brand-indigo">AEO Services</a>
+                <a href="/ai-seo-services" class="block py-1 text-slate-300 hover:text-brand-indigo">AI SEO Services</a>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-black text-slate-400">Paid & Tech</p>
+                <a href="/google-ads-services" class="block py-1 text-slate-300 hover:text-brand-indigo">Google Ads</a>
+                <a href="/meta-ads-services" class="block py-1 text-slate-300 hover:text-brand-indigo">Meta Ads</a>
+                <a href="/shopify-development-services" class="block py-1 text-slate-300 hover:text-brand-indigo">Shopify Development</a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Solutions Accordion -->
+          <div class="border-b border-slate-800 pb-1.5">
+            <button 
+              class="mobile-accordion-btn w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+              data-target="mob-acc-solutions"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-brand-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                Solutions
+              </span>
+              <svg class="w-4 h-4 text-slate-500 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="mob-acc-solutions" class="hidden pl-4 py-1.5 space-y-1.5 border-l border-slate-850 text-[13px]">
+              <a href="/startup-growth-solutions" class="block py-1 text-slate-300 hover:text-brand-indigo">Startup Growth Solution</a>
+              <a href="/enterprise-marketing-solutions" class="block py-1 text-slate-300 hover:text-brand-indigo">Enterprise Marketing Solutions</a>
+              <a href="/dental-clinic-marketing" class="block py-1 text-brand-teal font-bold hover:text-white">Dental Clinic Marketing</a>
+              <a href="/healthcare-marketing-services" class="block py-1 text-slate-300 hover:text-brand-indigo">Healthcare Marketing</a>
+              <a href="/b2b-lead-generation-services" class="block py-1 text-slate-300 hover:text-brand-indigo">B2B Lead Generation</a>
+              <a href="/saas-marketing-solutions" class="block py-1 text-slate-300 hover:text-brand-indigo">SaaS Marketing Solutions</a>
+            </div>
+          </div>
+
+          <!-- Case Studies Accordion -->
+          <div class="border-b border-slate-800 pb-1.5">
+            <button 
+              class="mobile-accordion-btn w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+              data-target="mob-acc-cases"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-brand-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+                Case Studies
+              </span>
+              <svg class="w-4 h-4 text-slate-500 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="mob-acc-cases" class="hidden pl-4 py-1.5 space-y-1 border-l border-slate-850 text-[13px]">
+              <a href="/seo-case-studies" class="block py-1.5 text-slate-300 hover:text-brand-indigo">SEO Case Studies</a>
+              <a href="/case-study/ecommerce-seo-results" class="block py-1.5 text-slate-300 hover:text-brand-indigo">Ecommerce SEO Results</a>
+              <a href="/case-study/local-seo-results" class="block py-1.5 text-slate-300 hover:text-brand-indigo">Local SEO Results</a>
+              <a href="/case-study/ppc-success-stories" class="block py-1.5 text-slate-300 hover:text-brand-indigo">PPC Success Stories</a>
+              <a href="/case-study/ai-optimization-results" class="block py-1.5 text-slate-300 hover:text-brand-indigo">AI Optimization Results</a>
+            </div>
+          </div>
+
+          <!-- Resources Accordion -->
+          <div class="border-b border-slate-800 pb-1.5">
+            <button 
+              class="mobile-accordion-btn w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+              data-target="mob-acc-resources"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-brand-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                Resources
+              </span>
+              <svg class="w-4 h-4 text-slate-500 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="mob-acc-resources" class="hidden pl-4 py-1.5 space-y-2 border-l border-slate-850 text-[13px]">
+              <a href="/blog" class="block py-0.5 text-slate-300 hover:text-brand-indigo">All Insights Blog</a>
+              <a href="/free-checklists/" class="block py-0.5 text-slate-300 hover:text-brand-indigo">AI SEO Checklists (New)</a>
+              <a href="/tools" class="block py-0.5 text-slate-300 hover:text-brand-indigo">Free SEO Tools</a>
+              <a href="/learning-hub/seo-checklist-pdf" class="block py-0.5 text-slate-300 hover:text-brand-indigo">SEO Checklist PDF</a>
+            </div>
+          </div>
+
+          <!-- Company Accordion -->
+          <div class="border-b border-slate-800 pb-1.5">
+            <button 
+              class="mobile-accordion-btn w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+              data-target="mob-acc-company"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Company
+              </span>
+              <svg class="w-4 h-4 text-slate-500 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="mob-acc-company" class="hidden pl-4 py-1.5 space-y-1.5 border-l border-slate-850 text-[13px]">
+              <a href="/blog" class="block py-1 text-slate-300 hover:text-brand-indigo">SEO / AI Blog</a>
+              <a href="/tools" class="block py-1 text-slate-300 hover:text-brand-indigo">Free Tools</a>
+              <a href="/india-pricing" class="block py-1 text-slate-300 hover:text-brand-indigo">Indian Client Pricing</a>
+              <a href="/proposal-builder" class="block py-1 text-slate-300 hover:text-brand-indigo">Proposal PDF Builder</a>
+              <a href="/#team-leadership" class="block py-1 text-slate-300 hover:text-brand-indigo">About Us</a>
+              <a href="/internship-program" class="block py-1 text-slate-300 hover:text-brand-indigo">Internship Program</a>
+            </div>
+          </div>
+
+          <!-- Hire Experts Accordion -->
+          <div class="border-b border-slate-800">
+            <button 
+              class="mobile-accordion-btn w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+              data-target="mob-acc-hire"
+            >
+              <span class="flex items-center gap-2">
+                <svg class="w-4 h-4 text-brand-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+                Hire
+              </span>
+              <svg class="w-4 h-4 text-slate-500 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+            </button>
+            <div id="mob-acc-hire" class="hidden pl-4 py-1.5 space-y-1.5 border-l border-slate-850 text-[13px]">
+              <a href="/hire-seo-expert" class="block py-1 text-slate-300 hover:text-brand-indigo">Hire SEO Expert</a>
+              <a href="/hire-ppc-expert" class="block py-1 text-slate-300 hover:text-brand-indigo">Hire PPC Expert</a>
+              <a href="/hire-ai-seo-expert" class="block py-1 text-slate-300 hover:text-brand-indigo">Hire AI SEO Expert</a>
+              <a href="/hire-content-writer" class="block py-1 text-slate-300 hover:text-brand-indigo">Hire Content Writer</a>
+              <a href="/hire-wordpress-developer" class="block py-1 text-slate-300 hover:text-brand-indigo">Hire WordPress Developer</a>
+              <a href="/hire-link-building-expert" class="block py-1 text-slate-300 hover:text-brand-indigo">Hire Link Building Expert</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom CTA triggers inside Drawer -->
+        <div class="p-5 border-t border-slate-800 bg-[#0a0f1d] space-y-3">
+          <a 
+            href="#leadCaptureForm" 
+            class="w-full py-2.5 bg-brand-orange/10 text-brand-orange font-bold rounded-xl text-center block text-xs hover:bg-brand-orange hover:text-white transition-colors"
+          >
+            Get Free SEO Audit
+          </a>
+          
+          <a 
+            href="tel:+918318114492" 
+            class="w-full py-3 bg-brand-indigo hover:bg-opacity-95 text-white font-black text-center rounded-xl block text-xs shadow"
+          >
+            Book Free Consultation (+91 831 811 4492)
+          </a>
+        </div>
+
+      </div>
+    </div>
 
     <!-- LANDING PAGE HERO SECTION -->
     <main class="relative">
@@ -230,8 +1001,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           
           <div class="flex items-center gap-2 mb-8">
-            <a href="/" class="text-xs font-bold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-full py-1.5 px-4 transition-colors">
-              ← Return to Main Agency Website
+            <a href="/" class="inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-full py-1.5 px-4 transition-colors">
+              ← Back to Main Agency Website
             </a>
           </div>
 
@@ -239,23 +1010,23 @@
             <!-- Left Column: Copywriting content -->
             <div class="lg:col-span-7 space-y-6">
               
-              <div class="inline-flex items-center gap-2 bg-indigo-500/15 border border-indigo-500/30 text-indigo-300 rounded-full py-1.5 px-4 font-bold text-[10px] uppercase tracking-wider font-display">
+              <div class="inline-flex items-center gap-2 bg-brand-indigo/15 border border-brand-indigo/30 text-indigo-300 rounded-full py-1.5 px-4 font-bold text-[10.5px] uppercase tracking-wider font-display">
                 <span class="relative flex h-2 w-2">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-orange opacity-75"></span>
                   <span class="relative inline-flex rounded-full h-2 w-2 bg-brand-orange"></span>
                 </span>
-                <span>Generative Engine Optimization (GEO) • Live Enterprise Playbook</span>
+                <span>Generative Engine Optimization (GEO) • Live Playbook</span>
               </div>
 
               <h1 class="text-4xl sm:text-5xl md:text-5.5xl lg:text-6xl font-black font-display leading-[1.08] tracking-tight">
-                Secure Citation & Recommendation <br />
+                Get Sourced & Recommended <br />
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-indigo-400 to-purple-400">
                   By Generative AI Search.
                 </span>
               </h1>
 
               <p class="text-slate-400 text-sm md:text-base font-light leading-relaxed max-w-xl">
-                Traditional SEO boosts rankings on directory pages. GEO (Generative Engine Optimization) structures your entity associations, primary citation maps, and authority credentials so ChatGPT Search, Perplexity, Gemini, and Claude draft and recommend your brand.
+                Traditional SEO ranks you on list pages. GEO structures your entity relations, citation sources, and schema maps so ChatGPT Search, Perplexity, Gemini, and Claude answers cite and recommend your brand.
               </p>
 
               <!-- Main Call-To-Actions -->
@@ -271,7 +1042,7 @@
                   <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
                     <path d="M17.472 14.382c-.3.076-.84.254-1.127.305-.178.033-.374-.017-.508-.135-.38-.339-.745-.71-1.077-1.114-.305-.37-.624-.766-.883-1.176a.6.6 0 01-.013-.6c.101-.17.313-.364.444-.543.14-.19.26-.388.35-.61a.483.483 0 00-.03-.432c-.08-.19-.66-1.59-.9-2.17-.11-.27-.26-.35-.5-.35h-.45a1.2 1.2 0 00-.86.38c-.37.4-1.25 1.22-1.25 2.98s1.28 3.46 1.46 3.69c.18.24 2.52 3.85 6.11 5.4 2.31.99 3.19.88 3.97.77a3.174 3.174 0 002.1-1.48c.25-.49.25-.91.17-1.4-.08-.49-.3-.72-1.1-1.12zm-5.45 7.42A9.716 9.716 0 013 12c0-5.38 4.38-9.8 9.77-9.8a9.7 9.7 0 017 2.92A9.63 9.63 0 0119.7 12c0 1.94-.57 3.82-1.63 5.43l1.1 4.05-4.14-1.09a9.78 9.78 0 01-3.05.41zm0-19.6C6.54 2.2 1.4 7.33 1.4 13.6c0 2.01.52 3.96 1.52 5.68l-1.62 5.92 6.07-1.59A11.33 11.33 0 0012 25c6.26 0 11.4-5.13 11.4-11.4S18.26 2.2 12 2.2z"/>
                   </svg>
-                  WhatsApp Us Now
+                  WhatsApp Us: +91 831 811 4492
                 </a>
               </div>
 
@@ -1125,13 +1896,550 @@
       </section>
     </main>
 
-    <!-- FOOTER BLOCK -->
-    <footer class="bg-black/90 text-slate-500 py-8 border-t border-slate-900 text-center font-mono text-[10px]">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-2">
-        <p>&copy; 2026 AKGLS Group. All rights reserved.</p>
-        <p class="text-slate-600">Enterprise Generative Engine Optimization Frameworks &bull; High Authority Entity Matching Nodes</p>
+    <!-- GLOBAL CORPORATE FOOTER (Identical to React Footer.tsx) -->
+    <div class="w-full relative z-30" id="common-global-footer">
+      
+      <!-- SECTION 10: GRADIENT BLUE/PURPLE FLOATING CTA STRIP -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 md:mt-16 mb-[-60px] relative z-40">
+        <div class="bg-gradient-to-r from-brand-indigo via-indigo-950 to-brand-purple rounded-3xl p-8 md:p-12 border border-indigo-500/30 shadow-2xl relative overflow-hidden text-left">
+          <!-- Subtle background nodes for decorative feel -->
+          <div class="absolute top-0 right-0 w-80 h-80 bg-brand-teal/10 rounded-full blur-3xl pointer-events-none"></div>
+          <div class="absolute bottom-0 left-0 w-60 h-60 bg-brand-orange/5 rounded-full blur-2xl pointer-events-none"></div>
+
+          <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 relative z-10">
+            <div class="space-y-3.5 max-w-2xl">
+              <span class="flex items-center gap-1.5 text-[10px] text-brand-teal font-mono font-black uppercase tracking-widest">
+                <span class="w-2 h-2 rounded bg-brand-teal"></span>
+                ACQUISITION EXPANSION Active
+              </span>
+              <h3 class="text-2xl sm:text-3xl md:text-4xl font-black font-display text-white tracking-tight leading-tight">
+                Ready to Grow Your Business Online?
+              </h3>
+              <p class="text-indigo-200 text-xs sm:text-sm font-light max-w-xl">
+                Deploy customized structural optimizations, capture localized map citation networks, and secure recommendations inside generative AI indices. Get started today.
+              </p>
+            </div>
+
+            <div class="flex flex-wrap gap-3.5 w-full lg:w-auto shrink-0">
+              <a 
+                href="#auditForm"
+                class="bg-brand-orange hover:bg-opacity-95 text-white font-extrabold text-xs uppercase tracking-wider py-4 px-7 rounded-xl transition-all shadow-xl hover:shadow-brand-orange/25 w-full sm:w-auto text-center"
+                id="footer-strip-cta-audit"
+              >
+                Get Free SEO Audit
+              </a>
+              <a 
+                href="https://wa.me/918318114492?text=Hello%20AKGLS%20Group,%20I%20would%20like%20to%20schedule%20a%20consultation."
+                target="_blank"
+                rel="noopener noreferrer"
+                class="bg-slate-900 hover:bg-slate-800 border border-slate-850 hover:border-slate-700 text-slate-200 font-extrabold text-xs uppercase tracking-wider py-4 px-7 rounded-xl transition-all w-full sm:w-auto text-center"
+                id="footer-strip-cta-consult"
+              >
+                Schedule Consultation
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
-    </footer>
+
+      <!-- FOOTER CONTAINER BACKGROUND - DARK NAVY (#081120) -->
+      <footer class="bg-[#081120] text-slate-350 pt-28 pb-32 lg:pb-12 border-t border-slate-900/60 font-sans text-left">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          <!-- DESKTOP 6-COLUMN MEGA FOOTER & COMPANY CRADLE BLOCK -->
+          <div class="hidden lg:grid grid-cols-12 gap-8 pb-16 border-b border-indigo-950/40">
+            
+            <!-- SECTION 1: COLUMN 1 & COMPANY OVERVIEW -->
+            <div class="col-span-12 lg:col-span-3 space-y-6">
+              <a href="/" class="flex items-center gap-3 select-none group">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-indigo to-brand-purple flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform">
+                  <span class="text-white font-black text-xl font-display">AK</span>
+                </div>
+                <span class="font-extrabold tracking-wider text-white text-base font-display uppercase">
+                  AKGLS <span class="text-brand-teal">GROUP</span>
+                </span>
+              </a>
+
+              <p class="text-[11.5px] leading-relaxed text-slate-400 font-light pr-2">
+                AI-powered digital marketing agency helping businesses grow through SEO, GEO, AEO, AI SEO, Google Ads, Web Design, and lead generation solutions.
+              </p>
+
+              <!-- Company Trust Badges Mini Grid -->
+              <div class="grid grid-cols-2 gap-2 bg-[#050b15]/60 p-3 rounded-2xl border border-indigo-950/30">
+                <div class="text-left font-display">
+                  <span class="text-[10px] sm:text-[10.5px] font-black text-white block truncate leading-tight">10+ Years Experience</span>
+                  <span class="text-[8px] text-slate-500 block truncate leading-tight">Proven track record</span>
+                </div>
+                <div class="text-left font-display">
+                  <span class="text-[10px] sm:text-[10.5px] font-black text-white block truncate leading-tight">AI SEO Experts</span>
+                  <span class="text-[8px] text-slate-500 block truncate leading-tight">First-mover advantage</span>
+                </div>
+                <div class="text-left font-display">
+                  <span class="text-[10px] sm:text-[10.5px] font-black text-white block truncate leading-tight">100+ Projects</span>
+                  <span class="text-[8px] text-slate-500 block truncate leading-tight">Completed with excellence</span>
+                </div>
+                <div class="text-left font-display">
+                  <span class="text-[10px] sm:text-[10.5px] font-black text-white block truncate leading-tight">ROI-Focused Agency</span>
+                  <span class="text-[8px] text-slate-500 block truncate leading-tight">Metrics-driven results</span>
+                </div>
+              </div>
+
+              <!-- Social Media Circular Hover Icons -->
+              <div class="space-y-2">
+                <span class="text-[9px] font-mono text-slate-500 uppercase tracking-widest block font-bold">CONNECT VERIFIED CHANNELS</span>
+                <div class="flex gap-2">
+                  <a href="https://linkedin.com/company/akglsgroup" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-indigo hover:border-brand-indigo transition-all duration-300" title="LinkedIn">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.64 1.64 0 1 0 0 3.28 1.64 1.64 0 0 0 0-3.28z"/></svg>
+                  </a>
+                  <a href="https://instagram.com/akglsgroup" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-indigo hover:border-brand-indigo transition-all duration-300" title="Instagram">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                  </a>
+                  <a href="https://facebook.com/akglsgroup" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-indigo hover:border-brand-indigo transition-all duration-300" title="Facebook">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+                  </a>
+                  <a href="https://twitter.com/akglsgroup" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-indigo hover:border-brand-indigo transition-all duration-300" title="Twitter/X">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </a>
+                  <a href="https://youtube.com/akglsgroup" target="_blank" rel="noopener noreferrer" class="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-indigo hover:border-brand-indigo transition-all duration-300" title="YouTube">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- SECTION 2: COLUMN 2 - SEO SERVICES -->
+            <div class="col-span-6 lg:col-span-2 space-y-4">
+              <h4 class="text-xs font-extrabold uppercase tracking-widest text-white font-display flex items-center gap-1.5 border-b border-indigo-950/25 pb-2">
+                <span class="w-1.5 h-1.5 bg-brand-teal rounded-full"></span>
+                SEO Services
+              </h4>
+              <ul class="space-y-2.5 text-xs font-medium">
+                <li><a href="/seo-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">SEO Services</a></li>
+                <li><a href="/technical-seo" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Technical SEO</a></li>
+                <li><a href="/local-seo-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Local SEO</a></li>
+                <li><a href="/ecommerce-seo-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Ecommerce SEO</a></li>
+                <li><a href="/enterprise-seo-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Enterprise SEO</a></li>
+                <li><a href="/ai-seo-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">AI SEO Services</a></li>
+                <li><a href="/ai-search-optimization-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">AI Search Optimization</a></li>
+                <li><a href="/chatgpt-optimization-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">ChatGPT Optimization</a></li>
+                <li><a href="/gemini-optimization-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Gemini Optimization</a></li>
+                <li><a href="/claude-optimization-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Claude Optimization</a></li>
+                <li><a href="/geo-services" class="text-brand-teal font-extrabold transition-colors tracking-wide block hover:translate-x-1 duration-200">GEO Services</a></li>
+                <li><a href="/llm-optimization-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">LLM Optimization Services</a></li>
+                <li><a href="/ai-citation-building-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">AI Citation Building</a></li>
+                <li><a href="/aeo-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">AEO Services</a></li>
+                <li><a href="/link-building-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Link Building</a></li>
+                <li><a href="/seo-audit-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">SEO Audit Services</a></li>
+              </ul>
+            </div>
+
+            <!-- SECTION 3: COLUMN 3 - MARKETING SERVICES -->
+            <div class="col-span-6 lg:col-span-2 space-y-4">
+              <h4 class="text-xs font-extrabold uppercase tracking-widest text-white font-display flex items-center gap-1.5 border-b border-indigo-950/25 pb-2">
+                <span class="w-1.5 h-1.5 bg-indigo-500 rounded-full"></span>
+                Marketing Services
+              </h4>
+              <ul class="space-y-2.5 text-xs font-medium">
+                <li><a href="/enterprise-marketing-solutions" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Enterprise Marketing Solutions</a></li>
+                <li><a href="/ecommerce-growth-solutions" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Ecommerce Growth Solutions</a></li>
+                <li><a href="/local-business-growth-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Local Business Growth Services</a></li>
+                <li><a href="/google-ads-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Google Ads Services</a></li>
+                <li><a href="/meta-ads-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Meta Ads Services</a></li>
+                <li><a href="/linkedin-ads-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">LinkedIn Ads Services</a></li>
+                <li><a href="/#capabilities-explorer" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Social Media Marketing</a></li>
+                <li><a href="/#capabilities-explorer" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Content Marketing</a></li>
+                <li><a href="/#capabilities-explorer" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">ORM Services</a></li>
+                <li><a href="/b2b-lead-generation-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">B2B Lead Generation Services</a></li>
+                <li><a href="/saas-marketing-solutions" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">SaaS Marketing Solutions</a></li>
+                <li><a href="/#capabilities-explorer" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Email Marketing</a></li>
+                <li><a href="/#audit-form" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Conversion Optimization</a></li>
+                <li><a href="/#capabilities-explorer" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Analytics Services</a></li>
+              </ul>
+            </div>
+
+            <!-- SECTION 4: COLUMN 4 - WEB & DEVELOPMENT -->
+            <div class="col-span-6 lg:col-span-2 space-y-4">
+              <h4 class="text-xs font-extrabold uppercase tracking-widest text-white font-display flex items-center gap-1.5 border-b border-indigo-950/25 pb-2">
+                <span class="w-1.5 h-1.5 bg-brand-purple rounded-full"></span>
+                Web & Tech
+              </h4>
+              <ul class="space-y-2.5 text-xs font-medium">
+                <li><a href="/#web-design-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Web Design Services</a></li>
+                <li><a href="/#wordpress-development-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">WordPress Development</a></li>
+                <li><a href="/#web-design-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">WooCommerce Development</a></li>
+                <li><a href="/shopify-development-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Shopify Development</a></li>
+                <li><a href="/startup-growth-solutions" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Startup Growth Solutions</a></li>
+                <li><a href="/#web-design-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Landing Page Design</a></li>
+                <li><a href="/#web-design-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Website Maintenance</a></li>
+                <li><a href="/#web-design-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">UI/UX Design</a></li>
+                <li><a href="/technical-seo" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Website Speed Optimization</a></li>
+              </ul>
+            </div>
+
+            <!-- SECTION 5: COLUMN 5 - INDUSTRY SOLUTIONS -->
+            <div class="col-span-6 lg:col-span-1.5 space-y-4">
+              <h4 class="text-xs font-extrabold uppercase tracking-widest text-white font-display flex items-center gap-1.5 border-b border-indigo-950/25 pb-2">
+                <span class="w-1.5 h-1.5 bg-brand-orange rounded-full"></span>
+                Industries
+              </h4>
+              <ul class="space-y-2.5 text-xs font-medium">
+                <li><a href="/dental-clinic-marketing" class="text-brand-teal font-extrabold hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Dental Clinic Marketing</a></li>
+                <li><a href="/healthcare-marketing-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Healthcare Marketing</a></li>
+                <li><a href="/iot-company-marketing-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">IoT Marketing</a></li>
+                <li><a href="/law-firm-marketing-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Law Firm Marketing</a></li>
+                <li><a href="/manufacturing-marketing-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Manufacturing Marketing</a></li>
+                <li><a href="/real-estate-marketing-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Real Estate Marketing</a></li>
+                <li><a href="/education-marketing-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Education Marketing</a></li>
+                <li><a href="/restaurant-marketing-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Restaurant Marketing</a></li>
+                <li><a href="/finance-marketing-services" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Finance Marketing</a></li>
+              </ul>
+            </div>
+
+            <!-- SECTION 6: COLUMN 6 - RESOURCES & SYSTEM CONTACT -->
+            <div class="col-span-6 lg:col-span-1.5 space-y-4">
+              <h4 class="text-xs font-extrabold uppercase tracking-widest text-white font-display flex items-center gap-1.5 border-b border-indigo-950/25 pb-2">
+                <span class="w-1.5 h-1.5 bg-rose-500 rounded-full"></span>
+                Resources
+              </h4>
+              <ul class="space-y-2.5 text-xs font-medium">
+                <li><a href="/blog" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Blog & Insights</a></li>
+                <li><a href="/seo-case-studies" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Case Studies</a></li>
+                <li><a href="/tools" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Free SEO Tools</a></li>
+                <li><a href="#auditForm" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Free Performance Audit</a></li>
+                <li><a href="/internship-program" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Career Internship Program</a></li>
+                <li><a href="/learning-hub/seo-checklist-pdf" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">SEO Setup Checklist</a></li>
+                <li><a href="/learning-hub/ai-seo-guide" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">AI SEO Guide (2026)</a></li>
+                <li><a href="/learning-hub?category=Webinars" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Expert Webinars</a></li>
+                <li><a href="#leadCaptureForm" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Leads Portal (Secure)</a></li>
+                <li><a href="#faqAccordionContainer" class="text-slate-400 hover:text-brand-teal transition-colors tracking-wide block hover:translate-x-1 duration-200">Frequently FAQs</a></li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- MOBILE ACCORDION FOOTER SECTIONS -->
+          <div class="lg:hidden pb-10 border-b border-indigo-950/30">
+            <!-- Minimal Mobile Company Pitch -->
+            <div class="space-y-4 mb-8">
+              <a href="/" class="flex items-center gap-3 select-none">
+                <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-indigo to-brand-purple flex items-center justify-center">
+                  <span class="text-white font-black text-lg font-display">AK</span>
+                </div>
+                <span class="font-extrabold text-white text-sm font-display uppercase tracking-widest">
+                  AKGLS GROUP
+                </span>
+              </a>
+              <p class="text-slate-400 text-xs font-light leading-relaxed">
+                AI-powered digital marketing agency helping businesses grow through SEO, GEO, AEO, AI SEO, Google Ads, Web Design, and lead generation solutions.
+              </p>
+            </div>
+
+            <!-- ACCORDION TRIGGER MODULES -->
+            <div class="space-y-3" id="mobileFooterAccordions">
+              <!-- SEO Services -->
+              <div class="bg-slate-950/50 border border-indigo-950/20 rounded-2xl overflow-hidden">
+                <button class="footer-acc-btn w-full py-4.5 px-5 flex justify-between items-center text-xs font-extrabold text-white font-display focus:outline-none">
+                  <span class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-teal"></span>
+                    SEO Services
+                  </span>
+                  <svg class="w-4 h-4 text-slate-500 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="hidden px-5 pb-5 pt-1.5 border-t border-indigo-950/10 grid grid-cols-2 gap-2 text-left">
+                  <a href="/seo-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">SEO Services</a>
+                  <a href="/technical-seo" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Technical SEO</a>
+                  <a href="/local-seo-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Local SEO</a>
+                  <a href="/ecommerce-seo-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Ecommerce SEO</a>
+                  <a href="/enterprise-seo-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Enterprise SEO</a>
+                  <a href="/ai-seo-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">AI SEO Services</a>
+                  <a href="/ai-search-optimization-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">AI Search Optimization</a>
+                  <a href="/chatgpt-optimization-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">ChatGPT Optimization</a>
+                  <a href="/gemini-optimization-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Gemini Optimization</a>
+                  <a href="/claude-optimization-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Claude Optimization</a>
+                  <a href="/geo-services" class="text-brand-teal font-extrabold text-xs py-1.5 block truncate">GEO Services</a>
+                  <a href="/llm-optimization-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">LLM Optimization Services</a>
+                  <a href="/ai-citation-building-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">AI Citation Building</a>
+                  <a href="/aeo-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">AEO Services</a>
+                  <a href="/link-building-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Link Building</a>
+                  <a href="/seo-audit-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">SEO Audit Services</a>
+                </div>
+              </div>
+
+              <!-- Marketing Services -->
+              <div class="bg-slate-950/50 border border-indigo-950/20 rounded-2xl overflow-hidden">
+                <button class="footer-acc-btn w-full py-4.5 px-5 flex justify-between items-center text-xs font-extrabold text-white font-display focus:outline-none">
+                  <span class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
+                    Marketing Services
+                  </span>
+                  <svg class="w-4 h-4 text-slate-500 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="hidden px-5 pb-5 pt-1.5 border-t border-indigo-950/10 grid grid-cols-2 gap-2 text-left">
+                  <a href="/enterprise-marketing-solutions" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Enterprise Marketing</a>
+                  <a href="/ecommerce-growth-solutions" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Ecommerce Growth</a>
+                  <a href="/local-business-growth-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Local Business Growth</a>
+                  <a href="/google-ads-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Google Ads</a>
+                  <a href="/meta-ads-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Meta Ads</a>
+                  <a href="/linkedin-ads-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">LinkedIn Ads</a>
+                  <a href="/b2b-lead-generation-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">B2B Lead Gen</a>
+                  <a href="/saas-marketing-solutions" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">SaaS Marketing</a>
+                </div>
+              </div>
+
+              <!-- Web & Tech -->
+              <div class="bg-slate-950/50 border border-indigo-950/20 rounded-2xl overflow-hidden">
+                <button class="footer-acc-btn w-full py-4.5 px-5 flex justify-between items-center text-xs font-extrabold text-white font-display focus:outline-none">
+                  <span class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-purple"></span>
+                    Web & Development
+                  </span>
+                  <svg class="w-4 h-4 text-slate-500 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="hidden px-5 pb-5 pt-1.5 border-t border-indigo-950/10 grid grid-cols-2 gap-2 text-left">
+                  <a href="/#web-design-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Web Design Services</a>
+                  <a href="/#wordpress-development-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">WordPress Development</a>
+                  <a href="/shopify-development-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Shopify Development</a>
+                  <a href="/startup-growth-solutions" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Startup Growth</a>
+                  <a href="/technical-seo" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Speed Optimization</a>
+                </div>
+              </div>
+
+              <!-- Industry Solutions -->
+              <div class="bg-slate-950/50 border border-indigo-950/20 rounded-2xl overflow-hidden">
+                <button class="footer-acc-btn w-full py-4.5 px-5 flex justify-between items-center text-xs font-extrabold text-white font-display focus:outline-none">
+                  <span class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-brand-orange"></span>
+                    Industry Solutions
+                  </span>
+                  <svg class="w-4 h-4 text-slate-500 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="hidden px-5 pb-5 pt-1.5 border-t border-indigo-950/10 grid grid-cols-2 gap-2 text-left">
+                  <a href="/dental-clinic-marketing" class="text-brand-teal font-extrabold text-xs py-1.5 block truncate">Dental Clinic Marketing</a>
+                  <a href="/healthcare-marketing-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Healthcare Marketing</a>
+                  <a href="/iot-company-marketing-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">IoT Marketing</a>
+                  <a href="/law-firm-marketing-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Law Firm Marketing</a>
+                  <a href="/manufacturing-marketing-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Manufacturing</a>
+                  <a href="/real-estate-marketing-services" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Real Estate</a>
+                </div>
+              </div>
+
+              <!-- Resources & Tools -->
+              <div class="bg-slate-950/50 border border-indigo-950/20 rounded-2xl overflow-hidden">
+                <button class="footer-acc-btn w-full py-4.5 px-5 flex justify-between items-center text-xs font-extrabold text-white font-display focus:outline-none">
+                  <span class="flex items-center gap-2">
+                    <span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>
+                    Resources & Tools
+                  </span>
+                  <svg class="w-4 h-4 text-slate-500 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="hidden px-5 pb-5 pt-1.5 border-t border-indigo-950/10 grid grid-cols-2 gap-2 text-left">
+                  <a href="/blog" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Blog & Insights</a>
+                  <a href="/seo-case-studies" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Case Studies</a>
+                  <a href="/tools" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Free SEO Tools</a>
+                  <a href="/internship-program" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">Internship Program</a>
+                  <a href="/learning-hub/ai-seo-guide" class="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate">AI SEO Guide (2026)</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ADVANCED SECTION 7 & 8: CONTACT DETAILS, NEWSLETTER & GEO AUTHORIZATION TAGS -->
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 py-12 border-b border-indigo-950/40">
+            
+            <!-- SECTION 7: CONTACT INFORMATION -->
+            <div class="lg:col-span-4 space-y-4">
+              <h5 class="text-xs font-extrabold uppercase tracking-widest text-white font-display flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-slate-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                Contact Information
+              </h5>
+              <div class="space-y-3 text-xs text-slate-400 font-light leading-relaxed">
+                <p class="flex items-start gap-2">
+                  <svg class="w-3.5 h-3.5 text-brand-teal shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                  <span>
+                    Business Support:{" "}
+                    <a href="mailto:info@akglsgroup.com" class="text-white hover:underline font-extrabold">info@akglsgroup.com</a>
+                  </span>
+                </p>
+                <p class="flex items-start gap-2">
+                  <svg class="w-3.5 h-3.5 text-brand-teal shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.72l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.72.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                  <span>
+                    Call Council Support:{" "}
+                    <a href="tel:+918318114492" class="text-white hover:underline font-extrabold">+91 831 811 4492</a>
+                  </span>
+                </p>
+                <p class="flex items-start gap-2">
+                  <svg class="w-3.5 h-3.5 text-brand-teal shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  <span>San Francisco Office: 201 Mission St • NYC Office: 1540 Broadway</span>
+                </p>
+                <p class="flex items-start gap-2">
+                  <svg class="w-3.5 h-3.5 text-brand-teal shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  <span>Working Hours: Mon - Fri: 9:00 AM - 6:00 PM EST</span>
+                </p>
+              </div>
+
+              <!-- Instant Call CTA buttons -->
+              <div class="flex flex-wrap gap-2.5 pt-2">
+                <a 
+                  href="https://wa.me/918318114492"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[10px] uppercase tracking-wider py-2 px-4 rounded-lg transition-all flex items-center gap-1.5 shadow"
+                >
+                  <svg class="w-3.5 h-3.5 fill-white" viewBox="0 0 24 24"><path d="M17.472 14.382c-.3.076-.84.254-1.127.305-.178.033-.374-.017-.508-.135-.38-.339-.745-.71-1.077-1.114-.305-.37-.624-.766-.883-1.176a.6.6 0 01-.013-.6c.101-.17.313-.364.444-.543.14-.19.26-.388.35-.61a.483.483 0 00-.03-.432c-.08-.19-.66-1.59-.9-2.17-.11-.27-.26-.35-.5-.35h-.45a1.2 1.2 0 00-.86.38c-.37.4-1.25 1.22-1.25 2.98s1.28 3.46 1.46 3.69c.18.24 2.52 3.85 6.11 5.4 2.31.99 3.19.88 3.97.77a3.174 3.174 0 002.1-1.48c.25-.49.25-.91.17-1.4-.08-.49-.3-.72-1.1-1.12zm-5.45 7.42A9.716 9.716 0 013 12c0-5.38 4.38-9.8 9.77-9.8a9.7 9.7 0 017 2.92A9.63 9.63 0 0119.7 12c0 1.94-.57 3.82-1.63 5.43l1.1 4.05-4.14-1.09a9.78 9.78 0 01-3.05.41zm0-19.6C6.54 2.2 1.4 7.33 1.4 13.6c0 2.01.52 3.96 1.52 5.68l-1.62 5.92 6.07-1.59A11.33 11.33 0 0012 25c6.26 0 11.4-5.13 11.4-11.4S18.26 2.2 12 2.2z"/></svg>
+                  WhatsApp Chat
+                </a>
+                <a 
+                  href="#auditForm"
+                  class="bg-brand-indigo hover:bg-opacity-95 text-white font-extrabold text-[10px] uppercase tracking-wider py-2 px-4 rounded-lg transition-all flex items-center gap-1.5 shadow"
+                >
+                  <svg class="w-3.5 h-3.5 text-brand-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                  Book Consultation
+                </a>
+              </div>
+            </div>
+
+            <!-- SECTION 8: NEWSLETTER SUBSCRIPTION -->
+            <div class="lg:col-span-4 space-y-4">
+              <h5 class="text-xs font-extrabold uppercase tracking-widest text-white font-display flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-brand-teal" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
+                Stay Updated with AI SEO Trends
+              </h5>
+              <p class="text-[11.5px] font-light text-slate-400 leading-relaxed">
+                Get the latest SEO, GEO, AI Search & Google indexing update insights. Directly from our technical core laboratory.
+              </p>
+
+              <form id="footerNewsletterForm" class="space-y-2 relative">
+                <div class="relative">
+                  <input 
+                    type="email" 
+                    id="newsletterEmailInput"
+                    required
+                    placeholder="Enter your business email..."
+                    class="w-full bg-[#050b15]/90 border border-slate-800 focus:border-brand-indigo rounded-xl py-3 pl-4 pr-12 text-xs text-white placeholder-slate-500 focus:outline-none font-medium"
+                  />
+                  <button 
+                    type="submit"
+                    id="newsletterSubmitBtn"
+                    class="absolute right-1.5 top-1.5 bg-brand-indigo hover:bg-opacity-90 text-white p-1.5 rounded-lg text-xs transition-colors shrink-0 flex items-center justify-center cursor-pointer"
+                    title="Subscribe"
+                  >
+                    <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                  </button>
+                </div>
+                <p id="newsletterSuccessMsg" class="hidden text-[10px] text-brand-teal font-extrabold flex items-center gap-1">
+                  <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                  Signed up safely. Welcome to AKGLS Core newsletter!
+                </p>
+              </form>
+            </div>
+
+            <!-- ADVANCED STRATEGY: LOCAL SEO & GEO CITATION TARGETS -->
+            <div class="lg:col-span-4 space-y-4 text-left">
+              <div class="space-y-4">
+                <div>
+                  <h6 class="text-[10.5px] font-extrabold uppercase tracking-widest text-white font-mono flex items-center gap-1.5 mb-2.5">
+                    <svg class="w-3.5 h-3.5 text-indigo-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/></svg>
+                    Local SEO Authority
+                  </h6>
+                  <div class="flex flex-wrap gap-2">
+                    <a href="/seo-services" class="text-[10px] font-bold font-mono text-slate-400 hover:text-brand-teal bg-[#050b15] border border-indigo-950/40 py-1 px-2 rounded-md hover:border-brand-teal/20 transition-all block">SEO Company in Delhi</a>
+                    <a href="/seo-services" class="text-[10px] font-bold font-mono text-slate-400 hover:text-brand-teal bg-[#050b15] border border-indigo-950/40 py-1 px-2 rounded-md hover:border-brand-teal/20 transition-all block">SEO Company in Noida</a>
+                    <a href="/seo-services" class="text-[10px] font-bold font-mono text-slate-400 hover:text-brand-teal bg-[#050b15] border border-indigo-950/40 py-1 px-2 rounded-md hover:border-brand-teal/20 transition-all block">SEO Company in Gurgaon</a>
+                    <a href="/seo-services" class="text-[10px] font-bold font-mono text-slate-400 hover:text-brand-teal bg-[#050b15] border border-indigo-950/40 py-1 px-2 rounded-md hover:border-brand-teal/20 transition-all block">Digital Marketing Agency India</a>
+                  </div>
+                </div>
+
+                <div>
+                  <h6 class="text-[10.5px] font-extrabold uppercase tracking-widest text-white font-mono flex items-center gap-1.5 mb-2.5">
+                    <svg class="w-3.5 h-3.5 text-brand-orange" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+                    AI Search Citation Targets
+                  </h6>
+                  <div class="flex flex-wrap gap-2">
+                    <a href="/ai-seo-services" class="text-[10px] font-black font-mono text-slate-400 hover:text-indigo-300 bg-[#050b15] border border-indigo-950/40 py-1 px-2.5 rounded-md hover:border-indigo-400/20 transition-all block">AI SEO Services</a>
+                    <a href="/ai-search-optimization-services" class="text-[10px] font-black font-mono text-slate-400 hover:text-indigo-300 bg-[#050b15] border border-indigo-950/40 py-1 px-2.5 rounded-md hover:border-indigo-400/20 transition-all block">AI Search Optimization</a>
+                    <a href="/geo-services" class="text-[10px] font-black font-mono text-brand-teal bg-[#050b15] border border-brand-teal/40 py-1 px-2.5 rounded-md hover:border-indigo-400/20 transition-all block">GEO Services</a>
+                    <a href="/llm-optimization-services" class="text-[10px] font-black font-mono text-slate-400 hover:text-indigo-300 bg-[#050b15] border border-indigo-950/40 py-1 px-2.5 rounded-md hover:border-indigo-400/20 transition-all block">LLM Optimization Services</a>
+                    <a href="/ai-citation-building-services" class="text-[10px] font-black font-mono text-slate-400 hover:text-indigo-300 bg-[#050b15] border border-indigo-950/40 py-1 px-2.5 rounded-md hover:border-indigo-400/20 transition-all block">AI Citation Building</a>
+                    <a href="/aeo-services" class="text-[10px] font-black font-mono text-slate-400 hover:text-indigo-300 bg-[#050b15] border border-indigo-950/40 py-1 px-2.5 rounded-md hover:border-indigo-400/20 transition-all block">AEO Services</a>
+                    <a href="/chatgpt-optimization-services" class="text-[10px] font-black font-mono text-slate-400 hover:text-indigo-300 bg-[#050b15] border border-indigo-950/40 py-1 px-2.5 rounded-md hover:border-indigo-400/20 transition-all block">ChatGPT Optimization</a>
+                    <a href="/gemini-optimization-services" class="text-[10px] font-black font-mono text-slate-400 hover:text-indigo-300 bg-[#050b15] border border-indigo-950/40 py-1 px-2.5 rounded-md hover:border-indigo-400/20 transition-all block">Gemini Optimization</a>
+                    <a href="/claude-optimization-services" class="text-[10px] font-black font-mono text-slate-400 hover:text-indigo-300 bg-[#050b15] border border-indigo-950/40 py-1 px-2.5 rounded-md hover:border-indigo-400/20 transition-all block">Claude Optimization</a>
+                    <a href="/ai-search-optimization-services" class="text-[10px] font-black font-mono text-slate-400 hover:text-indigo-300 bg-[#050b15] border border-indigo-950/40 py-1 px-2.5 rounded-md hover:border-indigo-400/20 transition-all block">Voice Search SEO</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- SECTION 9: ACCREDITED TRUST & PARTNER CERTIFICATIONS -->
+          <div class="py-8 border-b border-indigo-950/40 flex flex-wrap justify-center md:justify-between items-center gap-6">
+            <span class="text-[10px] font-mono text-slate-500 uppercase font-black tracking-widest text-center md:text-left">
+              Secured & Licensed Enterprise credentials:
+            </span>
+            <div class="flex flex-wrap gap-4 items-center justify-center">
+              <div class="bg-slate-950/75 border border-indigo-950/20 px-3 py-1.5 rounded-lg flex items-center gap-1.5 text-left select-none">
+                <svg class="w-3.5 h-3.5 text-brand-teal shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div>
+                  <span class="text-[9.5px] font-black text-white block leading-none">Google Partner</span>
+                  <span class="text-[8px] text-slate-500 block leading-none mt-0.5">Verified Premier</span>
+                </div>
+              </div>
+              <div class="bg-slate-950/75 border border-indigo-950/20 px-3 py-1.5 rounded-lg flex items-center gap-1.5 text-left select-none">
+                <svg class="w-3.5 h-3.5 text-brand-teal shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div>
+                  <span class="text-[9.5px] font-black text-white block leading-none">Meta Business</span>
+                  <span class="text-[8px] text-slate-500 block leading-none mt-0.5">Strategic Agency</span>
+                </div>
+              </div>
+              <div class="bg-slate-950/75 border border-indigo-950/20 px-3 py-1.5 rounded-lg flex items-center gap-1.5 text-left select-none">
+                <svg class="w-3.5 h-3.5 text-brand-teal shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div>
+                  <span class="text-[9.5px] font-black text-white block leading-none">SSL Secured</span>
+                  <span class="text-[8px] text-slate-500 block leading-none mt-0.5">AES-256 Auth</span>
+                </div>
+              </div>
+              <div class="bg-slate-950/75 border border-indigo-950/20 px-3 py-1.5 rounded-lg flex items-center gap-1.5 text-left select-none">
+                <svg class="w-3.5 h-3.5 text-brand-teal shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div>
+                  <span class="text-[9.5px] font-black text-white block leading-none">HubSpot</span>
+                  <span class="text-[8px] text-slate-500 block leading-none mt-0.5">Diamond Partner</span>
+                </div>
+              </div>
+              <div class="bg-slate-950/75 border border-indigo-950/20 px-3 py-1.5 rounded-lg flex items-center gap-1.5 text-left select-none">
+                <svg class="w-3.5 h-3.5 text-brand-teal shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <div>
+                  <span class="text-[9.5px] font-black text-white block leading-none">TrustScore 4.9</span>
+                  <span class="text-[8px] text-slate-500 block leading-none mt-0.5">Elite Client Reviews</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SECTION 11 & 12: LEGAL LINKS & COPYRIGHT BAR -->
+          <div class="pt-8 flex flex-col md:flex-row justify-between items-center text-[11px] text-slate-500 gap-4 text-center select-none">
+            <!-- Legal compliance block -->
+            <div class="flex flex-wrap justify-center md:justify-start gap-4">
+              <span>© 2016-2026 AKGLS Group. All Rights Reserved.</span>
+              <div class="h-4 w-px bg-indigo-950/40 hidden sm:block"></div>
+              <a href="/privacy-policy" class="hover:text-slate-300 transition-colors">Privacy Policy</a>
+              <a href="/terms-and-conditions" class="hover:text-slate-300 transition-colors">Terms & Conditions</a>
+              <a href="/disclaimer-policy" class="hover:text-slate-300 transition-colors">Disclaimer Policy</a>
+              <a href="/refund-policy" class="hover:text-slate-300 transition-colors">Refund Policy</a>
+              <a href="/cookie-directives" class="hover:text-slate-300 transition-colors">Cookie Directives</a>
+              <a href="/gdpr-compliance" class="hover:text-slate-300 transition-colors">GDPR Compliance</a>
+            </div>
+
+            <!-- Designed with Love -->
+            <div class="flex items-center gap-1.5 font-display text-slate-400 text-xs font-semibold">
+              <span>Designed with ❤️ for AI-Driven Growth</span>
+            </div>
+          </div>
+
+        </div>
+      </footer>
+
+    </div>
 
     <!-- INTERACTIVE SCRIPTS CODE (PERFORMANCE ENHANCED VANILLA JAVASCRIPT) -->
     <script>
@@ -1457,6 +2765,39 @@
         leadCaptureForm.classList.add('hidden');
         leadSuccessScreen.classList.remove('hidden');
       });
+
+      // 6. Mobile Footer Accordion Toggle Handlers
+      const footerAccBtns = document.querySelectorAll('.footer-acc-btn');
+      footerAccBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const content = btn.nextElementSibling;
+          const icon = btn.querySelector('svg');
+          const isClosed = content.classList.contains('hidden');
+
+          if (isClosed) {
+            content.classList.remove('hidden');
+            if (icon) icon.classList.add('rotate-180', 'text-brand-teal');
+          } else {
+            content.classList.add('hidden');
+            if (icon) icon.classList.remove('rotate-180', 'text-brand-teal');
+          }
+        });
+      });
+
+      // 7. Footer Newsletter Subscription Handler
+      const footerNewsletterForm = document.getElementById('footerNewsletterForm');
+      const newsletterSuccessMsg = document.getElementById('newsletterSuccessMsg');
+      if (footerNewsletterForm && newsletterSuccessMsg) {
+        footerNewsletterForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          newsletterSuccessMsg.classList.remove('hidden');
+          const input = document.getElementById('newsletterEmailInput');
+          if (input) input.value = '';
+          setTimeout(() => {
+            newsletterSuccessMsg.classList.add('hidden');
+          }, 4000);
+        });
+      }
     </script>
   </body>
 </html>
