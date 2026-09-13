@@ -76,6 +76,7 @@ import LeadManagementPortalPage from './components/LeadManagementPortalPage';
 import { initAutoLeadCapture } from './utils/leadCapture';
 import FreeToolsPage from './components/FreeToolsPage';
 import SeoAuditToolPage from './components/SeoAuditToolPage';
+import AiGeoAuditPage from './components/AiGeoAuditPage';
 import SeoBlogListPage from './components/SeoBlogListPage';
 import LearningHubPage from './components/LearningHubPage';
 import InternshipProgramPage from './components/InternshipProgramPage';
@@ -833,6 +834,14 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     description: "Deconstruct your website header structures. Check canonical declarations, site-index maps, SSL compliance levels, and generate premium PDF logs."
   },
   {
+    id: "geo-audit-tool",
+    path: "/tools/geo-audit-tool/",
+    priority: 0.85,
+    changefreq: "weekly",
+    title: "Free AI & GEO Audit Scanner | Generative Engine Optimization Scorecard | AKGLS Group",
+    description: "Audit your website for Generative Engine Optimization (GEO). Check entity salience, schema markup depth, LLM readability, and citation probability across ChatGPT, Perplexity, and Gemini."
+  },
+  {
     id: "blog",
     path: "/blog/",
     priority: 0.8,
@@ -1183,6 +1192,15 @@ export default function App() {
         hash === '#tools/seo-audit-tool' || hash === '#seo-audit-tool'
       ) {
         setCurrentPage('seo-audit-tool');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/tools/geo-audit-tool' || pathname === '/tools/geo-audit-tool/' ||
+        pathname === '/geo-audit-tool' || pathname === '/geo-audit-tool/' ||
+        pathname === '/geo-audit' || pathname === '/geo-audit/' ||
+        pathname === '/ai-geo-audit' || pathname === '/ai-geo-audit/' ||
+        hash === '#tools/geo-audit-tool' || hash === '#geo-audit-tool' || hash === '#geo-audit' || hash === '#ai-geo-audit'
+      ) {
+        setCurrentPage('geo-audit-tool');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (
         pathname === '/free-checklists' || pathname === '/free-checklists/' ||
@@ -1643,6 +1661,11 @@ export default function App() {
       title: "Free Technical SEO Audit & Website Crawler Tool | AKGLS Group",
       description: "Deconstruct your website header structures. Check canonical declarations, site-index maps, SSL compliance levels, and generate premium PDF logs.",
       canonical: "https://akglsgroup.com/tools/seo-audit-tool/"
+    },
+    'geo-audit-tool': {
+      title: "Free AI & GEO Audit Scanner | Generative Engine Optimization Scorecard | AKGLS Group",
+      description: "Audit your website for Generative Engine Optimization (GEO). Check entity salience, schema markup depth, LLM readability, and citation probability across ChatGPT, Perplexity, and Gemini.",
+      canonical: "https://akglsgroup.com/tools/geo-audit-tool/"
     },
     'blog': {
       title: "Latest SEO, GEO, AEO & AI Search Engine Trends Blog | AKGLS Group",
@@ -2349,6 +2372,11 @@ export default function App() {
             window.location.hash = '#tools/seo-audit-tool';
             setCurrentPage('seo-audit-tool');
           }}
+          onNavigateToGeoAudit={() => {
+            window.history.pushState(null, '', '/tools/geo-audit-tool');
+            window.location.hash = '#tools/geo-audit-tool';
+            setCurrentPage('geo-audit-tool');
+          }}
         />
       ) : currentPage === 'seo-audit-tool' ? (
         <SeoAuditToolPage
@@ -2363,11 +2391,43 @@ export default function App() {
               window.history.pushState(null, '', '/tools/seo-audit-tool');
               window.location.hash = '#tools/seo-audit-tool';
               setCurrentPage('seo-audit-tool');
+            } else if (toolId === "geo-audit" || toolId === "geo-audit-tool") {
+              window.history.pushState(null, '', '/tools/geo-audit-tool');
+              window.location.hash = '#tools/geo-audit-tool';
+              setCurrentPage('geo-audit-tool');
             } else {
               window.history.pushState(null, '', '/tools');
               window.location.hash = `#tools?tool=${toolId}`;
               setCurrentPage('tools');
             }
+          }}
+        />
+      ) : currentPage === 'geo-audit-tool' ? (
+        <AiGeoAuditPage
+          onBackToTools={() => {
+            window.history.pushState(null, '', '/tools');
+            window.location.hash = '#tools';
+            setCurrentPage('tools');
+          }}
+          onNavigateToTool={(toolId) => {
+            if (toolId === "seo-audit" || toolId === "seo-audit-tool") {
+              window.history.pushState(null, '', '/tools/seo-audit-tool');
+              window.location.hash = '#tools/seo-audit-tool';
+              setCurrentPage('seo-audit-tool');
+            } else if (toolId === "geo-audit" || toolId === "geo-audit-tool") {
+              window.history.pushState(null, '', '/tools/geo-audit-tool');
+              window.location.hash = '#tools/geo-audit-tool';
+              setCurrentPage('geo-audit-tool');
+            } else {
+              window.history.pushState(null, '', '/tools');
+              window.location.hash = `#tools?tool=${toolId}`;
+              setCurrentPage('tools');
+            }
+          }}
+          onOpenProposal={() => {
+            window.history.pushState(null, '', '/proposal-builder');
+            window.location.hash = '#proposal-builder';
+            setCurrentPage('proposal-generator');
           }}
         />
       ) : currentPage === 'blog' ? (

@@ -4,8 +4,9 @@ import {
   Search, Filter, Play, CheckCircle2, Calculator, Copy, FileText, 
   Globe, Bot, Code, BarChart, Eye, ArrowLeft, Loader2, Sparkles, 
   HelpCircle, MessageSquare, Check, AlertTriangle, ArrowRight,
-  TrendingUp, Star, Phone, Tag, Terminal
+  TrendingUp, Star, Phone, Tag, Terminal, Cpu
 } from 'lucide-react';
+import GeoAuditScanner from './GeoAuditScanner';
 
 interface ToolItem {
   id: string;
@@ -31,6 +32,7 @@ const ALL_TOOLS_LIST: ToolItem[] = [
   { id: "serp-preview", name: "SERP Snippet Visualization Sandbox", shortDesc: "Preview search title wraps, and long URLs rendering constraints on Google.", category: "SEO Tools", isInteractive: true },
   
   // AI SEO
+  { id: "geo-audit", name: "AI & GEO Audit Scanner (New)", shortDesc: "Scan your website for Generative Engine Optimization readiness across ChatGPT, Perplexity & Gemini.", category: "AI SEO Tools", isPopular: true, isInteractive: true },
   { id: "ai-content", name: "AI Content & GEO Readability Analyzer", shortDesc: "Check text readability, conversational tone, and entity indexes.", category: "AI SEO Tools", isPopular: true, isInteractive: true },
   { id: "ai-visibility", name: "ChatGPT & Gemini Prominence Checker", shortDesc: "Audit query response probability indexes on prominent LLM search models.", category: "AI SEO Tools" },
   { id: "conversational-seo", name: "Voice & Conversational SEO Optimizer", shortDesc: "Audit query syntax flags to fit SGE or natural phrasing pipelines.", category: "AI SEO Tools" },
@@ -58,7 +60,15 @@ const CATEGORIES_LIST = [
   "Ecommerce Tools"
 ];
 
-export default function FreeToolsPage({ onBackToHome, onNavigateToSeoAudit }: { onBackToHome: () => void; onNavigateToSeoAudit?: () => void }) {
+export default function FreeToolsPage({ 
+  onBackToHome, 
+  onNavigateToSeoAudit,
+  onNavigateToGeoAudit 
+}: { 
+  onBackToHome: () => void; 
+  onNavigateToSeoAudit?: () => void;
+  onNavigateToGeoAudit?: () => void;
+}) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All Tools');
   const [activeToolId, setActiveToolId] = useState<string | null>("seo-audit");
@@ -385,6 +395,35 @@ export default function FreeToolsPage({ onBackToHome, onNavigateToSeoAudit }: { 
                 <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-mono font-bold uppercase">Free Unlimited Use</span>
               </div>
             </div>
+
+            {/* INTERACTIVE COMPONENT 0: AI & GEO AUDIT SCANNER */}
+            {activeToolId === 'geo-audit' && (
+              <div className="space-y-6">
+                <div className="bg-brand-purple/10 border border-brand-purple/30 p-4 rounded-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                  <div>
+                    <span className="text-[9px] font-mono font-bold text-brand-purple bg-brand-purple/20 px-2 py-0.5 rounded border border-brand-purple/30 uppercase tracking-widest block w-fit mb-1">
+                      New AI Search Upgrade
+                    </span>
+                    <h4 className="text-xs font-bold text-white uppercase tracking-wider">
+                      Generative Engine Optimization (GEO) & LLM Readiness Scanner
+                    </h4>
+                    <p className="text-[11px] text-slate-400 leading-normal mt-0.5 max-w-xl">
+                      Audit entity salience, Schema.org graph depth, Knowledge Graph citations, and crawler accessibility across ChatGPT Search, Perplexity, and Google Gemini.
+                    </p>
+                  </div>
+                  {onNavigateToGeoAudit && (
+                    <button
+                      onClick={onNavigateToGeoAudit}
+                      className="bg-gradient-to-r from-brand-indigo to-brand-purple hover:opacity-95 text-white text-[11px] font-extrabold uppercase tracking-wider px-4 py-2.5 rounded-lg shrink-0 flex items-center gap-1 shadow-md transition-all font-sans"
+                    >
+                      Open Full-Screen Scanner <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  )}
+                </div>
+
+                <GeoAuditScanner compactMode={true} />
+              </div>
+            )}
 
             {/* INTERACTIVE COMPONENT 1: SEO AUDIT TOOL */}
             {activeToolId === 'seo-audit' && (

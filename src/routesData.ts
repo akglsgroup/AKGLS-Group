@@ -971,6 +971,23 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     ]
   },
   {
+    id: "geo-audit-tool",
+    path: "/tools/geo-audit-tool/",
+    priority: 0.85,
+    changefreq: "weekly",
+    title: "Free AI & GEO Audit Scanner | Generative Engine Optimization Scorecard | AKGLS Group",
+    description: "Audit your website for Generative Engine Optimization (GEO). Check entity salience, schema markup depth, LLM readability, and citation probability across ChatGPT, Perplexity, and Gemini.",
+    category: "Tools",
+    h1: "Free AI & GEO Audit Scanner",
+    highlight: "ChatGPT, Perplexity & Gemini Citation Scorecard",
+    leadParagraph: "Test your brand's AI search visibility in seconds. Discover whether conversational models recommend your company, evaluate schema graph depth, and download an actionable fix roadmap.",
+    features: [
+      { title: "AI Search Retrieval Simulation", desc: "Simulate live conversational prompts across ChatGPT Search, Perplexity Sonar, and Google Gemini." },
+      { title: "Entity Salience & Knowledge Graph", desc: "Audit schema.org/Organization nodes, Wikidata sameAs triples, and brand disambiguation signals." },
+      { title: "RAG Readability & Schema Depth", desc: "Verify FAQPage, Article, and speakable microdata suitability for conversational chunk extraction." }
+    ]
+  },
+  {
     id: "seo-audit-tool",
     path: "/tools/seo-audit-tool/",
     priority: 0.8,
@@ -1138,6 +1155,23 @@ export const SITEMAP_ROUTES: AppRoute[] = [
       { title: "Milestone Architecture", desc: "Map 30, 60, and 90-day deliverables with clear performance KPIs." },
       { title: "Resource Allocation Matrix", desc: "Staffing projections covering SEO leads, content strategists, and paid media managers." },
       { title: "Executive Export", desc: "Instant high-resolution PDF download with signed agency terms." }
+    ]
+  },
+  {
+    id: "geo-audit-tool",
+    path: "/tools/geo-audit-tool/",
+    priority: 0.85,
+    changefreq: "weekly",
+    title: "Free AI & GEO Audit Scanner | Generative Engine Optimization Scorecard | AKGLS Group",
+    description: "Audit your website for Generative Engine Optimization (GEO). Check entity salience, schema markup depth, LLM readability, and citation probability across ChatGPT, Perplexity, and Gemini.",
+    category: "Tools",
+    h1: "AI & GEO Search Readiness Audit Scanner",
+    highlight: "Generative Engine Optimization Diagnostics",
+    leadParagraph: "Audit your website's visibility across artificial intelligence search models, conversational LLMs, and neural retrieval pipelines. Instant citation probability scorecard.",
+    features: [
+      { title: "LLM Bot Handshakes", desc: "Verify crawler crawlability for GPTBot, PerplexityBot, ClaudeBot, and Google-Extended." },
+      { title: "Entity Graph Density", desc: "Inspect Schema.org nesting, Wikidata alignments, and topical context embeddings." },
+      { title: "Citation Probability Score", desc: "Benchmark your domain's likelihood of being quoted in ChatGPT Search and Perplexity answers." }
     ]
   },
   {

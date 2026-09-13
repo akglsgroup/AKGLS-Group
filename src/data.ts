@@ -155,7 +155,8 @@ export const resourcesMenu: MegaColumn[] = [
   {
     title: "Free Tools",
     items: [
-      { name: "AI SEO Checklists (New)", href: "/free-checklists/" },
+      { name: "AI & GEO Audit Scanner (New)", href: "/tools/geo-audit-tool", isTrending: true },
+      { name: "AI SEO Checklists", href: "/free-checklists/" },
       { name: "SEO Audit Tool", href: "/tools/seo-audit-tool" },
       { name: "AI Content Analyzer", href: "/tools" },
       { name: "Meta Tag Generator", href: "/tools" },
