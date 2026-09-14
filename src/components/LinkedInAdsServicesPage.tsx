@@ -9,6 +9,7 @@ import {
   TrendingUp, Percent, DollarSign, Award, Target, Eye, Film, Heart, Share2,
   Building2, Landmark, GraduationCap, Truck, Stethoscope, Factory
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface LinkedInAdsServicesPageProps {
   onBackToHome: () => void;
@@ -23,7 +24,7 @@ const linkedinAdsSchemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "Enterprise-grade LinkedIn advertising management, ABM account targeting, dynamic Lead Gen forms, Sponsored InMail sequences, and CRM pipeline synchronization."
@@ -44,7 +45,7 @@ const linkedinAdsSchemaTemplates = {
 
 export default function LinkedInAdsServicesPage({ onBackToHome, openProposalForm }: LinkedInAdsServicesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20LinkedIn%20Ads%20and%20B2B%20Account-Based%20Marketing.';
 
   // State to simulate dynamic Page Titles
   useEffect(() => {
@@ -281,7 +282,7 @@ export default function LinkedInAdsServicesPage({ onBackToHome, openProposalForm
           className="bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black text-xs uppercase tracking-wider border border-emerald-500/30 transition-all font-mono"
           id="linkedin-whatsapp-floating-bar"
         >
-          <MessageSquare fill="white" className="w-4 h-4 text-white" /> WhatsApp B2B Help: {CONTACT_NUMBER}
+          <WhatsAppIcon className="w-4 h-4 text-white" /> WhatsApp B2B Help: {CONTACT_NUMBER}
         </a>
         <a 
           href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}
@@ -1203,7 +1204,7 @@ export default function LinkedInAdsServicesPage({ onBackToHome, openProposalForm
                       referrerPolicy="no-referrer"
                       className="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs py-3 rounded-xl transition inline-flex items-center gap-2 px-6 shadow-md"
                     >
-                      <MessageSquare fill="white" className="w-4 h-4 text-white" /> SPEED UP: START INSTANT WHATSAPP CHAT
+                      <WhatsAppIcon className="w-4 h-4 text-white" /> SPEED UP: START INSTANT WHATSAPP CHAT
                     </a>
                   </div>
                 </div>
@@ -1352,7 +1353,7 @@ export default function LinkedInAdsServicesPage({ onBackToHome, openProposalForm
               className="bg-slate-900 hover:bg-slate-800 text-white font-extrabold px-8 py-4 rounded-xl border border-slate-800 transition uppercase text-xs tracking-wider flex items-center justify-center gap-2"
               id="final-linkedin-cta-whatsapp"
             >
-              <MessageSquare fill="white" className="w-4 h-4 text-white" /> WhatsApp direct chat
+              <WhatsAppIcon className="w-4 h-4 text-white" /> WhatsApp direct chat
             </a>
           </div>
 

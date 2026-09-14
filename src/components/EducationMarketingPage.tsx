@@ -14,7 +14,7 @@ interface EducationMarketingPageProps {
 
 export default function EducationMarketingPage({ onBackToHome, openProposalForm }: EducationMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
-  const WHATSAPP_LINK = "https://wa.me/918318114492";
+  const WHATSAPP_LINK = "https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20education%20marketing%20and%20student%20enrollment%20campaigns.";
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -34,7 +34,7 @@ export default function EducationMarketingPage({ onBackToHome, openProposalForm 
         "provider": {
           "@type": "Organization",
           "name": "AKGLS Group",
-          "url": "https://akglsgroup.com"
+          "url": "https://www.akglsgroup.com"
         },
         "description": "Boost school and college admissions, gain student inquiries, and dominate Local Maps and AI search results with high-conversion educational SEO & ads.",
         "areaServed": "Global",

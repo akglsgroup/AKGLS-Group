@@ -13,6 +13,7 @@ import {
   MapPin, Star, MessageCircle, RefreshCw, ShoppingBag, ArrowDownRight, Info,
   DollarSign as PriceIcon
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface SeoCaseStudiesPageProps {
   onBackToHome: () => void;
@@ -27,7 +28,7 @@ const schemasTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "Proven SEO growth results across SaaS, Ecommerce, Healthcare, Real Estate, and Finance. Explore verified traffic, keyword, and organic revenue case studies.",
@@ -58,7 +59,7 @@ const schemasTemplates = {
 
 export default function SeoCaseStudiesPage({ onBackToHome, openProposalForm }: SeoCaseStudiesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20reviewed%20your%20SEO%20case%20studies%20and%20want%20to%20discuss%20scaling%20our%20website.';
 
   // State setup
   useEffect(() => {
@@ -404,7 +405,7 @@ export default function SeoCaseStudiesPage({ onBackToHome, openProposalForm }: S
           referrerPolicy="no-referrer"
           className="bg-emerald-600 hover:bg-emerald-500 text-white p-3 rounded-xl shadow-2xl flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider border border-white/10 transition-all font-mono"
         >
-          <MessageSquare fill="white" className="w-4 h-4 text-white" /> WhatsApp: {CONTACT_NUMBER}
+          <WhatsAppIcon className="w-4 h-4 text-white" /> WhatsApp: {CONTACT_NUMBER}
         </a>
         <a 
           href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}
@@ -1914,6 +1915,7 @@ export default function SeoCaseStudiesPage({ onBackToHome, openProposalForm }: S
               className="bg-slate-950 text-slate-200 border border-indigo-950 px-8 py-4 rounded-xl hover:border-brand-orange/40 transition flex items-center justify-center space-x-2"
               id="final-cta-btn-2"
             >
+              <WhatsAppIcon className="w-4 h-4 text-emerald-400" />
               <span>Talk to Senior SEO Experts</span>
               <ArrowRight className="w-4 h-4 text-brand-orange animate-pulse" />
             </a>

@@ -7,6 +7,7 @@ import {
   Send, Smartphone, Zap, Server, Shield, Volume2, MessageSquare, 
   Settings, Shuffle, BarChart3, AlertCircle, Copy, CheckCircle
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface AeoServicesPageProps {
   onBackToHome: () => void;
@@ -41,7 +42,7 @@ const schemaTemplates = {
 
 export default function AeoServicesPage({ onBackToHome, openProposalForm }: AeoServicesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20am%20interested%20in%20your%20AEO%20(Answer%20Engine%20Optimization)%20Services.%20Please%20share%20details.';
 
   // Dynamic Page Title & Meta simulation
   useEffect(() => {
@@ -260,7 +261,7 @@ export default function AeoServicesPage({ onBackToHome, openProposalForm }: AeoS
           className="bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black text-xs uppercase tracking-wider border border-emerald-500/30 transition-all font-mono"
           id="aeo-whatsapp-chat-trigger"
         >
-          <MessageSquare fill="white" className="w-4 h-4 text-white" /> AI Chat Line: {CONTACT_NUMBER}
+          <WhatsAppIcon className="w-4 h-4 text-white" /> AI Chat Line: {CONTACT_NUMBER}
         </a>
         <a 
           href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}
@@ -1283,7 +1284,7 @@ export default function AeoServicesPage({ onBackToHome, openProposalForm }: AeoS
               className="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs uppercase tracking-wider py-4 px-6 rounded-xl text-center transition-all flex items-center justify-center gap-2 font-mono"
               id="final-aeo-whatsapp-cta"
             >
-              <MessageSquare fill="white" className="w-4 h-4 text-white" /> Live Telegram & WhatsApp consults
+              <WhatsAppIcon className="w-4 h-4 text-white" /> Live Telegram & WhatsApp consults
             </a>
           </div>
 

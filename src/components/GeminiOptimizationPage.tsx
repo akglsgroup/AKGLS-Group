@@ -21,7 +21,7 @@ const schemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "Optimize your business entities and digital assets to rank inside Google Gemini, AI-powered Google search overviews, and mobile AI retrieval systems."
@@ -33,17 +33,17 @@ const schemaTemplates = {
     "@type": "ListItem",
     "position": 1,
     "name": "Home",
-    "item": "https://akglsgroup.com/"
+    "item": "https://www.akglsgroup.com/"
   },{
     "@type": "ListItem",
     "position": 2,
     "name": "Services",
-    "item": "https://akglsgroup.com/seo-services"
+    "item": "https://www.akglsgroup.com/seo-services"
   },{
     "@type": "ListItem",
     "position": 3,
     "name": "Gemini Optimization Services",
-    "item": "https://akglsgroup.com/gemini-optimization-services/"
+    "item": "https://www.akglsgroup.com/gemini-optimization-services/"
   }]
 }`
 };

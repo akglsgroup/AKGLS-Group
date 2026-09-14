@@ -11,6 +11,7 @@ import {
   Laptop, Layout, Paintbrush, ArrowUpRight, HelpCircle as HelpIcon, Layers3, Rocket,
   Lightbulb, ChevronRight, Play, LineChart, ZapOff, Minimize2, CheckSquare
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface StartupGrowthSolutionsPageProps {
   onBackToHome: () => void;
@@ -25,7 +26,7 @@ const schemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "AI-powered customer acquisition, product-led growth hacking, high-intent lead generation, search indexation strategies, and brand positioning models for high-growth startups."
@@ -48,7 +49,7 @@ const schemaTemplates = {
 
 export default function StartupGrowthSolutionsPage({ onBackToHome, openProposalForm }: StartupGrowthSolutionsPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20we%20are%20a%20startup%20looking%20for%20growth%20solutions%20and%20customer%20acquisition.';
 
   // Dynamic Page Title
   useEffect(() => {
@@ -263,7 +264,7 @@ export default function StartupGrowthSolutionsPage({ onBackToHome, openProposalF
           className="bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black text-xs uppercase tracking-wider border border-emerald-550/30 transition-all font-mono"
           id="startup-whatsapp-floating-bar"
         >
-          <MessageSquare fill="white" className="w-4 h-4 text-white" /> Live Founder WhatsApp: {CONTACT_NUMBER}
+          <WhatsAppIcon className="w-4 h-4 text-white" /> Live Founder WhatsApp: {CONTACT_NUMBER}
         </a>
         <a 
           href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}

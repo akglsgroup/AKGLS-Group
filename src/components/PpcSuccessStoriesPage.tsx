@@ -9,6 +9,7 @@ import {
   Layout, ArrowUpRight, Rocket, HelpCircle, Star, Info, CheckSquare,
   MessageCircle, BarChart, PhoneCall, Calendar, ShieldCheck, Crosshair
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface PpcSuccessStoriesPageProps {
   onBackToHome: () => void;
@@ -20,18 +21,18 @@ const schemasTemplates = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "PPC Case Study: How We Increased Leads by 620% and achieved 11X ROAS",
-  "image": "https://akglsgroup.com/assets/case-studies/ppc.jpg",
+  "image": "https://www.akglsgroup.com/assets/case-studies/ppc.jpg",
   "author": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "publisher": {
     "@type": "Organization",
     "name": "AKGLS Group",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://akglsgroup.com/logo.png"
+      "url": "https://www.akglsgroup.com/logo.png"
     }
   },
   "description": "How AKGLS Group scaled an enterprise Ecommerce & B2B brand's advertising ROI, generating +620% qualified leads and an 11X overall ROAS."
@@ -53,7 +54,7 @@ const schemasTemplates = {
 };
 
 export default function PpcSuccessStoriesPage({ onBackToHome, openProposalForm }: PpcSuccessStoriesPageProps) {
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20read%20your%20PPC%20success%20stories%20and%20would%20like%20to%20scale%20our%20paid%20search.';
 
   useEffect(() => {
     const originalTitle = document.title;
@@ -204,7 +205,7 @@ export default function PpcSuccessStoriesPage({ onBackToHome, openProposalForm }
                   referrerPolicy="no-referrer"
                   className="px-8 py-4 bg-slate-900/80 hover:bg-slate-800/80 border border-slate-850 text-slate-200 font-bold rounded-xl transition text-center flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <MessageSquare className="text-emerald-400 w-5 h-5" /> Chat with PPC Expert
+                  <WhatsAppIcon className="text-emerald-400 w-5 h-5" /> Chat with PPC Expert
                 </a>
               </div>
             </div>
@@ -1481,7 +1482,7 @@ export default function PpcSuccessStoriesPage({ onBackToHome, openProposalForm }
               referrerPolicy="no-referrer"
               className="px-8 py-4 bg-slate-900 hover:bg-slate-800 border border-slate-850 rounded-xl text-slate-200 font-bold transition flex items-center justify-center gap-1.5 cursor-pointer font-sans"
             >
-              <MessageSquare className="text-emerald-400 w-5 h-5" /> Talk to PPC Experts
+              <WhatsAppIcon className="text-emerald-400 w-5 h-5" /> Talk to PPC Experts
             </a>
           </div>
         </div>

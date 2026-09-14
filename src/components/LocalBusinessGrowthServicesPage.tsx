@@ -12,6 +12,7 @@ import {
   Lightbulb, ChevronRight, Play, LineChart, ZapOff, Minimize2, CheckSquare, BarChart4,
   MapPin, Map, StarHalf, MessageCircle
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface LocalBusinessGrowthServicesPageProps {
   onBackToHome: () => void;
@@ -23,7 +24,7 @@ const localSchemaTemplates = {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "Local Business Growth Services | AKGLS Group",
-  "image": "https://akglsgroup.com/assets/local-hero-meta.jpg",
+  "image": "https://www.akglsgroup.com/assets/local-hero-meta.jpg",
   "telephone": "+91 831 811 4492",
   "email": "info@akglsgroup.com",
   "address": {
@@ -39,7 +40,7 @@ const localSchemaTemplates = {
     "latitude": "28.6273",
     "longitude": "77.3725"
   },
-  "url": "https://akglsgroup.com/local-business-growth-services/",
+  "url": "https://www.akglsgroup.com/local-business-growth-services/",
   "priceRange": "$$"
 }`,
   service: `{
@@ -49,7 +50,7 @@ const localSchemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global/Local Markets",
   "description": "Hyperlocal SEO, Google Business Profile claim & maps keyword optimization, citation indexation, local lead generation funnels, review curation workflows, and GEO search rankings."
@@ -58,7 +59,7 @@ const localSchemaTemplates = {
 
 export default function LocalBusinessGrowthServicesPage({ onBackToHome, openProposalForm }: LocalBusinessGrowthServicesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20Local%20Business%20Growth%20and%20Google%20Maps%20visibility.';
 
   // Dynamic Page Title
   useEffect(() => {
@@ -292,7 +293,7 @@ export default function LocalBusinessGrowthServicesPage({ onBackToHome, openProp
           className="bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black text-xs uppercase tracking-wider border border-emerald-550/30 transition-all font-mono"
           id="local-whatsapp-floating-bar"
         >
-          <MessageSquare fill="white" className="w-4 h-4 text-white" /> WhatsApp Help desk: {CONTACT_NUMBER}
+          <WhatsAppIcon className="w-4 h-4 text-white" /> WhatsApp Help desk: {CONTACT_NUMBER}
         </a>
         <a 
           href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}
@@ -679,11 +680,11 @@ export default function LocalBusinessGrowthServicesPage({ onBackToHome, openProp
         </div>
 
         {/* Bento Service Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {localGrowthServices.map((srv, idx) => (
             <div 
               key={idx} 
-              className="bg-[#0b0e20] border border-indigo-950 rounded-2xl p-6 hover:border-brand-teal/30 hover:shadow-xl hover:shadow-brand-teal/5 transition duration-300 space-y-4 flex flex-col justify-between"
+              className="bg-[#0b0e20] border border-indigo-950 rounded-2xl p-4 sm:p-6 hover:border-brand-teal/30 hover:shadow-xl hover:shadow-brand-teal/5 transition duration-300 space-y-3.5 sm:space-y-4 flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex justify-between items-start">
@@ -692,13 +693,13 @@ export default function LocalBusinessGrowthServicesPage({ onBackToHome, openProp
                   </span>
                   <span className="text-xs text-slate-500 mr-1 font-mono">Module {idx+1} of 10</span>
                 </div>
-                <h3 className="text-xl font-bold text-white hover:text-brand-teal transition font-sans">{srv.title}</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-white hover:text-brand-teal transition font-sans">{srv.title}</h3>
                 <p className="text-xs md:text-sm text-slate-350 leading-relaxed font-sans font-normal text-left">{srv.desc}</p>
               </div>
 
-              <div className="pt-4 border-t border-indigo-950 space-y-1 text-left bg-slate-950/45 p-3 rounded-xl font-mono">
-                <span className="text-[9px] font-bold text-slate-405 text-slate-450 block tracking-widest mb-1 font-mono">Hyperlocal Performance:</span>
-                <div className="flex items-center space-x-1.5 text-[11px] text-brand-teal font-extrabold text-left leading-tight">
+              <div className="pt-3.5 sm:pt-4 border-t border-indigo-950 space-y-1 text-left bg-slate-950/45 p-3.5 sm:p-3 rounded-xl font-mono min-h-[44px] flex flex-col justify-center">
+                <span className="text-[9px] font-bold text-slate-400 block tracking-widest mb-1 font-mono">Hyperlocal Performance:</span>
+                <div className="flex items-center space-x-2 sm:space-x-1.5 text-xs sm:text-[11px] text-brand-teal font-extrabold text-left leading-tight">
                   <Check className="w-4 h-4 text-brand-teal shrink-0 animate-pulse" />
                   <span>{srv.outcome}</span>
                 </div>
@@ -1617,9 +1618,9 @@ export default function LocalBusinessGrowthServicesPage({ onBackToHome, openProp
               href={WHATSAPP_LINK}
               target="_blank"
               referrerPolicy="no-referrer"
-              className="w-full sm:w-auto bg-slate-900 text-white border border-indigo-900 py-4 px-8 rounded-xl font-bold text-xs uppercase cursor-pointer hover:bg-slate-800 transition text-center"
+              className="w-full sm:w-auto bg-slate-900 text-white border border-indigo-900 py-4 px-8 rounded-xl font-bold text-xs uppercase cursor-pointer hover:bg-slate-800 transition text-center flex items-center justify-center gap-2"
             >
-              Direct chat with Analyst
+              <WhatsAppIcon className="w-4 h-4 text-white" /> Direct chat with Analyst
             </a>
           </div>
 

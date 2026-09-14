@@ -5,6 +5,7 @@ import {
   Sparkles, ChevronDown, Check, CheckCircle, Linkedin, Instagram, 
   Facebook, Twitter, Youtube, Globe, RefreshCw 
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 import { 
   FOOTER_FLOATING_CTA, 
   FOOTER_COMPANY_INFO, 
@@ -100,14 +101,16 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
               <a 
                 href={FOOTER_FLOATING_CTA.primaryButton.href}
                 onClick={(e) => handleLinkClick(FOOTER_FLOATING_CTA.primaryButton.href, e)}
-                className="bg-brand-orange hover:bg-brand-orange/90 text-white font-extrabold text-xs uppercase tracking-wider py-3.5 px-6 rounded-xl transition-all shadow-xl hover:shadow-brand-orange/25 w-full sm:w-auto text-center"
+                aria-label={FOOTER_FLOATING_CTA.primaryButton.text}
+                className="bg-brand-orange hover:bg-brand-orange/90 text-white font-extrabold text-xs uppercase tracking-wider py-3.5 px-6 rounded-xl transition-all shadow-xl hover:shadow-brand-orange/25 w-full sm:w-auto text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-indigo-950"
                 id="footer-strip-cta-audit"
               >
                 {FOOTER_FLOATING_CTA.primaryButton.text}
               </a>
               <a 
                 href={FOOTER_FLOATING_CTA.secondaryButton.href}
-                className="bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-200 font-extrabold text-xs uppercase tracking-wider py-3.5 px-6 rounded-xl transition-all w-full sm:w-auto text-center flex items-center justify-center gap-2"
+                aria-label={FOOTER_FLOATING_CTA.secondaryButton.text}
+                className="bg-slate-900/90 hover:bg-slate-800 border border-slate-700 text-slate-200 font-extrabold text-xs uppercase tracking-wider py-3.5 px-6 rounded-xl transition-all w-full sm:w-auto text-center flex items-center justify-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-indigo-950"
                 id="footer-strip-cta-consult"
               >
                 <Phone className="w-4 h-4 text-brand-teal" />
@@ -128,7 +131,8 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
               <a 
                 href="/" 
                 onClick={(e) => handleLinkClick('/', e)} 
-                className="flex items-center gap-3 select-none group"
+                aria-label="AKGLS Group homepage"
+                className="flex items-center gap-3 select-none group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo rounded-xl p-1 -m-1"
               >
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-indigo to-brand-purple flex items-center justify-center shadow-lg transform group-hover:scale-105 transition-transform">
                   <span className="text-white font-black text-xl font-display">AK</span>
@@ -174,7 +178,8 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
                     href={soc.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-indigo hover:border-brand-indigo transition-all duration-300"
+                    aria-label={`Visit AKGLS Group on ${soc.label}`}
+                    className="w-8 h-8 rounded-full bg-slate-900 border border-slate-800 flex items-center justify-center text-slate-400 hover:text-white hover:bg-brand-indigo hover:border-brand-indigo transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo focus-visible:ring-offset-1 focus-visible:ring-offset-slate-900"
                     title={soc.label}
                   >
                     <soc.icon className="w-3.5 h-3.5" />
@@ -198,7 +203,8 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
                       <a 
                         href={link.href} 
                         onClick={(e) => handleLinkClick(link.href, e)}
-                        className="text-slate-400 hover:text-brand-teal transition-colors tracking-wide flex items-center justify-between group py-0.5"
+                        aria-label={link.name}
+                        className="text-slate-400 hover:text-brand-teal transition-colors tracking-wide flex items-center justify-between group py-0.5 rounded px-1 -mx-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                       >
                         <span className="group-hover:translate-x-1 transition-transform inline-block">{link.name}</span>
                         {link.badge && (
@@ -221,8 +227,11 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
               return (
                 <div key={col.id} className="bg-slate-950/60 border border-indigo-950/30 rounded-2xl overflow-hidden">
                   <button 
+                    type="button"
                     onClick={() => toggleAccordion(col.id)}
-                    className="w-full py-4 px-5 flex justify-between items-center text-xs font-extrabold text-white font-display focus:outline-none"
+                    aria-expanded={isExpanded}
+                    aria-label={`Toggle ${col.title} section`}
+                    className="w-full py-4 px-5 flex justify-between items-center text-xs font-extrabold text-white font-display focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal cursor-pointer"
                   >
                     <span className="flex items-center gap-2">
                       <span className={`w-1.5 h-1.5 rounded-full ${col.bulletClass}`} />
@@ -237,7 +246,8 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
                           key={lIdx}
                           href={link.href}
                           onClick={(e) => handleLinkClick(link.href, e)}
-                          className="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate"
+                          aria-label={link.name}
+                          className="text-slate-400 hover:text-brand-teal text-xs py-1.5 block truncate rounded px-1 -mx-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                         >
                           {link.name}
                         </a>
@@ -263,14 +273,14 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
                   <Mail className="w-3.5 h-3.5 text-brand-teal shrink-0 mt-0.5" />
                   <span>
                     Direct Inquiries:{" "}
-                    <a href={`mailto:${FOOTER_CONTACT.email}`} className="text-white hover:underline font-bold">{FOOTER_CONTACT.email}</a>
+                    <a href={`mailto:${FOOTER_CONTACT.email}`} aria-label={`Email AKGLS Group at ${FOOTER_CONTACT.email}`} className="text-white hover:underline font-bold rounded px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal">{FOOTER_CONTACT.email}</a>
                   </span>
                 </p>
                 <p className="flex items-start gap-2">
                   <Phone className="w-3.5 h-3.5 text-brand-teal shrink-0 mt-0.5" />
                   <span>
                     Direct Calling:{" "}
-                    <a href={`tel:${FOOTER_CONTACT.phoneClean}`} className="text-white hover:underline font-bold font-mono">{FOOTER_CONTACT.phone}</a>
+                    <a href={`tel:${FOOTER_CONTACT.phoneClean}`} aria-label={`Call AKGLS Group at ${FOOTER_CONTACT.phone}`} className="text-white hover:underline font-bold font-mono rounded px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal">{FOOTER_CONTACT.phone}</a>
                   </span>
                 </p>
                 <p className="flex items-start gap-2">
@@ -289,15 +299,17 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
                   href={FOOTER_CONTACT.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[10px] uppercase tracking-wider py-2 px-3.5 rounded-lg transition-all flex items-center gap-1.5 shadow"
+                  aria-label="Chat with AKGLS Group on WhatsApp"
+                  className="bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-[10px] uppercase tracking-wider py-2 px-3.5 rounded-lg transition-all flex items-center gap-1.5 shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-1 focus-visible:ring-offset-slate-900"
                 >
-                  <MessageSquare className="w-3.5 h-3.5" />
+                  <WhatsAppIcon className="w-3.5 h-3.5" />
                   WhatsApp Chat
                 </a>
                 <a 
                   href={FOOTER_CONTACT.consultationHref}
                   onClick={(e) => handleLinkClick(FOOTER_CONTACT.consultationHref, e)}
-                  className="bg-brand-indigo hover:bg-brand-indigo/90 text-white font-extrabold text-[10px] uppercase tracking-wider py-2 px-3.5 rounded-lg transition-all flex items-center gap-1.5 shadow"
+                  aria-label="Book Free Consultation with AKGLS Group"
+                  className="bg-brand-indigo hover:bg-brand-indigo/90 text-white font-extrabold text-[10px] uppercase tracking-wider py-2 px-3.5 rounded-lg transition-all flex items-center gap-1.5 shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-1 focus-visible:ring-offset-slate-900"
                 >
                   <Sparkles className="w-3.5 h-3.5 text-brand-teal" />
                   Book Consultation
@@ -321,14 +333,16 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
                     type="email" 
                     required
                     placeholder={FOOTER_NEWSLETTER.placeholder}
+                    aria-label="Email address for newsletter"
                     value={newsletterEmail}
                     onChange={(e) => setNewsletterEmail(e.target.value)}
-                    className="w-full bg-[#050b15] border border-slate-800 focus:border-brand-teal rounded-xl py-3 pl-4 pr-12 text-xs text-white placeholder-slate-500 focus:outline-none font-medium"
+                    className="w-full bg-[#050b15] border border-slate-800 focus:border-brand-teal rounded-xl py-3 pl-4 pr-12 text-xs text-white placeholder-slate-500 focus:outline-none font-medium focus-visible:ring-2 focus-visible:ring-brand-teal"
                   />
                   <button 
                     type="submit"
                     disabled={newsletterLoading}
-                    className="absolute right-1.5 top-1.5 bg-brand-indigo hover:bg-brand-indigo/80 disabled:opacity-60 text-white p-2 rounded-lg text-xs transition-colors shrink-0 flex items-center justify-center cursor-pointer"
+                    aria-label="Subscribe to newsletter"
+                    className="absolute right-1.5 top-1.5 bg-brand-indigo hover:bg-brand-indigo/80 disabled:opacity-60 text-white p-2 rounded-lg text-xs transition-colors shrink-0 flex items-center justify-center cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                     title="Subscribe"
                   >
                     {newsletterLoading ? (
@@ -368,7 +382,8 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
                       key={idx}
                       href={loc.href}
                       onClick={(e) => handleLinkClick(loc.href, e)}
-                      className="text-[9.5px] font-bold font-mono text-slate-400 hover:text-brand-teal bg-[#050b15] border border-indigo-950/40 py-1 px-2 rounded-md hover:border-brand-teal/30 transition-all block"
+                      aria-label={`Local SEO in ${loc.name}`}
+                      className="text-[9.5px] font-bold font-mono text-slate-400 hover:text-brand-teal bg-[#050b15] border border-indigo-950/40 py-1 px-2 rounded-md hover:border-brand-teal/30 transition-all block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                     >
                       {loc.name}
                     </a>
@@ -387,7 +402,8 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
                       key={idx}
                       href={tag.href}
                       onClick={(e) => handleLinkClick(tag.href, e)}
-                      className="text-[9.5px] font-black font-mono text-slate-400 hover:text-cyan-300 bg-[#050b15] border border-indigo-950/40 py-1 px-2 rounded-md hover:border-cyan-400/30 transition-all block"
+                      aria-label={`AI Citation topic: ${tag.name}`}
+                      className="text-[9.5px] font-black font-mono text-slate-400 hover:text-cyan-300 bg-[#050b15] border border-indigo-950/40 py-1 px-2 rounded-md hover:border-cyan-400/30 transition-all block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
                     >
                       {tag.name}
                     </a>
@@ -426,7 +442,8 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
                   key={lIdx} 
                   href={leg.href} 
                   onClick={(e) => handleLinkClick(leg.href, e)}
-                  className="hover:text-slate-300 transition-colors"
+                  aria-label={leg.name}
+                  className="hover:text-slate-300 transition-colors rounded px-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                 >
                   {leg.name}
                 </a>

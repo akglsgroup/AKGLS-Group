@@ -70,8 +70,8 @@ Here is an example structure to integrate on your root folders:
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "AKGLS Group",
-  "url": "https://akglsgroup.com",
-  "logo": "https://akglsgroup.com/logo.png",
+  "url": "https://www.akglsgroup.com",
+  "logo": "https://www.akglsgroup.com/logo.png",
   "sameAs": [
     "https://www.linkedin.com/company/akglsgroup/"
   ],
@@ -274,10 +274,10 @@ Here is an advanced nested metadata script illustrating how to combine standard 
   "@graph": [
     {
       "@type": "SEOAgency",
-      "@id": "https://akglsgroup.com/#agency",
+      "@id": "https://www.akglsgroup.com/#agency",
       "name": "AKGLS Group",
-      "url": "https://akglsgroup.com",
-      "logo": "https://akglsgroup.com/logo.png",
+      "url": "https://www.akglsgroup.com",
+      "logo": "https://www.akglsgroup.com/logo.png",
       "contactPoint": {
         "@type": "ContactPoint",
         "telephone": "+91-9876543210",
@@ -287,7 +287,7 @@ Here is an advanced nested metadata script illustrating how to combine standard 
     },
     {
       "@type": "FAQPage",
-      "@id": "https://akglsgroup.com/seo-services/#faq",
+      "@id": "https://www.akglsgroup.com/seo-services/#faq",
       "mainEntity": [
         {
           "@type": "Question",

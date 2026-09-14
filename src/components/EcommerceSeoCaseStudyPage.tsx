@@ -10,6 +10,7 @@ import {
   Layout, ArrowUpRight, Rocket, HelpCircle, ShoppingBag, ArrowDownRight,
   ChevronRight, RefreshCw, Star, Info, CheckSquare
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface EcommerceSeoCaseStudyPageProps {
   onBackToHome: () => void;
@@ -21,18 +22,18 @@ const schemasTemplates = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "Ecommerce SEO Case Study: 450% Traffic & 320% Revenue growth",
-  "image": "https://akglsgroup.com/assets/case-studies/ecommerce-seo.jpg",
+  "image": "https://www.akglsgroup.com/assets/case-studies/ecommerce-seo.jpg",
   "author": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "publisher": {
     "@type": "Organization",
     "name": "AKGLS Group",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://akglsgroup.com/logo.png"
+      "url": "https://www.akglsgroup.com/logo.png"
     }
   },
   "description": "How AKGLS Group scaled a premium Shopify fashion brand's organic operations, driving organic traffic from 12K to 68K visits per month in 8 months."
@@ -55,7 +56,7 @@ const schemasTemplates = {
 
 export default function EcommerceSeoCaseStudyPage({ onBackToHome, openProposalForm }: EcommerceSeoCaseStudyPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20read%20your%20E-Commerce%20SEO%20case%20study%20and%20want%20to%20scale%20our%20store.';
 
   useEffect(() => {
     const originalTitle = document.title;
@@ -188,7 +189,7 @@ export default function EcommerceSeoCaseStudyPage({ onBackToHome, openProposalFo
                   referrerPolicy="no-referrer"
                   className="px-8 py-4 bg-slate-900/80 hover:bg-slate-800/80 border border-slate-800 text-slate-200 font-bold rounded-xl transition text-center flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <MessageSquare className="text-emerald-400 w-5 h-5" /> Consult on WhatsApp
+                  <WhatsAppIcon className="text-emerald-400 w-5 h-5" /> Consult on WhatsApp
                 </a>
               </div>
             </div>
@@ -1572,7 +1573,7 @@ export default function EcommerceSeoCaseStudyPage({ onBackToHome, openProposalFo
               referrerPolicy="no-referrer"
               className="px-8 py-4 bg-slate-900 border border-slate-800 text-slate-200 font-bold rounded-xl hover:bg-slate-850 transition text-center flex items-center justify-center gap-1.5 cursor-pointer"
             >
-              <MessageSquare className="w-5 h-5 text-emerald-400" /> Talk to SEO Experts
+              <WhatsAppIcon className="w-5 h-5 text-emerald-400" /> Talk to SEO Experts
             </a>
           </div>
 
@@ -1591,7 +1592,7 @@ export default function EcommerceSeoCaseStudyPage({ onBackToHome, openProposalFo
           className="p-3.5 bg-emerald-600 text-white rounded-full shadow-2xl hover:bg-emerald-500 transition-all flex items-center justify-center hover:scale-105 active:scale-95"
           title="Chat with an Expert"
         >
-          <MessageCircle className="w-6 h-6 fill-white" />
+          <WhatsAppIcon className="w-6 h-6 text-white" />
         </a>
       </div>
     </div>

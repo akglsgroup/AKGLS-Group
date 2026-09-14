@@ -72,7 +72,7 @@ export default function EcommerceSeoPage({ onBackToHome, openProposalForm }: Eco
   "@context": "https://schema.org",
   "@type": "Product",
   "name": "Target Product Sample",
-  "image": "https://akglsgroup.com/product-image.png",
+  "image": "https://www.akglsgroup.com/product-image.png",
   "description": "High-intent ecommerce product optimization layout.",
   "brand": {
     "@type": "Brand",

@@ -8,6 +8,7 @@ import {
   Settings, Shuffle, BarChart3, AlertCircle, Copy, CheckCircle,
   TrendingUp, Percent, DollarSign, Award, Target, Eye, Film, Heart, Share2
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface MetaAdsServicesPageProps {
   onBackToHome: () => void;
@@ -22,7 +23,7 @@ const metaAdsSchemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "High-perfomance Facebook and Instagram ad management, dynamic catalog setups, Reels/video funnel optimization, and first-party pixel conversions."
@@ -43,7 +44,7 @@ const metaAdsSchemaTemplates = {
 
 export default function MetaAdsServicesPage({ onBackToHome, openProposalForm }: MetaAdsServicesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20want%20to%20discuss%20Meta%20Ads%20(Facebook%20%26%20Instagram)%20scaling%20and%20ROAS.';
 
   // State to simulate dynamic Page Titles
   useEffect(() => {
@@ -280,7 +281,7 @@ export default function MetaAdsServicesPage({ onBackToHome, openProposalForm }: 
           className="bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black text-xs uppercase tracking-wider border border-emerald-500/30 transition-all font-mono"
           id="meta-whatsapp-floating-bar"
         >
-          <MessageSquare fill="white" className="w-4 h-4 text-white" /> WhatsApp: {CONTACT_NUMBER}
+          <WhatsAppIcon className="w-4 h-4 text-white" /> WhatsApp: {CONTACT_NUMBER}
         </a>
         <a 
           href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}
@@ -1085,7 +1086,7 @@ export default function MetaAdsServicesPage({ onBackToHome, openProposalForm }: 
                   <input
                     type="url"
                     required
-                    placeholder="https://akglsgroup.com"
+                    placeholder="https://www.akglsgroup.com"
                     value={auditForm.website}
                     onChange={(e) => setAuditForm({ ...auditForm, website: e.target.value })}
                     className="w-full bg-slate-950 border border-slate-850 p-3 rounded-lg text-white font-mono"
@@ -1214,7 +1215,7 @@ export default function MetaAdsServicesPage({ onBackToHome, openProposalForm }: 
               referrerPolicy="no-referrer"
               className="bg-slate-900 border border-slate-800 text-slate-200 font-semibold px-8 py-4 rounded-xl hover:bg-slate-800 transition block text-center flex items-center gap-1.5"
             >
-              <MessageSquare className="w-4 h-4 text-brand-teal" /> Chat with Advisor on WhatsApp
+              <WhatsAppIcon className="w-4 h-4 text-emerald-400" /> Chat with Advisor on WhatsApp
             </a>
           </div>
 

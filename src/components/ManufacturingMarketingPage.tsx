@@ -6,6 +6,7 @@ import {
   MapPin, MessageSquare, Zap, Clock, ChevronDown, CheckCircle,
   Database, FileCheck, Layers, HelpCircle, ArrowRight, TrendingUp, Search, X
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface ManufacturingMarketingPageProps {
   onBackToHome: () => void;
@@ -14,7 +15,7 @@ interface ManufacturingMarketingPageProps {
 
 export default function ManufacturingMarketingPage({ onBackToHome, openProposalForm }: ManufacturingMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
-  const WHATSAPP_LINK = "https://wa.me/918318114492";
+  const WHATSAPP_LINK = "https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20manufacturing%20and%20industrial%20B2B%20marketing.";
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -1809,7 +1810,7 @@ export default function ManufacturingMarketingPage({ onBackToHome, openProposalF
                         target="_blank"
                         referrerPolicy="no-referrer"
                       >
-                        <MessageSquare className="w-3.5 h-3.5" /> Speak via WhatsApp
+                        <WhatsAppIcon className="w-3.5 h-3.5 text-white" /> Speak via WhatsApp
                       </a>
                     </div>
                   </div>
@@ -1891,7 +1892,7 @@ export default function ManufacturingMarketingPage({ onBackToHome, openProposalF
               referrerPolicy="no-referrer"
               className="bg-emerald-600 hover:bg-opacity-95 text-white font-mono font-black text-xs uppercase tracking-wider py-3.5 px-8 rounded-xl transition-all flex items-center gap-1.5"
             >
-              <MessageSquare className="w-4 h-4" /> Chat With Industrial Specialist
+              <WhatsAppIcon className="w-4 h-4 text-white" /> Chat With Industrial Specialist
             </a>
           </div>
 

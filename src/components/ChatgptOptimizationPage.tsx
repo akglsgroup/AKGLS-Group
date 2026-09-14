@@ -7,6 +7,7 @@ import {
   Send, Smartphone, Zap, Server, Shield, Volume2, MessageSquare, 
   Settings, Shuffle, BarChart3, AlertCircle, Copy, CheckCircle
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface ChatgptOptimizationPageProps {
   onBackToHome: () => void;
@@ -21,7 +22,7 @@ const schemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "Increase brand visibility in ChatGPT and next-generation conversational AI search engines with advanced AI SEO strategies."
@@ -33,24 +34,24 @@ const schemaTemplates = {
     "@type": "ListItem",
     "position": 1,
     "name": "Home",
-    "item": "https://akglsgroup.com/"
+    "item": "https://www.akglsgroup.com/"
   },{
     "@type": "ListItem",
     "position": 2,
     "name": "Services",
-    "item": "https://akglsgroup.com/seo-services"
+    "item": "https://www.akglsgroup.com/seo-services"
   },{
     "@type": "ListItem",
     "position": 3,
     "name": "ChatGPT Optimization Services",
-    "item": "https://akglsgroup.com/chatgpt-optimization-services/"
+    "item": "https://www.akglsgroup.com/chatgpt-optimization-services/"
   }]
 }`
 };
 
 export default function ChatgptOptimizationPage({ onBackToHome, openProposalForm }: ChatgptOptimizationPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20optimize%20our%20website%20for%20ChatGPT%20Search%20and%20SearchGPT.';
 
   // Dynamic Page Title
   useEffect(() => {
@@ -1531,7 +1532,7 @@ export default function ChatgptOptimizationPage({ onBackToHome, openProposalForm
               href={WHATSAPP_LINK} 
               className="w-full sm:w-auto bg-brand-teal text-slate-950 px-8 py-4 rounded-xl font-bold font-mono text-xs uppercase hover:bg-white hover:scale-102 transition duration-300 flex items-center justify-center space-x-2"
             >
-              <MessageSquare className="w-4 h-4" />
+              <WhatsAppIcon className="w-4 h-4 text-slate-950" />
               <span>Message on WhatsApp ({CONTACT_NUMBER})</span>
             </a>
             <a 

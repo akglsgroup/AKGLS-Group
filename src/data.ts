@@ -5,8 +5,8 @@ export const servicesMenu: MegaColumn[] = [
     title: "SEO Services",
     items: [
       { name: "SEO Services", href: "/seo-services" },
-      { name: "Technical SEO", href: "/technical-seo" },
-      { name: "On-Page SEO", href: "/on-page-seo" },
+      { name: "Technical SEO", href: "/technical-seo-services" },
+      { name: "On-Page SEO", href: "/on-page-seo-services" },
       { name: "Off-Page SEO", href: "/off-page-seo-services" },
       { name: "Local SEO", href: "/local-seo-services" },
       { name: "Ecommerce SEO", href: "/ecommerce-seo-services" },
@@ -300,8 +300,8 @@ export const defaultCaseStudies: CaseStudy[] = [
 export const searchDatabase: SearchResult[] = [
   // Core SEO Services
   { title: "SEO Services", category: "SEO Services", href: "/seo-services", description: "Comprehensive search engine optimization services to scale rankings and premium traffic." },
-  { title: "Technical SEO Services", category: "SEO Services", href: "/technical-seo", description: "Deep server logs analysis, XML sitemaps, semantic crawl path audits, and Core Web Vitals lift." },
-  { title: "On-Page SEO Services", category: "SEO Services", href: "/on-page-seo", description: "Optimize metadata headers, structural markup tags, content schemas, and click-through rates." },
+  { title: "Technical SEO Services", category: "SEO Services", href: "/technical-seo-services", description: "Deep server logs analysis, XML sitemaps, semantic crawl path audits, and Core Web Vitals lift." },
+  { title: "On-Page SEO Services", category: "SEO Services", href: "/on-page-seo-services", description: "Optimize metadata headers, structural markup tags, content schemas, and click-through rates." },
   { title: "Off-Page SEO Services & Outreach", category: "SEO Services", href: "/off-page-seo-services", description: "Build high domain authority backlink profile footprint through clean digital PR outreach." },
   { title: "Local SEO Services", category: "SEO Services", href: "/local-seo-services", description: "Dominate Google Local Map packs, optimize Google Business Profile, and secure local citation catalogs." },
   { title: "Ecommerce SEO Services", category: "SEO Services", href: "/ecommerce-seo-services", description: "Scale product and category page rankings for Shopify, WooCommerce, or Magento stores." },

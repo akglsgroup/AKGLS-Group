@@ -1052,10 +1052,10 @@ export default function App() {
       } else if (pathname === '/linkedin-ads-services' || pathname === '/linkedin-ads-services/' || pathname === '/linkedin-advertising-services' || pathname === '/linkedin-advertising-services/' || pathname === '/b2b-linkedin-marketing' || pathname === '/b2b-linkedin-marketing/' || pathname === '/linkedin-lead-generation-services' || pathname === '/linkedin-lead-generation-services/' || hash === '#linkedin-ads-services' || hash === '#linkedin-ads' || hash === '#b2b-linkedin-marketing' || hash === '#linkedin-lead-generation-services' || hash === '#linkedin-advertising-services') {
         setCurrentPage('linkedin-ads');
         window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (hash === '#web-design-services' || hash === '#web-design' || hash === '#website-design-company' || hash === '#professional-web-design-services' || hash === '#ui-ux-web-design-agency') {
+      } else if (pathname === '/web-design-services' || pathname === '/web-design-services/' || hash === '#web-design-services' || hash === '#web-design' || hash === '#website-design-company' || hash === '#professional-web-design-services' || hash === '#ui-ux-web-design-agency') {
         setCurrentPage('web-design');
         window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (hash === '#wordpress-development-services' || hash === '#wordpress-development-company' || hash === '#wordpress-website-development' || hash === '#wordpress-agency' || hash === '#wordpress' || hash === '#wordpress-development') {
+      } else if (pathname === '/wordpress-development-services' || pathname === '/wordpress-development-services/' || hash === '#wordpress-development-services' || hash === '#wordpress-development-company' || hash === '#wordpress-website-development' || hash === '#wordpress-agency' || hash === '#wordpress' || hash === '#wordpress-development') {
         setCurrentPage('wordpress');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (pathname === '/shopify-development-services' || pathname === '/shopify-development-services/' || pathname === '/shopify-store-development' || pathname === '/shopify-store-development/' || pathname === '/shopify-web-development' || pathname === '/shopify-web-development/' || pathname === '/shopify-ecommerce-development' || pathname === '/shopify-ecommerce-development/' || hash === '#shopify-development-services' || hash === '#shopify-development' || hash === '#shopify-ecommerce-development' || hash === '#shopify-store-development') {
@@ -1375,313 +1375,338 @@ export default function App() {
     home: {
       title: "AKGLS Group | AI SEO, GEO & Performance Marketing Agency",
       description: "Deploy SEO-friendly structure markups with real-time Generative Engine Optimization (GEO) to citation-proof your business across ChatGPT, Perplexity, Gemini, and Google Search.",
-      canonical: "https://akglsgroup.com/"
+      canonical: "https://www.akglsgroup.com/"
     },
     geo: {
       title: "GEO (Generative Engine Optimization) Services | AKGLS Group",
       description: "Optimize your brand for Next-Gen LLM retrieval, conversational AI filters, Perplexity Citations, and ChatGPT Search results with our proven expertise.",
-      canonical: "https://akglsgroup.com/geo-services/"
+      canonical: "https://www.akglsgroup.com/geo-services/"
     },
     seo: {
       title: "Organic Search Optimization & SEO Services | AKGLS Group",
       description: "Drive massive organic keyword visibility and high-intent customer traffic with premium full-funnel, semantic content structures and modern search practices.",
-      canonical: "https://akglsgroup.com/seo-services/"
+      canonical: "https://www.akglsgroup.com/seo-services/"
     },
     'technical-seo': {
       title: "Technical SEO Optimization, Schema & Infrastructure | AKGLS Group",
       description: "Maximize crawl budget, speed, structural JSON-LD schemas, and indexing hierarchies so both human users and AI web crawlers browse flawlessly.",
-      canonical: "https://akglsgroup.com/technical-seo-services/"
+      canonical: "https://www.akglsgroup.com/technical-seo-services/"
     },
     'on-page-seo': {
       title: "On-Page SEO & Content Semantic Optimization | AKGLS Group",
       description: "Align your headings structure, alt entities, and LSI keyword relevancy to make pages immediately understandable to crawl bots and AI search engine agents.",
-      canonical: "https://akglsgroup.com/on-page-seo-services/"
+      canonical: "https://www.akglsgroup.com/on-page-seo-services/"
     },
     'off-page-seo': {
       title: "Off-Page SEO Services Company | Link Building Agency | AKGLS Group",
       description: "Secure high-authority backlinks, boost domain authority rating indicators, and expand search coverage with safe, white-hat editorial outreach campaigns.",
-      canonical: "https://akglsgroup.com/off-page-seo-services/"
+      canonical: "https://www.akglsgroup.com/off-page-seo-services/"
     },
     'local-seo': {
       title: "Local SEO Services Company | Google Map pack Optimization | AKGLS Group",
       description: "Dominate neighborhood searches and claim top-of-page ranks inside Google Map packs with optimized GBP profiles and hyper-local citation structures.",
-      canonical: "https://akglsgroup.com/local-seo-services/"
+      canonical: "https://www.akglsgroup.com/local-seo-services/"
     },
     'ecommerce-seo': {
       title: "Ecommerce SEO Services Company | Core Category Authority | AKGLS Group",
       description: "Drive non-branded traffic and direct product checkouts with platform-specific technical blueprints, category optimization schemes, and rich schemas.",
-      canonical: "https://akglsgroup.com/ecommerce-seo-services/"
+      canonical: "https://www.akglsgroup.com/ecommerce-seo-services/"
     },
     'enterprise-seo': {
       title: "Enterprise SEO Services Company | Corporate Search scale | AKGLS Group",
       description: "Scale organic revenues securely across millions of pages. We design structural sitemaps, optimize technical crawling, and resolve index blockades.",
-      canonical: "https://akglsgroup.com/enterprise-seo-services/"
+      canonical: "https://www.akglsgroup.com/enterprise-seo-services/"
     },
     'international-seo': {
       title: "International SEO Services Company | Global Hreflang setup | AKGLS Group",
       description: "Expand your organic footprint across multilingual territories. Configure precise Hreflang code rules and regional content structures.",
-      canonical: "https://akglsgroup.com/international-seo-services/"
+      canonical: "https://www.akglsgroup.com/international-seo-services/"
     },
     'mobile-seo': {
       title: "Mobile SEO Services & Core Web Vitals Speed | AKGLS Group",
       description: "Ensure lightning fast loading speeds, optimize responsiveness viewports, and secure smartphone crawlers priority indexing guidelines of Google.",
-      canonical: "https://akglsgroup.com/mobile-seo-services/"
+      canonical: "https://www.akglsgroup.com/mobile-seo-services/"
     },
     'programmatic-seo': {
       title: "Programmatic SEO Services & Automated Organic Scale | AKGLS Group",
       description: "Build dynamic database-driven templates, program high-volume localized keyword maps, and capture organic markets easily.",
-      canonical: "https://akglsgroup.com/programmatic-seo-services/"
+      canonical: "https://www.akglsgroup.com/programmatic-seo-services/"
     },
     'link-building': {
       title: "Link Building Services Company | White Hat Backlink Agency | AKGLS Group",
       description: "Secure permanent link assets, boost domain authority baseline statistics, audit toxic backlink profiles, and claim top ranking organic results.",
-      canonical: "https://akglsgroup.com/link-building-services/"
+      canonical: "https://www.akglsgroup.com/link-building-services/"
     },
     'seo-audit-services': {
       title: "Technical SEO Audit & Sitemap Compliance | AKGLS Group",
       description: "Diagnose crawl budget issues, verify HTTPS certificates configurations, map out content gaps, and prioritize developer execution models.",
-      canonical: "https://akglsgroup.com/seo-audit-services/"
+      canonical: "https://www.akglsgroup.com/seo-audit-services/"
     },
     'seo-consulting-services': {
       title: "SEO Consulting Services & Fractional Search Leadership | AKGLS Group",
       description: "Consult with seasoned search architects. Get custom growth roadmap timelines, build internal SOP manuals, and troubleshoot penalties.",
-      canonical: "https://akglsgroup.com/seo-consulting-services/"
+      canonical: "https://www.akglsgroup.com/seo-consulting-services/"
     },
     aeo: {
       title: "AEO (Answer Engine Optimization) & RAG Systems | AKGLS Group",
       description: "Align entity properties and structure conversational answers to trigger direct summary panel responses inside Google's AI Overviews and top retrievers.",
-      canonical: "https://akglsgroup.com/aeo-services/"
+      canonical: "https://www.akglsgroup.com/aeo-services/"
     },
     'chatgpt-optimization': {
       title: "ChatGPT Optimization Services | ChatGPT SEO Agency | AKGLS Group",
       description: "Increase your brand visibility in ChatGPT and AI-generated answers with advanced ChatGPT Optimization services from AKGLS Group. Future-ready AI search strategies.",
-      canonical: "https://akglsgroup.com/chatgpt-optimization-services/"
+      canonical: "https://www.akglsgroup.com/chatgpt-optimization-services/"
     },
     'gemini-optimization': {
       title: "Gemini Optimization Services | Google Gemini SEO Agency | AKGLS Group",
       description: "Optimize your business for Google Gemini and AI-powered search experiences with advanced Gemini Optimization services from AKGLS Group.",
-      canonical: "https://akglsgroup.com/gemini-optimization-services/"
+      canonical: "https://www.akglsgroup.com/gemini-optimization-services/"
     },
     'claude-optimization': {
       title: "Claude Optimization Services | Claude AI SEO Agency | AKGLS Group",
       description: "Optimize your business for Claude AI and conversational AI discovery with advanced Claude Optimization services from AKGLS Group. Improve AI visibility and future-ready search presence.",
-      canonical: "https://akglsgroup.com/claude-optimization-services/"
+      canonical: "https://www.akglsgroup.com/claude-optimization-services/"
     },
     'voice-search-optimization': {
       title: "Voice Search Optimization Services | Voice SEO Agency | AKGLS Group",
       description: "Optimize your business for voice assistants, conversational search, and AI-powered voice queries with advanced Voice Search Optimization services from AKGLS Group.",
-      canonical: "https://akglsgroup.com/voice-search-optimization-services/"
+      canonical: "https://www.akglsgroup.com/voice-search-optimization-services/"
     },
     'ai-search-optimization': {
       title: "AI Search Optimization Services | AI SEO Agency | AKGLS Group",
       description: "Optimize your business for ChatGPT, Google AI Overviews, Gemini & AI-powered search engines with advanced AI Search Optimization services from AKGLS Group.",
-      canonical: "https://akglsgroup.com/ai-search-optimization-services/"
+      canonical: "https://www.akglsgroup.com/ai-search-optimization-services/"
     },
     'llm-optimization': {
       title: "LLM Optimization Services | AI search visibility agency | AKGLS Group",
       description: "Claim top-tier visibility, mentions, and authoritative citations across leading AI engines (ChatGPT, Gemini, Claude, Perplexity, Copilot, Grok) with advanced LLM SEO optimization services from AKGLS Group.",
-      canonical: "https://akglsgroup.com/llm-optimization-services/"
+      canonical: "https://www.akglsgroup.com/llm-optimization-services/"
     },
     'ai-citation-building': {
       title: "AI Citation Building Services | ChatGPT & Gemini Mentions Agency | AKGLS Group",
       description: "Increase organic brand mentions, authoritative citations, and knowledge graph signals inside Perplexity, ChatGPT, Claude, and Gemini with leading AI Citation Building Services by AKGLS Group.",
-      canonical: "https://akglsgroup.com/ai-citation-building-services/"
+      canonical: "https://www.akglsgroup.com/ai-citation-building-services/"
     },
     'ai-seo': {
       title: "AI-Powered SEO & LLM Context Optimization | AKGLS Group",
       description: "Modernize your visibility pipelines with natural language semantic processing, dynamic entity graphs, and indexing nodes optimized for Claude, Gemini, and GPT-4.",
-      canonical: "https://akglsgroup.com/ai-seo-services/"
+      canonical: "https://www.akglsgroup.com/ai-seo-services/"
     },
     'google-ads': {
       title: "Google Ads Services | PPC Management Agency | AKGLS Group",
       description: "Generate high-quality leads and maximize ROI with expert Google Ads services from AKGLS Group. Search Ads, Display Ads, Shopping Ads, YouTube Ads & PPC management solutions.",
-      canonical: "https://akglsgroup.com/google-ads-services/"
+      canonical: "https://www.akglsgroup.com/google-ads-services/"
     },
     'meta-ads': {
       title: "Meta Ads Services | Facebook & Instagram Ads Agency | AKGLS Group",
       description: "Generate high-quality leads, sales, and brand awareness with expert Meta Ads services from AKGLS Group. Facebook Ads, Instagram Ads, remarketing & AI-powered social advertising solutions.",
-      canonical: "https://akglsgroup.com/meta-ads-services/"
+      canonical: "https://www.akglsgroup.com/meta-ads-services/"
     },
     'linkedin-ads': {
       title: "LinkedIn Ads Services | B2B LinkedIn Advertising Agency | AKGLS Group",
       description: "Generate high-quality B2B leads with expert LinkedIn Ads services from AKGLS Group. LinkedIn lead generation, sponsored ads, ABM campaigns & AI-powered B2B advertising solutions.",
-      canonical: "https://akglsgroup.com/linkedin-ads-services/"
+      canonical: "https://www.akglsgroup.com/linkedin-ads-services/"
     },
     'web-design': {
       title: "Professional Web Web Design & High-Converting UX/UI | AKGLS Group",
       description: "Build gorgeous, loading-fast custom websites crafted with optimal UX/UI standards. We supply clear structural nodes to search indexers and convert visitors.",
-      canonical: "https://akglsgroup.com/web-design-services/"
+      canonical: "https://www.akglsgroup.com/web-design-services/"
     },
     wordpress: {
       title: "WordPress Development Services & Custom Engineering | AKGLS Group",
       description: "Maximize WordPress speed, security, and schema scalability. We craft lightweight, database optimized, responsive architectures for modern search optimization.",
-      canonical: "https://akglsgroup.com/wordpress-development-services/"
+      canonical: "https://www.akglsgroup.com/wordpress-development-services/"
     },
     'shopify-development': {
       title: "Shopify Development Services | Shopify Store Development Company | AKGLS Group",
       description: "Build high-converting Shopify stores with expert Shopify development services from AKGLS Group. Custom Shopify design, theme development, Shopify SEO & ecommerce growth solutions.",
-      canonical: "https://akglsgroup.com/shopify-development-services/"
+      canonical: "https://www.akglsgroup.com/shopify-development-services/"
     },
     'startup-growth': {
       title: "Startup Growth Solutions | Startup Marketing & Scaling Agency | AKGLS Group",
       description: "Scale your startup faster with startup growth solutions from AKGLS Group. Growth marketing, AI SEO, lead generation, product growth, branding & startup scaling strategies.",
-      canonical: "https://akglsgroup.com/startup-growth-solutions/"
+      canonical: "https://www.akglsgroup.com/startup-growth-solutions/"
     },
     'enterprise-marketing': {
       title: "Enterprise Marketing Solutions | Enterprise Digital Marketing Agency | AKGLS Group",
       description: "Scale enterprise growth with AI-powered enterprise marketing solutions from AKGLS Group. Enterprise SEO, PPC, AI marketing, lead generation & digital transformation strategies.",
-      canonical: "https://akglsgroup.com/enterprise-marketing-solutions/"
+      canonical: "https://www.akglsgroup.com/enterprise-marketing-solutions/"
     },
     'ecommerce-growth': {
       title: "Ecommerce Growth Solutions | Ecommerce Marketing Agency | AKGLS Group",
       description: "Scale your ecommerce business with AI-powered ecommerce growth solutions from AKGLS Group. Ecommerce SEO, Google Ads, Shopify growth, CRO & performance marketing services.",
-      canonical: "https://akglsgroup.com/ecommerce-growth-solutions/"
+      canonical: "https://www.akglsgroup.com/ecommerce-growth-solutions/"
     },
     'b2b-lead-gen': {
       title: "B2B Lead Generation Services | B2B Lead Generation Agency | AKGLS Group",
       description: "Generate high-quality B2B leads with AI-powered lead generation services from AKGLS Group. LinkedIn outreach, SEO, PPC, ABM & sales funnel optimization solutions.",
-      canonical: "https://akglsgroup.com/b2b-lead-generation-services/"
+      canonical: "https://www.akglsgroup.com/b2b-lead-generation-services/"
     },
     'saas-marketing': {
       title: "SaaS Marketing Solutions | SaaS Growth Marketing Agency | AKGLS Group",
       description: "Scale your SaaS business with AI-powered SaaS marketing solutions from AKGLS Group. SaaS SEO, PPC, product-led growth, lead generation & customer acquisition strategies.",
-      canonical: "https://akglsgroup.com/saas-marketing-solutions/"
+      canonical: "https://www.akglsgroup.com/saas-marketing-solutions/"
     },
     'seo-case-studies': {
       title: "SEO Case Studies | Real traffic and keywords ranking growth metrics | AKGLS Group",
       description: "Verified SEO Case Studies and results achieved by AKGLS Group. Explore compounding traffic growth, enterprise lead generation, SaaS free trial lifts, and map pack takeovers.",
-      canonical: "https://akglsgroup.com/seo-case-studies/"
+      canonical: "https://www.akglsgroup.com/seo-case-studies/"
     },
     'ecommerce-seo-case-study': {
       title: "Ecommerce SEO Case Study | 450% Organic Traffic Growth | AKGLS Group",
       description: "Discover how AKGLS Group increased ecommerce organic traffic, keyword rankings, and revenue using technical SEO, AI SEO, CRO, and content optimization strategies.",
-      canonical: "https://akglsgroup.com/case-study/ecommerce-seo-results/"
+      canonical: "https://www.akglsgroup.com/case-study/ecommerce-seo-results/"
     },
     'local-seo-case-study': {
       title: "Local SEO Case Study | Google Maps Rankings & Lead Growth | AKGLS Group",
       description: "Discover how AKGLS Group increased Google Maps visibility, local business rankings, phone calls, and leads using Local SEO and Google Business Profile optimization strategies.",
-      canonical: "https://akglsgroup.com/case-study/local-seo-results/"
+      canonical: "https://www.akglsgroup.com/case-study/local-seo-results/"
     },
     'ppc-case-study': {
       title: "PPC Case Study | Google Ads & Paid Marketing Results | AKGLS Group",
       description: "Explore how AKGLS Group generated high-quality leads, improved ROAS, and scaled revenue using Google Ads, Meta Ads, LinkedIn Ads, AI-powered PPC, and conversion optimization strategies.",
-      canonical: "https://akglsgroup.com/case-study/ppc-success-stories/"
+      canonical: "https://www.akglsgroup.com/case-study/ppc-success-stories/"
     },
     'ai-optimization-case-study': {
       title: "AI Optimization Case Study | AI SEO & GEO Results | AKGLS Group",
       description: "Discover how AKGLS Group improved AI search visibility, ChatGPT mentions, GEO rankings, organic traffic, and lead generation using AI SEO, AEO, and conversational optimization strategies.",
-      canonical: "https://akglsgroup.com/case-study/ai-optimization-results/"
+      canonical: "https://www.akglsgroup.com/case-study/ai-optimization-results/"
     },
     'dental-clinic-marketing': {
       title: "Dental Clinic Marketing & Local Patient Acquisition Services | AKGLS Group",
       description: "Dominate dental local map packs, generate high-value implants and cosmetic patient appointments, and optimize local directories structures with HIPAA-aligned dental funnels.",
-      canonical: "https://akgls.group/dental-clinic-marketing"
+      canonical: "https://www.akglsgroup.com/dental-clinic-marketing/"
     },
     'manufacturing': {
       title: "Manufacturing Marketing Services | Industrial Digital Marketing Agency | AKGLS Group",
       description: "Grow your manufacturing business with industrial digital marketing services from AKGLS Group. SEO, lead generation, B2B marketing, Google Ads, AI SEO & website solutions for manufacturers.",
-      canonical: "https://akglsgroup.com/manufacturing-marketing-services"
+      canonical: "https://www.akglsgroup.com/manufacturing-marketing-services/"
     },
     'iot': {
       title: "IoT Company Marketing Services | IoT SEO Agency | AKGLS Group",
       description: "Grow your IoT business with expert IoT marketing services from AKGLS Group. IoT SEO, B2B lead generation, Google Ads, AI SEO & digital marketing solutions for IoT companies.",
-      canonical: "https://akglsgroup.com/iot-company-marketing-services/"
+      canonical: "https://www.akglsgroup.com/iot-company-marketing-services/"
     },
     'real-estate': {
       title: "Real Estate Marketing Services | Real Estate SEO Agency | AKGLS Group",
       description: "Generate property leads and grow your real estate business with expert real estate marketing services from AKGLS Group. SEO, Google Ads, social media & AI-powered property marketing solutions.",
-      canonical: "https://akglsgroup.com/real-estate-marketing-services/"
+      canonical: "https://www.akglsgroup.com/real-estate-marketing-services/"
     },
     'healthcare': {
       title: "Healthcare Marketing Services | Medical SEO Agency | AKGLS Group",
       description: "Grow your healthcare business with expert healthcare marketing services from AKGLS Group. Medical SEO, Google Ads, local SEO, AI SEO & patient lead generation solutions.",
-      canonical: "https://akglsgroup.com/healthcare-marketing-services/"
+      canonical: "https://www.akglsgroup.com/healthcare-marketing-services/"
     },
     'education': {
       title: "Education Marketing Services | School & College Marketing Agency | AKGLS Group",
       description: "Grow admissions and student inquiries with expert education marketing services from AKGLS Group. SEO, Google Ads, social media & AI-powered marketing for schools, colleges & edtech companies.",
-      canonical: "https://akglsgroup.com/education-marketing-services/"
+      canonical: "https://www.akglsgroup.com/education-marketing-services/"
     },
     'law-firm': {
       title: "Law Firm Marketing Services | Lawyer SEO Agency | AKGLS Group",
       description: "Grow your law firm with expert legal marketing services from AKGLS Group. Lawyer SEO, Google Ads, local SEO, AI SEO & lead generation solutions for attorneys and law firms.",
-      canonical: "https://akglsgroup.com/law-firm-marketing-services/"
+      canonical: "https://www.akglsgroup.com/law-firm-marketing-services/"
     },
     'restaurant': {
       title: "Restaurant Marketing Services | Restaurant SEO Agency | AKGLS Group",
       description: "Grow your restaurant with expert restaurant marketing services from AKGLS Group. Restaurant SEO, Google Ads, social media, local SEO & AI-powered food business marketing solutions.",
-      canonical: "https://akglsgroup.com/restaurant-marketing-services/"
+      canonical: "https://www.akglsgroup.com/restaurant-marketing-services/"
     },
     'finance': {
       title: "Finance Marketing Services | Financial SEO Agency | AKGLS Group",
       description: "Grow your financial business with expert finance marketing services from AKGLS Group. SEO, Google Ads, fintech marketing, AI SEO & lead generation solutions for finance companies.",
-      canonical: "https://akglsgroup.com/finance-marketing-services/"
+      canonical: "https://www.akglsgroup.com/finance-marketing-services/"
     },
     'hire-marketing-manager': {
       title: "Hire Marketing Manager | Dedicated Digital Marketing Manager | AKGLS Group",
       description: "Hire experienced marketing managers from AKGLS Group for SEO, PPC, social media, AI marketing, lead generation, branding & complete digital growth management services.",
-      canonical: "https://akglsgroup.com/hire-marketing-manager/"
+      canonical: "https://www.akglsgroup.com/hire-marketing-manager/"
     },
     'hire-wordpress-developer': {
       title: "Hire WordPress Developer | Dedicated WordPress Development Services | AKGLS Group",
       description: "Hire expert WordPress developers from AKGLS Group for custom WordPress development, WooCommerce, Elementor, speed optimization, SEO-friendly websites & AI-ready WordPress solutions.",
-      canonical: "https://akglsgroup.com/hire-wordpress-developer/"
+      canonical: "https://www.akglsgroup.com/hire-wordpress-developer/"
     },
     'hire-seo-expert': {
       title: "Hire SEO Expert | Dedicated Search Engine Optimization Experts | AKGLS Group",
       description: "Hire vetted dedicated SEO experts and search engineers from AKGLS Group. Scale your organic traffic, improve rankings, and drive organic revenue.",
-      canonical: "https://akglsgroup.com/hire-seo-expert/"
+      canonical: "https://www.akglsgroup.com/hire-seo-expert/"
     },
     'hire-ppc-expert': {
       title: "Hire PPC Expert | Google Ads Specialist for Hire | AKGLS Group",
       description: "Hire expert PPC specialists and Google Ads consultants from AKGLS Group. Optimize your campaign structures, improve ROAS, and stop ad budget waste.",
-      canonical: "https://akglsgroup.com/hire-ppc-expert/"
+      canonical: "https://www.akglsgroup.com/hire-ppc-expert/"
     },
     'hire-ai-seo-expert': {
       title: "Hire AI SEO Expert | Generative Engine Optimization Analysts | AKGLS Group",
       description: "Hire dedicated AI SEO and GEO experts from AKGLS Group. Optimize your website structure and schemas to rank in Perplexity, ChatGPT Search, and Gemini.",
-      canonical: "https://akglsgroup.com/hire-ai-seo-expert/"
+      canonical: "https://www.akglsgroup.com/hire-ai-seo-expert/"
     },
     'hire-content-writer': {
       title: "Hire SEO Content Copywriter | Dedicated Blog & Copywriting Experts | AKGLS Group",
       description: "Hire experienced copywriters and SEO semantic content planners from AKGLS Group to craft landing pages, detailed blogs, and user guides.",
-      canonical: "https://akglsgroup.com/hire-content-writer/"
+      canonical: "https://www.akglsgroup.com/hire-content-writer/"
     },
     'hire-link-building-expert': {
       title: "Hire Link Building Specialist | Dedicated Outreach Specialists | AKGLS Group",
       description: "Hire expert link builders and outreach strategists from AKGLS Group to secure highly authoritative white-hat backlinks and boost domain ratings.",
-      canonical: "https://akglsgroup.com/hire-link-building-expert/"
+      canonical: "https://www.akglsgroup.com/hire-link-building-expert/"
     },
     'tools': {
       title: "Free SEO, AI SEO & Digital Marketing Tools for Growth | AKGLS Group",
       description: "Explore 15+ free marketing tools, audit crawlers, and financial simulators. Optimize local metadata tags, schema structures, keyword stuffing risk levels, and calculate growth potentials instantly.",
-      canonical: "https://akglsgroup.com/tools/"
+      canonical: "https://www.akglsgroup.com/tools/"
     },
     'seo-audit-tool': {
       title: "Free Technical SEO Audit & Website Crawler Tool | AKGLS Group",
       description: "Deconstruct your website header structures. Check canonical declarations, site-index maps, SSL compliance levels, and generate premium PDF logs.",
-      canonical: "https://akglsgroup.com/tools/seo-audit-tool/"
+      canonical: "https://www.akglsgroup.com/tools/seo-audit-tool/"
     },
     'geo-audit-tool': {
       title: "Free AI & GEO Audit Scanner | Generative Engine Optimization Scorecard | AKGLS Group",
       description: "Audit your website for Generative Engine Optimization (GEO). Check entity salience, schema markup depth, LLM readability, and citation probability across ChatGPT, Perplexity, and Gemini.",
-      canonical: "https://akglsgroup.com/tools/geo-audit-tool/"
+      canonical: "https://www.akglsgroup.com/tools/geo-audit-tool/"
     },
     'blog': {
       title: "Latest SEO, GEO, AEO & AI Search Engine Trends Blog | AKGLS Group",
       description: "Read advanced SEO blueprints, Generative Engine Optimization guides, Core Web Vitals overhauls, and white-hat outreach strategies from AKGLS Group.",
-      canonical: "https://akglsgroup.com/blog/"
+      canonical: "https://www.akglsgroup.com/blog/"
     },
     'learning-hub': {
       title: "Algorithmic Growth Academy & Learning Hub | AKGLS Group",
       description: "Accelerate your systems alignment. Learn SEO, GEO, AEO, and AI marketing courses, access custom blueprints, interactive Excel templates and checklist tools built directly by engineers.",
-      canonical: "https://akglsgroup.com/learning-hub/"
+      canonical: "https://www.akglsgroup.com/learning-hub/"
     },
-    'internship-program': {
-      title: "Internship Program | Digital Marketing, SEO & AI SEO Internship | AKGLS Group",
-      description: "Join AKGLS Group Internship Program for hands-on training in SEO, AI SEO, social media marketing, Google Ads, WordPress, content writing & digital marketing with real projects and certification.",
-      canonical: "https://akglsgroup.com/internship-program/"
-    }
+    'india-pricing': {
+      title: "Digital Marketing & SEO Packages India Pricing | AKGLS Group",
+      description: "Affordable and transparent SEO, AI SEO, and performance marketing packages for Indian businesses, startups, and international enterprises.",
+      canonical: "https://www.akglsgroup.com/india-pricing/"
+    },
+    'proposal-generator': {
+      title: "Interactive Client Growth Proposal Builder | AKGLS Group",
+      description: "Customize your bespoke growth marketing roadmap, choose milestones, and download an executive proposal PDF in seconds.",
+      canonical: "https://www.akglsgroup.com/proposal-generator/"
+    },
+    'ai-seo-checklists': {
+      title: "Free AI SEO, GEO & AEO Checklists (2026 Edition) | AKGLS Group",
+      description: "Download free structured PDF checklists for ChatGPT Optimization, Generative Engine Optimization (GEO), and Answer Engine (AEO) schemas.",
+      canonical: "https://www.akglsgroup.com/free-checklists/"
+    },
+    'lead-portal': {
+      title: "Lead Management & Client Inquiries Portal | AKGLS Group",
+      description: "Secure lead tracking and consultation dashboard for reviewing incoming audits, proposals, and corporate inquiries.",
+      canonical: "https://www.akglsgroup.com/lead-portal/"
+    },
+    'local-business-growth': {
+      title: "Local Business Growth Services & Hyper-Local Marketing | AKGLS Group",
+      description: "Dominate your local service area. Hyper-local citation distribution, Google Business Profile acceleration, and reputation architecture.",
+      canonical: "https://www.akglsgroup.com/local-business-growth-services/"
+    },
+    'crypto-growth-services': {
+      title: "Crypto Growth Services | Web3 & Blockchain Marketing Agency | AKGLS Group",
+      description: "Scale your Web3, DeFi, and blockchain project with expert crypto growth services from AKGLS Group. Token marketing and crypto SEO.",
+      canonical: "https://www.akglsgroup.com/crypto-growth-services/"
+    },
   };
 
   const currentMeta = PAGE_METADATA[currentPage] || PAGE_METADATA.home;
@@ -2817,7 +2842,7 @@ export default function App() {
                 placeholder="Search from 140+ services (e.g. AEO, Shopify, Local maps, B2B lead generation)..."
                 value={servicesSearchQuery}
                 onChange={(e) => setServicesSearchQuery(e.target.value)}
-                className="w-full bg-[#0c121e] border border-slate-800 rounded-2xl py-4.5 pl-5 pr-12 text-xs text-slate-200 shadow-inner focus:outline-none focus:border-brand-indigo focus:ring-2 focus:ring-brand-indigo/20 placeholder-slate-500 font-medium"
+                className="w-full bg-[#0c121e] border border-slate-800 rounded-2xl py-3.5 sm:py-4.5 pl-4 sm:pl-5 pr-16 sm:pr-24 text-xs text-slate-200 shadow-inner focus:outline-none focus:border-brand-indigo focus:ring-2 focus:ring-brand-indigo/20 placeholder-slate-500 font-medium min-h-[44px]"
               />
               <span className="absolute right-4 inset-y-0 flex items-center text-xs text-slate-500 font-bold">
                 {servicesSearchQuery ? "Active" : `${ALL_CAPABILITIES.length} disciplines`}
@@ -2827,13 +2852,13 @@ export default function App() {
 
           {/* Capabilities grid blocks layout */}
           {filteredCapabilities.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {filteredCapabilities.map((cap) => (
                 <div 
                   key={cap.id} 
-                  className={`bg-[#0c121e] border border-slate-850 hover:border-brand-indigo/35 transition-all rounded-3xl p-6 text-left hover:shadow-2xl hover:shadow-brand-indigo/5 flex flex-col justify-between`}
+                  className="bg-[#0c121e] border border-slate-850 hover:border-brand-indigo/35 transition-all rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-left hover:shadow-2xl hover:shadow-brand-indigo/5 flex flex-col justify-between"
                 >
-                  <div className="space-y-4">
+                  <div className="space-y-3.5 sm:space-y-4">
                     <div className="flex items-center justify-between">
                       <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${cap.iconBgClass} ${cap.iconTextClass}`}>
                         {getIconComponent(cap.icon)}
@@ -2856,13 +2881,13 @@ export default function App() {
                       {cap.description}
                     </p>
                     
-                    <div className="border-t border-slate-800/85 pt-3 space-y-1.5 max-h-40 overflow-y-auto pr-1">
+                    <div className="border-t border-slate-800/85 pt-3 space-y-1.5 sm:space-y-1.5 max-h-48 sm:max-h-40 overflow-y-auto pr-1 overscroll-contain">
                       {cap.subservices.map((sub, sIdx) => {
                         const isMatch = servicesSearchQuery && sub.toLowerCase().includes(servicesSearchQuery.toLowerCase());
                         return (
                           <div 
                             key={sIdx} 
-                            className={`flex items-start gap-1.5 text-xs font-bold leading-tight ${isMatch ? 'text-brand-teal' : 'text-slate-350'}`}
+                            className={`flex items-start gap-2 text-xs font-bold leading-snug py-1 sm:py-0.5 min-h-[28px] sm:min-h-0 ${isMatch ? 'text-brand-teal' : 'text-slate-350'}`}
                           >
                             <CheckCircle2 className="w-3.5 h-3.5 text-brand-teal shrink-0 mt-0.5" />
                             <span>{sub}</span>
@@ -2872,26 +2897,27 @@ export default function App() {
                     </div>
                   </div>
                   
-                  <div className="pt-5 border-t border-slate-800/80 mt-5 flex justify-between items-center text-[10px] font-mono uppercase font-bold text-slate-500">
-                    <span>AKGLS PROTOCOL</span>
+                  <div className="pt-4 sm:pt-5 border-t border-slate-800/80 mt-4 sm:mt-5 flex flex-col sm:flex-row gap-2.5 sm:gap-0 justify-between items-stretch sm:items-center text-[10px] font-mono uppercase font-bold text-slate-500">
+                    <span className="text-center sm:text-left text-[9.5px] tracking-wider text-slate-500">AKGLS PROTOCOL</span>
                     <a 
                       href="#audit-form" 
-                      className="text-brand-indigo hover:text-indigo-300 text-xs flex items-center font-bold font-display uppercase tracking-wider transition-colors"
+                      className="min-h-[44px] sm:min-h-0 py-2.5 sm:py-0 px-4 sm:px-0 rounded-xl sm:rounded-none bg-brand-indigo/15 sm:bg-transparent hover:bg-brand-indigo/25 sm:hover:bg-transparent border border-brand-indigo/30 sm:border-0 text-brand-indigo hover:text-indigo-300 text-xs flex items-center justify-center sm:justify-start font-bold font-display uppercase tracking-wider transition-colors active:scale-[0.99] touch-manipulation"
                     >
-                      Request Audit Setup →
+                      <span>Request Audit Setup</span>
+                      <span className="ml-1.5">→</span>
                     </a>
                   </div>
                 </div>
               ))}
             </div>
           ) : (
-            <div className="text-center py-12 p-8 bg-[#0c121e] border border-slate-850 rounded-3xl max-w-lg mx-auto space-y-3">
+            <div className="text-center py-10 sm:py-12 p-6 sm:p-8 bg-[#0c121e] border border-slate-850 rounded-2xl sm:rounded-3xl max-w-lg mx-auto space-y-3">
               <p className="text-slate-400 text-sm font-light">
                 No matching service categories found for "<span className="text-brand-indigo font-bold">{servicesSearchQuery}</span>".
               </p>
               <button 
                 onClick={() => setServicesSearchQuery('')}
-                className="text-brand-teal hover:text-teal-300 text-xs font-bold font-display uppercase tracking-wider"
+                className="min-h-[44px] inline-flex items-center justify-center px-4 py-2.5 rounded-xl bg-brand-teal/10 border border-brand-teal/20 text-brand-teal hover:text-teal-300 text-xs font-bold font-display uppercase tracking-wider active:scale-95 transition-transform"
               >
                 Clear query & view all
               </button>

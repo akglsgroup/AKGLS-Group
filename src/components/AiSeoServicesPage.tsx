@@ -7,6 +7,7 @@ import {
   Send, Smartphone, Zap, Server, Shield, Volume2, MessageSquare, 
   Settings, Shuffle, BarChart3, AlertCircle, Copy, CheckCircle
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface AiSeoServicesPageProps {
   onBackToHome: () => void;
@@ -42,7 +43,7 @@ const schemaTemplates = {
 
 export default function AiSeoServicesPage({ onBackToHome, openProposalForm }: AiSeoServicesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20am%20interested%20in%20your%20AI-Powered%20SEO%20Services.%20Please%20share%20details.';
 
   // State to simulate dynamic Page Titles
   useEffect(() => {
@@ -253,7 +254,7 @@ export default function AiSeoServicesPage({ onBackToHome, openProposalForm }: Ai
           className="bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black text-xs uppercase tracking-wider border border-emerald-500/30 transition-all font-mono"
           id="ai-seo-whatsapp-bar"
         >
-          <MessageSquare fill="white" className="w-4 h-4 text-white" /> AI Help Desk: {CONTACT_NUMBER}
+          <WhatsAppIcon className="w-4 h-4 text-white" /> AI Help Desk: {CONTACT_NUMBER}
         </a>
         <a 
           href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}
@@ -1302,7 +1303,7 @@ export default function AiSeoServicesPage({ onBackToHome, openProposalForm }: Ai
               className="w-full sm:w-auto bg-[#0a0f1d] border border-slate-800 hover:border-slate-700 text-white font-extrabold text-xs uppercase tracking-widest py-4 px-8 rounded-xl transition-all flex items-center justify-center gap-2 font-mono"
               id="final-cta-chat-btn"
             >
-              <MessageSquare fill="white" className="w-4 h-4 text-white" /> WhatsApp AI Strategist
+              <WhatsAppIcon className="w-4 h-4 text-white" /> WhatsApp AI Strategist
             </a>
           </div>
 

@@ -230,7 +230,7 @@ export default function HireLinkBuildingExpertPage({ onBackToHome, openProposalF
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Worldwide",
   "description": "High authority white hat backlink building, guest post manual outreach, digital media PR connections & premium SEO authority amplification",
@@ -1414,7 +1414,7 @@ export default function HireLinkBuildingExpertPage({ onBackToHome, openProposalF
                 <input 
                   type="url" 
                   required
-                  placeholder="https://akglsgroup.com"
+                  placeholder="https://www.akglsgroup.com"
                   value={auditUrl}
                   onChange={(e) => setAuditUrl(e.target.value)}
                   className="w-full bg-[#02040b] border border-slate-850 focus:border-cyan-500 rounded p-2.5 text-xs text-white placeholder-slate-600 outline-none"

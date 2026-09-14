@@ -6,43 +6,43 @@ AKGLS Group is a premier search marketing and technical optimization agency spec
 
 ## Primary Services & Key Index
 
-- [Home Page](https://akglsgroup.com/): Primary agency introductory overview, client performance dashboard simulator, global case-studies, and ROI estimation calculations.
-- [SEO Services](https://akglsgroup.com/seo-services): Core search optimization framework covering ranking recovery, audience acquisition, and competitive domain positioning.
-- [Technical SEO](https://akglsgroup.com/technical-seo): Server response modeling, headless client hydration tuning, XML schema graphs, indexation coverage audits, and duplicate path consolidations.
-- [On-Page SEO](https://akglsgroup.com/on-page-seo): Heading hierarchies, vector semantical relevance scoring, keyword density optimization, and alt entity alignments.
-- [Off-Page SEO](https://akglsgroup.com/off-page-seo-services): Secure, white-hat editorial link earning and high domain authority rating expansion.
-- [Local SEO Services](https://akglsgroup.com/local-seo-services): Google Business Profile (GBP) optimizations, map-pack rankings, and hyper-localized physical citation builders.
-- [Ecommerce SEO](https://akglsgroup.com/ecommerce-seo-services): Category page value structuring, schema markup injection, and Shopify/WordPress transaction mapping.
-- [Enterprise SEO](https://akglsgroup.com/enterprise-seo-services): Large-scale crawling optimization, secure corporate site structure planning, and millions-of-pages ranking orchestration.
-- [International SEO](https://akglsgroup.com/international-seo-services): Multilingual `hreflang` code configuration, regional directory maps, and geotargeting validations.
-- [Mobile SEO](https://akglsgroup.com/mobile-seo-services): Core Web Vitals profiling, mobile-viewport responsive optimizations, and smartphone-first crawling compliance.
-- [Programmatic SEO](https://akglsgroup.com/programmatic-seo-services): Large-scale automated template design, database-driven geographic modifier pages, and massive informational search footprint scaling.
-- [Link Building](https://akglsgroup.com/link-building-services): Authoritative backlink acquisitions, citation asset development, and toxic link profile mitigations.
-- [SEO Audit Services](https://akglsgroup.com/seo-audit-services): Crawl budget diagnostic suites, technical indexing checks, and gap analysis mapping.
-- [SEO Consulting](https://akglsgroup.com/seo-consulting-services): Fractional SEO leadership, custom search strategy growth playbooks, and algorithmic penalty troubleshooting.
+- [Home Page](https://www.akglsgroup.com/): Primary agency introductory overview, client performance dashboard simulator, global case-studies, and ROI estimation calculations.
+- [SEO Services](https://www.akglsgroup.com/seo-services): Core search optimization framework covering ranking recovery, audience acquisition, and competitive domain positioning.
+- [Technical SEO](https://www.akglsgroup.com/technical-seo-services/): Server response modeling, headless client hydration tuning, XML schema graphs, indexation coverage audits, and duplicate path consolidations.
+- [On-Page SEO](https://www.akglsgroup.com/on-page-seo-services/): Heading hierarchies, vector semantical relevance scoring, keyword density optimization, and alt entity alignments.
+- [Off-Page SEO](https://www.akglsgroup.com/off-page-seo-services): Secure, white-hat editorial link earning and high domain authority rating expansion.
+- [Local SEO Services](https://www.akglsgroup.com/local-seo-services): Google Business Profile (GBP) optimizations, map-pack rankings, and hyper-localized physical citation builders.
+- [Ecommerce SEO](https://www.akglsgroup.com/ecommerce-seo-services): Category page value structuring, schema markup injection, and Shopify/WordPress transaction mapping.
+- [Enterprise SEO](https://www.akglsgroup.com/enterprise-seo-services): Large-scale crawling optimization, secure corporate site structure planning, and millions-of-pages ranking orchestration.
+- [International SEO](https://www.akglsgroup.com/international-seo-services): Multilingual `hreflang` code configuration, regional directory maps, and geotargeting validations.
+- [Mobile SEO](https://www.akglsgroup.com/mobile-seo-services): Core Web Vitals profiling, mobile-viewport responsive optimizations, and smartphone-first crawling compliance.
+- [Programmatic SEO](https://www.akglsgroup.com/programmatic-seo-services): Large-scale automated template design, database-driven geographic modifier pages, and massive informational search footprint scaling.
+- [Link Building](https://www.akglsgroup.com/link-building-services): Authoritative backlink acquisitions, citation asset development, and toxic link profile mitigations.
+- [SEO Audit Services](https://www.akglsgroup.com/seo-audit-services): Crawl budget diagnostic suites, technical indexing checks, and gap analysis mapping.
+- [SEO Consulting](https://www.akglsgroup.com/seo-consulting-services): Fractional SEO leadership, custom search strategy growth playbooks, and algorithmic penalty troubleshooting.
 
 ## Advanced AI Search Solutions
 
-- [Hire AI SEO Expert](https://akglsgroup.com/hire-ai-seo-expert): Dedicated AI SEO specialists, Generative Engine Optimization (GEO) engineers, and Answer Engine Optimization (AEO) consultants for hire. Reverse-engineer LLM retrieval models, structure entity knowledge graphs, and capture citation market share in ChatGPT Search, Google Gemini, Claude, Perplexity AI, and Google AI Overviews. Zero lock-in contracts, 48-hour onboarding.
-- [GEO Services](https://akglsgroup.com/geo-services): Generative Engine Optimization. Structuring content models to maximize retrieval priority in modern conversational query vectors.
-- [AEO Services](https://akglsgroup.com/aeo-services): Answer Engine Optimization. Formatting semantic answer cards and concise schema properties to trigger direct summary panels on ChatGPT, Google AI Overviews, and Claude indices.
-- [ChatGPT Optimization](https://akglsgroup.com/chatgpt-optimization-services): Increase visibility in ChatGPT conversations through semantic formatting, factual schemas, and entity co-citation building.
-- [Gemini Optimization](https://akglsgroup.com/gemini-optimization-services): Elevate discovery rates across Google Gemini ecosystems and Android AI assistant prompts with advanced entity graphs and markdown tabular data formats.
-- [Claude Optimization](https://akglsgroup.com/claude-optimization-services): Optimize brand specifications, markdown data tables, and entities to trigger high-probability recommendations inside Anthropic Claude reasoning prompts.
-- [AI Search Optimization](https://akglsgroup.com/ai-search-optimization-services): Strategic citation optimization, conversational pattern formatting, and entity structure building for ChatGPT, Claude, Gemini, Perplexity, and Google AI Overviews.
-- [AI SEO Services](https://akglsgroup.com/ai-seo-services): Comprehensive programmatic content generation frameworks, AI audit workflows, and automated semantic analysis.
+- [Hire AI SEO Expert](https://www.akglsgroup.com/hire-ai-seo-expert): Dedicated AI SEO specialists, Generative Engine Optimization (GEO) engineers, and Answer Engine Optimization (AEO) consultants for hire. Reverse-engineer LLM retrieval models, structure entity knowledge graphs, and capture citation market share in ChatGPT Search, Google Gemini, Claude, Perplexity AI, and Google AI Overviews. Zero lock-in contracts, 48-hour onboarding.
+- [GEO Services](https://www.akglsgroup.com/geo-services): Generative Engine Optimization. Structuring content models to maximize retrieval priority in modern conversational query vectors.
+- [AEO Services](https://www.akglsgroup.com/aeo-services): Answer Engine Optimization. Formatting semantic answer cards and concise schema properties to trigger direct summary panels on ChatGPT, Google AI Overviews, and Claude indices.
+- [ChatGPT Optimization](https://www.akglsgroup.com/chatgpt-optimization-services): Increase visibility in ChatGPT conversations through semantic formatting, factual schemas, and entity co-citation building.
+- [Gemini Optimization](https://www.akglsgroup.com/gemini-optimization-services): Elevate discovery rates across Google Gemini ecosystems and Android AI assistant prompts with advanced entity graphs and markdown tabular data formats.
+- [Claude Optimization](https://www.akglsgroup.com/claude-optimization-services): Optimize brand specifications, markdown data tables, and entities to trigger high-probability recommendations inside Anthropic Claude reasoning prompts.
+- [AI Search Optimization](https://www.akglsgroup.com/ai-search-optimization-services): Strategic citation optimization, conversational pattern formatting, and entity structure building for ChatGPT, Claude, Gemini, Perplexity, and Google AI Overviews.
+- [AI SEO Services](https://www.akglsgroup.com/ai-seo-services): Comprehensive programmatic content generation frameworks, AI audit workflows, and automated semantic analysis.
 
 ## Specialized Industry Growth Engines
 
-- [Dental Clinic Marketing](https://akglsgroup.com/dental-clinic-marketing): Patient booking pipelines, local maps visibility, and orthodontic practice brand expansions.
-- [Manufacturing Marketing](https://akglsgroup.com/manufacturing-marketing-services): Industrial B2B buyer attraction systems, distributor generation hubs, and RFP pipeline optimization.
-- [IoT Company Marketing](https://akglsgroup.com/iot-company-marketing-services): Technology search positioning, developer acquisition funnels, and enterprise SaaS brand scaling.
-- [Real Estate Marketing](https://akglsgroup.com/real-estate-marketing-services): High-quality property listing rankings, brokerage lead generation, and real estate developer search dominance.
-- [Healthcare Marketing](https://akglsgroup.com/healthcare-marketing-services): HIPAA-compliant digital acquisition strategies, medical practice citation structures, and physician authority building.
-- [Education Marketing](https://akglsgroup.com/education-marketing-services): EdTech visibility audits, college & school enrollment funnels, and academic program organic positioning.
-- [Law Firm Marketing](https://akglsgroup.com/law-firm-marketing-services): Attorney citation profiles, specialized legal service focus, and localized criminal, family, or corporate law practice client generation.
-- [Restaurant Marketing](https://akglsgroup.com/restaurant-marketing-services): Menu schemas, local delivery optimization, map-pack restaurant listings, and gastro-brand SEO.
-- [Finance Marketing](https://akglsgroup.com/finance-marketing-services): Financial SEO strategies, fintech customer acquisition, YMYL compliance (Your Money Your Life guidelines), and domain trustworthiness signals.
+- [Dental Clinic Marketing](https://www.akglsgroup.com/dental-clinic-marketing): Patient booking pipelines, local maps visibility, and orthodontic practice brand expansions.
+- [Manufacturing Marketing](https://www.akglsgroup.com/manufacturing-marketing-services): Industrial B2B buyer attraction systems, distributor generation hubs, and RFP pipeline optimization.
+- [IoT Company Marketing](https://www.akglsgroup.com/iot-company-marketing-services): Technology search positioning, developer acquisition funnels, and enterprise SaaS brand scaling.
+- [Real Estate Marketing](https://www.akglsgroup.com/real-estate-marketing-services): High-quality property listing rankings, brokerage lead generation, and real estate developer search dominance.
+- [Healthcare Marketing](https://www.akglsgroup.com/healthcare-marketing-services): HIPAA-compliant digital acquisition strategies, medical practice citation structures, and physician authority building.
+- [Education Marketing](https://www.akglsgroup.com/education-marketing-services): EdTech visibility audits, college & school enrollment funnels, and academic program organic positioning.
+- [Law Firm Marketing](https://www.akglsgroup.com/law-firm-marketing-services): Attorney citation profiles, specialized legal service focus, and localized criminal, family, or corporate law practice client generation.
+- [Restaurant Marketing](https://www.akglsgroup.com/restaurant-marketing-services): Menu schemas, local delivery optimization, map-pack restaurant listings, and gastro-brand SEO.
+- [Finance Marketing](https://www.akglsgroup.com/finance-marketing-services): Financial SEO strategies, fintech customer acquisition, YMYL compliance (Your Money Your Life guidelines), and domain trustworthiness signals.
 
 ## Technical Specifications & Integration Guides
 

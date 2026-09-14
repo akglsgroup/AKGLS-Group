@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { servicesMenu, solutionsMenu, caseStudiesMenu, resourcesMenu, companyMenu, hireExpertsMenu } from '../data';
 import { getWhatsAppMessage } from './WhatsAppWidget';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface HeaderProps {
   onSearchOpen: () => void;
@@ -125,19 +126,24 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
           {/* Left section contacts: Phone & WhatsApp */}
           <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] sm:text-xs">
-            <a href="tel:+918318114492" className="flex items-center gap-1.5 hover:text-brand-indigo transition-colors text-slate-300 font-semibold">
+            <a 
+              href="tel:+918318114492" 
+              aria-label="Call AKGLS Group at +91 831 811 4492"
+              className="flex items-center gap-1.5 hover:text-brand-indigo transition-colors text-slate-300 font-semibold rounded-md px-1 py-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-1 focus-visible:ring-offset-brand-navy"
+            >
               <Phone className="w-3.5 h-3.5 text-brand-indigo animate-pulse" />
               <span>+91 831 811 4492</span>
             </a>
-            <span className="text-slate-800 hidden sm:inline">|</span>
+            <span className="text-slate-800 hidden sm:inline" aria-hidden="true">|</span>
             <a 
-              href="https://wa.me/918318114492" 
+              href={`https://wa.me/918318114492?text=${encodeURIComponent(getWhatsAppMessage(currentPage))}`} 
               target="_blank" 
               rel="noopener noreferrer"
               referrerPolicy="no-referrer"
-              className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors text-slate-200 font-semibold"
+              aria-label="Chat with AKGLS Group on WhatsApp"
+              className="flex items-center gap-1.5 hover:text-emerald-400 transition-colors text-slate-200 font-semibold rounded-md px-1 py-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400 focus-visible:ring-offset-1 focus-visible:ring-offset-brand-navy"
             >
-              <MessageSquare className="w-3.5 h-3.5 text-emerald-400" />
+              <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400" />
               <span>WhatsApp Chat</span>
             </a>
           </div>
@@ -149,8 +155,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               target="_blank" 
               rel="noopener noreferrer"
               referrerPolicy="no-referrer"
-              className="text-slate-400 hover:text-[#1877F2] transition-colors p-1"
-              aria-label="Facebook"
+              className="text-slate-400 hover:text-[#1877F2] transition-colors p-1 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1877F2] focus-visible:ring-offset-1 focus-visible:ring-offset-brand-navy"
+              aria-label="Follow AKGLS Group on Facebook"
             >
               <Facebook className="w-4 h-4" />
             </a>
@@ -159,8 +165,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               target="_blank" 
               rel="noopener noreferrer"
               referrerPolicy="no-referrer"
-              className="text-slate-400 hover:text-white transition-colors p-1"
-              aria-label="X (formerly Twitter)"
+              className="text-slate-400 hover:text-white transition-colors p-1 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-1 focus-visible:ring-offset-brand-navy"
+              aria-label="Follow AKGLS Group on X (formerly Twitter)"
             >
               <Twitter className="w-4 h-4" />
             </a>
@@ -169,8 +175,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               target="_blank" 
               rel="noopener noreferrer"
               referrerPolicy="no-referrer"
-              className="text-slate-400 hover:text-[#0A66C2] transition-colors p-1"
-              aria-label="LinkedIn"
+              className="text-slate-400 hover:text-[#0A66C2] transition-colors p-1 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#0A66C2] focus-visible:ring-offset-1 focus-visible:ring-offset-brand-navy"
+              aria-label="Follow AKGLS Group on LinkedIn"
             >
               <Linkedin className="w-4 h-4" />
             </a>
@@ -179,8 +185,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               target="_blank" 
               rel="noopener noreferrer"
               referrerPolicy="no-referrer"
-              className="text-slate-400 hover:text-[#E1306C] transition-colors p-1"
-              aria-label="Instagram"
+              className="text-slate-400 hover:text-[#E1306C] transition-colors p-1 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#E1306C] focus-visible:ring-offset-1 focus-visible:ring-offset-brand-navy"
+              aria-label="Follow AKGLS Group on Instagram"
             >
               <Instagram className="w-4 h-4" />
             </a>
@@ -189,7 +195,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
       </div>
 
       {/* CORE STICKY CORPORATE NAVBAR */}
-      <nav id="header-nav" className={`sticky top-0 w-full z-40 transition-all duration-300 border-b ${
+      <nav id="header-nav" aria-label="Main Navigation" className={`sticky top-0 w-full z-40 transition-all duration-300 border-b ${
         isScrolled 
           ? 'bg-[#0a0f1d]/95 backdrop-blur-md shadow-xl py-3 border-slate-800' 
           : 'bg-[#0a0f1d]/90 backdrop-blur-md py-5 border-slate-800/80'
@@ -201,7 +207,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
             <a 
               href="/" 
               onClick={(e) => handleLinkClick(e, '/')}
-              className="flex items-center gap-3 select-none group"
+              aria-label="AKGLS Group Homepage"
+              className="flex items-center gap-3 select-none group rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1d]"
             >
               <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-indigo to-brand-purple flex items-center justify-center shadow-lg shadow-brand-indigo/35 group-hover:scale-105 transition-transform duration-300">
                 <span className="text-white font-black text-xl font-display">AK</span>
@@ -226,7 +233,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 onMouseLeave={() => setActiveMenu(null)}
               >
                 <button 
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all ${
+                  type="button"
+                  aria-expanded={activeMenu === 'services'}
+                  aria-haspopup="true"
+                  aria-label="Services navigation menu"
+                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo focus-visible:ring-offset-1 focus-visible:ring-offset-[#0a0f1d] cursor-pointer ${
                     activeMenu === 'services' 
                       ? 'bg-brand-indigo/10 text-brand-indigo' 
                       : 'text-slate-300 hover:text-white'
@@ -256,7 +267,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                                 key={iIdx} 
                                 href={item.href}
                                 onClick={(e) => handleLinkClick(e, item.href)}
-                                className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors"
+                                className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                               >
                                 <span className="text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo transition-colors flex items-center gap-1">
                                   {col.title.includes('AI') && <Bot className="w-3 h-3 text-brand-purple/70" />}
@@ -275,7 +286,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                             <div className="pt-2">
                               <a 
                                 href={col.featuredCta.href}
-                                className="flex items-center justify-between text-xs font-bold text-white bg-gradient-to-r from-brand-indigo to-brand-purple py-2 px-3 rounded-lg shadow hover:opacity-95 transition-opacity"
+                                className="flex items-center justify-between text-xs font-bold text-white bg-gradient-to-r from-brand-indigo to-brand-purple py-2 px-3 rounded-lg shadow hover:opacity-95 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                               >
                                 <span>{col.featuredCta.text}</span>
                                 <ArrowRight className="w-3 h-3" />
@@ -296,7 +307,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 onMouseLeave={() => setActiveMenu(null)}
               >
                 <button 
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all ${
+                  type="button"
+                  aria-expanded={activeMenu === 'solutions'}
+                  aria-haspopup="true"
+                  aria-label="Solutions navigation menu"
+                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo focus-visible:ring-offset-1 focus-visible:ring-offset-[#0a0f1d] cursor-pointer ${
                     activeMenu === 'solutions' 
                       ? 'bg-brand-indigo/10 text-brand-indigo' 
                       : 'text-slate-300 hover:text-white'
@@ -331,7 +346,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                                 key={iIdx} 
                                 href={item.href}
                                 onClick={(e) => handleLinkClick(e, item.href)}
-                                className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo"
+                                className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                               >
                                 <span className="flex items-center gap-1">
                                   {col.title.includes('Industry') && <Layers className="w-3 h-3 text-slate-400" />}
@@ -354,7 +369,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 onMouseLeave={() => setActiveMenu(null)}
               >
                 <button 
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all ${
+                  type="button"
+                  aria-expanded={activeMenu === 'cases'}
+                  aria-haspopup="true"
+                  aria-label="Case Studies navigation menu"
+                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo focus-visible:ring-offset-1 focus-visible:ring-offset-[#0a0f1d] cursor-pointer ${
                     activeMenu === 'cases' 
                       ? 'bg-brand-indigo/10 text-brand-indigo' 
                       : 'text-slate-300 hover:text-white'
@@ -384,7 +403,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                               key={idx} 
                               href={item.href}
                               onClick={(e) => handleLinkClick(e, item.href)}
-                              className="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all text-left"
+                              className="block py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                             >
                               {item.name}
                             </a>
@@ -392,8 +411,10 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                         </div>
                         <div className="pt-2">
                           <button 
+                            type="button"
                             onClick={openDownloadModal}
-                            className="w-full bg-[#0a0f1d] hover:bg-slate-900 border border-slate-800 text-[11px] font-bold py-2.5 px-3 rounded-lg text-slate-300 transition-colors flex items-center justify-center gap-2"
+                            aria-label="Download Performance Report Card"
+                            className="w-full bg-[#0a0f1d] hover:bg-slate-900 border border-slate-800 text-[11px] font-bold py-2.5 px-3 rounded-lg text-slate-300 transition-colors flex items-center justify-center gap-2 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                           >
                             <Download className="w-3.5 h-3.5" /> Download Report Card
                           </button>
@@ -420,7 +441,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                               <span>Month 1</span>
                               <span>Month 6</span>
                             </div>
-                            <svg className="w-full h-12" viewBox="0 0 100 50" preserveAspectRatio="none">
+                            <svg className="w-full h-12" viewBox="0 0 100 50" preserveAspectRatio="none" aria-hidden="true">
                               <defs>
                                 <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
                                   <stop offset="0%" stopColor="#4F46E5" stopOpacity="0.4" />
@@ -463,18 +484,23 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                         <div className="mt-3.5 flex items-center justify-between gap-2">
                           <div className="flex gap-1">
                             <button 
+                              type="button"
                               onClick={() => setSelectedCaseTab(0)}
-                              className={`w-2 h-2 rounded-full transition-all ${selectedCaseTab === 0 ? 'bg-brand-indigo w-4' : 'bg-slate-600'}`}
+                              aria-label="View Fintech Leader Inc. case study"
+                              className={`h-2 rounded-full transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal ${selectedCaseTab === 0 ? 'bg-brand-indigo w-4' : 'bg-slate-600 w-2'}`}
                             ></button>
                             <button 
+                              type="button"
                               onClick={() => setSelectedCaseTab(1)}
-                              className={`w-2 h-2 rounded-full transition-all ${selectedCaseTab === 1 ? 'bg-brand-indigo w-4' : 'bg-slate-600'}`}
+                              aria-label="View Apex Shopify Wear case study"
+                              className={`h-2 rounded-full transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal ${selectedCaseTab === 1 ? 'bg-brand-indigo w-4' : 'bg-slate-600 w-2'}`}
                             ></button>
                           </div>
                           
                           <a 
                             href="#portfolio-gallery" 
-                            className="bg-brand-orange hover:bg-opacity-95 text-[10px] font-black uppercase text-white py-2 px-3 rounded-lg transition-all"
+                            aria-label={featuredCases[selectedCaseTab].cta}
+                            className="bg-brand-orange hover:bg-opacity-95 text-[10px] font-black uppercase text-white py-2 px-3 rounded-lg transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white"
                           >
                             <span>{featuredCases[selectedCaseTab].cta}</span>
                           </a>
@@ -492,7 +518,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 onMouseLeave={() => setActiveMenu(null)}
               >
                 <button 
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all ${
+                  type="button"
+                  aria-expanded={activeMenu === 'resources'}
+                  aria-haspopup="true"
+                  aria-label="Resources navigation menu"
+                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo focus-visible:ring-offset-1 focus-visible:ring-offset-[#0a0f1d] cursor-pointer ${
                     activeMenu === 'resources' 
                       ? 'bg-brand-indigo/10 text-brand-indigo' 
                       : 'text-slate-300 hover:text-white'
@@ -524,7 +554,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                                 key={iIdx} 
                                 href={item.href}
                                 onClick={(e) => handleLinkClick(e, item.href)}
-                                className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo"
+                                className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                               >
                                 <span className="truncate">{item.name}</span>
                                 {col.title.includes('Downloads') && <Download className="w-3 h-3 text-slate-400 group-hover/item:text-brand-indigo" />}
@@ -545,7 +575,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 onMouseLeave={() => setActiveMenu(null)}
               >
                 <button 
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all ${
+                  type="button"
+                  aria-expanded={activeMenu === 'company'}
+                  aria-haspopup="true"
+                  aria-label="Company navigation menu"
+                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo focus-visible:ring-offset-1 focus-visible:ring-offset-[#0a0f1d] cursor-pointer ${
                     activeMenu === 'company' 
                       ? 'bg-brand-indigo/10 text-brand-indigo' 
                       : 'text-slate-300 hover:text-white'
@@ -569,7 +603,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                           key={idx} 
                           href={item.href}
                           onClick={(e) => handleLinkClick(e, item.href)}
-                          className="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo transition-all"
+                          className="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                         >
                           {item.name.includes('Team') && <Users className="w-3.5 h-3.5 text-slate-400" />}
                           {item.name.includes('Careers') && <Briefcase className="w-3.5 h-3.5 text-slate-400" />}
@@ -588,7 +622,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 onMouseLeave={() => setActiveMenu(null)}
               >
                 <button 
-                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all ${
+                  type="button"
+                  aria-expanded={activeMenu === 'hire'}
+                  aria-haspopup="true"
+                  aria-label="Hire Experts navigation menu"
+                  className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo focus-visible:ring-offset-1 focus-visible:ring-offset-[#0a0f1d] cursor-pointer ${
                     activeMenu === 'hire' 
                       ? 'bg-brand-indigo/10 text-brand-indigo' 
                       : 'text-slate-300 hover:text-white'
@@ -607,7 +645,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                       transition={{ duration: 0.15 }}
                       className="absolute right-0 top-full mt-2 w-56 bg-[#0c121e] border border-slate-800 rounded-xl shadow-xl p-3.5 z-50 text-left space-y-1.5 text-slate-200"
                     >
-                      <div className="px-2 pb-1.5 border-b border-slate-850 mb-1">
+                      <div className="px-2 pb-1.5 border-b border-slate-855 mb-1">
                         <span className="text-[10px] text-brand-orange font-black uppercase tracking-wider block">
                           Instant Placement
                         </span>
@@ -617,7 +655,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                           key={idx} 
                           href={item.href}
                           onClick={(e) => handleLinkClick(e, item.href)}
-                          className="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all"
+                          className="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                         >
                           <span>{item.name}</span>
                           <CheckCircle2 className="w-3.5 h-3.5 text-brand-emerald" />
@@ -634,8 +672,10 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
             <div className="hidden lg:flex items-center space-x-4">
               {/* Keyboard friendly search trigger */}
               <button 
+                type="button"
                 onClick={onSearchOpen} 
-                className="p-2.5 rounded-xl transition-all text-slate-300 hover:text-white hover:bg-white/10"
+                aria-label="Search capabilities and services"
+                className="p-2.5 rounded-xl transition-all text-slate-300 hover:text-white hover:bg-white/10 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1d]"
                 title="Search capabilities... (/)"
               >
                 <Search className="w-5 h-5" />
@@ -643,7 +683,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
 
               <a 
                 href="tel:+918318114492" 
-                className="bg-gradient-to-r from-brand-indigo to-brand-purple hover:opacity-95 text-white text-xs font-extrabold uppercase tracking-wide py-3.5 px-6 rounded-xl transition-all shadow-md shadow-brand-indigo/20 flex items-center gap-1.5"
+                aria-label="Call AKGLS Group at +91 831 811 4492"
+                className="bg-gradient-to-r from-brand-indigo to-brand-purple hover:opacity-95 text-white text-xs font-extrabold uppercase tracking-wide py-3.5 px-6 rounded-xl transition-all shadow-md shadow-brand-indigo/20 flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1d]"
               >
                 Call Now <Phone className="w-3.5 h-3.5" />
               </a>
@@ -652,14 +693,19 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
             {/* Mobile Navigation Toggles */}
             <div className="flex lg:hidden items-center space-x-3">
               <button 
+                type="button"
                 onClick={onSearchOpen}
-                className="p-2 text-slate-500 hover:text-brand-indigo"
+                aria-label="Open search capabilities"
+                className="p-2 text-slate-500 hover:text-brand-indigo rounded-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
               >
                 <Search className="w-5 h-5 pointer-events-none" />
               </button>
               <button 
+                type="button"
                 onClick={() => setIsMobileMenuOpen(true)}
-                className="p-2 text-slate-500 hover:text-brand-indigo"
+                aria-label="Open mobile navigation menu"
+                aria-expanded={isMobileMenuOpen}
+                className="p-2 text-slate-500 hover:text-brand-indigo rounded-lg cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
               >
                 <Menu className="w-6 h-6" />
               </button>
@@ -692,8 +738,10 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                   <span className="font-extrabold text-white text-base font-display">AKGLS MENU</span>
                 </div>
                 <button 
+                  type="button"
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="p-2 hover:bg-slate-900 rounded-lg text-slate-400 hover:text-white transition-colors"
+                  aria-label="Close mobile navigation menu"
+                  className="p-2 hover:bg-slate-900 rounded-lg text-slate-400 hover:text-white transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -702,18 +750,21 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               {/* Dynamic Auto-suggest Search Box inside menu */}
               <div className="px-5 py-3 border-b border-slate-800/80 bg-[#0a0f1d]/40">
                 <div className="relative">
-                  <Search className="absolute left-3 top-3 w-4 h-4 text-slate-400" />
+                  <Search className="absolute left-3 top-3 w-4 h-4 text-slate-400" aria-hidden="true" />
                   <input 
                     type="text" 
                     placeholder="Search 140+ capabilities..." 
+                    aria-label="Search 140+ capabilities and services"
                     value={mobileSearchQuery}
                     onChange={(e) => setMobileSearchQuery(e.target.value)}
-                    className="w-full bg-[#05070a] border border-slate-800 rounded-xl py-2 pl-9 pr-4 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-indigo"
+                    className="w-full bg-[#05070a] border border-slate-800 rounded-xl py-2 pl-9 pr-8 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:border-brand-indigo focus-visible:ring-2 focus-visible:ring-brand-indigo"
                   />
                   {mobileSearchQuery && (
                     <button 
+                      type="button"
                       onClick={() => setMobileSearchQuery('')}
-                      className="absolute right-3 top-3 text-[10px] font-bold text-slate-400"
+                      aria-label="Clear search query"
+                      className="absolute right-3 top-2.5 text-[10px] font-bold text-slate-400 p-1 hover:text-white rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo cursor-pointer"
                     >
                       ✕
                     </button>
@@ -726,7 +777,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                     <a 
                       href="#capabilities-explorer" 
                       onClick={() => setIsMobileMenuOpen(false)}
-                      className="block text-[11px] font-bold text-slate-300 hover:text-white py-1 px-1 rounded hover:bg-slate-900"
+                      className="block text-[11px] font-bold text-slate-300 hover:text-white py-1 px-1 rounded hover:bg-slate-900 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                     >
                       Technical search filters active
                     </a>
@@ -740,8 +791,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 {/* Services Accordion */}
                 <div className="border-b border-slate-800 pb-1.5">
                   <button 
+                    type="button"
                     onClick={() => handleMobileAccordionClick('services')}
-                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+                    aria-expanded={activeMobileAccordion === 'services'}
+                    aria-label="Toggle Services menu"
+                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px] cursor-pointer rounded-lg px-2 -mx-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                   >
                     <span className="flex items-center gap-2"><Layers className="w-4 h-4 text-brand-indigo" /> Services</span>
                     <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform ${activeMobileAccordion === 'services' ? 'rotate-180' : ''}`} />
@@ -756,7 +810,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                               key={sIdx} 
                               href={sub.href} 
                               onClick={(e) => handleLinkClick(e, sub.href)}
-                              className="block py-1 text-slate-300 hover:text-brand-indigo"
+                              className="block py-1 text-slate-300 hover:text-brand-indigo rounded px-1 -mx-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                             >
                               {sub.name}
                             </a>
@@ -770,8 +824,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 {/* Solutions Accordion */}
                 <div className="border-b border-slate-800 pb-1.5">
                   <button 
+                    type="button"
                     onClick={() => handleMobileAccordionClick('solutions')}
-                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+                    aria-expanded={activeMobileAccordion === 'solutions'}
+                    aria-label="Toggle Solutions menu"
+                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px] cursor-pointer rounded-lg px-2 -mx-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                   >
                     <span className="flex items-center gap-2"><Bot className="w-4 h-4 text-brand-purple" /> Solutions</span>
                     <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform ${activeMobileAccordion === 'solutions' ? 'rotate-180' : ''}`} />
@@ -786,7 +843,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                               key={sIdx} 
                               href={sub.href} 
                               onClick={(e) => handleLinkClick(e, sub.href)}
-                              className="block py-1 text-slate-300 hover:text-brand-indigo"
+                              className="block py-1 text-slate-300 hover:text-brand-indigo rounded px-1 -mx-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                             >
                               {sub.name}
                             </a>
@@ -800,8 +857,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 {/* Case Studies Accordion */}
                 <div className="border-b border-slate-800 pb-1.5">
                   <button 
+                    type="button"
                     onClick={() => handleMobileAccordionClick('cases')}
-                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+                    aria-expanded={activeMobileAccordion === 'cases'}
+                    aria-label="Toggle Case Studies menu"
+                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px] cursor-pointer rounded-lg px-2 -mx-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                   >
                     <span className="flex items-center gap-2"><TrendingUp className="w-4 h-4 text-brand-teal" /> Case Studies</span>
                     <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform ${activeMobileAccordion === 'cases' ? 'rotate-180' : ''}`} />
@@ -813,7 +873,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                           key={idx} 
                           href={item.href} 
                           onClick={(e) => handleLinkClick(e, item.href)}
-                          className="block py-1.5 text-slate-300 hover:text-brand-indigo"
+                          className="block py-1.5 text-slate-300 hover:text-brand-indigo rounded px-1 -mx-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                         >
                           {item.name}
                         </a>
@@ -825,8 +885,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 {/* Resources Accordion */}
                 <div className="border-b border-slate-800 pb-1.5">
                   <button 
+                    type="button"
                     onClick={() => handleMobileAccordionClick('resources')}
-                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+                    aria-expanded={activeMobileAccordion === 'resources'}
+                    aria-label="Toggle Resources menu"
+                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px] cursor-pointer rounded-lg px-2 -mx-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                   >
                     <span className="flex items-center gap-2"><Calculator className="w-4 h-4 text-brand-orange" /> Resources</span>
                     <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform ${activeMobileAccordion === 'resources' ? 'rotate-180' : ''}`} />
@@ -841,7 +904,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                               key={sIdx} 
                               href={sub.href} 
                               onClick={(e) => handleLinkClick(e, sub.href)}
-                              className="block py-0.5 text-slate-300 hover:text-brand-indigo"
+                              className="block py-0.5 text-slate-300 hover:text-brand-indigo rounded px-1 -mx-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                             >
                               {sub.name}
                             </a>
@@ -855,8 +918,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 {/* Company Accordion */}
                 <div className="border-b border-slate-800 pb-1.5">
                   <button 
+                    type="button"
                     onClick={() => handleMobileAccordionClick('company')}
-                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+                    aria-expanded={activeMobileAccordion === 'company'}
+                    aria-label="Toggle Company menu"
+                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px] cursor-pointer rounded-lg px-2 -mx-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                   >
                     <span className="flex items-center gap-2"><Info className="w-4 h-4 text-slate-500" /> Company</span>
                     <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform ${activeMobileAccordion === 'company' ? 'rotate-180' : ''}`} />
@@ -868,7 +934,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                           key={idx} 
                           href={item.href} 
                           onClick={(e) => handleLinkClick(e, item.href)}
-                          className="block py-1 text-slate-300 hover:text-brand-indigo"
+                          className="block py-1 text-slate-300 hover:text-brand-indigo rounded px-1 -mx-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                         >
                           {item.name}
                         </a>
@@ -880,8 +946,11 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 {/* Hire Experts Accordion */}
                 <div className="border-b border-slate-800">
                   <button 
+                    type="button"
                     onClick={() => handleMobileAccordionClick('hire')}
-                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px]"
+                    aria-expanded={activeMobileAccordion === 'hire'}
+                    aria-label="Toggle Hire Experts menu"
+                    className="w-full py-2.5 flex items-center justify-between font-bold text-slate-200 text-[14px] cursor-pointer rounded-lg px-2 -mx-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                   >
                     <span className="flex items-center gap-2"><Star className="w-4 h-4 text-brand-orange" /> Hire</span>
                     <ChevronDown className={`w-4 h-4 text-slate-500 transition-transform ${activeMobileAccordion === 'hire' ? 'rotate-180' : ''}`} />
@@ -893,7 +962,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                           key={idx} 
                           href={item.href} 
                           onClick={(e) => handleLinkClick(e, item.href)}
-                          className="block py-1 text-slate-300 hover:text-brand-indigo"
+                          className="block py-1 text-slate-300 hover:text-brand-indigo rounded px-1 -mx-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                         >
                           {item.name}
                         </a>
@@ -909,7 +978,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 <a 
                   href="#audit-quiz" 
                   onClick={() => { setIsMobileMenuOpen(false); openQuiz(); }} 
-                  className="w-full py-2.5 bg-brand-orange/10 text-brand-orange font-bold rounded-xl text-center block text-xs hover:bg-brand-orange hover:text-white transition-colors"
+                  aria-label="Get Free SEO Audit"
+                  className="w-full py-2.5 bg-brand-orange/10 text-brand-orange font-bold rounded-xl text-center block text-xs hover:bg-brand-orange hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
                 >
                   Get Free SEO Audit
                 </a>
@@ -917,7 +987,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 <a 
                   href="#audit-form" 
                   onClick={() => setIsMobileMenuOpen(false)}
-                  className="w-full py-3 bg-brand-indigo hover:bg-opacity-95 text-white font-black text-center rounded-xl block text-xs shadow"
+                  aria-label="Book Free Consultation"
+                  className="w-full py-3 bg-brand-indigo hover:bg-opacity-95 text-white font-black text-center rounded-xl block text-xs shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
                 >
                   Book Free Consultation
                 </a>
@@ -930,6 +1001,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
 
       {/* MOBILE STICKY BOTTOM CORE HIGH-CONVERSION CTA NAVIGATION BAR */}
       <div 
+        role="navigation"
+        aria-label="Mobile Quick Action Bar"
         className="fixed bottom-0 inset-x-0 bg-[#0a0f1d]/98 border-t border-slate-800/80 z-40 lg:hidden shadow-[0_-10px_35px_rgba(0,0,0,0.7)] backdrop-blur-md"
         style={{
           paddingTop: '10px',
@@ -945,16 +1018,18 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
             target="_blank" 
             rel="noopener noreferrer"
             referrerPolicy="no-referrer"
-            className="flex flex-col items-center justify-center text-slate-400 hover:text-emerald-400 transition-colors"
+            aria-label="Chat with AKGLS Group on WhatsApp"
+            className="flex flex-col items-center justify-center text-slate-400 hover:text-emerald-400 transition-colors rounded-lg p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-400"
           >
-            <MessageSquare className="w-5 h-5 text-emerald-500 hover:scale-105 transition-transform" />
+            <WhatsAppIcon className="w-5 h-5 text-emerald-500 hover:scale-105 transition-transform" />
             <span className="text-[9px] sm:text-[10px] font-bold mt-1.5 whitespace-nowrap">WhatsApp</span>
           </a>
 
           {/* Item 2: Call now */}
           <a 
             href="tel:+918318114492" 
-            className="flex flex-col items-center justify-center text-slate-400 hover:text-brand-indigo transition-colors"
+            aria-label="Call AKGLS Group at +91 831 811 4492"
+            className="flex flex-col items-center justify-center text-slate-400 hover:text-brand-indigo transition-colors rounded-lg p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
           >
             <PhoneCall className="w-5 h-5 text-brand-teal hover:scale-105 transition-transform" />
             <span className="text-[9px] sm:text-[10px] font-bold mt-1.5 whitespace-nowrap">Call Now</span>
@@ -962,11 +1037,13 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
 
           {/* Item 3: Free Audit */}
           <button 
+            type="button"
             onClick={() => {
               const element = document.querySelector('#audit-form');
               if (element) element.scrollIntoView({ behavior: 'smooth' });
             }}
-            className="flex flex-col items-center justify-center text-slate-400 hover:text-brand-orange transition-colors cursor-pointer"
+            aria-label="Scroll to Free SEO Audit form"
+            className="flex flex-col items-center justify-center text-slate-400 hover:text-brand-orange transition-colors cursor-pointer rounded-lg p-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange"
           >
             <FileText className="w-5 h-5 text-brand-orange hover:scale-105 transition-transform" />
             <span className="text-[9px] sm:text-[10px] font-bold mt-1.5 whitespace-nowrap">Free Audit</span>
@@ -974,8 +1051,10 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
 
           {/* Item 4: Book Consultation */}
           <button 
+            type="button"
             onClick={openQuiz}
-            className="flex flex-col items-center justify-center bg-gradient-to-r from-brand-indigo to-brand-purple text-white rounded-xl py-1 px-2.5 shadow-md hover:brightness-110 active:scale-95 transition-all cursor-pointer"
+            aria-label="Book Free Strategic Consultation"
+            className="flex flex-col items-center justify-center bg-gradient-to-r from-brand-indigo to-brand-purple text-white rounded-xl py-1 px-2.5 shadow-md hover:brightness-110 active:scale-95 transition-all cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal focus-visible:ring-offset-1 focus-visible:ring-offset-[#0a0f1d]"
           >
             <Zap className="w-4 h-4 text-brand-teal animate-pulse" />
             <span className="text-[9px] font-black uppercase mt-1 tracking-tight whitespace-nowrap">Book Free</span>

@@ -58,6 +58,15 @@ async function startServer() {
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
 
+  // 301 Canonical redirect: enforce www.akglsgroup.com for non-www requests
+  app.use((req, res, next) => {
+    const host = (req.headers.host || "").toLowerCase().split(':')[0];
+    if (host === "akglsgroup.com") {
+      return res.redirect(301, `https://www.akglsgroup.com${req.originalUrl}`);
+    }
+    next();
+  });
+
   // Health check API point
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });

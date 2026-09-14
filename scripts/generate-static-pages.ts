@@ -12,26 +12,33 @@ const distDir = path.join(rootDir, 'dist');
 
 // List of handcrafted static pages that should be preserved unless explicitly forced
 const PRESERVED_FILES = new Set([
-  'geo-services.html'
+  'geo-services.html',
+  'crypto-growth-services.html'
 ]);
 
 export function generateSitemapXml(): string {
   const currentDate = new Date().toISOString().split('T')[0];
+  const seenPaths = new Set<string>();
   const urls: string[] = [
     `  <url>
-    <loc>https://akglsgroup.com/</loc>
+    <loc>https://www.akglsgroup.com/</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>`
   ];
+  seenPaths.add('/');
 
   for (const route of SITEMAP_ROUTES) {
     if (!route.path || route.path === '/' || route.id === 'home') continue;
     const cleanPath = route.path.startsWith('/') ? route.path : `/${route.path}`;
     const formattedPath = cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
+    
+    if (seenPaths.has(formattedPath)) continue;
+    seenPaths.add(formattedPath);
+
     urls.push(`  <url>
-    <loc>https://akglsgroup.com${formattedPath}</loc>
+    <loc>https://www.akglsgroup.com${formattedPath}</loc>
     <lastmod>${currentDate}</lastmod>
     <changefreq>${route.changefreq || 'weekly'}</changefreq>
     <priority>${route.priority ? route.priority.toFixed(1) : '0.8'}</priority>

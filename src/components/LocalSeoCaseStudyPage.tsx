@@ -9,6 +9,7 @@ import {
   Layout, ArrowUpRight, Rocket, HelpCircle, MapPin, Star, Info, CheckSquare,
   MessageCircle, BarChart, PhoneCall, Calendar, Navigation, ShieldCheck, Map
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface LocalSeoCaseStudyPageProps {
   onBackToHome: () => void;
@@ -20,18 +21,18 @@ const schemasTemplates = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "Local SEO Case Study: 580% Maps Visibility & 420% Lead growth",
-  "image": "https://akglsgroup.com/assets/case-studies/local-seo.jpg",
+  "image": "https://www.akglsgroup.com/assets/case-studies/local-seo.jpg",
   "author": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "publisher": {
     "@type": "Organization",
     "name": "AKGLS Group",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://akglsgroup.com/logo.png"
+      "url": "https://www.akglsgroup.com/logo.png"
     }
   },
   "description": "How AKGLS Group scaled a multi-location dental clinic's local Search Engine footprint, boosting Google Maps visibility by 580% and lead generation volume in 6 months."
@@ -54,7 +55,7 @@ const schemasTemplates = {
 
 export default function LocalSeoCaseStudyPage({ onBackToHome, openProposalForm }: LocalSeoCaseStudyPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20read%20your%20Local%20SEO%20Case%20Study%20and%20would%20like%20to%20boost%20our%20local%20rankings.';
 
   useEffect(() => {
     const originalTitle = document.title;
@@ -234,7 +235,7 @@ export default function LocalSeoCaseStudyPage({ onBackToHome, openProposalForm }
                   referrerPolicy="no-referrer"
                   className="px-8 py-4 bg-slate-900/80 hover:bg-slate-800/80 border border-slate-800 text-slate-200 font-bold rounded-xl transition text-center flex items-center justify-center gap-2 cursor-pointer"
                 >
-                  <MessageSquare className="text-emerald-400 w-5 h-5" /> Consult on WhatsApp
+                  <WhatsAppIcon className="text-emerald-400 w-5 h-5" /> Consult on WhatsApp
                 </a>
               </div>
             </div>
@@ -1566,7 +1567,7 @@ export default function LocalSeoCaseStudyPage({ onBackToHome, openProposalForm }
           className="w-13 h-13 sm:w-14 sm:h-14 bg-emerald-500 text-white rounded-full flex items-center justify-center shadow-xl hover:bg-emerald-600 transition-all hover:scale-110 cursor-pointer"
           title="Consult on WhatsApp"
         >
-          <MessageCircle className="w-7 h-7 sm:w-8 sm:h-8" />
+          <WhatsAppIcon className="w-7 h-7 sm:w-8 sm:h-8" />
         </a>
       </div>
 

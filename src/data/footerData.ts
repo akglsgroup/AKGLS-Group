@@ -72,8 +72,8 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     bulletClass: "bg-brand-teal",
     links: [
       { name: "SEO Services", href: "/seo-services" },
-      { name: "Technical SEO", href: "/technical-seo" },
-      { name: "On-Page SEO", href: "/on-page-seo" },
+      { name: "Technical SEO", href: "/technical-seo-services" },
+      { name: "On-Page SEO", href: "/on-page-seo-services" },
       { name: "Off-Page SEO", href: "/off-page-seo-services" },
       { name: "Local SEO", href: "/local-seo-services" },
       { name: "Ecommerce SEO", href: "/ecommerce-seo-services" },
@@ -134,7 +134,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       { name: "Landing Page Design", href: "#web-design-services" },
       { name: "Website Maintenance", href: "#web-design-services" },
       { name: "UI/UX Design", href: "#web-design-services" },
-      { name: "Speed Optimization", href: "/technical-seo" },
+      { name: "Speed Optimization", href: "/technical-seo-services" },
       { name: "Indian Client Pricing", href: "/india-pricing" },
       { name: "Proposal PDF Builder", href: "/proposal-builder" }
     ]
@@ -184,7 +184,7 @@ export const FOOTER_CONTACT = {
   phoneClean: "+918318114492",
   offices: "San Francisco Office: 201 Mission St • NYC Office: 1540 Broadway • New Delhi: Cyber City",
   workingHours: "Mon - Fri: 9:00 AM - 6:00 PM EST (24/7 Global Client Support)",
-  whatsappUrl: "https://wa.me/918318114492",
+  whatsappUrl: "https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20inquire%20about%20your%20SEO%20and%20digital%20marketing%20services.",
   consultationHref: "#audit-form"
 };
 

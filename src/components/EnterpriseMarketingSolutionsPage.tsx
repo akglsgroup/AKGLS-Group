@@ -11,6 +11,7 @@ import {
   Laptop, Layout, Paintbrush, ArrowUpRight, HelpCircle as HelpIcon, Layers3, Rocket,
   Lightbulb, ChevronRight, Play, LineChart, ZapOff, Minimize2, CheckSquare, BarChart4
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface EnterpriseMarketingSolutionsPageProps {
   onBackToHome: () => void;
@@ -25,7 +26,7 @@ const enterpriseSchemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "Multi-location Enterprise SEO, global programmatic paid media management, high-volume B2B lead generation, and conversational search LLM visibility engines."
@@ -48,7 +49,7 @@ const enterpriseSchemaTemplates = {
 
 export default function EnterpriseMarketingSolutionsPage({ onBackToHome, openProposalForm }: EnterpriseMarketingSolutionsPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20am%20interested%20in%20your%20Enterprise%20Marketing%20Solutions.';
 
   // Dynamic Page Title
   useEffect(() => {
@@ -267,7 +268,7 @@ export default function EnterpriseMarketingSolutionsPage({ onBackToHome, openPro
           className="bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black text-xs uppercase tracking-wider border border-emerald-550/30 transition-all font-mono"
           id="enterprise-whatsapp-floating-bar"
         >
-          <MessageSquare fill="white" className="w-4 h-4 text-white" /> Enterprise WhatsApp Desk: {CONTACT_NUMBER}
+          <WhatsAppIcon className="w-4 h-4 text-white" /> Enterprise WhatsApp Desk: {CONTACT_NUMBER}
         </a>
         <a 
           href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}
@@ -694,26 +695,26 @@ export default function EnterpriseMarketingSolutionsPage({ onBackToHome, openPro
         </div>
 
         {/* Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {enterpriseServices.map((srv, idx) => (
             <div 
               key={idx} 
-              className="bg-[#0b0e20] border border-indigo-950 rounded-2xl p-6 hover:border-brand-teal/30 hover:shadow-xl hover:shadow-brand-teal/5 transition duration-300 space-y-4 flex flex-col justify-between"
+              className="bg-[#0b0e20] border border-indigo-950 rounded-2xl p-4 sm:p-6 hover:border-brand-teal/30 hover:shadow-xl hover:shadow-brand-teal/5 transition duration-300 space-y-3.5 sm:space-y-4 flex flex-col justify-between"
             >
               <div className="space-y-3">
                 <div className="flex justify-between items-start font-mono">
                   <span className="bg-brand-teal/5 border border-brand-teal/20 px-2.5 py-1 rounded text-[10px] font-bold text-brand-teal uppercase tracking-widest">
                     {srv.badge}
                   </span>
-                  <span className="text-xs text-slate-505 text-slate-550 mr-1">System Suite {idx+1} of 10</span>
+                  <span className="text-xs text-slate-500 mr-1">System Suite {idx+1} of 10</span>
                 </div>
-                <h3 className="text-xl font-bold text-white hover:text-brand-teal transition font-sans">{srv.title}</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-white hover:text-brand-teal transition font-sans">{srv.title}</h3>
                 <p className="text-xs md:text-sm text-slate-300 leading-relaxed text-left font-normal">{srv.desc}</p>
               </div>
 
-              <div className="pt-4 border-t border-indigo-955/20 border-indigo-950 space-y-1 text-left bg-slate-950/45 p-3 rounded-xl font-mono">
+              <div className="pt-3.5 sm:pt-4 border-t border-indigo-950 space-y-1 text-left bg-slate-950/45 p-3.5 sm:p-3 rounded-xl font-mono min-h-[44px] flex flex-col justify-center">
                 <span className="text-[9.5px] font-bold text-slate-400 block tracking-widest mb-1 font-mono">KPI TARGET:</span>
-                <div className="flex items-center space-x-1.5 text-[11px] text-brand-teal font-extrabold text-left font-mono">
+                <div className="flex items-center space-x-2 sm:space-x-1.5 text-xs sm:text-[11px] text-brand-teal font-extrabold text-left font-mono">
                   <Check className="w-4 h-4 text-brand-teal shrink-0" />
                   <span>{srv.outcome}</span>
                 </div>

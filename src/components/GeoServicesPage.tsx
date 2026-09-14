@@ -6,6 +6,7 @@ import {
   AlertCircle, AlertTriangle, MessageSquare, Settings, Layers, Activity, 
   Cpu, Globe, Gauge, Terminal, HelpCircle, ChevronDown, CheckCircle, Clock
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface GeoServicesPageProps {
   onBackToHome: () => void;
@@ -55,7 +56,8 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
 
   // Constants
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_BASE = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20am%20interested%20in%20your%20GEO%20Optimization%20Services.%20Please%20share%20details.';
 
   // Schema generation function
   const generatedSchemaText = `{
@@ -257,12 +259,12 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
                 </a>
                 
                 <a 
-                  href={`${WHATSAPP_LINK}?text=Hello%20AKGLS%20Group,%20I%20am%20interested%20in%20your%20GEO%20Optimization%20Services.%20Please%20share%20details.`}
+                  href={`${WHATSAPP_BASE}?text=Hello%20AKGLS%20Group,%20I%20am%20interested%20in%20your%20GEO%20Optimization%20Services.%20Please%20share%20details.`}
                   target="_blank" 
                   referrerPolicy="no-referrer"
                   className="bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs uppercase tracking-wider py-4 px-6 rounded-xl text-center shadow-lg transition-all flex items-center justify-center gap-2"
                 >
-                  <MessageSquare className="w-4 h-4 fill-white" /> WhatsApp Us: {CONTACT_NUMBER}
+                  <WhatsAppIcon className="w-4 h-4 text-white" /> WhatsApp Us: {CONTACT_NUMBER}
                 </a>
               </div>
 
@@ -542,7 +544,7 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
                   AI citation integrity factor: 99.8%
                 </span>
                 <a 
-                  href={`${WHATSAPP_LINK}?text=Hi%20AKGLS,%20please%20help%20me%20configure%20my%20domain%20citations%20for%20conversational%20RAG%20searches.`}
+                  href={`${WHATSAPP_BASE}?text=Hi%20AKGLS,%20please%20help%20me%20configure%20my%20domain%20citations%20for%20conversational%20RAG%20searches.`}
                   target="_blank" 
                   referrerPolicy="no-referrer"
                   className="bg-brand-indigo hover:bg-opacity-95 text-white font-bold py-2 px-4 rounded-lg tracking-wider transition-all flex items-center gap-1 uppercase"
@@ -573,11 +575,11 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
             
             {/* Bento Card 1 */}
-            <div className="bg-[#0c121e] border border-slate-850 hover:border-brand-indigo/35 transition-all rounded-3xl p-6 text-left flex flex-col justify-between">
-              <div className="space-y-4">
+            <div className="bg-[#0c121e] border border-slate-850 hover:border-brand-indigo/35 transition-all rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-left flex flex-col justify-between">
+              <div className="space-y-3.5 sm:space-y-4">
                 <div className="w-10 h-10 rounded-xl bg-brand-indigo/10 border border-brand-indigo/20 text-brand-indigo flex items-center justify-center">
                   <Code className="w-5 h-5 text-brand-indigo" />
                 </div>
@@ -588,14 +590,14 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
                   We write complex, highly nested, relational JSON-LD graphs linking founders, corporate entities, proprietary assets, and case studies so AI scrapers parse you instantly.
                 </p>
               </div>
-              <div className="pt-4 border-t border-slate-850 mt-4 text-[10px] uppercase font-mono text-slate-500 font-bold">
+              <div className="pt-3.5 sm:pt-4 border-t border-slate-850 mt-4 text-[10px] uppercase font-mono text-slate-500 font-bold min-h-[36px] sm:min-h-0 flex items-center">
                 Entity relationships verified
               </div>
             </div>
 
             {/* Bento Card 2 */}
-            <div className="bg-[#0c121e] border border-slate-850 hover:border-brand-purple/35 transition-all rounded-3xl p-6 text-left flex flex-col justify-between">
-              <div className="space-y-4">
+            <div className="bg-[#0c121e] border border-slate-850 hover:border-brand-purple/35 transition-all rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-left flex flex-col justify-between">
+              <div className="space-y-3.5 sm:space-y-4">
                 <div className="w-10 h-10 rounded-xl bg-brand-purple/10 border border-brand-purple/20 text-brand-purple flex items-center justify-center">
                   <Database className="w-5 h-5 text-brand-purple" />
                 </div>
@@ -606,14 +608,14 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
                   Traditional keyword stuffing is obsolete. We restructure content layouts into clear semantic Markdown blocks, Q&A indices, and factual table vectors favored by LLMs.
                 </p>
               </div>
-              <div className="pt-4 border-t border-slate-850 mt-4 text-[10px] uppercase font-mono text-slate-500 font-bold">
+              <div className="pt-3.5 sm:pt-4 border-t border-slate-850 mt-4 text-[10px] uppercase font-mono text-slate-500 font-bold min-h-[36px] sm:min-h-0 flex items-center">
                 optimized context sizing
               </div>
             </div>
 
             {/* Bento Card 3 */}
-            <div className="bg-[#0c121e] border border-slate-850 hover:border-brand-teal/35 transition-all rounded-3xl p-6 text-left flex flex-col justify-between">
-              <div className="space-y-4">
+            <div className="bg-[#0c121e] border border-slate-850 hover:border-brand-teal/35 transition-all rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-left flex flex-col justify-between">
+              <div className="space-y-3.5 sm:space-y-4">
                 <div className="w-10 h-10 rounded-xl bg-brand-teal/10 border border-brand-teal/20 text-brand-teal flex items-center justify-center">
                   <Cpu className="w-5 h-5 text-brand-teal" />
                 </div>
@@ -624,14 +626,14 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
                   AI engines reference multiple index directories. We orchestrate mentions and listings on top business directories and specific industry nodes to generate massive backlinks and weight.
                 </p>
               </div>
-              <div className="pt-4 border-t border-slate-850 mt-4 text-[10px] uppercase font-mono text-slate-500 font-bold">
+              <div className="pt-3.5 sm:pt-4 border-t border-slate-850 mt-4 text-[10px] uppercase font-mono text-slate-500 font-bold min-h-[36px] sm:min-h-0 flex items-center">
                 Source catalogs compiled
               </div>
             </div>
 
             {/* Bento Card 4 */}
-            <div className="bg-[#0c121e] border border-slate-850 hover:border-brand-orange/35 transition-all rounded-3xl p-6 text-left flex flex-col justify-between">
-              <div className="space-y-4">
+            <div className="bg-[#0c121e] border border-slate-850 hover:border-brand-orange/35 transition-all rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-left flex flex-col justify-between">
+              <div className="space-y-3.5 sm:space-y-4">
                 <div className="w-10 h-10 rounded-xl bg-brand-orange/10 border border-brand-orange/20 text-brand-orange flex items-center justify-center">
                   <ShieldCheck className="w-5 h-5 text-brand-orange" />
                 </div>
@@ -642,7 +644,7 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
                   Generative scrapers extract claims emphasizing exact numbers. We audit your digital copy, replacing vague phrases with statistical data and exact figures to increase LLM validation parameters.
                 </p>
               </div>
-              <div className="pt-4 border-t border-slate-850 mt-4 text-[10px] uppercase font-mono text-slate-500 font-bold">
+              <div className="pt-3.5 sm:pt-4 border-t border-slate-850 mt-4 text-[10px] uppercase font-mono text-slate-500 font-bold min-h-[36px] sm:min-h-0 flex items-center">
                 Numeric claims verification
               </div>
             </div>
@@ -775,7 +777,7 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
                 </p>
                 <div className="pt-3 flex items-center justify-end">
                   <a 
-                    href={`${WHATSAPP_LINK}?text=I%20have%20built%20my%27relationalgraph-metadata.json%27%20and%20want%20the%20AKGLS%20Engineering%20team%20to%20deploy%20relational%20graphs%20on%20my%20domain.`}
+                    href={`${WHATSAPP_BASE}?text=I%20have%20built%20my%20%27relationalgraph-metadata.json%27%20and%20want%20the%20AKGLS%20Engineering%20team%20to%20deploy%20relational%20graphs%20on%20my%20domain.`}
                     target="_blank" 
                     referrerPolicy="no-referrer"
                     className="text-brand-orange font-bold hover:underline font-mono uppercase tracking-wide text-[10.5px]"
@@ -831,12 +833,12 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
                     <Phone className="w-4 h-4" /> Call Direct: {CONTACT_NUMBER}
                   </a>
                   <a 
-                    href={`${WHATSAPP_LINK}?text=Hi%20AKGLS,%20I%20just%20submitted%20the%20AI%20Search%20Index%20Audit%20form%20for%20my%20brand%20called%20${leadForm.company}.%20Please%20fast-track%20my%20audit.`}
+                    href={`${WHATSAPP_BASE}?text=Hi%20AKGLS,%20I%20just%20submitted%20the%20AI%20Search%20Index%20Audit%20form%20for%20my%20brand%20called%20${encodeURIComponent(leadForm.company)}.%20Please%20fast-track%20my%20audit.`}
                     target="_blank" 
                     referrerPolicy="no-referrer"
                     className="w-full sm:w-auto px-6 py-3 bg-emerald-600 text-white font-bold text-xs uppercase tracking-wider rounded-xl hover:bg-emerald-500 text-center flex items-center justify-center gap-2"
                   >
-                    <MessageSquare className="w-4 h-4 fill-white" /> Ping Priority WhatsApp
+                    <WhatsAppIcon className="w-4 h-4 text-white" /> Ping Priority WhatsApp
                   </a>
                 </div>
               </motion.div>
@@ -1039,12 +1041,12 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
             </a>
             
             <a 
-              href={`${WHATSAPP_LINK}?text=Hi%20AKGLS%20Group,%20I%20am%2520interested%20in%20deploying%2520GEO%20Services%20on%20my%20domain.%20Please%20schedule%20a%20priority%20consultation.`}
+              href={`${WHATSAPP_BASE}?text=Hi%20AKGLS%20Group,%20I%20am%20interested%20in%20deploying%20GEO%20Services%20on%20my%20domain.%20Please%20schedule%20a%20priority%20consultation.`}
               target="_blank" 
               referrerPolicy="no-referrer"
               className="w-full sm:w-auto px-8 py-4 bg-[#0c121e] border border-slate-800 text-lime-400 font-extrabold text-xs uppercase tracking-wider rounded-xl hover:bg-slate-900 hover:text-white transition-all flex items-center justify-center gap-2"
             >
-              <MessageSquare className="w-4 h-4 text-lime-400 fill-lime-400/20" /> WhatsApp Direct: {CONTACT_NUMBER}
+              <WhatsAppIcon className="w-4 h-4 text-lime-400" /> WhatsApp Direct: {CONTACT_NUMBER}
             </a>
           </div>
 

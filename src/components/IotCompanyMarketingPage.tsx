@@ -15,7 +15,7 @@ interface IotCompanyMarketingPageProps {
 
 export default function IotCompanyMarketingPage({ onBackToHome, openProposalForm }: IotCompanyMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
-  const WHATSAPP_LINK = "https://wa.me/918318114492";
+  const WHATSAPP_LINK = "https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20digital%20marketing%20for%20our%20IoT%20enterprise.";
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -35,7 +35,7 @@ export default function IotCompanyMarketingPage({ onBackToHome, openProposalForm
         "provider": {
           "@type": "Organization",
           "name": "AKGLS Group",
-          "url": "https://akglsgroup.com"
+          "url": "https://www.akglsgroup.com"
         },
         "description": "Grow your IoT business with expert IoT marketing services from AKGLS Group. IoT SEO, B2B lead generation, Google Ads, AI SEO & digital marketing solutions for IoT companies.",
         "areaServed": "Global"

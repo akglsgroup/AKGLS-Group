@@ -7,7 +7,7 @@ import {
   Database, ListTodo, Send, Share2
 } from 'lucide-react';
 
-const WHATSAPP_LINK = 'https://wa.me/918318114492';
+const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20am%20using%20your%20AI%20SEO%20Checklist%20and%20would%20like%20an%20expert%20audit.';
 const CONTACT_NUMBER = '+91 83181 14492';
 
 interface AiSeoChecklistsPageProps {

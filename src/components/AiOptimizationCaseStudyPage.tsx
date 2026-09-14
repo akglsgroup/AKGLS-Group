@@ -18,18 +18,18 @@ const schemasTemplates = {
   "@context": "https://schema.org",
   "@type": "TechArticle",
   "headline": "AI Optimization Case Study: +740% AI Search visibility & +390% Organic Leads",
-  "image": "https://akglsgroup.com/assets/case-studies/ai-seo.jpg",
+  "image": "https://www.akglsgroup.com/assets/case-studies/ai-seo.jpg",
   "author": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "publisher": {
     "@type": "Organization",
     "name": "AKGLS Group",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://akglsgroup.com/logo.png"
+      "url": "https://www.akglsgroup.com/logo.png"
     }
   },
   "description": "How AKGLS Group scaled a B2B SaaS startup's AI engine footprint, boosting ChatGPT, Gemini, and search engine recommendations by +740% in 7 months."
@@ -161,7 +161,7 @@ export default function AiOptimizationCaseStudyPage({ onBackToHome, openProposal
         </button>
         <div className="flex items-center gap-4">
           <a 
-            href="https://wa.me/918318114492" 
+            href="https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20read%20your%20AI%20Optimization%20Case%20Study%20and%20would%20like%20to%20achieve%20similar%20growth." 
             target="_blank" 
             referrerPolicy="no-referrer"
             className="hidden sm:inline-flex text-xs font-mono text-emerald-400 border border-emerald-950/80 bg-emerald-950/20 px-3 py-1.5 rounded hover:bg-emerald-950/50 transition"
@@ -1311,7 +1311,7 @@ export default function AiOptimizationCaseStudyPage({ onBackToHome, openProposal
               Start Free AI Optimization Audit
             </button>
             <a 
-              href="https://wa.me/918318114492"
+              href="https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20read%20your%20AI%20Optimization%20Case%20Study%20and%20would%20like%20to%20achieve%20similar%20growth."
               target="_blank"
               referrerPolicy="no-referrer"
               className="inline-flex justify-center items-center gap-1.5 bg-slate-900 border border-slate-800 text-slate-200 hover:bg-slate-800 transition py-4 px-8 rounded text-sm font-semibold"

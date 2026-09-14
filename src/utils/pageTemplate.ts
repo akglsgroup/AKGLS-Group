@@ -3,7 +3,8 @@ import { renderSharedHeaderHtml, renderHeaderScript } from './headerTemplate';
 import { renderSharedFooterHtml, renderFooterScript } from './footerTemplate';
 
 export function renderPageHtml(route: AppRoute): string {
-  const fullUrl = `https://www.akglsgroup.com${route.path.startsWith('/') ? route.path : '/' + route.path}`.replace(/\/+$/, '');
+  const normalizedPath = route.path === '/' ? '/' : (route.path.endsWith('/') ? route.path : `${route.path}/`);
+  const fullUrl = `https://www.akglsgroup.com${normalizedPath}`;
   const title = route.title || `${route.h1 || 'Digital Growth'} | AKGLS Group`;
   const description = route.description || route.leadParagraph || 'Enterprise SEO, GEO, and AI search optimization services by AKGLS Group.';
   const h1 = route.h1 || route.title.split('|')[0].trim();
@@ -267,7 +268,10 @@ ${renderSharedHeaderHtml(route.path)}
                 </svg>
                 Call Direct: +91 831 811 4492
               </a>
-              <a href="https://wa.me/918318114492" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold bg-[#25D366] text-white hover:bg-emerald-600 transition-all">
+              <a href="https://wa.me/918318114492?text=${encodeURIComponent('Hello AKGLS Group, I would like to inquire about your ' + (route.h1 || 'SEO and digital marketing') + ' services.')}" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold bg-[#25D366] text-white hover:bg-emerald-600 transition-all shadow-lg shadow-emerald-500/20">
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.19 8.19 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24M8.53 7.33c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02s.87 2.35.99 2.51c.12.16 1.7 2.6 4.12 3.65.58.25 1.03.4 1.38.51.58.18 1.11.16 1.53.1.47-.07 1.44-.59 1.64-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28s-1.44-.71-1.66-.79c-.22-.08-.38-.12-.54.12s-.62.79-.76.95c-.14.16-.28.18-.52.06s-1.02-.38-1.94-1.2c-.72-.64-1.2-1.44-1.34-1.68s-.01-.37.11-.49c.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42s-.54-1.3-.74-1.78c-.2-.47-.4-.41-.55-.42z"/>
+                </svg>
                 WhatsApp Us
               </a>
               <a href="#audit-form" class="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl font-bold border border-brand-border bg-brand-card/60 hover:bg-brand-card hover:border-brand-teal/50 text-slate-200 transition-all">
@@ -301,30 +305,30 @@ ${renderSharedHeaderHtml(route.path)}
       </section>
 
       <!-- Key Capabilities & Strategic Grid -->
-      <section class="py-16 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center max-w-3xl mx-auto mb-16">
+      <section class="py-12 sm:py-24 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-brand-card text-brand-teal text-xs font-mono font-bold mb-3 border border-brand-teal/20">
             TECHNICAL BLUEPRINT
           </div>
-          <h2 class="text-3xl sm:text-4xl font-black font-display tracking-tight text-white mb-4">
+          <h2 class="text-2xl sm:text-4xl font-black font-display tracking-tight text-white mb-3 sm:mb-4">
             How We Deliver Compounding Growth
           </h2>
-          <p class="text-slate-400 text-sm sm:text-base">
+          <p class="text-slate-400 text-xs sm:text-base">
             Every implementation is backed by mathematical precision, rigorous schema governance, and conversion engineering.
           </p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
           ${features.map((f, i) => `
-          <div class="p-8 rounded-2xl bg-brand-card/70 border border-brand-border hover:border-brand-teal/40 transition-all flex flex-col justify-between group">
+          <div class="p-4.5 sm:p-8 rounded-2xl bg-brand-card/70 border border-brand-border hover:border-brand-teal/40 transition-all flex flex-col justify-between group">
             <div>
-              <div class="w-12 h-12 rounded-xl bg-brand-teal/10 text-brand-teal border border-brand-teal/20 flex items-center justify-center font-mono font-bold text-lg mb-6 group-hover:scale-110 transition-transform">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-xl bg-brand-teal/10 text-brand-teal border border-brand-teal/20 flex items-center justify-center font-mono font-bold text-base sm:text-lg mb-4 sm:mb-6 group-hover:scale-110 transition-transform">
                 0${i + 1}
               </div>
-              <h3 class="text-xl font-bold text-white mb-3">${escapeHtml(f.title)}</h3>
-              <p class="text-slate-300 text-sm leading-relaxed">${escapeHtml(f.desc)}</p>
+              <h3 class="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">${escapeHtml(f.title)}</h3>
+              <p class="text-slate-300 text-xs sm:text-sm leading-relaxed">${escapeHtml(f.desc)}</p>
             </div>
-            <div class="mt-6 pt-4 border-t border-brand-border/50 text-xs font-semibold text-brand-teal flex items-center gap-1">
+            <div class="mt-4 sm:mt-6 pt-3 sm:pt-4 border-t border-brand-border/50 text-xs font-semibold text-brand-teal flex items-center gap-1.5 min-h-[44px] sm:min-h-0 py-2 sm:py-0">
               <span>Included in Scope</span>
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
             </div>

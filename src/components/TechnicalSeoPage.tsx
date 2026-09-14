@@ -8,6 +8,7 @@ import {
   Globe, Gauge, Terminal, ChevronDown, Check, Percent, Send, Copy, 
   Laptop, Smartphone, Zap, Server, Shield, Globe2, AlertCircle
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface TechnicalSeoPageProps {
   onBackToHome: () => void;
@@ -16,7 +17,8 @@ interface TechnicalSeoPageProps {
 
 export default function TechnicalSeoPage({ onBackToHome, openProposalForm }: TechnicalSeoPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_BASE = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20am%20interested%20in%20a%20Technical%20SEO%20Audit%20and%20crawling%20optimization.';
 
   // Dynamic Page Title & Meta simulation
   useEffect(() => {
@@ -698,7 +700,7 @@ export default function TechnicalSeoPage({ onBackToHome, openProposalForm }: Tec
                   Deployment schedule: Included inside first sprint cycle.
                 </span>
                 <a 
-                  href={`${WHATSAPP_LINK}?text=I%20am%20interested%20in%20${serviceCategories[activeServiceTab as keyof typeof serviceCategories].title}.%20Please%20share%20proposal.`}
+                  href={`${WHATSAPP_BASE}?text=I%20am%20interested%20in%20${encodeURIComponent(serviceCategories[activeServiceTab as keyof typeof serviceCategories].title)}.%20Please%20share%20proposal.`}
                   target="_blank"
                   referrerPolicy="no-referrer"
                   className="bg-brand-indigo hover:opacity-95 text-white font-extrabold text-xs uppercase tracking-wider px-5 py-3 rounded-lg text-center"
@@ -1476,13 +1478,5 @@ export default function TechnicalSeoPage({ onBackToHome, openProposalForm }: Tec
 
 // Internal icons helper for WhatsApp Icon
 function MessageSquareFill() {
-  return (
-    <svg 
-      className="w-4 h-4 fill-current mr-0.5" 
-      viewBox="0 0 24 24" 
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.453L0 24zm6.59-4.846c1.6.95 3.197 1.45 4.817 1.452 5.424 0 9.835-4.417 9.838-9.848.002-2.63-1.018-5.1-2.872-6.958C16.578 1.99 14.108.974 11.998.974c-5.43 0-9.843 4.417-9.846 9.849 0 1.62.453 3.2 1.311 4.6l.287.469-1.01 3.69 3.79-.993.427.253z" />
-    </svg>
-  );
+  return <WhatsAppIcon className="w-4 h-4 text-white mr-0.5" />;
 }

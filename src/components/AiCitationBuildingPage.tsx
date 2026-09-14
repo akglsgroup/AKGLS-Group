@@ -20,7 +20,7 @@ const schemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "Increase the likelihood that AI search engines and Large Language Models (LLMs) reference your brand, website, content, products, or expertise within generated responses."
@@ -32,24 +32,24 @@ const schemaTemplates = {
     "@type": "ListItem",
     "position": 1,
     "name": "Home",
-    "item": "https://akglsgroup.com/"
+    "item": "https://www.akglsgroup.com/"
   },{
     "@type": "ListItem",
     "position": 2,
     "name": "Services",
-    "item": "https://akglsgroup.com/seo-services"
+    "item": "https://www.akglsgroup.com/seo-services"
   },{
     "@type": "ListItem",
     "position": 3,
     "name": "AI Citation Building Services",
-    "item": "https://akglsgroup.com/ai-citation-building-services/"
+    "item": "https://www.akglsgroup.com/ai-citation-building-services/"
   }]
 }`
 };
 
 export default function AiCitationBuildingPage({ onBackToHome, openProposalForm }: AiCitationBuildingPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20AI%20Citation%20Building%20for%20our%20brand.';
 
   // Dynamic Page Title
   useEffect(() => {

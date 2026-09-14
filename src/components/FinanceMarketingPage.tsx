@@ -34,7 +34,7 @@ const marketingToolsList = [
 
 export default function FinanceMarketingPage({ onBackToHome, openProposalForm }: FinanceMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
-  const WHATSAPP_LINK = "https://wa.me/918318114492";
+  const WHATSAPP_LINK = "https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20financial%20services%20and%20fintech%20digital%20marketing.";
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -54,7 +54,7 @@ export default function FinanceMarketingPage({ onBackToHome, openProposalForm }:
         "provider": {
           "@type": "Organization",
           "name": "AKGLS Group",
-          "url": "https://akglsgroup.com"
+          "url": "https://www.akglsgroup.com"
         },
         "description": "High-authority financial SEO, fintech application customer acquisition campaigns, secure calculator landing engines, and lead generation.",
         "areaServed": "Global",

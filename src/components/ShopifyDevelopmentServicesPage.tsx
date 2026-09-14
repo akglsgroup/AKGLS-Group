@@ -10,6 +10,7 @@ import {
   Building2, Landmark, GraduationCap, Truck, Stethoscope, Factory, ShoppingCart, 
   Laptop, Layout, Paintbrush, ArrowUpRight, HelpCircle as HelpIcon, Layers3
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface ShopifyDevelopmentServicesPageProps {
   onBackToHome: () => void;
@@ -24,7 +25,7 @@ const shopifySchemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "High-speed custom Shopify & Shopify Plus theme design, WooCommerce migration, custom app integration, and AI-driven checkout conversion optimization."
@@ -45,7 +46,7 @@ const shopifySchemaTemplates = {
 
 export default function ShopifyDevelopmentServicesPage({ onBackToHome, openProposalForm }: ShopifyDevelopmentServicesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20Shopify%20development%20and%20store%20optimization.';
 
   // Dynamic Page Title
   useEffect(() => {
@@ -240,7 +241,7 @@ export default function ShopifyDevelopmentServicesPage({ onBackToHome, openPropo
           className="bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black text-xs uppercase tracking-wider border border-emerald-500/30 transition-all font-mono"
           id="shopify-whatsapp-floating-bar"
         >
-          <MessageSquare fill="white" className="w-4 h-4 text-white" /> WhatsApp E-com Help: {CONTACT_NUMBER}
+          <WhatsAppIcon className="w-4 h-4 text-white" /> WhatsApp E-com Help: {CONTACT_NUMBER}
         </a>
         <a 
           href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}
@@ -1407,7 +1408,7 @@ export default function ShopifyDevelopmentServicesPage({ onBackToHome, openPropo
               referrerPolicy="no-referrer"
               className="bg-[#0c121e] border border-slate-805 text-slate-200 px-8 py-4 rounded-xl hover:border-slate-705 transition flex items-center justify-center space-x-2"
             >
-              <MessageSquare fill="white" className="w-4 h-4 text-white" />
+              <WhatsAppIcon className="w-4 h-4 text-white" />
               <span>Discuss Requirements via WhatsApp</span>
             </a>
           </div>

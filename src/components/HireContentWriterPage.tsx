@@ -142,7 +142,7 @@ export default function HireContentWriterPage({ onBackToHome, openProposalForm }
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Worldwide",
   "description": "Premium, SEO-optimized, AI-ready, and conversion-focused content writing services designed for SaaS, Ecommerce, and Enterprise brands.",

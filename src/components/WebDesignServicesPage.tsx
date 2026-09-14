@@ -8,6 +8,7 @@ import {
   Settings, Shuffle, BarChart3, AlertCircle, Copy, CheckCircle,
   Laptop, Tablet, Palette, RefreshCw, LayoutGrid, CheckSquare, Eye, Play, Award, HelpCircle as HelpIcon
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface WebDesignServicesPageProps {
   onBackToHome: () => void;
@@ -43,7 +44,7 @@ const designSchemaTemplates = {
 
 export default function WebDesignServicesPage({ onBackToHome, openProposalForm }: WebDesignServicesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20custom%20web%20design%20and%20development.';
 
   // Dynamic Page Title & Meta Simulation
   useEffect(() => {
@@ -251,7 +252,7 @@ export default function WebDesignServicesPage({ onBackToHome, openProposalForm }
           className="bg-emerald-600 hover:bg-emerald-500 text-white p-3.5 rounded-2xl shadow-2xl flex items-center justify-center gap-2 font-black text-xs uppercase tracking-wider border border-emerald-500/30 transition-all font-mono"
           id="web-whatsapp-sticky"
         >
-          <MessageSquare className="w-4 h-4 text-white" fill="white" /> WhatsApp Design Expert: {CONTACT_NUMBER}
+          <WhatsAppIcon className="w-4 h-4 text-white" /> WhatsApp Design Expert: {CONTACT_NUMBER}
         </a>
         <a 
           href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}

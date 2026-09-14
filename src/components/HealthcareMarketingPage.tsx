@@ -13,7 +13,7 @@ interface HealthcareMarketingPageProps {
 
 export default function HealthcareMarketingPage({ onBackToHome, openProposalForm }: HealthcareMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
-  const WHATSAPP_LINK = "https://wa.me/918318114492";
+  const WHATSAPP_LINK = "https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20healthcare%20and%20medical%20marketing%20services.";
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -33,7 +33,7 @@ export default function HealthcareMarketingPage({ onBackToHome, openProposalForm
         "provider": {
           "@type": "Organization",
           "name": "AKGLS Group",
-          "url": "https://akglsgroup.com"
+          "url": "https://www.akglsgroup.com"
         },
         "description": "Increase patient appointments, build brand trust, and dominate Google Maps & AI search engine results with our HIPAA-aware healthcare marketing strategies.",
         "areaServed": "Global",

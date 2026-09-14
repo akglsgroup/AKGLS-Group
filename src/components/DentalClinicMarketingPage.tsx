@@ -8,6 +8,7 @@ import {
   MessageSquare, StarHalf, Play, BarChart3, TrendingUp, ThumbsUp,
   Stethoscope, Zap, Bell, CheckSquare, Dumbbell, ShieldAlert, BadgeInfo
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface DentalClinicMarketingPageProps {
   onBackToHome: () => void;
@@ -22,7 +23,7 @@ const dentalSchemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global/Regional",
   "description": "Premium patient generation sequences, regional maps Optimization, hyper-targeted local Ads, and high-conversion UX websites for advanced clinics.",
@@ -37,7 +38,7 @@ const dentalSchemaTemplates = {
   "@context": "https://schema.org",
   "@type": "MedicalBusiness",
   "name": "Elite Dental Center",
-  "image": "https://akglsgroup.com/images/dental-clinic.jpg",
+  "image": "https://www.akglsgroup.com/images/dental-clinic.jpg",
   "telePhone": "+1-315-902-1234",
   "address": {
     "@type": "PostalAddress",
@@ -80,7 +81,7 @@ const dentalSchemaTemplates = {
 
 export default function DentalClinicMarketingPage({ onBackToHome, openProposalForm }: DentalClinicMarketingPageProps) {
   const CONTACT_NUMBER = '+1 (315) 902-1234';
-  const WHATSAPP_LINK = 'https://wa.me/13159021234';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20dental%20clinic%20marketing%20and%20patient%20acquisition.';
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -514,7 +515,7 @@ export default function DentalClinicMarketingPage({ onBackToHome, openProposalFo
             title="Chat on WhatsApp"
             id="whatsapp-chat-anchor"
           >
-            <MessageSquare className="w-5 h-5" />
+            <WhatsAppIcon className="w-5 h-5" />
           </a>
 
           {/* Quick Call Button */}

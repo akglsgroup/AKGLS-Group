@@ -21,7 +21,7 @@ const schemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "Optimize your business for Anthropic Claude and conversational AI models to claim citations inside direct answers."
@@ -33,24 +33,24 @@ const schemaTemplates = {
     "@type": "ListItem",
     "position": 1,
     "name": "Home",
-    "item": "https://akglsgroup.com/"
+    "item": "https://www.akglsgroup.com/"
   },{
     "@type": "ListItem",
     "position": 2,
     "name": "Services",
-    "item": "https://akglsgroup.com/seo-services"
+    "item": "https://www.akglsgroup.com/seo-services"
   },{
     "@type": "ListItem",
     "position": 3,
     "name": "Claude Optimization Services",
-    "item": "https://akglsgroup.com/claude-optimization-services/"
+    "item": "https://www.akglsgroup.com/claude-optimization-services/"
   }]
 }`
 };
 
 export default function ClaudeOptimizationPage({ onBackToHome, openProposalForm }: ClaudeOptimizationPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20Claude%20AI%20Search%20Optimization%20for%20our%20website.';
 
   // Dynamic Page Title
   useEffect(() => {

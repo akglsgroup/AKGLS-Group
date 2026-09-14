@@ -12,6 +12,7 @@ import {
   Lightbulb, ChevronRight, Play, LineChart, Minimize2, CheckSquare,
   MapPin, Star, MessageCircle, RefreshCw, ShoppingBag, ArrowDownRight, Info
 } from 'lucide-react';
+import WhatsAppIcon from './WhatsAppIcon';
 
 interface B2BLeadGenerationServicesPageProps {
   onBackToHome: () => void;
@@ -26,7 +27,7 @@ const b2bSchemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "AI-powered B2B lead generation, LinkedIn outreach, cold email automation, enterprise ABM campaign designs, and CRM closed-loop integration pipelines.",
@@ -53,7 +54,7 @@ const b2bSchemaTemplates = {
 
 export default function B2BLeadGenerationServicesPage({ onBackToHome, openProposalForm }: B2BLeadGenerationServicesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
-  const WHATSAPP_LINK = 'https://wa.me/918318114492';
+  const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20want%20to%20discuss%20B2B%20Lead%20Generation%20services%20and%20pipeline%20growth.';
 
   // Dynamic Page Title
   useEffect(() => {
@@ -285,7 +286,7 @@ export default function B2BLeadGenerationServicesPage({ onBackToHome, openPropos
           referrerPolicy="no-referrer"
           className="bg-emerald-600 hover:bg-emerald-500 text-white p-3 rounded-xl shadow-2xl flex items-center justify-center gap-2 font-bold text-xs uppercase tracking-wider border border-white/10 transition-all font-mono"
         >
-          <MessageSquare fill="white" className="w-4 h-4 text-white" /> WhatsApp Support: {CONTACT_NUMBER}
+          <WhatsAppIcon className="w-4 h-4 text-white" /> WhatsApp Support: {CONTACT_NUMBER}
         </a>
         <a 
           href={`tel:${CONTACT_NUMBER.replace(/\s+/g, '')}`}
@@ -739,29 +740,29 @@ export default function B2BLeadGenerationServicesPage({ onBackToHome, openPropos
         </div>
 
         {/* Services Bento Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8">
           {b2bServices.map((srv, index) => (
             <div 
               key={index}
-              className="bg-[#0b0e20] border border-indigo-950 rounded-2xl p-6 hover:border-brand-teal/30 hover:shadow-xl hover:shadow-brand-teal/5 transition duration-300 flex flex-col justify-between"
+              className="bg-[#0b0e20] border border-indigo-950 rounded-2xl p-4 sm:p-6 hover:border-brand-teal/30 hover:shadow-xl hover:shadow-brand-teal/5 transition duration-300 flex flex-col justify-between"
             >
-              <div className="space-y-4">
+              <div className="space-y-3.5 sm:space-y-4">
                 <div className="flex justify-between items-start font-mono text-left">
                   <span className="bg-brand-teal/5 border border-brand-teal/20 px-2.5 py-1 rounded text-[10px] font-bold text-brand-teal uppercase tracking-widest">{srv.tag}</span>
-                  <span className="text-slate-650 text-slate-500 text-[10px]">Module {index + 1} of 10</span>
+                  <span className="text-slate-500 text-[10px]">Module {index + 1} of 10</span>
                 </div>
                 
-                <h3 className="text-xl font-bold text-white font-sans hover:text-brand-teal transition tracking-tight text-left">{srv.title}</h3>
+                <h3 className="text-lg sm:text-xl font-bold text-white font-sans hover:text-brand-teal transition tracking-tight text-left">{srv.title}</h3>
                 
-                <p className="text-xs md:text-sm text-slate-350 leading-relaxed font-sans font-normal text-left text-slate-300">
+                <p className="text-xs md:text-sm text-slate-300 leading-relaxed font-sans font-normal text-left">
                   {srv.desc}
                 </p>
 
                 {/* Scope points */}
-                <div className="grid grid-cols-2 gap-2 pt-2 text-[10.5px]">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 sm:gap-2 pt-2 text-xs sm:text-[10.5px]">
                   {srv.highlights.map((hlt, hIdx) => (
-                    <div key={hIdx} className="flex items-center space-x-1.5 text-slate-400">
-                      <span className="w-1 h-1 rounded-full bg-brand-teal animate-pulse shrink-0"></span>
+                    <div key={hIdx} className="flex items-center space-x-2 sm:space-x-1.5 text-slate-400 min-h-[28px] sm:min-h-0">
+                      <span className="w-1.5 h-1.5 sm:w-1 sm:h-1 rounded-full bg-brand-teal animate-pulse shrink-0"></span>
                       <span className="truncate">{hlt}</span>
                     </div>
                   ))}
@@ -770,9 +771,9 @@ export default function B2BLeadGenerationServicesPage({ onBackToHome, openPropos
               </div>
 
               {/* Goal parameters */}
-              <div className="mt-6 pt-4 border-t border-indigo-900/40 text-left font-mono">
-                <span className="text-[9px] text-slate-550 text-slate-450 block uppercase font-bold text-brand-teal">Target Outcome:</span>
-                <p className="text-[11px] text-slate-400 italic mt-0.5 leading-snug">{srv.goal}</p>
+              <div className="mt-4 sm:mt-6 pt-3.5 sm:pt-4 border-t border-indigo-900/40 text-left font-mono min-h-[44px] flex flex-col justify-center">
+                <span className="text-[9px] block uppercase font-bold text-brand-teal">Target Outcome:</span>
+                <p className="text-xs sm:text-[11px] text-slate-400 italic mt-0.5 leading-snug">{srv.goal}</p>
               </div>
 
             </div>
@@ -1717,7 +1718,7 @@ export default function B2BLeadGenerationServicesPage({ onBackToHome, openPropos
               referrerPolicy="no-referrer"
               className="w-full sm:w-auto bg-slate-950 hover:bg-[#0c112b] text-slate-200 font-semibold px-8 py-4 rounded-xl border border-indigo-950 hover:border-indigo-900 transition flex items-center justify-center space-x-2"
             >
-              <MessageSquare className="w-4 h-4 text-emerald-450 text-emerald-400" />
+              <WhatsAppIcon className="w-4 h-4 text-emerald-400" />
               <span>Book B2B Growth Strategy Talk</span>
             </a>
           </div>

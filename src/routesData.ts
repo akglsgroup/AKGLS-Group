@@ -733,6 +733,23 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     ]
   },
   {
+    id: "crypto-growth-services",
+    path: "/crypto-growth-services/",
+    priority: 0.8,
+    changefreq: "weekly",
+    title: "Crypto Growth Services | Web3 & Blockchain Marketing Agency | AKGLS Group",
+    description: "Scale your Web3, DeFi, and blockchain project with expert crypto growth services from AKGLS Group. Token marketing, crypto SEO, community growth, and performance marketing.",
+    category: "Industry",
+    h1: "Crypto & Web3 Growth Services",
+    highlight: "Institutional Authority & Token User Acquisition",
+    leadParagraph: "Drive sustainable community adoption, investor liquidity, and search dominance for blockchain protocols, decentralized finance platforms, and Web3 ecosystems.",
+    features: [
+      { title: "Web3 Technical SEO & Entity Mapping", desc: "Position your protocol across search engines and AI knowledge graphs for technical terminology." },
+      { title: "High-Conviction Investor Outreach", desc: "Target accredited retail and institutional token participants through data-driven campaigns." },
+      { title: "Community Velocity & Retention", desc: "Architect conversion funnels connecting organic search visitors directly to Telegram and Discord hubs." }
+    ]
+  },
+  {
     id: "hire-marketing-manager",
     path: "/hire-marketing-manager/",
     priority: 0.8,
@@ -1022,6 +1039,23 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     ]
   },
   {
+    id: "seo-case-studies-alias",
+    path: "/seo-case-studies/",
+    priority: 0.8,
+    changefreq: "monthly",
+    title: "SEO, GEO & Performance Marketing Case Studies | Proven Results | AKGLS Group",
+    description: "Real client results and organic search case studies. Discover how AKGLS Group scaled organic traffic by 400%+, achieved 10x ROI on PPC, and generated $12M+ in pipeline.",
+    category: "Case Studies",
+    h1: "Client Case Studies & Verified Results",
+    highlight: "Real Growth Backed by Transparent Metrics",
+    leadParagraph: "Explore how leading B2B enterprises, ecommerce stores, and venture-backed startups achieved transformational organic search traffic and revenue growth.",
+    features: [
+      { title: "400%+ Organic Traffic Lifts", desc: "Proven strategies that turn search engines into compounding revenue channels." },
+      { title: "10x Paid Ad ROAS", desc: "Eliminating ad spend waste through closed-loop attribution and dynamic creative testing." },
+      { title: "Enterprise Pipeline Growth", desc: "Direct commercial attribution connecting rankings directly to signed client contracts." }
+    ]
+  },
+  {
     id: "ecommerce-seo-case-study",
     path: "/case-study/ecommerce-seo-results/",
     priority: 0.8,
@@ -1155,23 +1189,6 @@ export const SITEMAP_ROUTES: AppRoute[] = [
       { title: "Milestone Architecture", desc: "Map 30, 60, and 90-day deliverables with clear performance KPIs." },
       { title: "Resource Allocation Matrix", desc: "Staffing projections covering SEO leads, content strategists, and paid media managers." },
       { title: "Executive Export", desc: "Instant high-resolution PDF download with signed agency terms." }
-    ]
-  },
-  {
-    id: "geo-audit-tool",
-    path: "/tools/geo-audit-tool/",
-    priority: 0.85,
-    changefreq: "weekly",
-    title: "Free AI & GEO Audit Scanner | Generative Engine Optimization Scorecard | AKGLS Group",
-    description: "Audit your website for Generative Engine Optimization (GEO). Check entity salience, schema markup depth, LLM readability, and citation probability across ChatGPT, Perplexity, and Gemini.",
-    category: "Tools",
-    h1: "AI & GEO Search Readiness Audit Scanner",
-    highlight: "Generative Engine Optimization Diagnostics",
-    leadParagraph: "Audit your website's visibility across artificial intelligence search models, conversational LLMs, and neural retrieval pipelines. Instant citation probability scorecard.",
-    features: [
-      { title: "LLM Bot Handshakes", desc: "Verify crawler crawlability for GPTBot, PerplexityBot, ClaudeBot, and Google-Extended." },
-      { title: "Entity Graph Density", desc: "Inspect Schema.org nesting, Wikidata alignments, and topical context embeddings." },
-      { title: "Citation Probability Score", desc: "Benchmark your domain's likelihood of being quoted in ChatGPT Search and Perplexity answers." }
     ]
   },
   {
