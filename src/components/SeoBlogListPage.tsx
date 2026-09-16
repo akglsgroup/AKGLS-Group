@@ -5,7 +5,8 @@ import {
   Send, Share2, Check, FileText, ChevronRight, 
   HelpCircle, Sparkles, TrendingUp, Compass, MessageSquare,
   Award, BookOpenCheck, Layout, Flame,
-  ShieldCheck, SlidersHorizontal, ArrowUpDown, X, Layers
+  ShieldCheck, SlidersHorizontal, ArrowUpDown, X, Layers,
+  Copy, ExternalLink, Quote, MessageCircle, Type
 } from 'lucide-react';
 import { BLOG_POSTS, BlogPost, BlogTopicCategory, calculateReadingTime } from '../blogData';
 
@@ -136,6 +137,9 @@ export default function SeoBlogListPage({
 
   // Share link copy success state
   const [isCopied, setIsCopied] = useState(false);
+
+  // Reader typography preference: 'sm' | 'md' | 'lg'
+  const [readerFontSize, setReaderFontSize] = useState<'sm' | 'md' | 'lg'>('md');
 
   // Category counts
   const getPostCount = (cat: TopicFilter) => {
@@ -331,6 +335,24 @@ export default function SeoBlogListPage({
     setTimeout(() => setIsCopied(false), 2200);
   };
 
+  const handleShareWhatsApp = (post: BlogPost) => {
+    const url = `https://www.akglsgroup.com/blog/${post.slug}`;
+    const text = `*${post.title}*\n\n${post.shortDesc}\n\nRead the full breakdown on AKGLS Group:\n${url}`;
+    const whatsappUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(text)}`;
+    window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleShareTwitter = (post: BlogPost) => {
+    const url = `https://www.akglsgroup.com/blog/${post.slug}`;
+    const text = `${post.title} | High-Speed SEO & AI Search Insight via @AKGLSGroup`;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleShareLinkedIn = (post: BlogPost) => {
+    const url = `https://www.akglsgroup.com/blog/${post.slug}`;
+    window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank', 'noopener,noreferrer');
+  };
+
   const handleSubscribe = (e: React.FormEvent) => {
     e.preventDefault();
     if (!subscriberEmail) return;
@@ -386,122 +408,319 @@ export default function SeoBlogListPage({
     );
   };
 
-  // Markdown renderer for deep read mode
-  const renderFormattedMarkdown = (content: string) => {
-    const lines = content.split('\n');
-    let inCodeBlock = false;
-    let codeLanguage = '';
-    let codeBuffer: string[] = [];
-    let chapterCounter = 0;
+  // Inline formatting parser supporting bold, italic, inline code, and hyperlinks
+  const parseInlineFormatting = (text: string): React.ReactNode => {
+    const regex = /(\[[^\]]+\]\([^)]+\)|\*\*[^*]+\*\*|\*[^*]+\*|`[^`]+`)/g;
+    const parts = text.split(regex);
 
-    return lines.map((line, idx) => {
-      // Code fence check
-      if (line.startsWith('```')) {
-        if (!inCodeBlock) {
-          inCodeBlock = true;
-          codeLanguage = line.replace('```', '').trim() || 'code';
-          codeBuffer = [];
-          return null;
-        } else {
-          inCodeBlock = false;
-          const fullCode = codeBuffer.join('\n');
+    return parts.map((part, idx) => {
+      if (!part) return null;
+      if (part.startsWith('[') && part.includes('](') && part.endsWith(')')) {
+        const match = part.match(/^\[([^\]]+)\]\(([^)]+)\)$/);
+        if (match) {
+          const linkText = match[1];
+          const linkUrl = match[2];
+          const isExternal = linkUrl.startsWith('http') || linkUrl.startsWith('//');
           return (
-            <div key={idx} className="my-6 rounded-2xl overflow-hidden border border-slate-800 bg-[#070b14] shadow-2xl">
-              <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900/90 border-b border-slate-800">
-                <span className="text-[10px] font-mono text-emerald-400 font-bold uppercase tracking-wider">
-                  {codeLanguage}
-                </span>
-                <span className="text-[10px] text-slate-500 font-mono">Code Snippet</span>
-              </div>
-              <pre className="p-4 text-xs font-mono text-emerald-300/95 overflow-x-auto leading-relaxed">
-                <code>{fullCode}</code>
-              </pre>
-            </div>
+            <a
+              key={idx}
+              href={linkUrl}
+              target={isExternal ? '_blank' : undefined}
+              rel={isExternal ? 'noopener noreferrer' : undefined}
+              className="text-emerald-400 hover:text-emerald-300 underline underline-offset-4 decoration-emerald-500/50 hover:decoration-emerald-400 transition-colors font-medium inline-flex items-center gap-0.5"
+            >
+              <span>{linkText}</span>
+              {isExternal && <ExternalLink className="w-2.5 h-2.5 inline shrink-0 opacity-75 ml-0.5" />}
+            </a>
           );
         }
       }
-
-      if (inCodeBlock) {
-        codeBuffer.push(line);
-        return null;
-      }
-
-      if (line.startsWith('# ')) {
-        return null; // Title handled at header level
-      }
-
-      if (line.startsWith('## ')) {
-        const text = line.replace('## ', '');
-        const id = `chapter-ref-${chapterCounter++}`;
+      if (part.startsWith('**') && part.endsWith('**')) {
         return (
-          <h2 id={id} key={idx} className="text-xl sm:text-2xl font-black text-white tracking-tight mt-10 mb-4 pt-4 border-t border-slate-900 flex items-center gap-2.5">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 shrink-0" />
+          <strong key={idx} className="text-white font-bold tracking-tight">
+            {part.slice(2, -2)}
+          </strong>
+        );
+      }
+      if (part.startsWith('*') && part.endsWith('*') && !part.startsWith('**')) {
+        return (
+          <em key={idx} className="text-slate-200 italic font-serif">
+            {part.slice(1, -1)}
+          </em>
+        );
+      }
+      if (part.startsWith('`') && part.endsWith('`')) {
+        return (
+          <code
+            key={idx}
+            className="bg-slate-900 border border-slate-800 text-emerald-400 font-mono text-[11px] px-1.5 py-0.5 rounded shadow-inner"
+          >
+            {part.slice(1, -1)}
+          </code>
+        );
+      }
+      return part;
+    });
+  };
+
+  // Polished Code Snippet component with Copy button & macOS window chrome
+  const CodeSnippet: React.FC<{ language: string; code: string }> = ({ language, code }) => {
+    const [copied, setCopied] = useState(false);
+
+    const copyCode = () => {
+      navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    };
+
+    return (
+      <div className="my-6 rounded-2xl overflow-hidden border border-slate-800 bg-[#070b14] shadow-2xl">
+        <div className="flex items-center justify-between px-4 py-2.5 bg-slate-900/90 border-b border-slate-800">
+          <div className="flex items-center gap-2">
+            <div className="flex gap-1.5 items-center mr-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+            </div>
+            <span className="text-[10.5px] font-mono text-emerald-400 font-bold uppercase tracking-wider">
+              {language || 'code'}
+            </span>
+          </div>
+          <button
+            onClick={copyCode}
+            className="flex items-center gap-1.5 text-[11px] font-mono text-slate-400 hover:text-white bg-slate-800/80 hover:bg-slate-800 px-2.5 py-1 rounded-md transition"
+            title="Copy code to clipboard"
+          >
+            {copied ? (
+              <>
+                <Check className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-emerald-400 font-semibold">Copied!</span>
+              </>
+            ) : (
+              <>
+                <Copy className="w-3.5 h-3.5" />
+                <span>Copy code</span>
+              </>
+            )}
+          </button>
+        </div>
+        <pre className="p-4 text-xs font-mono text-emerald-300/95 overflow-x-auto leading-relaxed">
+          <code>{code}</code>
+        </pre>
+      </div>
+    );
+  };
+
+  // Markdown Table component with responsive horizontal scroll
+  const MarkdownTable: React.FC<{ headers: string[]; rows: string[][] }> = ({ headers, rows }) => (
+    <div className="my-7 overflow-x-auto rounded-2xl border border-slate-800 bg-slate-950/70 shadow-xl">
+      <table className="w-full text-left text-xs border-collapse">
+        <thead>
+          <tr className="bg-slate-900/95 border-b border-slate-800 text-slate-200 font-mono text-[11px] uppercase tracking-wider">
+            {headers.map((h, i) => (
+              <th key={i} className="py-3.5 px-4 font-bold text-slate-200 border-r border-slate-800/60 last:border-r-0">
+                {parseInlineFormatting(h)}
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-slate-900/80">
+          {rows.map((row, rIdx) => (
+            <tr key={rIdx} className="hover:bg-slate-900/40 transition-colors odd:bg-slate-950/40 even:bg-slate-900/20">
+              {row.map((cell, cIdx) => (
+                <td key={cIdx} className="py-3.5 px-4 text-slate-300 leading-relaxed border-r border-slate-900/60 last:border-r-0">
+                  {parseInlineFormatting(cell)}
+                </td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+
+  // BlockQuote component with quote icon and accent border
+  const BlockQuote: React.FC<{ text: string }> = ({ text }) => (
+    <blockquote className="my-6 border-l-4 border-emerald-500 bg-gradient-to-r from-emerald-950/30 via-slate-950/50 to-transparent p-4 sm:p-5 rounded-r-2xl text-slate-200 text-xs sm:text-sm leading-relaxed italic relative">
+      <div className="flex gap-3 items-start">
+        <Quote className="w-5 h-5 text-emerald-400 shrink-0 mt-0.5 opacity-90" />
+        <div className="flex-1 not-italic">
+          {parseInlineFormatting(text)}
+        </div>
+      </div>
+    </blockquote>
+  );
+
+  // Markdown renderer for deep read mode with full structural support
+  const renderFormattedMarkdown = (content: string) => {
+    const lines = content.split('\n');
+    const elements: React.ReactNode[] = [];
+    let i = 0;
+    let chapterCounter = 0;
+
+    const bodyTextSizeClass = 
+      readerFontSize === 'sm' ? 'text-xs leading-relaxed mb-4' :
+      readerFontSize === 'lg' ? 'text-base sm:text-lg leading-relaxed md:leading-8 mb-5' :
+      'text-xs sm:text-sm md:text-[15px] leading-relaxed md:leading-7 mb-4.5';
+
+    while (i < lines.length) {
+      const line = lines[i];
+
+      // 1. Code fence check
+      if (line.startsWith('```')) {
+        const language = line.replace('```', '').trim() || 'code';
+        const codeLines: string[] = [];
+        i++;
+        while (i < lines.length && !lines[i].startsWith('```')) {
+          codeLines.push(lines[i]);
+          i++;
+        }
+        i++; // skip closing fence
+        elements.push(
+          <CodeSnippet key={`code-${i}`} language={language} code={codeLines.join('\n')} />
+        );
+        continue;
+      }
+
+      // 2. Table (| Col 1 | Col 2 |)
+      if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
+        const tableLines: string[] = [];
+        while (i < lines.length && lines[i].trim().startsWith('|') && lines[i].trim().endsWith('|')) {
+          tableLines.push(lines[i].trim());
+          i++;
+        }
+        if (tableLines.length >= 2) {
+          const splitRow = (r: string) => r.slice(1, -1).split('|').map(c => c.trim());
+          const headers = splitRow(tableLines[0]);
+          const rows = tableLines.slice(2).map(splitRow);
+          elements.push(
+            <MarkdownTable key={`table-${i}`} headers={headers} rows={rows} />
+          );
+          continue;
+        }
+      }
+
+      // 3. Blockquote (> Quote text)
+      if (line.trim().startsWith('>')) {
+        const quoteLines: string[] = [];
+        while (i < lines.length && lines[i].trim().startsWith('>')) {
+          quoteLines.push(lines[i].replace(/^>\s?/, '').trim());
+          i++;
+        }
+        elements.push(
+          <BlockQuote key={`quote-${i}`} text={quoteLines.join(' ')} />
+        );
+        continue;
+      }
+
+      // 4. Horizontal Rule
+      if (line.trim() === '---') {
+        elements.push(
+          <hr key={`hr-${i}`} className="my-8 border-slate-900/90" />
+        );
+        i++;
+        continue;
+      }
+
+      // 5. Skip H1 (handled by header)
+      if (line.startsWith('# ')) {
+        i++;
+        continue;
+      }
+
+      // 6. H2 Heading
+      if (line.startsWith('## ')) {
+        const text = line.replace('## ', '').trim();
+        const id = `chapter-ref-${chapterCounter++}`;
+        elements.push(
+          <h2 
+            id={id} 
+            key={`h2-${i}`} 
+            className="text-xl sm:text-2xl font-black text-white tracking-tight mt-10 mb-4 pt-5 border-t border-slate-900 flex items-center gap-3 font-display"
+          >
+            <span className="h-2.5 w-2.5 rounded-full bg-emerald-500 shrink-0 ring-4 ring-emerald-500/20" />
             <span>{text}</span>
           </h2>
         );
+        i++;
+        continue;
       }
 
+      // 7. H3 Heading
       if (line.startsWith('### ')) {
-        const text = line.replace('### ', '');
+        const text = line.replace('### ', '').trim();
         const id = `chapter-ref-${chapterCounter++}`;
-        return (
-          <h3 id={id} key={idx} className="text-base sm:text-lg font-bold text-teal-300 tracking-tight mt-6 mb-2.5">
-            {text}
+        elements.push(
+          <h3 
+            id={id} 
+            key={`h3-${i}`} 
+            className="text-base sm:text-lg font-bold text-teal-300 tracking-tight mt-6 mb-3 flex items-center gap-2 font-display"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-teal-400 shrink-0" />
+            <span>{text}</span>
           </h3>
         );
+        i++;
+        continue;
       }
 
-      if (line.startsWith('*   ') || line.startsWith('-   ') || line.startsWith('* ') || line.startsWith('- ')) {
-        const bulletText = line.replace(/^(\*|-)(\s+)/, '');
-        const parts = bulletText.split(/(\*\*.*?\*\*)/g);
-        return (
-          <div key={idx} className="flex gap-2.5 items-start my-2 text-slate-300 text-xs sm:text-sm leading-relaxed pl-2">
-            <span className="h-1.5 w-1.5 rounded-full bg-teal-400 mt-2 shrink-0" />
-            <div>
-              {parts.map((part, pIdx) => {
-                if (part.startsWith('**') && part.endsWith('**')) {
-                  return <strong key={pIdx} className="text-white font-bold">{part.replace(/\*\*/g, '')}</strong>;
-                }
-                return part;
-              })}
+      // 8. Ordered List (1. Step)
+      const orderedMatch = line.match(/^(\d+)\.\s+(.*)/);
+      if (orderedMatch) {
+        const num = orderedMatch[1];
+        const listText = orderedMatch[2];
+        elements.push(
+          <div key={`ol-${i}`} className="flex gap-3 items-start my-2.5 text-slate-300 text-xs sm:text-sm leading-relaxed pl-1">
+            <span className="w-5 h-5 rounded-full bg-emerald-950 border border-emerald-500/30 text-emerald-400 font-mono text-[10px] font-bold flex items-center justify-center shrink-0 mt-0.5">
+              {num}
+            </span>
+            <div className="flex-1">
+              {parseInlineFormatting(listText)}
             </div>
           </div>
         );
+        i++;
+        continue;
       }
 
-      if (line.trim() === '---') {
-        return <hr key={idx} className="my-8 border-slate-900" />;
+      // 9. Unordered List (* Item or - Item)
+      if (line.match(/^(\*|-)\s+/)) {
+        const listText = line.replace(/^(\*|-)\s+/, '');
+        elements.push(
+          <div key={`ul-${i}`} className="flex gap-2.5 items-start my-2.5 text-slate-300 text-xs sm:text-sm leading-relaxed pl-2">
+            <span className="h-1.5 w-1.5 rounded-full bg-teal-400 mt-2 shrink-0 ring-2 ring-teal-400/20" />
+            <div className="flex-1">
+              {parseInlineFormatting(listText)}
+            </div>
+          </div>
+        );
+        i++;
+        continue;
       }
 
+      // 10. Empty line
       if (line.trim() === '') {
-        return null;
+        i++;
+        continue;
       }
 
-      // Standard paragraph
-      const parts = line.split(/(\*\*.*?\*\*|`.*?`)/g);
-      const parsedLineElements = parts.map((part, pIdx) => {
-        if (part.startsWith('**') && part.endsWith('**')) {
-          return <strong key={pIdx} className="text-white font-bold">{part.replace(/\*\*/g, '')}</strong>;
-        }
-        if (part.startsWith('`') && part.endsWith('`')) {
-          return <code key={pIdx} className="bg-slate-900 border border-slate-800 text-emerald-400 font-mono text-[11px] px-1.5 py-0.5 rounded">{part.replace(/`/g, '')}</code>;
-        }
-        return part;
-      });
-
-      return (
-        <p key={idx} className="text-slate-300 text-xs md:text-sm leading-relaxed mb-4.5 font-light">
-          {parsedLineElements}
+      // 11. Standard paragraph
+      elements.push(
+        <p key={`p-${i}`} className={`text-slate-300 font-light ${bodyTextSizeClass}`}>
+          {parseInlineFormatting(line)}
         </p>
       );
-    });
+      i++;
+    }
+
+    return elements;
   };
 
   const activeTopicConfig = TOPIC_CONFIGS[selectedCategory];
   const ActiveTopicIcon = activeTopicConfig.icon;
 
   return (
-    <div className="flex-1 bg-[#090d16] min-h-screen relative overflow-hidden text-slate-100 flex flex-col font-sans select-none">
+    <div className="flex-1 bg-[#090d16] min-h-screen relative overflow-hidden text-slate-100 flex flex-col font-sans">
       
       {/* Scroll indicator for reading mode */}
       {selectedPost && (
@@ -837,7 +1056,7 @@ export default function SeoBlogListPage({
                     ))}
                   </div>
 
-                  <div className="pt-4 border-t border-slate-900/70 flex justify-between items-center">
+                  <div className="pt-4 border-t border-slate-900/70 flex justify-between items-center gap-2">
                     <div className="flex items-center gap-3">
                       <img src={spotlightPost.author.avatar} alt="Author avatar" className="h-9 w-9 rounded-full border border-slate-800 object-cover" />
                       <div>
@@ -846,13 +1065,28 @@ export default function SeoBlogListPage({
                       </div>
                     </div>
 
-                    <button 
-                      onClick={() => handleSelectPost(spotlightPost)}
-                      className="bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider px-5 py-3 rounded-xl transition inline-flex items-center gap-1.5 shadow-md shadow-emerald-950/30 active:scale-95"
-                    >
-                      <span>Read Briefing</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleShareWhatsApp(spotlightPost);
+                        }}
+                        className="bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-[#25D366]/40 text-slate-300 hover:text-[#25D366] text-xs font-bold px-3 py-2.5 rounded-xl transition inline-flex items-center gap-1.5 active:scale-95"
+                        title="Share via WhatsApp"
+                        aria-label="Share via WhatsApp"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5 text-[#25D366]" />
+                        <span className="hidden sm:inline text-[11px]">WhatsApp</span>
+                      </button>
+
+                      <button 
+                        onClick={() => handleSelectPost(spotlightPost)}
+                        className="bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl transition inline-flex items-center gap-1.5 shadow-md shadow-emerald-950/30 active:scale-95"
+                      >
+                        <span>Read</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 </div>
 
@@ -920,7 +1154,7 @@ export default function SeoBlogListPage({
                         <span className="text-[10.5px] text-slate-400 font-bold">{post.author.name}</span>
                       </div>
 
-                      <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-2.5">
                         {(() => {
                           const stats = calculateReadingTime(post.content);
                           return (
@@ -933,9 +1167,22 @@ export default function SeoBlogListPage({
                             </span>
                           );
                         })()}
+
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleShareWhatsApp(post);
+                          }}
+                          className="text-slate-500 hover:text-[#25D366] hover:bg-slate-900 p-1.5 rounded-lg transition"
+                          title="Share via WhatsApp"
+                          aria-label="Share via WhatsApp"
+                        >
+                          <MessageCircle className="w-3.5 h-3.5" />
+                        </button>
+
                         <button 
                           onClick={() => handleSelectPost(post)}
-                          className="text-xs text-emerald-400 font-bold hover:text-emerald-300 transition inline-flex items-center gap-1"
+                          className="text-xs text-emerald-400 font-bold hover:text-emerald-300 transition inline-flex items-center gap-0.5"
                         >
                           <span>Read</span>
                           <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition" />
@@ -1026,31 +1273,68 @@ export default function SeoBlogListPage({
           >
             
             {/* LEFT MAIN DEEP-READ BLOG POST */}
-            <main className="lg:col-span-8 bg-slate-900/20 border border-slate-800/80 rounded-3xl p-6 sm:p-10 md:p-12 backdrop-blur-md shadow-2xl relative">
+            <main className="lg:col-span-8 bg-slate-900/20 border border-slate-800/80 rounded-3xl p-6 sm:p-10 md:p-12 backdrop-blur-md shadow-2xl relative select-text">
               <div className="absolute top-0 right-0 h-40 w-45 bg-indigo-500/5 blur-[90px] rounded-full pointer-events-none" />
               
               <div className="space-y-5 text-left">
-                <div className="flex flex-wrap items-center gap-2">
-                  {renderTopicBadge(selectedPost.category, false)}
-                  <span className="text-[10.5px] text-slate-500 font-mono font-semibold flex items-center gap-1.5 pl-2">
-                    <Calendar className="w-3.5 h-3.5 text-slate-600" />
-                    {selectedPost.date}
-                  </span>
-                  {(() => {
-                    const stats = calculateReadingTime(selectedPost.content);
-                    return (
-                      <span 
-                        className="text-[10.5px] text-slate-400 font-mono font-semibold flex items-center gap-1.5 pl-2"
-                        title={`${stats.wordCount.toLocaleString()} total words calculated at 200 wpm`}
-                      >
-                        <Clock className="w-3.5 h-3.5 text-emerald-400" />
-                        <span>{stats.text}</span>
-                        <span className="text-[9.5px] text-slate-400 bg-slate-950/80 border border-slate-800 px-2 py-0.5 rounded font-mono font-medium">
-                          {stats.wordCount.toLocaleString()} words
+                {/* Reading Toolbar & Badges */}
+                <div className="flex flex-wrap items-center justify-between gap-3 pb-3 border-b border-slate-900/80">
+                  <div className="flex flex-wrap items-center gap-2">
+                    {renderTopicBadge(selectedPost.category, false)}
+                    <span className="text-[10.5px] text-slate-500 font-mono font-semibold flex items-center gap-1.5 pl-1">
+                      <Calendar className="w-3.5 h-3.5 text-slate-600" />
+                      {selectedPost.date}
+                    </span>
+                    {(() => {
+                      const stats = calculateReadingTime(selectedPost.content);
+                      return (
+                        <span 
+                          className="text-[10.5px] text-slate-400 font-mono font-semibold flex items-center gap-1.5 pl-1"
+                          title={`${stats.wordCount.toLocaleString()} total words calculated at 200 wpm`}
+                        >
+                          <Clock className="w-3.5 h-3.5 text-emerald-400" />
+                          <span>{stats.text}</span>
+                          <span className="text-[9.5px] text-slate-400 bg-slate-950/80 border border-slate-800 px-2 py-0.5 rounded font-mono font-medium">
+                            {stats.wordCount.toLocaleString()} words
+                          </span>
                         </span>
-                      </span>
-                    );
-                  })()}
+                      );
+                    })()}
+                  </div>
+
+                  {/* Reading mode toolbar: Font size & Quick WhatsApp */}
+                  <div className="flex items-center gap-2 select-none">
+                    <div className="flex items-center bg-slate-950/80 border border-slate-800 rounded-lg p-0.5" title="Adjust text size">
+                      <Type className="w-3 h-3 text-slate-500 ml-1.5 mr-1" />
+                      <button
+                        onClick={() => setReaderFontSize('sm')}
+                        className={`px-2 py-0.5 text-[10px] font-mono rounded ${readerFontSize === 'sm' ? 'bg-emerald-500/20 text-emerald-300 font-bold' : 'text-slate-400 hover:text-white'}`}
+                      >
+                        A-
+                      </button>
+                      <button
+                        onClick={() => setReaderFontSize('md')}
+                        className={`px-2 py-0.5 text-[10px] font-mono rounded ${readerFontSize === 'md' ? 'bg-emerald-500/20 text-emerald-300 font-bold' : 'text-slate-400 hover:text-white'}`}
+                      >
+                        A
+                      </button>
+                      <button
+                        onClick={() => setReaderFontSize('lg')}
+                        className={`px-2 py-0.5 text-[10px] font-mono rounded ${readerFontSize === 'lg' ? 'bg-emerald-500/20 text-emerald-300 font-bold' : 'text-slate-400 hover:text-white'}`}
+                      >
+                        A+
+                      </button>
+                    </div>
+
+                    <button
+                      onClick={() => handleShareWhatsApp(selectedPost)}
+                      className="bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 text-[#25D366] px-2.5 py-1 rounded-lg text-[11px] font-bold transition flex items-center gap-1.5"
+                      title="Share to WhatsApp"
+                    >
+                      <MessageCircle className="w-3.5 h-3.5" />
+                      <span className="hidden sm:inline">WhatsApp</span>
+                    </button>
+                  </div>
                 </div>
 
                 <h1 className="text-2.5xl sm:text-4xl md:text-4.5xl font-black text-white tracking-tight leading-tight font-display">
@@ -1058,12 +1342,26 @@ export default function SeoBlogListPage({
                 </h1>
 
                 {/* Author profile */}
-                <div className="flex items-center gap-4 py-4 border-y border-slate-900 bg-slate-950/30 px-5 rounded-2xl border border-slate-900/60 my-6">
+                <div className="flex items-center gap-4 py-3.5 border-y border-slate-900 bg-slate-950/30 px-5 rounded-2xl border border-slate-900/60 my-4">
                   <img src={selectedPost.author.avatar} alt="Author avatar" className="h-11 w-11 rounded-full border border-slate-800 object-cover" />
-                  <div>
+                  <div className="flex-1">
                     <span className="block text-xs font-black text-white leading-none">{selectedPost.author.name}</span>
                     <span className="block text-[10px] text-slate-500 mt-1.5 font-bold uppercase tracking-wider">{selectedPost.author.role}</span>
                   </div>
+                  <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 border border-emerald-500/30 px-2.5 py-1 rounded-md hidden sm:inline-block font-semibold">
+                    Technical Analyst Verified
+                  </span>
+                </div>
+
+                {/* EXECUTIVE BRIEFING HIGHLIGHT CARD */}
+                <div className="my-5 bg-gradient-to-r from-emerald-950/40 via-slate-950 to-slate-900/50 border border-emerald-500/30 rounded-2xl p-5 sm:p-6 space-y-2 relative overflow-hidden shadow-lg">
+                  <div className="flex items-center gap-2 text-[10.5px] font-mono uppercase tracking-widest text-emerald-400 font-black">
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>Executive Summary</span>
+                  </div>
+                  <p className="text-xs sm:text-sm text-slate-200 leading-relaxed font-normal">
+                    {selectedPost.shortDesc}
+                  </p>
                 </div>
               </div>
 
@@ -1093,33 +1391,98 @@ export default function SeoBlogListPage({
                 {renderFormattedMarkdown(selectedPost.content)}
               </article>
 
-              {/* FOOTER METADATA */}
-              <div className="py-6 border-t border-slate-900 flex justify-between items-center flex-wrap gap-4 mt-12 bg-slate-950/20 px-4 rounded-xl">
-                <div className="flex flex-wrap gap-1.5">
+              {/* COMPREHENSIVE ARTICLE SOCIAL SHARE & ENGAGEMENT PANEL */}
+              <div className="mt-12 pt-8 border-t border-slate-900 space-y-6">
+                <div className="bg-gradient-to-br from-slate-950 via-[#0a1220] to-slate-950 border border-slate-800/90 rounded-2xl p-6 sm:p-8 space-y-5 shadow-2xl relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-48 h-48 bg-[#25D366]/5 blur-[80px] pointer-events-none" />
+                  
+                  <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+                    <div>
+                      <span className="text-[10px] font-mono text-[#25D366] font-bold uppercase tracking-widest flex items-center gap-1.5">
+                        <Share2 className="w-3.5 h-3.5 text-[#25D366]" /> Share Knowledge
+                      </span>
+                      <h3 className="text-base sm:text-lg font-bold text-white mt-1">
+                        Found this technical briefing valuable?
+                      </h3>
+                      <p className="text-xs text-slate-400 font-light mt-0.5">
+                        Broadcast to your team, colleagues, or engineering group directly on WhatsApp.
+                      </p>
+                    </div>
+
+                    <div className="flex flex-wrap gap-1">
+                      {selectedPost.tags.slice(0, 3).map(tag => (
+                        <span key={tag} className="text-[9.5px] font-mono border border-slate-850 bg-slate-900/80 text-slate-400 py-0.5 px-2 rounded font-semibold">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Share action buttons */}
+                  <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 pt-2">
+                    {/* Primary WhatsApp Share Button */}
+                    <button
+                      onClick={() => handleShareWhatsApp(selectedPost)}
+                      className="sm:col-span-2 bg-[#25D366] hover:bg-[#20bd5a] active:scale-[0.98] text-slate-950 font-black text-xs py-3 px-4 rounded-xl transition-all duration-150 flex items-center justify-center gap-2 shadow-lg shadow-[#25D366]/20 font-sans tracking-tight"
+                    >
+                      <MessageCircle className="w-4 h-4 fill-slate-950/20 text-slate-950" />
+                      <span>Share on WhatsApp</span>
+                    </button>
+
+                    {/* LinkedIn Share Button */}
+                    <button
+                      onClick={() => handleShareLinkedIn(selectedPost)}
+                      className="bg-slate-900 hover:bg-slate-850 hover:border-slate-700 border border-slate-800 text-slate-200 text-xs font-bold py-3 px-3 rounded-xl transition flex items-center justify-center gap-1.5"
+                      title="Share to LinkedIn"
+                    >
+                      <span>LinkedIn</span>
+                      <ExternalLink className="w-3 h-3 text-slate-400" />
+                    </button>
+
+                    {/* Twitter / X Share Button */}
+                    <button
+                      onClick={() => handleShareTwitter(selectedPost)}
+                      className="bg-slate-900 hover:bg-slate-850 hover:border-slate-700 border border-slate-800 text-slate-200 text-xs font-bold py-3 px-3 rounded-xl transition flex items-center justify-center gap-1.5"
+                      title="Share to X (Twitter)"
+                    >
+                      <span>X / Twitter</span>
+                      <ExternalLink className="w-3 h-3 text-slate-400" />
+                    </button>
+                  </div>
+
+                  {/* Copy Link Strip */}
+                  <div className="flex items-center justify-between bg-slate-900/70 border border-slate-800/80 rounded-xl px-3.5 py-2.5 text-xs">
+                    <div className="flex items-center gap-2 text-slate-400 truncate pr-2 font-mono text-[11px]">
+                      <span className="text-slate-600 select-none">URL:</span>
+                      <span className="truncate text-slate-300">https://www.akglsgroup.com/blog/{selectedPost.slug}</span>
+                    </div>
+                    <button
+                      onClick={handleCopyLink}
+                      className="shrink-0 bg-slate-800 hover:bg-slate-750 text-slate-200 hover:text-white px-3 py-1 rounded-lg text-xs font-bold transition flex items-center gap-1.5"
+                    >
+                      {isCopied ? (
+                        <>
+                          <Check className="w-3.5 h-3.5 text-emerald-400" />
+                          <span className="text-emerald-400">Copied</span>
+                        </>
+                      ) : (
+                        <>
+                          <Copy className="w-3.5 h-3.5 text-slate-400" />
+                          <span>Copy Link</span>
+                        </>
+                      )}
+                    </button>
+                  </div>
+                </div>
+
+                {/* All Article Tags list */}
+                <div className="flex flex-wrap items-center gap-1.5 pt-2">
+                  <span className="text-[10px] text-slate-600 font-mono mr-1">Indexed tags:</span>
                   {selectedPost.tags.map(tag => (
-                    <span key={tag} className="text-[10px] font-mono border border-slate-900 bg-slate-950/80 text-slate-400 py-1 px-3 rounded-lg font-bold">
+                    <span key={tag} className="text-[9.5px] font-mono border border-slate-900 bg-slate-950/60 text-slate-400 py-0.5 px-2.5 rounded-md font-semibold">
                       #{tag}
                     </span>
                   ))}
-                </div>
-
-                <div className="flex gap-2">
-                  <button 
-                    onClick={handleCopyLink}
-                    className="bg-slate-950/80 border border-slate-800 hover:border-teal-500/40 p-3 rounded-xl text-xs font-black text-slate-400 hover:text-white transition flex items-center gap-2 shadow-md shadow-black/40"
-                  >
-                    {isCopied ? (
-                      <>
-                        <Check className="w-4 h-4 text-emerald-400 animate-bounce" />
-                        <span className="text-emerald-400">Link Copied!</span>
-                      </>
-                    ) : (
-                      <>
-                        <Share2 className="w-4 h-4 text-teal-400" />
-                        <span>Share Article</span>
-                      </>
-                    )}
-                  </button>
                 </div>
               </div>
 
@@ -1128,6 +1491,51 @@ export default function SeoBlogListPage({
             {/* RIGHT SIDEBAR */}
             <aside className="lg:col-span-4 space-y-6 text-left">
               
+              {/* DESKTOP SOCIAL SHARE QUICK BAR */}
+              <div className="hidden lg:block bg-slate-950/80 border border-slate-850 p-5 rounded-2xl space-y-3.5 shadow-xl">
+                <div className="flex items-center justify-between border-b border-slate-900 pb-2.5">
+                  <h4 className="text-[10.5px] font-mono text-slate-400 uppercase tracking-widest flex items-center gap-2 font-black">
+                    <Share2 className="w-3.5 h-3.5 text-emerald-400" /> Share Insight
+                  </h4>
+                  <span className="text-[9px] text-[#25D366] font-mono font-bold bg-[#25D366]/10 px-2 py-0.5 rounded border border-[#25D366]/20">
+                    WhatsApp Ready
+                  </span>
+                </div>
+
+                <button 
+                  onClick={() => handleShareWhatsApp(selectedPost)}
+                  className="w-full bg-[#25D366] hover:bg-[#20bd5a] text-slate-950 font-black text-xs py-3 px-4 rounded-xl transition flex items-center justify-center gap-2 shadow-lg shadow-[#25D366]/20 group active:scale-[0.98]"
+                >
+                  <MessageCircle className="w-4 h-4 fill-slate-950/20 text-slate-950 group-hover:scale-110 transition-transform" />
+                  <span>Share on WhatsApp</span>
+                </button>
+
+                <div className="grid grid-cols-3 gap-2">
+                  <button 
+                    onClick={() => handleShareLinkedIn(selectedPost)}
+                    className="bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white text-[10.5px] font-bold py-2 rounded-lg transition text-center"
+                    title="Share on LinkedIn"
+                  >
+                    LinkedIn
+                  </button>
+                  <button 
+                    onClick={() => handleShareTwitter(selectedPost)}
+                    className="bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white text-[10.5px] font-bold py-2 rounded-lg transition text-center"
+                    title="Share on X (Twitter)"
+                  >
+                    X
+                  </button>
+                  <button 
+                    onClick={handleCopyLink}
+                    className="bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white text-[10.5px] font-bold py-2 rounded-lg transition flex items-center justify-center gap-1"
+                    title="Copy Article URL"
+                  >
+                    {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{isCopied ? 'Copied' : 'Copy'}</span>
+                  </button>
+                </div>
+              </div>
+
               {/* DESKTOP STICKY TABLE OF CONTENTS */}
               {tocChapters.length > 0 && (
                 <div className="hidden lg:block bg-slate-950/80 border border-slate-850 p-6 rounded-2xl space-y-4 sticky top-24 shadow-xl">
