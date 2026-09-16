@@ -943,6 +943,12 @@ export default function App() {
 
   // Hash and Path route router trigger for dedicated subpages
   useEffect(() => {
+    // Enforce canonical www.akglsgroup.com domain client-side
+    if (typeof window !== 'undefined' && window.location.hostname === 'akglsgroup.com') {
+      window.location.replace(`https://www.akglsgroup.com${window.location.pathname}${window.location.search}${window.location.hash}`);
+      return;
+    }
+
     const handleHashRouter = () => {
       const hash = window.location.hash;
       const pathname = window.location.pathname;
@@ -1728,10 +1734,13 @@ export default function App() {
         <link rel="canonical" href={currentMeta.canonical} />
         <meta property="og:title" content={currentMeta.title} />
         <meta property="og:description" content={currentMeta.description} />
+        <meta property="og:url" content={currentMeta.canonical} />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="AKGLS Group" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content={currentMeta.title} />
         <meta name="twitter:description" content={currentMeta.description} />
+        <meta name="twitter:url" content={currentMeta.canonical} />
       </Helmet>
       {/* GLOBAL SERVICES HEADER COMPONENTS */}
       <Header 

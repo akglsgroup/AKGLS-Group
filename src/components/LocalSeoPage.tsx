@@ -62,7 +62,7 @@ export default function LocalSeoPage({ onBackToHome, openProposalForm }: LocalSe
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
   "name": "AKGLS Group Local Partner Office",
-  "image": "https://akglsgroup.com/logo.png",
+  "image": "https://www.akglsgroup.com/logo.png",
   "telephone": "+91 831 811 4492",
   "address": {
     "@type": "PostalAddress",

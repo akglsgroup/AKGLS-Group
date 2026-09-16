@@ -33,7 +33,7 @@ export default function LawFirmMarketingPage({ onBackToHome, openProposalForm }:
         "provider": {
           "@type": "Organization",
           "name": "AKGLS Group",
-          "url": "https://akglsgroup.com"
+          "url": "https://www.akglsgroup.com"
         },
         "description": "Premium lawyer SEO, highly targeted trial google ads, legal practice schema alignments, and local maps pack dominance for elite law firms.",
         "areaServed": "Global",

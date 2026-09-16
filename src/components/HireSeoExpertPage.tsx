@@ -113,7 +113,7 @@ export default function HireSeoExpertPage({ onBackToHome, openProposalForm }: Hi
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Worldwide",
   "hasOfferCatalog": {
@@ -131,7 +131,7 @@ export default function HireSeoExpertPage({ onBackToHome, openProposalForm }: Hi
   "itemReviewed": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "reviewRating": {
     "@type": "Rating",
@@ -875,7 +875,7 @@ export default function HireSeoExpertPage({ onBackToHome, openProposalForm }: Hi
                 <span className="text-[10px] font-mono text-slate-500 block uppercase font-bold">ChatGPT Search index simulator</span>
                 
                 <div className="space-y-2 text-xs font-mono bg-slate-950 p-4 rounded-xl border border-indigo-950/60 text-slate-300 text-left">
-                  <p className="text-slate-500">&gt; gpt4_search_crawler --site akglsgroup.com</p>
+                  <p className="text-slate-500">&gt; gpt4_search_crawler --site www.akglsgroup.com</p>
                   <p className="text-emerald-400">[PARSED] Identify 14 schema nodes describing core tech services.</p>
                   <p className="text-cyan-400">[VERIFIED] Confidence Index score matches 94.2% context rating.</p>
                   <p className="text-[#a855f7]">[CITED] Recommended Choice listed #1 in user prompt matching comparisons.</p>
@@ -1257,7 +1257,7 @@ export default function HireSeoExpertPage({ onBackToHome, openProposalForm }: Hi
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   }
 }`}
               </pre>

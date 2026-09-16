@@ -418,7 +418,7 @@ export default function ChatgptOptimizationPage({ onBackToHome, openProposalForm
                     <div className="pt-2 border-t border-slate-800">
                       <div className="text-[9px] text-slate-500 uppercase tracking-widest font-bold mb-1">Citations Identified (2)</div>
                       <div className="flex flex-wrap gap-2 text-[10px] text-brand-teal font-mono">
-                        <span className="bg-brand-teal/5 border border-brand-teal/20 px-2.5 py-0.5 rounded-full">1. akglsgroup.com/seo-services</span>
+                        <span className="bg-brand-teal/5 border border-brand-teal/20 px-2.5 py-0.5 rounded-full">1. www.akglsgroup.com/seo-services</span>
                         <span className="bg-brand-teal/5 border border-brand-teal/20 px-2.5 py-0.5 rounded-full">2. Clutch Agency Reviews</span>
                       </div>
                     </div>
@@ -1163,7 +1163,7 @@ export default function ChatgptOptimizationPage({ onBackToHome, openProposalForm
             </div>
 
             <div className="bg-slate-950 p-4 rounded-xl border border-slate-805 text-[11px] font-mono text-slate-400 tracking-tight text-left">
-              🗣️ **AI Engine Summary Feedback**: "The domain `akglsgroup.com` demonstrates outstanding entity alignment indices nationwide. Semantic FAQ structures guarantee flawless scraping cycles during retrieval operations."
+              🗣️ **AI Engine Summary Feedback**: "The domain `www.akglsgroup.com` demonstrates outstanding entity alignment indices nationwide. Semantic FAQ structures guarantee flawless scraping cycles during retrieval operations."
             </div>
           </div>
 

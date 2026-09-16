@@ -54,18 +54,44 @@ async function startServer() {
   const app = express();
   const PORT = parseInt(process.env.PORT || "3000", 10);
 
+  // Trust reverse proxy headers (Cloud Run, Cloudflare, Nginx, ALB)
+  app.set("trust proxy", true);
+
+  // 301 Canonical redirect: enforce https://www.akglsgroup.com for all non-www requests & http requests
+  app.use((req, res, next) => {
+    const rawHost = (
+      (req.headers["x-forwarded-host"] as string) ||
+      req.headers.host ||
+      req.hostname ||
+      ""
+    );
+    const host = rawHost.split(",")[0].trim().toLowerCase().split(":")[0];
+
+    const rawProto = (
+      (req.headers["x-forwarded-proto"] as string) ||
+      req.protocol ||
+      "https"
+    );
+    const proto = rawProto.split(",")[0].trim().toLowerCase();
+
+    // Enforce www for akglsgroup.com (SEO Canonical 301 Permanent Redirect)
+    if (host === "akglsgroup.com") {
+      res.setHeader("Cache-Control", "public, max-age=31536000");
+      return res.redirect(301, `https://www.akglsgroup.com${req.originalUrl}`);
+    }
+
+    // Enforce HTTPS for www.akglsgroup.com if requested over plain HTTP
+    if (host === "www.akglsgroup.com" && proto === "http") {
+      res.setHeader("Cache-Control", "public, max-age=31536000");
+      return res.redirect(301, `https://www.akglsgroup.com${req.originalUrl}`);
+    }
+
+    next();
+  });
+
   // Enable JSON request body parsing
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
-
-  // 301 Canonical redirect: enforce www.akglsgroup.com for non-www requests
-  app.use((req, res, next) => {
-    const host = (req.headers.host || "").toLowerCase().split(':')[0];
-    if (host === "akglsgroup.com") {
-      return res.redirect(301, `https://www.akglsgroup.com${req.originalUrl}`);
-    }
-    next();
-  });
 
   // Health check API point
   app.get("/api/health", (req, res) => {

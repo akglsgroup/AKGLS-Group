@@ -68,7 +68,7 @@ export default function LinkBuildingPage({ onBackToHome, openProposalForm }: Lin
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   }
 }`;
     navigator.clipboard.writeText(code);

@@ -262,7 +262,7 @@ export default function AiCitationBuildingPage({ onBackToHome, openProposalForm 
                       
                       <div className="border-t border-slate-900 pt-2 flex flex-wrap gap-1.5 items-center">
                         <span className="text-[9px] text-slate-500">Citations:</span>
-                        <span className="text-[9px] bg-slate-900 px-1.5 py-0.5 rounded text-emerald-400 hover:underline cursor-pointer font-sans">[1] akglsgroup.com/services</span>
+                        <span className="text-[9px] bg-slate-900 px-1.5 py-0.5 rounded text-emerald-400 hover:underline cursor-pointer font-sans">[1] www.akglsgroup.com/services</span>
                         <span className="text-[9px] bg-slate-900 px-1.5 py-0.5 rounded text-emerald-400 hover:underline cursor-pointer font-sans">[2] IoT Case Study</span>
                       </div>
                     </div>

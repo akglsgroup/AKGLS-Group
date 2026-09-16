@@ -21,7 +21,7 @@ const schemaTemplates = {
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Global",
   "description": "Increase brand visibility, authority, citations, and mentions across ChatGPT, Gemini, Claude, Perplexity, Copilot, and conversational AI search engines."
@@ -33,17 +33,17 @@ const schemaTemplates = {
     "@type": "ListItem",
     "position": 1,
     "name": "Home",
-    "item": "https://akglsgroup.com/"
+    "item": "https://www.akglsgroup.com/"
   },{
     "@type": "ListItem",
     "position": 2,
     "name": "Services",
-    "item": "https://akglsgroup.com/seo-services"
+    "item": "https://www.akglsgroup.com/seo-services"
   },{
     "@type": "ListItem",
     "position": 3,
     "name": "LLM Optimization Services",
-    "item": "https://akglsgroup.com/llm-optimization-services/"
+    "item": "https://www.akglsgroup.com/llm-optimization-services/"
   }]
 }`
 };
@@ -243,7 +243,7 @@ export default function LlmOptimizationServicesPage({ onBackToHome, openProposal
                       </p>
                       <div className="border-t border-teal-500/10 pt-2 flex flex-wrap items-center gap-1.5">
                         <span className="text-[9px] font-mono text-slate-500">Citations:</span>
-                        <span className="text-[9px] font-mono bg-slate-950 px-2 py-0.5 rounded text-teal-400 hover:underline cursor-pointer">akglsgroup.com [1]</span>
+                        <span className="text-[9px] font-mono bg-slate-950 px-2 py-0.5 rounded text-teal-400 hover:underline cursor-pointer">www.akglsgroup.com [1]</span>
                         <span className="text-[9px] font-mono bg-slate-950 px-2 py-0.5 rounded text-teal-400 hover:underline cursor-pointer">AI SEO Audit [2]</span>
                       </div>
                     </div>

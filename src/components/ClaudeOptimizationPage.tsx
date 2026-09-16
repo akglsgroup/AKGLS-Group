@@ -412,7 +412,7 @@ export default function ClaudeOptimizationPage({ onBackToHome, openProposalForm 
                     <div className="pt-2.5 border-t border-slate-850">
                       <div className="text-[9px] text-slate-500 uppercase font-black tracking-widest mb-1">Citations Identified (2)</div>
                       <div className="flex flex-wrap gap-1.5 text-[9px] text-brand-teal font-mono">
-                        <span className="bg-brand-teal/5 border border-brand-teal/20 px-2 py-0.5 rounded">1. akglsgroup.com/seo-services</span>
+                        <span className="bg-brand-teal/5 border border-brand-teal/20 px-2 py-0.5 rounded">1. www.akglsgroup.com/seo-services</span>
                         <span className="bg-brand-teal/5 border border-brand-teal/20 px-2 py-0.5 rounded">2. Independent Tech-Review Portal</span>
                       </div>
                     </div>

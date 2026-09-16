@@ -54,7 +54,7 @@ export default function RestaurantMarketingPage({ onBackToHome, openProposalForm
         "provider": {
           "@type": "Organization",
           "name": "AKGLS Group",
-          "url": "https://akglsgroup.com"
+          "url": "https://www.akglsgroup.com"
         },
         "description": "Expert restaurant SEO, local maps optimization, social media food campaigns, food blogger collaborations, and high-converting restaurant websites.",
         "areaServed": "Global",

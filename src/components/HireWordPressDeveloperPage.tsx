@@ -276,7 +276,7 @@ export default function HireWordPressDeveloperPage({ onBackToHome, openProposalF
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Worldwide",
   "description": "Hire expert WordPress developers from AKGLS Group for custom WordPress development, WooCommerce, Elementor, speed optimization, and AI-ready sitemaps.",

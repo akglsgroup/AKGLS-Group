@@ -61,7 +61,7 @@ export default function SeoAuditPage({ onBackToHome, openProposalForm }: SeoAudi
   "@context": "https://schema.org",
   "@type": "Action",
   "name": "Complete Digital SEO Audit Action Code",
-  "target": "https://akglsgroup.com/seo-audit-services"
+  "target": "https://www.akglsgroup.com/seo-audit-services"
 }`;
     navigator.clipboard.writeText(code);
     setSchemaCopied(true);

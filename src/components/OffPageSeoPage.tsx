@@ -71,7 +71,7 @@ export default function OffPageSeoPage({ onBackToHome, openProposalForm }: OffPa
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "serviceType": "Off-Page Optimization"
 }`;
@@ -388,7 +388,7 @@ export default function OffPageSeoPage({ onBackToHome, openProposalForm }: OffPa
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "serviceType": "Authority SEO"
 }`}

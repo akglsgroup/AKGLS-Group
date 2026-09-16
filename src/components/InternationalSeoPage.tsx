@@ -22,7 +22,7 @@ export default function InternationalSeoPage({ onBackToHome, openProposalForm }:
 
   const [langCode, setLangCode] = useState('es');
   const [countryCode, setCountryCode] = useState('es');
-  const [targetUrl, setTargetUrl] = useState('https://akglsgroup.com');
+  const [targetUrl, setTargetUrl] = useState('https://www.akglsgroup.com');
   const [hreflangTag, setHreflangTag] = useState('');
   const [tagGenerated, setTagGenerated] = useState(false);
 
@@ -55,7 +55,7 @@ export default function InternationalSeoPage({ onBackToHome, openProposalForm }:
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Global Multi-Country Digital Properties",
-  "url": "https://akglsgroup.com",
+  "url": "https://www.akglsgroup.com",
   "inLanguage": ["en", "es", "fr", "de"]
 }`;
     navigator.clipboard.writeText(code);

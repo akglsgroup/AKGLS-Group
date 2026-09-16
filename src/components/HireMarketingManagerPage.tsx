@@ -227,7 +227,7 @@ export default function HireMarketingManagerPage({ onBackToHome, openProposalFor
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Worldwide",
   "description": "Hire verified digital marketing managers to conceptualize, audit, execute, and scale multi-channel SEO, PPC, and AI marketing pipelines.",

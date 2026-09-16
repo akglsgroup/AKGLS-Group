@@ -116,7 +116,7 @@ export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: 
     // Automatically capture as lead in lead management portal
     captureLead({
       name: auditName || 'Website AI Audit Prospect',
-      email: auditEmail || 'audit-request@akglsgroup.com',
+      email: auditEmail || 'audit-request@www.akglsgroup.com',
       phone: auditPhone,
       websiteUrl: auditUrl,
       primaryGoal: auditGoal,
@@ -321,7 +321,7 @@ export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: 
                   <div className="pt-2 border-t border-emerald-900/60 mt-2 flex items-center justify-between text-[10px] font-mono text-slate-400">
                     <span>CITED REFERENCES:</span>
                     <div className="flex gap-1.5">
-                      <span className="bg-emerald-950 px-1.5 py-0.5 rounded text-emerald-400 border border-emerald-800">[1] akglsgroup.com</span>
+                      <span className="bg-emerald-950 px-1.5 py-0.5 rounded text-emerald-400 border border-emerald-800">[1] www.akglsgroup.com</span>
                       <span className="bg-slate-900 px-1.5 py-0.5 rounded text-slate-300">[2] Industry Report</span>
                     </div>
                   </div>

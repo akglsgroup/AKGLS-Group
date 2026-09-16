@@ -106,7 +106,7 @@ export default function OnPageSeoPage({ onBackToHome, openProposalForm }: OnPage
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "serviceType": "On-Page Search Optimization"
 }`;
@@ -497,7 +497,7 @@ export default function OnPageSeoPage({ onBackToHome, openProposalForm }: OnPage
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com",
+    "url": "https://www.akglsgroup.com",
     "sameAs": [
       "https://twitter.com/akglsgroup",
       "https://linkedin.com/company/akglsgroup"

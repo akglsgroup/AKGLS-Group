@@ -141,15 +141,12 @@ export const caseStudiesMenu = {
 
 export const resourcesMenu: MegaColumn[] = [
   {
-    title: "Blog Categories",
+    title: "Blog Topics",
     items: [
-      { name: "All Insights Blog", href: "/blog" },
-      { name: "SEO Blogs", href: "/blog?category=SEO Blogs" },
-      { name: "AI SEO Blogs", href: "/blog?category=AI SEO Blogs" },
-      { name: "GEO Blogs", href: "/blog?category=GEO Blogs" },
-      { name: "AEO Blogs", href: "/blog?category=AEO Blogs" },
-      { name: "Google Updates", href: "/blog?category=Google Updates" },
-      { name: "SaaS Marketing Blogs", href: "/blog?category=SaaS Marketing" }
+      { name: "All Topics Feed", href: "/blog" },
+      { name: "AI SEO Insights", href: "/blog?category=AI SEO" },
+      { name: "Growth Marketing", href: "/blog?category=Growth Marketing" },
+      { name: "Technical Audits", href: "/blog?category=Technical Audits" }
     ]
   },
   {

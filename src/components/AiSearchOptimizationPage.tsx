@@ -417,7 +417,7 @@ export default function AiSearchOptimizationPage({ onBackToHome, openProposalFor
                     <div className="pt-2 border-t border-slate-800">
                       <div className="text-[10px] text-slate-500 uppercase tracking-widest font-bold mb-1">citations detected (3)</div>
                       <div className="flex flex-wrap gap-2 text-[10px] text-brand-teal font-mono">
-                        <span className="bg-brand-teal/5 border border-brand-teal/20 px-2 py-0.5 rounded-full">1. akglsgroup.com/geo-services</span>
+                        <span className="bg-brand-teal/5 border border-brand-teal/20 px-2 py-0.5 rounded-full">1. www.akglsgroup.com/geo-services</span>
                         <span className="bg-brand-teal/5 border border-brand-teal/20 px-2 py-0.5 rounded-full">2. Clutch AI Audits</span>
                       </div>
                     </div>

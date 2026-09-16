@@ -33,7 +33,7 @@ export default function RealEstateMarketingPage({ onBackToHome, openProposalForm
         "provider": {
           "@type": "Organization",
           "name": "AKGLS Group",
-          "url": "https://akglsgroup.com"
+          "url": "https://www.akglsgroup.com"
         },
         "description": "Generate high-quality property leads, increase site visits and dominate maps rankings with AKGLS Group real estate digital marketing expertise.",
         "areaServed": "Global",

@@ -142,7 +142,7 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Worldwide",
   "hasOfferCatalog": {
@@ -160,7 +160,7 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
   "itemReviewed": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "reviewRating": {
     "@type": "Rating",
@@ -1443,7 +1443,7 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
   "provider": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "areaServed": "Worldwide",
   "hasOfferCatalog": {
@@ -1476,7 +1476,7 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
   "itemReviewed": {
     "@type": "Organization",
     "name": "AKGLS Group",
-    "url": "https://akglsgroup.com"
+    "url": "https://www.akglsgroup.com"
   },
   "reviewRating": {
     "@type": "Rating",
