@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Search, ChevronDown, X, Menu, Phone, Mail, MapPin, 
-  TrendingUp, Bot, Sparkles, Code, FileText, CheckCircle2, 
+  TrendingUp, Bot, Code, FileText, CheckCircle2, 
   Calculator, Download, Award, Info, Users, Briefcase, 
   Layers, MessageSquare, Send, ArrowRight, Star, Zap, PhoneCall,
   Facebook, Twitter, Linkedin, Instagram
@@ -10,6 +10,7 @@ import {
 import { servicesMenu, solutionsMenu, caseStudiesMenu, resourcesMenu, companyMenu, hireExpertsMenu } from '../data';
 import { getWhatsAppMessage } from './WhatsAppWidget';
 import WhatsAppIcon from './WhatsAppIcon';
+import { PWAInstallButton } from './PWAInstallButton';
 
 interface HeaderProps {
   onSearchOpen: () => void;
@@ -270,8 +271,6 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                                 className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                               >
                                 <span className="text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo transition-colors flex items-center gap-1">
-                                  {col.title.includes('AI') && <Bot className="w-3 h-3 text-brand-purple/70" />}
-                                  {item.isTrending && <Sparkles className="w-3.5 h-3.5 text-brand-orange" />}
                                   {item.name}
                                 </span>
                                 {item.isTrending && (
@@ -669,7 +668,10 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
             </div>
 
             {/* Right Side Header Action Anchors */}
-            <div className="hidden lg:flex items-center space-x-4">
+            <div className="hidden lg:flex items-center space-x-3">
+              {/* PWA In-App Install Button */}
+              <PWAInstallButton />
+
               {/* Keyboard friendly search trigger */}
               <button 
                 type="button"
@@ -974,7 +976,10 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               </div>
 
               {/* Botton CTA triggers inside Drawer */}
+              {/* Mobile Menu Action Buttons & PWA Install */}
               <div className="p-5 border-t border-slate-800 bg-[#0a0f1d] space-y-3">
+                <PWAInstallButton className="w-full py-2.5 bg-brand-indigo/15 border border-brand-teal/30 text-brand-teal font-bold rounded-xl text-center flex items-center justify-center gap-2 text-xs hover:bg-brand-teal hover:text-slate-950 transition-all shadow-sm" />
+
                 <a 
                   href="#audit-quiz" 
                   onClick={() => { setIsMobileMenuOpen(false); openQuiz(); }} 

@@ -11,8 +11,9 @@ import {
   Laptop, Layout, Paintbrush, ArrowUpRight, Layers3, Rocket,
   Lightbulb, ChevronRight, Play, LineChart, Minimize2, CheckSquare,
   MapPin, Star, MessageCircle, RefreshCw, ShoppingBag, ArrowDownRight, Info,
-  DollarSign as PriceIcon
+  DollarSign as PriceIcon, Sliders
 } from 'lucide-react';
+import IndustryHeroVisual from './IndustryHeroVisual';
 import WhatsAppIcon from './WhatsAppIcon';
 
 interface SaaSMarketingSolutionsPageProps {
@@ -67,6 +68,7 @@ export default function SaaSMarketingSolutionsPage({ onBackToHome, openProposalF
   }, []);
 
   // SaaS Growth MRR & LTV Calculator States
+  const [heroViewMode, setHeroViewMode] = useState<'visual' | 'calculator'>('visual');
   const [currentMrr, setCurrentMrr] = useState<number>(15000); // Current Monthly recurring revenue
   const [cacValue, setCacValue] = useState<number>(350); // Customer acquisition cost
   const [arpuValue, setArpuValue] = useState<number>(49); // Average Revenue Per User / mo
@@ -396,131 +398,194 @@ export default function SaaSMarketingSolutionsPage({ onBackToHome, openProposalF
 
             {/* Hero Right: SaaS Model & Revenue Optimization Simulator Card */}
             <div className="lg:col-span-5 relative" id="saas-mrr-calculator">
-              <div className="bg-[#0b0e20] rounded-3xl p-6 border border-indigo-950 shadow-2xl relative overflow-hidden text-left font-mono">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-brand-teal/5 rounded-full blur-2xl pointer-events-none" />
-                
-                <div className="flex items-center justify-between pb-3 border-b border-indigo-900/40 mb-5">
-                  <div className="flex items-center gap-1.5 text-[10px]">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span className="text-slate-300 font-bold uppercase">SaaS Growth ROI Simulator</span>
-                  </div>
-                  <span className="text-[9px] bg-slate-950 border border-indigo-900 text-brand-teal py-0.5 px-2 rounded-full font-bold">
-                    RECURRING PIPELINE
-                  </span>
-                </div>
-
-                <div className="space-y-4 text-xs font-mono">
-                  
-                  {/* Monthly trials slider */}
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-400 uppercase font-black text-[9.5px]">Avg Monthly Signups/Trials:</span>
-                      <span className="text-sky-400 font-bold">{trialCount} users</span>
-                    </div>
-                    <input 
-                      type="range" 
-                      min="50" 
-                      max="2000" 
-                      step="50"
-                      value={trialCount}
-                      onChange={(e) => setTrialCount(Number(e.target.value))}
-                      className="w-full h-1.5 rounded bg-slate-950 cursor-pointer accent-sky-400"
-                    />
-                  </div>
-
-                  {/* Trial to Paid Conversion slider */}
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-400 uppercase font-black text-[9.5px]">Trial → Paid Conv (%):</span>
-                      <span className="text-indigo-400 font-bold">{trialToPaidRate}%</span>
-                    </div>
-                    <input 
-                      type="range" 
-                      min="1" 
-                      max="30" 
-                      step="1"
-                      value={trialToPaidRate}
-                      onChange={(e) => setTrialToPaidRate(Number(e.target.value))}
-                      className="w-full h-1.5 rounded bg-slate-950 cursor-pointer accent-indigo-400"
-                    />
-                  </div>
-
-                  {/* ARPU slider */}
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-400 uppercase font-black text-[9.5px]">Avg ARPU (Monthly Price):</span>
-                      <span className="text-brand-teal font-bold">${arpuValue} USD / mo</span>
-                    </div>
-                    <input 
-                      type="range" 
-                      min="9" 
-                      max="299" 
-                      step="5"
-                      value={arpuValue}
-                      onChange={(e) => setArpuValue(Number(e.target.value))}
-                      className="w-full h-1.5 rounded bg-slate-950 cursor-pointer accent-brand-teal"
-                    />
-                  </div>
-
-                  {/* CAC slider */}
-                  <div className="space-y-1.5">
-                    <div className="flex justify-between items-center">
-                      <span className="text-slate-400 uppercase font-black text-[9.5px]">Current Trials CAC Value:</span>
-                      <span className="text-rose-400 font-bold">${cacValue} USD</span>
-                    </div>
-                    <input 
-                      type="range" 
-                      min="50" 
-                      max="1500" 
-                      step="25"
-                      value={cacValue}
-                      onChange={(e) => setCacValue(Number(e.target.value))}
-                      className="w-full h-1.5 rounded bg-slate-950 cursor-pointer accent-rose-400"
-                    />
-                  </div>
-
-                  {/* Metrics Array Box */}
-                  <div className="bg-slate-950 border border-indigo-950 rounded-xl p-4 grid grid-cols-2 gap-4 text-left">
-                    
-                    <div className="space-y-0.5">
-                      <span className="text-[9px] text-slate-500 uppercase font-black block">Paying Customers / mo</span>
-                      <span className="text-base font-black text-slate-400">+{results.currentNewPayingUsers} accounts</span>
-                    </div>
-
-                    <div className="space-y-0.5">
-                      <span className="text-[9px] text-slate-500 uppercase font-black block">Est. LTV:CAC Ratio</span>
-                      <span className="text-base font-black text-rose-400">{results.ltvToCacRatio}x Ratio</span>
-                    </div>
-
-                    <div className="space-y-0.5 border-t border-indigo-900/60 pt-3">
-                      <span className="text-[9px] text-brand-teal uppercase font-black block">AKGLS Signups Target</span>
-                      <span className="text-base font-black text-brand-teal">{results.optimizedTrials} Trials</span>
-                    </div>
-
-                    <div className="space-y-0.5 border-t border-indigo-900/60 pt-3">
-                      <span className="text-[9px] text-brand-teal uppercase font-black block">Optimized LTV:CAC</span>
-                      <span className="text-base font-black text-emerald-400">{results.optimizedLtvToCac}x Health</span>
-                    </div>
-
-                    <div className="col-span-2 pt-3 border-t border-indigo-900/60 flex justify-between items-center bg-indigo-950/20 px-2.5 py-2 rounded-lg border border-indigo-900/55 mt-1">
-                      <div className="space-y-0.5 text-left">
-                        <span className="text-[9px] text-slate-300 uppercase font-black block">Monthly New MRR Boost</span>
-                        <span className="text-[10px] text-slate-550 block text-slate-400">Capped CAC: ${results.optimizedCac}</span>
-                      </div>
-                      <span className="text-lg font-black text-emerald-450 text-emerald-400 animate-pulse block font-mono">
-                        +${results.netMrrGrowthBoost.toLocaleString()}/mo
-                      </span>
-                    </div>
-
-                  </div>
-
-                  <span className="text-[8.5px] text-slate-500 block text-center uppercase tracking-wide">
-                    *Based on systematic PLG adoption adjustments, transactional search keyword indexes, and responsive email retention.
-                  </span>
-
-                </div>
-
+              {/* View Mode Toggle Strip */}
+              <div className="flex items-center justify-end mb-2 gap-1.5 font-mono text-[10px]">
+                <button
+                  onClick={() => setHeroViewMode('visual')}
+                  className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                    heroViewMode === 'visual'
+                      ? 'bg-brand-teal/20 border-brand-teal text-white font-bold'
+                      : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  <Sparkles className="w-3 h-3 text-brand-teal" />
+                  <span>SaaS Workspace</span>
+                </button>
+                <button
+                  onClick={() => setHeroViewMode('calculator')}
+                  className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                    heroViewMode === 'calculator'
+                      ? 'bg-brand-teal/20 border-brand-teal text-white font-bold'
+                      : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                  }`}
+                >
+                  <Sliders className="w-3 h-3 text-brand-teal" />
+                  <span>MRR Simulator</span>
+                </button>
               </div>
+
+              {heroViewMode === 'visual' ? (
+                <IndustryHeroVisual 
+                  configKey="saas"
+                  customOverlayContent={
+                    <div className="space-y-2.5">
+                      <div className="flex justify-between items-center text-[10px] font-mono">
+                        <span className="text-brand-teal font-bold flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-brand-teal animate-ping" />
+                          Recurring Revenue Engine
+                        </span>
+                        <button 
+                          onClick={() => setHeroViewMode('calculator')}
+                          className="text-sky-400 hover:underline text-[9.5px] cursor-pointer flex items-center gap-1"
+                        >
+                          Tune Metrics Simulator →
+                        </button>
+                      </div>
+
+                      <div className="grid grid-cols-3 gap-2 bg-slate-950/80 p-2.5 rounded-xl border border-slate-900 text-left">
+                        <div>
+                          <span className="text-[9px] text-slate-500 font-mono uppercase block">Target Trials</span>
+                          <span className="text-sm font-black font-display text-white mt-0.5 block">{results.optimizedTrials} /mo</span>
+                        </div>
+                        <div>
+                          <span className="text-[9px] text-slate-500 font-mono uppercase block">LTV:CAC Health</span>
+                          <span className="text-sm font-black font-display text-emerald-400 mt-0.5 block">{results.optimizedLtvToCac}x</span>
+                        </div>
+                        <div>
+                          <span className="text-[9px] text-slate-500 font-mono uppercase block">New MRR Boost</span>
+                          <span className="text-sm font-black font-display text-brand-teal mt-0.5 block">+${(results.netMrrGrowthBoost / 1000).toFixed(1)}k/mo</span>
+                        </div>
+                      </div>
+                    </div>
+                  }
+                />
+              ) : (
+                <div className="bg-[#0b0e20] rounded-3xl p-6 border border-indigo-950 shadow-2xl relative overflow-hidden text-left font-mono">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-brand-teal/5 rounded-full blur-2xl pointer-events-none" />
+                  
+                  <div className="flex items-center justify-between pb-3 border-b border-indigo-900/40 mb-5">
+                    <div className="flex items-center gap-1.5 text-[10px]">
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                      <span className="text-slate-300 font-bold uppercase">SaaS Growth ROI Simulator</span>
+                    </div>
+                    <span className="text-[9px] bg-slate-950 border border-indigo-900 text-brand-teal py-0.5 px-2 rounded-full font-bold">
+                      RECURRING PIPELINE
+                    </span>
+                  </div>
+
+                  <div className="space-y-4 text-xs font-mono">
+                    
+                    {/* Monthly trials slider */}
+                    <div className="space-y-1.5">
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-400 uppercase font-black text-[9.5px]">Avg Monthly Signups/Trials:</span>
+                        <span className="text-sky-400 font-bold">{trialCount} users</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="50" 
+                        max="2000" 
+                        step="50"
+                        value={trialCount}
+                        onChange={(e) => setTrialCount(Number(e.target.value))}
+                        className="w-full h-1.5 rounded bg-slate-950 cursor-pointer accent-sky-400"
+                      />
+                    </div>
+
+                    {/* Trial to Paid Conversion slider */}
+                    <div className="space-y-1.5">
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-400 uppercase font-black text-[9.5px]">Trial → Paid Conv (%):</span>
+                        <span className="text-indigo-400 font-bold">{trialToPaidRate}%</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="1" 
+                        max="30" 
+                        step="1"
+                        value={trialToPaidRate}
+                        onChange={(e) => setTrialToPaidRate(Number(e.target.value))}
+                        className="w-full h-1.5 rounded bg-slate-950 cursor-pointer accent-indigo-400"
+                      />
+                    </div>
+
+                    {/* ARPU slider */}
+                    <div className="space-y-1.5">
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-400 uppercase font-black text-[9.5px]">Avg ARPU (Monthly Price):</span>
+                        <span className="text-brand-teal font-bold">${arpuValue} USD / mo</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="9" 
+                        max="299" 
+                        step="5"
+                        value={arpuValue}
+                        onChange={(e) => setArpuValue(Number(e.target.value))}
+                        className="w-full h-1.5 rounded bg-slate-950 cursor-pointer accent-brand-teal"
+                      />
+                    </div>
+
+                    {/* CAC slider */}
+                    <div className="space-y-1.5">
+                      <div className="flex justify-between items-center">
+                        <span className="text-slate-400 uppercase font-black text-[9.5px]">Current Trials CAC Value:</span>
+                        <span className="text-rose-400 font-bold">${cacValue} USD</span>
+                      </div>
+                      <input 
+                        type="range" 
+                        min="50" 
+                        max="1500" 
+                        step="25"
+                        value={cacValue}
+                        onChange={(e) => setCacValue(Number(e.target.value))}
+                        className="w-full h-1.5 rounded bg-slate-950 cursor-pointer accent-rose-400"
+                      />
+                    </div>
+
+                    {/* Metrics Array Box */}
+                    <div className="bg-slate-950 border border-indigo-950 rounded-xl p-4 grid grid-cols-2 gap-4 text-left">
+                      
+                      <div className="space-y-0.5">
+                        <span className="text-[9px] text-slate-500 uppercase font-black block">Paying Customers / mo</span>
+                        <span className="text-base font-black text-slate-400">+{results.currentNewPayingUsers} accounts</span>
+                      </div>
+
+                      <div className="space-y-0.5">
+                        <span className="text-[9px] text-slate-500 uppercase font-black block">Est. LTV:CAC Ratio</span>
+                        <span className="text-base font-black text-rose-400">{results.ltvToCacRatio}x Ratio</span>
+                      </div>
+
+                      <div className="space-y-0.5 border-t border-indigo-900/60 pt-3">
+                        <span className="text-[9px] text-brand-teal uppercase font-black block">AKGLS Signups Target</span>
+                        <span className="text-base font-black text-brand-teal">{results.optimizedTrials} Trials</span>
+                      </div>
+
+                      <div className="space-y-0.5 border-t border-indigo-900/60 pt-3">
+                        <span className="text-[9px] text-brand-teal uppercase font-black block">Optimized LTV:CAC</span>
+                        <span className="text-base font-black text-emerald-400">{results.optimizedLtvToCac}x Health</span>
+                      </div>
+
+                      <div className="col-span-2 pt-3 border-t border-indigo-900/60 flex justify-between items-center bg-indigo-950/20 px-2.5 py-2 rounded-lg border border-indigo-900/55 mt-1">
+                        <div className="space-y-0.5 text-left">
+                          <span className="text-[9px] text-slate-300 uppercase font-black block">Monthly New MRR Boost</span>
+                          <span className="text-[10px] text-slate-550 block text-slate-400">Capped CAC: ${results.optimizedCac}</span>
+                        </div>
+                        <span className="text-lg font-black text-emerald-450 text-emerald-400 animate-pulse block font-mono">
+                          +${results.netMrrGrowthBoost.toLocaleString()}/mo
+                        </span>
+                      </div>
+
+                    </div>
+
+                    <span className="text-[8.5px] text-slate-500 block text-center uppercase tracking-wide">
+                      *Based on systematic PLG adoption adjustments, transactional search keyword indexes, and responsive email retention.
+                    </span>
+
+                  </div>
+
+                </div>
+              )}
             </div>
 
           </div>

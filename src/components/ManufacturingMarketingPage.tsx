@@ -4,8 +4,10 @@ import {
   Award, Bot, CheckCircle2, ChevronRight, Star, Users, Briefcase,
   Factory, Settings, Cpu, LineChart, ShieldCheck, Mail, Phone, 
   MapPin, MessageSquare, Zap, Clock, ChevronDown, CheckCircle,
-  Database, FileCheck, Layers, HelpCircle, ArrowRight, TrendingUp, Search, X
+  Database, FileCheck, Layers, HelpCircle, ArrowRight, TrendingUp, Search, X,
+  Sliders, Sparkles
 } from 'lucide-react';
+import IndustryHeroVisual from './IndustryHeroVisual';
 import WhatsAppIcon from './WhatsAppIcon';
 
 interface ManufacturingMarketingPageProps {
@@ -23,6 +25,7 @@ export default function ManufacturingMarketingPage({ onBackToHome, openProposalF
   }, []);
 
   // ROI & Lead Calculator States
+  const [heroViewMode, setHeroViewMode] = useState<'visual' | 'calculator'>('visual');
   const [currentLeadVolume, setCurrentLeadVolume] = useState<number>(15);
   const [avgContractValue, setAvgContractValue] = useState<number>(25000);
   const [closingRate, setClosingRate] = useState<number>(10); // % of leads closed
@@ -465,81 +468,143 @@ export default function ManufacturingMarketingPage({ onBackToHome, openProposalF
           </div>
 
           <div className="lg:col-span-5 relative">
-            {/* Live Interactive Client-Side RFQ Funnel / Dashboard Suggestion */}
-            <div className="bg-[#0b101b] border border-slate-900 rounded-2xl p-5 shadow-2xl relative">
-              <div className="flex items-center justify-between border-b border-slate-900 pb-3 mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/85" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                </div>
-                <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-extrabold flex items-center gap-1.5">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
-                  Client RFQ Funnel (Live Status)
-                </div>
-              </div>
-
-              {/* Simulated Stats Board */}
-              <div className="grid grid-cols-2 gap-3 mb-4 text-left">
-                <div className="bg-[#070b12] rounded-xl p-3 border border-slate-900/60">
-                  <span className="text-[9px] uppercase tracking-wider font-mono text-slate-500 block">Top Industrial Rank</span>
-                  <span className="text-xl font-bold font-display text-white mt-1 block">94.2%</span>
-                  <span className="text-[9px] text-brand-teal font-bold font-mono">24 Target Terms in Top 3</span>
-                </div>
-                <div className="bg-[#070b12] rounded-xl p-3 border border-slate-900/60">
-                  <span className="text-[9px] uppercase tracking-wider font-mono text-slate-500 block">RFQ Monthly Leads Passed</span>
-                  <span className="text-xl font-bold font-display text-brand-teal mt-1 block">+182%</span>
-                  <span className="text-[9px] text-brand-orange font-bold font-mono">Avg Quality Verified</span>
-                </div>
-              </div>
-
-              {/* Simulated Funnel bar */}
-              <div className="space-y-3.5 text-left mb-2">
-                <div>
-                  <div className="flex justify-between items-center text-[10px] text-slate-400 mb-1">
-                    <span className="font-mono uppercase font-bold">1. Industrial Intent Traffic Visits</span>
-                    <span className="text-white font-black">100% (High Reach)</span>
-                  </div>
-                  <div className="w-full bg-[#070b12] h-2 rounded-full overflow-hidden">
-                    <div className="bg-brand-indigo h-full w-full rounded-full" />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between items-center text-[10px] text-slate-400 mb-1">
-                    <span className="font-mono uppercase font-bold">2. Specific Catalog CAD Downloads</span>
-                    <span className="text-brand-purple font-black">42.5% Conversion</span>
-                  </div>
-                  <div className="w-full bg-[#070b12] h-2 rounded-full overflow-hidden">
-                    <div className="bg-brand-purple h-full w-[42.5%] rounded-full" />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between items-center text-[10px] text-slate-400 mb-1">
-                    <span className="font-mono uppercase font-bold">3. Completed Technical RFQ Forms</span>
-                    <span className="text-brand-teal font-black">22.8% Conversion</span>
-                  </div>
-                  <div className="w-full bg-[#070b12] h-2 rounded-full overflow-hidden">
-                    <div className="bg-brand-teal h-full w-[22.8%] rounded-full" />
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between items-center text-[10px] text-slate-400 mb-1">
-                    <span className="font-mono uppercase font-bold">4. Final Sourcing Agreement Closed</span>
-                    <span className="text-brand-orange font-black">8.4% Contracts Vetted</span>
-                  </div>
-                  <div className="w-full bg-[#070b12] h-2 rounded-full overflow-hidden">
-                    <div className="bg-brand-orange h-full w-[12.4%] rounded-full" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-[9px] text-center mt-3 text-slate-500 font-mono italic">
-                Optimized utilizing direct database injection vectors for aerospace parts exporters.
-              </div>
+            {/* View Mode Toggle Strip */}
+            <div className="flex items-center justify-end mb-2 gap-1.5 font-mono text-[10px]">
+              <button
+                onClick={() => setHeroViewMode('visual')}
+                className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  heroViewMode === 'visual'
+                    ? 'bg-brand-indigo/20 border-brand-indigo text-white font-bold'
+                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sparkles className="w-3 h-3 text-brand-indigo" />
+                <span>Industrial Plant</span>
+              </button>
+              <button
+                onClick={() => setHeroViewMode('calculator')}
+                className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  heroViewMode === 'calculator'
+                    ? 'bg-brand-indigo/20 border-brand-indigo text-white font-bold'
+                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sliders className="w-3 h-3 text-brand-indigo" />
+                <span>RFQ Simulator</span>
+              </button>
             </div>
+
+            {heroViewMode === 'visual' ? (
+              <IndustryHeroVisual 
+                configKey="manufacturing"
+                customOverlayContent={
+                  <div className="space-y-2.5">
+                    <div className="flex justify-between items-center text-[10px] font-mono">
+                      <span className="text-brand-indigo font-bold flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-brand-indigo animate-ping" />
+                        Industrial Procurement Index
+                      </span>
+                      <button 
+                        onClick={() => setHeroViewMode('calculator')}
+                        className="text-brand-teal hover:underline text-[9.5px] cursor-pointer flex items-center gap-1"
+                      >
+                        Inspect RFQ Funnel →
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 bg-slate-950/80 p-2.5 rounded-xl border border-slate-900 text-left">
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Expected RFQs</span>
+                        <span className="text-sm font-black font-display text-white mt-0.5 block">{expectedNewLeads}/mo</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">B2B Deals Closed</span>
+                        <span className="text-sm font-black font-display text-brand-teal mt-0.5 block">{optimizedClosedDeals} contracts</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Pipeline Gain</span>
+                        <span className="text-sm font-black font-display text-brand-orange mt-0.5 block">+${(calculatedLiftoff / 1000).toFixed(0)}k</span>
+                      </div>
+                    </div>
+                  </div>
+                }
+              />
+            ) : (
+              <div className="bg-[#0b101b] border border-slate-900 rounded-2xl p-5 shadow-2xl relative">
+                <div className="flex items-center justify-between border-b border-slate-900 pb-3 mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/85" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                  </div>
+                  <div className="text-[10px] font-mono text-slate-500 uppercase tracking-widest font-extrabold flex items-center gap-1.5">
+                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500 animate-ping" />
+                    Client RFQ Funnel (Live Status)
+                  </div>
+                </div>
+
+                {/* Simulated Stats Board */}
+                <div className="grid grid-cols-2 gap-3 mb-4 text-left">
+                  <div className="bg-[#070b12] rounded-xl p-3 border border-slate-900/60">
+                    <span className="text-[9px] uppercase tracking-wider font-mono text-slate-500 block">Top Industrial Rank</span>
+                    <span className="text-xl font-bold font-display text-white mt-1 block">94.2%</span>
+                    <span className="text-[9px] text-brand-teal font-bold font-mono">24 Target Terms in Top 3</span>
+                  </div>
+                  <div className="bg-[#070b12] rounded-xl p-3 border border-slate-900/60">
+                    <span className="text-[9px] uppercase tracking-wider font-mono text-slate-500 block">RFQ Monthly Leads Passed</span>
+                    <span className="text-xl font-bold font-display text-brand-teal mt-1 block">+182%</span>
+                    <span className="text-[9px] text-brand-orange font-bold font-mono">Avg Quality Verified</span>
+                  </div>
+                </div>
+
+                {/* Simulated Funnel bar */}
+                <div className="space-y-3.5 text-left mb-2">
+                  <div>
+                    <div className="flex justify-between items-center text-[10px] text-slate-400 mb-1">
+                      <span className="font-mono uppercase font-bold">1. Industrial Intent Traffic Visits</span>
+                      <span className="text-white font-black">100% (High Reach)</span>
+                    </div>
+                    <div className="w-full bg-[#070b12] h-2 rounded-full overflow-hidden">
+                      <div className="bg-brand-indigo h-full w-full rounded-full" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-center text-[10px] text-slate-400 mb-1">
+                      <span className="font-mono uppercase font-bold">2. Specific Catalog CAD Downloads</span>
+                      <span className="text-brand-purple font-black">42.5% Conversion</span>
+                    </div>
+                    <div className="w-full bg-[#070b12] h-2 rounded-full overflow-hidden">
+                      <div className="bg-brand-purple h-full w-[42.5%] rounded-full" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-center text-[10px] text-slate-400 mb-1">
+                      <span className="font-mono uppercase font-bold">3. Completed Technical RFQ Forms</span>
+                      <span className="text-brand-teal font-black">22.8% Conversion</span>
+                    </div>
+                    <div className="w-full bg-[#070b12] h-2 rounded-full overflow-hidden">
+                      <div className="bg-brand-teal h-full w-[22.8%] rounded-full" />
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-center text-[10px] text-slate-400 mb-1">
+                      <span className="font-mono uppercase font-bold">4. Final Sourcing Agreement Closed</span>
+                      <span className="text-brand-orange font-black">8.4% Contracts Vetted</span>
+                    </div>
+                    <div className="w-full bg-[#070b12] h-2 rounded-full overflow-hidden">
+                      <div className="bg-brand-orange h-full w-[12.4%] rounded-full" />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-[9px] text-center mt-3 text-slate-500 font-mono italic">
+                  Optimized utilizing direct database injection vectors for aerospace parts exporters.
+                </div>
+              </div>
+            )}
           </div>
 
         </div>

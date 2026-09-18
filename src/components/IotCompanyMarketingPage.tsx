@@ -5,8 +5,10 @@ import {
   Cpu, ShieldCheck, Mail, Phone, MapPin, MessageSquare, Zap, Clock, 
   ChevronDown, CheckCircle, Database, FileCheck, Layers, HelpCircle, 
   ArrowRight, TrendingUp, Search, X, Shield, Server, Terminal, 
-  Smartphone, Globe, BarChart3, AlertCircle, Sparkles, Network, Check
+  Smartphone, Globe, BarChart3, AlertCircle, Sparkles, Network, Check,
+  Sliders
 } from 'lucide-react';
+import IndustryHeroVisual from './IndustryHeroVisual';
 
 interface IotCompanyMarketingPageProps {
   onBackToHome: () => void;
@@ -49,6 +51,7 @@ export default function IotCompanyMarketingPage({ onBackToHome, openProposalForm
   }, []);
 
   // 1. IoT LEAD ESTIMATOR / CALCULATOR STATE
+  const [heroViewMode, setHeroViewMode] = useState<'visual' | 'calculator'>('visual');
   const [monthlyTraffic, setMonthlyTraffic] = useState<number>(3500);
   const [currentConversion, setCurrentConversion] = useState<number>(0.4); // e.g. 0.4% from traffic to demo
   const [avgLtv, setAvgLtv] = useState<number>(45000); // 45k USD average LTV for enterprise IoT solution
@@ -547,73 +550,136 @@ export default function IotCompanyMarketingPage({ onBackToHome, openProposalForm
 
           {/* Connected Device Ecosystem Simulator Graphic right */}
           <div className="lg:col-span-5 relative mt-6 lg:mt-0">
-            <div className="bg-[#0b101b] border border-slate-900 rounded-2.5xl p-5 shadow-2xl relative">
-              <div className="flex items-center justify-between border-b border-slate-900 pb-3 mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                </div>
-                <div className="text-[10px] font-mono text-slate-400 font-extrabold flex items-center gap-1.5">
-                  <span className="inline-block w-2 h-2 rounded-full bg-teal-500 animate-ping" />
-                  Ecosystem Telemetry Diagnostic
-                </div>
-              </div>
-
-              {/* Ecosystem Interactive Nodes UI Grid */}
-              <div className="grid grid-cols-4 gap-2 mb-4">
-                {[
-                  { key: 'sensor', icon: Cpu, label: "01. Sensors", color: "text-amber-400 bg-amber-400/10" },
-                  { key: 'gateway', icon: Network, label: "02. Gateways", color: "text-indigo-400 bg-indigo-400/10" },
-                  { key: 'cloud', icon: Server, label: "03. Cloud Broker", color: "text-teal-400 bg-teal-400/10" },
-                  { key: 'user', icon: Smartphone, label: "04. Apps UI", color: "text-purple-400 bg-purple-400/10" }
-                ].map((item) => {
-                  const NodeIcon = item.icon;
-                  const isSel = selectedNode === item.key;
-                  return (
-                    <button
-                      key={item.key}
-                      onClick={() => setSelectedNode(item.key as any)}
-                      className={`p-2.5 rounded-xl border text-center flex flex-col items-center justify-center transition-all cursor-pointer ${
-                        isSel 
-                          ? 'bg-brand-teal/10 border-brand-teal text-white' 
-                          : 'bg-[#060a12] border-slate-900 text-slate-500 hover:text-slate-300'
-                      }`}
-                    >
-                      <NodeIcon className={`w-5 h-5 mb-1 ${isSel ? 'text-brand-teal' : 'text-slate-500'}`} />
-                      <span className="text-[9px] font-mono whitespace-nowrap block truncate w-full leading-none">{item.label}</span>
-                    </button>
-                  );
-                })}
-              </div>
-
-              {/* Selected Node Details */}
-              <div className="bg-[#05080e] rounded-xl p-4 border border-slate-900/80 text-left min-h-[170px] flex flex-col justify-between">
-                <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <span className="text-[9px] font-mono text-brand-orange uppercase tracking-wider font-extrabold">Ecosystem Target Area</span>
-                    <span className="text-[10px] text-brand-teal font-mono font-black">{nodeInfo[selectedNode].metricLift}</span>
-                  </div>
-                  <h4 className="text-sm font-black font-display text-white mb-2">
-                    {nodeInfo[selectedNode].title}
-                  </h4>
-                  <div className="space-y-2 text-[11.5px] leading-relaxed">
-                    <p className="text-slate-400 font-light">
-                      <strong className="text-red-400 font-semibold font-mono uppercase text-[9px] block">Crawl / Conversion Bottleneck:</strong>
-                      {nodeInfo[selectedNode].challenge}
-                    </p>
-                    <p className="text-slate-300 font-light pt-1 border-t border-slate-900">
-                      <strong className="text-brand-teal font-semibold font-mono uppercase text-[9px] block">AKGLS Core Protocol Strategy:</strong>
-                      {nodeInfo[selectedNode].solution}
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-[9.5px] text-slate-500 text-center font-mono mt-3">
-                👉 Click on different components to inspect telemetry marketing gaps.
-              </div>
+            {/* View Mode Toggle Strip */}
+            <div className="flex items-center justify-end mb-2 gap-1.5 font-mono text-[10px]">
+              <button
+                onClick={() => setHeroViewMode('visual')}
+                className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  heroViewMode === 'visual'
+                    ? 'bg-brand-teal/20 border-brand-teal text-white font-bold'
+                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sparkles className="w-3 h-3 text-brand-teal" />
+                <span>IoT Infrastructure</span>
+              </button>
+              <button
+                onClick={() => setHeroViewMode('calculator')}
+                className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  heroViewMode === 'calculator'
+                    ? 'bg-brand-teal/20 border-brand-teal text-white font-bold'
+                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sliders className="w-3 h-3 text-brand-teal" />
+                <span>Node Diagnostic</span>
+              </button>
             </div>
+
+            {heroViewMode === 'visual' ? (
+              <IndustryHeroVisual 
+                configKey="iot"
+                customOverlayContent={
+                  <div className="space-y-2.5">
+                    <div className="flex justify-between items-center text-[10px] font-mono">
+                      <span className="text-brand-teal font-bold flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-brand-teal animate-ping" />
+                        IoT Mesh & Lead Velocity
+                      </span>
+                      <button 
+                        onClick={() => setHeroViewMode('calculator')}
+                        className="text-teal-400 hover:underline text-[9.5px] cursor-pointer flex items-center gap-1"
+                      >
+                        Inspect Telemetry Nodes →
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 bg-slate-950/80 p-2.5 rounded-xl border border-slate-900 text-left">
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Monthly Demos</span>
+                        <span className="text-sm font-black font-display text-white mt-0.5 block">{optimizedDemos} demos</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Demo Lift</span>
+                        <span className="text-sm font-black font-display text-brand-teal mt-0.5 block">+{leadLift}/mo</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Pipeline Value</span>
+                        <span className="text-sm font-black font-display text-brand-orange mt-0.5 block">${(estimatedRevenueLiftValue / 1000).toFixed(0)}k</span>
+                      </div>
+                    </div>
+                  </div>
+                }
+              />
+            ) : (
+              <div className="bg-[#0b101b] border border-slate-900 rounded-2.5xl p-5 shadow-2xl relative">
+                <div className="flex items-center justify-between border-b border-slate-900 pb-3 mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                  </div>
+                  <div className="text-[10px] font-mono text-slate-400 font-extrabold flex items-center gap-1.5">
+                    <span className="inline-block w-2 h-2 rounded-full bg-teal-500 animate-ping" />
+                    Ecosystem Telemetry Diagnostic
+                  </div>
+                </div>
+
+                {/* Ecosystem Interactive Nodes UI Grid */}
+                <div className="grid grid-cols-4 gap-2 mb-4">
+                  {[
+                    { key: 'sensor', icon: Cpu, label: "01. Sensors", color: "text-amber-400 bg-amber-400/10" },
+                    { key: 'gateway', icon: Network, label: "02. Gateways", color: "text-indigo-400 bg-indigo-400/10" },
+                    { key: 'cloud', icon: Server, label: "03. Cloud Broker", color: "text-teal-400 bg-teal-400/10" },
+                    { key: 'user', icon: Smartphone, label: "04. Apps UI", color: "text-purple-400 bg-purple-400/10" }
+                  ].map((item) => {
+                    const NodeIcon = item.icon;
+                    const isSel = selectedNode === item.key;
+                    return (
+                      <button
+                        key={item.key}
+                        onClick={() => setSelectedNode(item.key as any)}
+                        className={`p-2.5 rounded-xl border text-center flex flex-col items-center justify-center transition-all cursor-pointer ${
+                          isSel 
+                            ? 'bg-brand-teal/10 border-brand-teal text-white' 
+                            : 'bg-[#060a12] border-slate-900 text-slate-500 hover:text-slate-300'
+                        }`}
+                      >
+                        <NodeIcon className={`w-5 h-5 mb-1 ${isSel ? 'text-brand-teal' : 'text-slate-500'}`} />
+                        <span className="text-[9px] font-mono whitespace-nowrap block truncate w-full leading-none">{item.label}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {/* Selected Node Details */}
+                <div className="bg-[#05080e] rounded-xl p-4 border border-slate-900/80 text-left min-h-[170px] flex flex-col justify-between">
+                  <div>
+                    <div className="flex justify-between items-center mb-1">
+                      <span className="text-[9px] font-mono text-brand-orange uppercase tracking-wider font-extrabold">Ecosystem Target Area</span>
+                      <span className="text-[10px] text-brand-teal font-mono font-black">{nodeInfo[selectedNode].metricLift}</span>
+                    </div>
+                    <h4 className="text-sm font-black font-display text-white mb-2">
+                      {nodeInfo[selectedNode].title}
+                    </h4>
+                    <div className="space-y-2 text-[11.5px] leading-relaxed">
+                      <p className="text-slate-400 font-light">
+                        <strong className="text-red-400 font-semibold font-mono uppercase text-[9px] block">Crawl / Conversion Bottleneck:</strong>
+                        {nodeInfo[selectedNode].challenge}
+                      </p>
+                      <p className="text-slate-300 font-light pt-1 border-t border-slate-900">
+                        <strong className="text-brand-teal font-semibold font-mono uppercase text-[9px] block">AKGLS Core Protocol Strategy:</strong>
+                        {nodeInfo[selectedNode].solution}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-[9.5px] text-slate-500 text-center font-mono mt-3">
+                  👉 Click on different components to inspect telemetry marketing gaps.
+                </div>
+              </div>
+            )}
           </div>
 
         </div>

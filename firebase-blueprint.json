@@ -1,0 +1,121 @@
+{
+  "entities": {
+    "Lead": {
+      "title": "Lead",
+      "description": "Global website lead capture record submitted from contact forms, proposal requests, and audit tools across the site.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the lead record."
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the contact person."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Contact email address."
+        },
+        "phone": {
+          "type": "string",
+          "description": "Contact phone number."
+        },
+        "companyName": {
+          "type": "string",
+          "description": "Name of the business or company."
+        },
+        "websiteUrl": {
+          "type": "string",
+          "description": "Target website URL for services or audit."
+        },
+        "budget": {
+          "type": "string",
+          "description": "Budget bracket for marketing engagement."
+        },
+        "primaryGoal": {
+          "type": "string",
+          "description": "Primary goal or channel requested (e.g. SEO, GEO, PPC, Web Dev)."
+        },
+        "pageAddress": {
+          "type": "string",
+          "description": "Origin URL where the form submission occurred."
+        },
+        "pageTitle": {
+          "type": "string",
+          "description": "Title of the page where lead originated."
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO timestamp of lead generation."
+        },
+        "country": {
+          "type": "string",
+          "description": "Detected country from client/server geo-lookup."
+        },
+        "city": {
+          "type": "string",
+          "description": "Detected city from client/server geo-lookup."
+        },
+        "region": {
+          "type": "string",
+          "description": "Detected state/province region."
+        },
+        "ip": {
+          "type": "string",
+          "description": "Anonymized or client network IP address."
+        },
+        "status": {
+          "type": "string",
+          "enum": ["New", "Contacted", "In Progress", "Converted", "Spam", "Archived"],
+          "description": "Current lifecycle status of the lead in CRM pipeline."
+        },
+        "assignedTo": {
+          "type": "string",
+          "description": "Team member or agent assigned to this lead."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Internal CRM notes or qualification remarks."
+        },
+        "rawDetails": {
+          "type": "object",
+          "description": "Arbitrary extra key-value pairs submitted with the form."
+        }
+      },
+      "required": ["name", "email", "time", "status"]
+    },
+    "AdminProfile": {
+      "title": "AdminProfile",
+      "description": "Authorized administrative user profile for global lead management.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth user identifier."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address of the administrator."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["admin", "manager", "viewer"],
+          "description": "Access level role in CRM."
+        }
+      },
+      "required": ["uid", "email", "role"]
+    }
+  },
+  "firestore": {
+    "/leads/{leadId}": {
+      "$ref": "Lead"
+    },
+    "/admins/{adminUid}": {
+      "$ref": "AdminProfile"
+    }
+  }
+}

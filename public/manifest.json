@@ -1,0 +1,31 @@
+{
+  "id": "/",
+  "name": "AKGLS Group Site",
+  "short_name": "AKGLS",
+  "description": "Enterprise digital marketing and AI SEO agency portal featuring highly optimized mega navigation, strategic diagnostics, and ROI estimators.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#0b0e1e",
+  "background_color": "#0b0e1e",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

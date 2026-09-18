@@ -28,16 +28,6 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
         ${col.items.map((item) => `
           <a href="${escapeHtml(item.href)}" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
             <span class="flex items-center gap-1.5">
-              ${col.title.includes('AI') ? `
-                <svg class="w-3 h-3 text-brand-purple/70 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
-                </svg>
-              ` : ''}
-              ${item.isTrending ? `
-                <svg class="w-3.5 h-3.5 text-brand-orange shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
-                </svg>
-              ` : ''}
               ${escapeHtml(item.name)}
             </span>
             ${item.isTrending ? `

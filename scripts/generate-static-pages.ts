@@ -1,8 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { SITEMAP_ROUTES, AppRoute } from '../src/routesData';
+import { SITEMAP_ROUTES, AppRoute } from '../src/App';
 import { renderPageHtml } from '../src/utils/pageTemplate';
+import { generateSitemapXml, writeSitemapFiles, writeSitemapFilesSync } from '../src/utils/sitemapGenerator';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,50 +17,7 @@ const PRESERVED_FILES = new Set([
   'crypto-growth-services.html'
 ]);
 
-export function generateSitemapXml(): string {
-  const currentDate = new Date().toISOString().split('T')[0];
-  const seenPaths = new Set<string>();
-  const urls: string[] = [
-    `  <url>
-    <loc>https://www.akglsgroup.com/</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-  </url>`
-  ];
-  seenPaths.add('/');
-
-  for (const route of SITEMAP_ROUTES) {
-    if (!route.path || route.path === '/' || route.id === 'home') continue;
-    const cleanPath = route.path.startsWith('/') ? route.path : `/${route.path}`;
-    const formattedPath = cleanPath.endsWith('/') ? cleanPath : `${cleanPath}/`;
-    
-    if (seenPaths.has(formattedPath)) continue;
-    seenPaths.add(formattedPath);
-
-    urls.push(`  <url>
-    <loc>https://www.akglsgroup.com${formattedPath}</loc>
-    <lastmod>${currentDate}</lastmod>
-    <changefreq>${route.changefreq || 'weekly'}</changefreq>
-    <priority>${route.priority ? route.priority.toFixed(1) : '0.8'}</priority>
-  </url>`);
-  }
-
-  const xmlContent = `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${urls.join('\n')}
-</urlset>
-`;
-
-  const sitemapPublic = path.join(publicDir, 'sitemap.xml');
-  fs.writeFileSync(sitemapPublic, xmlContent, 'utf-8');
-
-  if (fs.existsSync(distDir)) {
-    fs.writeFileSync(path.join(distDir, 'sitemap.xml'), xmlContent, 'utf-8');
-  }
-
-  return xmlContent;
-}
+export { generateSitemapXml, writeSitemapFiles, writeSitemapFilesSync };
 
 export function generateAllStaticPages(force = false): { created: number; skipped: number; total: number } {
   if (!fs.existsSync(publicDir)) {
@@ -109,8 +67,8 @@ export function generateAllStaticPages(force = false): { created: number; skippe
     }
   }
 
-  // Generate sitemap.xml containing all routes
-  generateSitemapXml();
+  // Generate sitemap.xml containing all routes from App.tsx SITEMAP_ROUTES
+  writeSitemapFilesSync();
 
   return { created, skipped, total: SITEMAP_ROUTES.length - 1 };
 }

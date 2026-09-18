@@ -3,8 +3,10 @@ import {
   Award, Bot, CheckCircle, CheckCircle2, ChevronRight, Star, Users, Briefcase,
   Search, X, Shield, Server, Terminal, Smartphone, Globe, BarChart3, 
   AlertCircle, Sparkles, Network, Check, Landmark, Map, HelpCircle, Mail, Phone, 
-  MapPin, Zap, MessageSquare, TrendingUp, AlertTriangle, ChevronDown, Scale, Gavel, FileText, Lock
+  MapPin, Zap, MessageSquare, TrendingUp, AlertTriangle, ChevronDown, Scale, Gavel, FileText, Lock,
+  Sliders
 } from 'lucide-react';
+import IndustryHeroVisual from './IndustryHeroVisual';
 
 interface LawFirmMarketingPageProps {
   onBackToHome: () => void;
@@ -48,6 +50,7 @@ export default function LawFirmMarketingPage({ onBackToHome, openProposalForm }:
   }, []);
 
   // 1. INTERACTIVE LEGAL ACQUISITION & RETURN ON INVESTMENT ESTIMATOR
+  const [heroViewMode, setHeroViewMode] = useState<'visual' | 'calculator'>('visual');
   const [practiceType, setPracticeType] = useState<'injury' | 'family' | 'criminal' | 'corporate'>('injury');
   const [monthlySpend, setMonthlySpend] = useState<number>(6000);
   const [avgCaseValue, setAvgCaseValue] = useState<number>(15000);
@@ -553,128 +556,191 @@ export default function LawFirmMarketingPage({ onBackToHome, openProposalForm }:
             </div>
           </div>
 
-          {/* Interactive ROI & Case Intake Estimator */}
+          {/* Targeted Branded Hero Graphic with Calculator Toggle */}
           <div className="lg:col-span-5 relative mt-6 lg:mt-0" id="legal-estimator-section">
-            <div className="bg-[#0b101c] border border-slate-900 rounded-2.5xl p-5 shadow-2xl relative">
-              <div className="flex items-center justify-between border-b border-slate-900 pb-3 mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-teal-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-indigo-500/80 animate-pulse" />
-                </div>
-                <div className="text-[10px] font-mono text-slate-400 font-extrabold flex items-center gap-1.5">
-                  <span className="inline-block w-2 h-2 rounded-full bg-amber-500 animate-ping" />
-                  Legal Yield Estimator
-                </div>
-              </div>
-
-              <div className="space-y-4 text-left">
-                {/* Practice Area Selector */}
-                <div>
-                  <label className="text-[10px] uppercase font-mono font-black text-slate-500 block mb-1.5">Select Practice Area:</label>
-                  <div className="grid grid-cols-4 gap-1">
-                    {[
-                      { key: 'injury', label: 'Injury' },
-                      { key: 'family', label: 'Family' },
-                      { key: 'criminal', label: 'Criminal' },
-                      { key: 'corporate', label: 'Corporate' }
-                    ].map((type) => (
-                      <button
-                        key={type.key}
-                        onClick={() => setPracticeType(type.key as any)}
-                        className={`text-[9px] py-1.5 rounded font-bold border font-mono transition-colors cursor-pointer ${
-                          practiceType === type.key
-                            ? 'bg-amber-500/20 border-amber-500 text-white'
-                            : 'bg-slate-950 border-slate-900 text-slate-500 hover:text-slate-300'
-                        }`}
-                      >
-                        {type.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="text-[10px] uppercase font-mono font-black text-slate-400">Average Case Settlement Value (USD):</label>
-                    <span className="text-xs text-amber-500 font-bold font-mono">${avgCaseValue.toLocaleString()}</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min={2000} 
-                    max={100000} 
-                    step={2000}
-                    value={avgCaseValue}
-                    onChange={(e) => setAvgCaseValue(Number(e.target.value))}
-                    className="w-full accent-amber-500 h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
-                    <span>$2,000 (Solo Service)</span>
-                    <span>$50,000 (Complex Family)</span>
-                    <span>$100,000+ (Severe Injury Claims)</span>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="text-[10px] uppercase font-mono font-black text-slate-400">Target Monthly Case-Ad Spend (USD):</label>
-                    <span className="text-xs text-brand-teal font-bold font-mono">${monthlySpend.toLocaleString()}</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min={1000} 
-                    max={20000} 
-                    step={500}
-                    value={monthlySpend}
-                    onChange={(e) => setMonthlySpend(Number(e.target.value))}
-                    className="w-full accent-brand-teal h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
-                    <span>$1,000/mo</span>
-                    <span>$10,000/mo</span>
-                    <span>$20,000/mo</span>
-                  </div>
-                </div>
-
-                {/* Simulated Results Indicators */}
-                <div className="grid grid-cols-2 gap-3 pt-2">
-                  <div className="bg-[#05080f] p-3 rounded-lg border border-slate-900">
-                    <span className="text-[9px] text-slate-500 uppercase font-mono font-bold block">Baseline signed cases:</span>
-                    <span className="text-lg font-black text-slate-400 font-display block mt-1">{baselineSignedCases} <span className="text-[9px] text-slate-600 font-light font-sans">retained</span></span>
-                    <span className="text-[8px] text-slate-500 block font-mono mt-0.5">At standard {currentPractice.baselineConversion}% rate</span>
-                  </div>
-                  <div className="bg-[#070e17] p-3 rounded-lg border border-amber-500/20 animate-pulse">
-                    <span className="text-[9px] text-amber-500 uppercase font-mono font-black block">AKGLS Expected Cases:</span>
-                    <span className="text-lg font-black text-amber-500 font-display block mt-1">{akglsSignedCases} <span className="text-[9px] font-light font-sans">retained</span></span>
-                    <span className="text-[8px] text-slate-300 block font-mono mt-0.5">~{(currentPractice.improvementFactor * 100).toFixed(0)}% growth index</span>
-                  </div>
-                </div>
-
-                <div className="bg-[#060a12] rounded-xl p-3 border border-slate-900 text-center">
-                  <span className="text-[9px] text-slate-500 font-mono uppercase block">Projected Practice Value / ROI Model:</span>
-                  <div className="flex justify-around items-center mt-2">
-                    <div>
-                      <span className="text-xs text-white block font-semibold">{estClicks}</span>
-                      <span className="text-[8px] text-slate-500 block font-mono">Ad Clicks</span>
-                    </div>
-                    <div className="text-slate-800">|</div>
-                    <div>
-                      <span className="text-xs text-amber-500 block font-semibold">${(projectedFees / 1000).toFixed(0)}k</span>
-                      <span className="text-[8px] text-slate-500 block font-mono">Case Pipeline</span>
-                    </div>
-                    <div className="text-slate-800">|</div>
-                    <div>
-                      <span className="text-xs text-brand-teal block font-semibold">{simulatedRoiMultiplier}x ROI</span>
-                      <span className="text-[8px] text-slate-500 block font-mono">Ad-Spend Yield</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-[9px] text-slate-500 text-center font-mono mt-3">
-                Models assume compliance constraints & verified municipal competitive indices.
-              </div>
+            {/* View Mode Toggle Strip */}
+            <div className="flex items-center justify-end mb-2 gap-1.5 font-mono text-[10px]">
+              <button
+                onClick={() => setHeroViewMode('visual')}
+                className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  heroViewMode === 'visual'
+                    ? 'bg-amber-500/20 border-amber-500 text-white font-bold'
+                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sparkles className="w-3 h-3 text-amber-400" />
+                <span>Practice Overview</span>
+              </button>
+              <button
+                onClick={() => setHeroViewMode('calculator')}
+                className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  heroViewMode === 'calculator'
+                    ? 'bg-amber-500/20 border-amber-500 text-white font-bold'
+                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sliders className="w-3 h-3 text-amber-400" />
+                <span>ROI Simulator</span>
+              </button>
             </div>
+
+            {heroViewMode === 'visual' ? (
+              <IndustryHeroVisual 
+                configKey="legal"
+                customOverlayContent={
+                  <div className="space-y-2.5">
+                    <div className="flex justify-between items-center text-[10px] font-mono">
+                      <span className="text-amber-400 font-bold flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                        Target Intake Velocity
+                      </span>
+                      <button 
+                        onClick={() => setHeroViewMode('calculator')}
+                        className="text-amber-400 hover:underline text-[9.5px] cursor-pointer flex items-center gap-1"
+                      >
+                        Adjust Practice Budget →
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 bg-slate-950/80 p-2.5 rounded-xl border border-slate-900 text-left">
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Expected Cases</span>
+                        <span className="text-sm font-black font-display text-white mt-0.5 block">{akglsSignedCases} retained</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Retainer Pool</span>
+                        <span className="text-sm font-black font-display text-amber-400 mt-0.5 block">${(projectedFees / 1000).toFixed(0)}k/mo</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Return On Ad Spend</span>
+                        <span className="text-sm font-black font-display text-brand-teal mt-0.5 block">{simulatedRoiMultiplier}x Yield</span>
+                      </div>
+                    </div>
+                  </div>
+                }
+              />
+            ) : (
+              <div className="bg-[#0b101b] border border-slate-900 rounded-2.5xl p-5 shadow-2xl relative">
+                <div className="flex items-center justify-between border-b border-slate-900 pb-3 mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-teal-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-indigo-500/80 animate-pulse" />
+                  </div>
+                  <div className="text-[10px] font-mono text-slate-400 font-extrabold flex items-center gap-1.5">
+                    <span className="inline-block w-2 h-2 rounded-full bg-amber-500 animate-ping" />
+                    Legal Yield Estimator
+                  </div>
+                </div>
+
+                <div className="space-y-4 text-left">
+                  {/* Practice Area Selector */}
+                  <div>
+                    <label className="text-[10px] uppercase font-mono font-black text-slate-500 block mb-1.5">Select Practice Area:</label>
+                    <div className="grid grid-cols-4 gap-1">
+                      {[
+                        { key: 'injury', label: 'Injury' },
+                        { key: 'family', label: 'Family' },
+                        { key: 'criminal', label: 'Criminal' },
+                        { key: 'corporate', label: 'Corporate' }
+                      ].map((type) => (
+                        <button
+                          key={type.key}
+                          onClick={() => setPracticeType(type.key as any)}
+                          className={`text-[9px] py-1.5 rounded font-bold border font-mono transition-colors cursor-pointer ${
+                            practiceType === type.key
+                              ? 'bg-amber-500/20 border-amber-500 text-white'
+                              : 'bg-slate-950 border-slate-900 text-slate-500 hover:text-slate-300'
+                          }`}
+                        >
+                          {type.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="text-[10px] uppercase font-mono font-black text-slate-400">Average Case Settlement Value (USD):</label>
+                      <span className="text-xs text-amber-500 font-bold font-mono">${avgCaseValue.toLocaleString()}</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min={2000} 
+                      max={100000} 
+                      step={2000}
+                      value={avgCaseValue}
+                      onChange={(e) => setAvgCaseValue(Number(e.target.value))}
+                      className="w-full accent-amber-500 h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
+                      <span>$2,000 (Solo Service)</span>
+                      <span>$50,000 (Complex Family)</span>
+                      <span>$100,000+ (Severe Injury Claims)</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="text-[10px] uppercase font-mono font-black text-slate-400">Target Monthly Case-Ad Spend (USD):</label>
+                      <span className="text-xs text-brand-teal font-bold font-mono">${monthlySpend.toLocaleString()}</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min={1000} 
+                      max={20000} 
+                      step={500}
+                      value={monthlySpend}
+                      onChange={(e) => setMonthlySpend(Number(e.target.value))}
+                      className="w-full accent-brand-teal h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
+                      <span>$1,000/mo</span>
+                      <span>$10,000/mo</span>
+                      <span>$20,000/mo</span>
+                    </div>
+                  </div>
+
+                  {/* Simulated Results Indicators */}
+                  <div className="grid grid-cols-2 gap-3 pt-2">
+                    <div className="bg-[#05080f] p-3 rounded-lg border border-slate-900">
+                      <span className="text-[9px] text-slate-500 uppercase font-mono font-bold block">Baseline signed cases:</span>
+                      <span className="text-lg font-black text-slate-400 font-display block mt-1">{baselineSignedCases} <span className="text-[9px] text-slate-600 font-light font-sans">retained</span></span>
+                      <span className="text-[8px] text-slate-500 block font-mono mt-0.5">At standard {currentPractice.baselineConversion}% rate</span>
+                    </div>
+                    <div className="bg-[#070e17] p-3 rounded-lg border border-amber-500/20 animate-pulse">
+                      <span className="text-[9px] text-amber-500 uppercase font-mono font-black block">AKGLS Expected Cases:</span>
+                      <span className="text-lg font-black text-amber-500 font-display block mt-1">{akglsSignedCases} <span className="text-[9px] font-light font-sans">retained</span></span>
+                      <span className="text-[8px] text-slate-300 block font-mono mt-0.5">~{(currentPractice.improvementFactor * 100).toFixed(0)}% growth index</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-[#060a12] rounded-xl p-3 border border-slate-900 text-center">
+                    <span className="text-[9px] text-slate-500 font-mono uppercase block">Projected Practice Value / ROI Model:</span>
+                    <div className="flex justify-around items-center mt-2">
+                      <div>
+                        <span className="text-xs text-white block font-semibold">{estClicks}</span>
+                        <span className="text-[8px] text-slate-500 block font-mono">Ad Clicks</span>
+                      </div>
+                      <div className="text-slate-800">|</div>
+                      <div>
+                        <span className="text-xs text-amber-500 block font-semibold">${(projectedFees / 1000).toFixed(0)}k</span>
+                        <span className="text-[8px] text-slate-500 block font-mono">Case Pipeline</span>
+                      </div>
+                      <div className="text-slate-800">|</div>
+                      <div>
+                        <span className="text-xs text-brand-teal block font-semibold">{simulatedRoiMultiplier}x ROI</span>
+                        <span className="text-[8px] text-slate-500 block font-mono">Ad-Spend Yield</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-[9px] text-slate-500 text-center font-mono mt-3">
+                  Models assume compliance constraints & verified municipal competitive indices.
+                </div>
+              </div>
+            )}
           </div>
 
         </div>

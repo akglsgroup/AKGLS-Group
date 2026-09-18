@@ -2,9 +2,18 @@ import { useState, useEffect, FormEvent } from 'react';
 import { 
   Lock, KeyRound, Users, TrendingUp, Clock, MapPin, Search, Filter, 
   CheckCircle, AlertCircle, UserCheck, FileText, ExternalLink, 
-  Save, RefreshCw, ArrowLeft, Trash2, Mail, Phone, Calendar, ShieldCheck
-} from 'lucide-react';
+  Save, RefreshCw, ArrowLeft, Trash2, Mail, Phone, Calendar, ShieldCheck,
+  Cloud, CloudCheck, Database, Download, Check, Sparkles
+ } from 'lucide-react';
 import { LeadRecord } from '../types';
+import { 
+  subscribeToGlobalLeads, 
+  updateLeadInFirestore, 
+  deleteLeadFromFirestore,
+  syncLocalLeadsToFirestore,
+  saveLeadToFirestore,
+  db
+} from '../firebase';
 
 interface LeadManagementPortalPageProps {
   onBackToHome: () => void;
@@ -24,6 +33,13 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('All');
   const [editingLeadId, setEditingLeadId] = useState<string | null>(null);
+  const [deletingLeadId, setDeletingLeadId] = useState<string | null>(null);
+
+  // Real-time Cloud vs Local sync indicator
+  const [isFirebaseConnected, setIsFirebaseConnected] = useState<boolean>(true);
+  const [syncStatusMsg, setSyncStatusMsg] = useState<string>('Connected to Firebase Firestore');
+  const [isSyncingBackup, setIsSyncingBackup] = useState(false);
+  const [backupSyncSuccess, setBackupSyncSuccess] = useState(false);
 
   // Temporary edit states
   const [editStatus, setEditStatus] = useState<LeadRecord['status']>('New');
@@ -39,6 +55,39 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
     }
   }, []);
 
+  // Set up real-time Firebase subscription when authenticated
+  useEffect(() => {
+    if (!isAuthenticated) return;
+
+    setIsLoading(true);
+    setErrorString('');
+
+    // Subscribe to real-time updates from Firebase
+    const unsubscribe = subscribeToGlobalLeads(
+      (firestoreLeads) => {
+        setIsFirebaseConnected(true);
+        setIsLoading(false);
+        if (firestoreLeads.length > 0) {
+          setLeads(firestoreLeads);
+        } else {
+          // If Firestore collection is empty, check if we have local leads to display
+          loadLocalBackupLeads();
+        }
+      },
+      (err) => {
+        console.warn('[Firebase] Subscription listener notice:', err);
+        setIsFirebaseConnected(false);
+        setSyncStatusMsg('Operating on Local Resilient Cache');
+        loadLocalBackupLeads();
+        setIsLoading(false);
+      }
+    );
+
+    return () => {
+      unsubscribe();
+    };
+  }, [isAuthenticated]);
+
   const verifySavedPin = async (savedPin: string) => {
     setIsValidating(true);
     try {
@@ -53,23 +102,20 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
           const data = await res.json();
           if (data && data.valid) {
             setIsAuthenticated(true);
-            loadLeads(savedPin);
             return;
           }
         }
       }
       
-      // If we got here but pin is 2026, let it verify successfully in client-only fallback mode
+      // Default fallback PIN
       if (String(savedPin) === '2026') {
         setIsAuthenticated(true);
-        loadLeads(savedPin);
       } else {
         sessionStorage.removeItem('admin_portal_pin');
       }
-    } catch (e) {
+    } catch {
       if (String(savedPin) === '2026') {
         setIsAuthenticated(true);
-        loadLeads(savedPin);
       } else {
         sessionStorage.removeItem('admin_portal_pin');
       }
@@ -98,28 +144,23 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
           if (data && data.valid) {
             setIsAuthenticated(true);
             sessionStorage.setItem('admin_portal_pin', pin);
-            loadLeads(pin);
             setIsValidating(false);
             return;
           }
         }
       }
 
-      // If the response wasn't a standard API JSON or pin verification is rejected
       if (String(pin) === '2026') {
         setIsAuthenticated(true);
         sessionStorage.setItem('admin_portal_pin', pin);
-        loadLeads(pin);
       } else {
         setAuthError('Incorrect Administration PIN (Access Denied).');
         setPin('');
       }
-    } catch (err) {
-      // Offline / Local host sandbox validation fallback is checked here
+    } catch {
       if (String(pin) === '2026') {
         setIsAuthenticated(true);
         sessionStorage.setItem('admin_portal_pin', pin);
-        loadLeads(pin);
       } else {
         setAuthError('Incorrect Administration PIN.');
         setPin('');
@@ -133,52 +174,24 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
     try {
       const localLeadsStr = localStorage.getItem('akgls_system_leads') || '[]';
       const localLeads = JSON.parse(localLeadsStr);
-      if (Array.isArray(localLeads)) {
-        setLeads(localLeads);
-      } else {
-        setLeads([]);
+      if (Array.isArray(localLeads) && localLeads.length > 0) {
+        setLeads(prev => prev.length > 0 ? prev : localLeads);
       }
     } catch (e) {
       console.error(e);
-      setLeads([]);
     }
   };
 
-  const loadLeads = async (authPin: string) => {
-    setIsLoading(true);
-    setErrorString('');
+  const handleSyncLocalLeadsToCloud = async () => {
+    setIsSyncingBackup(true);
     try {
-      const res = await fetch(`/api/leads?pin=${authPin}`, {
-        headers: {
-          'X-Admin-PIN': authPin
-        }
-      });
-
-      if (res.ok) {
-        const contentType = res.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const data = await res.json();
-          if (data && data.success && Array.isArray(data.leads)) {
-            setLeads(data.leads);
-            return;
-          }
-        }
-      }
-      
-      // If server does not support API router or returns static fallback files
-      loadLocalBackupLeads();
+      const res = await syncLocalLeadsToFirestore();
+      setBackupSyncSuccess(true);
+      setTimeout(() => setBackupSyncSuccess(false), 4000);
     } catch (err) {
-      // Resiliently fallback without showing blocking synchronization alerts
-      loadLocalBackupLeads();
+      console.error(err);
     } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const triggerRefresh = () => {
-    const activePin = pin || sessionStorage.getItem('admin_portal_pin') || '';
-    if (activePin) {
-      loadLeads(activePin);
+      setIsSyncingBackup(false);
     }
   };
 
@@ -197,19 +210,27 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
     setIsUpdating(true);
     const activePin = pin || sessionStorage.getItem('admin_portal_pin') || '';
 
-    // Step 1: Resiliently apply updates locally first
+    const updates: Partial<LeadRecord> = {
+      status: editStatus,
+      assignedTo: editAssignedTo,
+      notes: editNotes
+    };
+
+    // 1. Update in Firebase Firestore globally
+    try {
+      await updateLeadInFirestore(leadId, updates);
+    } catch (fbErr) {
+      console.warn('[Firebase] Update notice:', fbErr);
+    }
+
+    // 2. Resiliently update local storage backup
     try {
       const localLeadsStr = localStorage.getItem('akgls_system_leads') || '[]';
       let localLeads = JSON.parse(localLeadsStr);
       if (Array.isArray(localLeads)) {
         const updatedLocalLeads = localLeads.map((l: LeadRecord) => {
           if (l.id === leadId) {
-            return {
-              ...l,
-              status: editStatus,
-              assignedTo: editAssignedTo,
-              notes: editNotes
-            };
+            return { ...l, ...updates };
           }
           return l;
         });
@@ -219,49 +240,87 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
       console.warn('Local save failed:', localErr);
     }
 
-    // Step 2: Push changes to the database server endpoints
+    // 3. Fallback sync to server endpoint if present
     try {
-      const res = await fetch(`/api/leads/${leadId}?pin=${activePin}`, {
+      await fetch(`/api/leads/${leadId}?pin=${activePin}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
           'X-Admin-PIN': activePin
         },
-        body: JSON.stringify({
-          status: editStatus,
-          assignedTo: editAssignedTo,
-          notes: editNotes
-        })
+        body: JSON.stringify(updates)
       });
-
-      if (res.ok) {
-        const contentType = res.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) {
-          const data = await res.json();
-          if (data && data.success && data.lead) {
-            setLeads(prevLeads => 
-              prevLeads.map(l => l.id === leadId ? data.lead : l)
-            );
-            setEditingLeadId(null);
-            setIsUpdating(false);
-            return;
-          }
-        }
-      }
-    } catch (err) {
-      console.warn('Backend update failed (continuing to run in local-only mode):', err);
+    } catch {
+      // Non-blocking
     }
 
-    // State fallback update matching clientside local storage
+    // 4. Update component state directly
     setLeads(prevLeads => 
       prevLeads.map(lead => 
-        lead.id === leadId 
-          ? { ...lead, status: editStatus, assignedTo: editAssignedTo, notes: editNotes }
-          : lead
+        lead.id === leadId ? { ...lead, ...updates } : lead
       )
     );
     setEditingLeadId(null);
     setIsUpdating(false);
+  };
+
+  const handleDeleteLead = async (leadId: string) => {
+    if (!confirm('Are you sure you want to permanently delete this lead?')) return;
+    setDeletingLeadId(leadId);
+
+    // 1. Delete from Firestore
+    try {
+      await deleteLeadFromFirestore(leadId);
+    } catch (fbErr) {
+      console.warn('[Firebase] Delete notice:', fbErr);
+    }
+
+    // 2. Delete from local storage
+    try {
+      const localLeadsStr = localStorage.getItem('akgls_system_leads') || '[]';
+      let localLeads = JSON.parse(localLeadsStr);
+      if (Array.isArray(localLeads)) {
+        const filtered = localLeads.filter((l: LeadRecord) => l.id !== leadId);
+        localStorage.setItem('akgls_system_leads', JSON.stringify(filtered));
+      }
+    } catch {
+      // Non-blocking
+    }
+
+    // 3. Delete from state
+    setLeads(prev => prev.filter(l => l.id !== leadId));
+    setDeletingLeadId(null);
+  };
+
+  // Export leads to CSV
+  const handleExportCSV = () => {
+    if (leads.length === 0) return;
+    const headers = ['ID', 'Name', 'Email', 'Phone', 'Company', 'Website', 'Budget', 'Goal', 'Status', 'Date', 'Country', 'City', 'Assigned To', 'Notes'];
+    const rows = leads.map(l => [
+      `"${l.id}"`,
+      `"${(l.name || '').replace(/"/g, '""')}"`,
+      `"${(l.email || '').replace(/"/g, '""')}"`,
+      `"${(l.phone || '').replace(/"/g, '""')}"`,
+      `"${(l.companyName || '').replace(/"/g, '""')}"`,
+      `"${(l.websiteUrl || '').replace(/"/g, '""')}"`,
+      `"${(l.budget || '').replace(/"/g, '""')}"`,
+      `"${(l.primaryGoal || '').replace(/"/g, '""')}"`,
+      `"${l.status}"`,
+      `"${l.time}"`,
+      `"${(l.country || '').replace(/"/g, '""')}"`,
+      `"${(l.city || '').replace(/"/g, '""')}"`,
+      `"${(l.assignedTo || '').replace(/"/g, '""')}"`,
+      `"${(l.notes || '').replace(/"/g, '""')}"`
+    ]);
+
+    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement('a');
+    link.setAttribute('href', encodedUri);
+    link.setAttribute('download', `akgls-leads-export-${new Date().toISOString().slice(0, 10)}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   // Log out / Lock session
@@ -307,8 +366,13 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
             <div className="mx-auto w-14 h-14 bg-brand-indigo/10 border border-brand-indigo/25 rounded-2xl flex items-center justify-center mb-4">
               <Lock className="w-6 h-6 text-brand-indigo" />
             </div>
+            <div className="flex items-center justify-center gap-1.5 mb-1.5">
+              <span className="text-[10px] font-mono font-bold tracking-widest text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-2 py-0.5 rounded-full uppercase flex items-center gap-1">
+                <Cloud className="w-3 h-3 text-emerald-400" /> Firebase Global CRM
+              </span>
+            </div>
             <h1 className="text-2xl font-bold tracking-tight text-white mb-2 font-display">AKGLS Command Center</h1>
-            <p className="text-slate-400 text-xs">Enter your secure verification PIN to view the Lead Board</p>
+            <p className="text-slate-400 text-xs">Enter your secure verification PIN to view the global Firebase lead desk</p>
           </div>
 
           <form onSubmit={handleLoginSubmit} className="space-y-5">
@@ -341,7 +405,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
               id="submit-auth-pin"
               type="submit"
               disabled={isValidating || !pin}
-              className="w-full bg-brand-indigo hover:bg-brand-indigo/90 active:bg-brand-indigo text-white font-medium py-3 rounded-xl transition-all shadow-lg hover:shadow-brand-indigo/20 flex items-center justify-center gap-2 text-sm disabled:opacity-55 disabled:cursor-not-allowed"
+              className="w-full bg-brand-indigo hover:bg-brand-indigo/90 active:bg-brand-indigo text-white font-medium py-3 rounded-xl transition-all shadow-lg hover:shadow-brand-indigo/20 flex items-center justify-center gap-2 text-sm disabled:opacity-55 disabled:cursor-not-allowed cursor-pointer"
             >
               {isValidating ? (
                 <>
@@ -351,7 +415,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
               ) : (
                 <>
                   <ShieldCheck className="w-4 h-4" />
-                  <span>Access Lead Desk</span>
+                  <span>Access Global Leads Desk</span>
                 </>
               )}
             </button>
@@ -361,7 +425,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
             <button
               id="back-to-home-btn"
               onClick={onBackToHome}
-              className="text-slate-450 hover:text-slate-205 transition-colors text-xs flex items-center justify-center gap-1.5 mx-auto"
+              className="text-slate-400 hover:text-slate-200 transition-colors text-xs flex items-center justify-center gap-1.5 mx-auto cursor-pointer"
             >
               <ArrowLeft className="w-3.5 h-3.5" />
               <span>Back to Public Website</span>
@@ -376,63 +440,96 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100 font-sans pb-24" id="lead-management-portal">
       {/* Top Banner / Header */}
-      <header className="border-b border-slate-900 bg-slate-900/15 backdrop-blur-md sticky top-0 z-40">
+      <header className="border-b border-slate-900 bg-slate-900/30 backdrop-blur-md sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
             <button
               id="portal-back-nav"
               onClick={onBackToHome}
-              className="p-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-slate-400 hover:text-white transition-all"
+              className="p-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-slate-400 hover:text-white transition-all cursor-pointer"
               title="Return to Website"
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-lg font-bold tracking-tight text-white font-display">AKGLS Leads Desk</h1>
-                <span className="bg-emerald-950 border border-emerald-900/50 text-emerald-400 text-[10px] uppercase tracking-widest font-mono font-bold px-2 py-0.5 rounded-full">Secure</span>
+                <h1 className="text-lg font-bold tracking-tight text-white font-display">AKGLS Global Leads Desk</h1>
+                <span className="bg-emerald-950 border border-emerald-900/50 text-emerald-400 text-[10px] uppercase tracking-widest font-mono font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  Firebase Firestore
+                </span>
               </div>
-              <p className="text-slate-400 text-xs mt-0.5">Central website submission logs & real-time diagnostics</p>
+              <p className="text-slate-400 text-xs mt-0.5">Central real-time database capturing submissions globally across all pages</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            {/* Sync local to cloud tool */}
             <button
-              id="refresh-leads-btn"
-              onClick={triggerRefresh}
-              disabled={isLoading}
-              className="p-2 sm:px-4 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-slate-300 hover:text-white transition-all flex items-center gap-2 text-xs font-medium disabled:opacity-50"
+              id="sync-backup-btn"
+              onClick={handleSyncLocalLeadsToCloud}
+              disabled={isSyncingBackup}
+              className="p-2 px-3 bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 rounded-xl text-slate-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-medium cursor-pointer"
+              title="Sync any cached client submissions to Firebase Firestore"
             >
-              <RefreshCw className={`w-3.5 h-3.5 ${isLoading ? 'animate-spin' : ''}`} />
-              <span className="hidden sm:inline">Refresh Sync</span>
+              <Database className="w-3.5 h-3.5 text-brand-indigo" />
+              <span className="hidden md:inline">{isSyncingBackup ? 'Syncing...' : 'Sync Local Cache'}</span>
+            </button>
+
+            {/* Export CSV button */}
+            <button
+              id="export-csv-btn"
+              onClick={handleExportCSV}
+              disabled={leads.length === 0}
+              className="p-2 px-3 bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 rounded-xl text-slate-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-medium disabled:opacity-40 cursor-pointer"
+              title="Export all lead records to CSV spreadsheet"
+            >
+              <Download className="w-3.5 h-3.5 text-brand-teal" />
+              <span className="hidden md:inline">Export CSV</span>
             </button>
 
             <button
               id="lock-portal-btn"
               onClick={handleLock}
-              className="p-2 sm:px-4 bg-red-950/20 hover:bg-red-950/40 border border-red-900/30 rounded-xl text-red-400 hover:text-red-300 transition-all flex items-center gap-2 text-xs font-medium"
+              className="p-2 px-3 bg-red-950/20 hover:bg-red-950/40 border border-red-900/30 rounded-xl text-red-400 hover:text-red-300 transition-all flex items-center gap-1.5 text-xs font-medium cursor-pointer"
             >
               <Lock className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">Lock Panel</span>
+              <span>Lock</span>
             </button>
           </div>
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         
+        {backupSyncSuccess && (
+          <div className="mb-6 p-3 bg-emerald-950/40 border border-emerald-800/60 rounded-xl text-emerald-300 text-xs flex items-center gap-2">
+            <Check className="w-4 h-4 text-emerald-400" />
+            <span>Local lead cache successfully synchronized to Firebase Firestore cloud database.</span>
+          </div>
+        )}
+
+        {/* Live Cloud Status Banner */}
+        <div className="mb-6 px-4 py-2.5 bg-slate-900/50 border border-slate-800/80 rounded-2xl flex items-center justify-between text-xs">
+          <div className="flex items-center gap-2">
+            <span className={`w-2 h-2 rounded-full ${isFirebaseConnected ? 'bg-emerald-400 shadow-sm shadow-emerald-400/50' : 'bg-amber-400'}`} />
+            <span className="text-slate-300 font-mono text-[11px]">Database Status: <strong className="text-white">{syncStatusMsg}</strong></span>
+          </div>
+          <span className="text-slate-500 font-mono text-[10px] hidden sm:inline">Project: realtors-directory • Collection: leads</span>
+        </div>
+
         {/* KPI Stats Grid */}
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8" id="portal-kpis">
           {/* KPI 1 */}
           <div className="bg-slate-900/40 border border-slate-900/80 rounded-2xl p-4 sm:p-5">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Total Inquiries</span>
+              <span className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Total Leads</span>
               <div className="p-1 px-1.5 bg-brand-indigo/10 border border-brand-indigo/15 text-brand-indigo rounded-lg">
                 <Users className="w-4 h-4" />
               </div>
             </div>
             <p className="text-2xl sm:text-3xl font-bold font-mono text-white leading-none">{totalCount}</p>
-            <p className="text-[10px] text-slate-500 mt-2 font-mono">From all forms site-wide</p>
+            <p className="text-[10px] text-slate-500 mt-2 font-mono">Globally stored in Firestore</p>
           </div>
 
           {/* KPI 2 */}
@@ -450,7 +547,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
           {/* KPI 3 */}
           <div className="bg-slate-900/40 border border-slate-900/80 rounded-2xl p-4 sm:p-5">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Active Pitch</span>
+              <span className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Active Pipeline</span>
               <div className="p-1 px-1.5 bg-amber-950/25 border border-amber-900/30 text-amber-400 rounded-lg">
                 <UserCheck className="w-4 h-4" />
               </div>
@@ -462,7 +559,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
           {/* KPI 4 */}
           <div className="bg-slate-900/40 border border-slate-900/80 rounded-2xl p-4 sm:p-5">
             <div className="flex items-center justify-between mb-3">
-              <span className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Deal Won Rate</span>
+              <span className="text-slate-400 text-xs font-semibold uppercase tracking-wider">Converted Clients</span>
               <div className="p-1 px-1.5 bg-emerald-950/20 border border-emerald-900/20 text-emerald-400 rounded-lg">
                 <TrendingUp className="w-4 h-4" />
               </div>
@@ -471,7 +568,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
               <p className="text-2xl sm:text-3xl font-bold font-mono text-emerald-400 leading-none">{convertedCount}</p>
               <span className="text-xs text-slate-500 font-mono">({conversionRate}%)</span>
             </div>
-            <p className="text-[10px] text-slate-500 mt-2 font-mono">Status converted safely</p>
+            <p className="text-[10px] text-slate-500 mt-2 font-mono">Successfully closed deals</p>
           </div>
         </section>
 
@@ -498,11 +595,11 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
               onChange={(e) => setStatusFilter(e.target.value)}
               className="bg-slate-950 border border-slate-800 rounded-xl py-2 px-3 text-xs font-mono text-slate-300 focus:outline-none focus:border-brand-indigo/45 focus:ring-1 focus:ring-brand-indigo/30 w-full sm:w-auto"
             >
-              <option value="All">All statuses</option>
-              <option value="New">New</option>
+              <option value="All">All statuses ({leads.length})</option>
+              <option value="New">New ({newCount})</option>
               <option value="Contacted">Contacted</option>
               <option value="In Progress">In Progress</option>
-              <option value="Converted">Converted</option>
+              <option value="Converted">Converted ({convertedCount})</option>
               <option value="Spam">Spam</option>
               <option value="Archived">Archived</option>
             </select>
@@ -513,20 +610,13 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
         {isLoading ? (
           <div className="py-20 text-center flex flex-col items-center justify-center gap-4">
             <RefreshCw className="w-8 h-8 text-brand-indigo animate-spin" />
-            <p className="text-slate-400 text-sm">Synchronizing latest digital inquiries...</p>
+            <p className="text-slate-400 text-sm">Streaming live inquiries from Firebase Firestore...</p>
           </div>
         ) : errorString ? (
           <div className="py-16 text-center border border-dashed border-red-900/30 rounded-2xl bg-red-950/10 p-8">
             <AlertCircle className="w-10 h-10 text-red-500 mx-auto mb-3" />
             <h3 className="text-lg font-bold text-slate-200">Synchronization Error</h3>
             <p className="text-red-400 text-xs mt-1.5">{errorString}</p>
-            <button
-              id="retry-fetch-leads"
-              onClick={triggerRefresh}
-              className="mt-4 px-4 py-2 bg-slate-900 hover:bg-slate-850 text-white rounded-xl text-xs font-medium border border-slate-800 transition-all"
-            >
-              Retry Connection
-            </button>
           </div>
         ) : filteredLeads.length === 0 ? (
           <div className="py-20 text-center border border-dashed border-slate-900 rounded-3xl bg-slate-900/10">
@@ -534,15 +624,15 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
             <h3 className="text-sm font-semibold text-slate-300">No Inquiries Found</h3>
             <p className="text-slate-500 text-xs mt-1 max-w-sm mx-auto">
               {leads.length === 0 
-                ? "No submissions have been captured on the website yet. Form inputs are recorded automatically." 
+                ? "No submissions have been captured on the website yet. All website forms stream here automatically in real time." 
                 : "No leads matched your filter criteria."}
             </p>
           </div>
         ) : (
           <section className="space-y-4" id="leads-list">
             <div className="text-slate-400 text-xs font-semibold mb-2 font-mono flex justify-between items-center px-1">
-              <span>Showing {filteredLeads.length} leads</span>
-              <span className="text-[10px] text-slate-505">Order: Newest First</span>
+              <span>Displaying {filteredLeads.length} leads in Firestore</span>
+              <span className="text-[10px] text-slate-500">Real-time Stream: Active</span>
             </div>
 
             {filteredLeads.map((lead) => {
@@ -571,7 +661,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                         <span className={`text-[10px] uppercase font-mono tracking-wider font-semibold px-2 py-0.5 rounded-full ${
                           lead.status === 'New' ? 'bg-blue-950 text-blue-400 border border-blue-900/30' :
                           lead.status === 'Contacted' ? 'bg-indigo-950 text-indigo-400 border border-indigo-900/30' :
-                          lead.status === 'In Progress' ? 'bg-amber-955 text-amber-400 border border-amber-900/30' :
+                          lead.status === 'In Progress' ? 'bg-amber-950 text-amber-400 border border-amber-900/30' :
                           lead.status === 'Converted' ? 'bg-emerald-950 text-emerald-400 border border-emerald-900/30' :
                           lead.status === 'Spam' ? 'bg-slate-900 text-slate-500 border border-slate-800' :
                           'bg-slate-950 text-slate-400 border border-slate-800'
@@ -599,7 +689,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                             <a href={`tel:${lead.phone}`} className="hover:text-brand-indigo hover:underline">{lead.phone}</a>
                           </span>
                         )}
-                        <span className="flex items-center gap-1.5 text-slate-450 font-mono text-[11px]">
+                        <span className="flex items-center gap-1.5 text-slate-400 font-mono text-[11px]">
                           <Calendar className="w-3.5 h-3.5 text-slate-600" />
                           <span>{formattedDate}</span>
                         </span>
@@ -609,20 +699,31 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                     {/* Quick status actions button */}
                     <div className="flex items-center gap-2 self-start md:self-auto">
                       {!isEditing ? (
-                        <button
-                          id={`edit-lead-btn-${lead.id}`}
-                          onClick={() => startEditing(lead)}
-                          className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-1.5"
-                        >
-                          <span>Manage Status</span>
-                        </button>
+                        <>
+                          <button
+                            id={`edit-lead-btn-${lead.id}`}
+                            onClick={() => startEditing(lead)}
+                            className="px-3 py-1.5 bg-slate-900 hover:bg-slate-850 border border-slate-800 rounded-xl text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
+                          >
+                            <span>Manage Status</span>
+                          </button>
+                          <button
+                            id={`delete-lead-btn-${lead.id}`}
+                            onClick={() => handleDeleteLead(lead.id)}
+                            disabled={deletingLeadId === lead.id}
+                            className="p-2 bg-slate-900/60 hover:bg-red-950/40 border border-slate-800 hover:border-red-900/50 rounded-xl text-slate-500 hover:text-red-400 transition-all cursor-pointer"
+                            title="Delete Lead Record"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </>
                       ) : (
                         <div className="flex items-center gap-1.5">
                           <button
                             id={`save-lead-btn-${lead.id}`}
                             onClick={() => handleUpdateLead(lead.id)}
                             disabled={isUpdating}
-                            className="px-3 py-1.5 bg-brand-indigo hover:bg-brand-indigo/90 text-white rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 disabled:opacity-50"
+                            className="px-3 py-1.5 bg-brand-indigo hover:bg-brand-indigo/90 text-white rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
                           >
                             <Save className="w-3.5 h-3.5" />
                             <span>Save</span>
@@ -630,7 +731,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                           <button
                             id={`cancel-lead-btn-${lead.id}`}
                             onClick={cancelEditing}
-                            className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-all"
+                            className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-all cursor-pointer"
                           >
                             Cancel
                           </button>
@@ -717,13 +818,13 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                     {/* Raw inquiry message / text */}
                     {lead.notes && (
                       <div className="bg-slate-950/20 p-4 border border-slate-900 rounded-xl">
-                        <span className="text-[10px] uppercase font-semibold font-mono tracking-wider text-slate-500 block mb-1">Inquirer Message notes</span>
+                        <span className="text-[10px] uppercase font-semibold font-mono tracking-wider text-slate-500 block mb-1">Inquirer Message / Notes</span>
                         <p className="text-slate-300 text-xs italic leading-relaxed whitespace-pre-wrap">"{lead.notes}"</p>
                       </div>
                     )}
 
                     {/* Raw Details Dump for generic submissions */}
-                    {lead.rawDetails && Object.keys(lead.rawDetails).length > 2 && (
+                    {lead.rawDetails && Object.keys(lead.rawDetails).length > 1 && (
                       <div className="bg-slate-950/15 p-3 rounded-lg border border-slate-900">
                         <details className="group">
                           <summary className="text-[10.5px] uppercase font-mono tracking-wider text-slate-500 hover:text-slate-300 cursor-pointer list-none flex items-center gap-1 select-none font-semibold">
@@ -743,8 +844,8 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
 
                     {/* Active Edit Panel */}
                     {isEditing && (
-                      <div className="bg-slate-950 border border-brand-indigo/20 p-4 rounded-xl mt-4 space-y-4 animate-fadeIn">
-                        <div className="text-xs font-bold text-slate-250 border-b border-slate-900 pb-2 flex items-center gap-1.5">
+                      <div className="bg-slate-950 border border-brand-indigo/20 p-4 rounded-xl mt-4 space-y-4">
+                        <div className="text-xs font-bold text-slate-200 border-b border-slate-900 pb-2 flex items-center gap-1.5">
                           <Edit3Icon className="w-3.5 h-3.5 text-brand-indigo" />
                           <span>Management Options Desk</span>
                         </div>
@@ -804,7 +905,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
   );
 }
 
-// Simple edit icon component for portability without importing too many
+// Simple edit icon component
 function Edit3Icon({ className }: { className?: string }) {
   return (
     <svg 

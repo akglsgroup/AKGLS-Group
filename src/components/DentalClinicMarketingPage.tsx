@@ -9,6 +9,7 @@ import {
   Stethoscope, Zap, Bell, CheckSquare, Dumbbell, ShieldAlert, BadgeInfo
 } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
+import IndustryHeroVisual from './IndustryHeroVisual';
 
 interface DentalClinicMarketingPageProps {
   onBackToHome: () => void;
@@ -597,62 +598,46 @@ export default function DentalClinicMarketingPage({ onBackToHome, openProposalFo
               </div>
             </div>
 
-            {/* RIGHT HERO PANEL: INTERACTIVE APP WINDOW */}
+            {/* RIGHT HERO PANEL: TARGETED PROFESSIONAL BRANDED HERO GRAPHIC */}
             <div className="lg:col-span-5 relative">
-              <div className="bg-[#0c121e] border border-slate-850 rounded-3xl p-6 shadow-2xl relative space-y-4">
-                {/* Header elements simulating scheduling growth panel */}
-                <div className="flex justify-between items-center text-[10px] font-mono text-slate-500 uppercase font-black tracking-wider">
-                  <span>Elite Medical Node: Syracuse</span>
-                  <span className="text-brand-teal flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-brand-teal rounded-full animate-ping" />
-                    Live Metrics Monitor
-                  </span>
-                </div>
-
-                <div className="bg-slate-950 p-4 rounded-2xl border border-slate-900 space-y-3.5">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <span className="text-[10px] font-mono text-slate-400 block uppercase">Appointment Growth Dashboard</span>
-                      <span className="text-2xl font-black font-display text-white">+118 Appointment Bookings</span>
+              <IndustryHeroVisual 
+                configKey="dental"
+                customOverlayContent={
+                  <div className="space-y-3">
+                    <div className="flex justify-between items-center text-[10px] font-mono text-slate-400">
+                      <span className="flex items-center gap-1.5 text-brand-teal font-bold">
+                        <span className="w-2 h-2 rounded-full bg-brand-teal animate-ping" />
+                        Patient Acquisition Yield
+                      </span>
+                      <span className="bg-brand-teal/15 text-brand-teal px-2 py-0.5 rounded border border-brand-teal/30 font-bold">+192% MoM</span>
                     </div>
-                    <span className="text-brand-teal font-mono font-bold text-xs bg-brand-teal/10 px-2 py-0.5 rounded border border-brand-teal/20">+192% MoM</span>
-                  </div>
 
-                  {/* Micro Visual Chart Block using SVG */}
-                  <div className="h-28 flex items-end justify-between gap-1 pt-2 border-b border-slate-900 pb-1">
-                    {[30, 42, 35, 68, 55, 92, 118].map((val, idx) => (
-                      <div key={idx} className="flex-1 flex flex-col items-center gap-1 group relative">
-                        <div className="text-[9px] font-mono text-slate-500 opacity-0 group-hover:opacity-100 absolute bottom-full mb-1 transition-opacity bg-slate-905 border border-slate-800 py-0.5 px-1.5 rounded">{val}</div>
-                        <div 
-                          className="w-full bg-gradient-to-t from-brand-indigo via-teal-500 to-brand-teal rounded-t-sm transition-all duration-1000 origin-bottom"
-                          style={{ height: `${(val / 120) * 85}px` }}
-                        />
-                        <span className="text-[9px] font-mono text-slate-600 mt-1 uppercase">Wk{idx+1}</span>
+                    {/* Micro Visual Chart Block using SVG */}
+                    <div className="h-16 flex items-end justify-between gap-1 border-b border-slate-900 pb-1">
+                      {[30, 42, 35, 68, 55, 92, 118].map((val, idx) => (
+                        <div key={idx} className="flex-1 flex flex-col items-center gap-1 group relative">
+                          <div 
+                            className="w-full bg-gradient-to-t from-brand-indigo via-teal-500 to-brand-teal rounded-t-sm transition-all duration-700 origin-bottom"
+                            style={{ height: `${(val / 120) * 55}px` }}
+                          />
+                          <span className="text-[8px] font-mono text-slate-500 uppercase">W{idx+1}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-2 text-[10.5px]">
+                      <div className="flex items-center gap-1.5 text-slate-300">
+                        <Check className="w-3.5 h-3.5 text-brand-teal flex-shrink-0" />
+                        <span>Google 3-Pack Rank #1</span>
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Micro list metrics */}
-                  <div className="grid grid-cols-2 gap-2.5 pt-1">
-                    <div className="flex items-center gap-1.5">
-                      <Check className="w-3.5 h-3.5 text-brand-teal" />
-                      <span className="text-[11px] text-slate-400">Organic Maps #2 slot</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Check className="w-3.5 h-3.5 text-brand-teal" />
-                      <span className="text-[11px] text-slate-400">Total leads val: +$42K</span>
+                      <div className="flex items-center gap-1.5 text-slate-300">
+                        <Check className="w-3.5 h-3.5 text-brand-teal flex-shrink-0" />
+                        <span>+$42,000 Pipeline Added</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-
-                <div className="flex justify-between items-center bg-[#070b14] p-3.5 rounded-2xl border border-slate-900">
-                  <div className="flex gap-2 items-center">
-                    <div className="w-2.5 h-2.5 rounded-full bg-brand-orange animate-pulse" />
-                    <span className="text-[11px] text-slate-300 font-bold">Implant Pipeline Active</span>
-                  </div>
-                  <span className="text-[10px] font-mono text-slate-400 uppercase">99.4% Citation Integrity</span>
-                </div>
-              </div>
+                }
+              />
             </div>
 
           </div>

@@ -173,7 +173,8 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       { name: "AI SEO Checklists", href: "/free-checklists/" },
       { name: "Engineering Blog", href: "/blog" },
       { name: "Learning Hub", href: "/learning-hub" },
-      { name: "Internship Program", href: "/internship-program" }
+      { name: "Internship Program", href: "/internship-program" },
+      { name: "FAQs & Common Questions", href: "#faq" }
     ]
   }
 ];

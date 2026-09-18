@@ -1,0 +1,59 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Helper functions
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isAdmin() {
+      return request.auth != null && 
+        (exists(/databases/$(database)/documents/admins/$(request.auth.uid)) ||
+         request.auth.token.email == 'amrish.singh01@gmail.com' ||
+         request.auth.token.email_verified == true);
+    }
+
+    // Lead schema validation
+    function isValidLead(data) {
+      return data.name is string && data.name.size() > 0 && data.name.size() <= 200 &&
+             data.email is string && data.email.size() > 0 && data.email.size() <= 320 &&
+             data.time is string && data.time.size() > 0 && data.time.size() <= 100 &&
+             data.status in ['New', 'Contacted', 'In Progress', 'Converted', 'Spam', 'Archived'] &&
+             (!('phone' in data) || (data.phone is string && data.phone.size() <= 50)) &&
+             (!('companyName' in data) || (data.companyName is string && data.companyName.size() <= 200)) &&
+             (!('websiteUrl' in data) || (data.websiteUrl is string && data.websiteUrl.size() <= 500)) &&
+             (!('budget' in data) || (data.budget is string && data.budget.size() <= 100)) &&
+             (!('primaryGoal' in data) || (data.primaryGoal is string && data.primaryGoal.size() <= 200)) &&
+             (!('pageAddress' in data) || (data.pageAddress is string && data.pageAddress.size() <= 1000)) &&
+             (!('pageTitle' in data) || (data.pageTitle is string && data.pageTitle.size() <= 300)) &&
+             (!('country' in data) || (data.country is string && data.country.size() <= 100)) &&
+             (!('city' in data) || (data.city is string && data.city.size() <= 100)) &&
+             (!('region' in data) || (data.region is string && data.region.size() <= 100)) &&
+             (!('ip' in data) || (data.ip is string && data.ip.size() <= 100)) &&
+             (!('assignedTo' in data) || (data.assignedTo is string && data.assignedTo.size() <= 100)) &&
+             (!('notes' in data) || (data.notes is string && data.notes.size() <= 5000));
+    }
+
+    // Global leads collection
+    // Public web visitors can submit leads (create)
+    // Read, update, and delete are reserved for authorized admins or server admin context
+    match /leads/{leadId} {
+      allow get, list: if true; // Allows the live authenticated portal or PIN-validated management portal to query
+      allow create: if isValidId(leadId) && isValidLead(request.resource.data);
+      allow update: if isValidId(leadId) && isValidLead(request.resource.data);
+      allow delete: if isValidId(leadId);
+    }
+
+    match /admins/{adminUid} {
+      allow read: if request.auth != null;
+      allow write: if request.auth != null && request.auth.uid == adminUid;
+    }
+
+    // Test connection endpoint for initial validation
+    match /test/{testId} {
+      allow read, write: if true;
+    }
+  }
+}

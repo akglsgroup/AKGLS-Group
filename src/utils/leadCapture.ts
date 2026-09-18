@@ -1,4 +1,5 @@
 import { LeadRecord } from '../types';
+import { saveLeadToFirestore } from '../firebase';
 
 /**
  * Fetches the user's geo-location details via client-side IP lookup.
@@ -43,12 +44,15 @@ export async function captureLead(formData: {
   budget?: string;
   primaryGoal?: string;
   notes?: string;
+  pageAddress?: string;
+  pageTitle?: string;
+  status?: LeadRecord['status'];
   rawDetails?: Record<string, any>;
 }): Promise<LeadRecord | null> {
   try {
     // 1. Gather browser details
-    const pageAddress = window.location.href;
-    const pageTitle = document.title;
+    const pageAddress = formData.pageAddress || (typeof window !== 'undefined' ? window.location.href : 'https://www.akglsgroup.com');
+    const pageTitle = formData.pageTitle || (typeof document !== 'undefined' ? document.title : 'AKGLS Group');
     const time = new Date().toISOString();
 
     // 2. Fetch client-side geo info in parallel (with timeout)
@@ -72,7 +76,7 @@ export async function captureLead(formData: {
       region: geo.region,
       ip: geo.ip,
       rawDetails: formData.rawDetails || {},
-      status: 'New' as const,
+      status: formData.status || ('New' as const),
       assignedTo: 'Unassigned',
     };
 
@@ -95,7 +99,14 @@ export async function captureLead(formData: {
     localLeads.unshift(clientLead);
     localStorage.setItem('akgls_system_leads', JSON.stringify(localLeads));
 
-    // 5. Try saving to server backend
+    // 5. Save to Firebase Firestore globally (Real-time Cloud Database)
+    try {
+      await saveLeadToFirestore(clientLead);
+    } catch (fbErr) {
+      console.warn('[Firebase] Direct write notice:', fbErr);
+    }
+
+    // 6. Try saving to server backend
     try {
       const response = await fetch('/api/leads', {
         method: 'POST',

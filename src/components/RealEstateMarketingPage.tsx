@@ -3,8 +3,10 @@ import {
   Award, Bot, CheckCircle, CheckCircle2, ChevronRight, Star, Users, Briefcase,
   Search, X, Shield, Server, Terminal, Smartphone, Globe, BarChart3, 
   AlertCircle, Sparkles, Network, Check, Home, Landmark, Key, Compass, 
-  Map, HelpCircle, Mail, Phone, MapPin, Zap, MessageSquare, TrendingUp, AlertTriangle, ChevronDown
+  Map, HelpCircle, Mail, Phone, MapPin, Zap, MessageSquare, TrendingUp, AlertTriangle, ChevronDown,
+  Sliders
 } from 'lucide-react';
+import IndustryHeroVisual from './IndustryHeroVisual';
 
 interface RealEstateMarketingPageProps {
   onBackToHome: () => void;
@@ -48,6 +50,7 @@ export default function RealEstateMarketingPage({ onBackToHome, openProposalForm
   }, []);
 
   // 1. PROPERTY LEAD ESTIMATOR / ROI CALCULATOR STATE
+  const [heroViewMode, setHeroViewMode] = useState<'visual' | 'calculator'>('visual');
   const [propertyPriceRange, setPropertyPriceRange] = useState<number>(120000); // Average flat price in dollars or equivalent
   const [monthlyAdSpend, setMonthlyAdSpend] = useState<number>(3000);
   const [conversionRate, setConversionRate] = useState<number>(2); // Typical conversion of site visits/ads clicks to lead (2%)
@@ -529,103 +532,166 @@ export default function RealEstateMarketingPage({ onBackToHome, openProposalForm
             </div>
           </div>
 
-          {/* Interactive Property Leads Calculator Simulator */}
+          {/* Targeted Branded Hero Graphic with Calculator toggle */}
           <div className="lg:col-span-5 relative mt-6 lg:mt-0" id="re-calc-section">
-            <div className="bg-[#0b101b] border border-slate-900 rounded-2.5xl p-5 shadow-2xl relative">
-              <div className="flex items-center justify-between border-b border-slate-900 pb-3 mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                </div>
-                <div className="text-[10px] font-mono text-slate-400 font-extrabold flex items-center gap-1.5">
-                  <span className="inline-block w-2 h-2 rounded-full bg-orange-500 animate-ping" />
-                  Lead Yield Estimator
-                </div>
-              </div>
-
-              <div className="space-y-4 text-left">
-                <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="text-[10px] uppercase font-mono font-black text-slate-400">Target Pricing Class (USD):</label>
-                    <span className="text-xs text-brand-orange font-bold font-mono">${propertyPriceRange.toLocaleString()}</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min={40000} 
-                    max={600000} 
-                    step={10000}
-                    value={propertyPriceRange}
-                    onChange={(e) => setPropertyPriceRange(Number(e.target.value))}
-                    className="w-full accent-brand-orange h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
-                    <span>$40K (Affordable)</span>
-                    <span>$250K (Moderate)</span>
-                    <span>$600K+ (Luxury)</span>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="text-[10px] uppercase font-mono font-black text-slate-400">Target Ads Spend / month (USD):</label>
-                    <span className="text-xs text-brand-teal font-bold font-mono">${monthlyAdSpend.toLocaleString()}</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min={1000} 
-                    max={15000} 
-                    step={500}
-                    value={monthlyAdSpend}
-                    onChange={(e) => setMonthlyAdSpend(Number(e.target.value))}
-                    className="w-full accent-brand-teal h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
-                    <span>$1,000/mo</span>
-                    <span>$7,500/mo</span>
-                    <span>$15,000/mo</span>
-                  </div>
-                </div>
-
-                {/* Simulated Output Metrics Display */}
-                <div className="grid grid-cols-2 gap-3 pt-2">
-                  <div className="bg-[#05080e] p-3 rounded-lg border border-slate-900">
-                    <span className="text-[9px] text-slate-500 uppercase font-mono font-bold block">Baseline leads count:</span>
-                    <span className="text-lg font-black text-slate-400 font-display block mt-1">{baselineLeads} <span className="text-[9px] text-slate-600 font-light font-sans">leads</span></span>
-                    <span className="text-[8px] text-slate-500 block font-mono mt-0.5">At standard {conversionRate}% rate</span>
-                  </div>
-                  <div className="bg-[#070e17] p-3 rounded-lg border border-brand-teal/20">
-                    <span className="text-[9px] text-brand-teal uppercase font-mono font-black block">AKGLS optimized:</span>
-                    <span className="text-lg font-black text-brand-teal font-display block mt-1">{akglsLeadsCount} <span className="text-[9px] font-light font-sans">leads</span></span>
-                    <span className="text-[8px] text-slate-400 block font-mono mt-0.5">+180% average uplift</span>
-                  </div>
-                </div>
-
-                <div className="bg-[#060a12] rounded-xl p-3 border border-slate-900 select-none text-center">
-                  <span className="text-[9px] text-slate-500 font-mono uppercase block">Projected Site Visits & Closings Value Prospect:</span>
-                  <div className="flex justify-around items-center mt-2">
-                    <div>
-                      <span className="text-xs text-white block font-semibold">{akglsSiteVisits}</span>
-                      <span className="text-[8px] text-slate-500 block font-mono">Site Visits/mo</span>
-                    </div>
-                    <div className="text-slate-800">|</div>
-                    <div>
-                      <span className="text-xs text-brand-orange block font-semibold">{estimatedCloses}</span>
-                      <span className="text-[8px] text-slate-500 block font-mono">Closings/mo</span>
-                    </div>
-                    <div className="text-slate-800">|</div>
-                    <div>
-                      <span className="text-xs text-brand-teal block font-semibold">${(pipelineValue / 1000).toFixed(0)}k</span>
-                      <span className="text-[8px] text-slate-500 block font-mono">Monthly Value Pipeline</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-[9px] text-slate-500 text-center font-mono mt-3">
-                Calculated based on standard client CRM outcomes across residential launches.
-              </div>
+            {/* View Mode Toggle Strip */}
+            <div className="flex items-center justify-end mb-2 gap-1.5 font-mono text-[10px]">
+              <button
+                onClick={() => setHeroViewMode('visual')}
+                className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  heroViewMode === 'visual'
+                    ? 'bg-brand-orange/20 border-brand-orange text-white font-bold'
+                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sparkles className="w-3 h-3 text-brand-orange" />
+                <span>Development Showcase</span>
+              </button>
+              <button
+                onClick={() => setHeroViewMode('calculator')}
+                className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  heroViewMode === 'calculator'
+                    ? 'bg-brand-orange/20 border-brand-orange text-white font-bold'
+                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sliders className="w-3 h-3 text-brand-orange" />
+                <span>ROI Simulator</span>
+              </button>
             </div>
+
+            {heroViewMode === 'visual' ? (
+              <IndustryHeroVisual 
+                configKey="realestate"
+                customOverlayContent={
+                  <div className="space-y-2.5">
+                    <div className="flex justify-between items-center text-[10px] font-mono">
+                      <span className="text-brand-orange font-bold flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-brand-orange animate-ping" />
+                        Buyer Pipeline Velocity
+                      </span>
+                      <button 
+                        onClick={() => setHeroViewMode('calculator')}
+                        className="text-brand-orange hover:underline text-[9.5px] cursor-pointer flex items-center gap-1"
+                      >
+                        Launch Yield Calculator →
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 bg-slate-950/80 p-2.5 rounded-xl border border-slate-900 text-left">
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Qualified Inquiries</span>
+                        <span className="text-sm font-black font-display text-white mt-0.5 block">{akglsLeadsCount} leads</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Projected Closings</span>
+                        <span className="text-sm font-black font-display text-brand-orange mt-0.5 block">{estimatedCloses} sales</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Monthly Pipeline</span>
+                        <span className="text-sm font-black font-display text-brand-teal mt-0.5 block">${(pipelineValue / 1000).toFixed(0)}k/mo</span>
+                      </div>
+                    </div>
+                  </div>
+                }
+              />
+            ) : (
+              <div className="bg-[#0b101b] border border-slate-900 rounded-2.5xl p-5 shadow-2xl relative">
+                <div className="flex items-center justify-between border-b border-slate-900 pb-3 mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                  </div>
+                  <div className="text-[10px] font-mono text-slate-400 font-extrabold flex items-center gap-1.5">
+                    <span className="inline-block w-2 h-2 rounded-full bg-orange-500 animate-ping" />
+                    Lead Yield Estimator
+                  </div>
+                </div>
+
+                <div className="space-y-4 text-left">
+                  <div>
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="text-[10px] uppercase font-mono font-black text-slate-400">Target Pricing Class (USD):</label>
+                      <span className="text-xs text-brand-orange font-bold font-mono">${propertyPriceRange.toLocaleString()}</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min={40000} 
+                      max={600000} 
+                      step={10000}
+                      value={propertyPriceRange}
+                      onChange={(e) => setPropertyPriceRange(Number(e.target.value))}
+                      className="w-full accent-brand-orange h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
+                      <span>$40K (Affordable)</span>
+                      <span>$250K (Moderate)</span>
+                      <span>$600K+ (Luxury)</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="text-[10px] uppercase font-mono font-black text-slate-400">Target Ads Spend / month (USD):</label>
+                      <span className="text-xs text-brand-teal font-bold font-mono">${monthlyAdSpend.toLocaleString()}</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min={1000} 
+                      max={15000} 
+                      step={500}
+                      value={monthlyAdSpend}
+                      onChange={(e) => setMonthlyAdSpend(Number(e.target.value))}
+                      className="w-full accent-brand-teal h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
+                      <span>$1,000/mo</span>
+                      <span>$7,500/mo</span>
+                      <span>$15,000/mo</span>
+                    </div>
+                  </div>
+
+                  {/* Simulated Output Metrics Display */}
+                  <div className="grid grid-cols-2 gap-3 pt-2">
+                    <div className="bg-[#05080e] p-3 rounded-lg border border-slate-900">
+                      <span className="text-[9px] text-slate-500 uppercase font-mono font-bold block">Baseline leads count:</span>
+                      <span className="text-lg font-black text-slate-400 font-display block mt-1">{baselineLeads} <span className="text-[9px] text-slate-600 font-light font-sans">leads</span></span>
+                      <span className="text-[8px] text-slate-500 block font-mono mt-0.5">At standard {conversionRate}% rate</span>
+                    </div>
+                    <div className="bg-[#070e17] p-3 rounded-lg border border-brand-teal/20">
+                      <span className="text-[9px] text-brand-teal uppercase font-mono font-black block">AKGLS optimized:</span>
+                      <span className="text-lg font-black text-brand-teal font-display block mt-1">{akglsLeadsCount} <span className="text-[9px] font-light font-sans">leads</span></span>
+                      <span className="text-[8px] text-slate-400 block font-mono mt-0.5">+180% average uplift</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-[#060a12] rounded-xl p-3 border border-slate-900 select-none text-center">
+                    <span className="text-[9px] text-slate-500 font-mono uppercase block">Projected Site Visits & Closings Value Prospect:</span>
+                    <div className="flex justify-around items-center mt-2">
+                      <div>
+                        <span className="text-xs text-white block font-semibold">{akglsSiteVisits}</span>
+                        <span className="text-[8px] text-slate-500 block font-mono">Site Visits/mo</span>
+                      </div>
+                      <div className="text-slate-800">|</div>
+                      <div>
+                        <span className="text-xs text-brand-orange block font-semibold">{estimatedCloses}</span>
+                        <span className="text-[8px] text-slate-500 block font-mono">Closings/mo</span>
+                      </div>
+                      <div className="text-slate-800">|</div>
+                      <div>
+                        <span className="text-xs text-brand-teal block font-semibold">${(pipelineValue / 1000).toFixed(0)}k</span>
+                        <span className="text-[8px] text-slate-500 block font-mono">Monthly Value Pipeline</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-[9px] text-slate-500 text-center font-mono mt-3">
+                  Calculated based on standard client CRM outcomes across residential launches.
+                </div>
+              </div>
+            )}
           </div>
 
         </div>

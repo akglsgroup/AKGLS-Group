@@ -1,11 +1,12 @@
 import { useState, FormEvent, MouseEvent } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
-  Phone, Mail, MapPin, Clock, MessageSquare, ArrowRight, Award, 
+  Phone, Mail, MapPin, Clock, MessageSquare, ArrowRight, ArrowUp, Award, 
   Sparkles, ChevronDown, Check, CheckCircle, Linkedin, Instagram, 
   Facebook, Twitter, Youtube, Globe, RefreshCw 
 } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
+import { PWAInstallButton } from './PWAInstallButton';
 import { 
   FOOTER_FLOATING_CTA, 
   FOOTER_COMPANY_INFO, 
@@ -39,22 +40,57 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
       return;
     }
 
+    if (href === '#' || href === '#top') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
     if (href.startsWith('#')) {
       e.preventDefault();
-      window.location.hash = href;
       const element = document.querySelector(href);
       if (element) {
         element.scrollIntoView({ behavior: 'smooth' });
+        window.history.pushState(null, '', href);
       } else {
-        window.history.pushState(null, '', '/');
-        window.location.hash = href;
+        window.history.pushState(null, '', '/' + href);
         window.dispatchEvent(new PopStateEvent('popstate'));
+        setTimeout(() => {
+          const el = document.querySelector(href);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 120);
       }
     } else if (href.startsWith('/')) {
-      e.preventDefault();
-      window.history.pushState(null, '', href);
-      window.dispatchEvent(new PopStateEvent('popstate'));
-      window.scrollTo({ top: 0, behavior: 'instant' });
+      if (href.includes('#')) {
+        e.preventDefault();
+        const [path, hash] = href.split('#');
+        const targetHash = `#${hash}`;
+        if (window.location.pathname === path || (path === '/' && window.location.pathname === '')) {
+          const el = document.querySelector(targetHash);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+            window.history.pushState(null, '', href);
+            return;
+          }
+        }
+        window.history.pushState(null, '', href);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+        setTimeout(() => {
+          const el = document.querySelector(targetHash);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }, 120);
+      } else {
+        e.preventDefault();
+        window.history.pushState(null, '', href);
+        window.dispatchEvent(new PopStateEvent('popstate'));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
     }
   };
 
@@ -450,8 +486,23 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
               ))}
             </div>
 
-            <div className="flex items-center gap-1.5 font-display text-slate-400 text-xs font-semibold">
+            <div className="flex items-center gap-3 font-display text-slate-400 text-xs font-semibold">
+              <PWAInstallButton 
+                variant="footer"
+                className="inline-flex items-center gap-1.5 text-slate-400 hover:text-brand-teal transition-colors rounded px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal cursor-pointer"
+              />
+              <span className="text-indigo-950/60 hidden sm:inline">•</span>
               <span>Designed with ❤️ for AI-Driven Growth</span>
+              <span className="text-indigo-950/60 hidden sm:inline">•</span>
+              <button 
+                type="button"
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="inline-flex items-center gap-1.5 text-slate-400 hover:text-brand-teal transition-colors rounded px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal cursor-pointer"
+                aria-label="Scroll smoothly back to top"
+              >
+                <ArrowUp className="w-3.5 h-3.5" />
+                <span>Back to top</span>
+              </button>
             </div>
           </div>
 

@@ -4,8 +4,10 @@ import {
   Search, X, Shield, Server, Terminal, Smartphone, Globe, BarChart3, 
   AlertCircle, Sparkles, Network, Check, Landmark, Map, HelpCircle, Mail, Phone, 
   MapPin, Zap, MessageSquare, TrendingUp, AlertTriangle, ChevronDown, Scale, Gavel, FileText, Lock,
-  UtensilsCrossed, Calendar, Eye, Compass, ShoppingBag, Radio, RefreshCw, Sparkle, Target, ListCollapse
+  UtensilsCrossed, Calendar, Eye, Compass, ShoppingBag, Radio, RefreshCw, Sparkle, Target, ListCollapse,
+  Sliders
 } from 'lucide-react';
+import IndustryHeroVisual from './IndustryHeroVisual';
 
 interface RestaurantMarketingPageProps {
   onBackToHome: () => void;
@@ -70,6 +72,7 @@ export default function RestaurantMarketingPage({ onBackToHome, openProposalForm
   }, []);
 
   // 1. DYNAMIC RESTAURANT ROI & CUSTOMER RETENTION CALCULATOR
+  const [heroViewMode, setHeroViewMode] = useState<'visual' | 'calculator'>('visual');
   const [businessType, setBusinessType] = useState<'cafe' | 'dining' | 'cloud' | 'chain'>('dining');
   const [targetSpend, setTargetSpend] = useState<number>(3000);
   const [avgTicket, setAvgTicket] = useState<number>(45);
@@ -552,128 +555,191 @@ export default function RestaurantMarketingPage({ onBackToHome, openProposalForm
             </div>
           </div>
 
-          {/* Interactive ROI & Booking Estimator */}
+          {/* Targeted Branded Hero Graphic with Calculator Toggle */}
           <div className="lg:col-span-5 relative mt-6 lg:mt-0" id="restaurant-estimator-section">
-            <div className="bg-[#070b13] border border-slate-900 rounded-2.5xl p-5 shadow-2xl relative">
-              <div className="flex items-center justify-between border-b border-slate-900 pb-3 mb-4">
-                <div className="flex items-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-orange-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-teal-500/80 animate-pulse" />
-                </div>
-                <div className="text-[10px] font-mono text-slate-400 font-extrabold flex items-center gap-1.5">
-                  <span className="inline-block w-2 h-2 rounded-full bg-orange-500 animate-ping" />
-                  Restaurant Yield Estimator
-                </div>
-              </div>
-
-              <div className="space-y-4 text-left">
-                {/* Business Type Selector */}
-                <div>
-                  <label className="text-[10px] uppercase font-mono font-black text-slate-500 block mb-1.5">Select Food Business Type:</label>
-                  <div className="grid grid-cols-4 gap-1">
-                    {[
-                      { key: 'cafe', label: 'Cafe' },
-                      { key: 'dining', label: 'Dining' },
-                      { key: 'cloud', label: 'Cloud' },
-                      { key: 'chain', label: 'Chain' }
-                    ].map((type) => (
-                      <button
-                        key={type.key}
-                        onClick={() => setBusinessType(type.key as any)}
-                        className={`text-[9px] py-1.5 rounded font-bold border font-mono transition-colors cursor-pointer ${
-                          businessType === type.key
-                            ? 'bg-amber-500/20 border-amber-500 text-white'
-                            : 'bg-slate-950 border-slate-900 text-slate-500 hover:text-slate-300'
-                        }`}
-                      >
-                        {type.label}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="text-[10px] uppercase font-mono font-black text-slate-400">Average Customer Order Value (USD):</label>
-                    <span className="text-xs text-amber-500 font-bold font-mono">${avgTicket.toLocaleString()}</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min={10} 
-                    max={200} 
-                    step={5}
-                    value={avgTicket}
-                    onChange={(e) => setAvgTicket(Number(e.target.value))}
-                    className="w-full accent-amber-500 h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
-                    <span>$10 (Cafes/Bites)</span>
-                    <span>$100 (Fine Lounges)</span>
-                    <span>$200 (Catering Menu)</span>
-                  </div>
-                </div>
-
-                <div>
-                  <div className="flex justify-between items-center mb-1">
-                    <label className="text-[10px] uppercase font-mono font-black text-slate-400">Target Monthly Marketing Budget (USD):</label>
-                    <span className="text-xs text-brand-teal font-bold font-mono">${targetSpend.toLocaleString()}</span>
-                  </div>
-                  <input 
-                    type="range" 
-                    min={500} 
-                    max={15000} 
-                    step={250}
-                    value={targetSpend}
-                    onChange={(e) => setTargetSpend(Number(e.target.value))}
-                    className="w-full accent-brand-teal h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
-                    <span>$500/mo</span>
-                    <span>$5,000/mo</span>
-                    <span>$15,000/mo</span>
-                  </div>
-                </div>
-
-                {/* Simulated Results Indicators */}
-                <div className="grid grid-cols-2 gap-3 pt-2">
-                  <div className="bg-[#02050b] p-3 rounded-lg border border-slate-900">
-                    <span className="text-[9px] text-slate-500 uppercase font-mono font-bold block">Baseline Sales Count:</span>
-                    <span className="text-lg font-black text-slate-400 font-display block mt-1">{baseCustomers} <span className="text-[9px] text-slate-600 font-light font-sans">orders</span></span>
-                    <span className="text-[8px] text-slate-500 block font-mono mt-0.5">At standard {currentConfig.baselineConv}% rate</span>
-                  </div>
-                  <div className="bg-[#05111a] p-3 rounded-lg border border-amber-500/20 animate-pulse">
-                    <span className="text-[9px] text-amber-500 uppercase font-mono font-black block">AKGLS Expected Sales:</span>
-                    <span className="text-lg font-black text-amber-500 font-display block mt-1">{akglsCustomersCheckins} <span className="text-[9px] font-light font-sans">guests</span></span>
-                    <span className="text-[8px] text-slate-300 block font-mono mt-0.5">~{(currentConfig.uplift * 100).toFixed(0)}% growth index</span>
-                  </div>
-                </div>
-
-                <div className="bg-[#03060c] rounded-xl p-3 border border-slate-900 text-center">
-                  <span className="text-[9px] text-slate-500 font-mono uppercase block">Projected Customer Yield / ROI Model:</span>
-                  <div className="flex justify-around items-center mt-2">
-                    <div>
-                      <span className="text-xs text-white block font-semibold">{clicks}</span>
-                      <span className="text-[8px] text-slate-500 block font-mono">Web Clicks</span>
-                    </div>
-                    <div className="text-slate-800">|</div>
-                    <div>
-                      <span className="text-xs text-amber-500 block font-semibold">${(generatedBillings / 1000).toFixed(0)}k</span>
-                      <span className="text-[8px] text-slate-500 block font-mono">Weekly Billings</span>
-                    </div>
-                    <div className="text-slate-800">|</div>
-                    <div>
-                      <span className="text-xs text-brand-teal block font-semibold">{computedRoiValue}x ROI</span>
-                      <span className="text-[8px] text-slate-500 block font-mono">Ad Spend Yield</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="text-[9px] text-slate-500 text-center font-mono mt-3">
-                Assumes localized user proximity density parameters and active reservations slots.
-              </div>
+            {/* View Mode Toggle Strip */}
+            <div className="flex items-center justify-end mb-2 gap-1.5 font-mono text-[10px]">
+              <button
+                onClick={() => setHeroViewMode('visual')}
+                className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  heroViewMode === 'visual'
+                    ? 'bg-amber-500/20 border-amber-500 text-white font-bold'
+                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sparkles className="w-3 h-3 text-amber-400" />
+                <span>Culinary Spotlight</span>
+              </button>
+              <button
+                onClick={() => setHeroViewMode('calculator')}
+                className={`px-3 py-1 rounded-lg border transition-all cursor-pointer flex items-center gap-1.5 ${
+                  heroViewMode === 'calculator'
+                    ? 'bg-amber-500/20 border-amber-500 text-white font-bold'
+                    : 'bg-slate-950/70 border-slate-800 text-slate-400 hover:text-slate-200'
+                }`}
+              >
+                <Sliders className="w-3 h-3 text-amber-400" />
+                <span>ROI Simulator</span>
+              </button>
             </div>
+
+            {heroViewMode === 'visual' ? (
+              <IndustryHeroVisual 
+                configKey="restaurant"
+                customOverlayContent={
+                  <div className="space-y-2.5">
+                    <div className="flex justify-between items-center text-[10px] font-mono">
+                      <span className="text-amber-400 font-bold flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-amber-400 animate-ping" />
+                        Table Cover & Delivery Surge
+                      </span>
+                      <button 
+                        onClick={() => setHeroViewMode('calculator')}
+                        className="text-amber-400 hover:underline text-[9.5px] cursor-pointer flex items-center gap-1"
+                      >
+                        Adjust Diner Yield →
+                      </button>
+                    </div>
+
+                    <div className="grid grid-cols-3 gap-2 bg-slate-950/80 p-2.5 rounded-xl border border-slate-900 text-left">
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Table Reservations</span>
+                        <span className="text-sm font-black font-display text-white mt-0.5 block">{akglsInquiries} covers</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Dine-In Check-ins</span>
+                        <span className="text-sm font-black font-display text-amber-400 mt-0.5 block">{akglsCustomersCheckins} guests</span>
+                      </div>
+                      <div>
+                        <span className="text-[9px] text-slate-500 font-mono uppercase block">Projected Billings</span>
+                        <span className="text-sm font-black font-display text-brand-teal mt-0.5 block">${(generatedBillings / 1000).toFixed(0)}k/wk</span>
+                      </div>
+                    </div>
+                  </div>
+                }
+              />
+            ) : (
+              <div className="bg-[#070b13] border border-slate-900 rounded-2.5xl p-5 shadow-2xl relative">
+                <div className="flex items-center justify-between border-b border-slate-900 pb-3 mb-4">
+                  <div className="flex items-center gap-2">
+                    <div className="w-3 h-3 rounded-full bg-amber-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-orange-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-teal-500/80 animate-pulse" />
+                  </div>
+                  <div className="text-[10px] font-mono text-slate-400 font-extrabold flex items-center gap-1.5">
+                    <span className="inline-block w-2 h-2 rounded-full bg-orange-500 animate-ping" />
+                    Restaurant Yield Estimator
+                  </div>
+                </div>
+
+                <div className="space-y-4 text-left">
+                  {/* Business Type Selector */}
+                  <div>
+                    <label className="text-[10px] uppercase font-mono font-black text-slate-500 block mb-1.5">Select Food Business Type:</label>
+                    <div className="grid grid-cols-4 gap-1">
+                      {[
+                        { key: 'cafe', label: 'Cafe' },
+                        { key: 'dining', label: 'Dining' },
+                        { key: 'cloud', label: 'Cloud' },
+                        { key: 'chain', label: 'Chain' }
+                      ].map((type) => (
+                        <button
+                          key={type.key}
+                          onClick={() => setBusinessType(type.key as any)}
+                          className={`text-[9px] py-1.5 rounded font-bold border font-mono transition-colors cursor-pointer ${
+                            businessType === type.key
+                              ? 'bg-amber-500/20 border-amber-500 text-white'
+                              : 'bg-slate-950 border-slate-900 text-slate-500 hover:text-slate-300'
+                          }`}
+                        >
+                          {type.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="text-[10px] uppercase font-mono font-black text-slate-400">Average Customer Order Value (USD):</label>
+                      <span className="text-xs text-amber-500 font-bold font-mono">${avgTicket.toLocaleString()}</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min={10} 
+                      max={200} 
+                      step={5}
+                      value={avgTicket}
+                      onChange={(e) => setAvgTicket(Number(e.target.value))}
+                      className="w-full accent-amber-500 h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
+                      <span>$10 (Cafes/Bites)</span>
+                      <span>$100 (Fine Lounges)</span>
+                      <span>$200 (Catering Menu)</span>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="text-[10px] uppercase font-mono font-black text-slate-400">Target Monthly Marketing Budget (USD):</label>
+                      <span className="text-xs text-brand-teal font-bold font-mono">${targetSpend.toLocaleString()}</span>
+                    </div>
+                    <input 
+                      type="range" 
+                      min={500} 
+                      max={15000} 
+                      step={250}
+                      value={targetSpend}
+                      onChange={(e) => setTargetSpend(Number(e.target.value))}
+                      className="w-full accent-brand-teal h-1 bg-slate-900 rounded-lg appearance-none cursor-pointer"
+                    />
+                    <div className="flex justify-between text-[8px] text-slate-500 font-mono mt-1">
+                      <span>$500/mo</span>
+                      <span>$5,000/mo</span>
+                      <span>$15,000/mo</span>
+                    </div>
+                  </div>
+
+                  {/* Simulated Results Indicators */}
+                  <div className="grid grid-cols-2 gap-3 pt-2">
+                    <div className="bg-[#02050b] p-3 rounded-lg border border-slate-900">
+                      <span className="text-[9px] text-slate-500 uppercase font-mono font-bold block">Baseline Sales Count:</span>
+                      <span className="text-lg font-black text-slate-400 font-display block mt-1">{baseCustomers} <span className="text-[9px] text-slate-600 font-light font-sans">orders</span></span>
+                      <span className="text-[8px] text-slate-500 block font-mono mt-0.5">At standard {currentConfig.baselineConv}% rate</span>
+                    </div>
+                    <div className="bg-[#05111a] p-3 rounded-lg border border-amber-500/20 animate-pulse">
+                      <span className="text-[9px] text-amber-500 uppercase font-mono font-black block">AKGLS Expected Sales:</span>
+                      <span className="text-lg font-black text-amber-500 font-display block mt-1">{akglsCustomersCheckins} <span className="text-[9px] font-light font-sans">guests</span></span>
+                      <span className="text-[8px] text-slate-300 block font-mono mt-0.5">~{(currentConfig.uplift * 100).toFixed(0)}% growth index</span>
+                    </div>
+                  </div>
+
+                  <div className="bg-[#03060c] rounded-xl p-3 border border-slate-900 text-center">
+                    <span className="text-[9px] text-slate-500 font-mono uppercase block">Projected Customer Yield / ROI Model:</span>
+                    <div className="flex justify-around items-center mt-2">
+                      <div>
+                        <span className="text-xs text-white block font-semibold">{clicks}</span>
+                        <span className="text-[8px] text-slate-500 block font-mono">Web Clicks</span>
+                      </div>
+                      <div className="text-slate-800">|</div>
+                      <div>
+                        <span className="text-xs text-amber-500 block font-semibold">${(generatedBillings / 1000).toFixed(0)}k</span>
+                        <span className="text-[8px] text-slate-500 block font-mono">Weekly Billings</span>
+                      </div>
+                      <div className="text-slate-800">|</div>
+                      <div>
+                        <span className="text-xs text-brand-teal block font-semibold">{computedRoiValue}x ROI</span>
+                        <span className="text-[8px] text-slate-500 block font-mono">Ad Spend Yield</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="text-[9px] text-slate-500 text-center font-mono mt-3">
+                  Assumes localized user proximity density parameters and active reservations slots.
+                </div>
+              </div>
+            )}
           </div>
 
         </div>
