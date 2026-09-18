@@ -18,15 +18,63 @@ import { getAuth } from 'firebase/auth';
 import { LeadRecord } from './types';
 import firebaseConfig from '../firebase-applet-config.json';
 
-// Initialize Firebase App instance safely (singleton)
-const app = getApps().length > 0 ? getApp() : initializeApp(firebaseConfig);
+// Helper to safely read env variables in both Vite/browser and Node/SSR/script environments
+const getEnv = (key: string): string => {
+  try {
+    if (typeof import.meta !== 'undefined' && (import.meta as any)?.env?.[key]) {
+      return (import.meta as any).env[key];
+    }
+  } catch {
+    // ignore
+  }
+  try {
+    if (typeof process !== 'undefined' && process.env?.[key]) {
+      return process.env[key] as string;
+    }
+  } catch {
+    // ignore
+  }
+  return '';
+};
+
+// Safely assemble Firebase configuration prioritizing environment variables over static config
+const resolvedConfig = {
+  projectId: getEnv('VITE_FIREBASE_PROJECT_ID') || (firebaseConfig as any)?.projectId || 'realtors-directory',
+  appId: getEnv('VITE_FIREBASE_APP_ID') || (firebaseConfig as any)?.appId || '',
+  apiKey: getEnv('VITE_FIREBASE_API_KEY') || (firebaseConfig as any)?.apiKey || '',
+  authDomain: getEnv('VITE_FIREBASE_AUTH_DOMAIN') || (firebaseConfig as any)?.authDomain || '',
+  firestoreDatabaseId: getEnv('VITE_FIREBASE_DATABASE_ID') || (firebaseConfig as any)?.firestoreDatabaseId,
+  storageBucket: getEnv('VITE_FIREBASE_STORAGE_BUCKET') || (firebaseConfig as any)?.storageBucket,
+  messagingSenderId: getEnv('VITE_FIREBASE_MESSAGING_SENDER_ID') || (firebaseConfig as any)?.messagingSenderId,
+};
+
+// Initialize Firebase App instance safely (singleton with safe fallback for build/SSR)
+const app = getApps().length > 0 
+  ? getApp() 
+  : initializeApp({
+      ...resolvedConfig,
+      apiKey: resolvedConfig.apiKey || 'AIzaSy_DEV_PLACEHOLDER_KEY_FOR_BUILD'
+    });
 
 // Initialize Firestore targeting the provisioned custom database ID if present
-export const db = (firebaseConfig as any).firestoreDatabaseId 
-  ? getFirestore(app, (firebaseConfig as any).firestoreDatabaseId)
+export const db = resolvedConfig.firestoreDatabaseId 
+  ? getFirestore(app, resolvedConfig.firestoreDatabaseId)
   : getFirestore(app);
 
-export const auth = getAuth(app);
+let authInstance: ReturnType<typeof getAuth> | null = null;
+try {
+  if (resolvedConfig.apiKey && resolvedConfig.apiKey !== 'AIzaSy_DEV_PLACEHOLDER_KEY_FOR_BUILD') {
+    authInstance = getAuth(app);
+  }
+} catch {
+  // Graceful fallback during static build / CI without client key
+}
+
+export const auth = {
+  get currentUser() {
+    return authInstance?.currentUser || null;
+  }
+} as any;
 
 export enum OperationType {
   CREATE = 'create',
