@@ -16,6 +16,7 @@ import {
   deleteLeadFromFirestore,
   syncLocalLeadsToFirestore,
   saveLeadToFirestore,
+  getLeadsFromFirestore,
   db
 } from '../firebase';
 import { captureLead } from '../utils/leadCapture';
@@ -154,6 +155,12 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
     await Promise.allSettled([
       fetchServerLeads(currentPin),
       syncLocalLeadsToServer(currentPin),
+      getLeadsFromFirestore().then((cloudLeads) => {
+        if (cloudLeads.length > 0) {
+          mergeLeads(cloudLeads);
+          setIsFirebaseConnected(true);
+        }
+      }),
     ]);
     loadLocalBackupLeads();
     setIsRefreshing(false);
@@ -175,8 +182,17 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
     setErrorString('');
     const currentPin = pin || sessionStorage.getItem('admin_portal_pin') || '2026';
 
-    // 1. Initial dual-fetch: Server + Local
-    fetchServerLeads(currentPin).finally(() => {
+    // 1. Initial multi-fetch: Firestore Cloud + Server API + Local Cache
+    Promise.allSettled([
+      getLeadsFromFirestore().then((cloudLeads) => {
+        if (cloudLeads.length > 0) {
+          mergeLeads(cloudLeads);
+          setIsFirebaseConnected(true);
+          setSyncStatusMsg('Live Real-Time Cloud Synced');
+        }
+      }),
+      fetchServerLeads(currentPin),
+    ]).finally(() => {
       loadLocalBackupLeads();
       setIsLoading(false);
     });

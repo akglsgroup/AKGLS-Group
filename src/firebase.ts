@@ -194,10 +194,9 @@ export function subscribeToGlobalLeads(
   onError?: (error: Error) => void
 ): Unsubscribe {
   const leadsCol = collection(db, 'leads');
-  const q = query(leadsCol, orderBy('time', 'desc'));
 
   return onSnapshot(
-    q,
+    leadsCol,
     (snapshot) => {
       const records: LeadRecord[] = [];
       snapshot.forEach((d) => {
@@ -207,6 +206,7 @@ export function subscribeToGlobalLeads(
           id: d.id || data.id,
         });
       });
+      records.sort((a, b) => new Date(b.time || 0).getTime() - new Date(a.time || 0).getTime());
       onUpdate(records);
     },
     (error) => {
@@ -214,6 +214,29 @@ export function subscribeToGlobalLeads(
       if (onError) onError(wrapped);
     }
   );
+}
+
+/**
+ * Direct one-time fetch of all leads from Firestore (ideal for initial portal hydration)
+ */
+export async function getLeadsFromFirestore(): Promise<LeadRecord[]> {
+  try {
+    const leadsCol = collection(db, 'leads');
+    const snapshot = await getDocs(leadsCol);
+    const records: LeadRecord[] = [];
+    snapshot.forEach((d) => {
+      const data = d.data() as LeadRecord;
+      records.push({
+        ...data,
+        id: d.id || data.id,
+      });
+    });
+    records.sort((a, b) => new Date(b.time || 0).getTime() - new Date(a.time || 0).getTime());
+    return records;
+  } catch (err) {
+    console.warn('[Firebase] getLeadsFromFirestore direct fetch notice:', err);
+    return [];
+  }
 }
 
 /**

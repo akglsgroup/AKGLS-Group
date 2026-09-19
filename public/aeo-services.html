@@ -3872,29 +3872,94 @@
           }
 
           const formData = new FormData(leadForm);
-          const payload = {};
-          formData.forEach((val, key) => { payload[key] = val; });
+          const raw = {};
+          formData.forEach((val, key) => { raw[key] = val; });
 
+          const leadId = 'lead_' + Date.now() + '_' + Math.random().toString(36).substring(2, 7);
+          const nowIso = new Date().toISOString();
+
+          // Geo lookup
+          let country = 'Unknown', city = 'Unknown', region = 'Unknown';
           try {
-            const response = await fetch('/api/leads', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload)
-            });
-            if (response.ok) {
-              leadForm.classList.add('hidden');
-              if (leadSuccess) leadSuccess.classList.remove('hidden');
-            } else {
-              alert('Submission error. Please call +91 831 811 4492 directly.');
-              if (submitBtn) {
-                submitBtn.disabled = false;
-                submitBtn.innerText = 'Submit Strategy Request';
-              }
+            const geoRes = await Promise.race([
+              fetch('https://ipapi.co/json/').then(r => r.json()),
+              new Promise((_, reject) => setTimeout(() => reject('timeout'), 800))
+            ]);
+            if (geoRes && !geoRes.error) {
+              country = geoRes.country_name || geoRes.country || 'Unknown';
+              city = geoRes.city || 'Unknown';
+              region = geoRes.region || 'Unknown';
             }
-          } catch (err) {
-            leadForm.classList.add('hidden');
-            if (leadSuccess) leadSuccess.classList.remove('hidden');
-          }
+          } catch (_) {}
+
+          const fullPayload = {
+            id: leadId,
+            name: raw.name || 'Anonymous Prospect',
+            email: raw.email || 'no-email@captured.com',
+            phone: raw.phone || '',
+            websiteUrl: raw.websiteUrl || '',
+            companyName: raw.companyName || '',
+            primaryGoal: raw.primaryGoal || 'Consultation Request',
+            notes: raw.notes || '',
+            pageAddress: raw.pageAddress || window.location.href,
+            pageTitle: raw.pageTitle || document.title,
+            country: country,
+            city: city,
+            region: region,
+            time: nowIso,
+            status: 'New',
+            assignedTo: 'Unassigned',
+            rawDetails: raw
+          };
+
+          // 1. Direct Cloud Firestore write (Global Real-Time - works with zero backend on Hostinger / CDN)
+          const firestoreFields = {
+            fields: {
+              id: { stringValue: fullPayload.id },
+              name: { stringValue: String(fullPayload.name) },
+              email: { stringValue: String(fullPayload.email) },
+              phone: { stringValue: String(fullPayload.phone) },
+              websiteUrl: { stringValue: String(fullPayload.websiteUrl) },
+              companyName: { stringValue: String(fullPayload.companyName) },
+              primaryGoal: { stringValue: String(fullPayload.primaryGoal) },
+              notes: { stringValue: String(fullPayload.notes) },
+              pageAddress: { stringValue: String(fullPayload.pageAddress) },
+              pageTitle: { stringValue: String(fullPayload.pageTitle) },
+              country: { stringValue: String(fullPayload.country) },
+              city: { stringValue: String(fullPayload.city) },
+              region: { stringValue: String(fullPayload.region) },
+              time: { stringValue: fullPayload.time },
+              status: { stringValue: 'New' },
+              assignedTo: { stringValue: 'Unassigned' }
+            }
+          };
+
+          const firestorePromise = fetch('https://firestore.googleapis.com/v1/projects/ask-amrish/databases/(default)/documents/leads?documentId=' + encodeURIComponent(leadId) + '&key=AIzaSyAK7JkxcKSJdMeQhlj-qXE1Va4Y25jcjPw', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(firestoreFields)
+          }).catch(err => console.warn('[Direct Firestore Sync Notice]', err));
+
+          // 2. Express Backend API call (in case server is active)
+          const apiPromise = fetch('/api/leads', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(fullPayload)
+          }).catch(() => null);
+
+          // 3. Save to local browser storage backup
+          try {
+            const localStr = localStorage.getItem('akgls_system_leads') || '[]';
+            let localLeads = JSON.parse(localStr);
+            if (!Array.isArray(localLeads)) localLeads = [];
+            localLeads.unshift(fullPayload);
+            localStorage.setItem('akgls_system_leads', JSON.stringify(localLeads.slice(0, 150)));
+          } catch (_) {}
+
+          await Promise.allSettled([firestorePromise, apiPromise]);
+
+          leadForm.classList.add('hidden');
+          if (leadSuccess) leadSuccess.classList.remove('hidden');
         });
       }
     </script>

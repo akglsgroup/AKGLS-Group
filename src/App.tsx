@@ -83,6 +83,7 @@ import LearningHubPage from './components/LearningHubPage';
 import InternshipProgramPage from './components/InternshipProgramPage';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import FAQ from './components/FAQ';
+import HomeHeroBanner from './components/HomeHeroBanner';
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
@@ -2176,159 +2177,17 @@ export default function App() {
         />
       ) : (
         <>
-          {/* CORE HERO SECTION + LIVE SIMULATOR MONITOR BOARD */}
-          <header className="relative pt-6 pb-16 sm:pt-8 md:pt-10 md:pb-20 lg:pt-12 bg-[#05070a] text-white overflow-hidden text-left">
-        {/* Top ambient highlight bridge connecting directly from header */}
-        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-brand-indigo/12 via-brand-teal/5 to-transparent pointer-events-none" />
-        {/* Decorative ambient gradients */}
-        <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] opacity-40 pointer-events-none" />
-        <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-brand-indigo/10 rounded-full blur-[100px] pointer-events-none" />
-        <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-brand-teal/10 rounded-full blur-[100px] pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          {/* Left Info segment */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="inline-flex items-center gap-2 bg-brand-indigo/15 border border-brand-indigo/30 text-indigo-300 rounded-full py-1.5 px-4 font-bold text-[10.5px] uppercase tracking-wider font-display">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-teal opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-brand-teal"></span>
-              </span>
-              <span>Enterprise organic ranking & geo systems</span>
-            </div>
-
-            <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold font-display leading-[1.12] sm:leading-[1.08] tracking-tight">
-              Traditional Search is Evolving. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-indigo-400 to-purple-400">
-                We Engineer AI SEO & Performance Marketing.
-              </span>
-            </h1>
-
-            <p className="text-slate-400 text-sm md:text-base font-light leading-relaxed max-w-xl">
-              Over 50% of high-intent search user journeys now bypass basic ranking lists to converse with generative AI tools. AKGLS Group deploys technical organic schema markup structures with real-time Generative Engine Optimization (GEO) to citation-proof your business across Perplexity, ChatGPT Search, Gemini, and Google.
-            </p>
-
-            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-2">
-              <a 
-                href="#audit-form"
-                className="bg-brand-orange hover:bg-opacity-95 text-white font-extrabold text-xs uppercase tracking-wider py-4 px-8 rounded-xl text-center shadow-lg transition-all flex items-center justify-center gap-2"
-              >
-                Request Strategy Audit <ArrowRight className="w-4 h-4" />
-              </a>
-              <a 
-                href="#capabilities-explorer"
-                className="bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 text-slate-300 font-extrabold text-xs uppercase tracking-wider py-4 px-6 rounded-xl text-center transition-all flex items-center justify-center gap-2"
-              >
-                <Bot className="w-4 h-4 text-brand-teal animate-pulse" /> Explore 140+ Services
-              </a>
-            </div>
-
-            {/* Core credentials ticker */}
-            <div className="grid grid-cols-3 gap-4 pt-8 border-t border-slate-800/80 max-w-lg text-left">
-              <div>
-                <div className="text-2xl font-black text-white font-display">250%+</div>
-                <div className="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mt-1">
-                  Avg Organic Lift
-                </div>
-              </div>
-              <div>
-                <div className="text-2xl font-black text-white font-display">48%</div>
-                <div className="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mt-1">
-                  Lower cost per acquisition
-                </div>
-              </div>
-              <div>
-                <div className="text-2xl font-black text-white font-display">98.2%</div>
-                <div className="text-[10px] text-slate-400 font-extrabold uppercase tracking-widest mt-1">
-                  Client retention rate
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right interactive Evaluator console card */}
-          <div className="lg:col-span-5 relative">
-            <div className="bg-slate-950/95 rounded-3xl p-6 border border-slate-800 shadow-2xl space-y-5 text-left relative overflow-hidden">
-              
-              <div className="flex items-center justify-between pb-3 border-b border-slate-850">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80"></span>
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80"></span>
-                </div>
-                <span className="text-[10px] text-slate-500 font-mono tracking-widest uppercase">
-                  generative engine evaluator
-                </span>
-                <span className="w-2 h-2 rounded-full bg-brand-teal animate-ping" />
-              </div>
-
-              <div className="space-y-4">
-                <div className="space-y-1">
-                  <h3 className="text-sm sm:text-base font-extrabold text-white font-display">
-                    Analyze Your Brand Recommendation Weight
-                  </h3>
-                  <p className="text-slate-400 text-[11px] leading-relaxed font-light">
-                    Test your website's indexing relevance across modern conversational AI LLM retrieval layers.
-                  </p>
-                </div>
-
-                <form onSubmit={runSimulator} className="space-y-2">
-                  <div className="relative">
-                    <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500 text-xs font-mono select-none">
-                      https://
-                    </span>
-                    <input 
-                      type="text" 
-                      required
-                      placeholder="yourcompany.com"
-                      value={simulationUrl}
-                      onChange={(e) => setSimulationUrl(e.target.value)}
-                      className="w-full bg-slate-900 border border-slate-800 focus:border-brand-indigo focus:ring-1 focus:ring-indigo-500/30 rounded-xl py-3 pl-16 pr-3 text-xs text-white placeholder-slate-500 focus:outline-none font-medium"
-                    />
-                  </div>
-                  <button 
-                    type="submit" 
-                    disabled={isSimulating}
-                    className="w-full bg-brand-indigo hover:bg-opacity-95 text-white font-bold py-3.5 px-4 rounded-xl text-xs transition-all flex items-center justify-center gap-1.5 shadow DISABLED:opacity-60 cursor-pointer"
-                  >
-                    {isSimulating ? (
-                      <>
-                        <Clock className="w-4 h-4 animate-spin text-brand-teal" /> Connecting AI Indices...
-                      </>
-                    ) : (
-                      <>
-                        <Sparkles className="w-4 h-4 text-brand-teal" /> Run Simulated Citation Check
-                      </>
-                    )}
-                  </button>
-                </form>
-
-                {/* Simulated outputs window */}
-                <div className="bg-black/90 rounded-xl p-3 border border-slate-850 h-36 overflow-y-auto space-y-1.5 scrollbar-none font-mono text-[10.5px] leading-normal select-none">
-                  {simLogs.map((log, idx) => (
-                    <p 
-                       key={idx} 
-                      className={
-                        log.startsWith('//') 
-                          ? 'text-slate-500' 
-                          : log.includes('MISSING') 
-                            ? 'text-rose-400 font-bold' 
-                            : log.includes('Actions') 
-                              ? 'text-brand-teal font-extrabold' 
-                              : 'text-slate-300'
-                      }
-                    >
-                      {log}
-                    </p>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </header>
+          {/* ADVANCED TECHNICAL HERO BANNER WITH GENERATIVE ENGINE EVALUATOR */}
+          <HomeHeroBanner
+            onOpenAuditForm={() => {
+              const formEl = document.querySelector('#audit-form');
+              formEl?.scrollIntoView({ behavior: 'smooth' });
+            }}
+            onExploreServices={() => {
+              const exploreEl = document.querySelector('#capabilities-explorer');
+              exploreEl?.scrollIntoView({ behavior: 'smooth' });
+            }}
+          />
 
       {/* CREDENTIALS / PARTNER TICKER */}
       <section className="bg-[#0c121e]/40 border-y border-slate-800/60 py-6 select-none relative overflow-hidden">

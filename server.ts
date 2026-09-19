@@ -132,6 +132,61 @@ async function startServer() {
     });
   });
 
+  // Firestore Cloud Synchronization Helpers
+  const FIREBASE_API_KEY = process.env.VITE_FIREBASE_API_KEY || "AIzaSyAK7JkxcKSJdMeQhlj-qXE1Va4Y25jcjPw";
+  const FIREBASE_PROJECT_ID = process.env.VITE_FIREBASE_PROJECT_ID || "ask-amrish";
+
+  async function syncLeadToFirestore(lead: any) {
+    try {
+      const fields: Record<string, any> = {};
+      for (const [k, v] of Object.entries(lead)) {
+        if (v !== undefined && v !== null && typeof v !== 'object') {
+          fields[k] = { stringValue: String(v) };
+        }
+      }
+      await fetch(
+        `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/databases/(default)/documents/leads?documentId=${encodeURIComponent(lead.id)}&key=${FIREBASE_API_KEY}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ fields })
+        }
+      );
+    } catch (e) {
+      console.warn('[Server] Firestore sync notice:', e);
+    }
+  }
+
+  async function fetchLeadsFromFirestore(): Promise<any[]> {
+    try {
+      const res = await fetch(
+        `https://firestore.googleapis.com/v1/projects/${FIREBASE_PROJECT_ID}/databases/(default)/documents/leads?key=${FIREBASE_API_KEY}`
+      );
+      if (!res.ok) return [];
+      const data = await res.json();
+      if (!data || !Array.isArray(data.documents)) return [];
+      
+      return data.documents.map((doc: any) => {
+        const obj: Record<string, any> = {};
+        if (doc.fields) {
+          for (const [key, val] of Object.entries<any>(doc.fields)) {
+            if (val.stringValue !== undefined) obj[key] = val.stringValue;
+            else if (val.integerValue !== undefined) obj[key] = Number(val.integerValue);
+            else if (val.doubleValue !== undefined) obj[key] = Number(val.doubleValue);
+            else if (val.booleanValue !== undefined) obj[key] = val.booleanValue;
+            else if (val.timestampValue !== undefined) obj[key] = val.timestampValue;
+          }
+        }
+        const nameParts = (doc.name || '').split('/');
+        obj.id = obj.id || nameParts[nameParts.length - 1];
+        return obj;
+      });
+    } catch (e) {
+      console.warn('[Server] Firestore fetch notice:', e);
+      return [];
+    }
+  }
+
   // PIN validation API
   app.post("/api/leads/verify-pin", (req, res) => {
     const { pin } = req.body;
@@ -202,6 +257,10 @@ async function startServer() {
         leads.unshift(newLead);
       }
       writeLeads(leads);
+
+      // Concurrently push to Firestore Cloud database
+      syncLeadToFirestore(newLead);
+
       res.status(201).json({ success: true, lead: newLead });
     } catch (error) {
       console.error("Error capturing lead:", error);
@@ -210,11 +269,26 @@ async function startServer() {
   });
 
   // Get all leads (PIN-auth)
-  app.get("/api/leads", checkAuth, (req, res) => {
+  app.get("/api/leads", checkAuth, async (req, res) => {
     try {
-      const leads = readLeads();
-      res.json({ success: true, leads });
+      const localLeads = readLeads();
+      const firestoreLeads = await fetchLeadsFromFirestore();
+
+      const map = new Map<string, any>();
+      localLeads.forEach(l => { if (l && l.id) map.set(l.id, l); });
+      firestoreLeads.forEach(l => {
+        if (l && l.id) {
+          const existing = map.get(l.id);
+          map.set(l.id, existing ? { ...existing, ...l } : l);
+        }
+      });
+
+      const unifiedLeads = Array.from(map.values());
+      unifiedLeads.sort((a, b) => new Date(b.time || 0).getTime() - new Date(a.time || 0).getTime());
+
+      res.json({ success: true, leads: unifiedLeads });
     } catch (error) {
+      console.error("Error fetching unified leads:", error);
       res.status(500).json({ error: "Failed to load leads" });
     }
   });
