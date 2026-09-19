@@ -5,6 +5,7 @@ import {
   Award, CheckCircle, Database, LineChart, ShieldCheck, 
   ChevronRight, Users, Sparkles, Zap, SmartphoneNfc, Wifi
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface MobileSeoPageProps {
   onBackToHome: () => void;
@@ -71,6 +72,20 @@ export default function MobileSeoPage({ onBackToHome, openProposalForm }: Mobile
 
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      websiteUrl: leadForm.siteUrl,
+      primaryGoal: 'Mobile Core Web Vitals & Mobile-First Indexing Audit',
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'Mobile SEO Services',
+      rawDetails: {
+        websiteUrl: leadForm.siteUrl,
+        lcpScore: lcp,
+        clsScore: cls,
+        fidScore: fid,
+      },
+    });
     setLeadSubmitted(true);
   };
 

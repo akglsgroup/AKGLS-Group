@@ -5,6 +5,7 @@ import {
   Phone, Mail, Award, CheckCircle, Database, LineChart, 
   ChevronRight, Star, Users, FileCheck, Layers, BookOpen, Text, Image as ImageIcon, Link as LinkIcon, AlertCircle, Copy, Send
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface OnPageSeoPageProps {
   onBackToHome: () => void;
@@ -95,6 +96,19 @@ export default function OnPageSeoPage({ onBackToHome, openProposalForm }: OnPage
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!leadForm.name || !leadForm.email || !leadForm.website) return;
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      websiteUrl: leadForm.website,
+      primaryGoal: 'On-Page SEO & Semantic Relevance Optimization',
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'On-Page SEO Services Company',
+      rawDetails: {
+        websiteUrl: leadForm.website,
+        testedUrl: analyzerUrl,
+        industry: leadForm.industry,
+      },
+    });
     setLeadSubmitted(true);
   };
 

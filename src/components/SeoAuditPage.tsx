@@ -5,6 +5,7 @@ import {
   Award, CheckCircle, Database, LineChart, ShieldCheck, 
   ChevronRight, Users, Sparkles, AlertTriangle, Play, RefreshCw, BarChart
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface SeoAuditPageProps {
   onBackToHome: () => void;
@@ -53,6 +54,18 @@ export default function SeoAuditPage({ onBackToHome, openProposalForm }: SeoAudi
 
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      websiteUrl: leadForm.siteUrl,
+      primaryGoal: `Technical SEO Audit (${leadForm.auditType})`,
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'Technical SEO Audit Services',
+      rawDetails: {
+        auditType: leadForm.auditType,
+        checklistScore: score,
+      },
+    });
     setLeadSubmitted(true);
   };
 

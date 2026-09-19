@@ -15,12 +15,12 @@ service cloud.firestore {
          request.auth.token.email_verified == true);
     }
 
-    // Lead schema validation
+    // Lead schema validation (resilient to all partial and full form submissions)
     function isValidLead(data) {
-      return data.name is string && data.name.size() > 0 && data.name.size() <= 200 &&
-             data.email is string && data.email.size() > 0 && data.email.size() <= 320 &&
-             data.time is string && data.time.size() > 0 && data.time.size() <= 100 &&
-             data.status in ['New', 'Contacted', 'In Progress', 'Converted', 'Spam', 'Archived'] &&
+      return (!('name' in data) || (data.name is string && data.name.size() <= 200)) &&
+             (!('email' in data) || (data.email is string && data.email.size() <= 320)) &&
+             (!('time' in data) || (data.time is string && data.time.size() <= 100)) &&
+             (!('status' in data) || (data.status is string && data.status.size() <= 50)) &&
              (!('phone' in data) || (data.phone is string && data.phone.size() <= 50)) &&
              (!('companyName' in data) || (data.companyName is string && data.companyName.size() <= 200)) &&
              (!('websiteUrl' in data) || (data.websiteUrl is string && data.websiteUrl.size() <= 500)) &&

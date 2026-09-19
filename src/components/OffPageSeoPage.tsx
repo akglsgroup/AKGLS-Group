@@ -6,6 +6,7 @@ import {
   ChevronRight, Star, Users, ExternalLink, Link2, ShieldAlert,
   ShieldCheck, Share2, Globe, HeartHandshake, Eye
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface OffPageSeoPageProps {
   onBackToHome: () => void;
@@ -60,6 +61,20 @@ export default function OffPageSeoPage({ onBackToHome, openProposalForm }: OffPa
 
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      websiteUrl: leadForm.website,
+      primaryGoal: `Off-Page SEO & Link Strategy (${targetCategory})`,
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'Off-Page SEO Services Company',
+      rawDetails: {
+        targetCategory,
+        competitor: leadForm.competitor,
+        simLinks,
+        currentDA,
+      },
+    });
     setLeadSubmitted(true);
   };
 

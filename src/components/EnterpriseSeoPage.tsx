@@ -5,6 +5,7 @@ import {
   Award, CheckCircle, Database, LineChart, ShieldCheck, 
   ChevronRight, Users, Sparkles, AlertTriangle, Layers, Cpu
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface EnterpriseSeoPageProps {
   onBackToHome: () => void;
@@ -57,6 +58,19 @@ export default function EnterpriseSeoPage({ onBackToHome, openProposalForm }: En
 
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      websiteUrl: leadForm.corporateDomain,
+      primaryGoal: `Enterprise SEO Consultation (${leadForm.department})`,
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'Enterprise SEO Services Company',
+      rawDetails: {
+        department: leadForm.department,
+        totalUrls: totalUrls,
+        leakageValue: leakageValue,
+      },
+    });
     setLeadSubmitted(true);
   };
 

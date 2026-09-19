@@ -5,6 +5,7 @@ import {
   Award, CheckCircle, Database, LineChart, ShieldCheck, 
   ChevronRight, Users, Sparkles, Cpu, Layers, Workflow
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface ProgrammaticSeoPageProps {
   onBackToHome: () => void;
@@ -62,6 +63,20 @@ export default function ProgrammaticSeoPage({ onBackToHome, openProposalForm }: 
 
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      primaryGoal: `Programmatic SEO Architecture (${leadForm.targetCrawlVol} pages target)`,
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'Programmatic SEO Services',
+      rawDetails: {
+        dataAssetsAvailable: leadForm.dataAssetsAvailable,
+        targetCrawlVol: leadForm.targetCrawlVol,
+        verticalCount,
+        geoCount,
+        projectedTraffic,
+      },
+    });
     setLeadSubmitted(true);
   };
 

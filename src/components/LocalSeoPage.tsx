@@ -5,6 +5,7 @@ import {
   Phone, Award, CheckCircle, Navigation, Search, 
   Map, Star, ChevronRight, Users, Bell, Globe, Compass, RefreshCw
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface LocalSeoPageProps {
   onBackToHome: () => void;
@@ -54,6 +55,20 @@ export default function LocalSeoPage({ onBackToHome, openProposalForm }: LocalSe
 
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      phone: leadForm.phone,
+      websiteUrl: leadForm.website,
+      primaryGoal: `Local SEO / Google Maps Optimization (${bizCategory} - ${bizCity})`,
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'Local SEO Services Company',
+      rawDetails: {
+        businessName: bizName,
+        businessCity: bizCity,
+        businessCategory: bizCategory,
+      },
+    });
     setLeadSubmitted(true);
   };
 

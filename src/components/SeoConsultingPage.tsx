@@ -5,6 +5,7 @@ import {
   CheckCircle, Database, LineChart, ShieldCheck, 
   ChevronRight, Users, Sparkles, BookOpen, Clock, Presentation
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface SeoConsultingPageProps {
   onBackToHome: () => void;
@@ -68,6 +69,17 @@ export default function SeoConsultingPage({ onBackToHome, openProposalForm }: Se
 
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      primaryGoal: `SEO Consulting & Strategy (${leadForm.consultingGoals})`,
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'SEO Consulting Services',
+      rawDetails: {
+        consultingGoals: leadForm.consultingGoals,
+        currentTeamSize: leadForm.currentTeamSize,
+      },
+    });
     setLeadSubmitted(true);
   };
 

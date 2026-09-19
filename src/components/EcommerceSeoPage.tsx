@@ -5,6 +5,7 @@ import {
   Phone, Award, CheckCircle, Smartphone, Flame, LineChart, 
   ChevronRight, Users, Sparkles, ShieldCheck, RefreshCw, BarChart3
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface EcommerceSeoPageProps {
   onBackToHome: () => void;
@@ -64,6 +65,17 @@ export default function EcommerceSeoPage({ onBackToHome, openProposalForm }: Eco
 
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      primaryGoal: `Ecommerce Audit (${leadForm.platform}, ${leadForm.skuCount} SKUs)`,
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'Ecommerce SEO Services',
+      rawDetails: {
+        platform: leadForm.platform,
+        skuCount: leadForm.skuCount,
+      },
+    });
     setLeadSubmitted(true);
   };
 

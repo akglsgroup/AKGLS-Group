@@ -7,6 +7,7 @@ import {
   Cpu, Globe, Gauge, Terminal, HelpCircle, ChevronDown, CheckCircle, Clock
 } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
+import { captureLead } from '../utils/leadCapture';
 
 interface GeoServicesPageProps {
   onBackToHome: () => void;
@@ -184,6 +185,20 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!leadForm.name || !leadForm.email) return;
+
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      websiteUrl: leadForm.websiteUrl,
+      primaryGoal: `GEO Optimization Audit (${leadForm.serviceFocus || 'General GEO'})`,
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'GEO Optimization Services',
+      rawDetails: {
+        websiteUrl: leadForm.websiteUrl,
+        serviceFocus: leadForm.serviceFocus,
+        scanUrl: targetUrl,
+      },
+    });
 
     setLeadSubmitted(true);
   };

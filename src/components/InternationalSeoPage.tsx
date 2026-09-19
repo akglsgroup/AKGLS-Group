@@ -5,6 +5,7 @@ import {
   Award, CheckCircle, Database, LineChart, ShieldCheck, 
   ChevronRight, Users, Sparkles, Languages, Settings, MapPin
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface InternationalSeoPageProps {
   onBackToHome: () => void;
@@ -47,6 +48,19 @@ export default function InternationalSeoPage({ onBackToHome, openProposalForm }:
 
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      websiteUrl: leadForm.siteUrl,
+      primaryGoal: `International SEO (${leadForm.targetRegions})`,
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'International SEO Services',
+      rawDetails: {
+        targetRegions: leadForm.targetRegions,
+        hreflangLanguage: langCode,
+        hreflangCountry: countryCode,
+      },
+    });
     setLeadSubmitted(true);
   };
 

@@ -6,6 +6,7 @@ import {
   BarChart, Sparkles, Shield, User, Mail, Phone, ChevronRight,
   TrendingUp, Code, MessageSquare, ExternalLink, RefreshCw
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface SeoAuditToolPageProps {
   onBackToTools: () => void;
@@ -119,6 +120,18 @@ export default function SeoAuditToolPage({ onBackToTools, onNavigateToTool }: Se
       alert("Please provide all fields to compile and email the 30-Page audit PDF report.");
       return;
     }
+    captureLead({
+      name: leadName,
+      email: leadEmail,
+      phone: leadPhone,
+      websiteUrl: targetUrl,
+      primaryGoal: 'Free Technical SEO Audit Tool Report (30-Page PDF)',
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'Technical SEO Audit Tool',
+      rawDetails: {
+        testedUrl: targetUrl,
+      },
+    });
     setLeadSubmitted(true);
     setShowLeadForm(false);
     setScanCompleted(true);

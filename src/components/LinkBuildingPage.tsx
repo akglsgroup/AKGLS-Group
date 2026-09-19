@@ -5,6 +5,7 @@ import {
   Award, CheckCircle, Database, LineChart, ShieldCheck, 
   ChevronRight, Users, Sparkles, Send, Mail, Copy, RefreshCw
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 interface LinkBuildingPageProps {
   onBackToHome: () => void;
@@ -57,6 +58,18 @@ export default function LinkBuildingPage({ onBackToHome, openProposalForm }: Lin
 
   const handleLeadSubmit = (e: FormEvent) => {
     e.preventDefault();
+    captureLead({
+      name: leadForm.name,
+      email: leadForm.email,
+      websiteUrl: leadForm.siteUrl,
+      primaryGoal: `Link Building Services (${leadForm.targetDr.toUpperCase()})`,
+      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+      pageTitle: typeof document !== 'undefined' ? document.title : 'Link Building Services Company',
+      rawDetails: {
+        targetDr: leadForm.targetDr,
+        pitchNiche: niche,
+      },
+    });
     setLeadSubmitted(true);
   };
 

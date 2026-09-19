@@ -7,6 +7,7 @@ import {
   BookOpen, HelpCircle, Download, Send, ArrowUpRight, Share2,
   Printer, ChevronRight, BarChart3, Activity
 } from 'lucide-react';
+import { captureLead } from '../utils/leadCapture';
 
 export interface GeoAuditResult {
   url: string;
@@ -1161,6 +1162,18 @@ export default function GeoAuditScanner({ onOpenProposal, compactMode = false }:
                   onSubmit={(e) => {
                     e.preventDefault();
                     if (!leadEmail) return;
+                    captureLead({
+                      email: leadEmail,
+                      websiteUrl: targetUrl,
+                      primaryGoal: `GEO Diagnostic Blueprint Request (${targetUrl})`,
+                      pageAddress: typeof window !== 'undefined' ? window.location.href : '',
+                      pageTitle: typeof document !== 'undefined' ? document.title : 'GEO Audit Scanner',
+                      rawDetails: {
+                        targetUrl,
+                        auditScore: auditResult?.overallScore || 78,
+                        brandName: auditResult?.brandName || '',
+                      },
+                    });
                     setLeadSubmitted(true);
                   }}
                   className="space-y-4"

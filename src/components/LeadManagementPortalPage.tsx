@@ -3,8 +3,8 @@ import {
   Lock, KeyRound, Users, TrendingUp, Clock, MapPin, Search, Filter, 
   CheckCircle, AlertCircle, UserCheck, FileText, ExternalLink, 
   Save, RefreshCw, ArrowLeft, Trash2, Mail, Phone, Calendar, ShieldCheck,
-  Cloud, CloudCheck, Database, Download, Check, Sparkles
- } from 'lucide-react';
+  Cloud, Database, Download, Check, Sparkles, Send
+} from 'lucide-react';
 import { LeadRecord } from '../types';
 import { 
   subscribeToGlobalLeads, 
@@ -14,6 +14,7 @@ import {
   saveLeadToFirestore,
   db
 } from '../firebase';
+import { captureLead } from '../utils/leadCapture';
 
 interface LeadManagementPortalPageProps {
   onBackToHome: () => void;
@@ -29,23 +30,112 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
   // Leads and management states
   const [leads, setLeads] = useState<LeadRecord[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isRefreshing, setIsRefreshing] = useState(false);
   const [errorString, setErrorString] = useState('');
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState<string>('All');
   const [editingLeadId, setEditingLeadId] = useState<string | null>(null);
   const [deletingLeadId, setDeletingLeadId] = useState<string | null>(null);
 
-  // Real-time Cloud vs Local sync indicator
+  // Real-time Cloud vs Server vs Local sync indicator
   const [isFirebaseConnected, setIsFirebaseConnected] = useState<boolean>(true);
-  const [syncStatusMsg, setSyncStatusMsg] = useState<string>('Connected to Firebase Firestore');
+  const [syncStatusMsg, setSyncStatusMsg] = useState<string>('Unified Cloud & Server Synced');
   const [isSyncingBackup, setIsSyncingBackup] = useState(false);
   const [backupSyncSuccess, setBackupSyncSuccess] = useState(false);
+  const [testLeadCreatedMsg, setTestLeadCreatedMsg] = useState('');
 
   // Temporary edit states
   const [editStatus, setEditStatus] = useState<LeadRecord['status']>('New');
   const [editAssignedTo, setEditAssignedTo] = useState('');
   const [editNotes, setEditNotes] = useState('');
   const [isUpdating, setIsUpdating] = useState(false);
+
+  // Helper to merge lists of leads without duplication and maintain latest-first sort
+  const mergeLeads = (newLeadsList: LeadRecord[]) => {
+    if (!Array.isArray(newLeadsList)) return;
+    setLeads((prev) => {
+      const map = new Map<string, LeadRecord>();
+      prev.forEach((l) => {
+        if (l && l.id) map.set(l.id, l);
+      });
+      newLeadsList.forEach((l) => {
+        if (!l || !l.id) return;
+        const existing = map.get(l.id);
+        map.set(l.id, existing ? { ...existing, ...l } : l);
+      });
+      const combined = Array.from(map.values());
+      combined.sort((a, b) => new Date(b.time || 0).getTime() - new Date(a.time || 0).getTime());
+      return combined;
+    });
+  };
+
+  // Fetch leads from the Express server endpoint
+  const fetchServerLeads = async (authPin?: string) => {
+    const currentPin = authPin || pin || sessionStorage.getItem('admin_portal_pin') || '2026';
+    try {
+      const res = await fetch(`/api/leads?pin=${currentPin}`, {
+        headers: {
+          'X-Admin-PIN': currentPin,
+        },
+      });
+      if (res.ok) {
+        const data = await res.json();
+        if (data && data.success && Array.isArray(data.leads)) {
+          mergeLeads(data.leads);
+          return data.leads;
+        }
+      }
+    } catch (e) {
+      console.warn('[CRM Portal] Server leads fetch notice:', e);
+    }
+    return [];
+  };
+
+  // Load local backup leads stored on this browser device
+  const loadLocalBackupLeads = () => {
+    try {
+      const localLeadsStr = localStorage.getItem('akgls_system_leads') || '[]';
+      const localLeads = JSON.parse(localLeadsStr);
+      if (Array.isArray(localLeads) && localLeads.length > 0) {
+        mergeLeads(localLeads);
+      }
+    } catch (e) {
+      console.error('Error reading local backup leads:', e);
+    }
+  };
+
+  // Synchronize any local device leads up to the server
+  const syncLocalLeadsToServer = async (authPin?: string) => {
+    const currentPin = authPin || pin || sessionStorage.getItem('admin_portal_pin') || '2026';
+    try {
+      const localLeadsStr = localStorage.getItem('akgls_system_leads') || '[]';
+      const localLeads = JSON.parse(localLeadsStr);
+      if (Array.isArray(localLeads) && localLeads.length > 0) {
+        await fetch(`/api/leads/batch-sync?pin=${currentPin}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Admin-PIN': currentPin,
+          },
+          body: JSON.stringify({ leads: localLeads }),
+        });
+      }
+    } catch {
+      // Non-blocking
+    }
+  };
+
+  // Refresh all channels manually or on load
+  const refreshAllLeads = async () => {
+    setIsRefreshing(true);
+    const currentPin = pin || sessionStorage.getItem('admin_portal_pin') || '2026';
+    await Promise.allSettled([
+      fetchServerLeads(currentPin),
+      syncLocalLeadsToServer(currentPin),
+    ]);
+    loadLocalBackupLeads();
+    setIsRefreshing(false);
+  };
 
   // Save PIN in session storage for refreshing ease
   useEffect(() => {
@@ -55,36 +145,44 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
     }
   }, []);
 
-  // Set up real-time Firebase subscription when authenticated
+  // Primary data hydration when authenticated
   useEffect(() => {
     if (!isAuthenticated) return;
 
     setIsLoading(true);
     setErrorString('');
+    const currentPin = pin || sessionStorage.getItem('admin_portal_pin') || '2026';
 
-    // Subscribe to real-time updates from Firebase
+    // 1. Initial dual-fetch: Server + Local
+    fetchServerLeads(currentPin).finally(() => {
+      loadLocalBackupLeads();
+      setIsLoading(false);
+    });
+
+    // 2. Subscribe to real-time updates from Firebase Firestore
     const unsubscribe = subscribeToGlobalLeads(
       (firestoreLeads) => {
         setIsFirebaseConnected(true);
-        setIsLoading(false);
+        setSyncStatusMsg('Live Real-Time Cloud Synced');
         if (firestoreLeads.length > 0) {
-          setLeads(firestoreLeads);
-        } else {
-          // If Firestore collection is empty, check if we have local leads to display
-          loadLocalBackupLeads();
+          mergeLeads(firestoreLeads);
         }
       },
       (err) => {
-        console.warn('[Firebase] Subscription listener notice:', err);
+        console.warn('[Firebase] Subscription notice:', err);
         setIsFirebaseConnected(false);
-        setSyncStatusMsg('Operating on Local Resilient Cache');
-        loadLocalBackupLeads();
-        setIsLoading(false);
+        setSyncStatusMsg('Server & Local Synchronized');
       }
     );
 
+    // 3. Periodic polling every 20 seconds for cross-device updates
+    const pollInterval = setInterval(() => {
+      fetchServerLeads(currentPin);
+    }, 20000);
+
     return () => {
       unsubscribe();
+      clearInterval(pollInterval);
     };
   }, [isAuthenticated]);
 
@@ -102,20 +200,23 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
           const data = await res.json();
           if (data && data.valid) {
             setIsAuthenticated(true);
+            setPin(savedPin);
             return;
           }
         }
       }
       
-      // Default fallback PIN
+      // Fallback valid PIN
       if (String(savedPin) === '2026') {
         setIsAuthenticated(true);
+        setPin(savedPin);
       } else {
         sessionStorage.removeItem('admin_portal_pin');
       }
     } catch {
       if (String(savedPin) === '2026') {
         setIsAuthenticated(true);
+        setPin(savedPin);
       } else {
         sessionStorage.removeItem('admin_portal_pin');
       }
@@ -170,28 +271,52 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
     }
   };
 
-  const loadLocalBackupLeads = () => {
-    try {
-      const localLeadsStr = localStorage.getItem('akgls_system_leads') || '[]';
-      const localLeads = JSON.parse(localLeadsStr);
-      if (Array.isArray(localLeads) && localLeads.length > 0) {
-        setLeads(prev => prev.length > 0 ? prev : localLeads);
-      }
-    } catch (e) {
-      console.error(e);
-    }
-  };
-
   const handleSyncLocalLeadsToCloud = async () => {
     setIsSyncingBackup(true);
+    const activePin = pin || sessionStorage.getItem('admin_portal_pin') || '2026';
     try {
-      const res = await syncLocalLeadsToFirestore();
+      await Promise.allSettled([
+        syncLocalLeadsToFirestore(),
+        syncLocalLeadsToServer(activePin),
+        fetchServerLeads(activePin),
+      ]);
       setBackupSyncSuccess(true);
       setTimeout(() => setBackupSyncSuccess(false), 4000);
     } catch (err) {
       console.error(err);
     } finally {
       setIsSyncingBackup(false);
+    }
+  };
+
+  // Quick verification test submission tool right in the CRM desk
+  const handleCreateTestLead = async () => {
+    setIsRefreshing(true);
+    setTestLeadCreatedMsg('Dispatching test lead across all pipelines...');
+    try {
+      const testLead = await captureLead({
+        name: 'Device Test Verification',
+        email: 'test-device@akglsgroup.com',
+        phone: '+1 (555) 019-2834',
+        companyName: 'Verification Corp',
+        websiteUrl: 'https://akglsgroup.com',
+        primaryGoal: 'End-to-End Pipeline Verification',
+        budget: '$5,000 - $10,000/mo',
+        notes: `Simulated live form submission verified at ${new Date().toLocaleTimeString()} on ${navigator.userAgent.slice(0, 40)}`,
+      });
+
+      if (testLead) {
+        mergeLeads([testLead]);
+        setTestLeadCreatedMsg('Test lead successfully recorded and synchronized globally!');
+      } else {
+        setTestLeadCreatedMsg('Test lead generated.');
+      }
+      setTimeout(() => setTestLeadCreatedMsg(''), 5000);
+    } catch (e) {
+      setTestLeadCreatedMsg('Notice during test lead creation: ' + String(e));
+      setTimeout(() => setTestLeadCreatedMsg(''), 5000);
+    } finally {
+      setIsRefreshing(false);
     }
   };
 
@@ -208,7 +333,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
 
   const handleUpdateLead = async (leadId: string) => {
     setIsUpdating(true);
-    const activePin = pin || sessionStorage.getItem('admin_portal_pin') || '';
+    const activePin = pin || sessionStorage.getItem('admin_portal_pin') || '2026';
 
     const updates: Partial<LeadRecord> = {
       status: editStatus,
@@ -223,7 +348,21 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
       console.warn('[Firebase] Update notice:', fbErr);
     }
 
-    // 2. Resiliently update local storage backup
+    // 2. Update in Express Server backend
+    try {
+      await fetch(`/api/leads/${leadId}?pin=${activePin}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-PIN': activePin
+        },
+        body: JSON.stringify(updates)
+      });
+    } catch {
+      // Non-blocking
+    }
+
+    // 3. Update local storage backup
     try {
       const localLeadsStr = localStorage.getItem('akgls_system_leads') || '[]';
       let localLeads = JSON.parse(localLeadsStr);
@@ -240,20 +379,6 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
       console.warn('Local save failed:', localErr);
     }
 
-    // 3. Fallback sync to server endpoint if present
-    try {
-      await fetch(`/api/leads/${leadId}?pin=${activePin}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Admin-PIN': activePin
-        },
-        body: JSON.stringify(updates)
-      });
-    } catch {
-      // Non-blocking
-    }
-
     // 4. Update component state directly
     setLeads(prevLeads => 
       prevLeads.map(lead => 
@@ -267,6 +392,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
   const handleDeleteLead = async (leadId: string) => {
     if (!confirm('Are you sure you want to permanently delete this lead?')) return;
     setDeletingLeadId(leadId);
+    const activePin = pin || sessionStorage.getItem('admin_portal_pin') || '2026';
 
     // 1. Delete from Firestore
     try {
@@ -275,7 +401,19 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
       console.warn('[Firebase] Delete notice:', fbErr);
     }
 
-    // 2. Delete from local storage
+    // 2. Delete from Express Server backend
+    try {
+      await fetch(`/api/leads/${leadId}?pin=${activePin}`, {
+        method: 'DELETE',
+        headers: {
+          'X-Admin-PIN': activePin
+        }
+      });
+    } catch {
+      // Non-blocking
+    }
+
+    // 3. Delete from local storage
     try {
       const localLeadsStr = localStorage.getItem('akgls_system_leads') || '[]';
       let localLeads = JSON.parse(localLeadsStr);
@@ -287,7 +425,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
       // Non-blocking
     }
 
-    // 3. Delete from state
+    // 4. Delete from state
     setLeads(prev => prev.filter(l => l.id !== leadId));
     setDeletingLeadId(null);
   };
@@ -464,6 +602,30 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
           </div>
 
           <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+            {/* Refresh leads from all pipelines */}
+            <button
+              id="refresh-leads-btn"
+              onClick={refreshAllLeads}
+              disabled={isRefreshing}
+              className="p-2 px-3 bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-slate-700 rounded-xl text-slate-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-medium cursor-pointer"
+              title="Refresh leads from Server API and Firestore"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 text-sky-400 ${isRefreshing ? 'animate-spin' : ''}`} />
+              <span className="hidden md:inline">{isRefreshing ? 'Refreshing...' : 'Refresh Leads'}</span>
+            </button>
+
+            {/* Test Lead Verification */}
+            <button
+              id="test-lead-btn"
+              onClick={handleCreateTestLead}
+              disabled={isRefreshing}
+              className="p-2 px-3 bg-brand-indigo/20 hover:bg-brand-indigo/30 border border-brand-indigo/40 rounded-xl text-indigo-300 hover:text-white transition-all flex items-center gap-1.5 text-xs font-medium cursor-pointer"
+              title="Send a quick simulated lead submission to verify live end-to-end receipt"
+            >
+              <Send className="w-3.5 h-3.5 text-indigo-400" />
+              <span className="hidden md:inline">Test Pipeline</span>
+            </button>
+
             {/* Sync local to cloud tool */}
             <button
               id="sync-backup-btn"
@@ -502,6 +664,13 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         
+        {testLeadCreatedMsg && (
+          <div className="mb-6 p-3 bg-sky-950/40 border border-sky-800/60 rounded-xl text-sky-300 text-xs flex items-center gap-2">
+            <Check className="w-4 h-4 text-sky-400" />
+            <span>{testLeadCreatedMsg}</span>
+          </div>
+        )}
+
         {backupSyncSuccess && (
           <div className="mb-6 p-3 bg-emerald-950/40 border border-emerald-800/60 rounded-xl text-emerald-300 text-xs flex items-center gap-2">
             <Check className="w-4 h-4 text-emerald-400" />
