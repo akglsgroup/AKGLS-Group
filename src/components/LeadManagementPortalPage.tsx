@@ -1,13 +1,15 @@
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, FormEvent, MouseEvent } from 'react';
 import { 
   Lock, KeyRound, Users, TrendingUp, Clock, MapPin, Search, Filter, 
   CheckCircle, AlertCircle, UserCheck, FileText, ExternalLink, 
   Save, RefreshCw, ArrowLeft, Trash2, Mail, Phone, Calendar, ShieldCheck,
-  Cloud, Database, Download, Check, Sparkles, Send, BarChart3, LayoutList, Pencil
+  Cloud, Database, Download, Check, Sparkles, Send, BarChart3, LayoutList, Pencil,
+  ChevronDown, ChevronUp, Eye, Maximize2, Code2, Tag
 } from 'lucide-react';
 import { LeadRecord } from '../types';
 import LeadAnalyticsDashboard from './LeadAnalyticsDashboard';
 import AkglsLogo from './AkglsLogo';
+import LeadDetailModal from './LeadDetailModal';
 import { 
   subscribeToGlobalLeads, 
   updateLeadInFirestore, 
@@ -39,6 +41,23 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
   const [statusFilter, setStatusFilter] = useState<string>('All');
   const [editingLeadId, setEditingLeadId] = useState<string | null>(null);
   const [deletingLeadId, setDeletingLeadId] = useState<string | null>(null);
+
+  // Modal and Row Expansion states
+  const [selectedLeadForModal, setSelectedLeadForModal] = useState<LeadRecord | null>(null);
+  const [expandedRowIds, setExpandedRowIds] = useState<Set<string>>(new Set());
+
+  const toggleRowExpand = (id: string, e?: MouseEvent) => {
+    if (e) e.stopPropagation();
+    setExpandedRowIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
+        next.add(id);
+      }
+      return next;
+    });
+  };
 
   // Real-time Cloud vs Server vs Local sync indicator
   const [isFirebaseConnected, setIsFirebaseConnected] = useState<boolean>(true);
@@ -334,11 +353,11 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
     setEditingLeadId(null);
   };
 
-  const handleUpdateLead = async (leadId: string) => {
+  const handleUpdateLead = async (leadId: string, customUpdates?: Partial<LeadRecord>) => {
     setIsUpdating(true);
     const activePin = pin || sessionStorage.getItem('admin_portal_pin') || '2026';
 
-    const updates: Partial<LeadRecord> = {
+    const updates: Partial<LeadRecord> = customUpdates || {
       status: editStatus,
       assignedTo: editAssignedTo,
       notes: editNotes
@@ -388,6 +407,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
         lead.id === leadId ? { ...lead, ...updates } : lead
       )
     );
+    setSelectedLeadForModal(prev => prev && prev.id === leadId ? { ...prev, ...updates } : prev);
     setEditingLeadId(null);
     setIsUpdating(false);
   };
@@ -395,6 +415,9 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
   const handleDeleteLead = async (leadId: string) => {
     if (!confirm('Are you sure you want to permanently delete this lead?')) return;
     setDeletingLeadId(leadId);
+    if (selectedLeadForModal?.id === leadId) {
+      setSelectedLeadForModal(null);
+    }
     const activePin = pin || sessionStorage.getItem('admin_portal_pin') || '2026';
 
     // 1. Delete from Firestore
@@ -859,12 +882,18 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                 : lead.time;
 
               const isEditing = editingLeadId === lead.id;
+              const isExpanded = expandedRowIds.has(lead.id);
 
               return (
                 <div 
                   key={lead.id} 
-                  className={`bg-slate-900/30 hover:bg-slate-900/50 border transition-all rounded-2xl overflow-hidden p-5 sm:p-6 ${
-                    isEditing ? 'border-brand-indigo/50 bg-brand-indigo/5 animate-none' : 'border-slate-900 hover:border-slate-800'
+                  onClick={() => setSelectedLeadForModal(lead)}
+                  className={`border transition-all rounded-2xl overflow-hidden p-5 sm:p-6 cursor-pointer group/card relative ${
+                    isEditing 
+                      ? 'border-brand-indigo/50 bg-brand-indigo/5' 
+                      : isExpanded
+                        ? 'border-slate-700 bg-slate-900/60 shadow-xl ring-1 ring-slate-700/50'
+                        : 'bg-slate-900/30 hover:bg-slate-900/50 border-slate-900 hover:border-slate-700 hover:shadow-lg hover:shadow-brand-indigo/5'
                   }`}
                   id={`lead-card-${lead.id}`}
                 >
@@ -872,7 +901,13 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                   <div className="flex flex-col md:flex-row md:items-start justify-between gap-4 mb-4 pb-4 border-b border-slate-900/80">
                     <div className="space-y-1">
                       <div className="flex flex-wrap items-center gap-2">
-                        <h3 className="text-base font-bold text-white tracking-tight">{lead.name}</h3>
+                        <h3 className="text-base font-bold text-white tracking-tight group-hover/card:text-brand-indigo transition-colors flex items-center gap-2">
+                          <span>{lead.name}</span>
+                          <span className="text-[10px] text-slate-500 font-mono hidden md:inline-flex items-center gap-1 group-hover/card:text-slate-400 transition-colors font-normal">
+                            <Eye className="w-3 h-3 text-brand-indigo" />
+                            <span>Click card to inspect</span>
+                          </span>
+                        </h3>
                         
                         {/* Status label badge */}
                         <span className={`text-[10px] uppercase font-mono tracking-wider font-semibold px-2 py-0.5 rounded-full ${
@@ -899,12 +934,24 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                       <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 text-xs text-slate-400 pt-1">
                         <span className="flex items-center gap-1.5 text-slate-200">
                           <Mail className="w-3.5 h-3.5 text-slate-500" />
-                          <a href={`mailto:${lead.email}`} className="hover:text-brand-indigo hover:underline">{lead.email}</a>
+                          <a 
+                            href={`mailto:${lead.email}`} 
+                            onClick={(e) => e.stopPropagation()}
+                            className="hover:text-brand-indigo hover:underline"
+                          >
+                            {lead.email}
+                          </a>
                         </span>
                         {lead.phone && (
                           <span className="flex items-center gap-1.5 text-slate-200">
                             <Phone className="w-3.5 h-3.5 text-slate-500" />
-                            <a href={`tel:${lead.phone}`} className="hover:text-brand-indigo hover:underline">{lead.phone}</a>
+                            <a 
+                              href={`tel:${lead.phone}`} 
+                              onClick={(e) => e.stopPropagation()}
+                              className="hover:text-brand-indigo hover:underline"
+                            >
+                              {lead.phone}
+                            </a>
                           </span>
                         )}
                         <span className="flex items-center gap-1.5 text-slate-400 font-mono text-[11px]">
@@ -915,19 +962,55 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                     </div>
 
                     {/* Quick status actions button */}
-                    <div className="flex items-center gap-2 self-start md:self-auto">
+                    <div className="flex items-center gap-2 self-start md:self-auto" onClick={(e) => e.stopPropagation()}>
                       {!isEditing ? (
                         <>
                           <button
+                            id={`inspect-lead-btn-${lead.id}`}
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              setSelectedLeadForModal(lead);
+                            }}
+                            className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-brand-indigo/60 rounded-xl text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+                            title="Inspect full lead details & raw submission data in modal"
+                          >
+                            <Maximize2 className="w-3.5 h-3.5 text-brand-indigo" />
+                            <span className="hidden sm:inline">Inspect Details</span>
+                          </button>
+
+                          <button
+                            id={`expand-lead-btn-${lead.id}`}
+                            type="button"
+                            onClick={(e) => toggleRowExpand(lead.id, e)}
+                            className="p-2 bg-slate-900 hover:bg-slate-800 border border-slate-800 hover:border-slate-700 rounded-xl text-slate-400 hover:text-white transition-all cursor-pointer"
+                            title={isExpanded ? "Collapse inline row view" : "Expand inline row details"}
+                            aria-label="Toggle row expansion"
+                          >
+                            {isExpanded ? (
+                              <ChevronUp className="w-3.5 h-3.5 text-brand-indigo" />
+                            ) : (
+                              <ChevronDown className="w-3.5 h-3.5 text-slate-400" />
+                            )}
+                          </button>
+
+                          <button
                             id={`edit-lead-btn-${lead.id}`}
-                            onClick={() => startEditing(lead)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              startEditing(lead);
+                            }}
                             className="px-3 py-1.5 bg-slate-900 hover:bg-slate-850 border border-slate-800 rounded-xl text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-1.5 cursor-pointer"
                           >
                             <span>Manage Status</span>
                           </button>
+
                           <button
                             id={`delete-lead-btn-${lead.id}`}
-                            onClick={() => handleDeleteLead(lead.id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleDeleteLead(lead.id);
+                            }}
                             disabled={deletingLeadId === lead.id}
                             className="p-2 bg-slate-900/60 hover:bg-red-950/40 border border-slate-800 hover:border-red-900/50 rounded-xl text-slate-500 hover:text-red-400 transition-all cursor-pointer"
                             title="Delete Lead Record"
@@ -936,10 +1019,13 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                           </button>
                         </>
                       ) : (
-                        <div className="flex items-center gap-1.5">
+                        <div className="flex items-center gap-1.5" onClick={(e) => e.stopPropagation()}>
                           <button
                             id={`save-lead-btn-${lead.id}`}
-                            onClick={() => handleUpdateLead(lead.id)}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleUpdateLead(lead.id);
+                            }}
                             disabled={isUpdating}
                             className="px-3 py-1.5 bg-brand-indigo hover:bg-brand-indigo/90 text-white rounded-xl text-xs font-medium transition-all flex items-center gap-1.5 disabled:opacity-50 cursor-pointer"
                           >
@@ -948,7 +1034,10 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                           </button>
                           <button
                             id={`cancel-lead-btn-${lead.id}`}
-                            onClick={cancelEditing}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              cancelEditing();
+                            }}
                             className="px-3 py-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-800 rounded-xl text-xs font-medium text-slate-400 hover:text-white transition-all cursor-pointer"
                           >
                             Cancel
@@ -969,6 +1058,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                           href={lead.pageAddress} 
                           target="_blank" 
                           rel="noreferrer" 
+                          onClick={(e) => e.stopPropagation()}
                           className="text-brand-indigo hover:underline flex items-center gap-1 font-mono text-[11px] break-all pt-0.5 leading-normal"
                         >
                           <span className="truncate">{lead.pageAddress}</span>
@@ -1009,7 +1099,13 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                         {lead.websiteUrl && (
                           <div className="text-slate-300 flex items-center gap-1.5 truncate">
                             <span className="text-slate-500">Site:</span> 
-                            <a href={lead.websiteUrl.startsWith('http') ? lead.websiteUrl : 'https://' + lead.websiteUrl} target="_blank" rel="noreferrer" className="text-slate-300 hover:text-brand-indigo underline truncate">
+                            <a 
+                              href={lead.websiteUrl.startsWith('http') ? lead.websiteUrl : 'https://' + lead.websiteUrl} 
+                              target="_blank" 
+                              rel="noreferrer" 
+                              onClick={(e) => e.stopPropagation()}
+                              className="text-slate-300 hover:text-brand-indigo underline truncate"
+                            >
                               {lead.websiteUrl}
                             </a>
                           </div>
@@ -1032,7 +1128,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                   </div>
 
                   {/* Details Drawer / Editable Pane */}
-                  <div className="space-y-3">
+                  <div className="space-y-3" onClick={(e) => e.stopPropagation()}>
                     {/* Raw inquiry message / text */}
                     {lead.notes && (
                       <div className="bg-slate-950/20 p-4 border border-slate-900 rounded-xl">
@@ -1041,22 +1137,65 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                       </div>
                     )}
 
-                    {/* Raw Details Dump for generic submissions */}
-                    {lead.rawDetails && Object.keys(lead.rawDetails).length > 1 && (
-                      <div className="bg-slate-950/15 p-3 rounded-lg border border-slate-900">
-                        <details className="group">
-                          <summary className="text-[10.5px] uppercase font-mono tracking-wider text-slate-500 hover:text-slate-300 cursor-pointer list-none flex items-center gap-1 select-none font-semibold">
-                            <span className="transition-transform group-open:rotate-90">▶</span>
-                            <span>View All Raw Submitted Form Attributes ({Object.keys(lead.rawDetails).length})</span>
-                          </summary>
-                          <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 gap-2 text-[10.5px] font-mono text-slate-400 bg-slate-950/60 p-3 rounded-xl border border-slate-900/60">
-                            {Object.entries(lead.rawDetails).map(([k, v]) => (
-                              <div key={k} className="border-b border-slate-900/50 pb-1 break-all">
-                                <span className="text-brand-indigo font-semibold">{k}:</span> <span className="text-slate-200">{String(v)}</span>
-                              </div>
-                            ))}
+                    {/* Inline Expandable Row Section: Full Details & Raw Attributes */}
+                    {isExpanded && (
+                      <div 
+                        className="mt-4 pt-4 border-t border-slate-800/80 bg-slate-950/60 p-4 rounded-2xl border border-slate-850 space-y-4 animate-in fade-in duration-200"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <div className="flex flex-wrap items-center justify-between gap-3">
+                          <div className="flex items-center gap-2">
+                            <Code2 className="w-4 h-4 text-emerald-400" />
+                            <span className="text-xs font-mono font-bold text-white uppercase tracking-wider">
+                              Full Raw Form Submission Data ({Object.keys(lead.rawDetails || {}).length} Fields)
+                            </span>
                           </div>
-                        </details>
+
+                          <div className="flex items-center gap-2">
+                            <button
+                              type="button"
+                              onClick={() => setSelectedLeadForModal(lead)}
+                              className="px-3 py-1.5 bg-brand-indigo hover:bg-brand-indigo/90 text-white rounded-xl text-xs font-semibold transition-all flex items-center gap-1.5 cursor-pointer shadow-md shadow-brand-indigo/20"
+                            >
+                              <Maximize2 className="w-3 h-3" />
+                              <span>Open Full-Screen Modal</span>
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Raw Attributes Key-Value Grid */}
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5 text-xs font-mono">
+                          {Object.entries({
+                            ...(lead.rawDetails || {}),
+                            leadId: lead.id,
+                            name: lead.name,
+                            email: lead.email,
+                            submissionTime: lead.time,
+                            crmStatus: lead.status,
+                            ...(lead.phone ? { phone: lead.phone } : {}),
+                            ...(lead.companyName ? { companyName: lead.companyName } : {}),
+                            ...(lead.websiteUrl ? { websiteUrl: lead.websiteUrl } : {}),
+                            ...(lead.budget ? { budget: lead.budget } : {}),
+                            ...(lead.primaryGoal ? { primaryGoal: lead.primaryGoal } : {}),
+                            pageAddress: lead.pageAddress,
+                            pageTitle: lead.pageTitle,
+                            clientIp: lead.ip || '127.0.0.1',
+                            geoCountry: lead.country || 'Unknown',
+                            ...(lead.city ? { geoCity: lead.city } : {}),
+                            ...(lead.region ? { geoRegion: lead.region } : {}),
+                            ...(lead.assignedTo ? { assignedTo: lead.assignedTo } : {}),
+                          }).map(([k, v]) => (
+                            <div key={k} className="bg-slate-950/80 p-2.5 rounded-xl border border-slate-900 flex flex-col justify-between">
+                              <span className="text-slate-500 text-[10px] uppercase font-semibold flex items-center gap-1">
+                                <Tag className="w-2.5 h-2.5 text-brand-indigo" />
+                                <span>{k}</span>
+                              </span>
+                              <span className="text-slate-200 break-all text-[11px] mt-1 font-mono">
+                                {typeof v === 'object' && v !== null ? JSON.stringify(v) : String(v || '—')}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
                       </div>
                     )}
 
@@ -1121,6 +1260,15 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
         )}
       </>
     )}
+
+    {/* Lead Detail & Raw Submission Modal */}
+    <LeadDetailModal
+      lead={selectedLeadForModal}
+      isOpen={!!selectedLeadForModal}
+      onClose={() => setSelectedLeadForModal(null)}
+      onUpdateLead={handleUpdateLead}
+      onDeleteLead={handleDeleteLead}
+    />
   </div>
 </main>
   );
