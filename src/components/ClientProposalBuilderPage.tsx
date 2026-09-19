@@ -22,6 +22,7 @@ import {
   PlusSquare,
   HelpCircle
 } from 'lucide-react';
+import AkglsLogo from './AkglsLogo';
 
 interface DeliverableItem {
   name: string;
@@ -1543,15 +1544,8 @@ export default function ClientProposalBuilderPage({ onBackToHome }: { onBackToHo
                     {state.agencyLogoBase64 ? (
                       <img src={state.agencyLogoBase64} className="h-9 max-w-[140px] object-contain rounded" alt="Corporate" />
                     ) : (
-                      state.agencyName && (
-                        <div className={`h-9 px-3 rounded-lg text-white font-black text-xs tracking-wider uppercase flex items-center justify-center ${themeColObj.bg}`}>
-                          {state.agencyName.substring(0,3).toUpperCase()}
-                        </div>
-                      )
+                      <AkglsLogo variant="navbar" theme="light" showTagline={false} />
                     )}
-                    <span className="text-xs font-black tracking-widest text-slate-900 uppercase">
-                      {state.agencyName}
-                    </span>
                   </div>
                   <span className="text-[10px] font-mono font-bold text-slate-400 tracking-widest uppercase">
                     {state.propDate && new Date(state.propDate).toLocaleDateString('en-US', { month: 'long', year: 'numeric' }).toUpperCase()}

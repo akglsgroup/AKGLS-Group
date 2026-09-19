@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 180" width="100%" height="100%">
+  <defs>
+    <!-- The gradient divider rule directly under AKGLS Group -->
+    <linearGradient id="hDividerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00c4b4" />
+      <stop offset="60%" stop-color="#00a89d" />
+      <stop offset="100%" stop-color="#ff1475" />
+    </linearGradient>
+  </defs>
+
+  <!-- "AKGLS Group" -->
+  <text x="20" y="85" 
+        font-family="'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif" 
+        font-size="86" 
+        font-weight="900" 
+        letter-spacing="-1.5" 
+        fill="#00174f">
+    AKGLS <tspan font-weight="800">Group</tspan>
+  </text>
+
+  <!-- Horizontal Gradient Divider Line under "AKGLS Group" -->
+  <rect x="20" y="108" width="720" height="6" rx="3" fill="url(#hDividerGrad)" />
+
+  <!-- Tagline: "We're the 'Ctrl+Alt+Del' for Your Business" -->
+  <text x="20" y="152" 
+        font-family="'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif" 
+        font-size="34" 
+        font-weight="600" 
+        fill="#00174f" 
+        letter-spacing="-0.2">
+    We&#x2019;re the <tspan fill="#00174f">&#x2018;</tspan><tspan fill="#00a89d" font-weight="700">Ctrl</tspan><tspan fill="#00174f" font-weight="700">+Alt+</tspan><tspan fill="#d80064" font-weight="700">Del</tspan><tspan fill="#00174f">&#x2019;</tspan> for Your Business
+  </text>
+</svg>

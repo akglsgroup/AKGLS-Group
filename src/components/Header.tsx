@@ -11,6 +11,7 @@ import { servicesMenu, solutionsMenu, caseStudiesMenu, resourcesMenu, companyMen
 import { getWhatsAppMessage } from './WhatsAppWidget';
 import WhatsAppIcon from './WhatsAppIcon';
 import { PWAInstallButton } from './PWAInstallButton';
+import AkglsLogo from './AkglsLogo';
 
 interface HeaderProps {
   onSearchOpen: () => void;
@@ -204,24 +205,14 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             
-            {/* Logo Mark */}
+            {/* Official AKGLS Group Brand Logo */}
             <a 
               href="/" 
               onClick={(e) => handleLinkClick(e, '/')}
               aria-label="AKGLS Group Homepage"
-              className="flex items-center gap-3 select-none group rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1d]"
+              className="flex items-center select-none group rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1d] py-1"
             >
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-indigo to-brand-purple flex items-center justify-center shadow-lg shadow-brand-indigo/35 group-hover:scale-105 transition-transform duration-300">
-                <span className="text-white font-black text-xl font-display">AK</span>
-              </div>
-              <div className="flex flex-col text-left">
-                <span className="font-black tracking-tight text-xl font-display leading-none transition-colors text-white">
-                  AKGLS <span className="text-brand-indigo">GROUP</span>
-                </span>
-                <span className="text-[9px] text-brand-teal tracking-widest font-extrabold uppercase mt-1 leading-none">
-                  Digital & AI Enterprise
-                </span>
-              </div>
+              <AkglsLogo variant="navbar" theme="dark" />
             </a>
 
             {/* Desktop Central Navigation with full Hover Dropdowns */}
@@ -736,8 +727,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               {/* Header inside drawer */}
               <div className="p-5 border-b border-slate-800/80 flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-lg bg-brand-indigo flex items-center justify-center font-bold text-white text-sm font-display">AK</div>
-                  <span className="font-extrabold text-white text-base font-display">AKGLS MENU</span>
+                  <AkglsLogo variant="navbar" theme="dark" showTagline={false} />
                 </div>
                 <button 
                   type="button"

@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import { LeadRecord } from '../types';
 import LeadAnalyticsDashboard from './LeadAnalyticsDashboard';
+import AkglsLogo from './AkglsLogo';
 import { 
   subscribeToGlobalLeads, 
   updateLeadInFirestore, 
@@ -506,15 +507,15 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
         
         <div className="w-full max-w-md bg-slate-900/60 border border-slate-800 p-8 rounded-3xl backdrop-blur-xl shadow-2xl relative z-10">
           <div className="text-center mb-8">
-            <div className="mx-auto w-14 h-14 bg-brand-indigo/10 border border-brand-indigo/25 rounded-2xl flex items-center justify-center mb-4">
-              <Lock className="w-6 h-6 text-brand-indigo" />
+            <div className="flex justify-center mb-4">
+              <AkglsLogo variant="full" theme="dark" />
             </div>
             <div className="flex items-center justify-center gap-1.5 mb-1.5">
               <span className="text-[10px] font-mono font-bold tracking-widest text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-2 py-0.5 rounded-full uppercase flex items-center gap-1">
                 <Cloud className="w-3 h-3 text-emerald-400" /> Firebase Global CRM
               </span>
             </div>
-            <h1 className="text-2xl font-bold tracking-tight text-white mb-2 font-display">AKGLS Command Center</h1>
+            <h1 className="text-xl font-bold tracking-tight text-white mb-1 font-display">Command Center Access</h1>
             <p className="text-slate-400 text-xs">Enter your secure verification PIN to view the global Firebase lead desk</p>
           </div>
 
@@ -594,9 +595,10 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
             >
               <ArrowLeft className="w-4 h-4" />
             </button>
+            <AkglsLogo variant="navbar" theme="dark" showTagline={false} />
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-lg font-bold tracking-tight text-white font-display">AKGLS Global Leads Desk</h1>
+                <h1 className="text-lg font-bold tracking-tight text-white font-display">Global Leads Command Desk</h1>
                 <span className="bg-emerald-950 border border-emerald-900/50 text-emerald-400 text-[10px] uppercase tracking-widest font-mono font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                   Firebase Firestore

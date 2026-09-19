@@ -207,17 +207,14 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
         <div class="flex items-center justify-between">
           
           <!-- Logo Mark -->
-          <a href="/" class="flex items-center gap-3 select-none group">
-            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-indigo to-brand-purple flex items-center justify-center shadow-lg shadow-brand-indigo/35 group-hover:scale-105 transition-transform duration-300">
-              <span class="text-white font-black text-xl font-display">AK</span>
+          <a href="/" class="inline-flex flex-col text-left justify-center select-none group py-1" aria-label="AKGLS Group Homepage">
+            <div class="flex items-baseline leading-none tracking-tight">
+              <span class="font-black tracking-tight text-xl sm:text-2xl text-white font-sans">AKGLS</span>
+              <span class="font-extrabold text-xl sm:text-2xl text-slate-100 font-sans ml-1.5">Group</span>
             </div>
-            <div class="flex flex-col text-left">
-              <span class="font-black tracking-tight text-xl font-display leading-none transition-colors text-white">
-                AKGLS <span class="text-brand-indigo">GROUP</span>
-              </span>
-              <span class="text-[9px] text-brand-teal tracking-widest font-extrabold uppercase mt-1 leading-none">
-                Digital &amp; AI Enterprise
-              </span>
+            <div class="w-full h-[2.5px] rounded-full bg-gradient-to-r from-[#00c4b4] via-[#00a89d] to-[#ff1475] my-1 sm:my-1.5 shadow-sm"></div>
+            <div class="font-sans text-[10.5px] sm:text-[11.5px] tracking-tight leading-none text-slate-300 font-medium whitespace-nowrap">
+              We’re the ‘<span class="text-[#00c4b4] font-bold">Ctrl</span>+Alt+<span class="text-[#ff1475] font-bold">Del</span>’ for Your Business
             </div>
           </a>
 

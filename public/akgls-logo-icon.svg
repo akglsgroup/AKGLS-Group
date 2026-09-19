@@ -1,21 +1,25 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
   <defs>
-    <linearGradient id="favTeal" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="akglsTeal" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#00c4b4" />
       <stop offset="100%" stop-color="#009688" />
     </linearGradient>
-    <linearGradient id="favMagenta" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="akglsMagenta" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#ff1475" />
       <stop offset="100%" stop-color="#d80064" />
     </linearGradient>
-    <linearGradient id="favNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+    <linearGradient id="akglsNavy" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#051747" />
       <stop offset="100%" stop-color="#001036" />
     </linearGradient>
+    <filter id="subtleShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.15" />
+    </filter>
   </defs>
 
+  <!-- Squircle Rounded Container with Opening on the Left for Inflowing Chevrons -->
   <!-- Container background: Clean Crisp White -->
-  <rect x="30" y="30" width="440" height="440" rx="90" ry="90" fill="#ffffff" />
+  <rect x="30" y="30" width="440" height="440" rx="90" ry="90" fill="#ffffff" filter="url(#subtleShadow)" />
   
   <!-- Outer Outline with left opening for chevrons -->
   <path d="M 30,290 L 30,380 C 30,425 65,460 110,460 L 390,460 C 435,460 470,425 470,380 L 470,120 C 470,75 435,40 390,40 L 110,40 C 65,40 30,75 30,120 L 30,200" 
@@ -26,18 +30,28 @@
         stroke-linejoin="round" />
 
   <!-- 3 Forward Teal Chevrons entering through left gap -->
+  <!-- Chevron 1 -->
   <path d="M 22,215 L 48,245 L 22,275" fill="none" stroke="#00a89d" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Chevron 2 -->
   <path d="M 52,215 L 78,245 L 52,275" fill="none" stroke="#00a89d" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
+  <!-- Chevron 3 -->
   <path d="M 82,215 L 108,245 L 82,275" fill="none" stroke="#00a89d" stroke-width="16" stroke-linecap="round" stroke-linejoin="round" />
 
   <!-- Stylized Monogram "A" -->
-  <polygon points="120,385 220,135 272,135 172,385" fill="url(#favNavy)" />
-  <polygon points="272,135 372,385 320,385 220,135" fill="url(#favTeal)" />
+  <!-- Left Leg of 'A' (Solid Deep Navy) -->
+  <polygon points="120,385 220,135 272,135 172,385" fill="url(#akglsNavy)" />
+
+  <!-- Right Leg of 'A' (Vibrant Teal / Cyan) -->
+  <!-- Peak joins at top, angled overlap -->
+  <polygon points="272,135 372,385 320,385 220,135" fill="url(#akglsTeal)" />
 
   <!-- Horizontal Crossbar / Arrow Sequence -->
+  <!-- Teal segment coming through the left navy leg -->
   <polygon points="146,245 190,245 180,275 134,275" fill="#00a89d" />
-  <path d="M 252,230 L 315,260 L 252,290 L 272,260 Z" fill="url(#favMagenta)" />
 
-  <!-- Dark Navy Computer Cursor -->
+  <!-- Bold Magenta Arrow Crossbar pointing to the right -->
+  <path d="M 252,230 L 315,260 L 252,290 L 272,260 Z" fill="url(#akglsMagenta)" />
+
+  <!-- Dark Navy Computer Cursor inside the lower cavity -->
   <path d="M 245,340 L 245,395 L 263,377 L 285,401 L 297,390 L 275,366 L 288,353 Z" fill="#00174f" />
 </svg>

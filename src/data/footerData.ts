@@ -47,7 +47,7 @@ export const FOOTER_FLOATING_CTA = {
 
 export const FOOTER_COMPANY_INFO = {
   name: "AKGLS GROUP",
-  tagline: "AI SEO & PERFORMANCE",
+  tagline: "We’re the ‘Ctrl+Alt+Del’ for Your Business",
   description: "AI-powered digital marketing agency helping businesses grow through SEO, GEO, AEO, AI SEO, Google Ads, Web Design, and lead generation solutions.",
   trustBadges: [
     { title: "10+ Years Experience", desc: "Proven track record" },

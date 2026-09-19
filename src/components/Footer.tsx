@@ -7,6 +7,7 @@ import {
 } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
 import { PWAInstallButton } from './PWAInstallButton';
+import AkglsLogo from './AkglsLogo';
 import { 
   FOOTER_FLOATING_CTA, 
   FOOTER_COMPANY_INFO, 
@@ -168,19 +169,9 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
                 href="/" 
                 onClick={(e) => handleLinkClick('/', e)} 
                 aria-label="AKGLS Group homepage"
-                className="flex items-center gap-3 select-none group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo rounded-xl p-1 -m-1"
+                className="inline-flex items-center select-none group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo rounded-xl p-1 -m-1"
               >
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-indigo to-brand-purple flex items-center justify-center shadow-lg transform group-hover:scale-105 transition-transform">
-                  <span className="text-white font-black text-xl font-display">AK</span>
-                </div>
-                <div>
-                  <span className="font-extrabold tracking-wider text-white text-base font-display uppercase block leading-none">
-                    AKGLS <span className="text-brand-teal">GROUP</span>
-                  </span>
-                  <span className="text-[9px] font-mono tracking-widest text-brand-teal uppercase font-bold block mt-1">
-                    {FOOTER_COMPANY_INFO.tagline}
-                  </span>
-                </div>
+                <AkglsLogo variant="full" theme="dark" />
               </a>
 
               <p className="text-xs leading-relaxed text-slate-400 font-light pr-4 max-w-lg">
