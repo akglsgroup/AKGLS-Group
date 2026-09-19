@@ -393,6 +393,7 @@ async function startServer() {
     if (
       req.path.startsWith("/api/") ||
       req.path.startsWith("/@") ||
+      req.path.startsWith("/__vite") ||
       req.path.startsWith("/src/") ||
       req.path.startsWith("/node_modules/") ||
       req.path.includes(".")
@@ -444,7 +445,7 @@ async function startServer() {
   });
 
   // Vite middleware for local development
-  if (process.env.NODE_ENV === "development") {
+  if (process.env.NODE_ENV !== "production") {
     const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
       server: { middlewareMode: true, allowedHosts: true },

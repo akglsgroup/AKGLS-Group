@@ -58,6 +58,16 @@
     <meta name="twitter:image" content="https://www.akglsgroup.com/assets/geo-og.png" />
     <script>
       (function() {
+        // Suppress expected benign Vite HMR websocket connection message in AI Studio sandboxed preview
+        var originalError = console.error;
+        console.error = function() {
+          var args = Array.prototype.slice.call(arguments);
+          if (args.length > 0 && typeof args[0] === 'string' && args[0].indexOf('[vite] failed to connect to websocket') !== -1) {
+            return;
+          }
+          return originalError.apply(console, args);
+        };
+
         try {
           var originalFetch = window.fetch;
           var currentFetch = originalFetch;
