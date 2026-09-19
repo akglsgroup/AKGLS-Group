@@ -16,7 +16,17 @@ import {
 } from 'firebase/firestore';
 import { getAuth } from 'firebase/auth';
 import { LeadRecord } from './types';
-import firebaseConfig from '../firebase-applet-config.json';
+
+// Default configuration for the dedicated AKGLS Firestore database
+const defaultConfig = {
+  projectId: 'realtors-directory',
+  appId: '1:815514143958:web:bd2705889a88216d4d0d77',
+  apiKey: 'AIzaSyBorb2F2oE1DQrn2j2abPC9v35ICOjN6GQ',
+  authDomain: 'realtors-directory.firebaseapp.com',
+  firestoreDatabaseId: 'ai-studio-akglsgroupsite-ecb433f8-a78e-41eb-99fb-e422adef4b3e',
+  storageBucket: 'realtors-directory.firebasestorage.app',
+  messagingSenderId: '815514143958'
+};
 
 // Base64 helper to avoid triggering GitHub static secret scanning on public Firebase client identifier
 const decodeFallbackKey = (): string => {
@@ -34,38 +44,32 @@ const resolvedConfig = {
   projectId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_PROJECT_ID) ||
     (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_PROJECT_ID) ||
-    (firebaseConfig as any)?.projectId || 
-    'realtors-directory',
+    defaultConfig.projectId,
   appId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_APP_ID) ||
     (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_APP_ID) ||
-    (firebaseConfig as any)?.appId || 
-    '1:815514143958:web:bd2705889a88216d4d0d77',
+    defaultConfig.appId,
   apiKey: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_API_KEY) ||
     (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_API_KEY) ||
-    (firebaseConfig as any)?.apiKey || 
+    defaultConfig.apiKey || 
     decodeFallbackKey(),
   authDomain: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_AUTH_DOMAIN) ||
     (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_AUTH_DOMAIN) ||
-    (firebaseConfig as any)?.authDomain || 
-    'realtors-directory.firebaseapp.com',
+    defaultConfig.authDomain,
   firestoreDatabaseId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_DATABASE_ID) ||
     (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_DATABASE_ID) ||
-    (firebaseConfig as any)?.firestoreDatabaseId ||
-    'ai-studio-akglsgroupsite-ecb433f8-a78e-41eb-99fb-e422adef4b3e',
+    defaultConfig.firestoreDatabaseId,
   storageBucket: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_STORAGE_BUCKET) ||
     (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_STORAGE_BUCKET) ||
-    (firebaseConfig as any)?.storageBucket ||
-    'realtors-directory.firebasestorage.app',
+    defaultConfig.storageBucket,
   messagingSenderId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_MESSAGING_SENDER_ID) ||
     (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_MESSAGING_SENDER_ID) ||
-    (firebaseConfig as any)?.messagingSenderId ||
-    '815514143958',
+    defaultConfig.messagingSenderId,
 };
 
 // Initialize Firebase App instance safely (singleton with safe fallback for build/SSR)

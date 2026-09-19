@@ -1,13 +1,9 @@
 import 'dotenv/config';
 import express from "express";
 import path from "path";
-import { fileURLToPath } from "url";
 import fs from "fs";
 import { getRouteBySlug, getOrCreateRouteBySlug } from "./src/routesData";
 import { renderPageHtml } from "./src/utils/pageTemplate";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 const LEADS_FILE = path.join(process.cwd(), "data", "leads.json");
 const ADMIN_PIN = process.env.ADMIN_PIN || "2026";

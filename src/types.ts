@@ -65,7 +65,7 @@ export interface LeadRecord {
   country?: string;
   city?: string;
   region?: string;
-  status: 'New' | 'Contacted' | 'In Progress' | 'Converted' | 'Spam' | 'Archived';
+  status: 'New' | 'Contacted' | 'Proposal Sent' | 'In Progress' | 'Converted' | 'Spam' | 'Archived';
   assignedTo?: string;
   notes?: string;
   rawDetails?: Record<string, any>;

@@ -3,9 +3,10 @@ import {
   Lock, KeyRound, Users, TrendingUp, Clock, MapPin, Search, Filter, 
   CheckCircle, AlertCircle, UserCheck, FileText, ExternalLink, 
   Save, RefreshCw, ArrowLeft, Trash2, Mail, Phone, Calendar, ShieldCheck,
-  Cloud, Database, Download, Check, Sparkles, Send
+  Cloud, Database, Download, Check, Sparkles, Send, BarChart3, LayoutList, Pencil
 } from 'lucide-react';
 import { LeadRecord } from '../types';
+import LeadAnalyticsDashboard from './LeadAnalyticsDashboard';
 import { 
   subscribeToGlobalLeads, 
   updateLeadInFirestore, 
@@ -29,6 +30,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
 
   // Leads and management states
   const [leads, setLeads] = useState<LeadRecord[]>([]);
+  const [activeView, setActiveView] = useState<'leads' | 'analytics'>('leads');
   const [isLoading, setIsLoading] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [errorString, setErrorString] = useState('');
@@ -488,7 +490,10 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
   // Calculate statistics from the actual lead data
   const totalCount = leads.length;
   const newCount = leads.filter(l => l.status === 'New').length;
-  const inProgressCount = leads.filter(l => l.status === 'In Progress' || l.status === 'Contacted').length;
+  const contactedCount = leads.filter(l => l.status === 'Contacted').length;
+  const proposalSentCount = leads.filter(l => l.status === 'Proposal Sent').length;
+  const inProgressCount = leads.filter(l => l.status === 'In Progress').length;
+  const activePipelineCount = leads.filter(l => l.status === 'In Progress' || l.status === 'Contacted' || l.status === 'Proposal Sent').length;
   const convertedCount = leads.filter(l => l.status === 'Converted').length;
   const conversionRate = totalCount > 0 ? Math.round((convertedCount / totalCount) * 100) : 0;
 
@@ -687,6 +692,41 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
           <span className="text-slate-500 font-mono text-[10px] hidden sm:inline">Project: realtors-directory • Collection: leads</span>
         </div>
 
+        {/* Non-Routed View Switcher: Inquiries Stream vs Analytics Dashboard */}
+        <div className="flex flex-wrap items-center justify-between gap-4 mb-6" id="portal-view-switcher">
+          <div className="flex items-center bg-slate-900/90 p-1 rounded-2xl border border-slate-800 shadow-inner">
+            <button
+              id="view-mode-leads-btn"
+              onClick={() => setActiveView('leads')}
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer ${
+                activeView === 'leads'
+                  ? 'bg-brand-indigo text-white shadow-lg shadow-brand-indigo/25'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <LayoutList className="w-3.5 h-3.5" />
+              <span>Inquiries Feed ({leads.length})</span>
+            </button>
+            <button
+              id="view-mode-analytics-btn"
+              onClick={() => setActiveView('analytics')}
+              className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all flex items-center gap-2 cursor-pointer ${
+                activeView === 'analytics'
+                  ? 'bg-brand-indigo text-white shadow-lg shadow-brand-indigo/25'
+                  : 'text-slate-400 hover:text-white'
+              }`}
+            >
+              <BarChart3 className="w-3.5 h-3.5 text-amber-300" />
+              <span>Analytics & Charts</span>
+            </button>
+          </div>
+
+          <div className="text-[11px] font-mono text-slate-400 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>{activeView === 'leads' ? `Showing ${filteredLeads.length} of ${leads.length} recorded inquiries` : 'Live Analytical Intelligence & Aggregations'}</span>
+          </div>
+        </div>
+
         {/* KPI Stats Grid */}
         <section className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8" id="portal-kpis">
           {/* KPI 1 */}
@@ -721,8 +761,8 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                 <UserCheck className="w-4 h-4" />
               </div>
             </div>
-            <p className="text-2xl sm:text-3xl font-bold font-mono text-amber-400 leading-none">{inProgressCount}</p>
-            <p className="text-[10px] text-slate-500 mt-2 font-mono">Contacted or In Progress</p>
+            <p className="text-2xl sm:text-3xl font-bold font-mono text-amber-400 leading-none">{activePipelineCount}</p>
+            <p className="text-[10px] text-slate-500 mt-2 font-mono">Contacted, Proposal, In Progress</p>
           </div>
 
           {/* KPI 4 */}
@@ -741,39 +781,45 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
           </div>
         </section>
 
-        {/* Controls Bar */}
-        <section className="bg-slate-900/20 border border-slate-900 rounded-2xl p-4 mb-6 flex flex-col md:flex-row gap-4 items-center justify-between" id="portal-filters">
-          <div className="relative w-full md:max-w-md">
-            <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
-            <input
-              id="search-leads-input"
-              type="text"
-              placeholder="Search leads by name, email, company, location..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2 pl-10 pr-4 text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-brand-indigo/45 focus:ring-1 focus:ring-brand-indigo/30 transition-all"
-            />
-          </div>
+        {/* View Content: Analytics Dashboard vs Leads Feed */}
+        {activeView === 'analytics' ? (
+          <LeadAnalyticsDashboard leads={leads} onCreateTestLead={handleCreateTestLead} />
+        ) : (
+          <>
+            {/* Controls Bar */}
+            <section className="bg-slate-900/20 border border-slate-900 rounded-2xl p-4 mb-6 flex flex-col md:flex-row gap-4 items-center justify-between" id="portal-filters">
+              <div className="relative w-full md:max-w-md">
+                <Search className="w-4 h-4 text-slate-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+                <input
+                  id="search-leads-input"
+                  type="text"
+                  placeholder="Search leads by name, email, company, location..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-slate-950 border border-slate-800 rounded-xl py-2 pl-10 pr-4 text-xs text-slate-200 placeholder:text-slate-500 focus:outline-none focus:border-brand-indigo/45 focus:ring-1 focus:ring-brand-indigo/30 transition-all"
+                />
+              </div>
 
-          <div className="flex items-center gap-3 w-full md:w-auto self-start md:self-center justify-end">
-            <Filter className="w-3.5 h-3.5 text-slate-500 hidden sm:inline" />
-            <label htmlFor="filter-status-select" className="text-slate-400 text-xs font-semibold uppercase tracking-wider hidden sm:inline">Status:</label>
-            <select
-              id="filter-status-select"
-              value={statusFilter}
-              onChange={(e) => setStatusFilter(e.target.value)}
-              className="bg-slate-950 border border-slate-800 rounded-xl py-2 px-3 text-xs font-mono text-slate-300 focus:outline-none focus:border-brand-indigo/45 focus:ring-1 focus:ring-brand-indigo/30 w-full sm:w-auto"
-            >
-              <option value="All">All statuses ({leads.length})</option>
-              <option value="New">New ({newCount})</option>
-              <option value="Contacted">Contacted</option>
-              <option value="In Progress">In Progress</option>
-              <option value="Converted">Converted ({convertedCount})</option>
-              <option value="Spam">Spam</option>
-              <option value="Archived">Archived</option>
-            </select>
-          </div>
-        </section>
+              <div className="flex items-center gap-3 w-full md:w-auto self-start md:self-center justify-end">
+                <Filter className="w-3.5 h-3.5 text-slate-500 hidden sm:inline" />
+                <label htmlFor="filter-status-select" className="text-slate-400 text-xs font-semibold uppercase tracking-wider hidden sm:inline">Status:</label>
+                <select
+                  id="filter-status-select"
+                  value={statusFilter}
+                  onChange={(e) => setStatusFilter(e.target.value)}
+                  className="bg-slate-950 border border-slate-800 rounded-xl py-2 px-3 text-xs font-mono text-slate-300 focus:outline-none focus:border-brand-indigo/45 focus:ring-1 focus:ring-brand-indigo/30 w-full sm:w-auto"
+                >
+                  <option value="All">All statuses ({leads.length})</option>
+                  <option value="New">New ({newCount})</option>
+                  <option value="Contacted">Contacted ({contactedCount})</option>
+                  <option value="Proposal Sent">Proposal Sent ({proposalSentCount})</option>
+                  <option value="In Progress">In Progress ({inProgressCount})</option>
+                  <option value="Converted">Converted ({convertedCount})</option>
+                  <option value="Spam">Spam</option>
+                  <option value="Archived">Archived</option>
+                </select>
+              </div>
+            </section>
 
         {/* Leads Board Grid / Content */}
         {isLoading ? (
@@ -830,6 +876,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                         <span className={`text-[10px] uppercase font-mono tracking-wider font-semibold px-2 py-0.5 rounded-full ${
                           lead.status === 'New' ? 'bg-blue-950 text-blue-400 border border-blue-900/30' :
                           lead.status === 'Contacted' ? 'bg-indigo-950 text-indigo-400 border border-indigo-900/30' :
+                          lead.status === 'Proposal Sent' ? 'bg-purple-950 text-purple-400 border border-purple-900/30' :
                           lead.status === 'In Progress' ? 'bg-amber-950 text-amber-400 border border-amber-900/30' :
                           lead.status === 'Converted' ? 'bg-emerald-950 text-emerald-400 border border-emerald-900/30' :
                           lead.status === 'Spam' ? 'bg-slate-900 text-slate-500 border border-slate-800' :
@@ -1030,6 +1077,7 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
                             >
                               <option value="New">New</option>
                               <option value="Contacted">Contacted</option>
+                              <option value="Proposal Sent">Proposal Sent</option>
                               <option value="In Progress">In Progress</option>
                               <option value="Converted">Converted</option>
                               <option value="Spam">Spam</option>
@@ -1069,8 +1117,10 @@ export default function LeadManagementPortalPage({ onBackToHome }: LeadManagemen
             })}
           </section>
         )}
-      </div>
-    </main>
+      </>
+    )}
+  </div>
+</main>
   );
 }
 
