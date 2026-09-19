@@ -181,7 +181,7 @@ export default function SeoAuditToolPage({ onBackToTools, onNavigateToTool }: Se
       </div>
 
       {/* HERO SECTION DESIGN */}
-      <header className="relative pt-12 pb-8 text-center max-w-4xl mx-auto px-6 z-10">
+      <header className="relative pt-6 sm:pt-8 md:pt-10 pb-6 text-center max-w-4xl mx-auto px-6 z-10">
         <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-950/40 border border-emerald-500/20 text-emerald-400 rounded-full text-xs font-semibold mb-4 animate-pulse">
           <Globe className="w-3.5 h-3.5" />
           Real-time Audit Spider Tool

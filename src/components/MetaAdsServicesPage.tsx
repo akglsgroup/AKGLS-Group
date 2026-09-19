@@ -314,7 +314,9 @@ export default function MetaAdsServicesPage({ onBackToHome, openProposalForm }: 
       </div>
 
       {/* HERO SECTION WITH DYNAMIC SOCIAL ROI FORECAST ENGINE */}
-      <section className="relative pt-16 pb-20 md:pt-24 md:pb-32 bg-[#05070a] text-white overflow-hidden text-left border-b border-slate-900">
+      <section className="relative pt-6 pb-16 sm:pt-8 md:pt-10 md:pb-24 bg-[#05070a] text-white overflow-hidden text-left border-b border-slate-900">
+        {/* Top ambient highlight bridge */}
+        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-brand-teal/12 via-brand-indigo/5 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] opacity-25 pointer-events-none" />
         <div className="absolute top-1/5 right-1/4 w-96 h-96 bg-brand-teal/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-1/5 left-1/4 w-96 h-96 bg-indigo-505/5 rounded-full blur-3xl pointer-events-none" />

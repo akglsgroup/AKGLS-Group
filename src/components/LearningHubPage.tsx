@@ -579,7 +579,7 @@ export default function LearningHubPage({
       <div className="absolute top-2/3 right-1/3 w-[350px] h-[350px] bg-[#6366f1]/5 blur-[100px] rounded-full pointer-events-none" />
 
       {/* Breadcrumb Navigation Header */}
-      <div className="max-w-7xl mx-auto w-full px-6 pt-10 pb-4 z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div className="max-w-7xl mx-auto w-full px-6 pt-5 pb-3 z-10 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         {selectedItem ? (
           <button 
             onClick={handleCloseItem}
@@ -620,7 +620,7 @@ export default function LearningHubPage({
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -15 }}
-            className="max-w-7xl mx-auto w-full px-6 py-10 space-y-12 z-10 relative flex-1"
+            className="max-w-7xl mx-auto w-full px-6 pt-4 pb-12 sm:pt-6 sm:pb-16 space-y-10 z-10 relative flex-1"
           >
             <header className="max-w-3xl space-y-3.5 text-left">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-950/50 border border-emerald-500/20 text-emerald-400 rounded-full text-[10.5px] font-black uppercase tracking-wider">

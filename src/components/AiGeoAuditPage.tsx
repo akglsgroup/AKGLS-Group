@@ -60,8 +60,8 @@ export default function AiGeoAuditPage({ onBackToTools, onNavigateToTool, onOpen
       <div className="absolute top-96 right-0 w-80 h-80 bg-brand-indigo/5 blur-[100px] pointer-events-none rounded-full" />
 
       {/* SUB-HEADER BREADCRUMB & BACK ACTION */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-4">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-850 pb-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-5 pb-3">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-slate-850 pb-3">
           <button
             onClick={onBackToTools}
             className="flex items-center gap-2 text-xs font-mono font-bold text-slate-400 hover:text-brand-teal transition-colors cursor-pointer"
@@ -81,7 +81,7 @@ export default function AiGeoAuditPage({ onBackToTools, onNavigateToTool, onOpen
       </div>
 
       {/* HERO SECTION */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 text-center space-y-6">
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-8 sm:pt-6 sm:pb-10 text-center space-y-5">
         <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-mono font-bold bg-brand-teal/10 text-brand-teal border border-brand-teal/20">
           <Sparkles className="w-3.5 h-3.5" />
           <span>FLAGSHIP 2026 AI SEARCH OPTIMIZER</span>

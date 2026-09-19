@@ -298,7 +298,7 @@ export default function FreeToolsPage({
       <div className="absolute bottom-1/4 left-[5%] w-[400px] h-[400px] bg-slate-700/5 blur-[130px] rounded-full pointer-events-none" />
 
       {/* HEADER SECTION FOR THE TOOLS LIBRARY */}
-      <header className="relative py-12 md:py-16 text-center max-w-4xl mx-auto px-6">
+      <header className="relative pt-6 pb-10 sm:pt-8 md:pt-10 md:pb-12 text-center max-w-4xl mx-auto px-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-950/40 border border-emerald-500/20 text-emerald-400 rounded-full text-xs font-semibold mb-4 backdrop-blur-md">
           <Sparkles className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
           <span>Natural Organic Marketing Engine Ecosystem</span>

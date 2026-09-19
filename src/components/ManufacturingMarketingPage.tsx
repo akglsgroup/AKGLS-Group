@@ -406,7 +406,9 @@ export default function ManufacturingMarketingPage({ onBackToHome, openProposalF
       </div>
 
       {/* 🚀 HERO SECTION */}
-      <section className="relative pt-20 pb-28 text-left bg-[#05070a] border-b border-slate-950 overflow-hidden">
+      <section className="relative pt-6 pb-16 sm:pt-8 md:pt-10 md:pb-24 text-left bg-[#05070a] border-b border-slate-950 overflow-hidden">
+        {/* Top ambient highlight bridge */}
+        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-brand-indigo/12 via-brand-teal/5 to-transparent pointer-events-none" />
         {/* Decorative ambient visual helpers */}
         <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-25 pointer-events-none" />
         <div className="absolute top-1/4 left-1/4 w-[450px] h-[450px] bg-brand-indigo/10 rounded-full blur-[120px] pointer-events-none animate-pulse" />

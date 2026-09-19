@@ -310,7 +310,9 @@ export default function GeminiOptimizationPage({ onBackToHome, openProposalForm 
       </div>
 
       {/* HERO SECTION */}
-      <section className="relative overflow-hidden pt-16 pb-20 md:pt-24 md:pb-32 border-b border-slate-900">
+      <section className="relative overflow-hidden pt-6 pb-16 sm:pt-8 md:pt-10 md:pb-24 border-b border-slate-900">
+        {/* Top ambient highlight bridge */}
+        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-brand-teal/12 via-brand-indigo/5 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(29,226,188,0.1),transparent_50%)] pointer-events-none" />
         <div className="absolute top-1/2 left-0 w-96 h-96 bg-brand-indigo/5 rounded-full blur-3xl pointer-events-none" />
 

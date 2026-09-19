@@ -124,7 +124,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
   return (
     <>
       {/* ENTERPRISE NOTICE TICKER / TOP BAR */}
-      <div id="top-bar" className="bg-brand-navy border-b border-slate-800 text-slate-300 py-2.5 px-4 text-xs font-medium z-50 relative">
+      <div id="top-bar" className="bg-brand-navy border-b border-slate-800 text-slate-300 py-1.5 sm:py-2 px-4 text-xs font-medium z-50 relative">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-3">
           {/* Left section contacts: Phone & WhatsApp */}
           <div className="flex flex-wrap items-center justify-center gap-4 text-[11px] sm:text-xs">
@@ -197,11 +197,13 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
       </div>
 
       {/* CORE STICKY CORPORATE NAVBAR */}
-      <nav id="header-nav" aria-label="Main Navigation" className={`sticky top-0 w-full z-40 transition-all duration-300 border-b ${
+      <nav id="header-nav" aria-label="Main Navigation" className={`sticky top-0 w-full z-40 transition-all duration-300 border-b relative ${
         isScrolled 
-          ? 'bg-[#0a0f1d]/95 backdrop-blur-md shadow-xl py-3 border-slate-800' 
-          : 'bg-[#0a0f1d]/90 backdrop-blur-md py-5 border-slate-800/80'
+          ? 'bg-[#0a0f1d]/95 backdrop-blur-md shadow-xl py-2.5 border-slate-800' 
+          : 'bg-[#0a0f1d]/90 backdrop-blur-md py-3.5 border-slate-800/80'
       }`}>
+        {/* Subtle glowing edge connecting navbar to banner below */}
+        <div className="absolute bottom-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-brand-indigo/35 via-teal-400/25 to-transparent pointer-events-none" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             

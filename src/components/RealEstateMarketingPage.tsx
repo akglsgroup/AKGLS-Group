@@ -471,7 +471,9 @@ export default function RealEstateMarketingPage({ onBackToHome, openProposalForm
       </div>
 
       {/* 🚀 HERO SECTION */}
-      <section className="relative pt-20 pb-28 text-left bg-[#05070a] border-b border-slate-950 overflow-hidden">
+      <section className="relative pt-6 pb-16 sm:pt-8 md:pt-10 md:pb-24 text-left bg-[#05070a] border-b border-slate-950 overflow-hidden">
+        {/* Top ambient highlight bridge */}
+        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-brand-orange/10 via-amber-400/5 to-transparent pointer-events-none" />
         {/* Background mesh items */}
         <div className="absolute inset-0 bg-[radial-gradient(#0e1726_1px,transparent_1px)] [background-size:28px_28px] opacity-25 pointer-events-none" />
         <div className="absolute top-1/4 left-1/4 w-[480px] h-[480px] bg-brand-orange/5 rounded-full blur-[130px] pointer-events-none animate-pulse" />

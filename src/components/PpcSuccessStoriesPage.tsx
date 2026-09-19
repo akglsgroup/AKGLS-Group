@@ -147,7 +147,9 @@ export default function PpcSuccessStoriesPage({ onBackToHome, openProposalForm }
       <script type="application/ld+json">{schemasTemplates.faq}</script>
 
       {/* Hero section */}
-      <section className="relative pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden border-b border-slate-900 bg-linear-to-b from-purple-950/25 via-slate-950 to-[#030712]">
+      <section className="relative pt-6 pb-16 sm:pt-8 md:pt-10 md:pb-24 overflow-hidden border-b border-slate-900 bg-linear-to-b from-purple-950/25 via-slate-950 to-[#030712]">
+        {/* Top ambient highlight bridge */}
+        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-purple-500/12 via-purple-950/20 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_top,rgba(147,51,234,0.1),transparent_50%)]"></div>
         <div className="absolute inset-x-0 bottom-0 h-px bg-linear-to-r from-transparent via-purple-500/30 to-transparent"></div>
         

@@ -494,7 +494,9 @@ export default function RestaurantMarketingPage({ onBackToHome, openProposalForm
       </div>
 
       {/* 👑 HERO SECTION */}
-      <section className="relative pt-20 pb-28 text-left bg-[#020408] border-b border-slate-950 overflow-hidden">
+      <section className="relative pt-6 pb-16 sm:pt-8 md:pt-10 md:pb-24 text-left bg-[#020408] border-b border-slate-950 overflow-hidden">
+        {/* Top ambient highlight bridge */}
+        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-amber-500/10 via-brand-teal/5 to-transparent pointer-events-none" />
         {/* Background elements */}
         <div className="absolute inset-0 bg-[radial-gradient(#152033_1px,transparent_1px)] [background-size:28px_28px] opacity-20 pointer-events-none" />
         <div className="absolute top-1/4 left-1/4 w-[480px] h-[480px] bg-amber-600/5 rounded-full blur-[130px] pointer-events-none animate-pulse" />

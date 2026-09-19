@@ -273,7 +273,9 @@ export default function AeoServicesPage({ onBackToHome, openProposalForm }: AeoS
       </div>
 
       {/* 🤖 HERO CONTAINER WITH INTERACTIVE CONVERSATIONAL AGENT MOCKUP */}
-      <section className="relative pt-20 pb-20 md:pt-28 md:pb-32 bg-[#05070a] text-white overflow-hidden text-left border-b border-slate-900">
+      <section className="relative pt-6 pb-16 sm:pt-8 md:pt-10 md:pb-24 bg-[#05070a] text-white overflow-hidden text-left border-b border-slate-900">
+        {/* Top ambient highlight bridge */}
+        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-brand-teal/12 via-brand-indigo/5 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] opacity-35 pointer-events-none" />
         <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-brand-teal/15 rounded-full blur-[160px] pointer-events-none" />
         <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-brand-indigo/10 rounded-full blur-[150px] pointer-events-none" />
@@ -282,7 +284,7 @@ export default function AeoServicesPage({ onBackToHome, openProposalForm }: AeoS
           
           <button 
             onClick={onBackToHome}
-            className="mb-8 inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-full py-2 px-5 transition-colors"
+            className="mb-5 sm:mb-6 inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-full py-2 px-5 transition-colors"
             id="back-from-aeo-services"
           >
             ← Back to Main Page

@@ -2177,7 +2177,9 @@ export default function App() {
       ) : (
         <>
           {/* CORE HERO SECTION + LIVE SIMULATOR MONITOR BOARD */}
-          <header className="relative pt-12 pb-20 md:pt-20 md:pb-28 bg-[#05070a] text-white overflow-hidden text-left">
+          <header className="relative pt-6 pb-16 sm:pt-8 md:pt-10 md:pb-20 lg:pt-12 bg-[#05070a] text-white overflow-hidden text-left">
+        {/* Top ambient highlight bridge connecting directly from header */}
+        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-brand-indigo/12 via-brand-teal/5 to-transparent pointer-events-none" />
         {/* Decorative ambient gradients */}
         <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] opacity-40 pointer-events-none" />
         <div className="absolute top-1/4 left-1/4 w-[400px] h-[400px] bg-brand-indigo/10 rounded-full blur-[100px] pointer-events-none" />

@@ -264,7 +264,9 @@ export default function WebDesignServicesPage({ onBackToHome, openProposalForm }
       </div>
 
       {/* 🌌 HERO SECTION WITH DYNAMIC BEFORE-AFTER SPLIT & REFRESH DEMO */}
-      <section className="relative pt-20 pb-20 md:pt-28 md:pb-32 bg-[#05070a] text-white overflow-hidden text-left border-b border-slate-900">
+      <section className="relative pt-6 pb-16 sm:pt-8 md:pt-10 md:pb-24 bg-[#05070a] text-white overflow-hidden text-left border-b border-slate-900">
+        {/* Top ambient highlight bridge */}
+        <div className="absolute top-0 inset-x-0 h-24 bg-gradient-to-b from-brand-orange/12 via-brand-teal/5 to-transparent pointer-events-none" />
         <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] opacity-25 pointer-events-none" />
         <div className="absolute top-1/4 left-1/3 w-[650px] h-[650px] bg-brand-orange/5 rounded-full blur-[170px] pointer-events-none" />
         <div className="absolute bottom-1/5 right-1/4 w-[550px] h-[550px] bg-brand-teal/5 rounded-full blur-[140px] pointer-events-none" />
@@ -273,7 +275,7 @@ export default function WebDesignServicesPage({ onBackToHome, openProposalForm }
           
           <button 
             onClick={onBackToHome}
-            className="mb-8 inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-full py-2 px-5 transition-colors"
+            className="mb-5 sm:mb-6 inline-flex items-center gap-2 text-xs font-bold text-slate-400 hover:text-white bg-slate-900 border border-slate-800 rounded-full py-2 px-5 transition-colors"
             id="back-from-web-services"
           >
             ← Back to Home
