@@ -112,14 +112,23 @@ async function startServer() {
 
   // Firebase client config endpoint (enables seamless client bootstrap)
   app.get("/api/config/firebase", (req, res) => {
+    let fileConfig: any = {};
+    try {
+      const configPath = path.join(process.cwd(), "firebase-applet-config.json");
+      if (fs.existsSync(configPath)) {
+        fileConfig = JSON.parse(fs.readFileSync(configPath, "utf-8"));
+      }
+    } catch (_) {}
+
     res.json({
-      projectId: process.env.VITE_FIREBASE_PROJECT_ID || "realtors-directory",
-      appId: process.env.VITE_FIREBASE_APP_ID || "1:815514143958:web:bd2705889a88216d4d0d77",
-      apiKey: process.env.VITE_FIREBASE_API_KEY || "AIzaSyBorb2F2oE1DQrn2j2abPC9v35ICOjN6GQ",
-      authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN || "realtors-directory.firebaseapp.com",
-      firestoreDatabaseId: process.env.VITE_FIREBASE_DATABASE_ID || "ai-studio-akglsgroupsite-ecb433f8-a78e-41eb-99fb-e422adef4b3e",
-      storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET || "realtors-directory.firebasestorage.app",
-      messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID || "815514143958",
+      projectId: process.env.VITE_FIREBASE_PROJECT_ID || fileConfig.projectId || "ask-amrish",
+      appId: process.env.VITE_FIREBASE_APP_ID || fileConfig.appId || "1:123264112333:web:ac5949a60ce131f4407b84",
+      apiKey: process.env.VITE_FIREBASE_API_KEY || fileConfig.apiKey || "AIzaSyAK7JkxcKSJdMeQhlj-qXE1Va4Y25jcjPw",
+      authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN || fileConfig.authDomain || "ask-amrish.firebaseapp.com",
+      firestoreDatabaseId: process.env.VITE_FIREBASE_DATABASE_ID || fileConfig.firestoreDatabaseId || "(default)",
+      storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET || fileConfig.storageBucket || "ask-amrish.firebasestorage.app",
+      messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID || fileConfig.messagingSenderId || "123264112333",
+      measurementId: process.env.VITE_FIREBASE_MEASUREMENT_ID || fileConfig.measurementId || "G-B9HL9DT4JL",
     });
   });
 

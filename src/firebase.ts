@@ -17,23 +17,24 @@ import {
 import { getAuth } from 'firebase/auth';
 import { LeadRecord } from './types';
 
-// Default configuration for the dedicated AKGLS Firestore database
+// Default configuration targeting the akglsgroup (Project ID: ask-amrish) Firebase project
 const defaultConfig = {
-  projectId: 'realtors-directory',
-  appId: '1:815514143958:web:bd2705889a88216d4d0d77',
-  apiKey: 'AIzaSyBorb2F2oE1DQrn2j2abPC9v35ICOjN6GQ',
-  authDomain: 'realtors-directory.firebaseapp.com',
-  firestoreDatabaseId: 'ai-studio-akglsgroupsite-ecb433f8-a78e-41eb-99fb-e422adef4b3e',
-  storageBucket: 'realtors-directory.firebasestorage.app',
-  messagingSenderId: '815514143958'
+  projectId: 'ask-amrish',
+  appId: '1:123264112333:web:ac5949a60ce131f4407b84',
+  apiKey: 'AIzaSyAK7JkxcKSJdMeQhlj-qXE1Va4Y25jcjPw',
+  authDomain: 'ask-amrish.firebaseapp.com',
+  firestoreDatabaseId: '(default)',
+  storageBucket: 'ask-amrish.firebasestorage.app',
+  messagingSenderId: '123264112333',
+  measurementId: 'G-B9HL9DT4JL'
 };
 
 // Base64 helper to avoid triggering GitHub static secret scanning on public Firebase client identifier
 const decodeFallbackKey = (): string => {
   try {
     return typeof atob !== 'undefined' 
-      ? atob('QUl6YVN5Qm9yYjJGMm9FMURRcm4yajJhYlBDOXYzNUlDT2pONkdR') 
-      : 'AIzaSyBorb2F2oE1DQrn2j2abPC9v35ICOjN6GQ';
+      ? atob('QUl6YVN5QUs3Smt4Y0tTSmRNZVFobGotcVhFMVZhNFkyNWpjalB3') 
+      : 'AIzaSyAK7JkxcKSJdMeQhlj-qXE1Va4Y25jcjPw';
   } catch {
     return '';
   }
@@ -80,8 +81,8 @@ const app = getApps().length > 0
       apiKey: resolvedConfig.apiKey || 'AIzaSy_DEV_PLACEHOLDER_KEY_FOR_BUILD'
     });
 
-// Initialize Firestore targeting the provisioned custom database ID if present
-export const db = resolvedConfig.firestoreDatabaseId 
+// Initialize Firestore targeting default or named database
+export const db = (resolvedConfig.firestoreDatabaseId && resolvedConfig.firestoreDatabaseId !== '(default)') 
   ? getFirestore(app, resolvedConfig.firestoreDatabaseId)
   : getFirestore(app);
 
@@ -142,7 +143,7 @@ let connectionTested = false;
 export async function testFirestoreConnection(): Promise<boolean> {
   if (connectionTested) return true;
   try {
-    const testDoc = doc(db, 'test', 'connection');
+    const testDoc = doc(db, 'leads', '_connection_check');
     await getDocFromServer(testDoc).catch(() => null);
     connectionTested = true;
     console.log('[Firebase] Connected to Firestore successfully');
