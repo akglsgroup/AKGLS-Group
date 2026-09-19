@@ -18,8 +18,40 @@ export default function HealthcareMarketingPage({ onBackToHome, openProposalForm
   const WHATSAPP_LINK = "https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20healthcare%20and%20medical%20marketing%20services.";
 
   useEffect(() => {
+    // Client-side canonical hostname enforcement: redirect non-www to www.akglsgroup.com
+    if (typeof window !== 'undefined' && window.location) {
+      const host = (window.location.hostname || '').toLowerCase();
+      const proto = window.location.protocol;
+      if (host === 'akglsgroup.com' || host === 'akgls.com' || host === 'www.akgls.com') {
+        window.location.replace(`https://www.akglsgroup.com${window.location.pathname}${window.location.search}${window.location.hash}`);
+        return;
+      } else if (host === 'www.akglsgroup.com' && proto === 'http:') {
+        window.location.replace(`https://www.akglsgroup.com${window.location.pathname}${window.location.search}${window.location.hash}`);
+        return;
+      }
+    }
+
     window.scrollTo({ top: 0, behavior: 'instant' });
     document.title = "Healthcare Marketing Services | Medical SEO Agency | AKGLS Group";
+
+    // Set canonical link for SEO
+    const canonicalHref = "https://www.akglsgroup.com/healthcare-marketing-services/";
+    let canonicalLink = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalHref);
+
+    // Set og:url meta tag
+    let ogUrl = document.querySelector("meta[property='og:url']") as HTMLMetaElement | null;
+    if (!ogUrl) {
+      ogUrl = document.createElement("meta");
+      ogUrl.setAttribute("property", "og:url");
+      document.head.appendChild(ogUrl);
+    }
+    ogUrl.setAttribute("content", canonicalHref);
     
     // Inject Schema Recommendations
     const scriptId = "healthcare-schema";
@@ -32,6 +64,8 @@ export default function HealthcareMarketingPage({ onBackToHome, openProposalForm
         "@context": "https://schema.org",
         "@type": "MedicalBusiness",
         "name": "AKGLS Group Healthcare Marketing Services",
+        "url": canonicalHref,
+        "mainEntityOfPage": canonicalHref,
         "provider": {
           "@type": "Organization",
           "name": "AKGLS Group",

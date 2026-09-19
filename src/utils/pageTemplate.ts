@@ -97,6 +97,19 @@ export function renderPageHtml(route: AppRoute): string {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="google-site-verification" content="qfDMo5MD2Sq1sBny_nq0o1lhXs-G0zDZS20K8MUM70w" />
+    <script>
+      (function() {
+        if (typeof window !== 'undefined' && window.location) {
+          var host = (window.location.hostname || '').toLowerCase();
+          var proto = window.location.protocol;
+          if (host === 'akglsgroup.com' || host === 'akgls.com' || host === 'www.akgls.com') {
+            window.location.replace('https://www.akglsgroup.com' + window.location.pathname + window.location.search + window.location.hash);
+          } else if (host === 'www.akglsgroup.com' && proto === 'http:') {
+            window.location.replace('https://www.akglsgroup.com' + window.location.pathname + window.location.search + window.location.hash);
+          }
+        }
+      })();
+    </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
     <!-- Highly Optimized SEO Meta Tags -->

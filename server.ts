@@ -54,31 +54,46 @@ async function startServer() {
   // Trust reverse proxy headers (Cloud Run, Cloudflare, Nginx, ALB)
   app.set("trust proxy", true);
 
-  // 301 Canonical redirect: enforce https://www.akglsgroup.com for all non-www requests & http requests
+  // 301 Canonical redirect: enforce https://www.akglsgroup.com for all non-www requests & plain http requests
   app.use((req, res, next) => {
     const rawHost = (
       (req.headers["x-forwarded-host"] as string) ||
+      (req.headers["x-original-host"] as string) ||
       req.headers.host ||
       req.hostname ||
       ""
     );
     const host = rawHost.split(",")[0].trim().toLowerCase().split(":")[0];
 
-    const rawProto = (
+    // Determine protocol considering all popular load balancers & CDN headers
+    let isHttps = req.secure;
+    const forwardedProto = (
       (req.headers["x-forwarded-proto"] as string) ||
-      req.protocol ||
-      "https"
+      (req.headers["x-forwarded-protocol"] as string) ||
+      ""
     );
-    const proto = rawProto.split(",")[0].trim().toLowerCase();
+    if (forwardedProto && forwardedProto.split(",")[0].trim().toLowerCase() === "https") {
+      isHttps = true;
+    }
+    if (req.headers["x-forwarded-ssl"] === "on" || req.headers["front-end-https"] === "on") {
+      isHttps = true;
+    }
+    if (req.headers["cf-visitor"]) {
+      try {
+        const cf = JSON.parse(req.headers["cf-visitor"] as string);
+        if (cf.scheme === "https") isHttps = true;
+      } catch (_) {}
+    }
 
-    // Enforce www for akglsgroup.com (SEO Canonical 301 Permanent Redirect)
-    if (host === "akglsgroup.com") {
+    // 1. Enforce www for non-www apex domain akglsgroup.com (and legacy akgls.com)
+    // E.g., https://akglsgroup.com/healthcare-marketing-services -> https://www.akglsgroup.com/healthcare-marketing-services
+    if (host === "akglsgroup.com" || host === "akgls.com" || host === "www.akgls.com") {
       res.setHeader("Cache-Control", "public, max-age=31536000");
       return res.redirect(301, `https://www.akglsgroup.com${req.originalUrl}`);
     }
 
-    // Enforce HTTPS for www.akglsgroup.com if requested over plain HTTP
-    if (host === "www.akglsgroup.com" && proto === "http") {
+    // 2. Enforce HTTPS for www.akglsgroup.com if requested over plain HTTP
+    if (host === "www.akglsgroup.com" && !isHttps) {
       res.setHeader("Cache-Control", "public, max-age=31536000");
       return res.redirect(301, `https://www.akglsgroup.com${req.originalUrl}`);
     }
@@ -349,7 +364,7 @@ async function startServer() {
   if (process.env.NODE_ENV === "development") {
     const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      server: { middlewareMode: true, allowedHosts: true },
       appType: "spa",
     });
     app.use(vite.middlewares);

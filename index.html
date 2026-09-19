@@ -30,8 +30,14 @@
     <link rel="manifest" href="/manifest.webmanifest" />
     <script>
       (function() {
-        if (typeof window !== 'undefined' && window.location.hostname === 'akglsgroup.com') {
-          window.location.replace('https://www.akglsgroup.com' + window.location.pathname + window.location.search + window.location.hash);
+        if (typeof window !== 'undefined' && window.location) {
+          var host = (window.location.hostname || '').toLowerCase();
+          var proto = window.location.protocol;
+          if (host === 'akglsgroup.com' || host === 'akgls.com' || host === 'www.akgls.com') {
+            window.location.replace('https://www.akglsgroup.com' + window.location.pathname + window.location.search + window.location.hash);
+          } else if (host === 'www.akglsgroup.com' && proto === 'http:') {
+            window.location.replace('https://www.akglsgroup.com' + window.location.pathname + window.location.search + window.location.hash);
+          }
         }
       })();
     </script>

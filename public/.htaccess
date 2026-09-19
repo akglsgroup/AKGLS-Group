@@ -9,6 +9,22 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # ----------------------------------------------------------------------
+  # Canonical 301 Redirect: Force HTTPS & Force WWW (akglsgroup.com -> www.akglsgroup.com)
+  # ----------------------------------------------------------------------
+  # Redirect non-www to www (e.g. akglsgroup.com/healthcare-marketing-services -> https://www.akglsgroup.com/healthcare-marketing-services)
+  RewriteCond %{HTTP_HOST} ^akglsgroup\.com$ [NC,OR]
+  RewriteCond %{HTTP_HOST} ^akgls\.com$ [NC,OR]
+  RewriteCond %{HTTP_HOST} ^www\.akgls\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.akglsgroup.com/$1 [R=301,L]
+
+  # Redirect plain HTTP to HTTPS for www.akglsgroup.com
+  RewriteCond %{HTTPS} off
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTP_HOST} ^www\.akglsgroup\.com$ [NC]
+  RewriteRule ^(.*)$ https://www.akglsgroup.com/$1 [R=301,L]
+
   RewriteRule ^index\.html$ - [L]
 
   # Dedicated Crawler-Friendly Pre-rendered Pages (Explicit overrides)
