@@ -265,44 +265,43 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
 
   return (
     <div 
-      className={`bg-slate-950/95 rounded-3xl border border-slate-800 shadow-2xl p-5 sm:p-6 text-left relative overflow-hidden backdrop-blur-xl ${className}`}
+      className={`bg-slate-950/95 rounded-2xl sm:rounded-3xl border border-slate-800/90 shadow-2xl p-4 sm:p-5 text-left relative overflow-hidden backdrop-blur-xl ${className}`}
       id="generative-engine-evaluator"
     >
       {/* Subtle top ambient glow */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-brand-teal/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-64 h-64 bg-brand-indigo/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-56 h-56 bg-brand-teal/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-56 h-56 bg-brand-indigo/10 rounded-full blur-3xl pointer-events-none" />
 
       {/* High-Tech Terminal Header Bar */}
-      <div className="flex flex-wrap items-center justify-between gap-3 pb-4 border-b border-slate-800/80">
+      <div className="flex items-center justify-between gap-2 pb-3 border-b border-slate-800/80">
         <div className="flex items-center gap-2">
           <div className="flex items-center gap-1.5">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block shadow-sm shadow-rose-500/50"></span>
-            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block shadow-sm shadow-amber-500/50"></span>
-            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block shadow-sm shadow-emerald-500/50"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block"></span>
+            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block"></span>
           </div>
-          <span className="text-[11px] font-mono text-slate-300 font-bold uppercase tracking-wider pl-1.5 flex items-center gap-1.5">
+          <span className="text-[11px] font-mono text-slate-200 font-bold uppercase tracking-wider pl-1 flex items-center gap-1.5">
             <Cpu className="w-3.5 h-3.5 text-brand-teal" />
-            GENERATIVE ENGINE EVALUATOR™
+            AI CITATION EVALUATOR
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
-          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[9.5px] font-mono font-extrabold uppercase tracking-widest bg-emerald-950/60 text-emerald-400 border border-emerald-800/60">
+        <div className="flex items-center gap-1.5">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase tracking-wider bg-emerald-950/70 text-emerald-400 border border-emerald-800/60">
             <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-            LLM_RAG: ACTIVE
+            Live Probe Active
           </span>
-          <span className="text-[10px] font-mono text-slate-500 hidden sm:inline">v3.8-PRO</span>
         </div>
       </div>
 
       {/* Target Domain Input Area */}
-      <div className="mt-4 space-y-3">
+      <div className="mt-3.5 space-y-2.5">
         <div className="flex items-center justify-between">
           <label className="text-xs font-extrabold text-white font-display flex items-center gap-1.5">
             <Network className="w-3.5 h-3.5 text-brand-teal" />
-            Evaluate Real-Time AI Search Citation Probability
+            Test Any Domain's AI Search Citation Readiness
           </label>
-          <span className="text-[10px] font-mono text-slate-400">Zero-API-Key Required</span>
+          <span className="text-[10px] font-mono text-slate-400">Zero-API-Key</span>
         </div>
 
         {/* Input + Action button */}
@@ -311,11 +310,11 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
             e.preventDefault();
             executeDiagnostic();
           }}
-          className="space-y-2.5"
+          className="space-y-2"
         >
-          <div className="flex flex-col sm:flex-row gap-2">
+          <div className="flex gap-2">
             <div className="relative flex-1">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 text-slate-500 text-xs font-mono select-none">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-slate-500 text-xs font-mono select-none">
                 https://
               </span>
               <input 
@@ -324,7 +323,7 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
                 placeholder="yourcompany.com"
                 value={inputUrl}
                 onChange={(e) => setInputUrl(e.target.value)}
-                className="w-full bg-slate-900/90 border border-slate-800 focus:border-brand-teal focus:ring-1 focus:ring-teal-500/30 rounded-xl py-2.5 pl-16 pr-3 text-xs text-white placeholder-slate-500 focus:outline-none font-mono font-medium transition-colors"
+                className="w-full bg-slate-900/90 border border-slate-800 focus:border-brand-teal focus:ring-1 focus:ring-teal-500/30 rounded-xl py-2 pl-16 pr-3 text-xs text-white placeholder-slate-500 focus:outline-none font-mono font-medium transition-colors"
                 id="evaluator-domain-input"
               />
             </div>
@@ -332,26 +331,26 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
             <button
               type="submit"
               disabled={isScanning || !inputUrl.trim()}
-              className="bg-gradient-to-r from-brand-teal to-teal-500 hover:from-teal-400 hover:to-brand-teal text-slate-950 font-black text-xs uppercase tracking-wider py-2.5 px-5 rounded-xl transition-all shadow-md flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 whitespace-nowrap"
+              className="bg-brand-teal hover:bg-teal-400 text-slate-950 font-extrabold text-xs uppercase tracking-wider py-2 px-4 rounded-xl transition-all shadow flex items-center justify-center gap-1.5 cursor-pointer disabled:opacity-50 whitespace-nowrap shrink-0"
               id="evaluator-submit-btn"
             >
               {isScanning ? (
                 <>
                   <RefreshCw className="w-3.5 h-3.5 animate-spin" />
-                  <span>Probing LLMs...</span>
+                  <span>Probing...</span>
                 </>
               ) : (
                 <>
                   <Sparkles className="w-3.5 h-3.5 fill-slate-950" />
-                  <span>Run GEO Audit</span>
+                  <span>Run Audit</span>
                 </>
               )}
             </button>
           </div>
 
           {/* Quick Preset Domains */}
-          <div className="flex flex-wrap items-center gap-1.5 pt-0.5">
-            <span className="text-[10px] font-mono text-slate-500 uppercase">Fast Presets:</span>
+          <div className="flex flex-wrap items-center gap-1.5">
+            <span className="text-[10px] font-mono text-slate-400 uppercase">Try:</span>
             {PRESET_TARGETS.map((p) => (
               <button
                 key={p.domain}
@@ -361,7 +360,7 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
                   setSelectedIndustry(p.industry);
                   executeDiagnostic(p.domain);
                 }}
-                className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-slate-400 hover:text-white hover:border-slate-700 transition-all cursor-pointer"
+                className="text-[10px] font-mono px-2 py-0.5 rounded-md bg-slate-900 border border-slate-800 text-slate-300 hover:text-white hover:border-slate-700 transition-all cursor-pointer"
               >
                 {p.label}
               </button>
@@ -370,20 +369,20 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
         </form>
 
         {/* Engine Targeting Filter Pills */}
-        <div className="flex flex-wrap items-center gap-1.5 pt-1 border-t border-slate-800/60">
-          <span className="text-[10px] font-mono text-slate-500 uppercase mr-1">Target Engine:</span>
+        <div className="flex flex-wrap items-center gap-1 pt-1 border-t border-slate-800/60">
+          <span className="text-[10px] font-mono text-slate-400 uppercase mr-1">Engine:</span>
           {(['all', 'chatgpt', 'perplexity', 'gemini', 'claude'] as const).map((eng) => (
             <button
               key={eng}
               type="button"
               onClick={() => setSelectedEngine(eng)}
-              className={`text-[10px] font-mono px-2.5 py-1 rounded-lg border transition-all cursor-pointer ${
+              className={`text-[10px] font-mono px-2 py-0.5 rounded-md border transition-all cursor-pointer ${
                 selectedEngine === eng
-                  ? 'bg-brand-indigo/30 border-brand-indigo text-indigo-300 font-bold'
+                  ? 'bg-brand-indigo/30 border-brand-indigo text-indigo-200 font-bold'
                   : 'bg-slate-900/60 border-slate-800 text-slate-400 hover:text-slate-200'
               }`}
             >
-              {eng === 'all' ? 'All Engines (Consensus)' : eng === 'chatgpt' ? 'ChatGPT' : eng === 'perplexity' ? 'Perplexity' : eng === 'gemini' ? 'Gemini' : 'Claude 3.7'}
+              {eng === 'all' ? 'All (Consensus)' : eng === 'chatgpt' ? 'ChatGPT' : eng === 'perplexity' ? 'Perplexity' : eng === 'gemini' ? 'Gemini' : 'Claude'}
             </button>
           ))}
         </div>
@@ -391,13 +390,13 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
 
       {/* Progress Scanning Bar */}
       {isScanning && (
-        <div className="mt-4 p-3 bg-slate-900/90 rounded-xl border border-teal-500/30 space-y-2 animate-pulse">
-          <div className="flex items-center justify-between text-[11px] font-mono">
+        <div className="mt-3 p-2.5 bg-slate-900/90 rounded-xl border border-teal-500/30 space-y-1.5 animate-pulse">
+          <div className="flex items-center justify-between text-[10.5px] font-mono">
             <span className="text-teal-400 flex items-center gap-1.5">
               <Activity className="w-3.5 h-3.5 animate-spin" />
-              Phase {scanStep}/3: {scanStep === 1 ? 'Handshaking AI Bots' : scanStep === 2 ? 'Parsing Graph Schemas' : 'Synthesizing Citation Weight'}
+              Phase {scanStep}/3: {scanStep === 1 ? 'Testing AI Crawler Handshake' : scanStep === 2 ? 'Parsing JSON-LD Schemas' : 'Calculating Citation Probability'}
             </span>
-            <span className="text-slate-400 font-bold">{scanProgress}%</span>
+            <span className="text-slate-300 font-bold">{scanProgress}%</span>
           </div>
           <div className="w-full bg-slate-950 rounded-full h-1.5 overflow-hidden">
             <div 
@@ -409,25 +408,25 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
       )}
 
       {/* Evaluator View Switcher (Telemetry / Terminal / Simulation) */}
-      <div className="mt-5">
-        <div className="flex items-center justify-between border-b border-slate-800/80 pb-2 mb-3">
-          <div className="flex items-center gap-2">
+      <div className="mt-3.5">
+        <div className="flex items-center justify-between border-b border-slate-800/80 pb-2 mb-2.5">
+          <div className="flex items-center gap-1.5">
             <button
               type="button"
               onClick={() => setActiveTab('telemetry')}
-              className={`text-xs font-extrabold uppercase tracking-wider py-1 px-3 rounded-lg font-display transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`text-[11px] font-extrabold uppercase tracking-wider py-1 px-2.5 rounded-lg font-display transition-all cursor-pointer flex items-center gap-1 ${
                 activeTab === 'telemetry'
                   ? 'bg-slate-800 text-white shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
               <Gauge className="w-3.5 h-3.5 text-brand-teal" />
-              Telemetry
+              Overview
             </button>
             <button
               type="button"
               onClick={() => setActiveTab('terminal')}
-              className={`text-xs font-extrabold uppercase tracking-wider py-1 px-3 rounded-lg font-display transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`text-[11px] font-extrabold uppercase tracking-wider py-1 px-2.5 rounded-lg font-display transition-all cursor-pointer flex items-center gap-1 ${
                 activeTab === 'terminal'
                   ? 'bg-slate-800 text-white shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
@@ -439,33 +438,33 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
             <button
               type="button"
               onClick={() => setActiveTab('simulation')}
-              className={`text-xs font-extrabold uppercase tracking-wider py-1 px-3 rounded-lg font-display transition-all cursor-pointer flex items-center gap-1.5 ${
+              className={`text-[11px] font-extrabold uppercase tracking-wider py-1 px-2.5 rounded-lg font-display transition-all cursor-pointer flex items-center gap-1 ${
                 activeTab === 'simulation'
                   ? 'bg-slate-800 text-white shadow-sm'
                   : 'text-slate-400 hover:text-slate-200'
               }`}
             >
               <Bot className="w-3.5 h-3.5 text-purple-400" />
-              LLM Response
+              AI Preview
             </button>
           </div>
 
           {result && (
             <span className="text-[10px] font-mono text-slate-400">
-              Scanned: <span className="text-white font-bold">{result.cleanDomain}</span>
+              Tested: <span className="text-white font-bold">{result.cleanDomain}</span>
             </span>
           )}
         </div>
 
         {/* TAB 1: TELEMETRY (VISUAL DASHBOARD) */}
         {activeTab === 'telemetry' && (
-          <div className="space-y-3">
+          <div className="space-y-2.5">
             {result ? (
               <>
                 {/* Score Banner */}
-                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 p-3.5 bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-950 rounded-2xl border border-slate-800">
-                  <div className="sm:col-span-1 flex items-center gap-3">
-                    <div className="w-14 h-14 rounded-2xl bg-slate-950 border border-teal-500/40 flex flex-col items-center justify-center shrink-0 shadow-inner">
+                <div className="p-3 bg-gradient-to-r from-slate-900 via-slate-900/90 to-slate-950 rounded-xl border border-slate-800/90 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <div className="w-13 h-13 rounded-xl bg-slate-950 border border-teal-500/40 flex flex-col items-center justify-center shrink-0 shadow-inner px-2 py-1">
                       <span className="text-xl font-black text-white font-display leading-none">
                         {result.overallScore}
                       </span>
@@ -474,20 +473,20 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
                       </span>
                     </div>
                     <div>
-                      <div className="text-[10px] font-mono uppercase text-slate-400 font-bold">Citation Index</div>
+                      <div className="text-[10px] font-mono uppercase text-slate-400 font-semibold">Visibility Status</div>
                       <div className="text-xs font-extrabold text-white">
-                        {result.overallScore >= 80 ? 'High Inclusion' : 'Needs Optimization'}
+                        {result.overallScore >= 80 ? 'High Inclusion Prob.' : 'Optimization Needed'}
                       </div>
                     </div>
                   </div>
 
-                  <div className="sm:col-span-2 grid grid-cols-2 gap-2 border-t sm:border-t-0 sm:border-l border-slate-800/80 pt-2 sm:pt-0 sm:pl-3">
+                  <div className="grid grid-cols-2 gap-2 border-l border-slate-800/80 pl-3">
                     <div>
-                      <span className="text-[9px] font-mono uppercase text-slate-400 block">LLM Citation Probability</span>
+                      <span className="text-[9px] font-mono uppercase text-slate-400 block">Citation Weight</span>
                       <span className="text-sm font-extrabold text-brand-teal font-display">{result.citationConfidence}%</span>
                     </div>
                     <div>
-                      <span className="text-[9px] font-mono uppercase text-slate-400 block">Topical Authority</span>
+                      <span className="text-[9px] font-mono uppercase text-slate-400 block">Entity Depth</span>
                       <span className="text-sm font-extrabold text-indigo-300 font-display">91.4 / 100</span>
                     </div>
                   </div>
@@ -495,74 +494,81 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
 
                 {/* 4 Diagnostic Pillars */}
                 <div className="grid grid-cols-2 gap-2 text-left">
-                  <div className="p-2.5 bg-slate-900/70 rounded-xl border border-slate-800/80 space-y-1">
+                  <div className="p-2 bg-slate-900/70 rounded-lg border border-slate-800/80 space-y-0.5">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-mono uppercase text-slate-300 font-bold">Entity Graph</span>
                       <span className="text-[10px] font-mono font-black text-emerald-400">{result.metrics.entityDisambiguation.score}%</span>
                     </div>
-                    <p className="text-[10px] text-slate-400 font-light truncate">{result.metrics.entityDisambiguation.detail}</p>
+                    <p className="text-[10px] text-slate-400 font-normal leading-tight">Wikipedia & Web Nodes</p>
                   </div>
 
-                  <div className="p-2.5 bg-slate-900/70 rounded-xl border border-slate-800/80 space-y-1">
+                  <div className="p-2 bg-slate-900/70 rounded-lg border border-slate-800/80 space-y-0.5">
                     <div className="flex items-center justify-between">
                       <span className="text-[10px] font-mono uppercase text-slate-300 font-bold">JSON-LD Schema</span>
                       <span className={`text-[10px] font-mono font-black ${result.metrics.jsonLdSchemaDepth.status === 'Warning' ? 'text-amber-400' : 'text-emerald-400'}`}>
                         {result.metrics.jsonLdSchemaDepth.score}%
                       </span>
                     </div>
-                    <p className="text-[10px] text-slate-400 font-light truncate">{result.metrics.jsonLdSchemaDepth.detail}</p>
+                    <p className="text-[10px] text-slate-400 font-normal leading-tight">
+                      {result.metrics.jsonLdSchemaDepth.status === 'Warning' ? 'Missing @graph nodes' : 'Rich nested schema'}
+                    </p>
                   </div>
 
-                  <div className="p-2.5 bg-slate-900/70 rounded-xl border border-slate-800/80 space-y-1">
+                  <div className="p-2 bg-slate-900/70 rounded-lg border border-slate-800/80 space-y-0.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-mono uppercase text-slate-300 font-bold">AI Bot Permissions</span>
+                      <span className="text-[10px] font-mono uppercase text-slate-300 font-bold">AI Bot Access</span>
                       <span className="text-[10px] font-mono font-black text-emerald-400">100% OK</span>
                     </div>
-                    <p className="text-[10px] text-slate-400 font-light truncate">GPTBot & Perplexity unblocked</p>
+                    <p className="text-[10px] text-slate-400 font-normal leading-tight">GPTBot & Perplexity unblocked</p>
                   </div>
 
-                  <div className="p-2.5 bg-slate-900/70 rounded-xl border border-slate-800/80 space-y-1">
+                  <div className="p-2 bg-slate-900/70 rounded-lg border border-slate-800/80 space-y-0.5">
                     <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-mono uppercase text-slate-300 font-bold">RAG Retrieval Match</span>
+                      <span className="text-[10px] font-mono uppercase text-slate-300 font-bold">RAG Retrieval</span>
                       <span className="text-[10px] font-mono font-black text-indigo-300">89%</span>
                     </div>
-                    <p className="text-[10px] text-slate-400 font-light truncate">High context window inclusion</p>
+                    <p className="text-[10px] text-slate-400 font-normal leading-tight">High context window fit</p>
                   </div>
                 </div>
 
-                {/* Remediation Action Strip */}
-                <div className="p-3 bg-brand-indigo/10 rounded-xl border border-brand-indigo/30 flex items-center justify-between gap-3">
-                  <div className="space-y-0.5">
+                {/* Priority Remediation Card: Full Width, Never Clipped */}
+                <div className="p-3 bg-slate-900/90 rounded-xl border border-brand-indigo/40 space-y-2">
+                  <div>
                     <div className="text-[11px] font-bold text-white flex items-center gap-1.5 font-display">
-                      <Zap className="w-3 h-3 text-amber-400" />
-                      Priority Fix: {result.remediations[0].title}
+                      <Zap className="w-3.5 h-3.5 text-amber-400 shrink-0" />
+                      <span>Priority Fix: {result.remediations[0].title}</span>
                     </div>
-                    <p className="text-[10px] text-slate-400 font-light truncate max-w-xs sm:max-w-sm">
+                    <p className="text-[10.5px] text-slate-300 font-normal mt-0.5 leading-relaxed">
                       {result.remediations[0].desc}
                     </p>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={handleRemediationAction}
-                    className="shrink-0 bg-brand-orange hover:bg-orange-600 text-white font-black text-[10px] uppercase tracking-wider py-2 px-3 rounded-lg transition-all flex items-center gap-1 cursor-pointer shadow"
-                  >
-                    Fix Architecture <ArrowRight className="w-3 h-3" />
-                  </button>
+                  <div className="pt-2 flex items-center justify-between border-t border-slate-800/80">
+                    <span className="text-[9.5px] font-mono text-amber-400 font-bold uppercase tracking-wider bg-amber-950/40 px-2 py-0.5 rounded border border-amber-800/50">
+                      Impact: {result.remediations[0].impact}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={handleRemediationAction}
+                      className="bg-brand-orange hover:bg-orange-600 text-white font-black text-[10.5px] uppercase tracking-wider py-1.5 px-3.5 rounded-lg transition-all flex items-center gap-1.5 cursor-pointer shadow-md"
+                    >
+                      Get Fix Blueprint <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
                 </div>
               </>
             ) : (
-              <div className="p-6 bg-slate-900/40 rounded-2xl border border-slate-800/80 text-center space-y-3">
-                <div className="w-10 h-10 rounded-full bg-slate-800/80 border border-slate-700 mx-auto flex items-center justify-center">
-                  <Bot className="w-5 h-5 text-brand-teal" />
+              <div className="p-5 bg-slate-900/40 rounded-xl border border-slate-800/80 text-center space-y-2.5">
+                <div className="w-9 h-9 rounded-full bg-slate-800/80 border border-slate-700 mx-auto flex items-center justify-center">
+                  <Bot className="w-4 h-4 text-brand-teal" />
                 </div>
                 <div className="space-y-1">
                   <h4 className="text-xs font-extrabold text-white font-display">Ready for Domain Diagnostic</h4>
-                  <p className="text-[11px] text-slate-400 font-light max-w-sm mx-auto">
+                  <p className="text-[11px] text-slate-400 font-normal max-w-sm mx-auto">
                     Enter your corporate website domain above or select a preset to analyze real-time citation readiness across ChatGPT, Perplexity, Gemini, and Claude.
                   </p>
                 </div>
-                <div className="flex justify-center gap-2 pt-1">
+                <div className="flex justify-center gap-2 pt-0.5">
                   <button
                     type="button"
                     onClick={() => {
@@ -647,10 +653,10 @@ export const GenerativeEngineEvaluator: React.FC<GenerativeEngineEvaluatorProps>
       </div>
 
       {/* Bottom Protocol Telemetry Footnote */}
-      <div className="mt-4 pt-3 border-t border-slate-800/60 flex flex-wrap items-center justify-between gap-2 text-[9.5px] font-mono text-slate-500">
+      <div className="mt-3 pt-2.5 border-t border-slate-800/60 flex flex-wrap items-center justify-between gap-2 text-[9px] font-mono text-slate-400">
         <span className="flex items-center gap-1.5">
           <ShieldCheck className="w-3 h-3 text-brand-teal" />
-          Compliant with OpenAI Search, Perplexity Sonar & Google SGE Graph Protocols
+          Compliant with OpenAI Search, Perplexity Sonar & Gemini Protocols
         </span>
         <span className="text-slate-400">LATENCY: ~18ms</span>
       </div>
