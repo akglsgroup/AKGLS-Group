@@ -1,9 +1,9 @@
 import React from 'react';
 import { 
-  ArrowRight, Bot, Sparkles, Terminal, Activity, ShieldCheck, 
+  ArrowRight, Bot, Sparkles, Activity, ShieldCheck, 
   Cpu, Database, Network, ChevronRight, Zap, CheckCircle2, Globe
 } from 'lucide-react';
-import GenerativeEngineEvaluator from './GenerativeEngineEvaluator';
+import DynamicHeroMediaShowcase from './DynamicHeroMediaShowcase';
 
 interface HomeHeroBannerProps {
   onOpenAuditForm?: () => void;
@@ -20,21 +20,6 @@ export const HomeHeroBanner: React.FC<HomeHeroBannerProps> = ({
     } else {
       const formEl = document.querySelector('#audit-form');
       formEl?.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
-  const handleRemediationPrefill = (data: { domain: string; score: number; note: string }) => {
-    const formEl = document.querySelector('#audit-form');
-    if (formEl) {
-      formEl.scrollIntoView({ behavior: 'smooth' });
-      const websiteInput = formEl.querySelector('input[name="websiteUrl"], input[placeholder*="domain"], input[type="url"]') as HTMLInputElement;
-      if (websiteInput) {
-        websiteInput.value = `https://${data.domain}`;
-      }
-      const notesInput = formEl.querySelector('textarea[name="notes"], textarea[placeholder*="goals"]') as HTMLTextAreaElement;
-      if (notesInput) {
-        notesInput.value = `GEO Evaluator Diagnostic: Domain ${data.domain} scored ${data.score}/100. Requesting technical RAG knowledge graph remediation plan.`;
-      }
     }
   };
 
@@ -164,9 +149,9 @@ export const HomeHeroBanner: React.FC<HomeHeroBannerProps> = ({
           </div>
         </div>
 
-        {/* Right Column: Clean, Polished Generative Engine Evaluator */}
+        {/* Right Column: Dynamic Visual Media Showcase */}
         <div className="lg:col-span-5 relative w-full">
-          <GenerativeEngineEvaluator onSelectRemediation={handleRemediationPrefill} />
+          <DynamicHeroMediaShowcase />
         </div>
 
       </div>
