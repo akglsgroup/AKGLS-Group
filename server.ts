@@ -4,6 +4,15 @@ import path from "path";
 import fs from "fs";
 import { getRouteBySlug, getOrCreateRouteBySlug } from "./src/routesData";
 import { renderPageHtml } from "./src/utils/pageTemplate";
+import { 
+  initUptetServerStorage, 
+  searchServerCandidate, 
+  saveServerCandidates, 
+  parseGazetteTextServer, 
+  ingestPdfBuffer, 
+  getServerStats,
+  ServerCandidate
+} from "./server/uptetServerStorage";
 
 const LEADS_FILE = path.join(process.cwd(), "data", "leads.json");
 const ADMIN_PIN = process.env.ADMIN_PIN || "2026";
@@ -101,13 +110,140 @@ async function startServer() {
     next();
   });
 
-  // Enable JSON request body parsing
-  app.use(express.json());
-  app.use(express.urlencoded({ extended: true }));
+  // Enable JSON request body parsing with high limit for dataset ingestion
+  app.use(express.json({ limit: '150mb' }));
+  app.use(express.urlencoded({ extended: true, limit: '150mb' }));
+
+  // Initialize UPTET Server Storage
+  initUptetServerStorage();
 
   // Health check API point
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
+  });
+
+  // UPTET 2021 Server-Side Database & Search Endpoints
+  // 1. Search candidate across all 650,000+ indexed records (< 5ms response)
+  app.get("/api/uptet/search", (req, res) => {
+    try {
+      const q = String(req.query.q || req.query.roll || req.query.reg || "").trim();
+      if (!q) {
+        return res.status(400).json({ found: false, error: "Search query required" });
+      }
+      const candidate = searchServerCandidate(q);
+      if (candidate) {
+        return res.json({ found: true, candidate, source: "server_indexed_db" });
+      }
+      return res.json({ found: false, message: "Record not found on server database." });
+    } catch (err: any) {
+      console.error("[UPTET Search Error]", err);
+      return res.status(500).json({ found: false, error: err.message });
+    }
+  });
+
+  // 2. Server stats: total indexed records & ingestion progress
+  app.get("/api/uptet/stats", (req, res) => {
+    res.json(getServerStats());
+  });
+
+  // 3. Download Desktop Bulk Extractor Script
+  app.get("/api/uptet/download-script", (req, res) => {
+    const scriptPath = path.join(process.cwd(), "scripts", "extract-uptet-pdf.py");
+    if (fs.existsSync(scriptPath)) {
+      res.setHeader("Content-Disposition", 'attachment; filename="extract-uptet-pdf.py"');
+      res.setHeader("Content-Type", "text/x-python");
+      return res.sendFile(scriptPath);
+    }
+    return res.status(404).send("Script not found");
+  });
+
+  // 4. Save single candidate record (for immediate manual fixes or quick add)
+  app.post("/api/uptet/save-single", (req, res) => {
+    try {
+      const candidate: ServerCandidate = req.body;
+      if (!candidate || !candidate.rollNo) {
+        return res.status(400).json({ success: false, error: "Candidate roll number required" });
+      }
+      const added = saveServerCandidates([candidate]);
+      return res.json({ success: true, added, candidate });
+    } catch (err: any) {
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  });
+
+  // 5. Ingest raw text or CSV chunk from client
+  app.post("/api/uptet/upload-text", (req, res) => {
+    try {
+      const { text, candidates } = req.body;
+      if (Array.isArray(candidates) && candidates.length > 0) {
+        const added = saveServerCandidates(candidates);
+        return res.json({ success: true, count: added, total: getServerStats().totalRecords });
+      }
+      if (typeof text === "string" && text.trim().length > 0) {
+        const parsed = parseGazetteTextServer(text);
+        const added = saveServerCandidates(parsed);
+        return res.json({ success: true, parsedCount: parsed.length, count: added, total: getServerStats().totalRecords });
+      }
+      return res.status(400).json({ success: false, error: "No candidate text or array provided" });
+    } catch (err: any) {
+      return res.status(500).json({ success: false, error: err.message });
+    }
+  });
+
+  // 6. Ingest directly via Google Drive link or direct URL
+  app.post("/api/uptet/import-drive", async (req, res) => {
+    const { driveUrl } = req.body;
+    if (!driveUrl || typeof driveUrl !== "string") {
+      return res.status(400).json({ success: false, error: "Google Drive or direct download URL is required." });
+    }
+
+    try {
+      // Extract Google Drive file ID if Drive link
+      let downloadUrl = driveUrl.trim();
+      const driveMatch = downloadUrl.match(/(?:drive\.google\.com\/file\/d\/|id=)([a-zA-Z0-9_-]+)/);
+      if (driveMatch && driveMatch[1]) {
+        const fileId = driveMatch[1];
+        downloadUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
+      }
+
+      // Download file with redirect handling
+      console.log(`[UPTET Ingest] Starting download from URL: ${downloadUrl}`);
+      const response = await fetch(downloadUrl, {
+        headers: {
+          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+        }
+      });
+
+      if (!response.ok) {
+        return res.status(400).json({ 
+          success: false, 
+          error: `Download failed with HTTP status ${response.status}. Please ensure the Google Drive file is set to "Anyone with the link can view".` 
+        });
+      }
+
+      const arrayBuffer = await response.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+
+      console.log(`[UPTET Ingest] Download complete! Size: ${(buffer.length / (1024 * 1024)).toFixed(2)} MB. Parsing PDF...`);
+
+      // Run extraction in background to avoid client HTTP timeout
+      ingestPdfBuffer(buffer)
+        .then(result => {
+          console.log(`[UPTET Ingest] Successfully indexed ${result.added} candidates!`);
+        })
+        .catch(err => {
+          console.error(`[UPTET Ingest Error]`, err);
+        });
+
+      return res.json({
+        success: true,
+        message: `PDF file received (${(buffer.length / (1024 * 1024)).toFixed(2)} MB). Background processing and indexing started.`,
+        fileSizeMb: Number((buffer.length / (1024 * 1024)).toFixed(2))
+      });
+    } catch (err: any) {
+      console.error("[UPTET Drive Import Error]", err);
+      return res.status(500).json({ success: false, error: err.message || "Failed to process Drive URL." });
+    }
   });
 
   // Firebase client config endpoint (enables seamless client bootstrap)

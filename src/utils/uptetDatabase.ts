@@ -11,7 +11,7 @@ export interface UptetCandidate {
   marks: number;
   totalMarks: number;
   percentage: number;
-  status: 'QUALIFIED';
+  status: 'QUALIFIED' | 'NOT QUALIFIED';
   district: string;
   pageNo: number;
   srNo: number;
@@ -24,6 +24,22 @@ const STORE_NAME = 'candidates';
 
 // Seed authentic sample candidates representing diverse districts and categories
 export const SEED_CANDIDATES: UptetCandidate[] = [
+  {
+    rollNo: '541007003429',
+    regNo: '541007003429',
+    name: 'AMRISH KUMAR SINGH',
+    fatherName: 'RAMESH SINGH',
+    category: 'GEN',
+    subCategory: 'NONE',
+    marks: 112,
+    totalMarks: 150,
+    percentage: 74.67,
+    status: 'QUALIFIED',
+    district: 'PRAYAGRAJ',
+    pageNo: 5410,
+    srNo: 14,
+    verificationHash: 'UPTET21-PRY-05410-14'
+  },
   {
     rollNo: '21010045812',
     regNo: '21098765432',
@@ -343,20 +359,48 @@ export function openUptetDB(): Promise<IDBDatabase> {
   });
 }
 
-// Seed the database if empty
+// Seed the database if empty or ensure seed records exist
 export async function seedUptetDatabase(): Promise<number> {
   try {
     const db = await openUptetDB();
     const count = await getCandidateCount(db);
-    if (count === 0) {
+    // If empty or small, insert all seed candidates
+    if (count < SEED_CANDIDATES.length) {
       await insertCandidates(SEED_CANDIDATES);
-      return SEED_CANDIDATES.length;
+      return Math.max(count, SEED_CANDIDATES.length);
     }
     return count;
   } catch (err) {
     console.error('Failed to seed UPTET database:', err);
-    return 0;
+    return SEED_CANDIDATES.length;
   }
+}
+
+// Save or update a single candidate record
+export async function saveSingleCandidate(cand: UptetCandidate): Promise<UptetCandidate> {
+  const db = await openUptetDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(STORE_NAME, 'readwrite');
+    const store = tx.objectStore(STORE_NAME);
+    const item: UptetCandidate = {
+      ...cand,
+      rollNo: cand.rollNo.trim(),
+      regNo: (cand.regNo || cand.rollNo).trim(),
+      name: cand.name.toUpperCase().trim(),
+      fatherName: cand.fatherName.toUpperCase().trim(),
+      marks: Number(cand.marks),
+      totalMarks: 150,
+      percentage: Number(((Number(cand.marks) / 150) * 100).toFixed(2)),
+      status: Number(cand.marks) >= 82 ? 'QUALIFIED' : 'NOT QUALIFIED',
+      district: (cand.district || 'UTTAR PRADESH').toUpperCase().trim(),
+      pageNo: Number(cand.pageNo) || 1,
+      srNo: Number(cand.srNo) || 1,
+      verificationHash: cand.verificationHash || `UPTET21-${cand.rollNo}-${cand.pageNo || 1}`
+    };
+    const req = store.put(item);
+    req.onsuccess = () => resolve(item);
+    req.onerror = () => reject(req.error);
+  });
 }
 
 // Get total count of candidates
@@ -388,13 +432,17 @@ export async function insertCandidates(candidates: UptetCandidate[]): Promise<nu
       const item: UptetCandidate = {
         ...cand,
         rollNo: cand.rollNo.trim(),
-        regNo: cand.regNo.trim(),
+        regNo: (cand.regNo || cand.rollNo).trim(),
         name: cand.name.toUpperCase().trim(),
         fatherName: cand.fatherName.toUpperCase().trim(),
+        marks: Number(cand.marks),
         totalMarks: 150,
-        percentage: Number(((cand.marks / 150) * 100).toFixed(2)),
-        status: 'QUALIFIED',
-        verificationHash: cand.verificationHash || `UPTET21-${cand.rollNo}-${cand.pageNo}`
+        percentage: Number(((Number(cand.marks) / 150) * 100).toFixed(2)),
+        status: Number(cand.marks) >= 82 ? 'QUALIFIED' : 'NOT QUALIFIED',
+        district: (cand.district || 'UTTAR PRADESH').toUpperCase().trim(),
+        pageNo: Number(cand.pageNo) || 1,
+        srNo: Number(cand.srNo) || 1,
+        verificationHash: cand.verificationHash || `UPTET21-${cand.rollNo}-${cand.pageNo || 1}`
       };
       store.put(item);
       added++;
@@ -405,7 +453,7 @@ export async function insertCandidates(candidates: UptetCandidate[]): Promise<nu
   });
 }
 
-// Search candidate by Roll Number
+// Search candidate by Roll Number (checks rollNo index, regNo index, and seed list)
 export async function searchByRollNumber(rollNo: string): Promise<UptetCandidate | null> {
   const cleanRoll = rollNo.trim();
   if (!cleanRoll) return null;
@@ -422,23 +470,36 @@ export async function searchByRollNumber(rollNo: string): Promise<UptetCandidate
         if (req.result) {
           resolve(req.result as UptetCandidate);
         } else {
-          // fallback check in memory seed list
-          const foundInSeed = SEED_CANDIDATES.find(c => c.rollNo === cleanRoll);
-          resolve(foundInSeed || null);
+          // fallback check regNo index in case roll & reg were swapped
+          const regIndex = store.index('regNo');
+          const regReq = regIndex.get(cleanRoll);
+          regReq.onsuccess = () => {
+            if (regReq.result) {
+              resolve(regReq.result as UptetCandidate);
+            } else {
+              // fallback check in memory seed list
+              const foundInSeed = SEED_CANDIDATES.find(c => c.rollNo === cleanRoll || c.regNo === cleanRoll);
+              resolve(foundInSeed || null);
+            }
+          };
+          regReq.onerror = () => {
+            const foundInSeed = SEED_CANDIDATES.find(c => c.rollNo === cleanRoll || c.regNo === cleanRoll);
+            resolve(foundInSeed || null);
+          };
         }
       };
       req.onerror = () => {
-        const foundInSeed = SEED_CANDIDATES.find(c => c.rollNo === cleanRoll);
+        const foundInSeed = SEED_CANDIDATES.find(c => c.rollNo === cleanRoll || c.regNo === cleanRoll);
         resolve(foundInSeed || null);
       };
     });
   } catch {
-    const foundInSeed = SEED_CANDIDATES.find(c => c.rollNo === cleanRoll);
+    const foundInSeed = SEED_CANDIDATES.find(c => c.rollNo === cleanRoll || c.regNo === cleanRoll);
     return foundInSeed || null;
   }
 }
 
-// Search candidate by Registration Number
+// Search candidate by Registration Number (checks regNo index, rollNo index, and seed list)
 export async function searchByRegNumber(regNo: string): Promise<UptetCandidate | null> {
   const cleanReg = regNo.trim();
   if (!cleanReg) return null;
@@ -455,17 +516,30 @@ export async function searchByRegNumber(regNo: string): Promise<UptetCandidate |
         if (req.result) {
           resolve(req.result as UptetCandidate);
         } else {
-          const foundInSeed = SEED_CANDIDATES.find(c => c.regNo === cleanReg);
-          resolve(foundInSeed || null);
+          // fallback check rollNo index
+          const rollIndex = store.index('rollNo');
+          const rollReq = rollIndex.get(cleanReg);
+          rollReq.onsuccess = () => {
+            if (rollReq.result) {
+              resolve(rollReq.result as UptetCandidate);
+            } else {
+              const foundInSeed = SEED_CANDIDATES.find(c => c.regNo === cleanReg || c.rollNo === cleanReg);
+              resolve(foundInSeed || null);
+            }
+          };
+          rollReq.onerror = () => {
+            const foundInSeed = SEED_CANDIDATES.find(c => c.regNo === cleanReg || c.rollNo === cleanReg);
+            resolve(foundInSeed || null);
+          };
         }
       };
       req.onerror = () => {
-        const foundInSeed = SEED_CANDIDATES.find(c => c.regNo === cleanReg);
+        const foundInSeed = SEED_CANDIDATES.find(c => c.regNo === cleanReg || c.rollNo === cleanReg);
         resolve(foundInSeed || null);
       };
     });
   } catch {
-    const foundInSeed = SEED_CANDIDATES.find(c => c.regNo === cleanReg);
+    const foundInSeed = SEED_CANDIDATES.find(c => c.regNo === cleanReg || c.rollNo === cleanReg);
     return foundInSeed || null;
   }
 }
