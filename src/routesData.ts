@@ -1294,7 +1294,24 @@ export const SITEMAP_ROUTES: AppRoute[] = [
       { title: `Level: ${item.difficulty}`, desc: `Rated ${item.rating}/5.0 by ${item.studentsCount.toLocaleString()}+ growth practitioners.` },
       { title: "Actionable Assets", desc: "Includes downloadable execution checklists, spreadsheet models, and architecture templates." }
     ]
-  }))
+  })),
+  {
+    id: "uptet-result-2021",
+    path: "/uptet-result-2021/",
+    priority: 0.9,
+    changefreq: "daily",
+    title: "UPTET Result 2021 Primary Level - Qualified Candidate Gazette Search & Verification",
+    description: "Search and verify UPTET 2021 Primary Level (Classes 1-5) qualified candidates across 25,000+ gazette pages. Instant verification by Roll No, Reg No, or Candidate Name.",
+    category: "Govt Examination",
+    h1: "UPTET 2021 Primary Level Qualified Candidate Gazette Search",
+    highlight: "25,000+ Gazette Pages & 650,000+ Candidates Indexed",
+    leadParagraph: "Fast search engine and verification utility for UPTET 2021 Primary Level examination gazette. Verify qualification status, download printable score slips, and calculate Super TET merit scores.",
+    features: [
+      { title: "Instant Roll & Reg Lookup", desc: "Retrieve verified candidate credentials and marks in sub-milliseconds." },
+      { title: "Printable Verification Slip", desc: "Official-style verification slip with security hash, QR verification, and DIET instructions." },
+      { title: "Super TET Merit Calculator", desc: "Interactive recruitment merit calculator combining academic weightage and written scores." }
+    ]
+  }
 ];
 
 export function getRouteBySlug(slug: string): AppRoute | undefined {

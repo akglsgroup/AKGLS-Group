@@ -152,6 +152,7 @@ export const resourcesMenu: MegaColumn[] = [
   {
     title: "Free Tools",
     items: [
+      { name: "UPTET 2021 Result & Gazette Search", href: "/uptet-result-2021", isTrending: true },
       { name: "AI & GEO Audit Scanner (New)", href: "/tools/geo-audit-tool", isTrending: true },
       { name: "AI SEO Checklists", href: "/free-checklists/" },
       { name: "SEO Audit Tool", href: "/tools/seo-audit-tool" },

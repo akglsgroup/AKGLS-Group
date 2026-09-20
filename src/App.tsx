@@ -78,6 +78,7 @@ import { initAutoLeadCapture, captureLead } from './utils/leadCapture';
 import FreeToolsPage from './components/FreeToolsPage';
 import SeoAuditToolPage from './components/SeoAuditToolPage';
 import AiGeoAuditPage from './components/AiGeoAuditPage';
+import UptetResult2021Page from './components/UptetResult2021Page';
 import SeoBlogListPage from './components/SeoBlogListPage';
 import LearningHubPage from './components/LearningHubPage';
 import InternshipProgramPage from './components/InternshipProgramPage';
@@ -717,6 +718,16 @@ export default function App() {
         hash === '#lead-portal' || hash === '#leads'
       ) {
         setCurrentPage('lead-portal');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/uptet-result-2021' || pathname === '/uptet-result-2021/' ||
+        pathname === '/tools/uptet-result-2021' || pathname === '/tools/uptet-result-2021/' ||
+        pathname === '/uptet-result' || pathname === '/uptet-result/' ||
+        pathname === '/uptet-2021-result' || pathname === '/uptet-2021-result/' ||
+        pathname === '/uptet-verification' || pathname === '/uptet-verification/' ||
+        hash === '#uptet-result-2021' || hash === '#uptet-result' || hash === '#uptet'
+      ) {
+        setCurrentPage('uptet-result-2021');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (
         pathname === '/tools' || pathname === '/tools/' ||
@@ -1922,6 +1933,14 @@ export default function App() {
             setCurrentPage('home');
           }}
         />
+      ) : currentPage === 'uptet-result-2021' ? (
+        <UptetResult2021Page
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+        />
       ) : currentPage === 'tools' ? (
         <FreeToolsPage
           onBackToHome={() => {
@@ -1938,6 +1957,11 @@ export default function App() {
             window.history.pushState(null, '', '/tools/geo-audit-tool');
             window.location.hash = '#tools/geo-audit-tool';
             setCurrentPage('geo-audit-tool');
+          }}
+          onNavigateToUptet={() => {
+            window.history.pushState(null, '', '/uptet-result-2021');
+            window.location.hash = '#uptet-result-2021';
+            setCurrentPage('uptet-result-2021');
           }}
         />
       ) : currentPage === 'seo-audit-tool' ? (

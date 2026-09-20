@@ -406,6 +406,22 @@ async function startServer() {
       return next(); // Root "/" served by index.html SPA
     }
 
+    // Interactive SPA routes that must always be rendered by React client app
+    const SPA_INTERACTIVE_ROUTES = new Set([
+      "uptet-result-2021",
+      "uptet-result",
+      "uptet-2021-result",
+      "uptet-verification",
+      "lead-portal",
+      "proposal-generator",
+      "tools/seo-audit-tool",
+      "tools/geo-audit-tool"
+    ]);
+
+    if (SPA_INTERACTIVE_ROUTES.has(cleanSlug)) {
+      return next();
+    }
+
     const isProd = process.env.NODE_ENV === "production";
     const publicTarget = path.join(process.cwd(), "public", `${cleanSlug}.html`);
     const distTarget = path.join(process.cwd(), "dist", `${cleanSlug}.html`);

@@ -19,6 +19,9 @@ interface ToolItem {
 
 // 1. Full directory list of tools for marketing and technical SEO
 const ALL_TOOLS_LIST: ToolItem[] = [
+  // Govt & Education
+  { id: "uptet-result-2021", name: "UPTET 2021 Result & Gazette Search", shortDesc: "Search & verify Primary Level qualified candidates across 25,000+ gazette pages instantly.", category: "Govt Exam Tools", isPopular: true, isInteractive: true },
+  
   // SEO
   { id: "seo-audit", name: "Comprehensive SEO Audit Tool", shortDesc: "Scan your complete website and list high-priority technical issues instantly.", category: "SEO Tools", isPopular: true, isInteractive: true },
   { id: "meta-gen", name: "Meta Tag Snippet Optimizer", shortDesc: "Generate pixel-optimized Google SEO meta titles & descriptions on the fly.", category: "SEO Tools", isPopular: true, isInteractive: true },
@@ -53,6 +56,7 @@ const ALL_TOOLS_LIST: ToolItem[] = [
 
 const CATEGORIES_LIST = [
   "All Tools",
+  "Govt Exam Tools",
   "SEO Tools",
   "AI SEO Tools",
   "Calculators",
@@ -63,11 +67,13 @@ const CATEGORIES_LIST = [
 export default function FreeToolsPage({ 
   onBackToHome, 
   onNavigateToSeoAudit,
-  onNavigateToGeoAudit 
+  onNavigateToGeoAudit,
+  onNavigateToUptet
 }: { 
   onBackToHome: () => void; 
   onNavigateToSeoAudit?: () => void;
   onNavigateToGeoAudit?: () => void;
+  onNavigateToUptet?: () => void;
 }) {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All Tools');
@@ -395,6 +401,38 @@ export default function FreeToolsPage({
                 <span className="text-[10px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 px-2 py-0.5 rounded font-mono font-bold uppercase">Free Unlimited Use</span>
               </div>
             </div>
+
+            {/* INTERACTIVE COMPONENT - UPTET 2021 RESULT & GAZETTE SEARCH */}
+            {activeToolId === 'uptet-result-2021' && (
+              <div className="space-y-6">
+                <div className="bg-gradient-to-r from-teal-950/40 to-slate-900 border border-teal-500/30 p-5 rounded-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                  <div>
+                    <span className="text-[9px] font-mono font-bold text-teal-400 bg-teal-950 px-2 py-0.5 rounded border border-teal-500/20 uppercase tracking-widest block w-fit mb-1">
+                      Govt Examination Gazette Tool
+                    </span>
+                    <h4 className="text-sm font-bold text-white uppercase tracking-wider">
+                      UPTET 2021 Primary Level (Classes 1-5) Qualified Candidate Gazette Search & Verification
+                    </h4>
+                    <p className="text-xs text-slate-300 leading-normal mt-1 max-w-xl">
+                      Instantly search 25,000+ pages of the official UPTET 2021 qualified candidate gazette by Roll Number, Registration Number, or Name. Includes Super TET Merit Calculator and official printable verification slip.
+                    </p>
+                  </div>
+                  <button
+                    onClick={() => {
+                      if (onNavigateToUptet) {
+                        onNavigateToUptet();
+                      } else {
+                        window.history.pushState(null, '', '/uptet-result-2021');
+                        window.dispatchEvent(new PopStateEvent('popstate'));
+                      }
+                    }}
+                    className="bg-brand-teal hover:bg-teal-400 text-slate-950 text-xs font-black uppercase tracking-wider px-5 py-3 rounded-xl shrink-0 flex items-center gap-2 shadow-lg shadow-teal-500/20 transition-all font-sans cursor-pointer"
+                  >
+                    Open UPTET Verification Portal <ArrowRight className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
 
             {/* INTERACTIVE COMPONENT 0: AI & GEO AUDIT SCANNER */}
             {activeToolId === 'geo-audit' && (

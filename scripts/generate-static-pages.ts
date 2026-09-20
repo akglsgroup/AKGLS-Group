@@ -30,7 +30,7 @@ export function generateAllStaticPages(force = false): { created: number; skippe
 
   for (const route of SITEMAP_ROUTES) {
     // Skip home page as index.html is the React SPA root
-    if (!route.path || route.path === '/' || route.id === 'home') {
+    if (!route.path || route.path === '/' || route.id === 'home' || route.id === 'uptet-result-2021') {
       continue;
     }
 
