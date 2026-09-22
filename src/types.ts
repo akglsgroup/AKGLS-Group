@@ -71,3 +71,48 @@ export interface LeadRecord {
   rawDetails?: Record<string, any>;
 }
 
+export interface UserProfile {
+  uid: string;
+  email: string;
+  displayName: string;
+  photoURL?: string;
+  company?: string;
+  domain?: string;
+  customLogo?: string;
+  role: 'client' | 'admin' | 'viewer';
+  createdAt: string;
+  lastLoginAt: string;
+}
+
+export interface GroundingSource {
+  title?: string;
+  uri: string;
+}
+
+export interface GroundingMetadata {
+  webSearchQueries?: string[];
+  groundingChunks?: Array<{
+    web?: {
+      title?: string;
+      uri?: string;
+    };
+  }>;
+  groundingSupports?: any[];
+  searchEntryPoint?: {
+    renderedContent?: string;
+  };
+}
+
+export interface ChatMessageRecord {
+  id: string;
+  userId: string;
+  role: 'user' | 'model' | 'system';
+  content: string;
+  timestamp: string;
+  modelUsed?: string;
+  searchGrounded?: boolean;
+  groundingMetadata?: GroundingMetadata;
+}
+
+export * from './types/crm';
+

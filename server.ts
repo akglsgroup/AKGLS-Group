@@ -2,6 +2,7 @@ import 'dotenv/config';
 import express from "express";
 import path from "path";
 import fs from "fs";
+import { GoogleGenAI } from "@google/genai";
 import { getRouteBySlug, getOrCreateRouteBySlug } from "./src/routesData";
 import { renderPageHtml } from "./src/utils/pageTemplate";
 import { 
@@ -257,15 +258,108 @@ async function startServer() {
     } catch (_) {}
 
     res.json({
-      projectId: process.env.VITE_FIREBASE_PROJECT_ID || fileConfig.projectId || "ask-amrish",
-      appId: process.env.VITE_FIREBASE_APP_ID || fileConfig.appId || "1:123264112333:web:ac5949a60ce131f4407b84",
-      apiKey: process.env.VITE_FIREBASE_API_KEY || fileConfig.apiKey || "AIzaSyAK7JkxcKSJdMeQhlj-qXE1Va4Y25jcjPw",
-      authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN || fileConfig.authDomain || "ask-amrish.firebaseapp.com",
-      firestoreDatabaseId: process.env.VITE_FIREBASE_DATABASE_ID || fileConfig.firestoreDatabaseId || "(default)",
-      storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET || fileConfig.storageBucket || "ask-amrish.firebasestorage.app",
-      messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID || fileConfig.messagingSenderId || "123264112333",
-      measurementId: process.env.VITE_FIREBASE_MEASUREMENT_ID || fileConfig.measurementId || "G-B9HL9DT4JL",
+      projectId: process.env.VITE_FIREBASE_PROJECT_ID || fileConfig.projectId || "realtors-directory",
+      appId: process.env.VITE_FIREBASE_APP_ID || fileConfig.appId || "1:815514143958:web:bd2705889a88216d4d0d77",
+      apiKey: process.env.VITE_FIREBASE_API_KEY || fileConfig.apiKey || "AIzaSyBorb2F2oE1DQrn2j2abPC9v35ICOjN6GQ",
+      authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN || fileConfig.authDomain || "realtors-directory.firebaseapp.com",
+      firestoreDatabaseId: process.env.VITE_FIREBASE_DATABASE_ID || fileConfig.firestoreDatabaseId || "ai-studio-akglsgroupsite-ecb433f8-a78e-41eb-99fb-e422adef4b3e",
+      storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET || fileConfig.storageBucket || "realtors-directory.firebasestorage.app",
+      messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID || fileConfig.messagingSenderId || "815514143958",
+      measurementId: process.env.VITE_FIREBASE_MEASUREMENT_ID || fileConfig.measurementId || "",
     });
+  });
+
+  // Lazy GoogleGenAI client (safe for startup when key is injected at runtime)
+  let genAIClient: GoogleGenAI | null = null;
+  function getGenAI(): GoogleGenAI {
+    const key = process.env.GEMINI_API_KEY;
+    if (!key) {
+      throw new Error("GEMINI_API_KEY environment variable is not configured.");
+    }
+    if (!genAIClient) {
+      genAIClient = new GoogleGenAI({ apiKey: key });
+    }
+    return genAIClient;
+  }
+
+  // Gemini Multi-turn Chat API with Search Grounding
+  app.post("/api/gemini/chat", async (req, res) => {
+    try {
+      const { 
+        messages, 
+        model = "gemini-3.5-flash", 
+        searchGrounding = false, 
+        role = "seo_growth_advisor" 
+      } = req.body;
+
+      if (!messages || !Array.isArray(messages) || messages.length === 0) {
+        return res.status(400).json({ error: "Missing or invalid messages array" });
+      }
+
+      const client = getGenAI();
+
+      // System instruction defining the chatbot's specific domain role
+      let systemInstruction = "You are the AKGLS Group AI Growth Advisor, an elite digital marketing, SEO, and Generative Engine Optimization (GEO) strategist. You provide concrete, evidence-based recommendations, precise search analysis, and actionable implementation steps. Maintain an authoritative yet collaborative executive tone.";
+      if (role === "seo_architect") {
+        systemInstruction = "You are the AKGLS Group Senior SEO & Technical Architect. You specialize in Google Search algorithm evolution, AI Overviews citation mechanics, Perplexity indexing, schema graph modeling, Core Web Vitals optimization, and server-rendered HTML resilience. Provide in-depth, structured recommendations with code snippets and schema examples.";
+      } else if (role === "content_strategist") {
+        systemInstruction = "You are the AKGLS Group Lead Content & Copy Strategist. You craft high-converting marketing copy, compelling meta descriptions, value propositions, and thought-leadership articles optimized for both human intent and AI search discovery.";
+      } else if (role === "lead_consultant") {
+        systemInstruction = "You are the AKGLS Group Commercial Lead & Growth Consultant. You advise enterprise clients, healthcare organizations, and real estate networks on high-converting client acquisition funnels, digital transformations, and customer lifetime value.";
+      }
+
+      // Model selection enforcement as mandated:
+      // - 'gemini-3.1-pro-preview' for particularly complex tasks
+      // - 'gemini-3.5-flash' for general tasks and search grounding
+      // - 'gemini-3.1-flash-lite' for tasks that should happen fast
+      let targetModel = model;
+      if (searchGrounding) {
+        targetModel = "gemini-3.5-flash"; // Required model with googleSearch tool
+      } else if (!["gemini-3.1-pro-preview", "gemini-3.5-flash", "gemini-3.1-flash-lite"].includes(targetModel)) {
+        targetModel = "gemini-3.5-flash";
+      }
+
+      // Format multi-turn conversation history
+      const formattedContents = messages.map((m: any) => ({
+        role: m.role === "assistant" || m.role === "model" ? "model" : "user",
+        parts: [{ text: String(m.content || "") }]
+      }));
+
+      const config: any = {
+        systemInstruction
+      };
+
+      if (searchGrounding) {
+        config.tools = [{ googleSearch: {} }];
+      }
+
+      console.log(`[Gemini API] Dispatching chat request with model: ${targetModel}, grounding: ${searchGrounding}, turns: ${formattedContents.length}`);
+
+      const response = await client.models.generateContent({
+        model: targetModel,
+        contents: formattedContents,
+        config
+      });
+
+      const responseText = response.text || "";
+      const candidate = response.candidates?.[0];
+      const groundingMetadata = candidate?.groundingMetadata || null;
+
+      res.json({
+        success: true,
+        role: "model",
+        content: responseText,
+        modelUsed: targetModel,
+        searchGrounded: Boolean(searchGrounding),
+        groundingMetadata
+      });
+    } catch (err: any) {
+      console.error("[Gemini API Error]", err);
+      res.status(500).json({ 
+        success: false, 
+        error: err.message || "Failed to generate AI response" 
+      });
+    }
   });
 
   // Firestore Cloud Synchronization Helpers

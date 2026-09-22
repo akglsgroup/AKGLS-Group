@@ -14,63 +14,47 @@ import {
   getDocFromServer,
   Unsubscribe
 } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
-import { LeadRecord } from './types';
+import { 
+  getAuth, 
+  GoogleAuthProvider, 
+  signInWithPopup, 
+  signOut, 
+  onAuthStateChanged,
+  User 
+} from 'firebase/auth';
+import { LeadRecord, UserProfile, ChatMessageRecord } from './types';
+import appletConfig from '../firebase-applet-config.json';
 
-// Default configuration targeting the akglsgroup (Project ID: ask-amrish) Firebase project
-const defaultConfig = {
-  projectId: 'ask-amrish',
-  appId: '1:123264112333:web:ac5949a60ce131f4407b84',
-  apiKey: 'AIzaSyAK7JkxcKSJdMeQhlj-qXE1Va4Y25jcjPw',
-  authDomain: 'ask-amrish.firebaseapp.com',
-  firestoreDatabaseId: '(default)',
-  storageBucket: 'ask-amrish.firebasestorage.app',
-  messagingSenderId: '123264112333',
-  measurementId: 'G-B9HL9DT4JL'
-};
-
-// Base64 helper to avoid triggering GitHub static secret scanning on public Firebase client identifier
-const decodeFallbackKey = (): string => {
-  try {
-    return typeof atob !== 'undefined' 
-      ? atob('QUl6YVN5QUs3Smt4Y0tTSmRNZVFobGotcVhFMVZhNFkyNWpjalB3') 
-      : 'AIzaSyAK7JkxcKSJdMeQhlj-qXE1Va4Y25jcjPw';
-  } catch {
-    return '';
-  }
-};
-
-// Safely assemble Firebase configuration using static references for Vite compile-time injection
+// Resolved configuration targeting the provisioned project
 const resolvedConfig = {
   projectId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_PROJECT_ID) ||
-    (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_PROJECT_ID) ||
-    defaultConfig.projectId,
+    appletConfig?.projectId ||
+    'realtors-directory',
   appId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_APP_ID) ||
-    (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_APP_ID) ||
-    defaultConfig.appId,
+    appletConfig?.appId ||
+    '1:815514143958:web:bd2705889a88216d4d0d77',
   apiKey: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_API_KEY) ||
-    (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_API_KEY) ||
-    defaultConfig.apiKey || 
-    decodeFallbackKey(),
+    appletConfig?.apiKey ||
+    'AIzaSyBorb2F2oE1DQrn2j2abPC9v35ICOjN6GQ',
   authDomain: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_AUTH_DOMAIN) ||
-    (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_AUTH_DOMAIN) ||
-    defaultConfig.authDomain,
+    appletConfig?.authDomain ||
+    'realtors-directory.firebaseapp.com',
   firestoreDatabaseId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_DATABASE_ID) ||
-    (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_DATABASE_ID) ||
-    defaultConfig.firestoreDatabaseId,
+    appletConfig?.firestoreDatabaseId ||
+    'ai-studio-akglsgroupsite-ecb433f8-a78e-41eb-99fb-e422adef4b3e',
   storageBucket: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_STORAGE_BUCKET) ||
-    (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_STORAGE_BUCKET) ||
-    defaultConfig.storageBucket,
+    appletConfig?.storageBucket ||
+    'realtors-directory.firebasestorage.app',
   messagingSenderId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_MESSAGING_SENDER_ID) ||
-    (typeof process !== 'undefined' && process.env?.VITE_FIREBASE_MESSAGING_SENDER_ID) ||
-    defaultConfig.messagingSenderId,
+    appletConfig?.messagingSenderId ||
+    '815514143958',
 };
 
 // Initialize Firebase App instance safely (singleton with safe fallback for build/SSR)
@@ -86,20 +70,176 @@ export const db = (resolvedConfig.firestoreDatabaseId && resolvedConfig.firestor
   ? getFirestore(app, resolvedConfig.firestoreDatabaseId)
   : getFirestore(app);
 
-let authInstance: ReturnType<typeof getAuth> | null = null;
-try {
-  if (resolvedConfig.apiKey && resolvedConfig.apiKey !== 'AIzaSy_DEV_PLACEHOLDER_KEY_FOR_BUILD') {
-    authInstance = getAuth(app);
+// Initialize Firebase Authentication
+export const authInstance: ReturnType<typeof getAuth> = getAuth(app);
+export const auth = authInstance;
+
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({
+  prompt: 'select_account'
+});
+
+/**
+ * Sign in using Firebase Google Auth Popup
+ */
+export async function signInWithGoogle(): Promise<{ user: User | null; error?: string }> {
+  try {
+    const result = await signInWithPopup(authInstance, googleProvider);
+    if (result.user) {
+      // Sync or update user profile in Firestore
+      await syncUserProfileToFirestore(result.user);
+    }
+    return { user: result.user };
+  } catch (err: any) {
+    console.error('Google Sign-In Error:', err);
+    return { user: null, error: err?.message || 'Google sign-in was interrupted.' };
   }
-} catch {
-  // Graceful fallback during static build / CI without client key
 }
 
-export const auth = {
-  get currentUser() {
-    return authInstance?.currentUser || null;
+/**
+ * Log out authenticated user
+ */
+export async function logoutUser(): Promise<void> {
+  try {
+    await signOut(authInstance);
+  } catch (err) {
+    console.error('Logout error:', err);
   }
-} as any;
+}
+
+/**
+ * Subscribe to Firebase Auth state change
+ */
+export function subscribeToAuthState(callback: (user: User | null) => void): Unsubscribe {
+  return onAuthStateChanged(authInstance, callback);
+}
+
+/**
+ * Synchronize user profile into Firestore collection /users/{userId}
+ */
+export async function syncUserProfileToFirestore(
+  userOrUid: User | string, 
+  additionalData?: Partial<UserProfile>
+): Promise<UserProfile> {
+  const uid = typeof userOrUid === 'string' ? userOrUid : userOrUid.uid;
+  const user = typeof userOrUid === 'string' ? null : userOrUid;
+  const userRef = doc(db, 'users', uid);
+  const now = new Date().toISOString();
+
+  let existingData: Partial<UserProfile> = {};
+  try {
+    const snap = await getDoc(userRef);
+    if (snap.exists()) {
+      existingData = snap.data() as UserProfile;
+    }
+  } catch (e) {
+    console.warn('Profile read before write notice:', e);
+  }
+
+  const profile: UserProfile = {
+    uid: uid,
+    email: user?.email || additionalData?.email || existingData.email || '',
+    displayName: user?.displayName || additionalData?.displayName || existingData.displayName || (user?.email?.split('@')[0]) || 'User',
+    photoURL: user?.photoURL || additionalData?.photoURL || existingData.photoURL || '',
+    company: additionalData?.company || existingData.company || '',
+    domain: additionalData?.domain || existingData.domain || '',
+    customLogo: additionalData?.customLogo || existingData.customLogo || '',
+    role: (user?.email === 'amrish.singh01@gmail.com' || existingData.email === 'amrish.singh01@gmail.com') ? 'admin' : (existingData.role || 'client'),
+    createdAt: existingData.createdAt || now,
+    lastLoginAt: now
+  };
+
+  try {
+    await setDoc(userRef, profile, { merge: true });
+  } catch (err) {
+    console.error('Error saving user profile to Firestore:', err);
+  }
+
+  return profile;
+}
+
+/**
+ * Fetch a user profile from Firestore /users/{userId}
+ */
+export async function getUserProfile(userId: string): Promise<UserProfile | null> {
+  try {
+    const userRef = doc(db, 'users', userId);
+    const snap = await getDoc(userRef);
+    if (snap.exists()) {
+      return snap.data() as UserProfile;
+    }
+  } catch (err) {
+    console.error('Failed to get user profile from Firestore:', err);
+  }
+  return null;
+}
+
+export const getUserProfileFromFirestore = getUserProfile;
+
+export async function updateUserProfileInFirestore(userId: string, data: Partial<UserProfile>): Promise<void> {
+  const userRef = doc(db, 'users', userId);
+  await setDoc(userRef, { ...data, updatedAt: new Date().toISOString() }, { merge: true });
+}
+
+/**
+ * Save chat message to Firestore under /users/{userId}/chat_messages/{messageId}
+ */
+export async function saveChatMessageToFirestore(userId: string, message: ChatMessageRecord): Promise<boolean> {
+  try {
+    const msgRef = doc(db, 'users', userId, 'chat_messages', message.id);
+    const cleanMsg: Record<string, any> = {};
+    for (const [k, v] of Object.entries(message)) {
+      if (v !== undefined) {
+        cleanMsg[k] = v;
+      }
+    }
+    await setDoc(msgRef, cleanMsg, { merge: true });
+    return true;
+  } catch (err) {
+    console.error('Failed to save chat message to Firestore:', err);
+    return false;
+  }
+}
+
+/**
+ * Subscribe to real-time chat history for an authenticated user
+ */
+export function subscribeToChatHistory(
+  userId: string,
+  onUpdate: (messages: ChatMessageRecord[]) => void
+): Unsubscribe {
+  const colRef = collection(db, 'users', userId, 'chat_messages');
+  return onSnapshot(
+    colRef,
+    (snapshot) => {
+      const msgs: ChatMessageRecord[] = [];
+      snapshot.forEach((d) => {
+        msgs.push(d.data() as ChatMessageRecord);
+      });
+      // Sort in ascending chronological order for thread view
+      msgs.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime());
+      onUpdate(msgs);
+    },
+    (err) => {
+      console.warn('Chat history subscribe notice:', err);
+    }
+  );
+}
+
+/**
+ * Clear chat history in Firestore for an authenticated user
+ */
+export async function clearChatHistoryFromFirestore(userId: string): Promise<void> {
+  try {
+    const colRef = collection(db, 'users', userId, 'chat_messages');
+    const snap = await getDocs(colRef);
+    for (const d of snap.docs) {
+      await deleteDoc(d.ref);
+    }
+  } catch (err) {
+    console.error('Failed to clear chat history in Firestore:', err);
+  }
+}
 
 export enum OperationType {
   CREATE = 'create',

@@ -437,10 +437,13 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
       <div id="mobileDrawerPanel" class="absolute right-0 top-0 bottom-0 w-full max-w-[340px] bg-[#0c121e] border-l border-slate-800 flex flex-col justify-between shadow-2xl overflow-y-auto text-slate-200 transition-transform duration-300 translate-x-full">
         <!-- Header inside drawer -->
         <div class="p-5 border-b border-slate-800/80 flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <div class="w-8 h-8 rounded-lg bg-brand-indigo flex items-center justify-center font-bold text-white text-sm font-display">AK</div>
-            <span class="font-extrabold text-white text-base font-display">AKGLS MENU</span>
-          </div>
+          <a href="/" class="inline-flex flex-col text-left justify-center select-none" aria-label="AKGLS Group Homepage">
+            <div class="flex items-baseline leading-none tracking-tight">
+              <span class="font-black font-sans text-xl text-white tracking-tight">AKGLS</span>
+              <span class="font-extrabold ml-1.5 font-sans text-xl text-slate-100">Group</span>
+            </div>
+            <div class="w-full rounded-full bg-gradient-to-r from-[#00c4b4] via-[#00a89d] to-[#ff1475] shadow-sm h-[2.5px] my-1"></div>
+          </a>
           <button 
             id="mobileMenuCloseBtn"
             class="p-2 hover:bg-slate-900 rounded-lg text-slate-400 hover:text-white transition-colors cursor-pointer"

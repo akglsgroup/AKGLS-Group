@@ -200,7 +200,7 @@ export function renderPageHtml(route: AppRoute): string {
       "@type": "Organization",
       "name": "AKGLS Group",
       "url": "https://www.akglsgroup.com",
-      "logo": "https://www.akglsgroup.com/favicon.svg",
+      "logo": "https://www.akglsgroup.com/akgls-logo-horizontal.svg",
       "telephone": "+918318114492",
       "email": "info@akglsgroup.com",
       "address": {

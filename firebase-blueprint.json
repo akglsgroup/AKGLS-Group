@@ -108,6 +108,164 @@
         }
       },
       "required": ["uid", "email", "role"]
+    },
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "Client profile synchronized with Firebase Auth Google Sign-In and personalized dashboard settings.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "description": "Firebase Auth user identifier."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User email address."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "User full display name."
+        },
+        "photoURL": {
+          "type": "string",
+          "description": "Profile avatar URL from Google Sign-In or uploaded photo."
+        },
+        "company": {
+          "type": "string",
+          "description": "Associated company or organization name."
+        },
+        "domain": {
+          "type": "string",
+          "description": "Client primary website domain."
+        },
+        "customLogo": {
+          "type": "string",
+          "description": "Personalized custom company logo data URL or image link."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["client", "admin", "viewer"],
+          "description": "User authorization role."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Account registration timestamp."
+        },
+        "lastLoginAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Most recent authentication timestamp."
+        }
+      },
+      "required": ["uid", "email"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "Multi-turn Gemini chatbot message persisting conversation history in Firestore per user thread.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the chat message."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Identifier of the authenticated user who owns the chat message."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["user", "model", "system"],
+          "description": "Sender role of the message."
+        },
+        "content": {
+          "type": "string",
+          "description": "Text body of the message."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when message was sent or received."
+        },
+        "modelUsed": {
+          "type": "string",
+          "description": "Gemini model variant used (e.g. gemini-3.5-flash, gemini-3.1-pro-preview, gemini-3.1-flash-lite)."
+        },
+        "searchGrounded": {
+          "type": "boolean",
+          "description": "Whether Google Search Grounding was utilized for this response."
+        },
+        "groundingSources": {
+          "type": "object",
+          "description": "Attribution and search citation URLs returned by Google Search Grounding."
+        }
+      },
+      "required": ["id", "userId", "role", "content", "timestamp"]
+    },
+    "CrmClient": {
+      "title": "CrmClient",
+      "description": "Customer record for digital marketing agency client including services taken, contract details, and assigned account manager.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "companyName": { "type": "string" },
+        "contactPerson": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "websiteUrl": { "type": "string" },
+        "industry": { "type": "string" },
+        "status": { "type": "string" },
+        "assignedTeamMemberId": { "type": "string" },
+        "assignedTeamMemberName": { "type": "string" },
+        "servicesTaken": { "type": "array" },
+        "totalMonthlyRetainer": { "type": "number" },
+        "currency": { "type": "string" },
+        "contractStartDate": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "companyName", "contactPerson", "email"]
+    },
+    "CrmTeamMember": {
+      "title": "CrmTeamMember",
+      "description": "Internal employee, agent, associate, or freelance specialist managed by the agency.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string" },
+        "phone": { "type": "string" },
+        "role": { "type": "string" },
+        "type": { "type": "string" },
+        "status": { "type": "string" },
+        "assignedClientsCount": { "type": "number" },
+        "specialties": { "type": "array" },
+        "joinDate": { "type": "string" },
+        "notes": { "type": "string" }
+      },
+      "required": ["id", "name", "role", "type"]
+    },
+    "CrmCommunication": {
+      "title": "CrmCommunication",
+      "description": "Customer communication log recording calls, WhatsApp messages, emails, meetings, and next follow-ups.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "clientId": { "type": "string" },
+        "clientName": { "type": "string" },
+        "companyName": { "type": "string" },
+        "date": { "type": "string" },
+        "channel": { "type": "string" },
+        "loggedByEmployeeId": { "type": "string" },
+        "loggedByEmployeeName": { "type": "string" },
+        "summary": { "type": "string" },
+        "discussionNotes": { "type": "string" },
+        "nextFollowUpDate": { "type": "string" },
+        "status": { "type": "string" }
+      },
+      "required": ["id", "clientId", "summary", "date", "channel"]
     }
   },
   "firestore": {
@@ -116,6 +274,21 @@
     },
     "/admins/{adminUid}": {
       "$ref": "AdminProfile"
+    },
+    "/users/{userId}": {
+      "$ref": "UserProfile"
+    },
+    "/users/{userId}/chat_messages/{messageId}": {
+      "$ref": "ChatMessage"
+    },
+    "/crm_clients/{clientId}": {
+      "$ref": "CrmClient"
+    },
+    "/crm_team/{memberId}": {
+      "$ref": "CrmTeamMember"
+    },
+    "/crm_communications/{commId}": {
+      "$ref": "CrmCommunication"
     }
   }
 }

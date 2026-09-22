@@ -79,6 +79,8 @@ import FreeToolsPage from './components/FreeToolsPage';
 import SeoAuditToolPage from './components/SeoAuditToolPage';
 import AiGeoAuditPage from './components/AiGeoAuditPage';
 import UptetResult2021Page from './components/UptetResult2021Page';
+import ClientDashboardPage from './components/ClientDashboardPage';
+import ManagerDashboardPage from './components/ManagerDashboardPage';
 import SeoBlogListPage from './components/SeoBlogListPage';
 import LearningHubPage from './components/LearningHubPage';
 import InternshipProgramPage from './components/InternshipProgramPage';
@@ -713,6 +715,20 @@ export default function App() {
         setCurrentPage('ai-seo-checklists');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (
+        pathname === '/manage' || pathname === '/manage/' ||
+        pathname === '/manager-dashboard' || pathname === '/manager-dashboard/' ||
+        pathname === '/crm' || pathname === '/crm/' ||
+        pathname === '/client-dashboard' || pathname === '/client-dashboard/' ||
+        pathname === '/dashboard' || pathname === '/dashboard/' ||
+        pathname === '/client-portal' || pathname === '/client-portal/' ||
+        hash === '#manage' || hash === '#/manage' ||
+        hash === '#manager-dashboard' || hash === '#crm' ||
+        hash === '#client-dashboard' || hash === '#/client-dashboard' ||
+        hash === '#dashboard' || hash === '#client-portal'
+      ) {
+        setCurrentPage('manager-dashboard');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
         pathname === '/lead-portal' || pathname === '/lead-portal/' ||
         pathname === '/admin/leads' || pathname === '/admin/leads/' ||
         hash === '#lead-portal' || hash === '#leads'
@@ -1236,6 +1252,11 @@ export default function App() {
       title: "Free AI SEO, GEO & AEO Checklists (2026 Edition) | AKGLS Group",
       description: "Download free structured PDF checklists for ChatGPT Optimization, Generative Engine Optimization (GEO), and Answer Engine (AEO) schemas.",
       canonical: "https://www.akglsgroup.com/free-checklists/"
+    },
+    'client-dashboard': {
+      title: "Client Performance Dashboard & Lead Activity | AKGLS Group",
+      description: "Secure real-time performance analytics, Generative Engine Optimization citation tracking, and lead conversion feed for logged-in clients.",
+      canonical: "https://www.akglsgroup.com/client-dashboard/"
     },
     'lead-portal': {
       title: "Lead Management & Client Inquiries Portal | AKGLS Group",
@@ -1923,6 +1944,14 @@ export default function App() {
           openProposalForm={() => {
             const formEl = document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : (currentPage === 'manager-dashboard' || currentPage === 'manage' || currentPage === 'client-dashboard') ? (
+        <ManagerDashboardPage
+          onNavigateHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
           }}
         />
       ) : currentPage === 'lead-portal' ? (
