@@ -1296,6 +1296,23 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     ]
   })),
   {
+    id: "faq",
+    path: "/faq/",
+    priority: 0.8,
+    changefreq: "weekly",
+    title: "Frequently Asked Questions (FAQ) & Schema Guide | AKGLS Group",
+    description: "Explore verified answers regarding Generative Engine Optimization (GEO), AI SEO, Technical Core Web Vitals, PPC Campaigns, and Performance Retainers.",
+    category: "Agency",
+    h1: "Frequently Asked Questions & Answers",
+    highlight: "Schema.org FAQPage Validated",
+    leadParagraph: "Transparent, technical, and commercial answers to questions about AI SEO, GEO search ranking, performance marketing funnels, and technical architecture.",
+    features: [
+      { title: "Dynamic JSON-LD Schema", desc: "Every question is auto-indexed in Schema.org FAQPage markup for rich snippets and zero-click citations." },
+      { title: "Cross-Channel Answers", desc: "Covers AI SEO, Generative Engine Optimization (GEO), PPC, CRO, and dedicated specialist hiring." },
+      { title: "Instant Forensic Audits", desc: "Direct access to technical audit generators and consultative proposals from our search architects." }
+    ]
+  },
+  {
     id: "uptet-result-2021",
     path: "/uptet-result-2021/",
     priority: 0.9,

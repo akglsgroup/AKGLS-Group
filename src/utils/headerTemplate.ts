@@ -207,16 +207,20 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
         <div class="flex items-center justify-between">
           
           <!-- Logo Mark -->
-          <a href="/" class="inline-flex flex-col text-left justify-center select-none group py-1" aria-label="AKGLS Group Homepage">
-            <div class="flex items-baseline leading-none tracking-tight">
-              <span class="font-black tracking-tight text-xl sm:text-2xl text-white font-sans">AKGLS</span>
-              <span class="font-extrabold text-xl sm:text-2xl text-slate-100 font-sans ml-1.5">Group</span>
-            </div>
-            <div class="w-full h-[2.5px] rounded-full bg-gradient-to-r from-[#00c4b4] via-[#00a89d] to-[#ff1475] my-1 sm:my-1.5 shadow-sm"></div>
-            <div class="font-sans text-[10.5px] sm:text-[11.5px] tracking-tight leading-none text-slate-300 font-medium whitespace-nowrap">
-              We’re the ‘<span class="text-[#00c4b4] font-bold">Ctrl</span>+Alt+<span class="text-[#ff1475] font-bold">Del</span>’ for Your Business
-            </div>
-          </a>
+          <div class="flex items-center gap-3">
+            <a href="/" class="flex items-center select-none group rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0f1d] py-1" aria-label="AKGLS Group Homepage">
+              <div class="inline-flex flex-col text-left justify-center select-none">
+                <div class="flex items-baseline leading-none tracking-tight">
+                  <span class="font-black font-sans text-xl sm:text-2xl tracking-tight text-white">AKGLS</span>
+                  <span class="font-extrabold ml-1.5 font-sans text-xl sm:text-2xl text-slate-100">Group</span>
+                </div>
+                <div class="w-full rounded-full bg-gradient-to-r from-[#00c4b4] via-[#00a89d] to-[#ff1475] shadow-sm h-[2.5px] my-1 sm:my-1.5"></div>
+                <div class="font-sans tracking-tight leading-none whitespace-nowrap text-[10.5px] sm:text-[11.5px] font-medium text-slate-300">
+                  <span>We’re the </span><span class="text-slate-400">‘</span><span class="text-[#00c4b4] font-bold">Ctrl</span><span class="text-slate-200 font-bold">+Alt+</span><span class="text-[#ff1475] font-bold">Del</span><span class="text-slate-400">’</span><span class="text-slate-300"> for Your Business</span>
+                </div>
+              </div>
+            </a>
+          </div>
 
           <!-- Desktop Central Navigation with full Hover Dropdowns -->
           <div class="hidden lg:flex items-center space-x-1.5 xl:space-x-4">
@@ -437,12 +441,14 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
       <div id="mobileDrawerPanel" class="absolute right-0 top-0 bottom-0 w-full max-w-[340px] bg-[#0c121e] border-l border-slate-800 flex flex-col justify-between shadow-2xl overflow-y-auto text-slate-200 transition-transform duration-300 translate-x-full">
         <!-- Header inside drawer -->
         <div class="p-5 border-b border-slate-800/80 flex items-center justify-between">
-          <a href="/" class="inline-flex flex-col text-left justify-center select-none" aria-label="AKGLS Group Homepage">
-            <div class="flex items-baseline leading-none tracking-tight">
-              <span class="font-black font-sans text-xl text-white tracking-tight">AKGLS</span>
-              <span class="font-extrabold ml-1.5 font-sans text-xl text-slate-100">Group</span>
+          <a href="/" class="flex items-center select-none group rounded-xl py-1" aria-label="AKGLS Group Homepage">
+            <div class="inline-flex flex-col text-left justify-center select-none">
+              <div class="flex items-baseline leading-none tracking-tight">
+                <span class="font-black font-sans text-xl text-white tracking-tight">AKGLS</span>
+                <span class="font-extrabold ml-1.5 font-sans text-xl text-slate-100">Group</span>
+              </div>
+              <div class="w-full rounded-full bg-gradient-to-r from-[#00c4b4] via-[#00a89d] to-[#ff1475] shadow-sm h-[2.5px] my-1"></div>
             </div>
-            <div class="w-full rounded-full bg-gradient-to-r from-[#00c4b4] via-[#00a89d] to-[#ff1475] shadow-sm h-[2.5px] my-1"></div>
           </a>
           <button 
             id="mobileMenuCloseBtn"

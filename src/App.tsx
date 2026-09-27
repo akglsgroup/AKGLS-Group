@@ -793,6 +793,13 @@ export default function App() {
       ) {
         setCurrentPage('internship-program');
         window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/faq' || pathname === '/faq/' ||
+        pathname === '/faqs' || pathname === '/faqs/' ||
+        hash === '#faq-page'
+      ) {
+        setCurrentPage('faq');
+        window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         setCurrentPage('home');
         if (hash && hash.length > 1) {
@@ -1273,6 +1280,11 @@ export default function App() {
       description: "Scale your Web3, DeFi, and blockchain project with expert crypto growth services from AKGLS Group. Token marketing and crypto SEO.",
       canonical: "https://www.akglsgroup.com/crypto-growth-services/"
     },
+    'faq': {
+      title: "Frequently Asked Questions (FAQ) & Schema Guide | AKGLS Group",
+      description: "Explore verified answers regarding Generative Engine Optimization (GEO), AI SEO, Technical Core Web Vitals, PPC Campaigns, and Performance Retainers.",
+      canonical: "https://www.akglsgroup.com/faq/"
+    },
   };
 
   const currentMeta = PAGE_METADATA[currentPage] || PAGE_METADATA.home;
@@ -1306,8 +1318,17 @@ export default function App() {
       <Header 
         onSearchOpen={() => setIsSearchOpen(true)}
         openQuiz={() => {
-          const quizEl = document.querySelector('#audit-quiz');
-          quizEl?.scrollIntoView({ behavior: 'smooth' });
+          if (currentPage !== 'home') {
+            setCurrentPage('home');
+            window.history.pushState(null, '', '/#audit-quiz');
+            setTimeout(() => {
+              const quizEl = document.querySelector('#audit-quiz');
+              quizEl?.scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+          } else {
+            const quizEl = document.querySelector('#audit-quiz');
+            quizEl?.scrollIntoView({ behavior: 'smooth' });
+          }
         }}
         openProposal={() => {
           const formEl = document.querySelector('#audit-form');
@@ -2228,6 +2249,11 @@ export default function App() {
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
         />
+      ) : currentPage === 'faq' ? (
+        <FAQ 
+          isStandalonePage={true} 
+          onNavigate={handleInternalSmoothScroll} 
+        />
       ) : (
         <>
           {/* ADVANCED TECHNICAL HERO BANNER WITH GENERATIVE ENGINE EVALUATOR */}
@@ -2381,18 +2407,44 @@ export default function App() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
           
           <div className="text-center max-w-2xl mx-auto space-y-4">
-            <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-brand-indigo bg-brand-indigo/10 border border-brand-indigo/20 rounded-full py-1.5 px-4 font-display">
-              STRATEGY MATRIX
+            <span className="text-[10px] md:text-xs font-black uppercase tracking-widest text-brand-teal bg-brand-teal/10 border border-brand-teal/20 rounded-full py-1.5 px-4 font-display">
+              INTERACTIVE GROWTH QUIZ & SOLUTION FINDER
             </span>
             <h2 className="text-3xl md:text-4xl font-extrabold font-display leading-tight text-white">
-              What is Your Primary Growth Bottleneck?
+              Discover Your Optimal AKGLS Growth Blueprint
             </h2>
-            <p className="text-slate-400 text-xs sm:text-sm font-light">
-              Take 30 seconds to answer our interactive diagnostic quiz below to pinpoint crawler or conversion bottlenecks and calculate tailored playbook solutions.
+            <p className="text-slate-400 text-xs sm:text-sm font-light max-w-xl mx-auto leading-relaxed">
+              Answer 4 quick questions about your industry, goals, and challenges. Our diagnostic engine will calculate your custom service match and roadmap to scale.
             </p>
           </div>
 
-          <ServiceQuiz />
+          <ServiceQuiz 
+            onNavigateToService={(servicePageId) => {
+              if (servicePageId) {
+                setCurrentPage(servicePageId);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }
+            }}
+            onBookConsultation={(prefillData) => {
+              if (prefillData) {
+                setProposalForm(prev => ({
+                  ...prev,
+                  companyName: prefillData.companyName || prefillData.website || prev.companyName,
+                  companyUrl: prefillData.website || prev.companyUrl,
+                  budget: prefillData.spend === 'starter' ? '<$5k' : prefillData.spend === 'core' ? '$5k-$15k' : prefillData.spend === 'growth' ? '$15k-$30k' : '$30k+',
+                  contactName: prefillData.name || prev.contactName,
+                  contactEmail: prefillData.email || prev.contactEmail,
+                  notes: `[Diagnostic Quiz Recommendation: ${prefillData.recommendedService || 'Custom Solution'}]\nGoal: ${prefillData.goal || 'Accelerate Growth'}\n${prefillData.notes || ''}`
+                }));
+                // Advance proposal wizard to final verification step for frictionless completion
+                setProposalStep(3);
+              }
+              const auditFormEl = document.querySelector('#audit-form');
+              if (auditFormEl) {
+                auditFormEl.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+          />
 
         </div>
       </section>

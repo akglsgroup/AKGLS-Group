@@ -58,15 +58,53 @@
     <meta name="twitter:image" content="https://www.akglsgroup.com/assets/geo-og.png" />
     <script>
       (function() {
-        // Suppress expected benign Vite HMR websocket connection message in AI Studio sandboxed preview
+        // Suppress expected benign Vite HMR websocket connection messages in AI Studio sandboxed preview
+        function isViteOrWsMsg(val) {
+          if (!val) return false;
+          var str = typeof val === 'string' ? val : (val.message ? String(val.message) : String(val));
+          return str.indexOf('[vite]') !== -1 || str.indexOf('WebSocket') !== -1 || str.indexOf('websocket') !== -1;
+        }
+
         var originalError = console.error;
         console.error = function() {
           var args = Array.prototype.slice.call(arguments);
-          if (args.length > 0 && typeof args[0] === 'string' && args[0].indexOf('[vite] failed to connect to websocket') !== -1) {
-            return;
+          if (args.length > 0) {
+            for (var i = 0; i < args.length; i++) {
+              if (isViteOrWsMsg(args[i])) {
+                return;
+              }
+            }
           }
           return originalError.apply(console, args);
         };
+
+        var originalWarn = console.warn;
+        console.warn = function() {
+          var args = Array.prototype.slice.call(arguments);
+          if (args.length > 0) {
+            for (var i = 0; i < args.length; i++) {
+              if (isViteOrWsMsg(args[i])) {
+                return;
+              }
+            }
+          }
+          return originalWarn.apply(console, args);
+        };
+
+        window.addEventListener('error', function(e) {
+          if (e && (isViteOrWsMsg(e.message) || isViteOrWsMsg(e.error))) {
+            e.preventDefault();
+            if (typeof e.stopImmediatePropagation === 'function') {
+              e.stopImmediatePropagation();
+            }
+          }
+        }, true);
+
+        window.addEventListener('unhandledrejection', function(e) {
+          if (e && isViteOrWsMsg(e.reason)) {
+            e.preventDefault();
+          }
+        });
 
         try {
           var originalFetch = window.fetch;

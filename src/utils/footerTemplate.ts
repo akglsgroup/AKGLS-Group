@@ -156,14 +156,14 @@ export function renderSharedFooterHtml(currentPath: string = '/'): string {
         <!-- Top Row: Brand Profile & Trust Badges -->
         <div class="pb-12 border-b border-indigo-950/40 grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           <div class="lg:col-span-5 space-y-4">
-            <a href="/" class="inline-flex flex-col text-left justify-center group select-none" aria-label="AKGLS Group homepage">
+            <a href="/" class="inline-flex flex-col text-left justify-center group select-none py-1" aria-label="AKGLS Group Homepage">
               <div class="flex items-baseline leading-none tracking-tight">
-                <span class="font-black tracking-tight text-2xl sm:text-3xl text-white font-sans">AKGLS</span>
-                <span class="font-extrabold text-2xl sm:text-3xl text-slate-100 font-sans ml-1.5">Group</span>
+                <span class="font-black font-sans text-2xl sm:text-3xl tracking-tight text-white">AKGLS</span>
+                <span class="font-extrabold ml-1.5 font-sans text-2xl sm:text-3xl text-slate-100">Group</span>
               </div>
-              <div class="w-full h-[3px] rounded-full bg-gradient-to-r from-[#00c4b4] via-[#00a89d] to-[#ff1475] my-1.5 sm:my-2 shadow-sm"></div>
-              <div class="font-sans text-xs sm:text-sm tracking-tight leading-none text-slate-300 font-semibold whitespace-nowrap">
-                We’re the ‘<span class="text-[#00c4b4] font-bold">Ctrl</span>+Alt+<span class="text-[#ff1475] font-bold">Del</span>’ for Your Business
+              <div class="w-full rounded-full bg-gradient-to-r from-[#00c4b4] via-[#00a89d] to-[#ff1475] shadow-sm h-[3px] my-1.5 sm:my-2"></div>
+              <div class="font-sans tracking-tight leading-none whitespace-nowrap text-xs sm:text-sm font-semibold text-slate-300">
+                <span>We’re the </span><span class="text-slate-400">‘</span><span class="text-[#00c4b4] font-bold">Ctrl</span><span class="text-slate-200 font-bold">+Alt+</span><span class="text-[#ff1475] font-bold">Del</span><span class="text-slate-400">’</span><span class="text-slate-300"> for Your Business</span>
               </div>
             </a>
             <p class="text-xs leading-relaxed text-slate-400 font-light pr-4 max-w-lg">

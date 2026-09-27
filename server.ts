@@ -1,4 +1,9 @@
 import 'dotenv/config';
+
+if (!process.env.DISABLE_HMR) {
+  process.env.DISABLE_HMR = 'true';
+}
+
 import express from "express";
 import path from "path";
 import fs from "fs";
@@ -59,7 +64,9 @@ function checkAuth(req: express.Request, res: express.Response, next: express.Ne
 
 async function startServer() {
   const app = express();
-  const PORT = parseInt(process.env.PORT || "3000", 10);
+  const portArgIndex = process.argv.indexOf("--port");
+  const cliPort = portArgIndex !== -1 ? process.argv[portArgIndex + 1] : undefined;
+  const PORT = parseInt(process.env.PORT || cliPort || "3000", 10);
 
   // Trust reverse proxy headers (Cloud Run, Cloudflare, Nginx, ALB)
   app.set("trust proxy", true);
@@ -694,10 +701,30 @@ async function startServer() {
   if (process.env.NODE_ENV !== "production") {
     const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
-      server: { middlewareMode: true, allowedHosts: true },
+      server: {
+        middlewareMode: true,
+        allowedHosts: true,
+        hmr: false,
+      },
       appType: "spa",
     });
     app.use(vite.middlewares);
+
+    // Development SPA fallback: render transformed index.html for any client-side routes
+    app.use("*", async (req, res, next) => {
+      if (req.method !== "GET") return next();
+      const url = req.originalUrl;
+      try {
+        let template = fs.readFileSync(path.resolve(process.cwd(), "index.html"), "utf-8");
+        template = await vite.transformIndexHtml(url, template);
+        res.status(200).set({ "Content-Type": "text/html" }).end(template);
+      } catch (e: any) {
+        if (vite.ssrFixStacktrace) {
+          vite.ssrFixStacktrace(e);
+        }
+        next(e);
+      }
+    });
   } else {
     const distPath = path.join(process.cwd(), "dist");
     app.use(express.static(distPath));

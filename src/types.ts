@@ -35,11 +35,17 @@ export interface CaseStudy {
 }
 
 export interface QuizState {
-  friction: string;
+  industry: string;
+  goal: string;
+  challenge: string;
   spend: string;
-  tech: string;
-  email: string;
-  website: string;
+  name?: string;
+  email?: string;
+  phone?: string;
+  website?: string;
+  companyName?: string;
+  friction?: string;
+  tech?: string;
 }
 
 export interface SearchResult {
