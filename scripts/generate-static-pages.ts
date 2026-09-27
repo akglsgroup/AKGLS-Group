@@ -49,7 +49,9 @@ export function generateAllStaticPages(force = false): { created: number; skippe
       'proposal-generator',
       'tools',
       'tools/seo-audit-tool',
-      'tools/geo-audit-tool'
+      'tools/geo-audit-tool',
+      'international-seo-services',
+      'international-multilingual-seo-services'
     ]);
     if (SPA_ROUTES.has(cleanSlug)) {
       skipped++;

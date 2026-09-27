@@ -517,7 +517,9 @@ async function startServer() {
       "lead-portal",
       "proposal-generator",
       "tools/seo-audit-tool",
-      "tools/geo-audit-tool"
+      "tools/geo-audit-tool",
+      "international-seo-services",
+      "international-multilingual-seo-services"
     ]);
 
     if (SPA_INTERACTIVE_ROUTES.has(cleanSlug)) {

@@ -222,18 +222,18 @@ export const SITEMAP_ROUTES: AppRoute[] = [
   {
     id: "international-seo",
     path: "/international-seo-services/",
-    priority: 0.8,
+    priority: 0.9,
     changefreq: "weekly",
-    title: "International SEO Services Company | Global Hreflang setup | AKGLS Group",
-    description: "Expand your organic footprint across multilingual territories. Configure precise Hreflang code rules and regional content structures.",
+    title: "International & Multilingual SEO Services | AKGLS Group",
+    description: "Grow globally with AKGLS Group's International & Multilingual SEO Services. Global SEO, hreflang, localized content, technical SEO, AEO, GEO & AI search optimization.",
     category: "International",
-    h1: "International & Multilingual SEO",
-    highlight: "Expand Into Global Markets",
-    leadParagraph: "Conquer search across borders. We structure hreflang tags, ccTLDs vs subdirectories, localized currency schemas, and region-specific content strategies.",
+    h1: "International & Multilingual SEO Services",
+    highlight: "Global Search Visibility. Local Relevance. International Growth.",
+    leadParagraph: "Expand your business beyond borders with International & Multilingual SEO Services by AKGLS Group. We help businesses build search visibility across countries, languages, search engines, and AI-powered discovery platforms.",
     features: [
       { title: "Hreflang & Geotargeting Governance", desc: "Flawless bidirectional hreflang annotations eliminating cross-market cannibalization." },
       { title: "Native Cultural Keyword Mapping", desc: "Localize search intent instead of using basic machine translations." },
-      { title: "Global CDN & Server Architecture", desc: "Ensure lightning load speeds regardless of where your international customers connect from." }
+      { title: "AEO, GEO & AI Search Optimization", desc: "Win visibility in ChatGPT, Perplexity, and Gemini across international markets." }
     ]
   },
   {

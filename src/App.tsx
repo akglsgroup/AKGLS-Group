@@ -397,6 +397,15 @@ function getInitialRoute(): string {
   if (p.includes('/proposal') || h.includes('proposal')) {
     return 'proposal-generator';
   }
+  if (
+    p.includes('/international-seo') ||
+    p.includes('/international-multilingual-seo') ||
+    p.includes('/global-seo') ||
+    h.includes('international-seo') ||
+    h.includes('international-multilingual-seo')
+  ) {
+    return 'international-seo';
+  }
   return 'home';
 }
 
@@ -535,7 +544,13 @@ export default function App() {
       } else if (pathname === '/enterprise-seo-services' || pathname === '/enterprise-seo-services/' || hash === '#enterprise-seo' || hash === '#enterprise-seo-services') {
         setCurrentPage('enterprise-seo');
         window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (pathname === '/international-seo-services' || pathname === '/international-seo-services/' || hash === '#international-seo' || hash === '#international-seo-services') {
+      } else if (
+        pathname === '/international-seo-services' || pathname === '/international-seo-services/' ||
+        pathname === '/international-multilingual-seo-services' || pathname === '/international-multilingual-seo-services/' ||
+        pathname === '/global-seo-services' || pathname === '/global-seo-services/' ||
+        hash === '#international-seo' || hash === '#international-seo-services' ||
+        hash === '#international-multilingual-seo' || hash === '#international-multilingual-seo-services'
+      ) {
         setCurrentPage('international-seo');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (pathname === '/mobile-seo-services' || pathname === '/mobile-seo-services/' || hash === '#mobile-seo' || hash === '#mobile-seo-services') {
@@ -1045,8 +1060,8 @@ export default function App() {
       canonical: "https://www.akglsgroup.com/enterprise-seo-services/"
     },
     'international-seo': {
-      title: "International SEO Services Company | Global Hreflang setup | AKGLS Group",
-      description: "Expand your organic footprint across multilingual territories. Configure precise Hreflang code rules and regional content structures.",
+      title: "International & Multilingual SEO Services | AKGLS Group",
+      description: "Grow globally with AKGLS Group's International & Multilingual SEO Services. Global SEO, hreflang, localized content, technical SEO, AEO, GEO & AI search optimization.",
       canonical: "https://www.akglsgroup.com/international-seo-services/"
     },
     'mobile-seo': {
@@ -1501,11 +1516,13 @@ export default function App() {
             window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
+            window.scrollTo({ top: 0, behavior: 'instant' });
           }}
           openProposalForm={() => {
-            const formEl = document.querySelector('#international-cta') || document.querySelector('#audit-form');
+            const formEl = document.querySelector('#global-audit-form') || document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
+          onNavigate={navigateTo}
         />
       ) : currentPage === 'mobile-seo' ? (
         <MobileSeoPage 
