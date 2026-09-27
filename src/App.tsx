@@ -1,4 +1,4 @@
-import { useState, useEffect, FormEvent, MouseEvent } from 'react';
+import { useState, useEffect, useCallback, FormEvent, MouseEvent } from 'react';
 import * as ReactHelmetAsync from 'react-helmet-async';
 const Helmet: any = (ReactHelmetAsync as any).Helmet || (ReactHelmetAsync as any).default?.Helmet || ReactHelmetAsync;
 import { 
@@ -369,8 +369,39 @@ const getIconComponent = (icon: string) => {
 
 export { SITEMAP_ROUTES, type AppRoute } from './routesData';
 
+function getInitialRoute(): string {
+  if (typeof window === 'undefined') return 'home';
+  const p = (window.location.pathname || '').toLowerCase();
+  const h = (window.location.hash || '').toLowerCase();
+  if (
+    p === '/about' || p === '/about/' || p === '/about.html' || p === '/about.html/' ||
+    p.endsWith('/about') || p.endsWith('/about/') ||
+    p === '/about-us' || p === '/about-us/' || p.endsWith('/about-us') || p.endsWith('/about-us/') ||
+    p === '/who-we-are' || p === '/who-we-are/' ||
+    h === '#about' || h === '#/about' || h === '#about-us' || h === '#/about-us' || h === '#who-we-are' || h === '#/who-we-are'
+  ) {
+    return 'about';
+  }
+  if (p === '/faq' || p === '/faq/' || p === '/faqs' || p === '/faqs/' || h.includes('faq')) {
+    return 'faq';
+  }
+  if (p.includes('/lead-portal') || h.includes('lead-portal') || h.includes('leads')) {
+    return 'lead-portal';
+  }
+  if (p.includes('/tools') || h.includes('tools')) {
+    return 'tools';
+  }
+  if (p.includes('/india-pricing') || h.includes('india-pricing')) {
+    return 'india-pricing';
+  }
+  if (p.includes('/proposal') || h.includes('proposal')) {
+    return 'proposal-generator';
+  }
+  return 'home';
+}
+
 export default function App() {
-  const [currentPage, setCurrentPage] = useState<string>('home');
+  const [currentPage, setCurrentPage] = useState<string>(getInitialRoute);
   const [blogInitialCategory, setBlogInitialCategory] = useState<string | null>(null);
   const [learningInitialCategory, setLearningInitialCategory] = useState<string | null>(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -731,9 +762,14 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (
         pathname === '/about' || pathname === '/about/' ||
+        pathname === '/about.html' || pathname === '/about.html/' ||
+        pathname.endsWith('/about') || pathname.endsWith('/about/') ||
         pathname === '/about-us' || pathname === '/about-us/' ||
+        pathname.endsWith('/about-us') || pathname.endsWith('/about-us/') ||
         pathname === '/who-we-are' || pathname === '/who-we-are/' ||
-        hash === '#about' || hash === '#about-us' || hash === '#who-we-are'
+        hash === '#about' || hash === '#/about' ||
+        hash === '#about-us' || hash === '#/about-us' ||
+        hash === '#who-we-are' || hash === '#/who-we-are'
       ) {
         setCurrentPage('about');
         window.scrollTo({ top: 0, behavior: 'instant' });
@@ -818,6 +854,30 @@ export default function App() {
       window.removeEventListener('hashchange', handleHashRouter);
       window.removeEventListener('popstate', handleHashRouter);
     };
+  }, []);
+
+  // Universal client navigation handler that guarantees instant reactive routing
+  const navigateTo = useCallback((href: string) => {
+    if (!href) return;
+
+    if (href.startsWith('#')) {
+      const isSub = window.location.pathname !== '/' && window.location.pathname !== '';
+      if (isSub) {
+        window.history.pushState(null, '', `/${href}`);
+      } else {
+        window.location.hash = href;
+        const targetEl = document.querySelector(href);
+        if (targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth' });
+        }
+      }
+    } else if (href.startsWith('/')) {
+      window.history.pushState(null, '', href);
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    // Trigger router update directly
+    window.dispatchEvent(new PopStateEvent('popstate'));
   }, []);
 
   // Generative Engine mock scanner log runner
@@ -1340,6 +1400,7 @@ export default function App() {
         }}
         openDownloadModal={() => setDownloadModalOpen(true)}
         currentPage={currentPage}
+        onNavigate={navigateTo}
       />
 
       {currentPage === 'geo' ? (
@@ -1985,11 +2046,13 @@ export default function App() {
             window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
+            window.scrollTo({ top: 0, behavior: 'instant' });
           }}
           openProposalForm={() => {
             const formEl = document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
+          onNavigate={navigateTo}
         />
       ) : currentPage === 'faq' ? (
         <div className="pt-4 min-h-screen">
@@ -3221,6 +3284,7 @@ export default function App() {
           formEl?.scrollIntoView({ behavior: 'smooth' });
         }}
         openDownloadModal={() => setDownloadModalOpen(true)}
+        onNavigate={navigateTo}
       />
 
 

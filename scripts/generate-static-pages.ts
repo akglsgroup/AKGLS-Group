@@ -38,6 +38,24 @@ export function generateAllStaticPages(force = false): { created: number; skippe
     const cleanSlug = route.path.replace(/^\/+|\/+$/g, '');
     if (!cleanSlug) continue;
 
+    // Skip interactive SPA routes that must always be dynamically rendered by React
+    const SPA_ROUTES = new Set([
+      'about',
+      'about-us',
+      'faq',
+      'faqs',
+      'geo-services',
+      'lead-portal',
+      'proposal-generator',
+      'tools',
+      'tools/seo-audit-tool',
+      'tools/geo-audit-tool'
+    ]);
+    if (SPA_ROUTES.has(cleanSlug)) {
+      skipped++;
+      continue;
+    }
+
     const fileName = `${cleanSlug}.html`;
     const targetPath = path.join(publicDir, fileName);
 

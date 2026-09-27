@@ -12,9 +12,10 @@ import AkglsLogo from './AkglsLogo';
 interface AboutUsPageProps {
   onBackToHome: () => void;
   openProposalForm?: () => void;
+  onNavigate?: (href: string) => void;
 }
 
-export default function AboutUsPage({ onBackToHome, openProposalForm }: AboutUsPageProps) {
+export default function AboutUsPage({ onBackToHome, openProposalForm, onNavigate }: AboutUsPageProps) {
   const [activePillar, setActivePillar] = useState<number>(0);
   const [activeEngine, setActiveEngine] = useState<'labs' | 'solutions'>('labs');
   const [activeStage, setActiveStage] = useState<number>(0);
@@ -1033,6 +1034,12 @@ export default function AboutUsPage({ onBackToHome, openProposalForm }: AboutUsP
                 <a
                   key={idx}
                   href={ind.href}
+                  onClick={(e) => {
+                    if (onNavigate) {
+                      e.preventDefault();
+                      onNavigate(ind.href);
+                    }
+                  }}
                   className="bg-slate-950 border border-slate-800/80 rounded-xl p-5 hover:border-indigo-500/50 hover:bg-slate-900/60 transition-all flex flex-col justify-between group"
                 >
                   <div>

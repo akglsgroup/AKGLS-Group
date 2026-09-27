@@ -21,9 +21,10 @@ interface HeaderProps {
   openProposal: () => void;
   openDownloadModal: () => void;
   currentPage?: string;
+  onNavigate?: (href: string) => void;
 }
 
-export default function Header({ onSearchOpen, openQuiz, openProposal, openDownloadModal, currentPage = 'home' }: HeaderProps) {
+export default function Header({ onSearchOpen, openQuiz, openProposal, openDownloadModal, currentPage = 'home', onNavigate }: HeaderProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileSearchQuery, setMobileSearchQuery] = useState('');
@@ -97,24 +98,27 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
   };
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    setActiveMenu(null);
+    setIsMobileMenuOpen(false);
+
+    if (onNavigate) {
+      e.preventDefault();
+      onNavigate(href);
+      return;
+    }
+
     const isSubPage = window.location.pathname !== '/';
     
     if (href.startsWith('/')) {
       e.preventDefault();
       window.history.pushState(null, '', href);
       window.dispatchEvent(new PopStateEvent('popstate'));
-      setActiveMenu(null);
-      setIsMobileMenuOpen(false);
     } else if (href.startsWith('#')) {
       if (isSubPage) {
         e.preventDefault();
         window.history.pushState(null, '', `/${href}`);
         window.dispatchEvent(new PopStateEvent('popstate'));
-        setActiveMenu(null);
-        setIsMobileMenuOpen(false);
       } else {
-        setIsMobileMenuOpen(false);
-        setActiveMenu(null);
         const element = document.querySelector(href);
         if (element) {
           e.preventDefault();
@@ -127,8 +131,6 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
         e.preventDefault();
         window.history.pushState(null, '', '/');
         window.dispatchEvent(new PopStateEvent('popstate'));
-        setActiveMenu(null);
-        setIsMobileMenuOpen(false);
       }
     }
   };

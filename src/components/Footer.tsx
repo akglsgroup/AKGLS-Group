@@ -24,9 +24,10 @@ interface FooterProps {
   onBackToHome?: () => void;
   openProposal?: () => void;
   openDownloadModal?: () => void;
+  onNavigate?: (href: string) => void;
 }
 
-export default function Footer({ onBackToHome, openProposal, openDownloadModal }: FooterProps) {
+export default function Footer({ onBackToHome, openProposal, openDownloadModal, onNavigate }: FooterProps) {
   const [mobileActiveTab, setMobileActiveTab] = useState<string | null>(null);
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
@@ -38,6 +39,12 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal }
     if (href === '#audit-form' && openProposal) {
       e.preventDefault();
       openProposal();
+      return;
+    }
+
+    if (onNavigate) {
+      e.preventDefault();
+      onNavigate(href);
       return;
     }
 
