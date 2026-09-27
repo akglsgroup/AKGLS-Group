@@ -382,6 +382,18 @@ function getInitialRoute(): string {
   ) {
     return 'about';
   }
+  if (
+    p === '/manage' || p === '/manage/' || p.includes('/manage') ||
+    p === '/manager-dashboard' || p === '/manager-dashboard/' ||
+    p === '/crm' || p === '/crm/' ||
+    p === '/client-dashboard' || p === '/client-dashboard/' ||
+    p === '/dashboard' || p === '/dashboard/' ||
+    p === '/client-portal' || p === '/client-portal/' ||
+    h === '#manage' || h === '#/manage' || h.includes('manage') ||
+    h === '#crm' || h === '#manager-dashboard' || h === '#client-dashboard' || h === '#client-portal'
+  ) {
+    return 'manager-dashboard';
+  }
   if (p === '/faq' || p === '/faq/' || p === '/faqs' || p === '/faqs/' || h.includes('faq')) {
     return 'faq';
   }
@@ -405,6 +417,16 @@ function getInitialRoute(): string {
     h.includes('international-multilingual-seo')
   ) {
     return 'international-seo';
+  }
+  if (
+    p.includes('/education-marketing') ||
+    p.includes('/education-digital-marketing') ||
+    p.includes('/school-marketing') ||
+    p.includes('/college-marketing') ||
+    p.includes('/edtech-marketing') ||
+    h.includes('education-marketing')
+  ) {
+    return 'education';
   }
   return 'home';
 }
@@ -1240,8 +1262,8 @@ export default function App() {
       canonical: "https://www.akglsgroup.com/healthcare-marketing-services/"
     },
     'education': {
-      title: "Education Marketing Services | School & College Marketing Agency | AKGLS Group",
-      description: "Grow admissions and student inquiries with expert education marketing services from AKGLS Group. SEO, Google Ads, social media & AI-powered marketing for schools, colleges & edtech companies.",
+      title: "Education & EdTech Marketing Services | AKGLS Group",
+      description: "Grow student enquiries and enrollments with AKGLS Group's Education & EdTech Marketing Services. SEO, AEO, GEO, AIO, paid ads, content, CRO & lead generation.",
       canonical: "https://www.akglsgroup.com/education-marketing-services/"
     },
     'law-firm': {
@@ -2294,11 +2316,13 @@ export default function App() {
             window.history.pushState(null, '', '/');
             window.location.hash = '';
             setCurrentPage('home');
+            window.scrollTo({ top: 0, behavior: 'instant' });
           }}
           openProposalForm={() => {
-            const formEl = document.querySelector('#education-audit-section') || document.querySelector('#audit-form');
+            const formEl = document.querySelector('#education-audit-form') || document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
+          onNavigate={navigateTo}
         />
       ) : currentPage === 'law-firm' ? (
         <LawFirmMarketingPage

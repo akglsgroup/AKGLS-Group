@@ -715,18 +715,18 @@ export const SITEMAP_ROUTES: AppRoute[] = [
   {
     id: "education",
     path: "/education-marketing-services/",
-    priority: 0.8,
+    priority: 0.9,
     changefreq: "weekly",
-    title: "Education Marketing Services | School & College Marketing Agency | AKGLS Group",
-    description: "Grow admissions and student inquiries with expert education marketing services from AKGLS Group. SEO, Google Ads, social media & AI-powered marketing for schools, colleges & edtech companies.",
+    title: "Education & EdTech Marketing Services | AKGLS Group",
+    description: "Grow student enquiries and enrollments with AKGLS Group's Education & EdTech Marketing Services. SEO, AEO, GEO, AIO, paid ads, content, CRO & lead generation.",
     category: "Industry",
-    h1: "Education & EdTech Marketing",
-    highlight: "Student Admissions & Enrollment Growth",
-    leadParagraph: "Drive student admissions and enrollments with search engine visibility, hyper-targeted digital advertising, and high-conversion parent/student engagement funnels.",
+    h1: "Education & EdTech Marketing Services",
+    highlight: "Turn Search Visibility Into Student Enrollments",
+    leadParagraph: "Grow your school, college, university, coaching institute, EdTech platform, or education brand with an integrated digital growth strategy built for modern search and AI discovery.",
     features: [
-      { title: "Admissions Search Intent", desc: "Rank for competitive course searches, school accreditations, and degree keywords." },
-      { title: "Multi-Channel Enrollment Ads", desc: "Target students and parents across Meta, YouTube, and Google Search." },
-      { title: "Campus Tour Lead Generation", desc: "Frictionless online inquiry and campus open-day scheduling workflows." }
+      { title: "Student Journey Architecture", desc: "Discover, explore, compare, enquire, and enroll with connected touchpoints." },
+      { title: "AEO, GEO & AI Search", desc: "Win authoritative citations in ChatGPT, Perplexity, and Google Gemini." },
+      { title: "Performance Paid Acquisition", desc: "High-intent Google Ads, Meta Ads, and LinkedIn campaigns driving qualified inquiries." }
     ]
   },
   {

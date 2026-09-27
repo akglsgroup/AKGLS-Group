@@ -42,6 +42,12 @@ export function generateAllStaticPages(force = false): { created: number; skippe
     const SPA_ROUTES = new Set([
       'about',
       'about-us',
+      'manage',
+      'manager-dashboard',
+      'client-dashboard',
+      'crm',
+      'dashboard',
+      'client-portal',
       'faq',
       'faqs',
       'geo-services',
@@ -51,7 +57,8 @@ export function generateAllStaticPages(force = false): { created: number; skippe
       'tools/seo-audit-tool',
       'tools/geo-audit-tool',
       'international-seo-services',
-      'international-multilingual-seo-services'
+      'international-multilingual-seo-services',
+      'education-marketing-services'
     ]);
     if (SPA_ROUTES.has(cleanSlug)) {
       skipped++;

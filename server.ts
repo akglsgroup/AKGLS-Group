@@ -511,6 +511,12 @@ async function startServer() {
     const SPA_INTERACTIVE_ROUTES = new Set([
       "about",
       "about-us",
+      "manage",
+      "manager-dashboard",
+      "client-dashboard",
+      "crm",
+      "dashboard",
+      "client-portal",
       "faq",
       "faqs",
       "geo-services",
@@ -519,7 +525,8 @@ async function startServer() {
       "tools/seo-audit-tool",
       "tools/geo-audit-tool",
       "international-seo-services",
-      "international-multilingual-seo-services"
+      "international-multilingual-seo-services",
+      "education-marketing-services"
     ]);
 
     if (SPA_INTERACTIVE_ROUTES.has(cleanSlug)) {
