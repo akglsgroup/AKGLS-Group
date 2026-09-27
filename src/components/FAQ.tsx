@@ -208,6 +208,18 @@ export const DEFAULT_FAQS: FAQItem[] = [
 ];
 
 /**
+ * Cleans plain text for Schema.org JSON-LD to prevent formatting corruption in search snippets
+ */
+export function cleanSchemaText(text: string): string {
+  if (!text) return '';
+  return text
+    .replace(/<[^>]*>/g, '') // remove HTML tags
+    .replace(/[\r\n]+/g, ' ') // collapse newlines into spaces
+    .replace(/\s+/g, ' ') // normalize whitespace
+    .trim();
+}
+
+/**
  * Slugifies question text for anchor links and schema IDs
  */
 export function slugifyQuestion(text: string): string {
@@ -233,7 +245,7 @@ export function generateFaqSchemaJsonLd(
   return {
     '@context': 'https://schema.org',
     '@type': 'FAQPage',
-    '@id': `${pageUrl}#faq-page-schema`,
+    '@id': `${pageUrl}#faqpage-schema`,
     'url': pageUrl,
     'name': 'AKGLS Group - Frequently Asked Questions & Knowledge Base',
     'description': 'Verified answers to common questions regarding Generative Engine Optimization (GEO), AI Search SEO, Technical Architecture, PPC Funnels, and Performance Retainers.',
@@ -250,17 +262,19 @@ export function generateFaqSchemaJsonLd(
     'mainEntity': items.map((item, idx) => {
       const slug = item.id || slugifyQuestion(item.q) || `item-${idx + 1}`;
       const itemUrl = `${pageUrl}#faq-${slug}`;
+      const questionText = cleanSchemaText(item.q);
+      const answerText = cleanSchemaText(item.a);
 
       return {
         '@type': 'Question',
         '@id': `${pageUrl}#faq-q-${slug}`,
-        'name': item.q,
+        'name': questionText,
         'url': itemUrl,
         'answerCount': 1,
         'acceptedAnswer': {
           '@type': 'Answer',
           '@id': `${pageUrl}#faq-a-${slug}`,
-          'text': item.a,
+          'text': answerText,
           'url': itemUrl,
           'author': {
             '@type': 'Organization',
@@ -340,6 +354,34 @@ export default function FAQ({
   // Safe HTML representation escaping dangerous script tag syntax
   const safeJsonLdString = useMemo(() => {
     return schemaJsonString.replace(/</g, '\\u003c');
+  }, [schemaJsonString]);
+
+  // DYNAMIC SCRIPT INJECTION INTO DOCUMENT HEAD
+  // Automatically creates, updates, and mounts a valid Schema.org FAQPage JSON-LD tag
+  // directly in document.head for search crawlers (Googlebot, Bingbot, GPTBot, Perplexity, Claude).
+  // Automatically cleans up on unmount or updates when questions/categories change.
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+
+    const scriptId = 'faqpage-schema-jsonld';
+    let scriptEl = document.getElementById(scriptId) as HTMLScriptElement | null;
+
+    if (!scriptEl) {
+      scriptEl = document.createElement('script');
+      scriptEl.id = scriptId;
+      scriptEl.type = 'application/ld+json';
+      scriptEl.setAttribute('data-schema-type', 'FAQPage');
+      document.head.appendChild(scriptEl);
+    }
+
+    scriptEl.textContent = schemaJsonString;
+
+    return () => {
+      const existing = document.getElementById(scriptId);
+      if (existing && existing.parentNode) {
+        existing.parentNode.removeChild(existing);
+      }
+    };
   }, [schemaJsonString]);
 
   // Deep-link support: On mount or hash change, expand matching FAQ item and scroll to it

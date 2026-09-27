@@ -509,6 +509,11 @@ async function startServer() {
 
     // Interactive SPA routes that must always be rendered by React client app
     const SPA_INTERACTIVE_ROUTES = new Set([
+      "about",
+      "about-us",
+      "faq",
+      "faqs",
+      "geo-services",
       "lead-portal",
       "proposal-generator",
       "tools/seo-audit-tool",

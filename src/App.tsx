@@ -83,6 +83,7 @@ import ManagerDashboardPage from './components/ManagerDashboardPage';
 import SeoBlogListPage from './components/SeoBlogListPage';
 import LearningHubPage from './components/LearningHubPage';
 import InternshipProgramPage from './components/InternshipProgramPage';
+import AboutUsPage from './components/AboutUsPage';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import FAQ from './components/FAQ';
 import HomeHeroBanner from './components/HomeHeroBanner';
@@ -728,6 +729,21 @@ export default function App() {
         setCurrentPage('manager-dashboard');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (
+        pathname === '/about' || pathname === '/about/' ||
+        pathname === '/about-us' || pathname === '/about-us/' ||
+        pathname === '/who-we-are' || pathname === '/who-we-are/' ||
+        hash === '#about' || hash === '#about-us' || hash === '#who-we-are'
+      ) {
+        setCurrentPage('about');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/faq' || pathname === '/faq/' ||
+        pathname === '/faqs' || pathname === '/faqs/' ||
+        hash === '#faq' || hash === '#faqs'
+      ) {
+        setCurrentPage('faq');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
         pathname === '/lead-portal' || pathname === '/lead-portal/' ||
         pathname === '/admin/leads' || pathname === '/admin/leads/' ||
         hash === '#lead-portal' || hash === '#leads'
@@ -1261,6 +1277,16 @@ export default function App() {
       title: "Crypto Growth Services | Web3 & Blockchain Marketing Agency | AKGLS Group",
       description: "Scale your Web3, DeFi, and blockchain project with expert crypto growth services from AKGLS Group. Token marketing and crypto SEO.",
       canonical: "https://www.akglsgroup.com/crypto-growth-services/"
+    },
+    'about': {
+      title: "About Us | AK Global Labs & Solutions (AKGLS Group)",
+      description: "Engineering Digital Transformation. Building Intelligent Businesses. Discover AKGLS Group's dual-engine model (AK Labs & AK Solutions) and four transformation pillars.",
+      canonical: "https://www.akglsgroup.com/about/"
+    },
+    'faq': {
+      title: "Frequently Asked Questions (FAQ) & Schema Knowledge Base | AKGLS Group",
+      description: "Explore verified answers to common questions about Generative Engine Optimization (GEO), AI SEO, Technical Core Web Vitals, and Performance Retainers.",
+      canonical: "https://www.akglsgroup.com/faq/"
     },
   };
 
@@ -1952,6 +1978,22 @@ export default function App() {
             setCurrentPage('home');
           }}
         />
+      ) : currentPage === 'about' ? (
+        <AboutUsPage
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'faq' ? (
+        <div className="pt-4 min-h-screen">
+          <FAQ isStandalonePage={true} onNavigate={handleInternalSmoothScroll} />
+        </div>
       ) : currentPage === 'lead-portal' ? (
         <LeadManagementPortalPage
           onBackToHome={() => {

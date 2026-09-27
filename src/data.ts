@@ -195,7 +195,7 @@ export const companyMenu = [
   { name: "Free SEO/AI SEO Tools", href: "/tools" },
   { name: "Indian Client Pricing", href: "/india-pricing" },
   { name: "Proposal PDF Builder", href: "/proposal-builder" },
-  { name: "About Us", href: "#team-leadership" },
+  { name: "About Us", href: "/about" },
   { name: "Meet Our Team", href: "#team-leadership" },
   { name: "Careers", href: "#careers-gateway" },
   { name: "Internship Program", href: "/internship-program" },

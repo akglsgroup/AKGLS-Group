@@ -162,6 +162,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     color: "text-rose-400",
     bulletClass: "bg-rose-400",
     links: [
+      { name: "About AKGLS Group", href: "/about", isNew: true },
       { name: "Hire AI SEO Expert", href: "/hire-ai-seo-expert" },
       { name: "Hire SEO Expert", href: "/hire-seo-expert" },
       { name: "Hire PPC Expert", href: "/hire-ppc-expert" },

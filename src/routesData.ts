@@ -36,6 +36,54 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     ]
   },
   {
+    id: "about",
+    path: "/about/",
+    priority: 0.9,
+    changefreq: "monthly",
+    title: "About Us | AK Global Labs & Solutions (AKGLS Group)",
+    description: "AK Global Labs & Solutions (AKGLS Group) is a digital transformation and technology solutions company focused on helping businesses build, modernize, automate, and scale their digital operations.",
+    category: "Company",
+    h1: "Engineering Digital Transformation",
+    highlight: "Building Intelligent Businesses",
+    leadParagraph: "AK Global Labs & Solutions (AKGLS Group) brings together technology, artificial intelligence, software engineering, data, digital growth, automation, and strategic consulting under one integrated ecosystem.",
+    features: [
+      { title: "AK Labs: Innovation & Intelligence", desc: "Applied AI research, LLM systems, RAG architectures, autonomous AI agents, and next-generation search engineering." },
+      { title: "AK Solutions: Enterprise Execution", desc: "Enterprise software engineering, cloud systems, deep CRM/ERP integrations, and high-concurrency digital platforms." },
+      { title: "Four Transformation Pillars", desc: "Intelligent Technology, AI & Automation, Digital Growth & Discovery, and Operational Business Intelligence." }
+    ],
+    faqs: [
+      {
+        q: "What is AKGLS Group?",
+        a: "AKGLS Group operates under the banner of AK Global Labs & Solutions, combining two complementary engines: AK Labs (Research, Innovation, Intelligence, Experimentation) and AK Solutions (Engineering, Implementation, Transformation, Growth) to engineer digital transformation and build intelligent businesses."
+      },
+      {
+        q: "What are the Four Transformation Pillars of AKGLS Group?",
+        a: "Our capabilities are organized around four core pillars: 01 Intelligent Technology (building the digital foundation), 02 Artificial Intelligence & Automation (turning technology into operational intelligence), 03 Digital Growth & Discovery (multi-surface search across AI, GEO, and traditional engines), and 04 Data, Automation & Business Intelligence (converting business data into actionable truth)."
+      },
+      {
+        q: "How does AKGLS Group approach AI implementation?",
+        a: "Rather than treating AI as an isolated gimmick, we treat AI as an organizational intelligence layer across customer routing, internal knowledge retrieval via RAG, automated workflows, predictive analytics, and employee copilots."
+      }
+    ]
+  },
+  {
+    id: "faq",
+    path: "/faq/",
+    priority: 0.85,
+    changefreq: "weekly",
+    title: "Frequently Asked Questions (FAQ) & Schema Knowledge Base | AKGLS Group",
+    description: "Explore verified answers to common questions about Generative Engine Optimization (GEO), AI SEO, Technical Core Web Vitals, and Performance Retainers.",
+    category: "Resources",
+    h1: "Frequently Asked Questions",
+    highlight: "Schema.org FAQPage Validated",
+    leadParagraph: "Verified answers to technical, strategic, and commercial questions regarding AI SEO, Generative Engine Optimization, Core Web Vitals, Paid Ads, and dedicated talent retainers.",
+    features: [
+      { title: "Dynamic Schema.org FAQPage", desc: "Auto-generated JSON-LD structured data injected directly into document head for Google rich snippet carousels." },
+      { title: "AI Search Ground-Truth Citations", desc: "Structured question-and-answer pairs engineered for ChatGPT, Perplexity, Claude, and Google AI Overviews." },
+      { title: "Deep-Link Anchor Navigation", desc: "Direct canonical anchor URLs for every individual question enabling instant sharing and direct linking." }
+    ]
+  },
+  {
     id: "geo",
     path: "/geo-services/",
     priority: 0.9,

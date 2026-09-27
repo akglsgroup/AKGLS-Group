@@ -582,7 +582,7 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
               <a href="/tools" class="block py-1 text-slate-300 hover:text-brand-indigo">Free Tools</a>
               <a href="/india-pricing" class="block py-1 text-slate-300 hover:text-brand-indigo">Indian Client Pricing</a>
               <a href="/proposal-builder" class="block py-1 text-slate-300 hover:text-brand-indigo">Proposal PDF Builder</a>
-              <a href="/#team-leadership" class="block py-1 text-slate-300 hover:text-brand-indigo">About Us</a>
+              <a href="/about" class="block py-1 text-slate-300 hover:text-brand-indigo">About Us</a>
               <a href="/internship-program" class="block py-1 text-slate-300 hover:text-brand-indigo">Internship Program</a>
             </div>
           </div>
