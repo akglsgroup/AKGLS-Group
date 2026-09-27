@@ -87,6 +87,7 @@ import AboutUsPage from './components/AboutUsPage';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import FAQ from './components/FAQ';
 import HomeHeroBanner from './components/HomeHeroBanner';
+import PartnerTrustCarousel from './components/PartnerTrustCarousel';
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
@@ -2269,33 +2270,8 @@ export default function App() {
             }}
           />
 
-      {/* CREDENTIALS / PARTNER TICKER */}
-      <section className="bg-[#0c121e]/40 border-y border-slate-800/60 py-6 select-none relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 mb-2.5 text-center">
-          <p className="text-[10px] font-black uppercase tracking-widest text-slate-500 font-display">
-            integrating natively with leading digital growth channels & technical standard directories:
-          </p>
-        </div>
-
-        <div className="flex overflow-hidden">
-          <div className="animate-marquee flex items-center gap-16 whitespace-nowrap text-slate-500 hover:text-slate-400 font-display font-semibold text-xs tracking-wider uppercase">
-            <span className="flex items-center gap-1.5">★ Google Premier Partner</span>
-            <span className="flex items-center gap-1.5">★ Meta Business Partner</span>
-            <span className="flex items-center gap-1.5">★ Shopify Plus Expert</span>
-            <span className="flex items-center gap-1.5">★ Forbes Agency Council</span>
-            <span className="flex items-center gap-1.5">★ HubSpot Diamond Agency</span>
-            <span className="flex items-center gap-1.5">★ TechCrunch Featured</span>
-            
-            {/* Repeat loop */}
-            <span className="flex items-center gap-1.5">★ Google Premier Partner</span>
-            <span className="flex items-center gap-1.5">★ Meta Business Partner</span>
-            <span className="flex items-center gap-1.5">★ Shopify Plus Expert</span>
-            <span className="flex items-center gap-1.5">★ Forbes Agency Council</span>
-            <span className="flex items-center gap-1.5">★ HubSpot Diamond Agency</span>
-            <span className="flex items-center gap-1.5">★ TechCrunch Featured</span>
-          </div>
-        </div>
-      </section>
+          {/* OFFICIAL PARTNER TRUST BADGE CAROUSEL */}
+          <PartnerTrustCarousel />
 
       {/* CORE CAPABILITIES EXPLORER SECTION */}
       <section id="capabilities-explorer" className="py-16 md:py-24 bg-[#05070a] scroll-mt-20 border-t border-slate-900/40">
