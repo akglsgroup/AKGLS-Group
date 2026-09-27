@@ -1294,41 +1294,7 @@ export const SITEMAP_ROUTES: AppRoute[] = [
       { title: `Level: ${item.difficulty}`, desc: `Rated ${item.rating}/5.0 by ${item.studentsCount.toLocaleString()}+ growth practitioners.` },
       { title: "Actionable Assets", desc: "Includes downloadable execution checklists, spreadsheet models, and architecture templates." }
     ]
-  })),
-  {
-    id: "faq",
-    path: "/faq/",
-    priority: 0.8,
-    changefreq: "weekly",
-    title: "Frequently Asked Questions (FAQ) & Schema Guide | AKGLS Group",
-    description: "Explore verified answers regarding Generative Engine Optimization (GEO), AI SEO, Technical Core Web Vitals, PPC Campaigns, and Performance Retainers.",
-    category: "Agency",
-    h1: "Frequently Asked Questions & Answers",
-    highlight: "Schema.org FAQPage Validated",
-    leadParagraph: "Transparent, technical, and commercial answers to questions about AI SEO, GEO search ranking, performance marketing funnels, and technical architecture.",
-    features: [
-      { title: "Dynamic JSON-LD Schema", desc: "Every question is auto-indexed in Schema.org FAQPage markup for rich snippets and zero-click citations." },
-      { title: "Cross-Channel Answers", desc: "Covers AI SEO, Generative Engine Optimization (GEO), PPC, CRO, and dedicated specialist hiring." },
-      { title: "Instant Forensic Audits", desc: "Direct access to technical audit generators and consultative proposals from our search architects." }
-    ]
-  },
-  {
-    id: "uptet-result-2021",
-    path: "/uptet-result-2021/",
-    priority: 0.9,
-    changefreq: "daily",
-    title: "UPTET Result 2021 Primary Level - Qualified Candidate Gazette Search & Verification",
-    description: "Search and verify UPTET 2021 Primary Level (Classes 1-5) qualified candidates across 25,000+ gazette pages. Instant verification by Roll No, Reg No, or Candidate Name.",
-    category: "Govt Examination",
-    h1: "UPTET 2021 Primary Level Qualified Candidate Gazette Search",
-    highlight: "25,000+ Gazette Pages & 650,000+ Candidates Indexed",
-    leadParagraph: "Fast search engine and verification utility for UPTET 2021 Primary Level examination gazette. Verify qualification status, download printable score slips, and calculate Super TET merit scores.",
-    features: [
-      { title: "Instant Roll & Reg Lookup", desc: "Retrieve verified candidate credentials and marks in sub-milliseconds." },
-      { title: "Printable Verification Slip", desc: "Official-style verification slip with security hash, QR verification, and DIET instructions." },
-      { title: "Super TET Merit Calculator", desc: "Interactive recruitment merit calculator combining academic weightage and written scores." }
-    ]
-  }
+  }))
 ];
 
 export function getRouteBySlug(slug: string): AppRoute | undefined {

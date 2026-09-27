@@ -78,7 +78,6 @@ import { initAutoLeadCapture, captureLead } from './utils/leadCapture';
 import FreeToolsPage from './components/FreeToolsPage';
 import SeoAuditToolPage from './components/SeoAuditToolPage';
 import AiGeoAuditPage from './components/AiGeoAuditPage';
-import UptetResult2021Page from './components/UptetResult2021Page';
 import ClientDashboardPage from './components/ClientDashboardPage';
 import ManagerDashboardPage from './components/ManagerDashboardPage';
 import SeoBlogListPage from './components/SeoBlogListPage';
@@ -736,16 +735,6 @@ export default function App() {
         setCurrentPage('lead-portal');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (
-        pathname === '/uptet-result-2021' || pathname === '/uptet-result-2021/' ||
-        pathname === '/tools/uptet-result-2021' || pathname === '/tools/uptet-result-2021/' ||
-        pathname === '/uptet-result' || pathname === '/uptet-result/' ||
-        pathname === '/uptet-2021-result' || pathname === '/uptet-2021-result/' ||
-        pathname === '/uptet-verification' || pathname === '/uptet-verification/' ||
-        hash === '#uptet-result-2021' || hash === '#uptet-result' || hash === '#uptet'
-      ) {
-        setCurrentPage('uptet-result-2021');
-        window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (
         pathname === '/tools' || pathname === '/tools/' ||
         pathname === '/free-tools' || pathname === '/free-tools/' ||
         pathname === '/marketing-tools' || pathname === '/marketing-tools/' ||
@@ -792,13 +781,6 @@ export default function App() {
         hash === '#internship-program' || hash === '#careers/internship'
       ) {
         setCurrentPage('internship-program');
-        window.scrollTo({ top: 0, behavior: 'instant' });
-      } else if (
-        pathname === '/faq' || pathname === '/faq/' ||
-        pathname === '/faqs' || pathname === '/faqs/' ||
-        hash === '#faq-page'
-      ) {
-        setCurrentPage('faq');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         setCurrentPage('home');
@@ -1279,11 +1261,6 @@ export default function App() {
       title: "Crypto Growth Services | Web3 & Blockchain Marketing Agency | AKGLS Group",
       description: "Scale your Web3, DeFi, and blockchain project with expert crypto growth services from AKGLS Group. Token marketing and crypto SEO.",
       canonical: "https://www.akglsgroup.com/crypto-growth-services/"
-    },
-    'faq': {
-      title: "Frequently Asked Questions (FAQ) & Schema Guide | AKGLS Group",
-      description: "Explore verified answers regarding Generative Engine Optimization (GEO), AI SEO, Technical Core Web Vitals, PPC Campaigns, and Performance Retainers.",
-      canonical: "https://www.akglsgroup.com/faq/"
     },
   };
 
@@ -1983,14 +1960,6 @@ export default function App() {
             setCurrentPage('home');
           }}
         />
-      ) : currentPage === 'uptet-result-2021' ? (
-        <UptetResult2021Page
-          onBackToHome={() => {
-            window.history.pushState(null, '', '/');
-            window.location.hash = '';
-            setCurrentPage('home');
-          }}
-        />
       ) : currentPage === 'tools' ? (
         <FreeToolsPage
           onBackToHome={() => {
@@ -2007,11 +1976,6 @@ export default function App() {
             window.history.pushState(null, '', '/tools/geo-audit-tool');
             window.location.hash = '#tools/geo-audit-tool';
             setCurrentPage('geo-audit-tool');
-          }}
-          onNavigateToUptet={() => {
-            window.history.pushState(null, '', '/uptet-result-2021');
-            window.location.hash = '#uptet-result-2021';
-            setCurrentPage('uptet-result-2021');
           }}
         />
       ) : currentPage === 'seo-audit-tool' ? (
@@ -2248,11 +2212,6 @@ export default function App() {
             const formEl = document.querySelector('#finance-audit-section') || document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
-        />
-      ) : currentPage === 'faq' ? (
-        <FAQ 
-          isStandalonePage={true} 
-          onNavigate={handleInternalSmoothScroll} 
         />
       ) : (
         <>
