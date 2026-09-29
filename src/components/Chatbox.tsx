@@ -6,6 +6,7 @@ import {
   ShieldCheck, LogIn, User, RefreshCw, AlertCircle
 } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
+import LazyImage from './LazyImage';
 import { ChatMessageRecord, GroundingMetadata } from '../types';
 import { 
   auth, 
@@ -388,7 +389,14 @@ export default function Chatbox() {
                     }`}>
                       {isUser ? (
                         currentUser?.photoURL ? (
-                          <img src={currentUser.photoURL} alt="User" referrerPolicy="no-referrer" className="w-full h-full object-cover rounded-lg" />
+                          <LazyImage 
+                            src={currentUser.photoURL} 
+                            alt="User" 
+                            referrerPolicy="no-referrer" 
+                            containerClassName="w-full h-full rounded-lg overflow-hidden"
+                            className="w-full h-full object-cover" 
+                            showShimmer={false}
+                          />
                         ) : <User className="w-3.5 h-3.5" />
                       ) : <Bot className="w-3.5 h-3.5" />}
                     </div>

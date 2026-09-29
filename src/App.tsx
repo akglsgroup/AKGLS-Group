@@ -88,6 +88,10 @@ import { OfflineIndicator } from './components/OfflineIndicator';
 import FAQ from './components/FAQ';
 import HomeHeroBanner from './components/HomeHeroBanner';
 import PartnerTrustCarousel from './components/PartnerTrustCarousel';
+import ProposalSuccessState from './components/ProposalSuccessState';
+import LazyImage, { Image, LazyImageProps } from './components/LazyImage';
+export { LazyImage, Image };
+export type { LazyImageProps };
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
@@ -501,6 +505,47 @@ export default function App() {
     };
     window.addEventListener('keydown', handleShortcut);
     return () => window.removeEventListener('keydown', handleShortcut);
+  }, []);
+
+  // Universal Core Web Vitals & Image Performance Optimization across all routes
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const optimizeImages = () => {
+      const imgs = document.querySelectorAll<HTMLImageElement>('img:not([data-cwv-optimized])');
+      imgs.forEach((img) => {
+        img.setAttribute('data-cwv-optimized', 'true');
+        
+        // Ensure lazy loading on non-eager/non-priority images
+        if (img.getAttribute('loading') !== 'eager' && !img.hasAttribute('data-priority')) {
+          img.setAttribute('loading', 'lazy');
+        }
+        
+        if (!img.getAttribute('decoding')) {
+          img.setAttribute('decoding', 'async');
+        }
+
+        // Add smooth fade-in transitions to prevent visual jarring
+        if (!img.complete) {
+          img.classList.add('transition-opacity', 'duration-300');
+          img.addEventListener('load', () => {
+            img.classList.remove('opacity-0');
+            img.classList.add('opacity-100');
+          }, { once: true });
+        }
+      });
+    };
+
+    optimizeImages();
+
+    // Observe any dynamically inserted images (e.g. blog posts, modals, portfolio)
+    const observer = new MutationObserver(() => {
+      optimizeImages();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+
+    return () => observer.disconnect();
   }, []);
 
   // Hash and Path route router trigger for dedicated subpages
@@ -3289,24 +3334,24 @@ export default function App() {
 
               </form>
             ) : (
-              /* Success results state */
-              <div className="p-6 bg-emerald-50/50 border border-emerald-100 rounded-3xl text-center space-y-4">
-                <CheckCircle2 className="w-12 h-12 text-brand-emerald mx-auto animate-bounce" />
-                <h4 className="text-xl font-extrabold font-display text-brand-navy">
-                  Strategic Proposal Secured!
-                </h4>
-                <p className="text-slate-600 text-xs sm:text-sm font-light leading-relaxed max-w-lg mx-auto">
-                  Thank you, <strong className="text-slate-900 font-bold">{proposalForm.contactName}</strong>. Our organic SEO analysts have queued the audit profile for <strong className="text-brand-indigo font-bold">{proposalForm.companyUrl}</strong>. A strategists will submit complete diagnostics containing 30 keyword options to your email queue within 24 business hours.
-                </p>
-                <div className="pt-2">
-                  <button 
-                    onClick={resetProposalForm}
-                    className="bg-brand-navy hover:bg-brand-slate text-white text-xs font-bold py-2.5 px-6 rounded-xl transition-all cursor-pointer"
-                  >
-                    Request Another Strategic Audit
-                  </button>
-                </div>
-              </div>
+              /* High-impact rewarding micro-interaction success state */
+              <ProposalSuccessState
+                contactName={proposalForm.contactName}
+                companyName={proposalForm.companyName}
+                companyUrl={proposalForm.companyUrl}
+                budget={proposalForm.budget ? ({
+                  low_scale: '$2,000 - $5,000 / mo',
+                  mid_scale: '$5,000 - $15,000 / mo',
+                  high_enterprise: '$15,000 - $50,050 / mo',
+                  top_tier: '$50,000+ / mo'
+                }[proposalForm.budget] || proposalForm.budget) : undefined}
+                channels={Object.entries(proposalForm.interestedChannels)
+                  .filter(([_, v]) => v)
+                  .map(([k]) => k === 'seo' ? 'Organic SEO' : k === 'aiseo' ? 'AI / GEO & AEO' : 'Paid PPC')}
+                notes={proposalForm.notes}
+                onReset={resetProposalForm}
+                variant="light"
+              />
             )}
 
           </div>

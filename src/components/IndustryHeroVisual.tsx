@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Sparkles, CheckCircle, Eye, RefreshCw, Layers } from 'lucide-react';
 import { INDUSTRY_HERO_ASSETS, IndustryHeroConfig } from '../data/industryHeroAssets';
+import LazyImage from './LazyImage';
 
 interface IndustryHeroVisualProps {
   configKey: string;
@@ -41,11 +42,13 @@ export const IndustryHeroVisual: React.FC<IndustryHeroVisualProps> = ({
 
       {/* Main Targeted Hero Image */}
       <div className="relative aspect-[16/10] sm:aspect-[16/9] w-full overflow-hidden bg-slate-950">
-        <img
+        <LazyImage
           src={imgError ? fallbackUrl : currentImg}
           alt={config.altText}
+          fallbackSrc={fallbackUrl}
           referrerPolicy="no-referrer"
-          onError={() => setImgError(true)}
+          priority={true}
+          onImageError={() => setImgError(true)}
           className="w-full h-full object-cover object-center transform transition-transform duration-700 ease-out group-hover:scale-105 filter brightness-90 contrast-105"
           id={`hero-img-${config.id}`}
         />

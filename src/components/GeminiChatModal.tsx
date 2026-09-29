@@ -13,6 +13,7 @@ import {
   subscribeToChatHistory, 
   clearChatHistoryFromFirestore 
 } from '../firebase';
+import LazyImage from './LazyImage';
 
 interface GeminiChatModalProps {
   isOpen: boolean;
@@ -441,11 +442,13 @@ export default function GeminiChatModal({ isOpen, onClose, initialPrompt }: Gemi
                   }`}>
                     {isUser ? (
                       currentUser?.photoURL ? (
-                        <img 
+                        <LazyImage 
                           src={currentUser.photoURL} 
                           alt="User" 
                           referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover rounded-xl"
+                          containerClassName="w-full h-full rounded-xl overflow-hidden"
+                          className="w-full h-full object-cover"
+                          showShimmer={false}
                         />
                       ) : (
                         <User className="w-4 h-4" />

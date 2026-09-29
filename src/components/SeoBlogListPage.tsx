@@ -9,6 +9,7 @@ import {
   Copy, ExternalLink, Quote, MessageCircle, Type
 } from 'lucide-react';
 import { BLOG_POSTS, BlogPost, BlogTopicCategory, calculateReadingTime } from '../blogData';
+import LazyImage from './LazyImage';
 
 interface SeoBlogListPageProps {
   initialCategory?: string | null;
@@ -1058,7 +1059,13 @@ export default function SeoBlogListPage({
 
                   <div className="pt-4 border-t border-slate-900/70 flex justify-between items-center gap-2">
                     <div className="flex items-center gap-3">
-                      <img src={spotlightPost.author.avatar} alt="Author avatar" className="h-9 w-9 rounded-full border border-slate-800 object-cover" />
+                      <LazyImage 
+                        src={spotlightPost.author.avatar} 
+                        alt={spotlightPost.author.name} 
+                        containerClassName="h-9 w-9 rounded-full overflow-hidden shrink-0 border border-slate-800"
+                        className="h-9 w-9 rounded-full object-cover" 
+                        showShimmer={false}
+                      />
                       <div>
                         <span className="block text-xs font-bold text-white leading-none">{spotlightPost.author.name}</span>
                         <span className="block text-[10px] text-slate-500 mt-1 font-semibold">{spotlightPost.author.role}</span>
@@ -1150,7 +1157,13 @@ export default function SeoBlogListPage({
 
                     <div className="pt-4 border-t border-slate-900 flex justify-between items-center mt-auto">
                       <div className="flex items-center gap-2">
-                        <img src={post.author.avatar} alt="Author Avatar" className="h-6 w-6 rounded-full border border-slate-800 object-cover" />
+                        <LazyImage 
+                          src={post.author.avatar} 
+                          alt={post.author.name} 
+                          containerClassName="h-6 w-6 rounded-full overflow-hidden shrink-0 border border-slate-800"
+                          className="h-6 w-6 rounded-full object-cover" 
+                          showShimmer={false}
+                        />
                         <span className="text-[10.5px] text-slate-400 font-bold">{post.author.name}</span>
                       </div>
 
@@ -1343,7 +1356,13 @@ export default function SeoBlogListPage({
 
                 {/* Author profile */}
                 <div className="flex items-center gap-4 py-3.5 border-y border-slate-900 bg-slate-950/30 px-5 rounded-2xl border border-slate-900/60 my-4">
-                  <img src={selectedPost.author.avatar} alt="Author avatar" className="h-11 w-11 rounded-full border border-slate-800 object-cover" />
+                  <LazyImage 
+                    src={selectedPost.author.avatar} 
+                    alt={selectedPost.author.name} 
+                    containerClassName="h-11 w-11 rounded-full overflow-hidden shrink-0 border border-slate-800"
+                    className="h-11 w-11 rounded-full object-cover" 
+                    showShimmer={false}
+                  />
                   <div className="flex-1">
                     <span className="block text-xs font-black text-white leading-none">{selectedPost.author.name}</span>
                     <span className="block text-[10px] text-slate-500 mt-1.5 font-bold uppercase tracking-wider">{selectedPost.author.role}</span>

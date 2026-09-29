@@ -8,6 +8,7 @@ import {
   Video, Eye, Volume2, Maximize2, Pause
 } from 'lucide-react';
 import { LEARNING_ITEMS, LearningHubItem } from '../learningData';
+import LazyImage from './LazyImage';
 
 interface LearningHubPageProps {
   initialCategory?: string | null;
@@ -718,7 +719,13 @@ export default function LearningHubPage({
                         </p>
 
                         <div className="flex items-center gap-3 bg-slate-950/50 p-2.5 rounded-lg border border-slate-900">
-                          <img src={item.author.avatar} alt="Author" className="h-6 w-6 rounded-full border border-slate-800 object-cover" />
+                          <LazyImage 
+                            src={item.author.avatar} 
+                            alt={item.author.name} 
+                            containerClassName="h-6 w-6 rounded-full overflow-hidden shrink-0 border border-slate-800"
+                            className="h-6 w-6 rounded-full object-cover" 
+                            showShimmer={false}
+                          />
                           <div className="text-[10px] leading-tight">
                             <span className="block font-bold text-white leading-none">{item.author.name}</span>
                             <span className="block text-slate-500 mt-0.5">{item.author.role}</span>
@@ -1089,7 +1096,13 @@ export default function LearningHubPage({
                     </h2>
 
                     <div className="flex items-center gap-3 py-4 border-y border-slate-900 bg-slate-950/50 p-4 border border-slate-900 rounded-xl">
-                      <img src={selectedItem.author.avatar} alt="Author" className="h-8 w-8 rounded-full border border-slate-800 object-cover" />
+                      <LazyImage 
+                        src={selectedItem.author.avatar} 
+                        alt={selectedItem.author.name} 
+                        containerClassName="h-8 w-8 rounded-full overflow-hidden shrink-0 border border-slate-800"
+                        className="h-8 w-8 rounded-full object-cover" 
+                        showShimmer={false}
+                      />
                       <div>
                         <span className="block text-xs font-black text-white">{selectedItem.author.name}</span>
                         <span className="block text-[10px] text-slate-500 tracking-wider mt-0.5 font-bold uppercase">{selectedItem.author.role}</span>

@@ -5,7 +5,7 @@ import {
   TrendingUp, Bot, Code, FileText, CheckCircle2, 
   Calculator, Download, Award, Info, Users, Briefcase, 
   Layers, MessageSquare, Send, ArrowRight, Star, Zap, PhoneCall,
-  Facebook, Twitter, Linkedin, Instagram, BarChart3
+  Facebook, Twitter, Linkedin, Instagram, BarChart3, Building2
 } from 'lucide-react';
 import { servicesMenu, solutionsMenu, caseStudiesMenu, resourcesMenu, companyMenu, hireExpertsMenu } from '../data';
 import { getWhatsAppMessage } from './WhatsAppWidget';
@@ -14,6 +14,7 @@ import { PWAInstallButton } from './PWAInstallButton';
 import AkglsLogo from './AkglsLogo';
 import { auth, signInWithGoogle, logoutUser, subscribeToAuthState } from '../firebase';
 import GeminiChatModal from './GeminiChatModal';
+import LazyImage from './LazyImage';
 
 interface HeaderProps {
   onSearchOpen: () => void;
@@ -161,6 +162,38 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
             >
               <WhatsAppIcon className="w-3.5 h-3.5 text-emerald-400" />
               <span>WhatsApp Chat</span>
+            </a>
+          </div>
+
+          {/* Center-Right Quick Links for Desktop */}
+          <div className="hidden md:flex items-center gap-3 text-[11px]">
+            <a 
+              href="/about"
+              onClick={(e) => handleLinkClick(e, '/about')}
+              className={`transition-colors flex items-center gap-1 font-semibold px-2 py-0.5 rounded ${
+                currentPage === 'about' 
+                  ? 'text-brand-teal bg-slate-800' 
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
+              }`}
+              title="About AKGLS Group (/about)"
+            >
+              <Building2 className="w-3.5 h-3.5 text-brand-indigo" />
+              <span>About Us</span>
+            </a>
+            <span className="text-slate-700" aria-hidden="true">|</span>
+            <a 
+              href="/manage"
+              onClick={(e) => handleLinkClick(e, '/manage')}
+              className={`transition-colors flex items-center gap-1.5 font-bold px-2.5 py-0.5 rounded border ${
+                currentPage === 'manager-dashboard' || currentPage === 'manage'
+                  ? 'text-brand-teal bg-brand-teal/25 border-brand-teal' 
+                  : 'text-brand-teal hover:text-white bg-brand-teal/10 border-brand-teal/30 hover:bg-brand-teal/20'
+              }`}
+              title="Agency Manager CRM & Operations Portal (/manage)"
+            >
+              <Briefcase className="w-3.5 h-3.5 text-brand-teal" />
+              <span>Agency Manager CRM</span>
+              <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-1 rounded">/manage</span>
             </a>
           </div>
 
@@ -574,7 +607,21 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 </AnimatePresence>
               </div>
 
-              {/* Menu 5: Company (Standard Dropdown) */}
+              {/* Menu 5: About AKGLS Group (Direct Top-Level Menu Link) */}
+              <a 
+                href="/about"
+                onClick={(e) => handleLinkClick(e, '/about')}
+                aria-label="About AKGLS Group"
+                className={`px-3 py-2 rounded-lg text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo cursor-pointer ${
+                  currentPage === 'about'
+                    ? 'bg-brand-indigo/15 text-teal-400 ring-1 ring-brand-indigo/50'
+                    : 'text-slate-300 hover:text-white hover:bg-slate-900/50'
+                }`}
+              >
+                About
+              </a>
+
+              {/* Menu 6: Company (Standard Dropdown) */}
               <div 
                 className="relative"
                 onMouseEnter={() => setActiveMenu('company')}
@@ -621,7 +668,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 </AnimatePresence>
               </div>
 
-              {/* Menu 6: Hire Experts (High Intent Core Dropdown Menu) */}
+              {/* Menu 7: Hire Experts (High Intent Core Dropdown Menu) */}
               <div 
                 className="relative"
                 onMouseEnter={() => setActiveMenu('hire')}
@@ -672,6 +719,23 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 </AnimatePresence>
               </div>
 
+              {/* Direct Top-Level Menu: Agency CRM (/manage) */}
+              <a 
+                href="/manage"
+                onClick={(e) => handleLinkClick(e, '/manage')}
+                aria-label="Agency Manager CRM & Operations"
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold transition-all border cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal ${
+                  currentPage === 'manager-dashboard' || currentPage === 'manage'
+                    ? 'bg-brand-teal/25 text-brand-teal border-brand-teal ring-1 ring-brand-teal'
+                    : 'text-brand-teal hover:text-white bg-brand-teal/10 border-brand-teal/35 hover:bg-brand-teal/20'
+                }`}
+                title="Agency Manager CRM & Operations Portal (/manage)"
+              >
+                <Briefcase className="w-3.5 h-3.5 text-brand-teal" />
+                <span>CRM</span>
+                <span className="text-[10px] px-1 py-0.2 rounded bg-brand-teal/30 text-teal-300 font-mono">/manage</span>
+              </a>
+
             </div>
 
             {/* Right Side Header Action Anchors */}
@@ -694,13 +758,13 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
 
               {/* Agency Manager CRM & Operations */}
               <a
-                href="/#manage"
-                onClick={(e) => handleLinkClick(e, '/#manage')}
+                href="/manage"
+                onClick={(e) => handleLinkClick(e, '/manage')}
                 aria-label="Agency Manager CRM & Operations"
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border border-slate-700/80 bg-slate-900/90 text-brand-teal hover:text-white hover:border-brand-teal/60 transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal cursor-pointer"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border border-brand-teal/50 bg-slate-900/90 text-brand-teal hover:text-white hover:border-brand-teal transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal cursor-pointer"
                 title="Agency Manager CRM & Operations (/manage)"
               >
-                <Briefcase className="w-3.5 h-3.5" />
+                <Briefcase className="w-3.5 h-3.5 text-brand-teal" />
                 <span>Manager CRM</span>
               </a>
 
@@ -708,11 +772,13 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               {currentUser ? (
                 <div className="flex items-center gap-2 bg-slate-900/90 border border-slate-750 px-2 py-1.5 rounded-xl">
                   {currentUser.photoURL ? (
-                    <img 
+                    <LazyImage 
                       src={currentUser.photoURL} 
                       alt="User avatar" 
                       referrerPolicy="no-referrer"
+                      containerClassName="w-5 h-5 rounded-full overflow-hidden"
                       className="w-5 h-5 rounded-full object-cover" 
+                      showShimmer={false}
                     />
                   ) : (
                     <div className="w-5 h-5 rounded-full bg-brand-teal text-slate-950 flex items-center justify-center text-[10px] font-bold">
@@ -866,6 +932,34 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               {/* Accordion Based Nav Middle Section */}
               <div className="flex-1 px-5 py-4 space-y-1 text-slate-300 overflow-y-auto scrollbar-none">
                 
+                {/* Priority Mobile Quick Access Buttons */}
+                <div className="grid grid-cols-2 gap-2 pb-3 mb-2 border-b border-slate-800">
+                  <a
+                    href="/about"
+                    onClick={(e) => { setIsMobileMenuOpen(false); handleLinkClick(e, '/about'); }}
+                    className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center gap-1.5 transition-colors ${
+                      currentPage === 'about'
+                        ? 'bg-brand-indigo/20 border-brand-indigo text-teal-300'
+                        : 'bg-slate-900 border-slate-800 text-slate-200 hover:text-white'
+                    }`}
+                  >
+                    <Building2 className="w-3.5 h-3.5 text-brand-indigo" />
+                    <span>About Us</span>
+                  </a>
+                  <a
+                    href="/manage"
+                    onClick={(e) => { setIsMobileMenuOpen(false); handleLinkClick(e, '/manage'); }}
+                    className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center gap-1.5 transition-colors ${
+                      currentPage === 'manager-dashboard' || currentPage === 'manage'
+                        ? 'bg-brand-teal/25 border-brand-teal text-brand-teal'
+                        : 'bg-slate-900 border-brand-teal/40 text-brand-teal hover:text-white'
+                    }`}
+                  >
+                    <Briefcase className="w-3.5 h-3.5 text-brand-teal" />
+                    <span>CRM (/manage)</span>
+                  </a>
+                </div>
+
                 {/* Services Accordion */}
                 <div className="border-b border-slate-800 pb-1.5">
                   <button 
@@ -1055,8 +1149,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               {/* Mobile Menu Action Buttons & PWA Install */}
               <div className="p-5 border-t border-slate-800 bg-[#0a0f1d] space-y-3">
                 <a 
-                  href="/#manage" 
-                  onClick={(e) => { setIsMobileMenuOpen(false); handleLinkClick(e, '/#manage'); }} 
+                  href="/manage" 
+                  onClick={(e) => { setIsMobileMenuOpen(false); handleLinkClick(e, '/manage'); }} 
                   aria-label="Agency Manager CRM & Operations"
                   className="w-full py-2.5 bg-slate-900 border border-brand-teal/40 text-brand-teal font-bold rounded-xl text-center flex items-center justify-center gap-2 text-xs hover:bg-brand-teal hover:text-slate-950 transition-all shadow-sm"
                 >

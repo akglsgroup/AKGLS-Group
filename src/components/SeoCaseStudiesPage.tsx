@@ -14,6 +14,7 @@ import {
   DollarSign as PriceIcon
 } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
+import LazyImage from './LazyImage';
 
 interface SeoCaseStudiesPageProps {
   onBackToHome: () => void;
@@ -697,13 +698,13 @@ export default function SeoCaseStudiesPage({ onBackToHome, openProposalForm }: S
                   
                   {/* Card Visual Top header banner */}
                   <div className="relative h-48 overflow-hidden bg-slate-950">
-                    <img 
+                    <LazyImage 
                       src={cs.image} 
                       alt={cs.title} 
                       className="w-full h-full object-cover opacity-75 hover:scale-105 duration-700 transition"
                       referrerPolicy="no-referrer"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#070a16] via-[#070a16]/40 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#070a16] via-[#070a16]/40 to-transparent pointer-events-none" />
                     
                     {/* Top badgies */}
                     <div className="absolute top-4 left-4 right-4 flex justify-between items-center z-10 font-mono text-[9px]">

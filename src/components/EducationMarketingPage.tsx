@@ -4,10 +4,12 @@ import {
   Search, Bot, Sparkles, Globe, Users, PhoneCall, Layers, 
   ShieldCheck, TrendingUp, BarChart3, ChevronRight, HelpCircle, 
   Building2, Landmark, Check, Send, Phone, MessageSquare, 
-  Cpu, Zap, Compass, ArrowUpRight, Share2, Target, Calendar
+  Cpu, Zap, Compass, ArrowUpRight, Share2, Target, Calendar,
+  Video, Star, ThumbsUp, Quote, MessageCircle
 } from 'lucide-react';
 import { captureLead } from '../utils/leadCapture';
 import WhatsAppIcon from './WhatsAppIcon';
+import ProposalSuccessState from './ProposalSuccessState';
 
 interface EducationMarketingPageProps {
   onBackToHome: () => void;
@@ -1119,6 +1121,155 @@ export default function EducationMarketingPage({ onBackToHome, openProposalForm,
         </div>
       </section>
 
+      {/* SECTION 9.5: SOCIAL MEDIA MARKETING FOR EDUCATION */}
+      <section className="py-20 border-b border-slate-800/80 bg-[#04060f]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left space-y-12">
+          
+          <div className="max-w-3xl space-y-4">
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-teal-400 font-semibold">
+              <Share2 className="w-4 h-4 text-teal-400" />
+              <span>Turn Knowledge Into Engagement</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-display">
+              Social Media Marketing for Education: Turn Education Content Into Student Engagement
+            </h2>
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+              Education brands have an unfair advantage over traditional businesses: you possess genuine knowledge worth sharing. AKGLS Group transforms that knowledge into high-retention social content that captivates prospective students, comforts skeptical parents, and drives surges of qualified admissions.
+            </p>
+          </div>
+
+          {/* 12 Content Formats Grid */}
+          <div className="space-y-4">
+            <div className="text-xs font-mono uppercase tracking-wider text-slate-400 font-bold">
+              12 Social Content Formats Engineered for Education Brands:
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3.5">
+              {[
+                { title: "Educational Reels & Shorts", desc: "60-second conceptual explainers, entrance exam shortcuts, and bite-sized learning." },
+                { title: "Course & Degree Explainers", desc: "Transparent syllabus breakdowns, required tools, and career pathway highlights." },
+                { title: "Faculty Masterclass Teasers", desc: "Spotlights on star educators demonstrating deep subject mastery and pedagogy." },
+                { title: "Student Stories & Vlogs", desc: "A day in the life of a scholar, lab work, hostel lifestyle, and student clubs." },
+                { title: "Campus & Lab Tours", desc: "Showcases of modern facilities, libraries, maker spaces, and sports complexes." },
+                { title: "Admission Announcements", desc: "Seasonal cutoff releases, batch deadlines, and early-bird scholarship alerts." },
+                { title: "Career Tips & Salary Insights", desc: "Honest discussions about industry salaries, hiring trends, and interview tips." },
+                { title: "Exam Cutoffs & Alerts", desc: "Real-time updates on NEET, JEE, CAT, GATE, or regional board examinations." },
+                { title: "Student & Parent FAQs", desc: "Bite-sized video answers resolving doubts about fees, housing, and placements." },
+                { title: "Placement Celebrations", desc: "Social proof carousels celebrating students who secured high-package job offers." },
+                { title: "Interactive Live Webinars", desc: "Live AMA sessions with Deans, counselors, and top alumni to convert applicants." },
+                { title: "Micro-Learning Series", desc: "Sequential carousel posts that establish educational authority across feeds." }
+              ].map((fmt, idx) => (
+                <div key={idx} className="p-3.5 rounded-xl bg-[#090e1f] border border-slate-800/80 hover:border-slate-700 transition-all space-y-1.5">
+                  <div className="text-xs font-bold text-teal-300 font-display flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400 shrink-0" />
+                    <span>{fmt.title}</span>
+                  </div>
+                  <p className="text-[11px] text-slate-400 leading-relaxed">
+                    {fmt.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Social Platform Architecture */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-2">
+            {[
+              {
+                platform: "Instagram",
+                target: "Students & Gen-Z (16-24)",
+                desc: "Reels, stories, campus lifestyle aesthetics, student takeovers, and direct messaging admissions inquiry funnels."
+              },
+              {
+                platform: "YouTube",
+                target: "Deep Research & Intent",
+                desc: "Comprehensive syllabus breakdowns, campus walkthrough videos, alumni interview podcasts, and webinar recordings."
+              },
+              {
+                platform: "LinkedIn",
+                target: "Executive & B2B Up-Skilling",
+                desc: "Executive MBAs, corporate partnerships, L&D leader targeting, faculty research, and high-ticket degree prestige."
+              },
+              {
+                platform: "Facebook",
+                target: "Parents & Family Decision-Makers",
+                desc: "K-12 school admissions, parent community groups, transparent fee reviews, safety assurances, and local open days."
+              }
+            ].map((p, pIdx) => (
+              <div key={pIdx} className="p-5 rounded-2xl bg-slate-950/80 border border-slate-800 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="text-base font-bold text-white font-display">{p.platform}</span>
+                  <span className="text-[10px] font-mono text-teal-400 font-bold uppercase">{p.target}</span>
+                </div>
+                <p className="text-xs text-slate-400 leading-relaxed">{p.desc}</p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
+      {/* SECTION 9.6: REPUTATION & TRUST MANAGEMENT */}
+      <section className="py-20 border-b border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left space-y-12">
+          
+          <div className="max-w-3xl space-y-4">
+            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-teal-400 font-semibold">
+              <Award className="w-4 h-4 text-teal-400" />
+              <span>Decisive Trust Architecture</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight font-display">
+              Reputation & Trust Management: Students Choose Brands They Trust
+            </h2>
+            <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+              For schools, colleges, and EdTech platforms, trust directly dictates enrollment velocity. Students and parents will not invest time and savings without verifying reviews, alumni outcomes, and accreditations. AKGLS Group establishes an unbreakable digital trust fortress around your education brand.
+            </p>
+          </div>
+
+          {/* 6 Trust Engine Pillars */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              {
+                pillar: "01. Multi-Platform Reviews & Ratings",
+                desc: "Systematic review cultivation across Google Maps, Shiksha, Careers360, Trustpilot, and Glassdoor, paired with proactive sentiment monitoring and response workflows."
+              },
+              {
+                pillar: "02. Alumni Outcomes & Placement Proof",
+                desc: "Verifiable salary statistics, recruiter rosters (Google, Microsoft, TCS, Deloitte), and authentic career path case studies that give applicants confidence."
+              },
+              {
+                pillar: "03. Faculty Credibility & Thought Leadership",
+                desc: "Showcase PhD credentials, published papers, industry advisory roles, and academic awards to validate educational quality."
+              },
+              {
+                pillar: "04. Institutional Accreditation Badges",
+                desc: "Prominent placement of NAAC, NIRF, UGC, AICTE, NBA, IB, Cambridge, AACSB, and international affiliations throughout landing pages and schema graphs."
+              },
+              {
+                pillar: "05. Digital PR & Media Coverage",
+                desc: "High-authority editorial features in leading educational dailies, press releases for rankings, innovations, and campus milestones."
+              },
+              {
+                pillar: "06. Authentic Student Testimonial Architecture",
+                desc: "Unscripted student and parent video interviews addressing real doubts: fees, faculty support, campus culture, and career outcomes."
+              }
+            ].map((trust, tIdx) => (
+              <div key={tIdx} className="p-6 rounded-2xl bg-[#090e1f] border border-slate-800/80 hover:border-slate-700 transition-all space-y-3">
+                <div className="text-xs font-mono font-bold text-teal-400 uppercase tracking-wider">
+                  TRUST PILLAR {tIdx + 1}
+                </div>
+                <h3 className="text-base font-bold text-white font-display">
+                  {trust.pillar}
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  {trust.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+
+        </div>
+      </section>
+
       {/* SECTION 10: MARKETING SOLUTIONS FOR EVERY EDUCATION BUSINESS (8 SECTORS) */}
       <section className="py-20 border-b border-slate-800/80 bg-[#04060f]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left space-y-12">
@@ -1420,36 +1571,34 @@ export default function EducationMarketingPage({ onBackToHome, openProposalForm,
               <div className="bg-[#0b1024] border border-slate-800 rounded-2xl p-6 sm:p-8 shadow-2xl">
                 
                 {leadSuccess ? (
-                  <div className="p-8 text-center space-y-4">
-                    <div className="w-14 h-14 rounded-full bg-teal-500/20 border border-teal-500/40 flex items-center justify-center text-teal-400 mx-auto">
-                      <CheckCircle2 className="w-7 h-7" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-white font-display">Audit Request Received!</h3>
-                    <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md mx-auto">
-                      Thank you. Our senior education marketing strategist will analyze your institutional search footprint, competitor admissions funnels, and contact you within 24 hours.
-                    </p>
-                    <div className="pt-2">
-                      <button
-                        onClick={() => {
-                          setLeadSuccess(false);
-                          setLeadForm({
-                            institutionName: '',
-                            contactName: '',
-                            email: '',
-                            phone: '',
-                            websiteUrl: '',
-                            institutionType: 'College / University',
-                            primaryGoal: 'Increase Qualified Student Enquiries',
-                            targetCourses: '',
-                            notes: ''
-                          });
-                        }}
-                        className="px-6 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold cursor-pointer"
-                      >
-                        Submit Another Request
-                      </button>
-                    </div>
-                  </div>
+                  <ProposalSuccessState
+                    contactName={leadForm.contactName}
+                    companyName={leadForm.institutionName || 'Your Education Institution'}
+                    companyUrl={leadForm.websiteUrl}
+                    budget={leadForm.institutionType}
+                    channels={[
+                      'Student Journey SEO',
+                      'Answer Engine (AEO)',
+                      'Generative AI (GEO)',
+                      'Admissions Funnel'
+                    ]}
+                    notes={leadForm.targetCourses}
+                    onReset={() => {
+                      setLeadSuccess(false);
+                      setLeadForm({
+                        institutionName: '',
+                        contactName: '',
+                        email: '',
+                        phone: '',
+                        websiteUrl: '',
+                        institutionType: 'College / University',
+                        primaryGoal: 'Increase Qualified Student Enquiries',
+                        targetCourses: '',
+                        notes: ''
+                      });
+                    }}
+                    variant="dark"
+                  />
                 ) : (
                   <form onSubmit={handleLeadSubmit} className="space-y-4">
                     <div className="border-b border-slate-800 pb-3">
