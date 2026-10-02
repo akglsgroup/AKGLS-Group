@@ -8,6 +8,7 @@ import {
 import WhatsAppIcon from './WhatsAppIcon';
 import { PWAInstallButton } from './PWAInstallButton';
 import AkglsLogo from './AkglsLogo';
+import { forcePwaCacheRefresh } from '../utils/pwaCache';
 import { 
   FOOTER_FLOATING_CTA, 
   FOOTER_COMPANY_INFO, 
@@ -32,8 +33,22 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal, 
   const [newsletterEmail, setNewsletterEmail] = useState('');
   const [newsletterSuccess, setNewsletterSuccess] = useState(false);
   const [newsletterLoading, setNewsletterLoading] = useState(false);
+  const [isForceRefreshing, setIsForceRefreshing] = useState(false);
+  const [refreshStatus, setRefreshStatus] = useState<string | null>(null);
 
   const currentYear = new Date().getFullYear();
+
+  const handleForceRefresh = async () => {
+    if (isForceRefreshing) return;
+    setIsForceRefreshing(true);
+    try {
+      await forcePwaCacheRefresh({
+        onStatusUpdate: (msg) => setRefreshStatus(msg)
+      });
+    } catch (_) {
+      window.location.reload();
+    }
+  };
 
   const handleLinkClick = (href: string, e: MouseEvent) => {
     if (href === '#audit-form' && openProposal) {
@@ -484,11 +499,23 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal, 
               ))}
             </div>
 
-            <div className="flex items-center gap-3 font-display text-slate-400 text-xs font-semibold">
+            <div className="flex flex-wrap items-center justify-center md:justify-end gap-3 font-display text-slate-400 text-xs font-semibold">
               <PWAInstallButton 
                 variant="footer"
                 className="inline-flex items-center gap-1.5 text-slate-400 hover:text-brand-teal transition-colors rounded px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal cursor-pointer"
               />
+              <span className="text-indigo-950/60 hidden sm:inline">•</span>
+              <button
+                type="button"
+                onClick={handleForceRefresh}
+                disabled={isForceRefreshing}
+                className="inline-flex items-center gap-1.5 text-slate-400 hover:text-brand-teal transition-colors rounded px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal cursor-pointer disabled:opacity-50"
+                title="Clear PWA Service Worker cache & force reload latest updates"
+                aria-label="Force Refresh and clear cache"
+              >
+                <RefreshCw className={`w-3.5 h-3.5 ${isForceRefreshing ? 'animate-spin text-brand-teal' : ''}`} />
+                <span>{isForceRefreshing ? (refreshStatus || 'Refreshing...') : 'Force Refresh'}</span>
+              </button>
               <span className="text-indigo-950/60 hidden sm:inline">•</span>
               <span>Designed with ❤️ for AI-Driven Growth</span>
               <span className="text-indigo-950/60 hidden sm:inline">•</span>

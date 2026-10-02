@@ -337,7 +337,18 @@ export function renderSharedFooterHtml(currentPath: string = '/'): string {
             `).join('')}
           </div>
 
-          <div class="flex items-center gap-1.5 font-display text-slate-400 text-xs font-semibold">
+          <div class="flex flex-wrap items-center justify-center md:justify-end gap-3 font-display text-slate-400 text-xs font-semibold">
+            <button 
+              type="button" 
+              id="footer-force-refresh-btn"
+              class="inline-flex items-center gap-1.5 text-slate-400 hover:text-brand-teal transition-colors rounded px-2 py-1 cursor-pointer"
+              title="Clear PWA Service Worker cache & force reload latest content"
+              aria-label="Force Refresh and clear cache"
+            >
+              <svg class="w-3.5 h-3.5 refresh-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+              <span class="refresh-label">Force Refresh</span>
+            </button>
+            <span class="text-indigo-950/60 hidden sm:inline">•</span>
             <span>Designed with ❤️ for AI-Driven Growth</span>
           </div>
         </div>
@@ -403,6 +414,38 @@ export function renderFooterScript(): string {
                 }
               }, 4500);
             }, 800);
+          });
+        }
+
+        // 3. Global Footer Force Refresh Handler
+        var forceRefreshBtn = document.getElementById('footer-force-refresh-btn');
+        if (forceRefreshBtn) {
+          forceRefreshBtn.addEventListener('click', async function() {
+            var icon = forceRefreshBtn.querySelector('.refresh-icon');
+            var label = forceRefreshBtn.querySelector('.refresh-label');
+            if (icon) icon.classList.add('animate-spin', 'text-brand-teal');
+            if (label) label.textContent = 'Clearing Cache...';
+            forceRefreshBtn.disabled = true;
+
+            try {
+              if ('caches' in window) {
+                var cacheKeys = await window.caches.keys();
+                await Promise.all(cacheKeys.map(function(k) { return window.caches.delete(k); }));
+              }
+              if ('serviceWorker' in navigator) {
+                var regs = await navigator.serviceWorker.getRegistrations();
+                await Promise.all(regs.map(function(r) { return r.unregister(); }));
+              }
+            } catch (err) {
+              console.warn('[PWA] Cache purge error:', err);
+            }
+
+            if (label) label.textContent = 'Reloading...';
+            setTimeout(function() {
+              var u = new URL(window.location.href);
+              u.searchParams.set('_pwa_refresh', Date.now().toString());
+              window.location.replace(u.toString());
+            }, 300);
           });
         }
       })();
