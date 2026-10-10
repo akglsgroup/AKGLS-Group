@@ -21,6 +21,37 @@ interface SeoCaseStudiesPageProps {
   openProposalForm?: () => void;
 }
 
+const saasFaqs = [
+  {
+    q: "How long does SEO take to show ranking and traffic results?",
+    a: "While preliminary technical issues can see immediate index state updates, compounding search engine traffic growth typically requires between 4 to 6 months of structural optimization, content hub integration, and continuous authority block scaling."
+  },
+  {
+    q: "What specific industries does AKGLS Group specialize in?",
+    a: "Our core expert portfolios span SaaS apps, Ecommerce retailers, multi-location Healthcare and local patient clinics, capital Real Estate companies, B2B Industrial Manufacturing, EdTech structures, and compliance-guided Finance agencies."
+  },
+  {
+    q: "Are the client results in these case studies verified?",
+    a: "Yes. All organic traffic, keyword rankings, incoming inquiries volume, and incremental revenue charts are taken directly from actual client GSC, GA4, and CRM database screenshots under active NDA parameters."
+  },
+  {
+    q: "Can SEO directly improve our pipeline leads and revenue?",
+    a: "Absolutely. Instead of targeting generic high-difficulty keywords, we construct high-intent comparative buyer guide nodes and frictionlessly coordinate checkout headers to optimize lead-converting traffic directly."
+  },
+  {
+    q: "How does AI SEO and Search Engine Optimization (GEO) work?",
+    a: "AI SEO aligns database schemas, conversational keyword clusters, and structural authority references so that generative engines like ChatGPT, Gemini, and Perplexity suggest your brand as the expert recommendation."
+  },
+  {
+    q: "What software tools do you use inside your audit procedures?",
+    a: "Our SEO specialists deploy professional enterprise intelligence tech including Google Search Console, Ahrefs, SEMrush, Screaming Frog crawlers, GTmetrix, PageSpeed, and proprietary AI citation crawlers."
+  },
+  {
+    q: "Do you provide monthly progress reports and index transparency?",
+    a: "Yes. We offer fully transparent reporting grids detailing search index shifts, keyword ranks lifts, inbound conversion logs, and actual ROI status on a recurring 30-day timeline."
+  }
+];
+
 const schemasTemplates = {
   service: `{
   "@context": "https://schema.org",
@@ -55,19 +86,55 @@ const schemasTemplates = {
     "bestRating": "5"
   },
   "reviewBody": "AKGLS Group tripled our organic trial rate in under six months while lowering our average customer acquisition cost by over 30%."
-}`
+}`,
+  faq: JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": saasFaqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.a
+      }
+    }))
+  }, null, 2)
 };
 
 export default function SeoCaseStudiesPage({ onBackToHome, openProposalForm }: SeoCaseStudiesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
   const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20reviewed%20your%20SEO%20case%20studies%20and%20want%20to%20discuss%20scaling%20our%20website.';
 
-  // State setup
+  // State setup & Inject FAQPage Schema
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "SEO Case Studies | Organic Traffic & AI Search Success | AKGLS Group";
+
+    // Set canonical link for SEO
+    const canonicalHref = "https://www.akglsgroup.com/seo-case-studies";
+    let canonicalLink = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalHref);
+
+    // Inject FAQPage Schema
+    const faqScriptId = "seo-case-studies-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = schemasTemplates.faq;
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -76,37 +143,6 @@ export default function SeoCaseStudiesPage({ onBackToHome, openProposalForm }: S
   const [selectedService, setSelectedService] = useState<string>('All');
 
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  const saasFaqs = [
-    {
-      q: "How long does SEO take to show ranking and traffic results?",
-      a: "While preliminary technical issues can see immediate index state updates, compounding search engine traffic growth typically requires between 4 to 6 months of structural optimization, content hub integration, and continuous authority block scaling."
-    },
-    {
-      q: "What specific industries does AKGLS Group specialize in?",
-      a: "Our core expert portfolios span SaaS apps, Ecommerce retailers, multi-location Healthcare and local patient clinics, capital Real Estate companies, B2B Industrial Manufacturing, EdTech structures, and compliance-guided Finance agencies."
-    },
-    {
-      q: "Are the client results in these case studies verified?",
-      a: "Yes. All organic traffic, keyword rankings, incoming inquiries volume, and incremental revenue charts are taken directly from actual client GSC, GA4, and CRM database screenshots under active NDA parameters."
-    },
-    {
-      q: "Can SEO directly improve our pipeline leads and revenue?",
-      a: "Absolutely. Instead of targeting generic high-difficulty keywords, we construct high-intent comparative buyer guide nodes and frictionlessly coordinate checkout headers to optimize lead-converting traffic directly."
-    },
-    {
-      q: "How does AI SEO and Search Engine Optimization (GEO) work?",
-      a: "AI SEO aligns database schemas, conversational keyword clusters, and structural authority references so that generative engines like ChatGPT, Gemini, and Perplexity suggest your brand as the expert recommendation."
-    },
-    {
-      q: "What software tools do you use inside your audit procedures?",
-      a: "Our SEO specialists deploy professional enterprise intelligence tech including Google Search Console, Ahrefs, SEMrush, Screaming Frog crawlers, GTmetrix, PageSpeed, and proprietary AI citation crawlers."
-    },
-    {
-      q: "Do you provide monthly progress reports and index transparency?",
-      a: "Yes. We offer fully transparent reporting grids detailing search index shifts, keyword ranks lifts, inbound conversion logs, and actual ROI status on a recurring 30-day timeline."
-    }
-  ];
 
   // Interactive ROI Calculator States
   const [currTraffic, setCurrTraffic] = useState<number>(10000); // monthly visits
@@ -397,6 +433,11 @@ export default function SeoCaseStudiesPage({ onBackToHome, openProposalForm }: S
 
   return (
     <div id="seo-case-studies-page" className="bg-[#030712] text-slate-300 min-h-screen relative font-sans leading-relaxed selection:bg-brand-orange selection:text-slate-950">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: schemasTemplates.faq }} 
+      />
       
       {/* Dynamic WhatsApp Support & Phone Floating triggers */}
       <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm">
@@ -1629,6 +1670,16 @@ export default function SeoCaseStudiesPage({ onBackToHome, openProposalForm }: S
                   {copiedKey === 'review' ? '★ Copies Code!' : 'Copy Code'}
                 </span>
               </button>
+
+              <button 
+                onClick={() => copySchema(schemasTemplates.faq, 'faq')}
+                className="w-full bg-[#0b0e20] border border-indigo-950 text-slate-300 p-3.5 rounded-xl hover:border-brand-orange/30 transition flex justify-between items-center cursor-pointer"
+              >
+                <span>3. View FAQPage Schema (Q&A Markup)</span>
+                <span className="text-[10px] text-brand-orange font-bold uppercase tracking-wider block">
+                  {copiedKey === 'faq' ? '★ Copies Code!' : 'Copy Code'}
+                </span>
+              </button>
             </div>
 
           </div>
@@ -1643,7 +1694,7 @@ export default function SeoCaseStudiesPage({ onBackToHome, openProposalForm }: S
               </div>
 
               <div className="p-4 bg-slate-950/40 text-left overflow-x-auto max-h-64 text-indigo-300 leading-snug">
-                <pre>{copiedKey === 'review' ? schemasTemplates.review : schemasTemplates.service}</pre>
+                <pre>{copiedKey === 'review' ? schemasTemplates.review : copiedKey === 'faq' ? schemasTemplates.faq : schemasTemplates.service}</pre>
               </div>
 
               <div className="bg-slate-950 p-3 border-t border-indigo-950 text-center">

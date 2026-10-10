@@ -13,6 +13,29 @@ interface SeoServicesPageProps {
   onBackToHome: () => void;
 }
 
+const seoServicesFaqsList = [
+  {
+    q: "How long does professional SEO take to display rankings?",
+    a: "For older existing websites, technical schema and loading speed corrections generate index shifts inside 14-30 days. For new domains seeking high-intent commercial terms, content authority pipelines take 3 to 6 months to establish permanent domain rating foundations."
+  },
+  {
+    q: "Is SEO better for business growth than PPC Ads?",
+    a: "PPC is excellent for immediate lead ingestion, but costs rise continuously. SEO represents an asset that scales organically; average acquisition costs reduce by over 48% when organic domains captures the majority of keyword clicks."
+  },
+  {
+    q: "What is GEO / AI Search Optimization?",
+    a: "Generative Engine Optimization (GEO) involves preparing structure metadata so next-gen conversation engines select your domain as the primary source when generating conversational answers or recommended listings."
+  },
+  {
+    q: "Do you supply Looker monthly performance reports?",
+    a: "Yes. Every client portal links directly to live-updating Looker Studio dashboards tracking keywords, Google crawler errors, organic click trends and direct lead calls."
+  },
+  {
+    q: "Will you configure maps local Citations directly?",
+    a: "Yes. Our services provide direct Google Business Profile setup, local map pack geolocation coordinates optimization and clean directories citation sync."
+  }
+];
+
 export default function SeoServicesPage({ onBackToHome }: SeoServicesPageProps) {
   // Constants for CTA
   const CONTACT_NUMBER = '+91 831 811 4492';
@@ -24,9 +47,32 @@ export default function SeoServicesPage({ onBackToHome }: SeoServicesPageProps) 
     const originalTitle = document.title;
     document.title = "SEO Services Company | AI-Powered SEO Agency | AKGLS Group";
     
-    // Add custom meta tags simulation or dynamically append if needed
+    // Inject FAQPage Schema
+    const faqScriptId = "seo-services-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": seoServicesFaqsList.map(f => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.a
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -275,6 +321,24 @@ export default function SeoServicesPage({ onBackToHome }: SeoServicesPageProps) 
 
   return (
     <div className="bg-[#05070a] text-slate-300 min-h-screen">
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": seoServicesFaqsList.map(f => ({
+              "@type": "Question",
+              "name": f.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.a
+              }
+            }))
+          })
+        }}
+      />
       
       {/* 🚀 FLOAT PANEL BAR FOR HIGH CONVERSION */}
       <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2.5 max-w-sm">
@@ -1189,28 +1253,7 @@ export default function SeoServicesPage({ onBackToHome }: SeoServicesPageProps) 
           </div>
 
           <div className="space-y-3">
-            {[
-              {
-                q: "How long does professional SEO take to display rankings?",
-                a: "For older existing websites, technical schema and loading speed corrections generate index shifts inside 14-30 days. For new domains seeking high-intent commercial terms, content authority pipelines take 3 to 6 months to establish permanent domain rating foundations."
-              },
-              {
-                q: "Is SEO better for business growth than PPC Ads?",
-                a: "PPC is excellent for immediate lead ingestion, but costs rise continuously. SEO represents an asset that scales organically; average acquisition costs reduce by over 48% when organic domains captures the majority of keyword clicks."
-              },
-              {
-                q: "What is GEO / AI Search Optimization?",
-                a: "Generative Engine Optimization (GEO) involves preparing structure metadata so next-gen conversation engines select your domain as the primary source when generating conversational answers or recommended listings."
-              },
-              {
-                q: "Do you supply Looker monthly performance reports?",
-                a: "Yes. Every client portal links directly to live-updating Looker Studio dashboards tracking keywords, Google crawler errors, organic click trends and direct lead calls."
-              },
-              {
-                q: "Will you configure maps local Citations directly?",
-                a: "Yes. Our services provide direct Google Business Profile setup, local map pack geolocation coordinates optimization and clean directories citation sync."
-              }
-            ].map((faq, idx) => {
+            {seoServicesFaqsList.map((faq, idx) => {
               const isOpen = activeFaq === idx;
               return (
                 <div key={idx} className="bg-[#0c121e] border border-slate-850 rounded-2xl overflow-hidden transition-all">

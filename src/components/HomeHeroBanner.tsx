@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, Bot } from 'lucide-react';
 import CleanAdvancedHeroVisual from './CleanAdvancedHeroVisual';
+import RealisticHeroAgencyVisual from './RealisticHeroAgencyVisual';
 
 interface HomeHeroBannerProps {
   onOpenAuditForm?: () => void;
@@ -84,9 +85,9 @@ export const HomeHeroBanner: React.FC<HomeHeroBannerProps> = ({
 
           </div>
 
-          {/* Right Column: Simple, Clean, Advanced Visual */}
+          {/* Right Column: Realistic Corporate HQ Reception & Team Showcase */}
           <div className="lg:col-span-5 relative w-full flex items-center justify-center">
-            <CleanAdvancedHeroVisual />
+            <RealisticHeroAgencyVisual onOpenAudit={scrollToAudit} />
           </div>
 
         </div>

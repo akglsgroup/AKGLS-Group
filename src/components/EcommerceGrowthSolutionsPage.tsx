@@ -48,16 +48,51 @@ const ecommerceSchemaTemplates = {
 }`
 };
 
+const ecommerceFaqsList = [
+  { q: "How can ecommerce businesses increase online sales?", a: "By combining three core levers: increasing high-intent traffic (Ecommerce SEO and hyper-targeted Google/Meta Ads), maximizing Conversion Rates (CRO checkout streamline, fast load speeds), and lifting Average Order Value (AOV via upsells, smart product recommendations, and free-shipping thresholds)." },
+  { q: "Is Ecommerce SEO important if we are already spending heavily on paid ads?", a: "Absolutely. Paid ads stop delivering sales the second you pause the spend. Ecommerce SEO builds permanent, highly profitable organic visibility on Google. This drives down your overall Customer Acquisition Cost (CAC) and builds a secure baseline of predictable high-margin sales on autopilot." },
+  { q: "Which ads work best for ecommerce brands?", a: "For immediate, high-intent sales, Google Shopping and Performance Max (PMax) Ads are unmatched because they capture users actively searching for product names. For visual/lifestyle discovery, social impulse buys, and scaling brand volume, Meta (Instagram/Facebook) and TikTok Ads outperform other networks." },
+  { q: "Can AI improve ecommerce growth?", a: "Yes, in multiple ways. AI-powered search optimization (GEO) ensures your products appear when users ask AI assistants like ChatGPT or Gemini for product recommendations. AI-powered personalization can also dynamically display product catalogs tailored to user behaviors, and automate responsive support via smart commerce agents." },
+  { q: "What is Conversion Rate Optimization (CRO)?", a: "CRO is the scientific process of identifying why website visitors abandon their carts or leave your store without purchasing, then systematically testing solutions. Our custom CRO services focus on cart abandonment rescue, checkout field reduction, layout speed, and high-trust social validation badges." },
+  { q: "How long does it take to see positive returns?", a: "Paid advertising optimizations generally produce visible ROAS shifts within 7 to 14 days of account restructures. Organic SEO rankings and technical content velocity compound significantly over a 45 to 90 days period to drive permanent organic sales." },
+  { q: "Do you help Shopify stores scale?", a: "Shopify is our primary platform capability. We custom design, develop, and optimize high-speed Liquid theme code, integrate automated Klaviyo marketing loops, implement premium checkout hooks, and scale multi-million dollar ad operations for Shopify stores worldwide." }
+];
+
 export default function EcommerceGrowthSolutionsPage({ onBackToHome, openProposalForm }: EcommerceGrowthSolutionsPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
   const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20want%20to%20scale%20our%20e-commerce%20revenue%20with%20your%20growth%20solutions.';
 
-  // Dynamic Page Title
+  // Dynamic Page Title & FAQ Schema
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "Ecommerce Growth Solutions | Ecommerce Marketing Agency | AKGLS Group";
+
+    // Inject FAQPage Schema
+    const faqScriptId = "ecommerce-growth-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": ecommerceFaqsList.map(f => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.a
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -236,15 +271,7 @@ export default function EcommerceGrowthSolutionsPage({ onBackToHome, openProposa
   // FAQ collapses
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
-  const faqs = [
-    { q: "How can ecommerce businesses increase online sales?", a: "By combining three core levers: increasing high-intent traffic (Ecommerce SEO and hyper-targeted Google/Meta Ads), maximizing Conversion Rates (CRO checkout streamline, fast load speeds), and lifting Average Order Value (AOV via upsells, smart product recommendations, and free-shipping thresholds)." },
-    { q: "Is Ecommerce SEO important if we are already spending heavily on paid ads?", a: "Absolutely. Paid ads stop delivering sales the second you pause the spend. Ecommerce SEO builds permanent, highly profitable organic visibility on Google. This drives down your overall Customer Acquisition Cost (CAC) and builds a secure baseline of predictable high-margin sales on autopilot." },
-    { q: "Which ads work best for ecommerce brands?", a: "For immediate, high-intent sales, Google Shopping and Performance Max (PMax) Ads are unmatched because they capture users actively searching for product names. For visual/lifestyle discovery, social impulse buys, and scaling brand volume, Meta (Instagram/Facebook) and TikTok Ads outperform other networks." },
-    { q: "Can AI improve ecommerce growth?", a: "Yes, in multiple ways. AI-powered search optimization (GEO) ensures your products appear when users ask AI assistants like ChatGPT or Gemini for product recommendations. AI-powered personalization can also dynamically display product catalogs tailored to user behaviors, and automate responsive support via smart commerce agents." },
-    { q: "What is Conversion Rate Optimization (CRO)?", a: "CRO is the scientific process of identifying why website visitors abandon their carts or leave your store without purchasing, then systematically testing solutions. Our custom CRO services focus on cart abandonment rescue, checkout field reduction, layout speed, and high-trust social validation badges." },
-    { q: "How long does it take to see positive returns?", a: "Paid advertising optimizations generally produce visible ROAS shifts within 7 to 14 days of account restructures. Organic SEO rankings and technical content velocity compound significantly over a 45 to 90 days period to drive permanent organic sales." },
-    { q: "Do you help Shopify stores scale?", a: "Shopify is our primary platform capability. We custom design, develop, and optimize high-speed Liquid theme code, integrate automated Klaviyo marketing loops, implement premium checkout hooks, and scale multi-million dollar ad operations for Shopify stores worldwide." }
-  ];
+  const faqs = ecommerceFaqsList;
 
   // Simulated Audit Submission
   const [auditForm, setAuditForm] = useState({
@@ -265,6 +292,24 @@ export default function EcommerceGrowthSolutionsPage({ onBackToHome, openProposa
 
   return (
     <div id="ecommerce-growth-solutions-page" className="bg-[#02050f] text-slate-300 min-h-screen relative font-sans leading-relaxed selection:bg-brand-teal selection:text-slate-950">
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": ecommerceFaqsList.map(f => ({
+              "@type": "Question",
+              "name": f.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.a
+              }
+            }))
+          })
+        }}
+      />
       
       {/* Floating Hotline & Action widgets */}
       <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2 max-w-sm">

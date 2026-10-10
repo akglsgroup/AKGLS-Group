@@ -15,14 +15,17 @@ import {
 } from '../firebase';
 import LazyImage from './LazyImage';
 
-interface GeminiChatModalProps {
+export interface GeminiChatModalProps {
   isOpen: boolean;
   onClose: () => void;
   initialPrompt?: string;
+  categoryName?: string;
+  categoryQuestions?: string[];
+  initialRole?: ConsultantRole;
 }
 
-type ModelVariant = 'gemini-3.5-flash' | 'gemini-3.1-pro-preview' | 'gemini-3.1-flash-lite';
-type ConsultantRole = 'seo_architect' | 'content_strategist' | 'lead_consultant' | 'general';
+export type ModelVariant = 'gemini-3.5-flash' | 'gemini-3.1-pro-preview' | 'gemini-3.1-flash-lite';
+export type ConsultantRole = 'seo_architect' | 'content_strategist' | 'lead_consultant' | 'general';
 
 const ROLE_PRESETS: { id: ConsultantRole; label: string; description: string; icon: string }[] = [
   {
@@ -58,18 +61,44 @@ const PROMPT_SUGGESTIONS = [
   "What are the latest 2026 Google Search algorithmic updates?"
 ];
 
-export default function GeminiChatModal({ isOpen, onClose, initialPrompt }: GeminiChatModalProps) {
+export default function GeminiChatModal({ 
+  isOpen, 
+  onClose, 
+  initialPrompt,
+  categoryName,
+  categoryQuestions,
+  initialRole
+}: GeminiChatModalProps) {
   const [messages, setMessages] = useState<ChatMessageRecord[]>([]);
   const [input, setInput] = useState(initialPrompt || '');
   const [isLoading, setIsLoading] = useState(false);
   const [model, setModel] = useState<ModelVariant>('gemini-3.5-flash');
   const [searchGrounding, setSearchGrounding] = useState<boolean>(true);
-  const [role, setRole] = useState<ConsultantRole>('seo_architect');
+  const [role, setRole] = useState<ConsultantRole>(initialRole || 'seo_architect');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [currentUser, setCurrentUser] = useState<any>(auth.currentUser);
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+
+  // Sync initialPrompt and initialRole whenever modal opens or props change
+  useEffect(() => {
+    if (isOpen) {
+      if (initialPrompt !== undefined) {
+        setInput(initialPrompt);
+      }
+      if (initialRole) {
+        setRole(initialRole);
+      }
+      setTimeout(() => {
+        if (textareaRef.current) {
+          textareaRef.current.focus();
+          const len = textareaRef.current.value.length;
+          textareaRef.current.setSelectionRange(len, len);
+        }
+      }, 100);
+    }
+  }, [isOpen, initialPrompt, initialRole]);
 
   // Monitor auth status
   useEffect(() => {
@@ -408,6 +437,24 @@ export default function GeminiChatModal({ isOpen, onClose, initialPrompt }: Gemi
             </div>
           </div>
 
+          {/* Quick Ask Category Banner */}
+          {categoryName && (
+            <div className="px-5 py-2.5 bg-gradient-to-r from-brand-indigo/15 via-brand-purple/10 to-transparent border-b border-slate-800/80 flex items-center justify-between gap-3 text-xs">
+              <div className="flex items-center gap-2">
+                <span className="px-2 py-0.5 rounded-full bg-brand-teal/20 text-brand-teal font-mono text-[9.5px] uppercase font-bold tracking-wider flex items-center gap-1">
+                  <Sparkles className="w-2.5 h-2.5" />
+                  Quick Ask AI
+                </span>
+                <span className="text-slate-200 font-bold">
+                  {categoryName}
+                </span>
+              </div>
+              <span className="text-slate-400 text-[11px] hidden sm:inline">
+                Inquiry pre-filled below • Edit or press Send to consult AI Agent
+              </span>
+            </div>
+          )}
+
           {/* Error Banner */}
           {errorMsg && (
             <div className="flex items-center justify-between gap-2 px-5 py-2.5 bg-rose-500/10 border-b border-rose-500/30 text-rose-300 text-xs font-medium">
@@ -563,21 +610,31 @@ export default function GeminiChatModal({ isOpen, onClose, initialPrompt }: Gemi
           </div>
 
           {/* Quick Prompt Suggestions */}
-          {messages.length <= 2 && (
-            <div className="px-5 py-2 bg-[#090d18] border-t border-slate-850">
-              <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block mb-1.5">
-                Suggested Growth Inquiries:
-              </span>
+          {(messages.length <= 4 || (categoryQuestions && categoryQuestions.length > 0)) && (
+            <div className="px-5 py-2.5 bg-[#090d18] border-t border-slate-850">
+              <div className="flex items-center justify-between mb-1.5">
+                <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider flex items-center gap-1.5">
+                  <Sparkles className="w-3 h-3 text-brand-teal" />
+                  {categoryName ? `Suggested Inquiries for ${categoryName}:` : 'Suggested Growth Inquiries:'}
+                </span>
+                <span className="text-[9.5px] text-slate-500 font-mono hidden sm:inline">click to fill inquiry</span>
+              </div>
               <div className="flex flex-wrap gap-1.5">
-                {PROMPT_SUGGESTIONS.map((promptText, pIdx) => (
+                {((categoryQuestions && categoryQuestions.length > 0) ? categoryQuestions : PROMPT_SUGGESTIONS).map((promptText, pIdx) => (
                   <button
                     key={pIdx}
                     type="button"
-                    onClick={() => handleSend(promptText)}
-                    className="text-left text-xs bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-brand-indigo/50 text-slate-300 hover:text-white px-2.5 py-1.5 rounded-xl transition-all flex items-center gap-1.5"
+                    onClick={() => {
+                      setInput(promptText);
+                      setTimeout(() => {
+                        textareaRef.current?.focus();
+                      }, 50);
+                    }}
+                    className="text-left text-xs bg-slate-900 hover:bg-slate-850 border border-slate-800 hover:border-brand-indigo/50 text-slate-300 hover:text-white px-2.5 py-1.5 rounded-xl transition-all flex items-center gap-1.5 group/chip"
+                    title="Insert this inquiry into chat input"
                   >
-                    <span>{promptText}</span>
-                    <ChevronRight className="w-3 h-3 text-slate-500" />
+                    <span className="max-w-[260px] sm:max-w-md truncate">{promptText}</span>
+                    <CornerDownLeft className="w-3 h-3 text-slate-500 group-hover/chip:text-brand-teal shrink-0" />
                   </button>
                 ))}
               </div>

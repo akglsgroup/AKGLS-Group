@@ -14,12 +14,80 @@ interface HireSeoExpertPageProps {
   openProposalForm: () => void;
 }
 
+const hireSeoFaqs = [
+  {
+    q: "Why should I hire an SEO expert from AKGLS Group?",
+    a: "Unlike generalized marketing agencies or low-cost gig workers, our SEO specialists have certified experience in technical SEO, dynamic schema injection, Core Web Vitals optimizations, and AI Search SEO (GEO/AEO) playbooks."
+  },
+  {
+    q: "How much does an SEO expert cost?",
+    a: "Pricing relies on engagement tier parameters. Fractional part-time specialists typically map out around $1,500 - $3,000/mo, whereas comprehensive enterprise support from full-time search engineers aligns around $5,000 - $9,000/mo."
+  },
+  {
+    q: "Can SEO experts guarantee top ranking results?",
+    a: "No professional agency guarantees rankings because search algorithms change. However, our technical compliance workflows reduce indexing bottlenecks by 99% and systematically scale traffic metrics."
+  },
+  {
+    q: "What is AI SEO & GEO, and why do we need it?",
+    a: "Generative Engine Optimization (GEO) involves formatting sitemaps, specification tables, sitemaping feeds, and context tags to ensure LLMs (Perplexity, ChatGPT, Gemini, and Google AI Overviews) list your site in prompt answers."
+  },
+  {
+    q: "Do you provide dedicated full-time support?",
+    a: "Yes. Our full-time pricing models map one certified strategist exclusively to your Slack channels and developer workspaces to complete daily strategy implementation."
+  },
+  {
+    q: "How long does SEO take to show visible organic changes?",
+    a: "Initial crawl and speed fixes normally trigger indexing changes in weeks. Realizing stable keyword shifts and organic buyer pipeline scaling usually completes in 3 - 6 months."
+  },
+  {
+    q: "Do you offer ecommerce optimization services?",
+    a: "Yes. Our experts fully configure WooCommerce, Shopify, and complex product schema parameters targeting large scale product catalogs."
+  }
+];
+
+const hireSeoFaqSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": hireSeoFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a
+    }
+  }))
+});
+
 export default function HireSeoExpertPage({ onBackToHome, openProposalForm }: HireSeoExpertPageProps) {
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "Hire SEO Expert | Dedicated SEO Specialist & Consultant | AKGLS Group";
+
+    // Set canonical link for SEO
+    const canonicalHref = "https://www.akglsgroup.com/hire-seo-expert";
+    let canonicalLink = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalHref);
+
+    // Inject FAQPage Schema
+    const faqScriptId = "hire-seo-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = hireSeoFaqSchemaJson;
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -160,6 +228,11 @@ export default function HireSeoExpertPage({ onBackToHome, openProposalForm }: Hi
 
   return (
     <div className="min-h-screen bg-[#040612] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-300 font-sans antialiased overflow-x-hidden relative">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: hireSeoFaqSchemaJson }} 
+      />
       
       {/* Background decoration elements */}
       <div className="absolute top-0 left-0 right-0 h-[700px] bg-gradient-to-b from-[#140b33]/30 via-[#0a183d]/15 to-transparent pointer-events-none" />
@@ -1305,36 +1378,7 @@ export default function HireSeoExpertPage({ onBackToHome, openProposalForm }: Hi
         </div>
 
         <div className="space-y-4 text-left">
-          {[
-            {
-              q: "Why should I hire an SEO expert from AKGLS Group?",
-              a: "Unlike generalized marketing agencies or low-cost gig workers, our SEO specialists have certified experience in technical SEO, dynamic schema injection, Core Web Vitals optimizations, and AI Search SEO (GEO/AEO) playbooks."
-            },
-            {
-              q: "How much does an SEO expert cost?",
-              a: "Pricing relies on engagement tier parameters. Fractional part-time specialists typically map out around $1,500 - $3,000/mo, whereas comprehensive enterprise support from full-time search engineers aligns around $5,000 - $9,000/mo."
-            },
-            {
-              q: "Can SEO experts guarantee top ranking results?",
-              a: "No professional agency guarantees rankings because search algorithms change. However, our technical compliance workflows reduce indexing bottlenecks by 99% and systematically scale traffic metrics."
-            },
-            {
-              q: "What is AI SEO & GEO, and why do we need it?",
-              a: "Generative Engine Optimization (GEO) involves formatting sitemaps, specification tables, sitemaping feeds, and context tags to ensure LLMs (Perplexity, ChatGPT, Gemini, and Google AI Overviews) list your site in prompt answers."
-            },
-            {
-              q: "Do you provide dedicated full-time support?",
-              a: "Yes. Our full-time pricing models map one certified strategist exclusively to your Slack channels and developer workspaces to complete daily strategy implementation."
-            },
-            {
-              q: "How long does SEO take to show visible organic changes?",
-              a: "Initial crawl and speed fixes normally trigger indexing changes in weeks. Realizing stable keyword shifts and organic buyer pipeline scaling usually completes in 3 - 6 months."
-            },
-            {
-              q: "Do you offer ecommerce optimization services?",
-              a: "Yes. Our experts fully configure WooCommerce, Shopify, and complex product schema parameters targeting large scale product catalogs."
-            }
-          ].map((faq, i) => (
+          {hireSeoFaqs.map((faq, i) => (
             <div key={i} className="bg-[#0b0e20] border border-slate-900 rounded-xl overflow-hidden transition-all">
               <button
                 onClick={() => setActiveFaq(activeFaq === i ? null : i)}

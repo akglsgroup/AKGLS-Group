@@ -34,6 +34,37 @@ const marketingToolsList = [
   { name: "Smarter Review API", type: "Automated Maps ratings & citation collection" }
 ];
 
+const restaurantFaqsList = [
+  {
+    q: "How can restaurants get more customers online?",
+    a: "We focus on high-intent regional dining queries. Instead of relying on random followers, we target active local users searching for dinner now or planning group corporate lunches. By optimizing your Google Business Profile, running targeted map ads during peak hours, and integrating fast reservation paths, we drive highly motivated diners straight to your front doors."
+  },
+  {
+    q: "Is SEO important for local restaurants?",
+    a: "Absolutely critical. Over 80% of local diners search online before visiting a venue. SEO ensures your restaurant sits in the Google Local 3-Pack and ranks for popular search queries, instead of letting aggregators hijack your customers and charge you commissions for them."
+  },
+  {
+    q: "Can social media marketing actually increase restaurant sales?",
+    a: "Yes, when paired with clear conversion paths. Creative food visuals build desire, but we couple them with clear call-to-actions, WhatsApp ordering portals, and direct reservation links that turn visual engagement into confirmed covers."
+  },
+  {
+    q: "How long does professional restaurant SEO take?",
+    a: "Hyperlocal maps modifications and targeted Google Ads show traffic impact within days. Broader organic page optimization and Local 3-Pack placement typically yield significant authority gains in 45 to 90 days."
+  },
+  {
+    q: "Can you improve Google Maps and Map Pack rankings?",
+    a: "Yes. By optimizing proximity metadata, synchronizing geographic listings, driving positive review campaigns, and deploying structured Restaurant Schema, we consistently outrank generic directory websites."
+  },
+  {
+    q: "Do you market cloud kitchens and delivery brands?",
+    a: "Yes. We focus on acquiring direct orders via customized websites, creating targeted late-night campaigns, and optimizing Swiggy/Zomato profiles to maximize delivery tickets with minimal commissions."
+  },
+  {
+    q: "What is AI SEO for restaurants?",
+    a: "AI SEO, or Generative Engine Optimization (GEO), ensures that when people ask conversational engines like ChatGPT Search, Claude, or Gemini for food recommendations, your restaurant is cited with accurate pricing and a direct call to action."
+  }
+];
+
 export default function RestaurantMarketingPage({ onBackToHome, openProposalForm }: RestaurantMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
   const WHATSAPP_LINK = "https://wa.me/918318114492";
@@ -65,9 +96,34 @@ export default function RestaurantMarketingPage({ onBackToHome, openProposalForm
       });
       document.head.appendChild(scriptEl);
     }
+
+    // Inject FAQPage Schema dynamically
+    const faqScriptId = "restaurant-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": restaurantFaqsList.map(item => ({
+          "@type": "Question",
+          "name": item.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item.a
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       const el = document.getElementById(scriptId);
       if (el) el.remove();
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -435,39 +491,28 @@ export default function RestaurantMarketingPage({ onBackToHome, openProposalForm
     }
   ];
 
-  const faqItemsList = [
-    {
-      q: "How can restaurants get more customers online?",
-      a: "We focus on high-intent regional dining queries. Instead of relying on random followers, we target active local users searching for dinner now or planning group corporate lunches. By optimizing your Google Business Profile, running targeted map ads during peak hours, and integrating fast reservation paths, we drive highly motivated diners straight to your front doors."
-    },
-    {
-      q: "Is SEO important for local restaurants?",
-      a: "Absolutely critical. Over 80% of local diners search online before visiting a venue. SEO ensures your restaurant sits in the Google Local 3-Pack and ranks for popular search queries, instead of letting aggregators hijack your customers and charge you commissions for them."
-    },
-    {
-      q: "Can social media marketing actually increase restaurant sales?",
-      a: "Yes, when paired with clear conversion paths. Creative food visuals build desire, but we couple them with clear call-to-actions, WhatsApp ordering portals, and direct reservation links that turn visual engagement into confirmed covers."
-    },
-    {
-      q: "How long does professional restaurant SEO take?",
-      a: "Hyperlocal maps modifications and targeted Google Ads show traffic impact within days. Broader organic page optimization and Local 3-Pack placement typically yield significant authority gains in 45 to 90 days."
-    },
-    {
-      q: "Can you improve Google Maps and Map Pack rankings?",
-      a: "Yes. By optimizing proximity metadata, synchronizing geographic listings, driving positive review campaigns, and deploying structured Restaurant Schema, we consistently out-position generic directory websites."
-    },
-    {
-      q: "Do you market cloud kitchens and delivery brands?",
-      a: "Yes. We focus on acquiring direct orders via customized websites, creating targeted late-night campaigns, and optimizing Swiggy/Zomato profiles to maximize delivery tickets with minimal commissions."
-    },
-    {
-      q: "What is AI SEO for restaurants?",
-      a: "AI SEO, or Generative Engine Optimization (GEO), ensures that when people ask conversational engines like ChatGPT Search, Claude, or Gemini for food recommendations, your restaurant is cited with accurate pricing and a direct call to action."
-    }
-  ];
+  const faqItemsList = restaurantFaqsList;
 
   return (
     <>
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": restaurantFaqsList.map(item => ({
+              "@type": "Question",
+              "name": item.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.a
+              }
+            }))
+          })
+        }}
+      />
       {/* SECTION NAV BAR */}
       <div className="bg-[#05080f] border-b border-slate-900 py-3.5 px-4 z-30 relative transition-all duration-200">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">

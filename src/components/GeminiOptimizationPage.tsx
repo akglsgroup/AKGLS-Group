@@ -13,6 +13,29 @@ interface GeminiOptimizationPageProps {
   openProposalForm?: () => void;
 }
 
+const geminiFaqs = [
+  {
+    q: "What is Google Gemini Optimization?",
+    a: "Gemini Optimization is the specialized task of formatting digital domain records, entities, Wikidata metrics, and factual databases to ensure Google Gemini's retrieval layers mention and link your website as a top citation answer."
+  },
+  {
+    q: "How is Gemini SEO different from traditional SEO?",
+    a: "Traditional SEO focuses on page layout, keyword indices, and raw backlink juice. Gemini Optimization focuses on RAG ingestion compatibility, factual tables, Wikidata entity alignment, and co-citation authority metrics."
+  },
+  {
+    q: "Can businesses rank inside Gemini's conversational answers?",
+    a: "Yes. By deploying structured entity schemas and maintaining direct, factual documentation listings across authoritative indexes, you position your brand as a primary citation choice."
+  },
+  {
+    q: "What is Generative Engine Optimization (GEO)?",
+    a: "GEO represents the post-search programmatic methodology where copies are reconfigured utilizing exact schemas, direct answers formatting, and semantic topic clusters to ensure safe extraction by LLMs."
+  },
+  {
+    q: "How long does Gemini Optimization take?",
+    a: "Factual database mappings and structured JSON schema rollouts process within days. Noticeable growth in citation mentions and Gemini query triggers generally scales within 3 to 6 weeks."
+  }
+];
+
 const schemaTemplates = {
   service: `{
   "@context": "https://schema.org",
@@ -45,19 +68,55 @@ const schemaTemplates = {
     "name": "Gemini Optimization Services",
     "item": "https://www.akglsgroup.com/gemini-optimization-services/"
   }]
-}`
+}`,
+  faq: JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": geminiFaqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.a
+      }
+    }))
+  }, null, 2)
 };
 
 export default function GeminiOptimizationPage({ onBackToHome, openProposalForm }: GeminiOptimizationPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
   const WHATSAPP_LINK = 'https://wa.me/918318114492';
 
-  // Dynamic Page Title
+  // Dynamic Page Title & Head FAQ Schema Injection
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "Gemini Optimization Services | Google Gemini SEO Agency | AKGLS Group";
+
+    // Set canonical link for SEO
+    const canonicalHref = "https://www.akglsgroup.com/gemini-optimization-services/";
+    let canonicalLink = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalHref);
+
+    // Inject FAQPage Schema
+    const faqScriptId = "gemini-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = schemaTemplates.faq;
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -288,6 +347,11 @@ export default function GeminiOptimizationPage({ onBackToHome, openProposalForm 
 
   return (
     <div id="gemini-optimization-page" className="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-brand-teal selection:text-slate-950">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: schemaTemplates.faq }} 
+      />
       
       {/* Sticky Top Header Navigation Info Alert */}
       <div className="bg-slate-900 border-b border-slate-800 text-xs py-2 px-4 flex justify-between items-center z-20 relative">
@@ -1097,17 +1161,17 @@ export default function GeminiOptimizationPage({ onBackToHome, openProposalForm 
           {/* Interactive Code Copier Box */}
           <div className="lg:col-span-6 bg-slate-900 rounded-2xl border border-slate-800 overflow-hidden shadow-xl text-left">
             <div className="bg-slate-950 py-3 px-4 border-b border-slate-800 flex justify-between items-center bg-slate-950/80">
-              <span className="text-xs font-mono text-slate-300 font-bold">Standard Service Schema Payload</span>
+              <span className="text-xs font-mono text-slate-300 font-bold">FAQPage Schema Payload (JSON-LD)</span>
               <button
-                onClick={() => copySchemaText(schemaTemplates.service, 'service')}
+                onClick={() => copySchemaText(schemaTemplates.faq, 'faq')}
                 className="text-[10px] font-mono bg-slate-900 border border-slate-800 text-brand-teal hover:text-white px-2.5 py-1 rounded transition cursor-pointer flex items-center gap-1"
               >
-                {schemaCopied === 'service' ? <Check className="w-3 h-3 text-brand-teal" /> : <Copy className="w-3 h-3" />}
-                <span>{schemaCopied === 'service' ? 'Copied' : 'Copy'}</span>
+                {schemaCopied === 'faq' ? <Check className="w-3 h-3 text-brand-teal" /> : <Copy className="w-3 h-3" />}
+                <span>{schemaCopied === 'faq' ? 'Copied' : 'Copy'}</span>
               </button>
             </div>
-            <pre className="p-4 overflow-x-auto text-[10px] text-slate-400 font-mono bg-slate-950/40 text-left">
-              <code>{schemaTemplates.service}</code>
+            <pre className="p-4 overflow-x-auto text-[10px] text-slate-400 font-mono bg-slate-950/40 text-left max-h-56 overflow-y-auto">
+              <code>{schemaTemplates.faq}</code>
             </pre>
           </div>
 
@@ -1123,28 +1187,7 @@ export default function GeminiOptimizationPage({ onBackToHome, openProposalForm 
           </div>
 
           <div className="space-y-4 text-left">
-            {[
-              {
-                q: "What is Google Gemini Optimization?",
-                a: "Gemini Optimization is the specialized task of formatting digital domain records, entities, Wikidata metrics, and factual databases to ensure Google Gemini's retrieval layers mention and link your website as a top citation answer."
-              },
-              {
-                q: "How is Gemini SEO different from traditional SEO?",
-                a: "Traditional SEO focuses on page layout, keyword indices, and raw backlink juice. Gemini Optimization focuses on RAG ingestion compatibility, factual tables, Wikidata entity alignment, and co-citation authority metrics."
-              },
-              {
-                q: "Can businesses rank inside Gemini's conversational answers?",
-                a: "Yes. By deploying structured entity schemas and maintaining direct, factual documentation listings across authoritative indexes, you position your brand as a primary citation choice."
-              },
-              {
-                q: "What is Generative Engine Optimization (GEO)?",
-                a: "GEO represents the post-search programmatic methodology where copies are reconfigured utilizing exact schemas, direct answers formatting, and semantic topic clusters to ensure safe extraction by LLMs."
-              },
-              {
-                q: "How long does Gemini Optimization take?",
-                a: "Factual database mappings and structured JSON schema rollouts process within days. Noticeable growth in citation mentions and Gemini query triggers generally scales within 3 to 6 weeks."
-              }
-            ].map((faq, fIdx) => (
+            {geminiFaqs.map((faq, fIdx) => (
               <div key={fIdx} className="bg-slate-950 p-5 rounded-xl border border-slate-805 space-y-2">
                 <button
                   onClick={() => setActiveFaq(activeFaq === fIdx ? null : fIdx)}

@@ -48,16 +48,64 @@ const schemaTemplates = {
 }`
 };
 
+const voiceFaqsList = [
+  {
+    q: "What is Voice Search Optimization (Voice SEO)?",
+    a: "Voice SEO is the technical optimization process of structuring web directories, maps coordinates, and markup elements so voice-activated synthesizers (Google Assistant, Siri, Alexa) seamlessly retrieve and speak your page descriptions."
+  },
+  {
+    q: "Why is voice-activated SEO important for local brick-and-mortar storefronts?",
+    a: "Over 75% of mobile speech prompts containing 'near me' or directional intent resolve immediately into walk-in transactions. If your local business lacks styled map profiles and coordinate schemas, spoken assistants will bypass you."
+  },
+  {
+    q: "Can businesses rank inside ChatGPT Voice or Gemini Live?",
+    a: "Yes! By formatting long-form informational hubs with detailed markdown data structures and structured relational schemas (JSON sameAs tags linking Wikidata entities), advanced LLM synthesis frameworks recognize and suggest your brand as the expert citation source."
+  },
+  {
+    q: "What are Speakable schema tags?",
+    a: "Speakable is a specific JSON-LD structured data configuration that indicators to Google's crawlers exactly which text paragraphs contain high informational density ideal for smart-speaker text-to-speech audio outputs."
+  },
+  {
+    q: "How long does a typical Voice SEO integration program take?",
+    a: "Initial crawl compliance updates and map integrations resolve within 14 to 30 days. As search systems execute deep crawler passes, automated citations and auditory zero-position results scale steadily over succeeding weeks."
+  }
+];
+
 export default function VoiceSearchOptimizationPage({ onBackToHome, openProposalForm }: VoiceSearchOptimizationPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
   const WHATSAPP_LINK = 'https://wa.me/918318114492';
 
-  // Dynamic Page Title
+  // Dynamic Page Title & FAQ Schema
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "Voice Search Optimization Services | Voice SEO Agency | AKGLS Group";
+
+    // Inject FAQPage Schema
+    const faqScriptId = "voice-search-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": voiceFaqsList.map(f => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.a
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -308,6 +356,24 @@ export default function VoiceSearchOptimizationPage({ onBackToHome, openProposal
 
   return (
     <div id="voice-search-optimization-page" className="bg-slate-955 text-slate-100 min-h-screen font-sans selection:bg-brand-teal selection:text-slate-950">
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": voiceFaqsList.map(f => ({
+              "@type": "Question",
+              "name": f.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.a
+              }
+            }))
+          })
+        }}
+      />
       
       {/* Sticky Top Header Navigation Info Alert */}
       <div className="bg-slate-900 border-b border-slate-800 text-xs py-2 px-4 flex justify-between items-center z-20 relative">
@@ -1278,28 +1344,7 @@ export default function VoiceSearchOptimizationPage({ onBackToHome, openProposal
         <h2 className="text-3xl md:text-4xl font-black text-white text-center mb-12">Frequently Asked Questions</h2>
         
         <div className="space-y-4 text-left">
-          {[
-            {
-              q: "What is Voice Search Optimization (Voice SEO)?",
-              a: "Voice SEO is the technical optimization process of structuring web directories, maps coordinates, and markup elements so voice-activated synthesizers (Google Assistant, Siri, Alexa) seamlessly retrieve and speak your page descriptions."
-            },
-            {
-              q: "Why is voice-activated SEO important for local brick-and-mortar storefronts?",
-              a: "Over 75% of mobile speech prompts containing 'near me' or directional intent resolve immediately into walk-in transactions. If your local business lacks styled map profiles and coordinate schemas, spoken assistants will bypass you."
-            },
-            {
-              q: "Can businesses rank inside ChatGPT Voice or Gemini Live?",
-              a: "Yes! By formatting long-form informational hubs with detailed markdown data structures and structured relational schemas (JSON sameAs tags linking Wikidata entities), advanced LLM synthesis frameworks recognize and suggest your brand as the expert citation source."
-            },
-            {
-              q: "What are Speakable schema tags?",
-              a: "Speakable is a specific JSON-LD structured data configuration that indicators to Google's crawlers exactly which text paragraphs contain high informational density ideal for smart-speaker text-to-speech audio outputs."
-            },
-            {
-              q: "How long does a typical Voice SEO integration program take?",
-              a: "Initial crawl compliance updates and map integrations resolve within 14 to 30 days. As search systems execute deep crawler passes, automated citations and auditory zero-position results scale steadily over succeeding weeks."
-            }
-          ].map((item, index) => (
+          {voiceFaqsList.map((item, index) => (
             <div 
               key={index} 
               className="bg-slate-900 border border-slate-808 rounded-xl p-5 hover:border-brand-teal/20 transition cursor-pointer"

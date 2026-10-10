@@ -14,7 +14,72 @@ interface GeoServicesPageProps {
   openProposalForm: () => void;
 }
 
+const geoFaqs = [
+  {
+    q: "What is GEO (Generative Engine Optimization) vs traditional SEO?",
+    a: "Traditional SEO focuses on webpage placements in flat keyword indexes for standard search crawlers (like Googlebot). GEO (Generative Engine Optimization) adapts web content structures for Large Language Models' (LLMs) Retrieval-Augmented Generation (RAG) engines. It ensures your corporate identity, key facts, and statistical metrics are perfectly formatted as semantic vectors so conversational agents check and reference you inside search results citation markers."
+  },
+  {
+    q: "What is an AI Visibility Index and how is it scored?",
+    a: "An AI Visibility Index evaluates how frequently and prominently your target domain is cited inside search engine summaries (e.g. ChatGPT, Claude, Gemini, Perplexity). Scoring factors include Entity Relationship weights, density of structural schemas (nested JSON-LD graphs), alignment with direct natural language user queries, and presence of specific, localized statistical statements which AI agents extract to build credibility."
+  },
+  {
+    q: "Why does having specific numbers and metrics increase AI citation likelihood?",
+    a: "Conversational engines perform factual weight analysis during context optimization. AI models favor concrete, localized metrics (e.g. 'boosted ROI by 35%') over broad adjectives (e.g. 'significant improvement') because statistical statements act as ground proof references. In corporate text reviews, websites featuring verified metrics receive 3x higher citation index inclusions."
+  },
+  {
+    q: "Is Schema markup mandatory to index in Perplexity and Copilot?",
+    a: "Using nested schema relationships is highly critical. Conversational scrapers read index relationships to identify the official owner and core entity representation. Properly deploying schema graphs (like Organization, founder nodes, or medically verified schemas) provides immediate, clear context maps, reducing entity ambiguity and dramatically raising brand recommendations."
+  }
+];
+
+const geoFaqSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": geoFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a
+    }
+  }))
+}, null, 2);
+
 export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoServicesPageProps) {
+  // Page Title & Head FAQ Schema Injection
+  useEffect(() => {
+    const originalTitle = document.title;
+    document.title = "GEO Optimization Services | Generative Engine Optimization Agency | AKGLS Group";
+
+    // Set canonical link for SEO
+    const canonicalHref = "https://www.akglsgroup.com/geo-services/";
+    let canonicalLink = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalHref);
+
+    // Inject FAQPage Schema
+    const faqScriptId = "geo-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = geoFaqSchemaJson;
+      document.head.appendChild(faqScriptEl);
+    }
+
+    return () => {
+      document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
+    };
+  }, []);
+
   // Simulator States
   const [targetUrl, setTargetUrl] = useState('');
   const [isScanning, setIsScanning] = useState(false);
@@ -224,6 +289,11 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
 
   return (
     <div className="bg-[#05070a] text-slate-300 min-h-screen">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: geoFaqSchemaJson }} 
+      />
       
       {/* LANDING PAGE HERO HEADER */}
       <section className="relative pt-6 pb-16 sm:pt-8 md:pt-10 md:pb-24 bg-[#05070a] text-white overflow-hidden text-left border-b border-slate-900/60">
@@ -993,24 +1063,7 @@ export default function GeoServicesPage({ onBackToHome, openProposalForm }: GeoS
           </div>
 
           <div className="space-y-4 max-w-3xl mx-auto select-none">
-            {[
-              {
-                q: "What is GEO (Generative Engine Optimization) vs traditional SEO?",
-                a: "Traditional SEO focuses on webpage placements in flat keyword indexes for standard search crawlers (like Googlebot). GEO (Generative Engine Optimization) adapts web content structures for Large Language Models' (LLMs) Retrieval-Augmented Generation (RAG) engines. It ensures your corporate identity, key facts, and statistical metrics are perfectly formatted as semantic vectors so conversational agents check and reference you inside search results citation markers."
-              },
-              {
-                q: "What is an AI Visibility Index and how is it scored?",
-                a: "An AI Visibility Index evaluates how frequently and prominently your target domain is cited inside search engine summaries (e.g. ChatGPT, Claude, Gemini, Perplexity). Scoring factors include Entity Relationship weights, density of structural schemas (nested JSON-LD graphs), alignment with direct natural language user queries, and presence of specific, localized statistical statements which AI agents extract to build credibility."
-              },
-              {
-                q: "Why does having specific numbers and metrics increase AI citation likelihood?",
-                a: "Conversational engines perform factual weight analysis during context optimization. AI models favor concrete, localized metrics (e.g. 'boosted ROI by 35%') over broad adjectives (e.g. 'significant improvement') because statistical statements act as ground proof references. In corporate text reviews, websites featuring verified metrics receive 3x higher citation index inclusions."
-              },
-              {
-                q: "Is Schema markup mandatory to index in Perplexity and Copilot?",
-                a: "Using nested schema relationships is highly critical. Conversational scrapers read index relationships to identify the official owner and core entity representation. Properly deploying schema graphs (like Organization, founder nodes, or medically verified schemas) provides immediate, clear context maps, reducing entity ambiguity and dramatically raising brand recommendations."
-              }
-            ].map((faq, idx) => {
+            {geoFaqs.map((faq, idx) => {
               const isOpen = activeFaq === idx;
               return (
                 <div 

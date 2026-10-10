@@ -48,16 +48,64 @@ const schemaTemplates = {
 }`
 };
 
+const llmFaqsList = [
+  {
+    q: "What is the difference between SEO and LLM Optimization?",
+    a: "Traditional SEO focuses on ranking in standard search engines (like blue-link Google results), while LLM Optimization focuses on improving brand reputation, semantic connectivity, and reference weights within generative search engine answer sequences (like ChatGPT, Gemini, Perplexity, and Claude)."
+  },
+  {
+    q: "Can ChatGPT cite my website?",
+    a: "Yes. Major AI models leverage connected search indices (e.g., GPT-4o search, Bing Index integration) and can provide real-time hyperlinked citations if your website offers authoritative, structured, and factual source information answering the specific user intent."
+  },
+  {
+    q: "How long does LLM Optimization take?",
+    a: "Most businesses begin observing positive improvements in brand visibility indices, direct AI references, or conversational citations within 3 to 6 months. This depends heavily on existing brand authority, target niche competition, and swiftness in implementing recommended entity and schema changes."
+  },
+  {
+    q: "Is LLM Optimization the same as GEO?",
+    a: "No, GEO (Generative Engine Optimization) is an direct component of LLM Optimization. While GEO centers mostly on formatting content pages to be easily consumable by retrieval-augmented generation (RAG) frameworks, LLM Optimization expands to cover brand entity schema mapping, knowledge graphs, digital PR integration, and model-specific reinforcement audits."
+  },
+  {
+    q: "Which AI platforms do you optimize for?",
+    a: "We fully optimize your digital assets for ChatGPT, Gemini, Claude, Perplexity AI, Microsoft Copilot, Grok, Google AI Overviews, and emerging next-gen search technologies."
+  }
+];
+
 export default function LlmOptimizationServicesPage({ onBackToHome, openProposalForm }: LlmOptimizationServicesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
   const WHATSAPP_LINK = 'https://wa.me/918318114492';
 
-  // Dynamic Page Title
+  // Dynamic Page Title & FAQ Schema
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "LLM Optimization Services | AI Search Optimization Company | AKGLS Group";
+
+    // Inject FAQPage Schema
+    const faqScriptId = "llm-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": llmFaqsList.map(f => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.a
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -101,31 +149,28 @@ export default function LlmOptimizationServicesPage({ onBackToHome, openProposal
     setTimeout(() => setSchemaCopied(null), 2000);
   };
 
-  const faqs = [
-    {
-      q: "What is the difference between SEO and LLM Optimization?",
-      a: "Traditional SEO focuses on ranking in standard search engines (like blue-link Google results), while LLM Optimization focuses on improving brand reputation, semantic connectivity, and reference weights within generative search engine answer sequences (like ChatGPT, Gemini, Perplexity, and Claude)."
-    },
-    {
-      q: "Can ChatGPT cite my website?",
-      a: "Yes. Major AI models leverage connected search indices (e.g., GPT-4o search, Bing Index integration) and can provide real-time hyperlinked citations if your website offers authoritative, structured, and factual source information answering the specific user intent."
-    },
-    {
-      q: "How long does LLM Optimization take?",
-      a: "Most businesses begin observing positive improvements in brand visibility indices, direct AI references, or conversational citations within 3 to 6 months. This depends heavily on existing brand authority, target niche competition, and swiftness in implementing recommended entity and schema changes."
-    },
-    {
-      q: "Is LLM Optimization the same as GEO?",
-      a: "No, GEO (Generative Engine Optimization) is an direct component of LLM Optimization. While GEO centers mostly on formatting content pages to be easily consumable by retrieval-augmented generation (RAG) frameworks, LLM Optimization expands to cover brand entity schema mapping, knowledge graphs, digital PR integration, and model-specific reinforcement audits."
-    },
-    {
-      q: "Which AI platforms do you optimize for?",
-      a: "We fully optimize your digital assets for ChatGPT, Gemini, Claude, Perplexity AI, Microsoft Copilot, Grok, Google AI Overviews, and emerging next-gen search technologies."
-    }
-  ];
+  const faqs = llmFaqsList;
 
   return (
     <div id="llm-services-container" className="min-h-screen bg-[#060a12] text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-teal-500/30 selection:text-teal-200">
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": llmFaqsList.map(f => ({
+              "@type": "Question",
+              "name": f.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.a
+              }
+            }))
+          })
+        }}
+      />
       
       {/* Background visual graphics */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-teal-900/10 via-purple-950/5 to-transparent pointer-events-none" />

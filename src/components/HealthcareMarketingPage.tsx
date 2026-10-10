@@ -13,6 +13,37 @@ interface HealthcareMarketingPageProps {
   openProposalForm?: () => void;
 }
 
+const healthcareFaqsData = [
+  {
+    question: "How can healthcare providers get more patients online?",
+    answer: "We avoid broad informational health queries that attract general trivia researchers. Instead, we target high-intent medical queries: location-specific searches ('dermatologist for acne near me'), action-oriented treatments ('physiotherapy for sports injuries chicago'), or specialty physician details. By combining optimized Local Google Business Pack targets with streamlined call-to-action booking forms, we capture patients exactly at the moment they require professional medical solutions."
+  },
+  {
+    question: "Is SEO genuinely important for hospital networks & regional clinics?",
+    answer: "Yes. While national medical resources (like WebMD or Mayo Clinic) dominate informational symptom searches, they are useless when a patient needs to visit a doctor. Patients search locally. Placing your clinic in the local Google Business Pack and ranking for location-based specialty keywords ensures your hospital is the immediate answer chosen above distant national databases."
+  },
+  {
+    question: "Can Google Ads campaigns reliably generate patient appointments?",
+    answer: "Absolutely. Google Search Ads are highly effective for healthcare when optimized with strict keyword match types. We deploy negative keyword filters to block job searchers and medical school researchers, and configure call-only search ads that display tap-to-call interfaces directly within mobile results, generating immediate patient phone calls."
+  },
+  {
+    question: "How long does a professional healthcare SEO strategy take to deliver results?",
+    answer: "While paid Google Ads generate incoming patient calls within days of validation, organic SEO and Local Map Pack prominence require 60 to 90 days. However, once established, organic SEO creates a continuous, highly stable flow of patient inquiries entirely free from recurring pay-per-click charges."
+  },
+  {
+    question: "Do you market multi-department hospitals and specialty clinics?",
+    answer: "We work across complex healthcare networks. Our team coordinates distinct division campaigns (such as Cardiology, Orthopedics, Pediatrics, or Emergency Services) under a unified domain, ensuring distinct search footprints for each department."
+  },
+  {
+    question: "Can you reliably improve Google Maps Pack rankings for multiple locations?",
+    answer: "Our local SEO system corrects inaccurate clinic addresses, structures JSON-LD MedicalBusiness location markers on your website, resolves duplicate entries on regional medical maps, and integrates post-checkout SMS prompts to generate authentic reviews from happy patients. This local optimization signals high authority to Google's ranking algorithms."
+  },
+  {
+    question: "What is AI SEO for healthcare, and how does it help practice growth?",
+    answer: "AI SEO, or Generative Engine Optimization (GEO), optimizes your doctor profiles and clinical services so that conversational platforms (including ChatGPT Search, Perplexity, and Apple Siri) cite your practice as the top recommendation when asked queries like 'certified dermatologist near me'."
+  }
+];
+
 export default function HealthcareMarketingPage({ onBackToHome, openProposalForm }: HealthcareMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
   const WHATSAPP_LINK = "https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20healthcare%20and%20medical%20marketing%20services.";
@@ -77,9 +108,34 @@ export default function HealthcareMarketingPage({ onBackToHome, openProposalForm
       });
       document.head.appendChild(scriptEl);
     }
+
+    // Inject FAQPage Schema
+    const faqScriptId = "healthcare-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": healthcareFaqsData.map(f => ({
+          "@type": "Question",
+          "name": f.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.answer
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       const el = document.getElementById(scriptId);
       if (el) el.remove();
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -462,39 +518,29 @@ export default function HealthcareMarketingPage({ onBackToHome, openProposalForm
     }
   ];
 
-  const faqsData = [
-    {
-      question: "How can healthcare providers get more patients online?",
-      answer: "We avoid broad informational health queries that attract general trivia researchers. Instead, we target high-intent medical queries: location-specific searches ('dermatologist for acne near me'), action-oriented treatments ('physiotherapy for sports injuries chicago'), or specialty physician details. By combining optimized Local Google Business Pack targets with streamlined call-to-action booking forms, we capture patients exactly at the moment they require professional medical solutions."
-    },
-    {
-      question: "Is SEO genuinely important for hospital networks & regional clinics?",
-      answer: "Yes. While national medical resources (like WebMD or Mayo Clinic) dominate informational symptom searches, they are useless when a patient needs to visit a doctor. Patients search locally. Placing your clinic in the local Google Business Pack and ranking for location-based specialty keywords ensures your hospital is the immediate answer chosen above distant national databases."
-    },
-    {
-      question: "Can Google Ads campaigns reliably generate patient appointments?",
-      answer: "Absolutely. Google Search Ads are highly effective for healthcare when optimized with strict keyword match types. We deploy negative keyword filters to block job searchers and medical school researchers, and configure call-only search ads that display tap-to-call interfaces directly within mobile results, generating immediate patient phone calls."
-    },
-    {
-      question: "How long does a professional healthcare SEO strategy take to deliver results?",
-      answer: "While paid Google Ads generate incoming patient calls within days of validation, organic SEO and Local Map Pack prominence require 60 to 90 days. However, once established, organic SEO creates a continuous, highly stable flow of patient inquiries entirely free from recurring pay-per-click charges."
-    },
-    {
-      question: "Do you market multi-department hospitals and specialty clinics?",
-      answer: "We work across complex healthcare networks. Our team coordinates distinct division campaigns (such as Cardiology, Orthopedics, Pediatrics, or Emergency Services) under a unified domain, ensuring distinct search footprints for each department."
-    },
-    {
-      question: "Can you reliably improve Google Maps Pack rankings for multiple locations?",
-      answer: "Our local SEO system corrects inaccurate clinic addresses, structures JSON-LD MedicalBusiness location markers on your website, resolves duplicate entries on regional medical maps, and integrates post-checkout SMS prompts to generate authentic reviews from happy patients. This local optimization signals high authority to Google's ranking algorithms."
-    },
-    {
-      question: "What is AI SEO for healthcare, and how does it help practice growth?",
-      answer: "AI SEO, or Generative Engine Optimization (GEO), optimizes your doctor profiles and clinical services so that conversational platforms (including ChatGPT Search, Perplexity, and Apple Siri) cite your practice as the top recommendation when asked queries like 'certified dermatologist near me'."
-    }
-  ];
+  const faqsData = healthcareFaqsData;
 
   return (
     <>
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": healthcareFaqsData.map(f => ({
+              "@type": "Question",
+              "name": f.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.answer
+              }
+            }))
+          })
+        }}
+      />
+
       {/* SECTION NAV BAR */}
       <div className="bg-[#0b0f1d] border-b border-slate-900 py-3.5 px-4 z-30 relative transition-all duration-200">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">

@@ -13,13 +13,69 @@ interface SeoAuditToolPageProps {
   onNavigateToTool: (toolId: string) => void;
 }
 
+const seoAuditToolFaqs = [
+  {
+    q: "Why is a Technical SEO Auditing procedure essential?",
+    a: "Technical configurations dictating crawl rules, security frameworks and sitemap indices represent the foundational layer of clean SEO. If crawler spiders face blocks or canonical loops, your high-quality content assets simply will never get indexed on Google."
+  },
+  {
+    q: "What metrics are audited inside the real-time test?",
+    a: "Our free utility performs instant client-side audits targeting canonical validation declarations, robots rule configurations, XML sitemap formats, key-metadata lengths, speed parameters (First Contentful Paint guides) and structured schema alignments."
+  },
+  {
+    q: "How often should technical site audits be conducted?",
+    a: "We recommend initiating quarterly diagnostic crawls. Any structural changes in your WordPress configuration, Shopify setup, or custom React codebases can introduce indexation errors that impact rankings visibility."
+  },
+  {
+    q: "How do I resolve 'Crawl anomalies' and 'Excluded by noindex context' flags?",
+    a: "These flags represent crawling bottlenecks where Googlebot cannot parse details. To remedy these securely, consult our technical guidelines below or contact our senior team for a comprehensive code overhaul."
+  }
+];
+
+const seoAuditToolFaqSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": seoAuditToolFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a
+    }
+  }))
+});
+
 export default function SeoAuditToolPage({ onBackToTools, onNavigateToTool }: SeoAuditToolPageProps) {
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "Free Technical SEO Audit Tool | Real-time Search Crawler Audit | AKGLS Group";
     window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Set canonical link for SEO
+    const canonicalHref = "https://www.akglsgroup.com/free-seo-audit-tool";
+    let canonicalLink = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalHref);
+
+    // Inject FAQPage Schema
+    const faqScriptId = "seo-audit-tool-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = seoAuditToolFaqSchemaJson;
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -143,27 +199,16 @@ export default function SeoAuditToolPage({ onBackToTools, onNavigateToTool }: Se
     setScanCompleted(true);
   };
 
-  const FAQS = [
-    {
-      q: "Why is a Technical SEO Auditing procedure essential?",
-      a: "Technical configurations dictating crawl rules, security frameworks and sitemap indices represent the foundational layer of clean SEO. If crawler spiders face blocks or canonical loops, your high-quality content assets simply will never get indexed on Google."
-    },
-    {
-      q: "What metrics are audited inside the real-time test?",
-      a: "Our free utility performs instant client-side audits targeting canonical validation declarations, robots rule configurations, XML sitemap formats, key-metadata lengths, speed parameters (First Contentful Paint guides) and structured schema alignments."
-    },
-    {
-      q: "How often should technical site audits be conducted?",
-      a: "We recommend initiating quarterly diagnostic crawls. Any structural changes in your WordPress configuration, Shopify setup, or custom React codebases can introduce indexation errors that impact rankings visibility."
-    },
-    {
-      q: "How do I resolve 'Crawl anomalies' and 'Excluded by noindex context' flags?",
-      a: "These flags represent crawling bottlenecks where Googlebot cannot parse details. To remedy these securely, consult our technical guidelines below or contact our senior team for a comprehensive code overhaul."
-    }
-  ];
+  const FAQS = seoAuditToolFaqs;
 
   return (
     <div className="flex-1 bg-[#090d16] min-h-screen relative overflow-hidden text-slate-100 flex flex-col font-sans">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: seoAuditToolFaqSchemaJson }} 
+      />
+      
       {/* Visual background accents */}
       <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-indigo-950/20 via-transparent to-transparent pointer-events-none" />
       <div className="absolute top-1/3 left-10 w-96 h-96 bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />

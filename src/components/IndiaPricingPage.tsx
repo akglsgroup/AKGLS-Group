@@ -14,12 +14,72 @@ interface IndiaPricingPageProps {
   openProposalForm: () => void;
 }
 
+const indiaPricingFaqs = [
+  {
+    q: "Is GST included in the prices shown?",
+    a: "No, the suggested retainers are exclusive of 18% GST. A valid GST Tax Invoice will be shared to help you claim credit inputs smoothly."
+  },
+  {
+    q: "Do you offer flexible payment structures or milestone terms?",
+    a: "Yes! We specialize in supporting scaling brands through flexible milestone structures. You can split development and custom setup fees into progressive phases based on delivery schedules."
+  },
+  {
+    q: "Can I switch or upgrade packages intermediate?",
+    a: "Absolutely. You can scale your retainer packages, shift budgets between paid ads and organic SEO resources, or adjust targeted keywords dynamically as your objectives shift."
+  },
+  {
+    q: "How does the Quarterly billing discount operate?",
+    a: "By choosing a Quarterly retainer, you secure an automatic 15% discount across all months, which also assists in establishing compiler search metrics momentum over the typical 90-day trajectory."
+  },
+  {
+    q: "In what languages will my dedicated growth team communicate?",
+    a: "Our account teams are entirely bilingual. We offer fully professional English alignments or direct हिन्दी/English Hinglish sync setups based strictly on your company preferences."
+  }
+];
+
+const indiaPricingFaqSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": indiaPricingFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a
+    }
+  }))
+});
+
 export default function IndiaPricingPage({ onBackToHome, openProposalForm }: IndiaPricingPageProps) {
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "Local & Organic Growth Task Plans (India Market) | AKGLS Group";
+
+    // Set canonical link for SEO
+    const canonicalHref = "https://www.akglsgroup.com/pricing-in-india";
+    let canonicalLink = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalHref);
+
+    // Inject FAQPage Schema
+    const faqScriptId = "india-pricing-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = indiaPricingFaqSchemaJson;
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -407,6 +467,11 @@ export default function IndiaPricingPage({ onBackToHome, openProposalForm }: Ind
 
   return (
     <div className="min-h-screen bg-[#02040d] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-300 font-sans antialiased overflow-x-hidden relative">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: indiaPricingFaqSchemaJson }} 
+      />
       
       {/* Decorative ambient background glows */}
       <div className="absolute top-0 left-0 right-0 h-[800px] bg-gradient-to-b from-[#091b26]/30 via-[#020614]/15 to-transparent pointer-events-none" />
@@ -2135,28 +2200,7 @@ export default function IndiaPricingPage({ onBackToHome, openProposalForm }: Ind
           </div>
 
           <div className="space-y-3.5 pt-4">
-            {[
-              {
-                q: "Is GST included in the prices shown?",
-                a: "No, the suggested retainers are exclusive of 18% GST. A valid GST Tax Invoice will be shared to help you claim credit inputs smoothly."
-              },
-              {
-                q: "Do you offer flexible payment structures or milestone terms?",
-                a: "Yes! We specialize in supporting scaling brands through flexible milestone structures. You can split development and custom setup fees into progressive phases based on delivery schedules."
-              },
-              {
-                q: "Can I switch or upgrade packages intermediate?",
-                a: "Absolutely. You can scale your retainer packages, shift budgets between paid ads and organic SEO resources, or adjust targeted keywords dynamically as your objectives shift."
-              },
-              {
-                q: "How does the Quarterly billing discount operate?",
-                a: "By choosing a Quarterly retainer, you secure an automatic 15% discount across all months, which also assists in establishing compiler search metrics momentum over the typical 90-day trajectory."
-              },
-              {
-                q: "In what languages will my dedicated growth team communicate?",
-                a: "Our account teams are entirely bilingual. We offer fully professional English alignments or direct हिन्दी/English Hinglish sync setups based strictly on your company preferences."
-              }
-            ].map((faq, idx) => {
+            {indiaPricingFaqs.map((faq, idx) => {
               const isOpen = activeFaq === idx;
               return (
                 <div 

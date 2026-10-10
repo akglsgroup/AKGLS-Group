@@ -23,37 +23,40 @@ import {
   User 
 } from 'firebase/auth';
 import { LeadRecord, UserProfile, ChatMessageRecord } from './types';
-import appletConfig from '../firebase-applet-config.json';
+
+// Optional static or runtime configuration fallback
+const getAppletConfig = () => {
+  try {
+    // If running in Node or bundled environment, check env or global
+    return {};
+  } catch {
+    return {};
+  }
+};
+const appletConfig = getAppletConfig();
 
 // Resolved configuration targeting the provisioned project
 const resolvedConfig = {
   projectId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_PROJECT_ID) ||
-    appletConfig?.projectId ||
     'realtors-directory',
   appId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_APP_ID) ||
-    appletConfig?.appId ||
     '1:815514143958:web:bd2705889a88216d4d0d77',
   apiKey: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_API_KEY) ||
-    appletConfig?.apiKey ||
     'AIzaSyBorb2F2oE1DQrn2j2abPC9v35ICOjN6GQ',
   authDomain: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_AUTH_DOMAIN) ||
-    appletConfig?.authDomain ||
     'realtors-directory.firebaseapp.com',
   firestoreDatabaseId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_DATABASE_ID) ||
-    appletConfig?.firestoreDatabaseId ||
     'ai-studio-akglsgroupsite-ecb433f8-a78e-41eb-99fb-e422adef4b3e',
   storageBucket: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_STORAGE_BUCKET) ||
-    appletConfig?.storageBucket ||
     'realtors-directory.firebasestorage.app',
   messagingSenderId: 
     (typeof import.meta !== 'undefined' && import.meta.env?.VITE_FIREBASE_MESSAGING_SENDER_ID) ||
-    appletConfig?.messagingSenderId ||
     '815514143958',
 };
 

@@ -13,6 +13,37 @@ interface RealEstateMarketingPageProps {
   openProposalForm?: () => void;
 }
 
+const realEstateFaqsData = [
+  {
+    question: "How can real estate businesses generate highly pre-qualified leads online?",
+    answer: "We avoid generic, broad real estate keywords. Instead, we target precise asset attributes: configuration keys ('ready to move ready construction flats'), location specifications ('3bhk builder floors in South Delhi'), and specific pricing or amenities indicators. We design landing paths around instant floorplan or pricing brochure downloads, requiring real business numbers, and bridge them instantly to automated WhatsApp chat sequences, ensuring immediate verification."
+  },
+  {
+    question: "Is SEO genuinely important for developers, or do portals dominate?",
+    answer: "While massive portals (like Zillow, SquareYards, or standard property directories) dominate broad national terms, they fail entirely on hyperlocal search intent. Buyers want neighborhood-specific details, street proms, and specific developer reputations. By optimizing neighborhood cluster articles and targeting local Google Maps Packs, we place your individual developer project layouts directly above generic portal lists on standard search loops."
+  },
+  {
+    question: "Which ads perform best for generating immediate property buyer inquiries?",
+    answer: "For immediate, high-intent needs, Google Search and Business Map Pack Ads perform beautifully. For luxury and visually stunning residential projects, targeted Meta (Instagram/Facebook) Reels campaigns paired with in-line lead form captures generate high volumes. Integrating these with active conversational AI routing ensures no leads sit cold."
+  },
+  {
+    question: "Can you actually guarantee top ranks in the local Google Business Maps pack?",
+    answer: "We utilize algorithmic optimization paths: cleaning Name, Address, and Phone (NAP) citations across national registries, injecting real location metadata keywords inside physical photos, structuring localized vicinity schema on your domain, and automating client review loops. This proximity optimization forces Google's ranking engine to favor your listing."
+  },
+  {
+    question: "How long does a systemic Real Estate SEO roadmap take to show value?",
+    answer: "While paid ad networks bring leads within 24 hours of campaign validation, organic SEO and Local Map Pack authority require between 60 to 90 days to gain real traction. Once established, this creates a permanent flow of property inquiries at zero cost-per-click."
+  },
+  {
+    question: "Do you design custom developer websites with interactive listings?",
+    answer: "Absolutely. We code and maintain lightning-fast property websites optimized for conversion. We build responsive listing tables, easily editable location modules, and secure spaces where agents can download drone walkthrough units and floorplans instantly on any mobile device."
+  },
+  {
+    question: "What is AI SEO for real estate, and how does it help sales?",
+    answer: "AI SEO, or Generative Engine Optimization (GEO), ensures your properties and developer brand are referenced inside ChatGPT Search, Claude, and Perplexity. By writing structured metadata schemas and securing co-citations on verified domain networks, we ensure conversational models output your projects as the primary recommendation when asked questions like 'luxury apartments for sale ready to move'."
+  }
+];
+
 export default function RealEstateMarketingPage({ onBackToHome, openProposalForm }: RealEstateMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
   const WHATSAPP_LINK = "https://wa.me/918318114492";
@@ -43,9 +74,34 @@ export default function RealEstateMarketingPage({ onBackToHome, openProposalForm
       });
       document.head.appendChild(scriptEl);
     }
+
+    // Inject FAQPage Schema
+    const faqScriptId = "realestate-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": realEstateFaqsData.map(f => ({
+          "@type": "Question",
+          "name": f.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.answer
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       const el = document.getElementById(scriptId);
       if (el) el.remove();
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -412,39 +468,29 @@ export default function RealEstateMarketingPage({ onBackToHome, openProposalForm
     }
   ];
 
-  const faqsData = [
-    {
-      question: "How can real estate businesses generate highly pre-qualified leads online?",
-      answer: "We avoid generic, broad real estate keywords. Instead, we target precise asset attributes: configuration keys ('ready to move ready construction flats'), location specifications ('3bhk builder floors in South Delhi'), and specific pricing or amenities indicators. We design landing paths around instant floorplan or pricing brochure downloads, requiring real business numbers, and bridge them instantly to automated WhatsApp chat sequences, ensuring immediate verification."
-    },
-    {
-      question: "Is SEO genuinely important for developers, or do portals dominate?",
-      answer: "While massive portals (like Zillow, SquareYards, or standard property directories) dominate broad national terms, they fail entirely on hyperlocal search intent. Buyers want neighborhood-specific details, street proms, and specific developer reputations. By optimizing neighborhood cluster articles and targeting local Google Maps Packs, we place your individual developer project layouts directly above generic portal lists on standard search loops."
-    },
-    {
-      question: "Which ads perform best for generating immediate property buyer inquiries?",
-      answer: "For immediate, high-intent needs, Google Search and Business Map Pack Ads perform beautifully. For luxury and visually stunning residential projects, targeted Meta (Instagram/Facebook) Reels campaigns paired with in-line lead form captures generate high volumes. Integrating these with active conversational AI routing ensures no leads sit cold."
-    },
-    {
-      question: "Can you actually guarantee top ranks in the local Google Business Maps pack?",
-      answer: "We utilize algorithmic optimization paths: cleaning Name, Address, and Phone (NAP) citations across national registries, injecting real location metadata keywords inside physical photos, structuring localized vicinity schema on your domain, and automating client review loops. This proximity optimization forces Google's ranking engine to favor your listing."
-    },
-    {
-      question: "How long does a systemic Real Estate SEO roadmap take to show value?",
-      answer: "While paid ad networks bring leads within 24 hours of campaign validation, organic SEO and Local Map Pack authority require between 60 to 90 days to gain real traction. Once established, this creates a permanent flow of property inquiries at zero cost-per-click."
-    },
-    {
-      question: "Do you design custom developer websites with interactive listings?",
-      answer: "Absolutely. We code and maintain lightning-fast property websites optimized for conversion. We build responsive listing tables, easily editable location modules, and secure spaces where agents can download drone walkthrough units and floorplans instantly on any mobile device."
-    },
-    {
-      question: "What is AI SEO for real estate, and how does it help sales?",
-      answer: "AI SEO, or Generative Engine Optimization (GEO), ensures your properties and developer brand are referenced inside ChatGPT Search, Claude, and Perplexity. By writing structured metadata schemas and securing co-citations on verified domain networks, we ensure conversational models output your projects as the primary recommendation when asked questions like 'luxury apartments for sale ready to move'."
-    }
-  ];
+  const faqsData = realEstateFaqsData;
 
   return (
     <>
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": realEstateFaqsData.map(f => ({
+              "@type": "Question",
+              "name": f.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.answer
+              }
+            }))
+          })
+        }}
+      />
+
       {/* SECTION NAV BAR (NON-STUNNING EXCLUSIVE TO PAGE) */}
       <div className="bg-[#0b0f1d] border-b border-slate-900 py-3.5 px-4 z-30 relative transition-all duration-200">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">

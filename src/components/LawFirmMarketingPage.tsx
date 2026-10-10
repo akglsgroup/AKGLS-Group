@@ -13,6 +13,37 @@ interface LawFirmMarketingPageProps {
   openProposalForm?: () => void;
 }
 
+const legalFaqsData = [
+  {
+    question: "How can lawyers generate qualified leads online?",
+    answer: "We focus on high-intent user searches. Instead of bidding on generic keywords like 'legal details', we target terms used by active searchers ready to hire counsel: specialized practice terms ('brain injury lawyer with free consultation'), transactional phrases ('best commercial litigation attorney near me'), and target regions. Pairing these with Local Service Ads and high-converting attorney profiles maximizes high-value sign-ups."
+  },
+  {
+    question: "Is SEO important for law firms?",
+    answer: "Indispensable. Over 75% of prospective clients research attorneys online before hiring. Scoring top organic ranks on Google helps you capture cases directly, reducing dependency on third-party legal directory networks."
+  },
+  {
+    question: "Can Google Ads generate high-value legal consultations?",
+    answer: "Yes, when matched with expert qualifiers. We utilize strict negative keyword directories to screen out individuals seeking free legal help, employment seekers, or trivial queries, sending only highly qualified case profiles to your desk."
+  },
+  {
+    question: "How long does a professional attorney SEO strategy take to show results?",
+    answer: "Google Local Service Ads (LSAs) and Search PPC deliver qualified consultation leads within days of verification. Organic SEO rankings and Google Maps 3-Pack authority typically experience meaningful growth within 60 to 90 days, delivering long-term cases at zero ongoing ad costs."
+  },
+  {
+    question: "Do you market all types of law firms?",
+    answer: "Yes. We design tailor-made strategies depending on your client targets: high-empathy visual networks for Personal Injury & Family Law, premium informative guides for Criminal Defense, or sophisticated corporate B2B authority programs for Commercial & Intellectual Property firms."
+  },
+  {
+    question: "Can you improve local Google rankings and Map positions?",
+    answer: "Yes. By optimizing proximity tags, cleaning inconsistent citation directories, boosting your natural reviews collection, and implementing Attorney-specific schemas, we consistently outrank generic legal portal pages."
+  },
+  {
+    question: "What is AI SEO for lawyers?",
+    answer: "AI SEO, or Generative Engine Optimization (GEO), optimizes your attorney bios, legal publications, and company pages so that conversational systems like ChatGPT Search, Perplexity, and Gemini include your firm as a recommended option when users ask complex legal questions."
+  }
+];
+
 export default function LawFirmMarketingPage({ onBackToHome, openProposalForm }: LawFirmMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
   const WHATSAPP_LINK = "https://wa.me/918318114492";
@@ -43,9 +74,34 @@ export default function LawFirmMarketingPage({ onBackToHome, openProposalForm }:
       });
       document.head.appendChild(scriptEl);
     }
+
+    // Inject FAQPage Schema dynamically
+    const faqScriptId = "lawfirm-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": legalFaqsData.map(f => ({
+          "@type": "Question",
+          "name": f.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.answer
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       const el = document.getElementById(scriptId);
       if (el) el.remove();
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -436,39 +492,29 @@ export default function LawFirmMarketingPage({ onBackToHome, openProposalForm }:
     }
   ];
 
-  const faqsData = [
-    {
-      question: "How can lawyers generate qualified leads online?",
-      answer: "We focus on high-intent user searches. Instead of bidding on generic keywords like 'legal details', we target terms used by active searchers ready to hire counsel: specialized practice terms ('brain injury lawyer with free consultation'), transactional phrases ('best commercial litigation attorney near me'), and target regions. Pairing these with Local Service Ads and high-converting attorney profiles maximizes high-value sign-ups."
-    },
-    {
-      question: "Is SEO important for law firms?",
-      answer: "Indispensable. Over 75% of prospective clients research attorneys online before hiring. Scoring top organic ranks on Google helps you capture cases directly, reducing dependency on third-party legal directory networks."
-    },
-    {
-      question: "Can Google Ads generate high-value legal consultations?",
-      answer: "Yes, when matched with expert qualifiers. We utilize strict negative keyword directories to screen out individuals seeking free legal help, employment seekers, or trivial queries, sending only highly qualified case profiles to your desk."
-    },
-    {
-      question: "How long does a professional attorney SEO strategy take to show results?",
-      answer: "Google Local Service Ads (LSAs) and Search PPC deliver qualified consultation leads within days of verification. Organic SEO rankings and Google Maps 3-Pack authority typically experience meaningful growth within 60 to 90 days, delivering long-term cases at zero ongoing ad costs."
-    },
-    {
-      question: "Do you market all types of law firms?",
-      answer: "Yes. We design tailor-made strategies depending on your client targets: high-empathy visual networks for Personal Injury & Family Law, premium informative guides for Criminal Defense, or sophisticated corporate B2B authority programs for Commercial & Intellectual Property firms."
-    },
-    {
-      question: "Can you improve local Google rankings and Map positions?",
-      answer: "Yes. By optimizing proximity tags, cleaning inconsistent citation directories, boosting your natural reviews collection, and implementing Attorney-specific schemas, we consistently outrank generic legal portal pages."
-    },
-    {
-      question: "What is AI SEO for lawyers?",
-      answer: "AI SEO, or Generative Engine Optimization (GEO), optimizes your attorney bios, legal publications, and company pages so that conversational systems like ChatGPT Search, Perplexity, and Gemini include your firm as a recommended option when users ask complex legal questions."
-    }
-  ];
+  const faqsData = legalFaqsData;
 
   return (
     <>
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": legalFaqsData.map(f => ({
+              "@type": "Question",
+              "name": f.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.answer
+              }
+            }))
+          })
+        }}
+      />
+
       {/* SECTION NAV BAR */}
       <div className="bg-[#0a0d17] border-b border-slate-900 py-3.5 px-4 z-30 relative transition-all duration-200">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">

@@ -13,6 +13,29 @@ interface AiSearchOptimizationPageProps {
   openProposalForm?: () => void;
 }
 
+const aiSearchFaqs = [
+  {
+    q: "What is AI Search Optimization?",
+    a: "AI Search Optimization refers to technical copywriting and data engineering strategies configured specifically to rank your business as a cited option inside ChatGPT, Google AI Overviews, Claude, Gemini, and other generative models."
+  },
+  {
+    q: "How does it differ from traditional SEO?",
+    a: "Traditional SEO is primarily concerned with blue link rankings based on general volume keywords and backlink signals. AI optimization centers on entity relations, NLP structure patterns, clear data parameter columns, and direct question answering capabilities."
+  },
+  {
+    q: "Can businesses actually rank inside closed assistants like ChatGPT?",
+    a: "Yes! LLM systems leverage real-time web crawlers to grab and compile comparative data lists, using citations to back up assertions. Optimizing schemas and forum footprints ensures positive citations."
+  },
+  {
+    q: "What is the difference between GEO and AEO?",
+    a: "GEO (Generative Engine Optimization) works to make overall article blocks synthesize cleanly across summarization networks. AEO (Answer Engine Optimization) structures punchy question-answer pairs optimized for voice systems."
+  },
+  {
+    q: "How long does it take to see organic AI index updates?",
+    a: "Crawlers index high-authority sites within a few days, but system weight updates generally propagate over 4 to 8 weeks as underlying AI memory caches are refreshed."
+  }
+];
+
 const schemaTemplates = {
   service: `{
   "@context": "https://schema.org",
@@ -45,19 +68,55 @@ const schemaTemplates = {
     "name": "AI Search Optimization Services",
     "item": "https://www.akglsgroup.com/ai-search-optimization-services/"
   }]
-}`
+}`,
+  faq: JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": aiSearchFaqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.a
+      }
+    }))
+  }, null, 2)
 };
 
 export default function AiSearchOptimizationPage({ onBackToHome, openProposalForm }: AiSearchOptimizationPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
   const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20want%20to%20optimize%20our%20domain%20for%20AI%20Search%20Engines%20like%20Perplexity%20and%20SearchGPT.';
 
-  // Dynamic Page Title
+  // Dynamic Page Title & Head FAQ Schema Injection
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "AI Search Optimization Services | AI SEO Agency | AKGLS Group";
+
+    // Set canonical link for SEO
+    const canonicalHref = "https://www.akglsgroup.com/ai-search-optimization-services/";
+    let canonicalLink = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalHref);
+
+    // Inject FAQPage Schema
+    const faqScriptId = "ai-search-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = schemaTemplates.faq;
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -291,6 +350,11 @@ export default function AiSearchOptimizationPage({ onBackToHome, openProposalFor
 
   return (
     <div id="ai-search-optimization-page" className="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-brand-teal selection:text-slate-950">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: schemaTemplates.faq }} 
+      />
       
       {/* Dynamic Sticky Header Navigation Placeholder Alert / Navigation Assist */}
       <div className="bg-slate-900 border-b border-slate-800 text-xs py-2 px-4 flex justify-between items-center z-20 relative">
@@ -1179,6 +1243,21 @@ export default function AiSearchOptimizationPage({ onBackToHome, openProposalFor
                   Multi-tier navigational index informing robots of exact content folders relative hierarchy.
                 </p>
               </div>
+
+              <div 
+                className="p-4 bg-slate-905 border border-slate-800 rounded-xl hover:border-brand-teal/30 cursor-pointer transition"
+                onClick={() => copySchemaText(schemaTemplates.faq, 'faq')}
+              >
+                <div className="flex justify-between items-center text-xs font-bold text-slate-300 font-mono mb-2">
+                  <span>FAQPAGE JSON-LD SCHEMA</span>
+                  <span className="text-brand-teal text-[10px] uppercase font-bold">
+                    {schemaCopied === 'faq' ? 'COPIED!' : 'CLICK TO COPY'}
+                  </span>
+                </div>
+                <p className="text-xs text-slate-400 font-mono">
+                  Schema.org FAQPage structured data providing high-authority conversational Q&A snippets for AI models.
+                </p>
+              </div>
             </div>
           </div>
 
@@ -1262,28 +1341,7 @@ export default function AiSearchOptimizationPage({ onBackToHome, openProposalFor
         </div>
 
         <div className="space-y-4">
-          {[
-            {
-              q: "What is AI Search Optimization?",
-              a: "AI Search Optimization refers to technical copywriting and data engineering strategies configured specifically to rank your business as a cited option inside ChatGPT, Google AI Overviews, Claude, Gemini, and other generative models."
-            },
-            {
-              q: "How does it differ from traditional SEO?",
-              a: "Traditional SEO is primarily concerned with blue link rankings based on general volume keywords and backlink signals. AI optimization centers on entity relations, NLP structure patterns, clear data parameter columns, and direct question answering capabilities."
-            },
-            {
-              q: "Can businesses actually rank inside closed assistants like ChatGPT?",
-              a: "Yes! LLM systems leverage real-time web crawlers to grab and compile comparative data lists, using citations to back up assertions. Optimizing schemas and forum footprints ensures positive citations."
-            },
-            {
-              q: "What is the difference between GEO and AEO?",
-              a: "GEO (Generative Engine Optimization) works to make overall article blocks synthesize cleanly across summarization networks. AEO (Answer Engine Optimization) structures punchy question-answer pairs optimized for voice systems."
-            },
-            {
-              q: "How long does it take to see organic AI index updates?",
-              a: "Crawlers index high-authority sites within a few days, but system weight updates generally propagate over 4 to 8 weeks as underlying AI memory caches are refreshed."
-            }
-          ].map((faq, index) => (
+          {aiSearchFaqs.map((faq, index) => (
             <div key={index} className="bg-slate-900 border border-slate-800 rounded-xl transition overflow-hidden">
               <button
                 onClick={() => setActiveFaq(activeFaq === index ? null : index)}

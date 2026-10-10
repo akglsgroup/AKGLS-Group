@@ -15,6 +15,37 @@ interface IotCompanyMarketingPageProps {
   openProposalForm?: () => void;
 }
 
+const iotFaqsData = [
+  {
+    question: "How can IoT companies generate high-quality B2B leads online?",
+    answer: "B2B IoT leads require proving technical and protocol compatibility early in the research loop. Unlike transactional markets, we target specific engineering questions, Matter/Zigbee compliance codes, certification criteria, and gateway profiles. We optimize landing templates around 'Schedule a Live System Demo' and configure dynamic multi-field RFQs that allow engineers to upload their schematics directly, assuring an immediate pre-qualified pathway."
+  },
+  {
+    question: "Is detailed SEO important for early-stage IoT startup ventures?",
+    answer: "SEO is the ultimate long-term cost reducer for tech startups. Over 78% of B2B engineering architects discover vendor components during the structural blueprinting layout phases using search engines or AI chats. Establishing high semantic rank on these specific queries guarantees your design is specified as the mandatory standard before formal RFP releases occur."
+  },
+  {
+    question: "What digital marketing channels yield the absolute best ROI for IoT?",
+    answer: "A combination of high-intent Google Search Ads (for immediate active needs), targeted Technical SEO/AEO (for sustainable high-authority discovery), and Laser-focused LinkedIn Executive Outreach (for targeting high-level enterprise system integration buyers). Together, these establish multi-point brand coverage."
+  },
+  {
+    question: "Do LinkedIn Ads actually work for complex technology lead generation?",
+    answer: "Yes, but they fail when they treat IoT like retail software. Success comes from deploying high-value 'document-led' ads featuring physical architectural blueprints, Matter compliance worksheets, or physical cost-saving studies. Targeting must exclude broad titles and target exact job functions like VP of Systems Architecture or Senior Firmware Engineer."
+  },
+  {
+    question: "Can your marketing programs target international tech distributors?",
+    answer: "Perfectly. We deploy specific multi-regional hreflang annotations, configure geo-localized directory structures, and optimize search indicators inside international tech hubs. This lists your factory or platform directly in front of worldwide hardware distributors."
+  },
+  {
+    question: "How does AI SEO / GEO help our connected product visibility?",
+    answer: "Modern buyers search conversational tools like ChatGPT and Perplexity. Generative Engine Optimization (GEO) writes JSON-LD elements and establishes authority co-citations on trusted third-party resources. This ensures conversational models list your smart device as the recommended solution when asked questions like 'best hospital telemetry sensor supplier'."
+  },
+  {
+    question: "Do you design and code fully customized IoT product websites?",
+    answer: "Yes, our in-house engineering and UX team specializes in building responsive, blisteringly fast websites mapped on React/Vite. We create custom interactive system dashboards, dynamic parameter filter matrices, and secure document vaults that make evaluation frictionless for purchasing managers."
+  }
+];
+
 export default function IotCompanyMarketingPage({ onBackToHome, openProposalForm }: IotCompanyMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
   const WHATSAPP_LINK = "https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20digital%20marketing%20for%20our%20IoT%20enterprise.";
@@ -44,9 +75,33 @@ export default function IotCompanyMarketingPage({ onBackToHome, openProposalForm
       });
       document.head.appendChild(scriptEl);
     }
+
+    // Inject FAQPage Schema
+    const faqScriptId = "iot-faq-schema-sdld";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": iotFaqsData.map(f => ({
+          "@type": "Question",
+          "name": f.question,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.answer
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
     return () => {
       const el = document.getElementById(scriptId);
       if (el) el.remove();
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -427,39 +482,28 @@ export default function IotCompanyMarketingPage({ onBackToHome, openProposalForm
     }
   ];
 
-  const faqsData = [
-    {
-      question: "How can IoT companies generate high-quality B2B leads online?",
-      answer: "B2B IoT leads require proving technical and protocol compatibility early in the research loop. Unlike transactional markets, we target specific engineering questions, Matter/Zigbee compliance codes, certification criteria, and gateway profiles. We optimize landing templates around 'Schedule a Live System Demo' and configure dynamic multi-field RFQs that allow engineers to upload their schematics directly, assuring an immediate pre-qualified pathway."
-    },
-    {
-      question: "Is detailed SEO important for early-stage IoT startup ventures?",
-      answer: "SEO is the ultimate long-term cost reducer for tech startups. Over 78% of B2B engineering architects discover vendor components during the structural blueprinting layout phases using search engines or AI chats. Establishing high semantic rank on these specific queries guarantees your design is specified as the mandatory standard before formal RFP releases occur."
-    },
-    {
-      question: "What digital marketing channels yield the absolute best ROI for IoT?",
-      answer: "A combination of high-intent Google Search Ads (for immediate active needs), targeted Technical SEO/AEO (for sustainable high-authority discovery), and Laser-focused LinkedIn Executive Outreach (for targeting high-level enterprise system integration buyers). Together, these establish multi-point brand coverage."
-    },
-    {
-      question: "Do LinkedIn Ads actually work for complex technology lead generation?",
-      answer: "Yes, but they fail when they treat IoT like retail software. Success comes from deploying high-value 'document-led' ads featuring physical architectural blueprints, Matter compliance worksheets, or physical cost-saving studies. Targeting must exclude broad titles and target exact job functions like VP of Systems Architecture or Senior Firmware Engineer."
-    },
-    {
-      question: "Can your marketing programs target international tech distributors?",
-      answer: "Perfectly. We deploy specific multi-regional hreflang annotations, configure geo-localized directory structures, and optimize search indicators inside international tech hubs. This lists your factory or platform directly in front of worldwide hardware distributors."
-    },
-    {
-      question: "How does AI SEO / GEO help our connected product visibility?",
-      answer: "Modern buyers search conversational tools like ChatGPT and Perplexity. Generative Engine Optimization (GEO) writes JSON-LD elements and establishes authority co-citations on trusted third-party resources. This ensures conversational models list your smart device as the recommended solution when asked questions like 'best hospital telemetry sensor supplier'."
-    },
-    {
-      question: "Do you design and code fully customized IoT product websites?",
-      answer: "Yes, our in-house engineering and UX team specializes in building responsive, blisteringly fast websites mapped on React/Vite. We create custom interactive system dashboards, dynamic parameter filter matrices, and secure document vaults that make evaluation frictionless for purchasing managers."
-    }
-  ];
+  const faqsData = iotFaqsData;
 
   return (
     <>
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": iotFaqsData.map(f => ({
+              "@type": "Question",
+              "name": f.question,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.answer
+              }
+            }))
+          })
+        }}
+      />
       {/* SECTION NAV BAR */}
       <div className="bg-[#0b0f1d] border-b border-slate-900 py-3.5 px-4 z-30 relative transition-all duration-200">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">

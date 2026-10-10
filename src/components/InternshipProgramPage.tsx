@@ -21,14 +21,86 @@ interface DomainCard {
   icon: React.ReactNode;
 }
 
+const internshipFaqs = [
+  {
+    q: "Is this internship paid or unpaid?",
+    a: "We offer both training-focused (unpaid) and project-contributor (stipend-based) tracks depending on previous skills, portfolio reviews, and duration choice. All tracks include premium software tools access, clinical mentorship reviews, verified certifications, and career support."
+  },
+  {
+    q: "Will I get a verified physical certificate?",
+    a: "Yes. Upon successful completion of your timeline criteria and dynamic task evaluations, you will receive a secure digital credential with a serialized verification ID, as well as a reference letter detailing your project outcomes."
+  },
+  {
+    q: "Is live project training included?",
+    a: "Absolutely. 100% of our curriculum centers around practical operations. You will analyze and formulate SEO optimizations, content briefs, and ad mock setups for live client projects in real-time."
+  },
+  {
+    q: "Can complete beginners apply?",
+    a: "Yes. Our 1-Month Basic track is designed to guide beginners from basic terminologies up. More advanced tracks (3-Month & 6-Month) are tailored for marketing freshers and graduates ready to build portfolio materials."
+  },
+  {
+    q: "Is work-from-home internship available?",
+    a: "Yes, we support Online/Remote workflows with weekly virtual check-ins, Offline workflows in our active workspace, and Hybrid models that combine both formats perfectly."
+  },
+  {
+    q: "Will there be placement opportunities?",
+    a: "Outstanding performers are fast-tracked into our internal placement pool. Since AKGLS Group is continuously expanding our digital solutions, we hire the best interns directly."
+  },
+  {
+    q: "What tools will I learn to operate?",
+    a: "You will master premium professional tools: SEMrush, Ahrefs, Google Analytics, Google Ads, Meta Business Suite, Canva, custom LLM prompting, and WordPress Elementor constructs."
+  }
+];
+
+const internshipFaqSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": internshipFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a
+    }
+  }))
+});
+
 export default function InternshipProgramPage({ 
   onBackToHome,
   onNavigateToService
 }: InternshipProgramPageProps) {
-  // Sync page scroll and title
+  // Sync page scroll and title & Inject FAQPage Schema
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
+    const originalTitle = document.title;
     document.title = "Internship Program | Digital Marketing & AI SEO Internship | AKGLS Group";
+
+    // Set canonical link for SEO
+    const canonicalHref = "https://www.akglsgroup.com/internship-program";
+    let canonicalLink = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalHref);
+
+    // Inject FAQPage Schema
+    const faqScriptId = "internship-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = internshipFaqSchemaJson;
+      document.head.appendChild(faqScriptEl);
+    }
+
+    return () => {
+      document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
+    };
   }, []);
 
   // Application fields
@@ -257,36 +329,7 @@ export default function InternshipProgramPage({
     }
   ];
 
-  const faqs = [
-    {
-      q: "Is this internship paid or unpaid?",
-      a: "We offer both training-focused (unpaid) and project-contributor (stipend-based) tracks depending on previous skills, portfolio reviews, and duration choice. All tracks include premium software tools access, clinical mentorship reviews, verified certifications, and career support."
-    },
-    {
-      q: "Will I get a verified physical certificate?",
-      a: "Yes. Upon successful completion of your timeline criteria and dynamic task evaluations, you will receive a secure digital credential with a serialized verification ID, as well as a reference letter detailing your project outcomes."
-    },
-    {
-      q: "Is live project training included?",
-      a: "Absolutely. 100% of our curriculum centers around practical operations. You will analyze and formulate SEO optimizations, content briefs, and ad mock setups for live client projects in real-time."
-    },
-    {
-      q: "Can complete beginners apply?",
-      a: "Yes. Our 1-Month Basic track is designed to guide beginners from basic terminologies up. More advanced tracks (3-Month & 6-Month) are tailored for marketing freshers and graduates ready to build portfolio materials."
-    },
-    {
-      q: "Is work-from-home internship available?",
-      a: "Yes, we support Online/Remote workflows with weekly virtual check-ins, Offline workflows in our active workspace, and Hybrid models that combine both formats perfectly."
-    },
-    {
-      q: "Will there be placement opportunities?",
-      a: "Outstanding performers are fast-tracked into our internal placement pool. Since AKGLS Group is continuously expanding our digital solutions, we hire the best interns directly."
-    },
-    {
-      q: "What tools will I learn to operate?",
-      a: "You will master premium professional tools: SEMrush, Ahrefs, Google Analytics, Google Ads, Meta Business Suite, Canva, custom LLM prompting, and WordPress Elementor constructs."
-    }
-  ];
+  const faqs = internshipFaqs;
 
   // Drag-and-drop Resume Helpers
   const handleDragOver = (e: React.DragEvent) => {
@@ -356,6 +399,11 @@ export default function InternshipProgramPage({
 
   return (
     <div className="flex-1 bg-[#05070a] text-slate-100 min-h-screen relative overflow-hidden font-sans pb-16">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: internshipFaqSchemaJson }} 
+      />
       
       {/* Decorative spotlights */}
       <div className="absolute top-0 inset-x-0 h-[600px] bg-gradient-to-b from-brand-indigo/10 via-transparent to-transparent pointer-events-none" />

@@ -15,6 +15,29 @@ interface HireAiSeoExpertPageProps {
   openProposalForm: () => void;
 }
 
+const hireAiSeoFaqs = [
+  { q: "What is AI SEO?", a: "AI SEO focuses on optimizing web layouts so generative platforms (such as ChatGPT, Google SGE, and Gemini) can crawl, contextually categorize, cite, and reference your business in personalized generative responses." },
+  { q: "What is GEO optimization?", a: "Generative Engine Optimization (GEO) uses structured schemas, semantic density adjustments, and entity linkage parameters to make your articles readable for LLM training systems and retrieval models." },
+  { q: "Why should I hire an AI SEO expert?", a: "Because legacy indexing strategies do not cover conversational intent matrices. An AI SEO expert has specialized training in JSON schema structures, entity networks, and retrieval systems." },
+  { q: "Can AI SEO improve standard organic rankings?", a: "Yes. By improving semantic data frameworks, crawl accessibilities, and code formats, standard search crawlers perceive higher structural authority, yielding massive lifts for standard key terms." },
+  { q: "How does ChatGPT optimization work?", a: "By injecting context schemas and establishing high topical authority in Knowledge Graphs. This ensures that when conversational clients seek verified citations, your domains are selected." },
+  { q: "Is conversational SEO important?", a: "Absolutely. Over 50% of mobile search queries involve conversational voice commands or follow-ups. Adapting to natural speech is crucial to scaling organic traffic." },
+  { q: "How long does AI SEO take to show results?", a: "Foundational improvements like schema injection and topic modeling index within 4 to 6 weeks, while holistic semantic citation growth maps continuously over 3 to 6 months." }
+];
+
+const hireAiSeoFaqSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": hireAiSeoFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a
+    }
+  }))
+});
+
 export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: HireAiSeoExpertPageProps) {
   useEffect(() => {
     const originalTitle = document.title;
@@ -49,6 +72,13 @@ export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: 
     });
     document.head.appendChild(schemaScript);
 
+    // Inject FAQPage Schema
+    const faqScript = document.createElement('script');
+    faqScript.type = 'application/ld+json';
+    faqScript.id = 'react-hire-ai-seo-faq-schema';
+    faqScript.text = hireAiSeoFaqSchemaJson;
+    document.head.appendChild(faqScript);
+
     return () => {
       document.title = originalTitle;
       if (metaDesc) {
@@ -60,6 +90,8 @@ export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: 
       }
       const existingSchema = document.getElementById('react-hire-ai-seo-schema');
       if (existingSchema) existingSchema.remove();
+      const existingFaqSchema = document.getElementById('react-hire-ai-seo-faq-schema');
+      if (existingFaqSchema) existingFaqSchema.remove();
     };
   }, []);
 
@@ -173,6 +205,11 @@ export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: 
 
   return (
     <div className="min-h-screen bg-[#02040d] text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-300 font-sans antialiased overflow-x-hidden relative">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: hireAiSeoFaqSchemaJson }} 
+      />
       
       {/* Background decoration elements */}
       <div className="absolute top-0 left-0 right-0 h-[800px] bg-gradient-to-b from-[#061b17]/30 via-[#030d21]/15 to-transparent pointer-events-none" />
@@ -1224,15 +1261,7 @@ export default function HireAiSeoExpertPage({ onBackToHome, openProposalForm }: 
         </div>
 
         <div className="max-w-3xl mx-auto space-y-4">
-          {[
-            { q: "What is AI SEO?", a: "AI SEO focuses on optimizing web layouts so generative platforms (such as ChatGPT, Google SGE, and Gemini) can crawl, contextually categorize, cite, and reference your business in personalized generative responses." },
-            { q: "What is GEO optimization?", a: "Generative Engine Optimization (GEO) uses structured schemas, semantic density adjustments, and entity linkage parameters to make your articles readable for LLM training systems and retrieval models." },
-            { q: "Why should I hire an AI SEO expert?", a: "Because legacy indexing strategies do not cover conversational intent matrices. An AI SEO expert has specialized training in JSON schema structures, entity networks, and retrieval systems." },
-            { q: "Can AI SEO improve standard organic rankings?", a: "Yes. By improving semantic data frameworks, crawl accessibilities, and code formats, standard search crawlers perceive higher structural authority, yielding massive lifts for standard key terms." },
-            { q: "How does ChatGPT optimization work?", a: "By injecting context schemas and establishing high topical authority in Knowledge Graphs. This ensures that when conversational clients seek verified citations, your domains are selected." },
-            { q: "Is conversational SEO important?", a: "Absolutely. Over 50% of mobile search queries involve conversational voice commands or follow-ups. Adapting to natural speech is crucial to scaling organic traffic." },
-            { q: "How long does AI SEO take to show results?", a: "Foundational improvements like schema injection and topic modeling index within 4 to 6 weeks, while holistic semantic citation growth maps continuously over 3 to 6 months." }
-          ].map((faq, idx) => (
+          {hireAiSeoFaqs.map((faq, idx) => (
             <div key={idx} className="bg-[#030612]/60 border border-slate-900 rounded-lg overflow-hidden transition-all">
               <button 
                 onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}

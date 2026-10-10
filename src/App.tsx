@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback, FormEvent, MouseEvent } from 'react';
+import { motion } from 'motion/react';
 import * as ReactHelmetAsync from 'react-helmet-async';
 const Helmet: any = (ReactHelmetAsync as any).Helmet || (ReactHelmetAsync as any).default?.Helmet || ReactHelmetAsync;
 import { 
@@ -88,10 +89,12 @@ import { OfflineIndicator } from './components/OfflineIndicator';
 import FAQ from './components/FAQ';
 import HomeHeroBanner from './components/HomeHeroBanner';
 import PartnerTrustCarousel from './components/PartnerTrustCarousel';
+import CorporateHeadquartersSection from './components/CorporateHeadquartersSection';
 import ProposalSuccessState from './components/ProposalSuccessState';
 import LazyImage, { Image, LazyImageProps } from './components/LazyImage';
 export { LazyImage, Image };
 export type { LazyImageProps };
+import AnimatedMetricNumber from './components/AnimatedMetricNumber';
 import { defaultCaseStudies } from './data';
 import { CaseStudy } from './types';
 
@@ -2456,21 +2459,32 @@ export default function App() {
           {filteredCapabilities.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {filteredCapabilities.map((cap) => (
-                <div 
+                <motion.div 
                   key={cap.id} 
-                  className="bg-[#0c121e] border border-slate-850 hover:border-brand-indigo/35 transition-all rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-left hover:shadow-2xl hover:shadow-brand-indigo/5 flex flex-col justify-between"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  whileHover={{ 
+                    y: -5, 
+                    transition: { type: "spring", stiffness: 380, damping: 24 } 
+                  }}
+                  whileTap={{ scale: 0.99 }}
+                  className="bg-[#0c121e] border border-slate-850 hover:border-brand-indigo/40 rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-left hover:shadow-2xl hover:shadow-brand-indigo/10 flex flex-col justify-between transition-colors relative overflow-hidden group"
                 >
+                  {/* Subtle ambient hover top border sheen */}
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-brand-indigo/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
                   <div className="space-y-3.5 sm:space-y-4">
                     <div className="flex items-center justify-between">
-                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${cap.iconBgClass} ${cap.iconTextClass}`}>
+                      <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-bold ${cap.iconBgClass} ${cap.iconTextClass} group-hover:scale-105 transition-transform duration-300`}>
                         {getIconComponent(cap.icon)}
                       </div>
-                      <span className="text-[10px] text-slate-500 font-mono font-bold uppercase tracking-wider">
+                      <span className="text-[10px] text-slate-500 font-mono font-bold uppercase tracking-wider group-hover:text-slate-400 transition-colors">
                         {cap.tag}
                       </span>
                     </div>
                     
-                    <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-1.5">
+                    <h3 className="text-lg font-extrabold text-white font-display flex items-center gap-1.5 group-hover:text-indigo-200 transition-colors">
                       {cap.title}
                       {cap.badge && (
                         <span className="bg-brand-purple/10 text-brand-purple text-[8.5px] uppercase py-0.5 px-2 rounded font-mono font-bold shrink-0">
@@ -2503,13 +2517,13 @@ export default function App() {
                     <span className="text-center sm:text-left text-[9.5px] tracking-wider text-slate-500">AKGLS PROTOCOL</span>
                     <a 
                       href="#audit-form" 
-                      className="min-h-[44px] sm:min-h-0 py-2.5 sm:py-0 px-4 sm:px-0 rounded-xl sm:rounded-none bg-brand-indigo/15 sm:bg-transparent hover:bg-brand-indigo/25 sm:hover:bg-transparent border border-brand-indigo/30 sm:border-0 text-brand-indigo hover:text-indigo-300 text-xs flex items-center justify-center sm:justify-start font-bold font-display uppercase tracking-wider transition-colors active:scale-[0.99] touch-manipulation"
+                      className="min-h-[44px] sm:min-h-0 py-2.5 sm:py-0 px-4 sm:px-0 rounded-xl sm:rounded-none bg-brand-indigo/15 sm:bg-transparent hover:bg-brand-indigo/25 sm:hover:bg-transparent border border-brand-indigo/30 sm:border-0 text-brand-indigo hover:text-indigo-300 text-xs flex items-center justify-center sm:justify-start font-bold font-display uppercase tracking-wider transition-colors active:scale-[0.99] touch-manipulation group/btn"
                     >
                       <span>Request Audit Setup</span>
-                      <span className="ml-1.5">→</span>
+                      <span className="ml-1.5 group-hover/btn:translate-x-0.5 transition-transform">→</span>
                     </a>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           ) : (
@@ -2718,7 +2732,7 @@ export default function App() {
                         {cs.metrics.label}:
                       </span>
                       <strong className="text-base font-mono font-extrabold text-brand-emerald">
-                        {cs.metrics.value}
+                        <AnimatedMetricNumber value={cs.metrics.value} />
                       </strong>
                     </div>
                     <div className="text-right">
@@ -2749,6 +2763,14 @@ export default function App() {
         </div>
       </section>
 
+      {/* CORPORATE HEADQUARTERS & PHYSICAL CLIENT OPERATIONS */}
+      <CorporateHeadquartersSection 
+        onScheduleVisit={() => {
+          const formEl = document.querySelector('#audit-form');
+          formEl?.scrollIntoView({ behavior: 'smooth' });
+        }}
+      />
+
       {/* LEADERSHIP PROFILE BOARD & CORE VALUES */}
       <section id="team-leadership" className="py-16 md:py-24 bg-[#0a0f1d] border-y border-slate-850/60 scroll-mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-12">
@@ -2758,30 +2780,67 @@ export default function App() {
               AGENCY LEADERSHIP & TEAM
             </span>
             <h2 className="text-3xl md:text-5xl font-extrabold font-display leading-tight text-white">
-              Board & Core Strategists
+              Board & Principal Strategists
             </h2>
             <p className="text-slate-400 text-xs sm:text-sm font-light">
-              We consolidate experienced organic architects, developer engineers, and conversion copywriters.
+              Meet our senior organic architects, paid acquisition leads, and technical engineers directing client campaigns across 4 global hubs.
             </p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
-              { name: "Amit K.", role: "Chief Growth Strategist & Founder", initial: "AK", desc: "Focuses on technical sitemaps, semantic indexing arrays, and enterprise project strategies." },
-              { name: "Siddharth G.", role: "Head of Paid advertising", initial: "SG", desc: "Manages bid properties, coordinates display ads, and removes PPC budget waste." },
-              { name: "Ria Malhotra", role: "UI/UX & custom Web Dev Lead", initial: "RM", desc: "Rebuilds checkout checkout templates to scale speeds and optimize conversions." },
-              { name: "Aravind N.", role: "Senior Schema prompt engineer", initial: "AN", desc: "Coordinates dynamic schemas and evaluates prompt visibility ratios in generative networks." }
+              { 
+                name: "Amit K.", 
+                role: "Chief Growth Strategist & Founder", 
+                initial: "AK", 
+                exp: "14+ Yrs Exp",
+                image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=400",
+                desc: "Directs technical sitemaps, semantic indexing arrays, and multi-market enterprise SEO architecture." 
+              },
+              { 
+                name: "Siddharth G.", 
+                role: "Head of Paid Advertising", 
+                initial: "SG", 
+                exp: "11+ Yrs Exp",
+                image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=400",
+                desc: "Manages seven-figure PPC properties, coordinates Google & Meta Ad bidding, and eliminates ad spend waste." 
+              },
+              { 
+                name: "Ria Malhotra", 
+                role: "UI/UX & Custom Web Dev Lead", 
+                initial: "RM", 
+                exp: "9+ Yrs Exp",
+                image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=400",
+                desc: "Re-engineers conversion templates to achieve sub-second Core Web Vitals and maximize checkout conversions." 
+              },
+              { 
+                name: "Aravind N.", 
+                role: "Senior Schema & AI Engineer", 
+                initial: "AN", 
+                exp: "8+ Yrs Exp",
+                image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=400",
+                desc: "Architects dynamic JSON-LD schemas and optimizes brand visibility across ChatGPT, Perplexity, and Gemini." 
+              }
             ].map((member, idx) => (
               <div 
                 key={idx}
-                className="bg-[#0c121e] rounded-3xl p-6 border border-slate-850 text-left hover:border-brand-indigo/40 hover:shadow-2xl hover:shadow-brand-indigo/5 transition-all flex flex-col justify-between text-slate-200"
+                className="bg-[#0c121e] rounded-3xl p-6 border border-slate-850 text-left hover:border-brand-indigo/40 hover:shadow-2xl hover:shadow-brand-indigo/5 transition-all flex flex-col justify-between text-slate-200 group"
               >
                 <div className="space-y-4">
-                  <div className="w-14 h-14 rounded-full bg-brand-indigo/15 border border-brand-indigo/30 flex items-center justify-center font-bold text-lg text-brand-indigo font-display">
-                    {member.initial}
+                  <div className="relative aspect-square w-full rounded-2xl overflow-hidden bg-slate-900 border border-slate-800">
+                    <LazyImage
+                      src={member.image}
+                      alt={`${member.name} - ${member.role}`}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover object-center filter brightness-95 group-hover:scale-105 transition-transform duration-500"
+                    />
+                    <div className="absolute top-2.5 right-2.5 bg-black/60 backdrop-blur-md border border-white/10 px-2 py-0.5 rounded-full text-[9px] font-mono font-bold text-brand-teal">
+                      {member.exp}
+                    </div>
                   </div>
+
                   <div className="space-y-1">
-                    <h4 className="text-base font-extrabold text-white font-display leading-none animate-fade-in">
+                    <h4 className="text-base font-extrabold text-white font-display leading-tight group-hover:text-brand-teal transition-colors">
                       {member.name}
                     </h4>
                     <span className="text-[9.5px] font-black uppercase text-brand-purple tracking-widest block font-mono">
@@ -2791,6 +2850,13 @@ export default function App() {
                   <p className="text-xs text-slate-400 font-light leading-relaxed">
                     {member.desc}
                   </p>
+                </div>
+
+                <div className="pt-4 border-t border-slate-800/80 mt-4 flex items-center justify-between text-[10px] font-mono text-slate-500">
+                  <span className="text-emerald-400 flex items-center gap-1 font-bold">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" /> On-Site
+                  </span>
+                  <span className="text-slate-400">AKGLS Core Board</span>
                 </div>
               </div>
             ))}

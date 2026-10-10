@@ -23,9 +23,10 @@ interface HeaderProps {
   openDownloadModal: () => void;
   currentPage?: string;
   onNavigate?: (href: string) => void;
+  openGeminiModal?: (prompt?: string, categoryName?: string, questions?: string[]) => void;
 }
 
-export default function Header({ onSearchOpen, openQuiz, openProposal, openDownloadModal, currentPage = 'home', onNavigate }: HeaderProps) {
+export default function Header({ onSearchOpen, openQuiz, openProposal, openDownloadModal, currentPage = 'home', onNavigate, openGeminiModal }: HeaderProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileSearchQuery, setMobileSearchQuery] = useState('');
@@ -747,7 +748,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               <button
                 type="button"
                 id="header-open-gemini-btn"
-                onClick={() => setIsGeminiOpen(true)}
+                onClick={() => openGeminiModal ? openGeminiModal() : setIsGeminiOpen(true)}
                 className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border border-brand-indigo/60 bg-gradient-to-r from-brand-indigo/20 to-brand-purple/20 text-indigo-300 hover:text-white hover:border-brand-indigo transition-all shadow-sm cursor-pointer"
                 title="Ask Gemini Growth Advisor (Search Grounded)"
               >

@@ -57,16 +57,48 @@ const localSchemaTemplates = {
 }`
 };
 
+const localBusinessFaqsList = [
+  { q: "What is the key driver of ranking higher in the Google Maps 'Local Pack'?", a: "Consistency and density of Name, Address, and Phone (NAP) citations across the web, alongside direct customer interactions, search proximity metrics, and a fully polished, active Google Business Profile containing geo-tagged photo updates." },
+  { q: "How long does it take to see positive calls and walk-in returns from Local SEO?", a: "Immediate localized Google Ads draw new customers within 5 to 7 days. Compounded organic Local SEO and Maps optimization sprints start creating massive permanent visibility upgrades within 45 to 60 days of directory index approvals." },
+  { q: "What is AI Local Search Optimization (GEO) and voice search engine compatibility?", a: "GEO modifies your local listings, hours, catalog items, and geographical directions so semantic search networks (e.g. ChatGPT, Perplexity, Apple Siri, Google Voice) read your metadata seamlessly. This allows your business to appear as the handpicked recommendation when someone says, 'Suggest a top-rated attorney near me right now'." },
+  { q: "Do you offer call and lead tracking matrices so we see which campaigns drive customers?", a: "Yes. Every growth campaign includes localized call tracking parameters, dynamic number insertions (DNI) to isolate clicks, and lightweight lead capturing dashboards. You will witness exactly which keyword or profile photo earned the client connection." }
+];
+
 export default function LocalBusinessGrowthServicesPage({ onBackToHome, openProposalForm }: LocalBusinessGrowthServicesPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
   const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20Local%20Business%20Growth%20and%20Google%20Maps%20visibility.';
 
-  // Dynamic Page Title
+  // Dynamic Page Title & FAQ Schema
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "Local Business Growth Services | Local Marketing Agency | AKGLS Group";
+
+    // Inject FAQPage Schema
+    const faqScriptId = "local-growth-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": localBusinessFaqsList.map(f => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.a
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -243,12 +275,7 @@ export default function LocalBusinessGrowthServicesPage({ onBackToHome, openProp
     { cat: "CRM Sync", name: "HubSpot / GHL Lead Pipeline" }
   ];
 
-  const localFaqs = [
-    { q: "What is the key driver of ranking higher in the Google Maps 'Local Pack'?", a: "Consistency and density of Name, Address, and Phone (NAP) citations across the web, alongside direct customer interactions, search proximity metrics, and a fully polished, active Google Business Profile containing geo-tagged photo updates." },
-    { q: "How long does it take to see positive calls and walk-in returns from Local SEO?", a: "Immediate localized Google Ads draw new customers within 5 to 7 days. Compounded organic Local SEO and Maps optimization sprints start creating massive permanent visibility upgrades within 45 to 60 days of directory index approvals." },
-    { q: "What is AI Local Search Optimization (GEO) and voice search engine compatibility?", a: "GEO modifies your local listings, hours, catalog items, and geographical directions so semantic search networks (e.g. ChatGPT, Perplexity, Apple Siri, Google Voice) read your metadata seamlessly. This allows your business to appear as the handpicked recommendation when someone says, 'Suggest a top-rated attorney near me right now'." },
-    { q: "Do you offer call and lead tracking matrices so we see which campaigns drive customers?", a: "Yes. Every growth campaign includes localized call tracking parameters, dynamic number insertions (DNI) to isolate clicks, and lightweight lead capturing dashboards. You will witness exactly which keyword or profile photo earned the client connection." }
-  ];
+  const localFaqs = localBusinessFaqsList;
 
   // Schema copy state
   const [schemaCopied, setSchemaCopied] = useState<string | null>(null);
@@ -283,6 +310,24 @@ export default function LocalBusinessGrowthServicesPage({ onBackToHome, openProp
 
   return (
     <div id="local-business-growth-services-page" className="bg-[#02050f] text-slate-300 min-h-screen relative font-sans leading-relaxed selection:bg-brand-teal selection:text-slate-950">
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": localBusinessFaqsList.map(f => ({
+              "@type": "Question",
+              "name": f.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.a
+              }
+            }))
+          })
+        }}
+      />
       
       {/* Floating Call & Help Bars (Strictly responsive, matching site layouts) */}
       <div className="fixed bottom-4 right-4 z-50 flex flex-col gap-2.5 max-w-sm">

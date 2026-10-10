@@ -80,6 +80,37 @@ const dentalSchemaTemplates = {
 }`
 };
 
+const dentalFaqsList = [
+  {
+    q: "How can dentists get more patients online?",
+    a: "The most effective method is a unified local strategy. First, capture high-intent 'near me' organic searchers by landing in the top three Google Map positions. Second, run surgical Google Ads triggered only by acute pain or procedure-specific terms to capture immediate bookings. Third, ensure your clinic's landing site has clear online scheduling forms and direct click-to-call buttons to limit conversion drops."
+  },
+  {
+    q: "Is SEO good for dental clinics?",
+    a: "Absolutely. Over 80% of local dental inquiries begin in search engines. Unlike paid campaigns which stop generating leads once your budget runs dry, dental SEO builds persistent, compound interest organic traffic on terms like 'best dentist in Syracuse' or 'invisalign expert', securing a stable lead flow with zero added cost per click."
+  },
+  {
+    q: "How much does dental marketing cost?",
+    a: "Our dental specialist marketing solutions scale with your clinic's location counts and aggressive growth goals, spanning from our Starter clinic maps setup at $1,450/month to full market dominator programs at $6,500/month. We write clear deliverables and never charge hidden lead commissions."
+  },
+  {
+    q: "Do Google Ads work for dentists?",
+    a: "Yes, but only when configured by team members with medical healthcare domain knowledge. Standard agencies waste thousands bidding on generic terms like 'tooth doctor'. We target high-intent action phrases like 'emergency wisdom tooth removal near me' mapped directly to Call-Only campaigns to maximize local conversions."
+  },
+  {
+    q: "How long does dental SEO take?",
+    a: "You will usually see localized rating adjustments on your Google Maps pack statistics in 30-60 days. Organic authority on hard keyword procedures like 'dental crown cost analysis' builds over 90-120 days as Google indexes our Schema optimizations and authoritative content updates."
+  },
+  {
+    q: "Can you rank my clinic on Google Maps?",
+    a: "Yes, this is our native specialty. We rewrite Google Business Profile parameters, deploy geographically targeted clinical address schemas, sync matching business citation indexes across 80+ directories, and deploy checkout receipt triggers to boost your genuine 5-star feedback count."
+  },
+  {
+    q: "Do you design custom dental websites?",
+    a: "Yes. All our dental sites are mobile-focused, HIPAA-aligned, and custom styled to load under 1.2 seconds. They contain visual Before/After sliders, secure appointment application integrations, and interactive WhatsApp direct chat widgets."
+  }
+];
+
 export default function DentalClinicMarketingPage({ onBackToHome, openProposalForm }: DentalClinicMarketingPageProps) {
   const CONTACT_NUMBER = '+1 (315) 902-1234';
   const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20dental%20clinic%20marketing%20and%20patient%20acquisition.';
@@ -87,6 +118,33 @@ export default function DentalClinicMarketingPage({ onBackToHome, openProposalFo
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     document.title = "Dental Clinic Marketing Services | Dental SEO Agency | AKGLS Group";
+
+    // Inject FAQPage Schema
+    const faqScriptId = "dental-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": dentalFaqsList.map(f => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.a
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
+    return () => {
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
+    };
   }, []);
 
   // ROI Calculator States
@@ -421,36 +479,7 @@ export default function DentalClinicMarketingPage({ onBackToHome, openProposalFo
     }
   ];
 
-  const faqs = [
-    {
-      q: "How can dentists get more patients online?",
-      a: "The most effective method is a unified local strategy. First, capture high-intent 'near me' organic searchers by landing in the top three Google Map positions. Second, run surgical Google Ads triggered only by acute pain or procedure-specific terms to capture immediate bookings. Third, ensure your clinic's landing site has clear online scheduling forms and direct click-to-call buttons to limit conversion drops."
-    },
-    {
-      q: "Is SEO good for dental clinics?",
-      a: "Absolutely. Over 80% of local dental inquiries begin in search engines. Unlike paid campaigns which stop generating leads once your budget runs dry, dental SEO builds persistent, compound interest organic traffic on terms like 'best dentist in Syracuse' or 'invisalign expert', securing a stable lead flow with zero added cost per click."
-    },
-    {
-      q: "How much does dental marketing cost?",
-      a: "Our dental specialist marketing solutions scale with your clinic's location counts and aggressive growth goals, spanning from our Starter clinic maps setup at $1,450/month to full market dominator programs at $6,500/month. We write clear deliverables and never charge hidden lead commissions."
-    },
-    {
-      q: "Do Google Ads work for dentists?",
-      a: "Yes, but only when configured by team members with medical healthcare domain knowledge. Standard agencies waste thousands bidding on generic terms like 'tooth doctor'. We target high-intent action phrases like 'emergency wisdom tooth removal near me' mapped directly to Call-Only campaigns to maximize local conversions."
-    },
-    {
-      q: "How long does dental SEO take?",
-      a: "You will usually see localized rating adjustments on your Google Maps pack statistics in 30-60 days. Organic authority on hard keyword procedures like 'dental crown cost analysis' builds over 90-120 days as Google indexes our Schema optimizations and authoritative content updates."
-    },
-    {
-      q: "Can you rank my clinic on Google Maps?",
-      a: "Yes, this is our native specialty. We rewrite Google Business Profile parameters, deploy geographically targeted clinical address schemas, sync matching business citation indexes across 80+ directories, and deploy checkout receipt triggers to boost your genuine 5-star feedback count."
-    },
-    {
-      q: "Do you design custom dental websites?",
-      a: "Yes. All our dental sites are mobile-focused, HIPAA-aligned, and custom styled to load under 1.2 seconds. They contain visual Before/After sliders, secure appointment application integrations, and interactive WhatsApp direct chat widgets."
-    }
-  ];
+  const faqs = dentalFaqsList;
 
   // AI Typing action simulator
   const runAiDemoType = (term: string) => {
@@ -473,6 +502,24 @@ export default function DentalClinicMarketingPage({ onBackToHome, openProposalFo
 
   return (
     <div className="bg-[#05070a] text-slate-300 font-sans selection:bg-brand-indigo selection:text-white min-h-screen relative overflow-hidden">
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": dentalFaqsList.map(f => ({
+              "@type": "Question",
+              "name": f.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.a
+              }
+            }))
+          })
+        }}
+      />
       
       {/* BACKGROUND GRAPHIC ACCENTS */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-indigo-950/10 via-teal-950/5 to-transparent pointer-events-none" />

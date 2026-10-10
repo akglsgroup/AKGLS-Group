@@ -14,6 +14,29 @@ interface ChatgptOptimizationPageProps {
   openProposalForm?: () => void;
 }
 
+const chatgptFaqs = [
+  {
+    q: "What is ChatGPT Optimization?",
+    a: "ChatGPT Optimization (or ChatGPT SEO) is a strategy designed to structure a domain's content, metadata, schemas, and entity signals to ensure OpenAI's conversational system parses, understands, and recommends your brand as a direct citation answer."
+  },
+  {
+    q: "Can businesses actually rank inside ChatGPT answers?",
+    a: "Yes! When ChatGPT evaluates options to recommend to users, it scrapes external databases, search engines, and factual authority schemas. Maintaining optimized schemas and a high frequency of factual data matrices helps businesses claim these citation links."
+  },
+  {
+    q: "How does ChatGPT discover website content?",
+    a: "ChatGPT uses its background web-scraping agents (like GPTBot) to index high-trust domains. It also uses real-time search engine configurations (Bing APIs) during conversational prompting to fetch references matching natural user questions."
+  },
+  {
+    q: "What is Generative Engine Optimization (GEO)?",
+    a: "GEO focuses on adjusting content models specifically for search platforms synthesized by AI, prioritizing contextual NLP densities, factual columns, authority references, and schema structures instead of old keyword stuffing rules."
+  },
+  {
+    q: "How long does it take to see results?",
+    a: "Because AI models constantly update and synthesize inputs, results are often visible within weeks of deploying nested microdata FAQ schemas and claims-verification structures across your category pages."
+  }
+];
+
 const schemaTemplates = {
   service: `{
   "@context": "https://schema.org",
@@ -46,19 +69,55 @@ const schemaTemplates = {
     "name": "ChatGPT Optimization Services",
     "item": "https://www.akglsgroup.com/chatgpt-optimization-services/"
   }]
-}`
+}`,
+  faq: JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": chatgptFaqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.a
+      }
+    }))
+  }, null, 2)
 };
 
 export default function ChatgptOptimizationPage({ onBackToHome, openProposalForm }: ChatgptOptimizationPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
   const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20optimize%20our%20website%20for%20ChatGPT%20Search%20and%20SearchGPT.';
 
-  // Dynamic Page Title
+  // Dynamic Page Title & Head FAQ Schema Injection
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "ChatGPT Optimization Services | ChatGPT SEO Agency | AKGLS Group";
+
+    // Set canonical link for SEO
+    const canonicalHref = "https://www.akglsgroup.com/chatgpt-optimization-services/";
+    let canonicalLink = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalHref);
+
+    // Inject FAQPage Schema
+    const faqScriptId = "chatgpt-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = schemaTemplates.faq;
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -292,6 +351,11 @@ export default function ChatgptOptimizationPage({ onBackToHome, openProposalForm
 
   return (
     <div id="chatgpt-optimization-page" className="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-brand-teal selection:text-slate-950">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: schemaTemplates.faq }} 
+      />
       
       {/* Sub Header Navigation */}
       <div className="bg-slate-900 border-b border-slate-800 text-xs py-2 px-4 flex justify-between items-center z-20 relative">
@@ -1242,6 +1306,35 @@ export default function ChatgptOptimizationPage({ onBackToHome, openProposalForm
               </p>
             </div>
 
+            {/* FAQPage schema card */}
+            <div className="bg-slate-950 p-5 rounded-xl border border-slate-805 space-y-3 relative">
+              <div className="flex justify-between items-center pb-2 border-b border-slate-900">
+                <span className="text-xs font-bold font-mono text-brand-teal">FAQPage Schema (JSON-LD)</span>
+                <button
+                  onClick={() => copySchemaText(schemaTemplates.faq, 'faq')}
+                  className="text-slate-400 hover:text-white transition duration-200 cursor-pointer flex items-center space-x-1 font-mono text-[10px]"
+                >
+                  {schemaCopied === 'faq' ? (
+                    <>
+                      <Check className="w-3.5 h-3.5 text-brand-teal" />
+                      <span className="text-brand-teal">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>Copy Schema</span>
+                    </>
+                  )}
+                </button>
+              </div>
+              <pre className="text-[10px] md:text-xs text-slate-300 font-mono bg-slate-900 p-4 rounded-lg overflow-x-auto select-all max-h-48 overflow-y-auto">
+                {schemaTemplates.faq}
+              </pre>
+              <p className="text-[10.5px] text-slate-400 font-mono leading-relaxed">
+                *Schema.org FAQPage structured data providing high-authority conversational Q&A snippets for ChatGPT citations.
+              </p>
+            </div>
+
           </div>
         </div>
       </section>
@@ -1345,28 +1438,7 @@ export default function ChatgptOptimizationPage({ onBackToHome, openProposalForm
           </div>
 
           <div className="space-y-4">
-            {[
-              {
-                q: "What is ChatGPT Optimization?",
-                a: "ChatGPT Optimization (or ChatGPT SEO) is a strategy designed to structure a domain's content, metadata, schemas, and entity signals to ensure OpenAI's conversational system parses, understands, and recommends your brand as a direct citation answer."
-              },
-              {
-                q: "Can businesses actually rank inside ChatGPT answers?",
-                a: "Yes! When ChatGPT evaluates options to recommend to users, it scrapes external databases, search engines, and factual authority schemas. Maintaining optimized schemas and a high frequency of factual data matrices helps businesses claim these citation links."
-              },
-              {
-                q: "How does ChatGPT discover website content?",
-                a: "ChatGPT uses its background web-scraping agents (like GPTBot) to index high-trust domains. It also uses real-time search engine configurations (Bing APIs) during conversational prompting to fetch references matching natural user questions."
-              },
-              {
-                q: "What is Generative Engine Optimization (GEO)?",
-                a: "GEO focuses on adjusting content models specifically for search platforms synthesized by AI, prioritizing contextual NLP densities, factual columns, authority references, and schema structures instead of old keyword stuffing rules."
-              },
-              {
-                q: "How long does it take to see results?",
-                a: "Because AI models constantly update and synthesize inputs, results are often visible within weeks of deploying nested microdata FAQ schemas and claims-verification structures across your category pages."
-              }
-            ].map((faq, fIdx) => (
+            {chatgptFaqs.map((faq, fIdx) => (
               <div 
                 key={fIdx} 
                 className="bg-slate-900 border border-slate-850 rounded-xl overflow-hidden transition duration-200"

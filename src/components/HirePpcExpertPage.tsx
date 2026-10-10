@@ -14,6 +14,50 @@ interface HirePpcExpertPageProps {
   openProposalForm: () => void;
 }
 
+const hirePpcFaqs = [
+  {
+    q: "Why should I hire a dedicated PPC expert instead of using a standard digital marketing agency?",
+    a: "Traditional agencies often assign junior managers to oversee dozens of accounts at once, leading to generic templates and unmanaged bid pacing. A dedicated PPC specialist from AKGLS Group integrates directly into your team, allowing for highly tactical bid editing, tailored lookalike testing, and deep alignment with your revenue goals."
+  },
+  {
+    q: "How much does hiring a PPC expert cost, and what are your pricing options?",
+    a: "We offer completely flexible plans tailored to your budget. Options range from $1,800/mo for starter configurations (under 12 hrs/wk) to $3,400/mo for multi-channel scaling (25 hrs/wk), alongside fully custom enterprise team rates (40 hrs/wk) to suit your unique sourcing goals."
+  },
+  {
+    q: "How quickly can PPC generate results and leads?",
+    a: "Unlike organic search SEO which requires months to build authority, PPC yields traffic immediately upon launch. With accurate tracking and calibrated campaign structures, you can expect qualified conversions within the first 48 to 72 hours of activating the campaigns."
+  },
+  {
+    q: "Which platform is best suited for my business's paid campaigns?",
+    a: "It depends strongly on your target audience. For immediate search intent or local service inquiries, Google Ads yields excellent results. For visual consumer products, Shopify stores, and brand campaigns, Meta (Instagram/Facebook) leads. For B2B enterprise SaaS, LinkedIn advertising is highly recommended."
+  },
+  {
+    q: "What is AI PPC optimization, and how does your team deploy it?",
+    a: "AI PPC optimization leverages predictive bidding algorithms, machine learning cohort filters, and multivariable automated testing. Rather than guessing bid metrics, our specialists run automated analysis programs to test copywriting, prevent creative fatigue, and prevent wasted spend blocks."
+  },
+  {
+    q: "Do you provide landing page design or landing page optimization (LPO) services?",
+    a: "Yes. Getting qualified clicks is only half the battle. Your expert handles comprehensive landing page optimization, configuring trust indicators, optimizing copy triggers, and streamlining forms to raise the proportion of conversions from your paid traffic."
+  },
+  {
+    q: "How do you protect data attribution in the era of iOS cookie blockages?",
+    a: "We implement advanced server-side Tag Manager tracking connected to Meta Conversions API (CAPI) and Google Data-Driven attribution modules. This helps you track conversion events accurately, bypassing browser blockages to ensure efficient machine-learning feedback."
+  }
+];
+
+const hirePpcFaqSchemaJson = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": hirePpcFaqs.map(f => ({
+    "@type": "Question",
+    "name": f.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.a
+    }
+  }))
+});
+
 export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: HirePpcExpertPageProps) {
   useEffect(() => {
     const originalTitle = document.title;
@@ -29,6 +73,17 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
     }
     metaDesc.setAttribute('content', 'Hire PPC experts from AKGLS Group for Google Ads, Meta Ads, LinkedIn Ads, AI-powered PPC, lead generation & ROI-focused paid marketing campaigns.');
 
+    // Inject FAQPage Schema
+    const faqScriptId = "hire-ppc-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement('script');
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute('type', 'application/ld+json');
+      faqScriptEl.innerHTML = hirePpcFaqSchemaJson;
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
       if (metaDesc) {
@@ -38,6 +93,8 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
           metaDesc.remove();
         }
       }
+      const existingFaqSchema = document.getElementById(faqScriptId);
+      if (existingFaqSchema) existingFaqSchema.remove();
     };
   }, []);
 
@@ -189,6 +246,11 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
 
   return (
     <div className="min-h-screen bg-[#040612] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-300 font-sans antialiased overflow-x-hidden relative">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: hirePpcFaqSchemaJson }} 
+      />
       
       {/* Background decoration elements */}
       <div className="absolute top-0 left-0 right-0 h-[700px] bg-gradient-to-b from-[#0b1433]/30 via-[#0a1b3d]/15 to-transparent pointer-events-none" />
@@ -1504,36 +1566,7 @@ export default function HirePpcExpertPage({ onBackToHome, openProposalForm }: Hi
           </div>
 
           <div className="space-y-4">
-            {[
-              {
-                q: "Why should I hire a dedicated PPC expert instead of using a standard digital marketing agency?",
-                a: "Traditional agencies often assign junior managers to oversee dozens of accounts at once, leading to generic templates and unmanaged bid pacing. A dedicated PPC specialist from AKGLS Group integrates directly into your team, allowing for highly tactical bid editing, tailored lookalike testing, and deep alignment with your revenue goals."
-              },
-              {
-                q: "How much does hiring a PPC expert cost, and what are your pricing options?",
-                a: "We offer completely flexible plans tailored to your budget. Options range from $1,800/mo for starter configurations (under 12 hrs/wk) to $3,400/mo for multi-channel scaling (25 hrs/wk), alongside fully custom enterprise team rates (40 hrs/wk) to suit your unique sourcing goals."
-              },
-              {
-                q: "How quickly can PPC generate results and leads?",
-                a: "Unlike organic search SEO which requires months to build authority, PPC yields traffic immediately upon launch. With accurate tracking and calibrated campaign structures, you can expect qualified conversions within the first 48 to 72 hours of activating the campaigns."
-              },
-              {
-                q: "Which platform is best suited for my business's paid campaigns?",
-                a: "It depends strongly on your target audience. For immediate search intent or local service inquiries, Google Ads yields excellent results. For visual consumer products, Shopify stores, and brand campaigns, Meta (Instagram/Facebook) leads. For B2B enterprise SaaS, LinkedIn advertising is highly recommended."
-              },
-              {
-                q: "What is AI PPC optimization, and how does your team deploy it?",
-                a: "AI PPC optimization leverages predictive bidding algorithms, machine learning cohort filters, and multivariable automated testing. Rather than guessing bid metrics, our specialists run automated analysis programs to test copywriting, prevent creative fatigue, and prevent wasted spend blocks."
-              },
-              {
-                q: "Do you provide landing page design or landing page optimization (LPO) services?",
-                a: "Yes. Getting qualified clicks is only half the battle. Your expert handles comprehensive landing page optimization, configuring trust indicators, optimizing copy triggers, and streamlining forms to raise the proportion of conversions from your paid traffic."
-              },
-              {
-                q: "How do you protect data attribution in the era of iOS cookie blockages?",
-                a: "We implement advanced server-side Tag Manager tracking connected to Meta Conversions API (CAPI) and Google Data-Driven attribution modules. This helps you track conversion events accurately, bypassing browser blockages to ensure efficient machine-learning feedback."
-              }
-            ].map((faq, idx) => (
+            {hirePpcFaqs.map((faq, idx) => (
               <div 
                 key={idx} 
                 className="bg-[#0c0e29]/50 border border-indigo-950 rounded-xl overflow-hidden transition-all"

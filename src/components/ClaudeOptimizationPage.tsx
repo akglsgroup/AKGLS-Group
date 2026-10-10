@@ -13,6 +13,29 @@ interface ClaudeOptimizationPageProps {
   openProposalForm?: () => void;
 }
 
+const claudeFaqs = [
+  {
+    q: "What is Claude Optimization?",
+    a: "Claude Optimization is a branch of AI SEO focused on formatting, structuring, and optimizing website data so Anthropic's Claude AI crawls and cites your brand inside its answers."
+  },
+  {
+    q: "How does Claude discover content?",
+    a: "Claude discovers content through a combination of periodic dataset scrapes, integration with web search extensions, and references to globally verified databases like Wikidata, Yelp, and Wikipedia."
+  },
+  {
+    q: "Can businesses rank in Claude AI answers?",
+    a: "Yes. By deploying highly structured markdown, factual tables, nested schema data, and building external brand co-citations, businesses can ensure they trigger direct summaries and recommendations inside Claude."
+  },
+  {
+    q: "What is GEO (Generative Engine Optimization)?",
+    a: "GEO is the technical successor of traditional SEO. It structures copywriting to match the logical synthesis mechanisms of LLMs rather than raw keyword strings."
+  },
+  {
+    q: "How long does Claude optimization take?",
+    a: "Standard semantic restructuring and schema mapping take 3 to 4 weeks to resolve. Ongoing citation crawls and directory syncs usually show steady growth in mention share metrics over 60 to 90 days."
+  }
+];
+
 const schemaTemplates = {
   service: `{
   "@context": "https://schema.org",
@@ -45,19 +68,55 @@ const schemaTemplates = {
     "name": "Claude Optimization Services",
     "item": "https://www.akglsgroup.com/claude-optimization-services/"
   }]
-}`
+}`,
+  faq: JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": claudeFaqs.map(f => ({
+      "@type": "Question",
+      "name": f.q,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": f.a
+      }
+    }))
+  }, null, 2)
 };
 
 export default function ClaudeOptimizationPage({ onBackToHome, openProposalForm }: ClaudeOptimizationPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
   const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20Claude%20AI%20Search%20Optimization%20for%20our%20website.';
 
-  // Dynamic Page Title
+  // Dynamic Page Title & Head FAQ Schema Injection
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "Claude Optimization Services | Claude AI SEO Agency | AKGLS Group";
+
+    // Set canonical link for SEO
+    const canonicalHref = "https://www.akglsgroup.com/claude-optimization-services/";
+    let canonicalLink = document.querySelector("link[rel='canonical']") as HTMLLinkElement | null;
+    if (!canonicalLink) {
+      canonicalLink = document.createElement("link");
+      canonicalLink.setAttribute("rel", "canonical");
+      document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.setAttribute("href", canonicalHref);
+
+    // Inject FAQPage Schema
+    const faqScriptId = "claude-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = schemaTemplates.faq;
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -290,6 +349,11 @@ export default function ClaudeOptimizationPage({ onBackToHome, openProposalForm 
 
   return (
     <div id="claude-optimization-page" className="bg-slate-950 text-slate-100 min-h-screen font-sans selection:bg-brand-teal selection:text-slate-950">
+      {/* FAQPage Structured Data */}
+      <script 
+        type="application/ld+json" 
+        dangerouslySetInnerHTML={{ __html: schemaTemplates.faq }} 
+      />
       
       {/* Sticky Top Header Navigation Info Alert */}
       <div className="bg-slate-900 border-b border-slate-800 text-xs py-2 px-4 flex justify-between items-center z-20 relative animate-fade-in">
@@ -1094,6 +1158,31 @@ export default function ClaudeOptimizationPage({ onBackToHome, openProposalForm 
                 </div>
               )}
             </div>
+
+            <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+              <div 
+                onClick={() => setActiveFaq(activeFaq === 97 ? null : 97)}
+                className="p-5 flex justify-between items-center cursor-pointer hover:bg-slate-850/40 transition"
+              >
+                <div className="flex items-center space-x-2 font-mono">
+                  <Code className="w-4 h-4 text-brand-teal" />
+                  <span className="text-sm font-bold text-white">3. FAQPage Schema (JSON-LD Template)</span>
+                </div>
+                <ChevronDown className={`w-4 h-4 text-slate-400 transition-transform ${activeFaq === 97 ? 'rotate-180' : ''}`} />
+              </div>
+
+              {activeFaq === 97 && (
+                <div className="p-5 border-t border-slate-805 bg-slate-950 font-mono text-xs text-slate-300 relative">
+                  <button 
+                    onClick={() => copySchemaText(schemaTemplates.faq, 'schema-faq')}
+                    className="absolute top-4 right-4 bg-slate-900 border border-slate-700 font-bold px-3 py-1.5 rounded hover:bg-slate-800 text-[10px] text-brand-teal cursor-pointer"
+                  >
+                    {schemaCopied === 'schema-faq' ? 'Copied ✅' : 'Copy Schema'}
+                  </button>
+                  <pre className="overflow-x-auto whitespace-pre-wrap">{schemaTemplates.faq}</pre>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </section>
@@ -1142,28 +1231,7 @@ export default function ClaudeOptimizationPage({ onBackToHome, openProposalForm 
           </div>
 
           <div className="space-y-4 text-left">
-            {[
-              {
-                q: "What is Claude Optimization?",
-                a: "Claude Optimization is a branch of AI SEO focused on formatting, structuring, and optimizing website data so Anthropic's Claude AI crawls and cites your brand inside its answers."
-              },
-              {
-                q: "How does Claude discover content?",
-                a: "Claude discovers content through a combination of periodic dataset scrapes, integration with web search extensions, and references to globally verified databases like Wikidata, Yelp, and Wikipedia."
-              },
-              {
-                q: "Can businesses rank in Claude AI answers?",
-                a: "Yes. By deploying highly structured markdown, factual tables, nested schema data, and building external brand co-citations, businesses can ensure they trigger direct summaries and recommendations inside Claude."
-              },
-              {
-                q: "What is GEO (Generative Engine Optimization)?",
-                a: "GEO is the technical successor of traditional SEO. It structures copywriting to match the logical synthesis mechanisms of LLMs rather than raw keyword strings."
-              },
-              {
-                q: "How long does Claude optimization take?",
-                a: "Standard semantic restructuring and schema mapping take 3 to 4 weeks to resolve. Ongoing citation crawls and directory syncs usually show steady growth in mention share metrics over 60 to 90 days."
-              }
-            ].map((faq, idx) => (
+            {claudeFaqs.map((faq, idx) => (
               <div key={idx} className="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
                 <div 
                   onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}

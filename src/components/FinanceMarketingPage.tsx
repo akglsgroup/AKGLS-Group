@@ -33,6 +33,37 @@ const marketingToolsList = [
   { name: "Schema Validator Engine", type: "Ensuring faultless search entity alignment" }
 ];
 
+const financeFaqsList = [
+  {
+    q: "How can finance businesses generate high-quality leads online?",
+    a: "By shifting focus from high-volume generic clicks to high-intent transactional search terms. We design targeted pages that address specific questions—like corporate tax structures or private asset trusts—and pair them with secure, interactive pre-qualification wizards that capture motivated prospects."
+  },
+  {
+    q: "Is SEO important for financial services companies?",
+    a: "Yes, organic presence builds trust. In the financial sector, trust is the primary currency. A strong organic ranking positions your firm as a leading authority, which is far more credible than running constant, disruptive pop-up ads."
+  },
+  {
+    q: "Can Google Ads generate high-intent corporate financial leads?",
+    a: "Absolutely. By targeting exact-match business search phrases, setting strict geographical filters, and refining negative keyword lists to exclude low-credit searches, we deliver highly qualified prospects ready to book consultations."
+  },
+  {
+    q: "How long does finance SEO take to show ranking results?",
+    a: "While Google Ads and local map optimizations show immediate traffic impacts, complete organic search indexing and local 3-pack gains typically build strong momentum over 60 to 90 days."
+  },
+  {
+    q: "Do you market complex fintech startups and mobile apps?",
+    a: "Yes. We design and run complete growth campaigns that handle app database indexing (ASO), paid installer campaigns across Meta/LinkedIn, and visual product explainer video workflows."
+  },
+  {
+    q: "Can you improve Google Maps local rankings for financial advisors?",
+    a: "Yes. We set up compliant LocalBusiness/FinancialService schemas, tune proximity metadata, and run automated review-generation campaigns to list you in the Local 3-Pack."
+  },
+  {
+    q: "What is AI SEO and GEO for financial businesses?",
+    a: "Generative Engine Optimization (GEO) ensures that when high-value clients query ChatGPT Search, Claude, or Gemini about wealth management or business loans, your firm is listed as a primary, trusted citation."
+  }
+];
+
 export default function FinanceMarketingPage({ onBackToHome, openProposalForm }: FinanceMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
   const WHATSAPP_LINK = "https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20financial%20services%20and%20fintech%20digital%20marketing.";
@@ -63,9 +94,34 @@ export default function FinanceMarketingPage({ onBackToHome, openProposalForm }:
       });
       document.head.appendChild(scriptEl);
     }
+
+    // Inject FAQPage Schema dynamically
+    const faqScriptId = "financial-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": financeFaqsList.map(item => ({
+          "@type": "Question",
+          "name": item.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": item.a
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       const el = document.getElementById(scriptId);
       if (el) el.remove();
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -431,39 +487,29 @@ export default function FinanceMarketingPage({ onBackToHome, openProposalForm }:
     }
   ];
 
-  const faqItemsList = [
-    {
-      q: "How can finance businesses generate high-quality leads online?",
-      a: "By shifting focus from high-volume generic clicks to high-intent transactional search terms. We design targeted pages that address specific questions—like corporate tax structures or private asset trusts—and pair them with secure, interactive pre-qualification wizards that capture motivated prospects."
-    },
-    {
-      q: "Is SEO important for financial services companies?",
-      a: "Yes, organic presence builds trust. In the financial sector, trust is the primary currency. A strong organic ranking positions your firm as a leading authority, which is far more credible than running constant, disruptive pop-up ads."
-    },
-    {
-      q: "Can Google Ads generate high-intent corporate financial leads?",
-      a: "Absolutely. By targeting exact-match business search phrases, setting strict geographical filters, and refining negative keyword lists to exclude low-credit searches, we deliver highly qualified prospects ready to book consultations."
-    },
-    {
-      q: "How long does finance SEO take to show ranking results?",
-      a: "While Google Ads and local map optimizations show immediate traffic impacts, complete organic search indexing and local 3-pack gains typically build strong momentum over 60 to 90 days."
-    },
-    {
-      q: "Do you market complex fintech startups and mobile apps?",
-      a: "Yes. We design and run complete growth campaigns that handle app database indexing (ASO), paid installer campaigns across Meta/LinkedIn, and visual product explainer video workflows."
-    },
-    {
-      q: "Can you improve Google Maps local rankings for financial advisors?",
-      a: "Yes. We set up compliant LocalBusiness/FinancialService schemas, tune proximity metadata, and run automated review-generation campaigns to list you in the Local 3-Pack."
-    },
-    {
-      q: "What is AI SEO and GEO for financial businesses?",
-      a: "Generative Engine Optimization (GEO) ensures that when high-value clients query ChatGPT Search, Claude, or Gemini about wealth management or business loans, your firm is listed as a primary, trusted citation."
-    }
-  ];
+  const faqItemsList = financeFaqsList;
 
   return (
     <>
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": financeFaqsList.map(item => ({
+              "@type": "Question",
+              "name": item.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": item.a
+              }
+            }))
+          })
+        }}
+      />
+
       {/* SECTION NAV BAR */}
       <div className="bg-[#05080f] border-b border-slate-900 py-3.5 px-4 z-30 relative transition-all duration-200">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">

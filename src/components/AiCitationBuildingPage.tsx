@@ -47,16 +47,64 @@ const schemaTemplates = {
 }`
 };
 
+const citationFaqsList = [
+  {
+    q: "What is an AI Citation?",
+    a: "An AI citation occurs when a conversational AI engine (like ChatGPT, Gemini, or Perplexity) generates a highly factual answer and embeds clickable footnotes or active hyperlinked citations referencing your company name, product info, or expert research articles."
+  },
+  {
+    q: "How is AI Citation Building different from traditional Link Building?",
+    a: "Traditional link building concentrates mostly on domain authority scores and keyword anchors to satisfy the PageRank algorithm. AI Citation Building focuses on establishing entity-level authority, brand relationships, semantic co-occurrences in trusted media, structured schema maps, and data feeds optimized for real-time model extraction modules."
+  },
+  {
+    q: "Can ChatGPT cite my website directly?",
+    a: "Yes. Using real-time web querying tools, ChatGPT extracts data from highly indexed, well-formatted, and trusted sources. By deploying our entity layouts and building citations across specific platforms that feed the LLM's retrieval window, your website is cited as a dynamic source."
+  },
+  {
+    q: "How long does it take to see improvements in AI citations?",
+    a: "Most campaigns start outputting measurable citations and references within 3 to 6 months, as search engine LLMs crawl trusted directories, semantic nodes, press networks, and update their localized reference weights."
+  },
+  {
+    q: "Do AI citations improve traditional organic Google SEO?",
+    a: "Absolutely. The precise entity structure, authoritative mentions in news platforms, original statistics publications, and validated schema markup required for AI also strongly improve traditional Google trust metrics, driving higher domain rankings across normal search pages."
+  }
+];
+
 export default function AiCitationBuildingPage({ onBackToHome, openProposalForm }: AiCitationBuildingPageProps) {
   const CONTACT_NUMBER = '+91 831 811 4492';
   const WHATSAPP_LINK = 'https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20AI%20Citation%20Building%20for%20our%20brand.';
 
-  // Dynamic Page Title
+  // Dynamic Page Title & FAQ Schema
   useEffect(() => {
     const originalTitle = document.title;
     document.title = "AI Citation Building Services | Get Cited By ChatGPT & Gemini | AKGLS Group";
+
+    // Inject FAQPage Schema
+    const faqScriptId = "ai-citation-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": citationFaqsList.map(f => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.a
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
     return () => {
       document.title = originalTitle;
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
     };
   }, []);
 
@@ -121,31 +169,28 @@ export default function AiCitationBuildingPage({ onBackToHome, openProposalForm 
     setTimeout(() => setSchemaCopied(null), 2000);
   };
 
-  const faqs = [
-    {
-      q: "What is an AI Citation?",
-      a: "An AI citation occurs when a conversational AI engine (like ChatGPT, Gemini, or Perplexity) generates a highly factual answer and embeds clickable footnotes or active hyperlinked citations referencing your company name, product info, or expert research articles."
-    },
-    {
-      q: "How is AI Citation Building different from traditional Link Building?",
-      a: "Traditional link building concentrates mostly on domain authority scores and keyword anchors to satisfy the PageRank algorithm. AI Citation Building focuses on establishing entity-level authority, brand relationships, semantic co-occurrences in trusted media, structured schema maps, and data feeds optimized for real-time model extraction modules."
-    },
-    {
-      q: "Can ChatGPT cite my website directly?",
-      a: "Yes. Using real-time web querying tools, ChatGPT extracts data from highly indexed, well-formatted, and trusted sources. By deploying our entity layouts and building citations across specific platforms that feed the LLM's retrieval window, your website is cited as a dynamic source."
-    },
-    {
-      q: "How long does it take to see improvements in AI citations?",
-      a: "Most campaigns start outputting measurable citations and references within 3 to 6 months, as search engine LLMs crawl trusted directories, semantic nodes, press networks, and update their localized reference weights."
-    },
-    {
-      q: "Do AI citations improve traditional organic Google SEO?",
-      a: "Absolutely. The precise entity structure, authoritative mentions in news platforms, original statistics publications, and validated schema markup required for AI also strongly improve traditional Google trust metrics, driving higher domain rankings across normal search pages."
-    }
-  ];
+  const faqs = citationFaqsList;
 
   return (
     <div id="ai-citation-services-container" className="min-h-screen bg-[#05080f] text-slate-100 font-sans antialiased overflow-x-hidden selection:bg-emerald-500/30 selection:text-emerald-200">
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": citationFaqsList.map(f => ({
+              "@type": "Question",
+              "name": f.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.a
+              }
+            }))
+          })
+        }}
+      />
       
       {/* Absolute Decorative Circles */}
       <div className="absolute top-0 left-0 w-full h-[600px] bg-gradient-to-b from-emerald-950/10 via-teal-950/5 to-transparent pointer-events-none" />

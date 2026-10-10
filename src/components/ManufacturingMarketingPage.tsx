@@ -15,6 +15,33 @@ interface ManufacturingMarketingPageProps {
   openProposalForm: () => void;
 }
 
+const manufacturingFaqList = [
+  {
+    q: "How can manufacturers generate highly pre-qualified leads online?",
+    a: "B2B manufacturing leads are acquired by capturing intent early in the procurement lifecycle. Unlike retail marketing, we write search schemas, target exact component names, part numbers, and ISO certifications. When a purchasing manager searches for specific high-volume technical limits, your engineered catalog answers with exact capabilities, drawing custom quotes."
+  },
+  {
+    q: "Is SEO genuinely relevant for highly specialized, niche industrial sectors?",
+    a: "Absolutely. Modern procurement managers and mechanical engineers do not rely solely on ancient printed catalogs. Over 80% of technical design engineers start their component discovery journey using Google Search, ChatGPT, or Perplexity. If your manufacturing facility is not present during this crucial design window, your competitor gets specified into the blueprint."
+  },
+  {
+    q: "What is the timeline to see meaningful organic lead growth in manufacturing?",
+    a: "While Google Ads can buy qualified traffic immediately, a systemic Industrial SEO roadmap generally takes between 3 to 6 months to mature. However, because our agency uses AI-Powered GEO structures, we often secure conversational mentions on platforms such as ChatGPT Search and Perplexity within 60 days, giving our clients a fast-mover advantage."
+  },
+  {
+    q: "How do you prevent wasted ad spend from job applicants and competitors?",
+    a: "We deploy strict filtering systems: heavy negative keyword databases (omitting phrases like 'careers', 'jobs', 'manuals', 'how to repair'), B2B audience demographic mapping, and conversion-focused landing pages. We design form validation rules requiring professional business emails and detailed specifications, ensuring your sales force only speaks to buyers."
+  },
+  {
+    q: "Do you build custom, SEO-friendly manufacturing website structures?",
+    a: "Yes, we build and optimize high-traffic, incredibly responsive website structures specifically designed to map large industrial catalogs into logical schema layers. We structure pages to show high-fidelity technical images, downloadable CAD drawings, and streamlined, mobile-responsive RFQ systems."
+  },
+  {
+    q: "Can you assist with global export lead acquisition?",
+    a: "Indeed. We configure internationalized metadata systems and multi-regional hreflang annotations. This establishes search authority directly inside localized international search hubs, helping exporters secure major distribution partners worldwide."
+  }
+];
+
 export default function ManufacturingMarketingPage({ onBackToHome, openProposalForm }: ManufacturingMarketingPageProps) {
   const CONTACT_NUMBER = "+91 831 811 4492";
   const WHATSAPP_LINK = "https://wa.me/918318114492?text=Hello%20AKGLS%20Group%2C%20I%20would%20like%20to%20discuss%20manufacturing%20and%20industrial%20B2B%20marketing.";
@@ -22,6 +49,33 @@ export default function ManufacturingMarketingPage({ onBackToHome, openProposalF
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
     document.title = "Manufacturing Marketing Services | B2B Industrial SEO | AKGLS Group";
+
+    // Inject FAQPage Schema
+    const faqScriptId = "manufacturing-faq-schema";
+    let faqScriptEl = document.getElementById(faqScriptId);
+    if (!faqScriptEl) {
+      faqScriptEl = document.createElement("script");
+      faqScriptEl.id = faqScriptId;
+      faqScriptEl.setAttribute("type", "application/ld+json");
+      faqScriptEl.innerHTML = JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": manufacturingFaqList.map(f => ({
+          "@type": "Question",
+          "name": f.q,
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": f.a
+          }
+        }))
+      });
+      document.head.appendChild(faqScriptEl);
+    }
+
+    return () => {
+      const faqEl = document.getElementById(faqScriptId);
+      if (faqEl) faqEl.remove();
+    };
   }, []);
 
   // ROI & Lead Calculator States
@@ -338,32 +392,7 @@ export default function ManufacturingMarketingPage({ onBackToHome, openProposalF
     }
   ];
 
-  const faqList = [
-    {
-      q: "How can manufacturers generate highly pre-qualified leads online?",
-      a: "B2B manufacturing leads are acquired by capturing intent early in the procurement lifecycle. Unlike retail marketing, we write search schemas, target exact component names, part numbers, and ISO certifications. When a purchasing manager searches for specific high-volume technical limits, your engineered catalog answers with exact capabilities, drawing custom quotes."
-    },
-    {
-      q: "Is SEO genuinely relevant for highly specialized, niche industrial sectors?",
-      a: "Absolutely. Modern procurement managers and mechanical engineers do not rely solely on ancient printed catalogs. Over 80% of technical design engineers start their component discovery journey using Google Search, ChatGPT, or Perplexity. If your manufacturing facility is not present during this crucial design window, your competitor gets specified into the blueprint."
-    },
-    {
-      q: "What is the timeline to see meaningful organic lead growth in manufacturing?",
-      a: "While Google Ads can buy qualified traffic immediately, a systemic Industrial SEO roadmap generally takes between 3 to 6 months to mature. However, because our agency uses AI-Powered GEO structures, we often secure conversational mentions on platforms such as ChatGPT Search and Perplexity within 60 days, giving our clients a fast-mover advantage."
-    },
-    {
-      q: "How do you prevent wasted ad spend from job applicants and competitors?",
-      a: "We deploy strict filtering systems: heavy negative keyword databases (omitting phrases like 'careers', 'jobs', 'manuals', 'how to repair'), B2B audience demographic mapping, and conversion-focused landing pages. We design form validation rules requiring professional business emails and detailed specifications, ensuring your sales force only speaks to buyers."
-    },
-    {
-      q: "Do you build custom, SEO-friendly manufacturing website structures?",
-      a: "Yes, we build and optimize high-traffic, incredibly responsive website structures specifically designed to map large industrial catalogs into logical schema layers. We structure pages to show high-fidelity technical images, downloadable CAD drawings, and streamlined, mobile-responsive RFQ systems."
-    },
-    {
-      q: "Can you assist with global export lead acquisition?",
-      a: "Indeed. We configure internationalized metadata systems and multi-regional hreflang annotations. This establishes search authority directly inside localized international search hubs, helping exporters secure major distribution partners worldwide."
-    }
-  ];
+  const faqList = manufacturingFaqList;
 
   const marketingTools = [
     { name: "Google Analytics 4", cat: "Tracking & Audiences" },
@@ -380,6 +409,24 @@ export default function ManufacturingMarketingPage({ onBackToHome, openProposalF
 
   return (
     <>
+      {/* Schema.org FAQPage Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": manufacturingFaqList.map(f => ({
+              "@type": "Question",
+              "name": f.q,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.a
+              }
+            }))
+          })
+        }}
+      />
       {/* SECTION NAV BAR (NON-STUNNING EXCLUSIVE TO PAGE) */}
       <div className="bg-[#0b0f1d] border-b border-slate-900 py-3.5 px-4 z-30 relative transition-all duration-200">
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-3">
