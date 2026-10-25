@@ -57,8 +57,7 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
       <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-800/80 pb-2 flex items-center justify-between">
         <span>${escapeHtml(col.title)}</span>
         ${col.title.includes('AI') ? `
-          <span class="flex items-center gap-0.5 text-[9px] bg-brand-purple/10 text-brand-purple rounded-full px-2 py-0.5 font-bold tracking-normal normal-case">
-            <svg class="w-2.5 h-2.5 fill-brand-purple" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          <span class="text-[9px] bg-brand-purple/10 text-brand-purple rounded-full px-2 py-0.5 font-bold tracking-normal normal-case">
             AI Powered
           </span>
         ` : ''}
@@ -66,14 +65,7 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
       <div class="space-y-1.5">
         ${col.items.map((item) => `
           <a href="${escapeHtml(item.href)}" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
-            <span class="flex items-center gap-1.5">
-              ${col.title.includes('Industry') ? `
-                <svg class="w-3 h-3 text-slate-400 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
-                </svg>
-              ` : ''}
-              ${escapeHtml(item.name)}
-            </span>
+            <span>${escapeHtml(item.name)}</span>
           </a>
         `).join('')}
       </div>
@@ -83,22 +75,13 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
   // Resources Columns
   const resourcesColsHtml = resourcesMenu.map((col) => `
     <div class="space-y-4">
-      <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-800/80 pb-2 flex items-center gap-1.5">
-        ${col.title.includes('Tools') ? `
-          <svg class="w-3.5 h-3.5 text-brand-indigo" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
-        ` : ''}
-        ${col.title.includes('Learning') ? `
-          <svg class="w-3.5 h-3.5 text-brand-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-        ` : ''}
+      <h4 class="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-800/80 pb-2">
         <span>${escapeHtml(col.title)}</span>
       </h4>
       <div class="space-y-1.5">
         ${col.items.map((item) => `
           <a href="${escapeHtml(item.href)}" class="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 hover:text-brand-indigo">
             <span class="truncate">${escapeHtml(item.name)}</span>
-            ${col.title.includes('Downloads') ? `
-              <svg class="w-3 h-3 text-slate-400 group-hover/item:text-brand-indigo shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
-            ` : ''}
           </a>
         `).join('')}
       </div>
@@ -107,13 +90,7 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
 
   // Company Items
   const companyItemsHtml = companyMenu.map((item) => `
-    <a href="${escapeHtml(item.href)}" class="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo transition-all">
-      ${item.name.includes('Team') ? `
-        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
-      ` : ''}
-      ${item.name.includes('Careers') ? `
-        <svg class="w-3.5 h-3.5 text-slate-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-      ` : ''}
+    <a href="${escapeHtml(item.href)}" class="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo transition-all">
       <span>${escapeHtml(item.name)}</span>
     </a>
   `).join('');
@@ -122,9 +99,6 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
   const hireItemsHtml = hireExpertsMenu.map((item) => `
     <a href="${escapeHtml(item.href)}" class="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all">
       <span>${escapeHtml(item.name)}</span>
-      <svg class="w-3.5 h-3.5 text-brand-emerald" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
     </a>
   `).join('');
 
@@ -559,8 +533,10 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
             </button>
             <div id="mob-acc-resources" class="hidden pl-4 py-1.5 space-y-2 border-l border-slate-800/80 text-[13px]">
               <a href="/blog" class="block py-0.5 text-slate-300 hover:text-brand-indigo">All Insights Blog</a>
-              <a href="/free-checklists/" class="block py-0.5 text-slate-300 hover:text-brand-indigo">AI SEO Checklists (New)</a>
               <a href="/tools" class="block py-0.5 text-slate-300 hover:text-brand-indigo">Free SEO Tools</a>
+              <a href="/proposal-builder" class="block py-0.5 text-slate-300 hover:text-brand-indigo">Proposal PDF Builder</a>
+              <a href="/free-checklists/" class="block py-0.5 text-slate-300 hover:text-brand-indigo">AI SEO Checklists (New)</a>
+              <a href="/india-pricing" class="block py-0.5 text-slate-300 hover:text-brand-indigo">Indian Client Pricing</a>
               <a href="/learning-hub/seo-checklist-pdf" class="block py-0.5 text-slate-300 hover:text-brand-indigo">SEO Checklist PDF</a>
             </div>
           </div>
@@ -578,12 +554,12 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
               <svg class="w-4 h-4 text-slate-500 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div id="mob-acc-company" class="hidden pl-4 py-1.5 space-y-1.5 border-l border-slate-800/80 text-[13px]">
-              <a href="/blog" class="block py-1 text-slate-300 hover:text-brand-indigo">SEO / AI Blog</a>
-              <a href="/tools" class="block py-1 text-slate-300 hover:text-brand-indigo">Free Tools</a>
-              <a href="/india-pricing" class="block py-1 text-slate-300 hover:text-brand-indigo">Indian Client Pricing</a>
-              <a href="/proposal-builder" class="block py-1 text-slate-300 hover:text-brand-indigo">Proposal PDF Builder</a>
               <a href="/about" class="block py-1 text-slate-300 hover:text-brand-indigo">About Us</a>
               <a href="/internship-program" class="block py-1 text-slate-300 hover:text-brand-indigo">Internship Program</a>
+              <a href="#team-leadership" class="block py-1 text-slate-300 hover:text-brand-indigo">Meet Our Team</a>
+              <a href="#careers-gateway" class="block py-1 text-slate-300 hover:text-brand-indigo">Careers</a>
+              <a href="#testimonials" class="block py-1 text-slate-300 hover:text-brand-indigo">Testimonials</a>
+              <a href="#audit-form" class="block py-1 text-slate-300 hover:text-brand-indigo">Contact Us</a>
             </div>
           </div>
 

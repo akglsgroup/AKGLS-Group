@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { 
   Search, ChevronDown, X, Menu, Phone, Mail, MapPin, 
-  TrendingUp, Bot, Code, FileText, CheckCircle2, 
-  Calculator, Download, Award, Info, Users, Briefcase, 
+  TrendingUp, Bot, Code, FileText, 
+  Calculator, Download, Award, Info, 
   Layers, MessageSquare, Send, ArrowRight, Star, Zap, PhoneCall,
   Facebook, Twitter, Linkedin, Instagram, BarChart3, Building2
 } from 'lucide-react';
@@ -13,7 +13,6 @@ import WhatsAppIcon from './WhatsAppIcon';
 import { PWAInstallButton } from './PWAInstallButton';
 import AkglsLogo from './AkglsLogo';
 import { auth, signInWithGoogle, logoutUser, subscribeToAuthState } from '../firebase';
-import GeminiChatModal from './GeminiChatModal';
 import LazyImage from './LazyImage';
 
 interface HeaderProps {
@@ -23,10 +22,9 @@ interface HeaderProps {
   openDownloadModal: () => void;
   currentPage?: string;
   onNavigate?: (href: string) => void;
-  openGeminiModal?: (prompt?: string, categoryName?: string, questions?: string[]) => void;
 }
 
-export default function Header({ onSearchOpen, openQuiz, openProposal, openDownloadModal, currentPage = 'home', onNavigate, openGeminiModal }: HeaderProps) {
+export default function Header({ onSearchOpen, openQuiz, openProposal, openDownloadModal, currentPage = 'home', onNavigate }: HeaderProps) {
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileSearchQuery, setMobileSearchQuery] = useState('');
@@ -34,7 +32,6 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
   const [isScrolled, setIsScrolled] = useState(false);
   const [selectedCaseTab, setSelectedCaseTab] = useState(0);
   const [currentUser, setCurrentUser] = useState<any>(auth.currentUser);
-  const [isGeminiOpen, setIsGeminiOpen] = useState(false);
 
   // Monitor Firebase Auth state
   useEffect(() => {
@@ -180,21 +177,6 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
             >
               <Building2 className="w-3.5 h-3.5 text-brand-indigo" />
               <span>About Us</span>
-            </a>
-            <span className="text-slate-700" aria-hidden="true">|</span>
-            <a 
-              href="/manage"
-              onClick={(e) => handleLinkClick(e, '/manage')}
-              className={`transition-colors flex items-center gap-1.5 font-bold px-2.5 py-0.5 rounded border ${
-                currentPage === 'manager-dashboard' || currentPage === 'manage'
-                  ? 'text-brand-teal bg-brand-teal/25 border-brand-teal' 
-                  : 'text-brand-teal hover:text-white bg-brand-teal/10 border-brand-teal/30 hover:bg-brand-teal/20'
-              }`}
-              title="Agency Manager CRM & Operations Portal (/manage)"
-            >
-              <Briefcase className="w-3.5 h-3.5 text-brand-teal" />
-              <span>Agency Manager CRM</span>
-              <span className="text-[10px] font-mono text-emerald-400 bg-emerald-950/60 px-1 rounded">/manage</span>
             </a>
           </div>
 
@@ -375,8 +357,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                           <h4 className="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2 flex items-center justify-between">
                             <span>{col.title}</span>
                             {col.title.includes('AI') && (
-                              <span className="flex items-center gap-0.5 text-[9px] bg-brand-purple/10 text-brand-purple rounded-full px-2 py-0.5 font-bold tracking-normal normal-case">
-                                <Star className="w-2.5 h-2.5 fill-brand-purple" /> AI Powered
+                              <span className="text-[9px] bg-brand-purple/10 text-brand-purple rounded-full px-2 py-0.5 font-bold tracking-normal normal-case">
+                                AI Powered
                               </span>
                             )}
                           </h4>
@@ -388,10 +370,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                                 onClick={(e) => handleLinkClick(e, item.href)}
                                 className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                               >
-                                <span className="flex items-center gap-1">
-                                  {col.title.includes('Industry') && <Layers className="w-3 h-3 text-slate-400" />}
-                                  {item.name}
-                                </span>
+                                <span>{item.name}</span>
                               </a>
                             ))}
                           </div>
@@ -583,10 +562,8 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                     >
                       {resourcesMenu.map((col, cIdx) => (
                         <div key={cIdx} className="space-y-4">
-                          <h4 className="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2 flex items-center gap-1.5">
-                            {col.title.includes('Tools') && <Calculator className="w-3.5 h-3.5 text-brand-indigo" />}
-                            {col.title.includes('Learning') && <Zap className="w-3.5 h-3.5 text-brand-purple" />}
-                            <span>{col.title}</span>
+                          <h4 className="text-xs font-extrabold tracking-widest text-slate-400 uppercase font-display border-b border-slate-850 pb-2">
+                            {col.title}
                           </h4>
                           <div className="space-y-1.5">
                             {col.items.map((item, iIdx) => (
@@ -597,7 +574,6 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                                 className="group/item flex items-center justify-between py-1 px-1.5 rounded-md hover:bg-slate-900/60 transition-colors text-[13px] font-semibold text-slate-300 group-hover/item:text-brand-indigo focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                               >
                                 <span className="truncate">{item.name}</span>
-                                {col.title.includes('Downloads') && <Download className="w-3 h-3 text-slate-400 group-hover/item:text-brand-indigo" />}
                               </a>
                             ))}
                           </div>
@@ -608,21 +584,7 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 </AnimatePresence>
               </div>
 
-              {/* Menu 5: About AKGLS Group (Direct Top-Level Menu Link) */}
-              <a 
-                href="/about"
-                onClick={(e) => handleLinkClick(e, '/about')}
-                aria-label="About AKGLS Group"
-                className={`px-3 py-2 rounded-lg text-sm font-bold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo cursor-pointer ${
-                  currentPage === 'about'
-                    ? 'bg-brand-indigo/15 text-teal-400 ring-1 ring-brand-indigo/50'
-                    : 'text-slate-300 hover:text-white hover:bg-slate-900/50'
-                }`}
-              >
-                About
-              </a>
-
-              {/* Menu 6: Company (Standard Dropdown) */}
+              {/* Menu 5: Company (Standard Dropdown) */}
               <div 
                 className="relative"
                 onMouseEnter={() => setActiveMenu('company')}
@@ -657,11 +619,9 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                           key={idx} 
                           href={item.href}
                           onClick={(e) => handleLinkClick(e, item.href)}
-                          className="flex items-center gap-2 py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
+                          className="flex items-center justify-between py-2 px-3 rounded-lg hover:bg-slate-900/60 text-[13px] font-semibold text-slate-300 hover:text-brand-indigo transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                         >
-                          {item.name.includes('Team') && <Users className="w-3.5 h-3.5 text-slate-400" />}
-                          {item.name.includes('Careers') && <Briefcase className="w-3.5 h-3.5 text-slate-400" />}
-                          {item.name}
+                          <span>{item.name}</span>
                         </a>
                       ))}
                     </motion.div>
@@ -712,7 +672,6 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                           className="flex items-center justify-between py-2 px-2.5 rounded-lg hover:bg-slate-900/60 text-[13px] font-bold text-slate-300 hover:text-brand-indigo transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
                         >
                           <span>{item.name}</span>
-                          <CheckCircle2 className="w-3.5 h-3.5 text-brand-emerald" />
                         </a>
                       ))}
                     </motion.div>
@@ -720,54 +679,12 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                 </AnimatePresence>
               </div>
 
-              {/* Direct Top-Level Menu: Agency CRM (/manage) */}
-              <a 
-                href="/manage"
-                onClick={(e) => handleLinkClick(e, '/manage')}
-                aria-label="Agency Manager CRM & Operations"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-bold transition-all border cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal ${
-                  currentPage === 'manager-dashboard' || currentPage === 'manage'
-                    ? 'bg-brand-teal/25 text-brand-teal border-brand-teal ring-1 ring-brand-teal'
-                    : 'text-brand-teal hover:text-white bg-brand-teal/10 border-brand-teal/35 hover:bg-brand-teal/20'
-                }`}
-                title="Agency Manager CRM & Operations Portal (/manage)"
-              >
-                <Briefcase className="w-3.5 h-3.5 text-brand-teal" />
-                <span>CRM</span>
-                <span className="text-[10px] px-1 py-0.2 rounded bg-brand-teal/30 text-teal-300 font-mono">/manage</span>
-              </a>
-
             </div>
 
             {/* Right Side Header Action Anchors */}
             <div className="hidden lg:flex items-center space-x-3">
               {/* PWA In-App Install Button */}
               <PWAInstallButton />
-
-              {/* Gemini AI Strategic Advisor Modal Trigger */}
-              <button
-                type="button"
-                id="header-open-gemini-btn"
-                onClick={() => openGeminiModal ? openGeminiModal() : setIsGeminiOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border border-brand-indigo/60 bg-gradient-to-r from-brand-indigo/20 to-brand-purple/20 text-indigo-300 hover:text-white hover:border-brand-indigo transition-all shadow-sm cursor-pointer"
-                title="Ask Gemini Growth Advisor (Search Grounded)"
-              >
-                <Bot className="w-3.5 h-3.5 text-brand-indigo animate-pulse" />
-                <span>AI Advisor</span>
-                <span className="text-[9px] px-1 py-0.2 rounded bg-brand-indigo/30 font-mono text-brand-teal">Live</span>
-              </button>
-
-              {/* Agency Manager CRM & Operations */}
-              <a
-                href="/manage"
-                onClick={(e) => handleLinkClick(e, '/manage')}
-                aria-label="Agency Manager CRM & Operations"
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold border border-brand-teal/50 bg-slate-900/90 text-brand-teal hover:text-white hover:border-brand-teal transition-all shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal cursor-pointer"
-                title="Agency Manager CRM & Operations (/manage)"
-              >
-                <Briefcase className="w-3.5 h-3.5 text-brand-teal" />
-                <span>Manager CRM</span>
-              </a>
 
               {/* Google Sign-in with Firebase Auth */}
               {currentUser ? (
@@ -948,16 +865,16 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
                     <span>About Us</span>
                   </a>
                   <a
-                    href="/manage"
-                    onClick={(e) => { setIsMobileMenuOpen(false); handleLinkClick(e, '/manage'); }}
+                    href="/tools"
+                    onClick={(e) => { setIsMobileMenuOpen(false); handleLinkClick(e, '/tools'); }}
                     className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center gap-1.5 transition-colors ${
-                      currentPage === 'manager-dashboard' || currentPage === 'manage'
-                        ? 'bg-brand-teal/25 border-brand-teal text-brand-teal'
-                        : 'bg-slate-900 border-brand-teal/40 text-brand-teal hover:text-white'
+                      currentPage === 'tools'
+                        ? 'bg-brand-orange/20 border-brand-orange text-orange-300'
+                        : 'bg-slate-900 border-slate-800 text-slate-200 hover:text-white'
                     }`}
                   >
-                    <Briefcase className="w-3.5 h-3.5 text-brand-teal" />
-                    <span>CRM (/manage)</span>
+                    <Calculator className="w-3.5 h-3.5 text-brand-orange" />
+                    <span>Free Tools</span>
                   </a>
                 </div>
 
@@ -1149,15 +1066,6 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               {/* Botton CTA triggers inside Drawer */}
               {/* Mobile Menu Action Buttons & PWA Install */}
               <div className="p-5 border-t border-slate-800 bg-[#0a0f1d] space-y-3">
-                <a 
-                  href="/manage" 
-                  onClick={(e) => { setIsMobileMenuOpen(false); handleLinkClick(e, '/manage'); }} 
-                  aria-label="Agency Manager CRM & Operations"
-                  className="w-full py-2.5 bg-slate-900 border border-brand-teal/40 text-brand-teal font-bold rounded-xl text-center flex items-center justify-center gap-2 text-xs hover:bg-brand-teal hover:text-slate-950 transition-all shadow-sm"
-                >
-                  <Briefcase className="w-4 h-4" />
-                  <span>Agency Manager CRM (/manage)</span>
-                </a>
 
                 <PWAInstallButton className="w-full py-2.5 bg-brand-indigo/15 border border-brand-teal/30 text-brand-teal font-bold rounded-xl text-center flex items-center justify-center gap-2 text-xs hover:bg-brand-teal hover:text-slate-950 transition-all shadow-sm" />
 
@@ -1248,11 +1156,6 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
         </div>
       </div>
 
-      {/* Gemini AI Strategic Advisor Modal */}
-      <GeminiChatModal 
-        isOpen={isGeminiOpen} 
-        onClose={() => setIsGeminiOpen(false)} 
-      />
     </>
   );
 }

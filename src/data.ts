@@ -152,6 +152,9 @@ export const resourcesMenu: MegaColumn[] = [
   {
     title: "Free Tools",
     items: [
+      { name: "Proposal PDF Builder", href: "/proposal-builder", isTrending: true },
+      { name: "Indian Client Pricing", href: "/india-pricing" },
+      { name: "Free SEO Tools Directory", href: "/tools" },
       { name: "AI & GEO Audit Scanner (New)", href: "/tools/geo-audit-tool", isTrending: true },
       { name: "AI SEO Checklists", href: "/free-checklists/" },
       { name: "SEO Audit Tool", href: "/tools/seo-audit-tool" },
@@ -191,10 +194,6 @@ export const resourcesMenu: MegaColumn[] = [
 ];
 
 export const companyMenu = [
-  { name: "SEO / AI Search Blog", href: "/blog" },
-  { name: "Free SEO/AI SEO Tools", href: "/tools" },
-  { name: "Indian Client Pricing", href: "/india-pricing" },
-  { name: "Proposal PDF Builder", href: "/proposal-builder" },
   { name: "About Us", href: "/about" },
   { name: "Meet Our Team", href: "#team-leadership" },
   { name: "Careers", href: "#careers-gateway" },

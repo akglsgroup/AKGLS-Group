@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'motion/react';
 import { 
   Phone, Mail, MapPin, Clock, MessageSquare, ArrowRight, ArrowUp, Award, 
   Sparkles, ChevronDown, Check, CheckCircle, Linkedin, Instagram, 
-  Facebook, Twitter, Youtube, Globe, RefreshCw 
+  Facebook, Twitter, Youtube, Globe, RefreshCw, Briefcase 
 } from 'lucide-react';
 import WhatsAppIcon from './WhatsAppIcon';
 import { PWAInstallButton } from './PWAInstallButton';
@@ -485,6 +485,18 @@ export default function Footer({ onBackToHome, openProposal, openDownloadModal, 
           <div className="pt-8 flex flex-col md:flex-row justify-between items-center text-[11px] text-slate-400 gap-4 text-center select-none">
             <div className="flex flex-wrap justify-center md:justify-start items-center gap-3">
               <span>© {currentYear} AKGLS Group. All Rights Reserved.</span>
+              <span className="text-indigo-950/60 hidden sm:inline">|</span>
+              <a 
+                href="/manage"
+                onClick={(e) => handleLinkClick('/manage', e)}
+                aria-label="Agency Manager CRM Portal"
+                className="inline-flex items-center gap-1.5 text-brand-teal hover:text-white font-bold bg-brand-teal/10 hover:bg-brand-teal/20 border border-brand-teal/30 px-2.5 py-0.5 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-teal"
+                title="Agency Operations & Manager CRM Portal (/manage)"
+              >
+                <Briefcase className="w-3.5 h-3.5 text-brand-teal" />
+                <span>Agency CRM</span>
+                <span className="text-[9px] font-mono bg-brand-teal/25 text-teal-300 px-1 rounded">/manage</span>
+              </a>
               <span className="text-indigo-950/60 hidden sm:inline">|</span>
               {FOOTER_LEGAL_LINKS.map((leg, lIdx) => (
                 <a 

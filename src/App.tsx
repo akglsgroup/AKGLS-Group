@@ -14,7 +14,6 @@ import SmartSearch from './components/SmartSearch';
 import ServiceQuiz from './components/ServiceQuiz';
 import RoiCalculator from './components/RoiCalculator';
 import ContentAnalyzer from './components/ContentAnalyzer';
-import Chatbox from './components/Chatbox';
 import GeoServicesPage from './components/GeoServicesPage';
 import SeoServicesPage from './components/SeoServicesPage';
 import TechnicalSeoPage from './components/TechnicalSeoPage';
@@ -3499,9 +3498,6 @@ export default function App() {
         isOpen={isSearchOpen} 
         onClose={() => setIsSearchOpen(false)} 
       />
-
-      {/* CORE INTEGRATION CHAT HELPER CHATBOX */}
-      <Chatbox />
 
       {/* PWA OFFLINE CONNECTIVITY INDICATOR */}
       <OfflineIndicator />

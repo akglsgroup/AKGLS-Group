@@ -734,46 +734,47 @@ export default function FAQ({
                       : 'border-slate-200 hover:border-slate-300'
                   }`}
                 >
-                  <button 
-                    type="button"
-                    id={headerId}
-                    aria-expanded={isOpen}
-                    aria-controls={contentId}
-                    onClick={() => toggleItem(slug)}
-                    className="w-full text-left p-5 sm:p-6 font-extrabold font-display text-sm sm:text-base text-brand-navy flex justify-between items-start gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo cursor-pointer transition-colors"
-                  >
-                    <div className="space-y-1.5 flex-1 pr-2">
-                      {item.categoryLabel && (
-                        <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-brand-indigo bg-indigo-50/80 px-2.5 py-0.5 rounded-md font-sans">
-                          {item.categoryLabel}
-                        </span>
-                      )}
-                      <h3 className="leading-snug text-slate-900 group-hover:text-brand-indigo transition-colors">
-                        {item.q}
-                      </h3>
-                    </div>
-
-                    <div className="flex items-center gap-2 shrink-0 pt-0.5">
-                      {/* Copy direct question link */}
-                      <button
-                        type="button"
-                        onClick={(e) => handleCopyQuestionLink(e, slug)}
-                        className="p-1.5 text-slate-400 hover:text-brand-indigo hover:bg-indigo-50 rounded-lg transition-colors"
-                        title={isCopied ? 'Link Copied!' : 'Copy direct link to this question'}
-                      >
-                        {isCopied ? (
-                          <Check className="w-4 h-4 text-emerald-600" />
-                        ) : (
-                          <Share2 className="w-4 h-4" />
+                  <div className="flex items-center justify-between p-5 sm:p-6 gap-3">
+                    <button 
+                      type="button"
+                      id={headerId}
+                      aria-expanded={isOpen}
+                      aria-controls={contentId}
+                      onClick={() => toggleItem(slug)}
+                      className="flex-1 text-left font-extrabold font-display text-sm sm:text-base text-brand-navy flex justify-between items-start gap-4 focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo cursor-pointer transition-colors group"
+                    >
+                      <div className="space-y-1.5 flex-1 pr-2">
+                        {item.categoryLabel && (
+                          <span className="inline-block text-[10px] font-bold uppercase tracking-wider text-brand-indigo bg-indigo-50/80 px-2.5 py-0.5 rounded-md font-sans">
+                            {item.categoryLabel}
+                          </span>
                         )}
-                      </button>
+                        <h3 className="leading-snug text-slate-900 group-hover:text-brand-indigo transition-colors">
+                          {item.q}
+                        </h3>
+                      </div>
 
                       {/* Expand chevron */}
-                      <span className="p-1 rounded-lg text-brand-indigo bg-indigo-50/60 font-bold transition-transform duration-200">
+                      <span className="p-1 rounded-lg text-brand-indigo bg-indigo-50/60 font-bold transition-transform duration-200 shrink-0 pt-0.5">
                         <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${isOpen ? 'rotate-180 text-brand-purple' : ''}`} />
                       </span>
-                    </div>
-                  </button>
+                    </button>
+
+                    {/* Copy direct question link */}
+                    <button
+                      type="button"
+                      onClick={(e) => handleCopyQuestionLink(e, slug)}
+                      className="p-1.5 text-slate-400 hover:text-brand-indigo hover:bg-indigo-50 rounded-lg transition-colors shrink-0 cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-indigo"
+                      title={isCopied ? 'Link Copied!' : 'Copy direct link to this question'}
+                      aria-label="Copy direct link to this question"
+                    >
+                      {isCopied ? (
+                        <Check className="w-4 h-4 text-emerald-600" />
+                      ) : (
+                        <Share2 className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
 
                   {isOpen && (
                     <div 
