@@ -84,6 +84,7 @@ import SeoBlogListPage from './components/SeoBlogListPage';
 import LearningHubPage from './components/LearningHubPage';
 import InternshipProgramPage from './components/InternshipProgramPage';
 import AboutUsPage from './components/AboutUsPage';
+import SocialMediaOptimizationServicesPage from './components/SocialMediaOptimizationServicesPage';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import FAQ from './components/FAQ';
 import HomeHeroBanner from './components/HomeHeroBanner';
@@ -174,16 +175,18 @@ const ALL_CAPABILITIES: Capability[] = [
   },
   {
     id: "smm",
-    tag: "15 SERVICES",
-    title: "Social Media Marketing (SMM)",
-    description: "Grow your audience, engagement, and brand authority across social platforms.",
+    tag: "16 SERVICES",
+    title: "Social Media Optimization (SMO) & Marketing",
+    description: "Grow your organic audience, engagement, profile authority, and discoverability across social platforms.",
     subservices: [
+      "Social Media Optimization (SMO)",
       "Social Media Strategy & Management",
-      "Content Creation (Reels & Shorts)",
-      "Influencer Marketing & Community Management",
-      "Paid Social Advertising & Social Branding",
-      "Viral Campaigns & LinkedIn Personal Branding",
-      "Instagram, Facebook, Reddit & Twitter Growth"
+      "LinkedIn B2B & Personal Branding",
+      "Instagram & YouTube Channel SEO",
+      "Content Creation (Reels & Carousels)",
+      "Community Management & Moderation",
+      "Paid Social Advertising & Retargeting",
+      "Facebook, X & Multi-Channel Growth"
     ],
     icon: "Users",
     iconBgClass: "bg-indigo-500/15",
@@ -434,6 +437,13 @@ function getInitialRoute(): string {
   ) {
     return 'education';
   }
+  if (
+    p === '/social-media-optimization-services' || p === '/social-media-optimization-services/' ||
+    p.includes('/social-media-optimization-services') ||
+    h.includes('social-media-optimization-services')
+  ) {
+    return 'social-media-optimization-services';
+  }
   return 'home';
 }
 
@@ -636,6 +646,12 @@ export default function App() {
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (pathname === '/seo-consulting-services' || pathname === '/seo-consulting-services/' || hash === '#seo-consulting' || hash === '#seo-consulting-services') {
         setCurrentPage('seo-consulting-services');
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (
+        pathname === '/social-media-optimization-services' || pathname === '/social-media-optimization-services/' ||
+        hash === '#social-media-optimization-services' || hash === '#social-media-optimization' || hash === '#smo-services'
+      ) {
+        setCurrentPage('social-media-optimization-services');
         window.scrollTo({ top: 0, behavior: 'instant' });
       } else if (pathname === '/aeo-services' || pathname === '/aeo-services/' || hash === '#aeo-services' || hash === '#aeo' || hash === '#ai-answer-optimization') {
         setCurrentPage('aeo');
@@ -1651,6 +1667,29 @@ export default function App() {
           openProposalForm={() => {
             const formEl = document.querySelector('#seo-consulting-cta') || document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+        />
+      ) : currentPage === 'social-media-optimization-services' ? (
+        <SocialMediaOptimizationServicesPage 
+          onBackToHome={() => {
+            window.history.pushState(null, '', '/');
+            window.location.hash = '';
+            setCurrentPage('home');
+            window.scrollTo({ top: 0, behavior: 'instant' });
+          }}
+          openProposalForm={() => {
+            const formEl = document.querySelector('#audit-form');
+            formEl?.scrollIntoView({ behavior: 'smooth' });
+          }}
+          onNavigate={(href) => {
+            if (href.startsWith('#')) {
+              const el = document.querySelector(href);
+              if (el) el.scrollIntoView({ behavior: 'smooth' });
+            } else {
+              window.history.pushState(null, '', href);
+              window.dispatchEvent(new PopStateEvent('popstate'));
+              window.scrollTo({ top: 0, behavior: 'instant' });
+            }
           }}
         />
       ) : currentPage === 'aeo' ? (

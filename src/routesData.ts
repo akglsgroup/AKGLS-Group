@@ -322,6 +322,74 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     ]
   },
   {
+    id: "social-media-optimization-services",
+    path: "/social-media-optimization-services/",
+    priority: 0.9,
+    changefreq: "weekly",
+    title: "Social Media Optimization Services | AKGLS Group",
+    description: "Improve brand visibility and engagement with AKGLS Group's social media optimization services. Request a social media audit today.",
+    category: "Social Media",
+    h1: "Social Media Optimization Services That Build Brand Visibility and Business Growth",
+    highlight: "Strategic Profile Optimization & Organic Discoverability",
+    leadParagraph: "Strengthen your social media presence with strategic profile optimization, audience-focused content, platform-specific discoverability, and performance-driven engagement.",
+    features: [
+      { title: "Strategic Profile Optimization", desc: "Audit and revamp bios, category tags, visual assets, contact links, and keyword discoverability across LinkedIn, Instagram, Facebook, and YouTube." },
+      { title: "Audience-Focused Content Engine", desc: "Structured monthly content pillars, high-retention post formats, carousel infographics, and conversion-oriented calls to action." },
+      { title: "Cross-Platform Growth & Community", desc: "Proactive community engagement, executive thought leadership, and organic distribution connecting social to search and lead funnels." }
+    ],
+    deliverables: [
+      "Comprehensive Social Media Audit & Competitor Benchmarking",
+      "Profile Overhauls across LinkedIn, Instagram, Facebook, and YouTube",
+      "Monthly Content Calendars (15-30 Custom Post & Reel Briefs)",
+      "Branded Design Templates & Visual Identity Guidelines",
+      "Platform-Specific Keyword, Bio & Hashtag Matrix",
+      "Community Moderation & Inbound DM Response Playbook",
+      "Monthly KPI Analytics Dashboard & Strategy Review Calls"
+    ],
+    faqs: [
+      {
+        q: "What is the difference between Social Media Optimization (SMO) and Social Media Marketing (SMM)?",
+        a: "Social Media Optimization (SMO) focuses on improving the quality, discoverability, and organic presentation of your profiles and content without relying on paid advertising budgets. Social Media Marketing (SMM) often refers to paid advertising campaigns (sponsored ads, boosted posts, PPC) where you pay per click or impression. SMO establishes the essential brand authority and trust that makes all other marketing—including paid ads—significantly more effective."
+      },
+      {
+        q: "How long does it take to see organic results from Social Media Optimization?",
+        a: "Initial improvements in brand presentation, profile clarity, and search discoverability happen immediately within the first 14 to 30 days as profiles are audited and revamped. Compounding improvements in organic reach, follower quality, and audience engagement typically mature over 60 to 90 days of consistent publishing."
+      },
+      {
+        q: "Which social media platforms should my business focus on?",
+        a: "The right platforms depend entirely on your target audience, business model, and resources. B2B and SaaS companies usually achieve the highest ROI from LinkedIn and YouTube. Visual and lifestyle brands, direct-to-consumer businesses, and local practices thrive on Instagram and Facebook."
+      },
+      {
+        q: "Does social media optimization help our website SEO rankings?",
+        a: "Yes, both directly and indirectly. Active, optimized social profiles frequently rank on Page 1 of Google for branded search queries, providing positive brand SERP real estate. Furthermore, high-quality social content drives referral traffic, increases dwell time, earns editorial backlinks from content creators, and reinforces entity signals across search and generative AI answer engines."
+      },
+      {
+        q: "Can AKGLS Group produce both visual graphics and copywriting for our social media?",
+        a: "Yes. Our complete SMO service packages include end-to-end creative support: strategic copy briefs, compelling captions, educational carousel designs, Reel hook scripts, custom infographics, and branded template systems designed to maintain strict visual consistency."
+      },
+      {
+        q: "Do you manage paid social media ad campaigns as well?",
+        a: "Yes. While organic Social Media Optimization (SMO) builds long-term equity, AKGLS Group also operates dedicated Paid Advertising teams specializing in Meta Ads (Facebook & Instagram Ads), LinkedIn Ads, and YouTube Ads."
+      },
+      {
+        q: "What metrics do you track to measure SMO success?",
+        a: "We avoid vanity metrics and focus on indicators that reflect genuine business impact: profile visits, search impressions, organic reach, engagement rates (saves, shares, thoughtful comments), follower growth quality, social referral traffic in Google Analytics, and inbound direct message inquiries."
+      },
+      {
+        q: "How does Social Media Optimization support Generative Engine Optimization (GEO) and AI search engines?",
+        a: "Conversational AI models like ChatGPT Search, Perplexity, Claude, and Google AI Overviews crawl social media channels, LinkedIn company pages, YouTube transcripts, and authoritative brand profiles to determine brand legitimacy and consensus. An active, well-optimized social ecosystem feeds consistent entity data directly to these LLMs."
+      },
+      {
+        q: "Do you offer customized SMO packages for startups and growing businesses?",
+        a: "Yes. We customize our scope based on your current growth phase, team bandwidth, and strategic objectives. Whether you need an initial foundational profile audit with brand guidelines, executive thought leadership on LinkedIn, or an ongoing multi-platform monthly optimization retainer, we structure a plan that fits."
+      },
+      {
+        q: "How do we get started with AKGLS Group for social media optimization?",
+        a: "Getting started is straightforward. Request a Free Social Media Audit using the form on this page or message our team directly via WhatsApp or telephone (+91 831 811 4492). We will review your existing profiles, run a competitive gap check, and schedule a 30-minute discovery session to walk through actionable growth opportunities."
+      }
+    ]
+  },
+  {
     id: "aeo",
     path: "/aeo-services/",
     priority: 0.9,

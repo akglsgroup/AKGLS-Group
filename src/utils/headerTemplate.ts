@@ -208,7 +208,7 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
                 </svg>
               </button>
 
-              <div class="hidden group-hover/menu:grid absolute left-1/2 -translate-x-[15%] top-full mt-2 w-[850px] bg-[#0c121e] border border-slate-800 rounded-2xl shadow-2xl p-6 z-50 text-left grid-cols-4 gap-6 text-slate-200">
+              <div class="hidden group-hover/menu:grid absolute left-1/2 -translate-x-[28%] top-full mt-2 w-[1060px] max-w-[96vw] bg-[#0c121e] border border-slate-800 rounded-2xl shadow-2xl p-6 z-50 text-left grid-cols-5 gap-5 text-slate-200">
                 ${servicesColsHtml}
               </div>
             </div>
@@ -370,16 +370,6 @@ export function renderSharedHeaderHtml(currentPath: string = ''): string {
             >
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
-              </svg>
-            </a>
-
-            <a 
-              href="tel:+918318114492" 
-              class="bg-gradient-to-r from-brand-indigo to-brand-purple hover:opacity-95 text-white text-xs font-extrabold uppercase tracking-wide py-3.5 px-6 rounded-xl transition-all shadow-md shadow-brand-indigo/20 flex items-center gap-1.5"
-            >
-              Call Now 
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.94.72l.548 2.2a1 1 0 01-.321.988l-1.305.98a10.582 10.582 0 004.872 4.872l.98-1.305a1 1 0 01.988-.321l2.2.548a1 1 0 01.72.94V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
               </svg>
             </a>
           </div>

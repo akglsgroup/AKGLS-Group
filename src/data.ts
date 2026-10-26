@@ -69,6 +69,26 @@ export const servicesMenu: MegaColumn[] = [
     }
   },
   {
+    title: "Social Media Services",
+    items: [
+      { name: "Social Media Optimization", href: "/social-media-optimization-services", isTrending: true },
+      { name: "LinkedIn B2B Optimization", href: "/social-media-optimization-services#linkedin-optimization" },
+      { name: "Instagram Optimization", href: "/social-media-optimization-services#instagram-optimization" },
+      { name: "Facebook Page Optimization", href: "/social-media-optimization-services#facebook-optimization" },
+      { name: "YouTube Channel SEO", href: "/social-media-optimization-services#youtube-optimization" },
+      { name: "Social Content Strategy", href: "/social-media-optimization-services#content-strategy" },
+      { name: "Social Profile Audit", href: "/social-media-optimization-services#audit-form" },
+      { name: "Competitor Social Analysis", href: "/social-media-optimization-services#audit-competitor" },
+      { name: "Community Management", href: "/social-media-optimization-services#community-management" },
+      { name: "Social Analytics & Reporting", href: "/social-media-optimization-services#analytics-reporting" }
+    ],
+    featuredCta: {
+      text: "Free Social Audit",
+      href: "/social-media-optimization-services#audit-form",
+      badge: "Free Audit"
+    }
+  },
+  {
     title: "Creative & Development",
     items: [
       { name: "Web Design", href: "#web-design-services" },
