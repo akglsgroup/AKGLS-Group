@@ -526,7 +526,8 @@ async function startServer() {
       "tools/geo-audit-tool",
       "international-seo-services",
       "international-multilingual-seo-services",
-      "education-marketing-services"
+      "education-marketing-services",
+      "social-media-optimization-services"
     ]);
 
     if (SPA_INTERACTIVE_ROUTES.has(cleanSlug)) {

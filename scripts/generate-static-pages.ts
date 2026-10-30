@@ -15,7 +15,8 @@ const distDir = path.join(rootDir, 'dist');
 // List of handcrafted static pages that should be preserved unless explicitly forced
 const PRESERVED_FILES = new Set([
   'geo-services.html',
-  'crypto-growth-services.html'
+  'crypto-growth-services.html',
+  'social-media-optimization-services.html'
 ]);
 
 export { generateSitemapXml, writeSitemapFiles, writeSitemapFilesSync };
@@ -58,7 +59,8 @@ export function generateAllStaticPages(force = false): { created: number; skippe
       'tools/geo-audit-tool',
       'international-seo-services',
       'international-multilingual-seo-services',
-      'education-marketing-services'
+      'education-marketing-services',
+      'social-media-optimization-services'
     ]);
     if (SPA_ROUTES.has(cleanSlug)) {
       skipped++;
