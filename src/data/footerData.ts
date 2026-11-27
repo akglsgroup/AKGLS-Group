@@ -163,6 +163,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     bulletClass: "bg-rose-400",
     links: [
       { name: "About AKGLS Group", href: "/about", isNew: true },
+      { name: "Contact Us", href: "/contact", isNew: true },
       { name: "Agency Manager CRM", href: "/manage", badge: "PORTAL", isHot: true },
       { name: "Hire AI SEO Expert", href: "/hire-ai-seo-expert" },
       { name: "Hire SEO Expert", href: "/hire-seo-expert" },
@@ -230,10 +231,10 @@ export const FOOTER_CERTIFICATIONS: PartnerCertification[] = [
 
 export const FOOTER_LEGAL_LINKS = [
   { name: "Privacy Policy", href: "/privacy-policy" },
-  { name: "Terms & Conditions", href: "/terms-of-service" },
-  { name: "Disclaimer Policy", href: "#disclaimer" },
-  { name: "Refund Policy", href: "#refund" },
-  { name: "Cookie Directives", href: "#cookies" },
-  { name: "GDPR Compliance", href: "#gdpr" },
+  { name: "Terms of Service", href: "/terms-of-service" },
+  { name: "Disclaimer", href: "/terms-of-service#disclaimer" },
+  { name: "Refund Policy", href: "/terms-of-service#refunds" },
+  { name: "Cookie Policy", href: "/privacy-policy#cookies" },
+  { name: "GDPR & Privacy Rights", href: "/privacy-policy#gdpr" },
   { name: "XML Sitemap", href: "/sitemap.xml" }
 ];

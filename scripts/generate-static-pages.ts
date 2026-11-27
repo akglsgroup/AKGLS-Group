@@ -60,7 +60,14 @@ export function generateAllStaticPages(force = false): { created: number; skippe
       'international-seo-services',
       'international-multilingual-seo-services',
       'education-marketing-services',
-      'social-media-optimization-services'
+      'social-media-optimization-services',
+      'contact',
+      'contact-us',
+      'privacy-policy',
+      'privacy',
+      'terms-of-service',
+      'terms-and-conditions',
+      'terms'
     ]);
     if (SPA_ROUTES.has(cleanSlug)) {
       skipped++;

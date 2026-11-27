@@ -527,7 +527,14 @@ async function startServer() {
       "international-seo-services",
       "international-multilingual-seo-services",
       "education-marketing-services",
-      "social-media-optimization-services"
+      "social-media-optimization-services",
+      "contact",
+      "contact-us",
+      "privacy-policy",
+      "privacy",
+      "terms-of-service",
+      "terms-and-conditions",
+      "terms"
     ]);
 
     if (SPA_INTERACTIVE_ROUTES.has(cleanSlug)) {

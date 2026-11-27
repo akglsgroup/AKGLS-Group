@@ -90,6 +90,46 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     ]
   },
   {
+    id: "contact",
+    path: "/contact/",
+    priority: 0.8,
+    changefreq: "monthly",
+    title: "Contact AKGLS Group | Talk to an SEO & AI Search Strategist",
+    description: "Contact AKGLS Group for SEO, AI search optimization (GEO/AEO), PPC and web development. Email, call or WhatsApp our team, or send a message and get a reply within one business day.",
+    category: "Company",
+    h1: "Contact AKGLS Group",
+    highlight: "Replies within one business day",
+    leadParagraph: "Tell us about your business and goals. A senior strategist will review your site and reply with next steps. Email info@akglsgroup.com, call or WhatsApp +91 831 811 4492, or use the contact form.",
+    features: [
+      { title: "Email", desc: "info@akglsgroup.com" },
+      { title: "Phone & WhatsApp", desc: "+91 831 811 4492" },
+      { title: "Offices", desc: "San Francisco (201 Mission St), New York (1540 Broadway) and New Delhi (Cyber City)." },
+      { title: "Hours", desc: "Mon - Fri: 9:00 AM - 6:00 PM EST, with 24/7 global client support." }
+    ]
+  },
+  {
+    id: "privacy-policy",
+    path: "/privacy-policy/",
+    priority: 0.3,
+    changefreq: "yearly",
+    title: "Privacy Policy | AKGLS Group",
+    description: "How AKGLS Group (AK Global Labs & Solutions) collects, uses, shares and protects personal information, and how to exercise your GDPR, CCPA and India DPDP Act rights.",
+    category: "Legal",
+    h1: "Privacy Policy",
+    leadParagraph: "This Privacy Policy explains how AK Global Labs & Solutions (AKGLS Group) collects, uses, shares and protects personal information when you visit www.akglsgroup.com, use our free tools, chat with us, or engage our services."
+  },
+  {
+    id: "terms-of-service",
+    path: "/terms-of-service/",
+    priority: 0.3,
+    changefreq: "yearly",
+    title: "Terms of Service | AKGLS Group",
+    description: "Terms governing use of the AKGLS Group website, free tools and SEO, AI search, advertising and development services, including payments, refunds and disclaimers.",
+    category: "Legal",
+    h1: "Terms of Service",
+    leadParagraph: "These Terms of Service govern your use of www.akglsgroup.com, our free tools and resources, and the services provided by AK Global Labs & Solutions (AKGLS Group)."
+  },
+  {
     id: "geo",
     path: "/geo-services/",
     priority: 0.9,

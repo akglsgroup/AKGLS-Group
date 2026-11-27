@@ -84,6 +84,11 @@ import SeoBlogListPage from './components/SeoBlogListPage';
 import LearningHubPage from './components/LearningHubPage';
 import InternshipProgramPage from './components/InternshipProgramPage';
 import AboutUsPage from './components/AboutUsPage';
+import ContactPage from './components/ContactPage';
+import LegalPage from './components/LegalPage';
+import NotFoundPage from './components/NotFoundPage';
+import { PRIVACY_POLICY, TERMS_OF_SERVICE } from './data/legalData';
+import { getRouteBySlug } from './routesData';
 import SocialMediaOptimizationServicesPage from './components/SocialMediaOptimizationServicesPage';
 import { OfflineIndicator } from './components/OfflineIndicator';
 import FAQ from './components/FAQ';
@@ -378,10 +383,28 @@ const getIconComponent = (icon: string) => {
 
 export { SITEMAP_ROUTES, type AppRoute } from './routesData';
 
+// Contact & legal pages: path aliases (with or without trailing slash) and hash shortcuts.
+const SIMPLE_PAGE_PATHS: Record<string, string[]> = {
+  contact: ['/contact', '/contact-us', '/get-in-touch'],
+  'privacy-policy': ['/privacy-policy', '/privacy'],
+  'terms-of-service': ['/terms-of-service', '/terms-and-conditions', '/terms'],
+};
+
+function matchSimplePage(pathname: string, hash: string): string | null {
+  const p = pathname.toLowerCase().replace(/\/+$/, '') || '/';
+  const h = hash.toLowerCase().replace(/^#\/?/, '');
+  for (const [page, paths] of Object.entries(SIMPLE_PAGE_PATHS)) {
+    if (paths.includes(p) || (p === '/' && paths.includes(`/${h}`))) return page;
+  }
+  return null;
+}
+
 function getInitialRoute(): string {
   if (typeof window === 'undefined') return 'home';
   const p = (window.location.pathname || '').toLowerCase();
   const h = (window.location.hash || '').toLowerCase();
+  const simple = matchSimplePage(p, h);
+  if (simple) return simple;
   if (
     p === '/about' || p === '/about/' || p === '/about.html' || p === '/about.html/' ||
     p.endsWith('/about') || p.endsWith('/about/') ||
@@ -568,6 +591,8 @@ export default function App() {
       return;
     }
 
+    let routerHasRun = false;
+    const isHomePath = (p: string) => ['', '/', '/index', '/index.html', '/home'].includes(p.toLowerCase().replace(/\/+$/, ''));
     const handleHashRouter = () => {
       const hash = window.location.hash;
       const pathname = window.location.pathname;
@@ -935,6 +960,23 @@ export default function App() {
       ) {
         setCurrentPage('internship-program');
         window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (matchSimplePage(pathname, hash)) {
+        setCurrentPage(matchSimplePage(pathname, hash)!);
+        if (!hash) window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (getInitialRoute() !== 'home') {
+        // Routes only recognised by the broader prefix rules in getInitialRoute (e.g. /proposal).
+        setCurrentPage(getInitialRoute());
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (!isHomePath(pathname)) {
+        const isFirstRun = !routerHasRun;
+        if (!isFirstRun && getRouteBySlug(pathname)) {
+          // A real page that is served as static HTML (not rendered by this app): load it.
+          window.location.assign(pathname + window.location.search + hash);
+          return;
+        }
+        // Unknown URL -> 404. (On first load a sitemap route Apache didn't prerender keeps the old homepage fallback.)
+        setCurrentPage(isFirstRun && getRouteBySlug(pathname) ? 'home' : 'not-found');
+        window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         setCurrentPage('home');
         if (hash && hash.length > 1) {
@@ -948,6 +990,7 @@ export default function App() {
       }
     };
     handleHashRouter();
+    routerHasRun = true;
     window.addEventListener('hashchange', handleHashRouter);
     window.addEventListener('popstate', handleHashRouter);
     return () => {
@@ -1444,6 +1487,26 @@ export default function App() {
       description: "Engineering Digital Transformation. Building Intelligent Businesses. Discover AKGLS Group's dual-engine model (AK Labs & AK Solutions) and four transformation pillars.",
       canonical: "https://www.akglsgroup.com/about/"
     },
+    'contact': {
+      title: "Contact AKGLS Group | Talk to an SEO & AI Search Strategist",
+      description: "Contact AKGLS Group for SEO, AI search optimization (GEO/AEO), PPC and web development. Email, call or WhatsApp our team, or send a message and get a reply within one business day.",
+      canonical: "https://www.akglsgroup.com/contact/"
+    },
+    'privacy-policy': {
+      title: "Privacy Policy | AKGLS Group",
+      description: "How AKGLS Group (AK Global Labs & Solutions) collects, uses, shares and protects personal information, and how to exercise your GDPR, CCPA and India DPDP Act rights.",
+      canonical: "https://www.akglsgroup.com/privacy-policy/"
+    },
+    'terms-of-service': {
+      title: "Terms of Service | AKGLS Group",
+      description: "Terms governing use of the AKGLS Group website, free tools and SEO, AI search, advertising and development services, including payments, refunds and disclaimers.",
+      canonical: "https://www.akglsgroup.com/terms-of-service/"
+    },
+    'not-found': {
+      title: "Page Not Found (404) | AKGLS Group",
+      description: "The page you are looking for could not be found. Explore AKGLS Group's SEO, AI search optimization and performance marketing services.",
+      canonical: "https://www.akglsgroup.com/"
+    },
     'faq': {
       title: "Frequently Asked Questions (FAQ) & Schema Knowledge Base | AKGLS Group",
       description: "Explore verified answers to common questions about Generative Engine Optimization (GEO), AI SEO, Technical Core Web Vitals, and Performance Retainers.",
@@ -1477,6 +1540,7 @@ export default function App() {
         <meta name="twitter:title" content={currentMeta.title} />
         <meta name="twitter:description" content={currentMeta.description} />
         <meta name="twitter:url" content={currentMeta.canonical} />
+        {currentPage === 'not-found' && <meta name="robots" content="noindex, follow" />}
       </Helmet>
       {/* GLOBAL SERVICES HEADER COMPONENTS */}
       <Header 
@@ -2177,6 +2241,23 @@ export default function App() {
             const formEl = document.querySelector('#audit-form');
             formEl?.scrollIntoView({ behavior: 'smooth' });
           }}
+          onNavigate={navigateTo}
+        />
+      ) : currentPage === 'contact' ? (
+        <ContactPage
+          onBackToHome={() => navigateTo('/')}
+          onNavigate={navigateTo}
+        />
+      ) : currentPage === 'privacy-policy' || currentPage === 'terms-of-service' ? (
+        <LegalPage
+          document={currentPage === 'privacy-policy' ? PRIVACY_POLICY : TERMS_OF_SERVICE}
+          onBackToHome={() => navigateTo('/')}
+          onNavigate={navigateTo}
+        />
+      ) : currentPage === 'not-found' ? (
+        <NotFoundPage
+          onBackToHome={() => navigateTo('/')}
+          onSearchOpen={() => setIsSearchOpen(true)}
           onNavigate={navigateTo}
         />
       ) : currentPage === 'faq' ? (

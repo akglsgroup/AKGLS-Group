@@ -167,6 +167,19 @@ export default function Header({ onSearchOpen, openQuiz, openProposal, openDownl
               <Building2 className="w-3.5 h-3.5 text-brand-indigo" />
               <span>About Us</span>
             </a>
+            <a 
+              href="/contact"
+              onClick={(e) => handleLinkClick(e, '/contact')}
+              className={`transition-colors flex items-center gap-1 font-semibold px-2 py-0.5 rounded ${
+                currentPage === 'contact' 
+                  ? 'text-brand-teal bg-slate-800' 
+                  : 'text-slate-300 hover:text-white hover:bg-slate-800/80'
+              }`}
+              title="Contact AKGLS Group (/contact)"
+            >
+              <Mail className="w-3.5 h-3.5 text-brand-indigo" />
+              <span>Contact</span>
+            </a>
           </div>
 
           {/* Right section social media icons */}
