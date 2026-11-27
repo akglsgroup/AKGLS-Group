@@ -1,6 +1,7 @@
 import { BLOG_POSTS } from './blogData';
 import { LEARNING_ITEMS } from './learningData';
 import { LOCAL_SEO_ROUTES } from './data/localSeoRoutes';
+import { SERVICE_ROUTES } from './data/serviceRoutes';
 
 export interface AppRoute {
   id: string;
@@ -1439,6 +1440,7 @@ export const SITEMAP_ROUTES: AppRoute[] = [
   },
   // Dynamic integration of all 5 in-depth Blog Articles
   ...LOCAL_SEO_ROUTES,
+  ...SERVICE_ROUTES,
   ...BLOG_POSTS.map(post => ({
     id: `blog-${post.slug}`,
     path: `/blog/${post.slug}/`,
