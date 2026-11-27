@@ -7,6 +7,9 @@ execSync('npx tsx scripts/generate-static-pages.ts', { stdio: 'inherit' });
 console.log('Running client build (Vite)...');
 execSync('vite build', { stdio: 'inherit' });
 
+console.log('Writing per-route meta pages for SPA-only routes...');
+execSync('npx tsx scripts/generate-spa-meta-pages.ts', { stdio: 'inherit' });
+
 console.log('Running server build (esbuild)...');
 esbuild.buildSync({
   entryPoints: ['server.ts'],
