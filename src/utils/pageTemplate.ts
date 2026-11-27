@@ -1,4 +1,4 @@
-import { AppRoute } from '../routesData';
+import { AppRoute, NOINDEX_ROUTE_IDS } from '../routesData';
 import { renderSharedHeaderHtml, renderHeaderScript } from './headerTemplate';
 import { renderSharedFooterHtml, renderFooterScript } from './footerTemplate';
 
@@ -116,7 +116,7 @@ export function renderPageHtml(route: AppRoute): string {
     <title>${escapeHtml(title)}</title>
     <meta name="description" content="${escapeHtml(description)}" />
     <link rel="canonical" href="${fullUrl}" />
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="robots" content="${NOINDEX_ROUTE_IDS.has(route.id) ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'}" />
 
     <!-- Open Graph (OG) Meta Tags -->
     <meta property="og:type" content="website" />
