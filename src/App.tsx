@@ -85,6 +85,7 @@ import LearningHubPage from './components/LearningHubPage';
 import InternshipProgramPage from './components/InternshipProgramPage';
 import AboutUsPage from './components/AboutUsPage';
 import ContactPage from './components/ContactPage';
+import PricingPage from './components/PricingPage';
 import LegalPage from './components/LegalPage';
 import NotFoundPage from './components/NotFoundPage';
 import { PRIVACY_POLICY, TERMS_OF_SERVICE } from './data/legalData';
@@ -386,6 +387,7 @@ export { SITEMAP_ROUTES, type AppRoute } from './routesData';
 // Contact & legal pages: path aliases (with or without trailing slash) and hash shortcuts.
 const SIMPLE_PAGE_PATHS: Record<string, string[]> = {
   contact: ['/contact', '/contact-us', '/get-in-touch'],
+  pricing: ['/pricing', '/plans', '/packages'],
   'privacy-policy': ['/privacy-policy', '/privacy'],
   'terms-of-service': ['/terms-of-service', '/terms-and-conditions', '/terms'],
 };
@@ -1492,6 +1494,11 @@ export default function App() {
       description: "Contact AKGLS Group for SEO, AI search optimization (GEO/AEO), PPC and web development. Email, call or WhatsApp our team, or send a message and get a reply within one business day.",
       canonical: "https://www.akglsgroup.com/contact/"
     },
+    'pricing': {
+      title: "SEO & AI Search Pricing Plans | AKGLS Group",
+      description: "Transparent SEO, GEO and AI search pricing from AKGLS Group: Scale Accelerator from $3,500/mo, Authority & AI SEO Suite from $6,500/mo, revenue-share options and custom enterprise plans.",
+      canonical: "https://www.akglsgroup.com/pricing/"
+    },
     'privacy-policy': {
       title: "Privacy Policy | AKGLS Group",
       description: "How AKGLS Group (AK Global Labs & Solutions) collects, uses, shares and protects personal information, and how to exercise your GDPR, CCPA and India DPDP Act rights.",
@@ -2245,6 +2252,11 @@ export default function App() {
         />
       ) : currentPage === 'contact' ? (
         <ContactPage
+          onBackToHome={() => navigateTo('/')}
+          onNavigate={navigateTo}
+        />
+      ) : currentPage === 'pricing' ? (
+        <PricingPage
           onBackToHome={() => navigateTo('/')}
           onNavigate={navigateTo}
         />

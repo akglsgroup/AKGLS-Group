@@ -108,6 +108,28 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     ]
   },
   {
+    id: "pricing",
+    path: "/pricing/",
+    priority: 0.8,
+    changefreq: "monthly",
+    title: "SEO & AI Search Pricing Plans | AKGLS Group",
+    description: "Transparent SEO, GEO and AI search pricing from AKGLS Group: Scale Accelerator from $3,500/mo, Authority & AI SEO Suite from $6,500/mo, revenue-share options and custom enterprise plans.",
+    category: "Company",
+    h1: "SEO & AI Search Pricing",
+    highlight: "Monthly retainer or revenue share",
+    leadParagraph: "Transparent plans for SEO, GEO and AI search growth. Pay a fixed monthly retainer, or share revenue with us when it fits your business. Prices are in USD and exclude taxes and ad spend.",
+    features: [
+      { title: "Scale Accelerator Plan: $3,500/mo or 2% revenue share", desc: "Up to 50 targeted keywords tracked, technical speed diagnostics and Looker Studio dashboard reporting. Requires a 3-month initial checkpoint." },
+      { title: "Authority & AI SEO Suite: $6,500/mo or 4% revenue share", desc: "AI recommendation and citation prompt tracking, dedicated JSON-LD schema deployment and page template rebuilds for sub-1.0s loads." },
+      { title: "Elite Custom Solutions: custom quote", desc: "A dedicated team, private Slack channel, full CRM database sync and programmatic landing page setup for multi-location and corporate businesses." }
+    ],
+    faqs: [
+      { q: "What is the difference between a retainer and a revenue share?", a: "A retainer is a fixed monthly fee for an agreed scope of work. With a revenue share you pay a percentage of the revenue the channels we manage generate, after we verify your tracking and traffic baseline." },
+      { q: "Is advertising spend included?", a: "No. Spend on Google, Meta, LinkedIn and other ad platforms is paid directly to those platforms and is separate from our management fee, unless your proposal says otherwise." },
+      { q: "Do you have pricing for businesses in India?", a: "Yes. See our India pricing page for packages in INR, built for Indian startups and SMEs." }
+    ]
+  },
+  {
     id: "privacy-policy",
     path: "/privacy-policy/",
     priority: 0.3,

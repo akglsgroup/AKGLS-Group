@@ -164,6 +164,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { name: "About AKGLS Group", href: "/about", isNew: true },
       { name: "Contact Us", href: "/contact", isNew: true },
+      { name: "Pricing & Plans", href: "/pricing", isNew: true },
       { name: "Agency Manager CRM", href: "/manage", badge: "PORTAL", isHot: true },
       { name: "Hire AI SEO Expert", href: "/hire-ai-seo-expert" },
       { name: "Hire SEO Expert", href: "/hire-seo-expert" },
