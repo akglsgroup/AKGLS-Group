@@ -1,4 +1,5 @@
 import { SITEMAP_ROUTES, AppRoute } from '../App';
+import { NOINDEX_ROUTE_IDS } from '../routesData';
 
 export const DEFAULT_BASE_URL = 'https://www.akglsgroup.com';
 
@@ -90,7 +91,7 @@ export function generateSitemapXml(
 
   // 2. Process all routes from App.tsx
   for (const route of routes) {
-    if (!route || !route.path || route.path === '/' || route.id === 'home') {
+    if (!route || !route.path || route.path === '/' || route.id === 'home' || NOINDEX_ROUTE_IDS.has(route.id)) {
       continue;
     }
 
@@ -146,7 +147,7 @@ export function getSitemapSummary(
   priorityDistribution['1.0'] = (priorityDistribution['1.0'] || 0) + 1;
 
   for (const route of routes) {
-    if (!route.path || route.path === '/' || route.id === 'home') continue;
+    if (!route.path || route.path === '/' || route.id === 'home' || NOINDEX_ROUTE_IDS.has(route.id)) continue;
     const loc = `${normalizedBase}${normalizeSitemapPath(route.path)}`;
     if (seenUrls.has(loc)) continue;
     seenUrls.add(loc);

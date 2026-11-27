@@ -17,6 +17,12 @@ export interface AppRoute {
   faqs?: { q: string; a: string }[];
 }
 
+/**
+ * Internal tools: reachable in the app, but kept out of sitemap.xml and served
+ * with `noindex` (they are not landing pages and would compete with real ones).
+ */
+export const NOINDEX_ROUTE_IDS = new Set<string>(['lead-portal', 'proposal-generator', 'proposal-builder']);
+
 export const SITEMAP_ROUTES: AppRoute[] = [
   {
     id: "home",
@@ -1140,23 +1146,6 @@ export const SITEMAP_ROUTES: AppRoute[] = [
   {
     id: "seo-case-studies",
     path: "/case-study/",
-    priority: 0.8,
-    changefreq: "monthly",
-    title: "SEO, GEO & Performance Marketing Case Studies | Proven Results | AKGLS Group",
-    description: "Real client results and organic search case studies. Discover how AKGLS Group scaled organic traffic by 400%+, achieved 10x ROI on PPC, and generated $12M+ in pipeline.",
-    category: "Case Studies",
-    h1: "Client Case Studies & Verified Results",
-    highlight: "Real Growth Backed by Transparent Metrics",
-    leadParagraph: "Explore how leading B2B enterprises, ecommerce stores, and venture-backed startups achieved transformational organic search traffic and revenue growth.",
-    features: [
-      { title: "400%+ Organic Traffic Lifts", desc: "Proven strategies that turn search engines into compounding revenue channels." },
-      { title: "10x Paid Ad ROAS", desc: "Eliminating ad spend waste through closed-loop attribution and dynamic creative testing." },
-      { title: "Enterprise Pipeline Growth", desc: "Direct commercial attribution connecting rankings directly to signed client contracts." }
-    ]
-  },
-  {
-    id: "seo-case-studies-alias",
-    path: "/seo-case-studies/",
     priority: 0.8,
     changefreq: "monthly",
     title: "SEO, GEO & Performance Marketing Case Studies | Proven Results | AKGLS Group",

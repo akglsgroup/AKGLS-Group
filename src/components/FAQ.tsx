@@ -351,11 +351,6 @@ export default function FAQ({
     return JSON.stringify(dynamicFaqJsonLd, null, 2);
   }, [dynamicFaqJsonLd]);
 
-  // Safe HTML representation escaping dangerous script tag syntax
-  const safeJsonLdString = useMemo(() => {
-    return schemaJsonString.replace(/</g, '\\u003c');
-  }, [schemaJsonString]);
-
   // DYNAMIC SCRIPT INJECTION INTO DOCUMENT HEAD
   // Automatically creates, updates, and mounts a valid Schema.org FAQPage JSON-LD tag
   // directly in document.head for search crawlers (Googlebot, Bingbot, GPTBot, Perplexity, Claude).
@@ -499,20 +494,10 @@ export default function FAQ({
             content="Explore detailed answers to common questions about Generative Engine Optimization (GEO), AI SEO, Technical Core Web Vitals, PPC Campaigns, and Retainers." 
           />
         )}
-        <script type="application/ld+json">
-          {schemaJsonString}
-        </script>
       </Helmet>
-
-      {/* 
-        2. DIRECT DOM INJECTION FOR STATIC HYDRATION & CRAWLERS
-        Guarantees that search engine robots reading static DOM without JS execution still extract 100% valid JSON-LD.
-      */}
-      <script
-        type="application/ld+json"
-        id="faq-jsonld-schema-data"
-        dangerouslySetInnerHTML={{ __html: safeJsonLdString }}
-      />
+      {/* FAQPage JSON-LD is managed in a single <head> tag (id="faqpage-schema-jsonld") by the
+          effect above. It used to be emitted three times (head tag + Helmet + inline), which
+          shows up as duplicate FAQPage markup in Google's Rich Results test. */}
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         

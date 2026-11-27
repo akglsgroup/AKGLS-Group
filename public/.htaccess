@@ -27,6 +27,9 @@
 
   RewriteRule ^index\.html$ - [L]
 
+  # Duplicate of /case-study/ (same title and content) - consolidate with a 301.
+  RewriteRule ^seo-case-studies/?$ https://www.akglsgroup.com/case-study/ [R=301,L]
+
   # Dedicated Crawler-Friendly Pre-rendered Pages (Explicit overrides)
   RewriteRule ^geo-services/?$ geo-services.html [L]
   RewriteRule ^hire-ai-seo-expert/?$ hire-ai-seo-expert.html [L]
