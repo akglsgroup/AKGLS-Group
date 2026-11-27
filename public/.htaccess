@@ -33,9 +33,13 @@
   RewriteRule ^aeo-services/?$ aeo-services.html [L]
   RewriteRule ^seo-services/?$ seo-services.html [L]
 
-  # Automatically serve any pre-rendered .html file if it exists for the requested path
+  # Automatically serve any pre-rendered .html file if it exists for the requested path.
+  # The capture must be non-greedy ("+?"): a greedy "+" swallows the trailing slash,
+  # so /technical-seo-services/ was checked as "technical-seo-services/.html", never
+  # matched, and fell through to the empty SPA shell (homepage title + canonical).
+  # This also serves blog.html etc. for /blog/ instead of a 403 on the bare directory.
   RewriteCond %{DOCUMENT_ROOT}/$1.html -f
-  RewriteRule ^([^.]+)/?$ $1.html [L]
+  RewriteRule ^([^.]+?)/?$ $1.html [L]
 
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
