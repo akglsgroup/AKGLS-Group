@@ -110,7 +110,7 @@ function schemaFor(route: AppRoute): object[] {
   } else {
     blocks.push({
       '@context': 'https://schema.org',
-      '@type': route.id === 'about' ? 'AboutPage' : 'WebPage',
+      '@type': route.id === 'about' ? 'AboutPage' : route.id === 'contact' ? 'ContactPage' : 'WebPage',
       '@id': `${url}#webpage`,
       url,
       name: route.title,

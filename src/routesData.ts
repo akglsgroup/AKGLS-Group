@@ -1,5 +1,7 @@
 import { BLOG_POSTS } from './blogData';
 import { LEARNING_ITEMS } from './learningData';
+import { LOCAL_SEO_ROUTES } from './data/localSeoRoutes';
+import { SERVICE_ROUTES } from './data/serviceRoutes';
 
 export interface AppRoute {
   id: string;
@@ -15,6 +17,16 @@ export interface AppRoute {
   features?: { title: string; desc: string }[];
   deliverables?: string[];
   faqs?: { q: string; a: string }[];
+  /** Schema.org Service.serviceType (defaults to h1). */
+  serviceType?: string;
+  /** Places this page targets; replaces the default worldwide areaServed in the Service schema. */
+  areaServed?: { type: 'City' | 'State' | 'Country'; name: string }[];
+  /** A real office in this area: adds ProfessionalService schema with this address. */
+  office?: { name: string; streetAddress?: string; locality: string; region?: string; country: string };
+  /** Long-form content blocks rendered as h2 sections (static template only). */
+  sections?: { heading: string; paragraphs?: string[]; bullets?: string[] }[];
+  /** Internal links rendered as a "Related services" block (static template only). */
+  related?: { name: string; href: string }[];
 }
 
 /**
@@ -88,6 +100,68 @@ export const SITEMAP_ROUTES: AppRoute[] = [
       { title: "AI Search Ground-Truth Citations", desc: "Structured question-and-answer pairs engineered for ChatGPT, Perplexity, Claude, and Google AI Overviews." },
       { title: "Deep-Link Anchor Navigation", desc: "Direct canonical anchor URLs for every individual question enabling instant sharing and direct linking." }
     ]
+  },
+  {
+    id: "contact",
+    path: "/contact/",
+    priority: 0.8,
+    changefreq: "monthly",
+    title: "Contact AKGLS Group | Talk to an SEO & AI Search Strategist",
+    description: "Contact AKGLS Group for SEO, AI search optimization (GEO/AEO), PPC and web development. Email, call or WhatsApp our team, or send a message and get a reply within one business day.",
+    category: "Company",
+    h1: "Contact AKGLS Group",
+    highlight: "Replies within one business day",
+    leadParagraph: "Tell us about your business and goals. A senior strategist will review your site and reply with next steps. Email info@akglsgroup.com, call or WhatsApp +91 831 811 4492, or use the contact form.",
+    features: [
+      { title: "Email", desc: "info@akglsgroup.com" },
+      { title: "Phone & WhatsApp", desc: "+91 831 811 4492" },
+      { title: "Offices", desc: "San Francisco (201 Mission St), New York (1540 Broadway) and New Delhi (Cyber City)." },
+      { title: "Hours", desc: "Mon - Fri: 9:00 AM - 6:00 PM EST, with 24/7 global client support." }
+    ]
+  },
+  {
+    id: "pricing",
+    path: "/pricing/",
+    priority: 0.8,
+    changefreq: "monthly",
+    title: "SEO & AI Search Pricing Plans | AKGLS Group",
+    description: "Transparent SEO, GEO and AI search pricing from AKGLS Group: Scale Accelerator from $3,500/mo, Authority & AI SEO Suite from $6,500/mo, revenue-share options and custom enterprise plans.",
+    category: "Company",
+    h1: "SEO & AI Search Pricing",
+    highlight: "Monthly retainer or revenue share",
+    leadParagraph: "Transparent plans for SEO, GEO and AI search growth. Pay a fixed monthly retainer, or share revenue with us when it fits your business. Prices are in USD and exclude taxes and ad spend.",
+    features: [
+      { title: "Scale Accelerator Plan: $3,500/mo or 2% revenue share", desc: "Up to 50 targeted keywords tracked, technical speed diagnostics and Looker Studio dashboard reporting. Requires a 3-month initial checkpoint." },
+      { title: "Authority & AI SEO Suite: $6,500/mo or 4% revenue share", desc: "AI recommendation and citation prompt tracking, dedicated JSON-LD schema deployment and page template rebuilds for sub-1.0s loads." },
+      { title: "Elite Custom Solutions: custom quote", desc: "A dedicated team, private Slack channel, full CRM database sync and programmatic landing page setup for multi-location and corporate businesses." }
+    ],
+    faqs: [
+      { q: "What is the difference between a retainer and a revenue share?", a: "A retainer is a fixed monthly fee for an agreed scope of work. With a revenue share you pay a percentage of the revenue the channels we manage generate, after we verify your tracking and traffic baseline." },
+      { q: "Is advertising spend included?", a: "No. Spend on Google, Meta, LinkedIn and other ad platforms is paid directly to those platforms and is separate from our management fee, unless your proposal says otherwise." },
+      { q: "Do you have pricing for businesses in India?", a: "Yes. See our India pricing page for packages in INR, built for Indian startups and SMEs." }
+    ]
+  },
+  {
+    id: "privacy-policy",
+    path: "/privacy-policy/",
+    priority: 0.3,
+    changefreq: "yearly",
+    title: "Privacy Policy | AKGLS Group",
+    description: "How AKGLS Group (AK Global Labs & Solutions) collects, uses, shares and protects personal information, and how to exercise your GDPR, CCPA and India DPDP Act rights.",
+    category: "Legal",
+    h1: "Privacy Policy",
+    leadParagraph: "This Privacy Policy explains how AK Global Labs & Solutions (AKGLS Group) collects, uses, shares and protects personal information when you visit www.akglsgroup.com, use our free tools, chat with us, or engage our services."
+  },
+  {
+    id: "terms-of-service",
+    path: "/terms-of-service/",
+    priority: 0.3,
+    changefreq: "yearly",
+    title: "Terms of Service | AKGLS Group",
+    description: "Terms governing use of the AKGLS Group website, free tools and SEO, AI search, advertising and development services, including payments, refunds and disclaimers.",
+    category: "Legal",
+    h1: "Terms of Service",
+    leadParagraph: "These Terms of Service govern your use of www.akglsgroup.com, our free tools and resources, and the services provided by AK Global Labs & Solutions (AKGLS Group)."
   },
   {
     id: "geo",
@@ -1365,6 +1439,8 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     ]
   },
   // Dynamic integration of all 5 in-depth Blog Articles
+  ...LOCAL_SEO_ROUTES,
+  ...SERVICE_ROUTES,
   ...BLOG_POSTS.map(post => ({
     id: `blog-${post.slug}`,
     path: `/blog/${post.slug}/`,

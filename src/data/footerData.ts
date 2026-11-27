@@ -83,7 +83,9 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       { name: "Programmatic SEO", href: "/programmatic-seo-services" },
       { name: "Link Building", href: "/link-building-services" },
       { name: "SEO Audit Services", href: "/seo-audit-services" },
-      { name: "SEO Consulting", href: "/seo-consulting-services" }
+      { name: "SEO Consulting", href: "/seo-consulting-services" },
+      { name: "YouTube SEO", href: "/youtube-seo-services" },
+      { name: "Reputation Management", href: "/online-reputation-management-services" }
     ]
   },
   {
@@ -101,6 +103,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       { name: "ChatGPT Optimization", href: "/chatgpt-optimization-services" },
       { name: "Gemini Optimization", href: "/gemini-optimization-services" },
       { name: "Claude Optimization", href: "/claude-optimization-services" },
+      { name: "Perplexity Optimization", href: "/perplexity-optimization-services" },
       { name: "Voice Search SEO", href: "/voice-search-optimization-services" }
     ]
   },
@@ -119,7 +122,9 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       { name: "Local Business Growth", href: "/local-business-growth-services" },
       { name: "SaaS Marketing Solutions", href: "/saas-marketing-solutions" },
       { name: "Startup Growth Solutions", href: "/startup-growth-solutions" },
-      { name: "Conversion Rate CRO", href: "#audit-form" }
+      { name: "Conversion Rate Optimization", href: "/conversion-rate-optimization-services" },
+      { name: "Email Marketing", href: "/email-marketing-services" },
+      { name: "Amazon Marketing", href: "/amazon-marketing-services" }
     ]
   },
   {
@@ -128,12 +133,12 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     color: "text-brand-purple",
     bulletClass: "bg-brand-purple",
     links: [
-      { name: "Web Design Services", href: "#web-design-services" },
-      { name: "WordPress Development", href: "#wordpress-development-services" },
+      { name: "Web Design Services", href: "/web-design-services" },
+      { name: "WordPress Development", href: "/wordpress-development-services" },
       { name: "Shopify Development", href: "/shopify-development-services" },
-      { name: "Landing Page Design", href: "#web-design-services" },
-      { name: "Website Maintenance", href: "#web-design-services" },
-      { name: "UI/UX Design", href: "#web-design-services" },
+      { name: "Landing Page Design", href: "/landing-page-design-services" },
+      { name: "Website Maintenance", href: "/website-maintenance-services" },
+      { name: "UI/UX Design", href: "/ui-ux-design-services" },
       { name: "Speed Optimization", href: "/technical-seo-services" },
       { name: "Indian Client Pricing", href: "/india-pricing" },
       { name: "Proposal PDF Builder", href: "/proposal-builder" }
@@ -163,6 +168,8 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     bulletClass: "bg-rose-400",
     links: [
       { name: "About AKGLS Group", href: "/about", isNew: true },
+      { name: "Contact Us", href: "/contact", isNew: true },
+      { name: "Pricing & Plans", href: "/pricing", isNew: true },
       { name: "Agency Manager CRM", href: "/manage", badge: "PORTAL", isHot: true },
       { name: "Hire AI SEO Expert", href: "/hire-ai-seo-expert" },
       { name: "Hire SEO Expert", href: "/hire-seo-expert" },
@@ -200,12 +207,12 @@ export const FOOTER_NEWSLETTER = {
 };
 
 export const FOOTER_LOCAL_SEO = [
-  { name: "SEO Company in Delhi", href: "/seo-services" },
-  { name: "SEO Company in Noida", href: "/seo-services" },
-  { name: "SEO Company in Gurgaon", href: "/seo-services" },
-  { name: "Digital Marketing Agency India", href: "/seo-services" },
-  { name: "SEO Agency New York", href: "/seo-services" },
-  { name: "SEO Agency San Francisco", href: "/seo-services" }
+  { name: "SEO Company in Delhi", href: "/seo-company-delhi" },
+  { name: "SEO Company in Noida", href: "/seo-company-noida" },
+  { name: "SEO Company in Gurgaon", href: "/seo-company-gurgaon" },
+  { name: "Digital Marketing Agency India", href: "/digital-marketing-agency-india" },
+  { name: "SEO Agency New York", href: "/seo-agency-new-york" },
+  { name: "SEO Agency San Francisco", href: "/seo-agency-san-francisco" }
 ];
 
 export const FOOTER_AI_CITATIONS = [
@@ -217,6 +224,7 @@ export const FOOTER_AI_CITATIONS = [
   { name: "ChatGPT Optimization", href: "/chatgpt-optimization-services" },
   { name: "Gemini Optimization", href: "/gemini-optimization-services" },
   { name: "Claude Optimization", href: "/claude-optimization-services" },
+  { name: "Perplexity Optimization", href: "/perplexity-optimization-services" },
   { name: "Voice Search SEO", href: "/voice-search-optimization-services" }
 ];
 
@@ -230,10 +238,10 @@ export const FOOTER_CERTIFICATIONS: PartnerCertification[] = [
 
 export const FOOTER_LEGAL_LINKS = [
   { name: "Privacy Policy", href: "/privacy-policy" },
-  { name: "Terms & Conditions", href: "/terms-of-service" },
-  { name: "Disclaimer Policy", href: "#disclaimer" },
-  { name: "Refund Policy", href: "#refund" },
-  { name: "Cookie Directives", href: "#cookies" },
-  { name: "GDPR Compliance", href: "#gdpr" },
+  { name: "Terms of Service", href: "/terms-of-service" },
+  { name: "Disclaimer", href: "/terms-of-service#disclaimer" },
+  { name: "Refund Policy", href: "/terms-of-service#refunds" },
+  { name: "Cookie Policy", href: "/privacy-policy#cookies" },
+  { name: "GDPR & Privacy Rights", href: "/privacy-policy#gdpr" },
   { name: "XML Sitemap", href: "/sitemap.xml" }
 ];
