@@ -1,5 +1,6 @@
 import { BLOG_POSTS } from './blogData';
 import { LEARNING_ITEMS } from './learningData';
+import { LOCAL_SEO_ROUTES } from './data/localSeoRoutes';
 
 export interface AppRoute {
   id: string;
@@ -15,6 +16,16 @@ export interface AppRoute {
   features?: { title: string; desc: string }[];
   deliverables?: string[];
   faqs?: { q: string; a: string }[];
+  /** Schema.org Service.serviceType (defaults to h1). */
+  serviceType?: string;
+  /** Places this page targets; replaces the default worldwide areaServed in the Service schema. */
+  areaServed?: { type: 'City' | 'State' | 'Country'; name: string }[];
+  /** A real office in this area: adds ProfessionalService schema with this address. */
+  office?: { name: string; streetAddress?: string; locality: string; region?: string; country: string };
+  /** Long-form content blocks rendered as h2 sections (static template only). */
+  sections?: { heading: string; paragraphs?: string[]; bullets?: string[] }[];
+  /** Internal links rendered as a "Related services" block (static template only). */
+  related?: { name: string; href: string }[];
 }
 
 /**
@@ -1427,6 +1438,7 @@ export const SITEMAP_ROUTES: AppRoute[] = [
     ]
   },
   // Dynamic integration of all 5 in-depth Blog Articles
+  ...LOCAL_SEO_ROUTES,
   ...BLOG_POSTS.map(post => ({
     id: `blog-${post.slug}`,
     path: `/blog/${post.slug}/`,

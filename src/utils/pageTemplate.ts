@@ -49,7 +49,7 @@ export function renderPageHtml(route: AppRoute): string {
   const serviceSchema = {
     "@context": "https://schema.org",
     "@type": "Service",
-    "serviceType": h1,
+    "serviceType": route.serviceType || h1,
     "name": title,
     "description": description,
     "provider": {
@@ -59,7 +59,9 @@ export function renderPageHtml(route: AppRoute): string {
       "telephone": "+918318114492",
       "email": "info@akglsgroup.com"
     },
-    "areaServed": ["Worldwide", "United States", "India", "United Kingdom", "United Arab Emirates"],
+    "areaServed": route.areaServed && route.areaServed.length > 0
+      ? route.areaServed.map(a => ({ "@type": a.type, "name": a.name }))
+      : ["Worldwide", "United States", "India", "United Kingdom", "United Arab Emirates"],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": `${h1} Deliverables`,
@@ -73,6 +75,69 @@ export function renderPageHtml(route: AppRoute): string {
       }))
     }
   };
+
+  // Breadcrumb trail matches the visible breadcrumb bar (Home / Category / Page).
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.akglsgroup.com/" },
+      { "@type": "ListItem", "position": 2, "name": h1, "item": fullUrl }
+    ]
+  };
+
+  // Only for pages about a place where AKGLS Group has a real office.
+  const officeSchema = route.office ? {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${fullUrl}#office`,
+    "name": route.office.name,
+    "url": fullUrl,
+    "image": "https://www.akglsgroup.com/akgls-logo-horizontal.svg",
+    "telephone": "+918318114492",
+    "email": "info@akglsgroup.com",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      ...(route.office.streetAddress ? { "streetAddress": route.office.streetAddress } : {}),
+      "addressLocality": route.office.locality,
+      ...(route.office.region ? { "addressRegion": route.office.region } : {}),
+      "addressCountry": route.office.country
+    },
+    ...(route.areaServed && route.areaServed.length > 0
+      ? { "areaServed": route.areaServed.map(a => ({ "@type": a.type, "name": a.name })) }
+      : {}),
+    "parentOrganization": { "@type": "Organization", "name": "AKGLS Group", "url": "https://www.akglsgroup.com" }
+  } : null;
+
+  const sectionsHtml = (route.sections || []).map(sec => `
+      <section class="py-6 sm:py-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 class="text-2xl sm:text-3xl font-black font-display tracking-tight text-white mb-4">${escapeHtml(sec.heading)}</h2>
+        ${(sec.paragraphs || []).map(p => `<p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">${escapeHtml(p)}</p>`).join('')}
+        ${sec.bullets && sec.bullets.length ? `<ul class="grid sm:grid-cols-2 gap-3 mt-2">${sec.bullets.map(b => `
+          <li class="flex gap-2.5 text-slate-300 text-sm leading-relaxed"><svg class="w-4 h-4 mt-0.5 shrink-0 text-brand-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>${escapeHtml(b)}</span></li>`).join('')}
+        </ul>` : ''}
+      </section>`).join('');
+
+  const deliverablesHtml = route.deliverables && route.deliverables.length ? `
+      <section class="py-6 sm:py-8 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="p-6 sm:p-8 rounded-2xl bg-brand-card/70 border border-brand-border">
+          <h2 class="text-xl sm:text-2xl font-black font-display text-white mb-4">What You Get</h2>
+          <ol class="space-y-3">${route.deliverables.map((d, i) => `
+            <li class="flex gap-3 text-slate-300 text-sm"><span class="font-mono font-bold text-brand-teal">0${i + 1}</span><span>${escapeHtml(d)}</span></li>`).join('')}
+          </ol>
+        </div>
+      </section>` : '';
+
+  const relatedHtml = route.related && route.related.length ? `
+      <nav aria-label="Related services" class="py-12 border-t border-brand-border/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 class="text-xl font-black font-display text-white mb-5">Related Services</h2>
+          <ul class="grid grid-cols-2 md:grid-cols-4 gap-3">${route.related.map(l => `
+            <li><a href="${escapeHtml(l.href)}" class="block px-4 py-3 rounded-xl bg-brand-card/60 border border-brand-border hover:border-brand-teal/50 text-slate-300 hover:text-white text-sm transition-colors">${escapeHtml(l.name)}</a></li>`).join('')}
+          </ul>
+        </div>
+      </nav>` : '';
 
   return `<!doctype html>
 <html lang="en">
@@ -236,6 +301,16 @@ export function renderPageHtml(route: AppRoute): string {
     <script type="application/ld+json">
     ${JSON.stringify(faqSchema, null, 2)}
     </script>
+
+    <!-- Schema.org BreadcrumbList -->
+    <script type="application/ld+json">
+    ${JSON.stringify(breadcrumbSchema, null, 2)}
+    </script>${officeSchema ? `
+
+    <!-- Schema.org ProfessionalService (office) -->
+    <script type="application/ld+json">
+    ${JSON.stringify(officeSchema, null, 2)}
+    </script>` : ''}
   </head>
   <body class="min-h-screen bg-brand-dark text-slate-100 flex flex-col font-sans selection:bg-brand-teal selection:text-brand-dark">
     <!-- Google Tag Manager (noscript) -->
@@ -350,6 +425,9 @@ ${renderSharedHeaderHtml(route.path)}
         </div>
       </section>
 
+${sectionsHtml}
+${deliverablesHtml}
+
       <!-- Interactive Lead Capture Form -->
       <section id="audit-form" class="py-16 sm:py-24 bg-gradient-to-b from-brand-indigo/30 via-brand-dark to-brand-dark border-y border-brand-border/60">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -437,6 +515,7 @@ ${renderSharedHeaderHtml(route.path)}
           `).join('')}
         </div>
       </section>
+${relatedHtml}
     </main>
 
     <!-- CORPORATE MEGA FOOTER (Standard Dynamic Unified Component Across All Pages) -->

@@ -119,7 +119,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       { name: "Local Business Growth", href: "/local-business-growth-services" },
       { name: "SaaS Marketing Solutions", href: "/saas-marketing-solutions" },
       { name: "Startup Growth Solutions", href: "/startup-growth-solutions" },
-      { name: "Conversion Rate CRO", href: "#audit-form" }
+      { name: "Conversion Rate Optimization", href: "/conversion-rate-optimization-services" }
     ]
   },
   {
@@ -202,12 +202,12 @@ export const FOOTER_NEWSLETTER = {
 };
 
 export const FOOTER_LOCAL_SEO = [
-  { name: "SEO Company in Delhi", href: "/seo-services" },
-  { name: "SEO Company in Noida", href: "/seo-services" },
-  { name: "SEO Company in Gurgaon", href: "/seo-services" },
-  { name: "Digital Marketing Agency India", href: "/seo-services" },
-  { name: "SEO Agency New York", href: "/seo-services" },
-  { name: "SEO Agency San Francisco", href: "/seo-services" }
+  { name: "SEO Company in Delhi", href: "/seo-company-delhi" },
+  { name: "SEO Company in Noida", href: "/seo-company-noida" },
+  { name: "SEO Company in Gurgaon", href: "/seo-company-gurgaon" },
+  { name: "Digital Marketing Agency India", href: "/digital-marketing-agency-india" },
+  { name: "SEO Agency New York", href: "/seo-agency-new-york" },
+  { name: "SEO Agency San Francisco", href: "/seo-agency-san-francisco" }
 ];
 
 export const FOOTER_AI_CITATIONS = [
